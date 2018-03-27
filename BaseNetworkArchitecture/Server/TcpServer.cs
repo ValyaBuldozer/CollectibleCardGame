@@ -15,28 +15,16 @@ namespace BaseNetworkArchitecture.Server
         private const string LOCALHOST_IP = "127.0.0.1";
         private readonly int PORT;
 
-        private readonly TcpListener _tcpListener;
+        public Thread GetListenerThread { get; private set; }
 
         public ICollection<IClient> Clients { set; get; }
 
+        public TcpListener TcpListener { get; private set; }
+
         public void Start()
         {
-            Console.WriteLine("Server is startinng...");
-            try
-            {
-                _tcpListener.Start();
-                while (true)
-                {
-                    var result =
-                        _tcpListener.BeginAcceptTcpClient(new AsyncCallback(DoAcceptTcpClientCallback), _tcpListener);
-                    result.AsyncWaitHandle.WaitOne();
-                }
-            }
-            catch (SocketException e)
-            {
-                Console.WriteLine(e);
-                _tcpListener.Stop();
-            }
+            GetListenerThread = new Thread(new ParameterizedThreadStart(AcceptClients));
+            GetListenerThread.Start(this);
         }
 
         public void Stop()
@@ -49,15 +37,38 @@ namespace BaseNetworkArchitecture.Server
                 }
                 catch (SocketException e) { }
             }
+            GetListenerThread.Abort();
 
-            _tcpListener.Stop();
+            TcpListener.Stop();
             Console.WriteLine("Server stoped");
+        }
+
+        private static void AcceptClients(object serverObj)
+        {
+            TcpServer server = (TcpServer) serverObj;
+            Console.WriteLine("Server is startinng...");
+            try
+            {
+                server.TcpListener.Start();
+                while (true)
+                {
+                    var result =
+                        server.TcpListener.BeginAcceptTcpClient(
+                            new AsyncCallback(server.DoAcceptTcpClientCallback), server.TcpListener);
+                    result.AsyncWaitHandle.WaitOne();
+                }
+            }
+            catch (SocketException e)
+            {
+                Console.WriteLine(e);
+                server.TcpListener.Stop();
+            }
         }
 
         public TcpServer(int port)
         {
             PORT = port;
-            _tcpListener = new TcpListener(IPAddress.Parse(LOCALHOST_IP), PORT);
+            TcpListener = new TcpListener(IPAddress.Parse(LOCALHOST_IP), PORT);
             Clients = new List<IClient>();
         }
 
