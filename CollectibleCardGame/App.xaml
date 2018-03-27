@@ -4,6 +4,13 @@
              xmlns:local="clr-namespace:CollectibleCardGame"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="OldStyles.xaml">
+                </ResourceDictionary>
+                <ResourceDictionary Source="CardGameStyles.xaml">
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
