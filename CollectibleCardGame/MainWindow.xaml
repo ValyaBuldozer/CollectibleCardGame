@@ -24,18 +24,54 @@
                           VerticalAlignment="Stretch" HorizontalAlignment="Left" />
 
             <ListBox Background="#343B49" x:Name="menuList" Grid.Row="0 " Margin="0,-2,0,0" BorderBrush="#343B49"  ItemContainerStyle="{StaticResource ListBoxItemMain}">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
+                <ListBoxItem Name="ObserverGameitem">
+                    <StackPanel>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="auto" />
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
-                            <Image Grid.Column="0" Width="20" Height="15" Source="{Binding Path=ImagePath}" />
-                            <TextBlock Margin="5,0,0,0"  Grid.Column="1" FontSize="16" Text="{Binding Path=Title}"/>
+                            <Image Grid.Column="0"  Source="Images/search.png" Width="20" Height="15" />
+                            <TextBlock Margin="5,0,0,0"  Grid.Column="1" FontSize="16" Text="Выбор игры" FontFamily="/CollectibleCardGame;component/Fonts/#Mason Chronicles" FontWeight="Bold"/>
                         </Grid>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
+                    </StackPanel>
+                </ListBoxItem>
+                <ListBoxItem Name="CardDecksItem">
+                    <StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.Column="0"  Source="Images/cards.png" Width="20" Height="15" />
+                            <TextBlock Margin="5,0,0,0"  Grid.Column="1" FontSize="16" Text="Колоды" FontFamily="/CollectibleCardGame;component/Fonts/#Mason Chronicles" FontWeight="Bold"/>
+                        </Grid>
+                    </StackPanel>
+                </ListBoxItem>
+                <ListBoxItem Name="HelpUserItem">
+                    <StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.Column="0"  Source="Images/question.png" Width="20" Height="15" />
+                            <TextBlock Margin="5,0,0,0"  Grid.Column="1" FontSize="16" Text="Помощь" FontFamily="/CollectibleCardGame;component/Fonts/#Mason Chronicles" FontWeight="Bold"/>
+                        </Grid>
+                    </StackPanel>
+                </ListBoxItem>
+                <ListBoxItem Name="SettingsItem">
+                    <StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.Column="0"  Source="Images/settingsChange.png" Width="20" Height="15" />
+                            <TextBlock Margin="5,0,0,0"  Grid.Column="1" FontSize="16" Text="Настройки" FontFamily="/CollectibleCardGame;component/Fonts/#Mason Chronicles" FontWeight="Bold"/>
+                        </Grid>
+                    </StackPanel>
+                </ListBoxItem>
             </ListBox>
 
         </Grid>
