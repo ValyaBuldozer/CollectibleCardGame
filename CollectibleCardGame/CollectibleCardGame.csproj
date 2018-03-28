@@ -60,11 +60,18 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Services\RelayCommand.cs" />
+    <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\Frames\CardDecksPageViewModel.cs" />
+    <Compile Include="ViewModels\UserControls\FractionUserControlViewModel.cs" />
     <Compile Include="Views\Frames\CardDecksFramePage.xaml.cs">
       <DependentUpon>CardDecksFramePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Frames\LogInFramePage.xaml.cs">
       <DependentUpon>LogInFramePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Frames\MainMenuFramePage.xaml.cs">
+      <DependentUpon>MainMenuFramePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Frames\NorthFractionDeckFramePage.xaml.cs">
       <DependentUpon>NorthFractionDeckFramePage.xaml</DependentUpon>
@@ -80,6 +87,9 @@
     </Compile>
     <Compile Include="Views\Frames\ToRegisterFramePage.xaml.cs">
       <DependentUpon>ToRegisterFramePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\FractionUserControl.xaml.cs">
+      <DependentUpon>FractionUserControl.xaml</DependentUpon>
     </Compile>
     <Page Include="CardGameStyles.xaml">
       <SubType>Designer</SubType>
@@ -109,6 +119,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Frames\MainMenuFramePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Frames\NorthFractionDeckFramePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -126,6 +140,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Frames\ToRegisterFramePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\FractionUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -154,22 +172,30 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\settingsChange.png" />
+    <Resource Include="Icons\settingsChange.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\cards.png" />
+    <Resource Include="Icons\cards.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\question.png" />
+    <Resource Include="Icons\question.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\info.png" />
+    <Resource Include="Icons\info.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\search.png" />
+    <Resource Include="Icons\search.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
+    <Folder Include="ViewModels\Elements\" />
+    <Folder Include="ViewModels\Windows\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\northPicture.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\southPicture.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,18 +1,17 @@
-﻿<Window x:Class="CollectibleCardGame.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:CollectibleCardGame"
-        mc:Ignorable="d"
-        Title="MainWindow"  Width="1200" MinHeight="375" MinWidth="550">
+﻿<Page x:Class="CollectibleCardGame.Views.Frames.MainMenuFramePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CollectibleCardGame.Views.Frames"
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="190"
+      Title="MainMenuFramePage">
+
     <Grid>
-        <Frame Name="MainFrame" NavigationUIVisibility="Hidden"/>
-       <!-- <Grid Background="{DynamicResource BasicBackGround}">
+        <Grid Background="{DynamicResource BasicBackGround}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="190" MinWidth="190" />
-                <ColumnDefinition Width="Auto" />
-
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
@@ -32,7 +31,7 @@
                                 <ColumnDefinition Width="auto" />
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
-                            <Image Grid.Column="0"  Source="Images/search.png" Width="20" Height="15" />
+                            <Image Grid.Column="0"  Source="/Images/search.png" Width="20" Height="15" />
                             <TextBlock Margin="5,0,0,0"  Grid.Column="1" FontSize="16" Text="Выбор игры" FontFamily="/CollectibleCardGame;component/Fonts/#Mason Chronicles" FontWeight="Bold"/>
                         </Grid>
                     </StackPanel>
@@ -44,7 +43,7 @@
                                 <ColumnDefinition Width="auto" />
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
-                            <Image Grid.Column="0"  Source="Images/cards.png" Width="20" Height="15" />
+                            <Image Grid.Column="0"  Source="/Images/cards.png" Width="20" Height="15" />
                             <TextBlock Margin="5,0,0,0"  Grid.Column="1" FontSize="16" Text="Колоды" FontFamily="/CollectibleCardGame;component/Fonts/#Mason Chronicles" FontWeight="Bold"/>
                         </Grid>
                     </StackPanel>
@@ -56,7 +55,7 @@
                                 <ColumnDefinition Width="auto" />
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
-                            <Image Grid.Column="0"  Source="Images/question.png" Width="20" Height="15" />
+                            <Image Grid.Column="0"  Source="/Images/question.png" Width="20" Height="15" />
                             <TextBlock Margin="5,0,0,0"  Grid.Column="1" FontSize="16" Text="Помощь" FontFamily="/CollectibleCardGame;component/Fonts/#Mason Chronicles" FontWeight="Bold"/>
                         </Grid>
                     </StackPanel>
@@ -68,14 +67,13 @@
                                 <ColumnDefinition Width="auto" />
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
-                            <Image Grid.Column="0"  Source="Images/settingsChange.png" Width="20" Height="15" />
+                            <Image Grid.Column="0"  Source="/Images/settingsChange.png" Width="20" Height="15" />
                             <TextBlock Margin="5,0,0,0"  Grid.Column="1" FontSize="16" Text="Настройки" FontFamily="/CollectibleCardGame;component/Fonts/#Mason Chronicles" FontWeight="Bold"/>
                         </Grid>
                     </StackPanel>
                 </ListBoxItem>
             </ListBox>
 
-        </Grid>-->
-
+        </Grid> 
     </Grid>
-</Window>
+</Page>

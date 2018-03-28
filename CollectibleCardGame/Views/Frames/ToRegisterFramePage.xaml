@@ -8,7 +8,7 @@
       d:DesignHeight="150" d:DesignWidth="300"
       Title="ToRegisterFramePage">
 
-    <Grid  Background="#E7E7E7">
+    <Grid  Background="{DynamicResource BasicBackGround}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="1.5*"></RowDefinition>
@@ -26,7 +26,7 @@
                 <ColumnDefinition Width="0.5*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Label Content="Логин" HorizontalAlignment="Center" Grid.Column="1" VerticalAlignment="Center" FontSize="8" />
-            <TextBox Name="LoginTextBox" Style="{DynamicResource TextBoxMulti}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Column="2"/>
+            <TextBox Name="LoginTextBox" Style="{DynamicResource TextBoxMulti}"  Validation.ErrorTemplate="{StaticResource validationFailed}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Column="2"/>
         </Grid>
 
         <Grid Grid.Row="3">
@@ -37,7 +37,7 @@
                 <ColumnDefinition Width="0.5*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Label Content="Повторите пароль" HorizontalAlignment="Center" Grid.Column="1" VerticalAlignment="Center" FontSize="8" />
-            <TextBox Name="PasswordTwiceTextBox" Style="{DynamicResource TextBoxMulti}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Column="2"/>
+            <TextBox Name="PasswordTwiceTextBox" Style="{DynamicResource TextBoxMulti}"  Validation.ErrorTemplate="{StaticResource validationFailed}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Column="2"/>
         </Grid>
 
         <Grid Grid.Row="2">
@@ -48,7 +48,7 @@
                 <ColumnDefinition Width="0.5*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Label Content="Пароль" HorizontalAlignment="Center" Grid.Column="1" VerticalAlignment="Center" FontSize="8" />
-            <TextBox Name="PasswordTextBox" Style="{DynamicResource TextBoxMulti}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Column="2"/>
+            <TextBox Name="PasswordTextBox" Style="{DynamicResource TextBoxMulti}"  Validation.ErrorTemplate="{StaticResource validationFailed}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Column="2"/>
         </Grid>
 
 

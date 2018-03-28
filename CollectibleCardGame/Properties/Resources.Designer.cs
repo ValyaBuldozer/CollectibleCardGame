@@ -93,6 +93,16 @@ namespace CollectibleCardGame.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap northPicture {
+            get {
+                object obj = ResourceManager.GetObject("northPicture", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap question {
             get {
                 object obj = ResourceManager.GetObject("question", resourceCulture);
@@ -116,6 +126,16 @@ namespace CollectibleCardGame.Properties {
         internal static System.Drawing.Bitmap settingsChange {
             get {
                 object obj = ResourceManager.GetObject("settingsChange", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap southPicture {
+            get {
+                object obj = ResourceManager.GetObject("southPicture", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
