@@ -5,9 +5,40 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CollectibleCardGame"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow"  MinHeight="350" Width="1200" MinWidth="450">
     <Grid>
-        
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="190" MinWidth="190" />
+                <ColumnDefinition Width="Auto" />
+
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions >
+
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <GridSplitter Grid.Row="1" Grid.Column="1" Width="6"
+                          VerticalAlignment="Stretch" HorizontalAlignment="Left" />
+
+            <ListBox Background="#343B49" x:Name="menuList" Grid.Row="0 " Margin="0,-2,0,0" BorderBrush="#343B49"  ItemContainerStyle="{StaticResource ListBoxItemMain}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.Column="0" Width="20" Height="15" Source="{Binding Path=ImagePath}" />
+                            <TextBlock Margin="5,0,0,0"  Grid.Column="1" FontSize="16" Text="{Binding Path=Title}"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+        </Grid>
 
     </Grid>
 </Window>

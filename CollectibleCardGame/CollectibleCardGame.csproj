@@ -55,6 +55,27 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Views\Frames\CardDecksFramePage.xaml.cs">
+      <DependentUpon>CardDecksFramePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Frames\LogInFramePage.xaml.cs">
+      <DependentUpon>LogInFramePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Frames\NorthFractionDeckFramePage.xaml.cs">
+      <DependentUpon>NorthFractionDeckFramePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Frames\ObserverGamesFramePage.xaml.cs">
+      <DependentUpon>ObserverGamesFramePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Frames\SettingsFramePage.xaml.cs">
+      <DependentUpon>SettingsFramePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Frames\SouthFractionDeckFramePage.xaml.cs">
+      <DependentUpon>SouthFractionDeckFramePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Frames\ToRegisterFramePage.xaml.cs">
+      <DependentUpon>ToRegisterFramePage.xaml</DependentUpon>
+    </Compile>
     <Page Include="CardGameStyles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -72,6 +93,34 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="OldStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Frames\CardDecksFramePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Frames\LogInFramePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Frames\NorthFractionDeckFramePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Frames\ObserverGamesFramePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Frames\SettingsFramePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Frames\SouthFractionDeckFramePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Frames\ToRegisterFramePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -121,7 +170,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
-    <Folder Include="Views\Frames\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
