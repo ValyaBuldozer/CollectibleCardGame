@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BaseNetworkArchitecture.Common
+﻿namespace BaseNetworkArchitecture.Common
 {
     public interface INetworkCommunicator
     {
-        bool SendMessage(Message message);
-        Message ReadMessage();
+        bool SendMessage(NetworkMessage networkMessage);
+        NetworkMessage ReadMessage();
         bool Connect();
         bool Disconnect();
     }

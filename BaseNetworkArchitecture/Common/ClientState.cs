@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Net.Sockets;
 
 namespace BaseNetworkArchitecture.Common
 {
-    class ClientState
+    internal class ClientState
     {
         // Object to contain client state, including the client socket
         // and the receive buffer

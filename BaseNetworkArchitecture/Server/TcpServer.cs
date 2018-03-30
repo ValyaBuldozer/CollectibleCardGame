@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using BaseNetworkArchitecture.Common;
 
 namespace BaseNetworkArchitecture.Server
@@ -15,37 +12,47 @@ namespace BaseNetworkArchitecture.Server
         private const string LOCALHOST_IP = "127.0.0.1";
         private readonly int PORT;
 
+        public TcpServer(int port)
+        {
+            PORT = port;
+            TcpListener = new TcpListener(IPAddress.Parse(LOCALHOST_IP), PORT);
+            Clients = new List<IClient>();
+        }
+
         public Thread GetListenerThread { get; private set; }
+
+        public TcpListener TcpListener { get; }
 
         public ICollection<IClient> Clients { set; get; }
 
-        public TcpListener TcpListener { get; private set; }
-
         public void Start()
         {
-            GetListenerThread = new Thread(new ParameterizedThreadStart(AcceptClients));
+            GetListenerThread = new Thread(AcceptClients);
             GetListenerThread.Start(this);
         }
 
         public void Stop()
         {
             foreach (var iClient in Clients)
-            {
                 try
                 {
                     iClient.Communicator.Disconnect();
                 }
-                catch (SocketException e) { }
-            }
+                catch (SocketException e)
+                {
+                }
+
             GetListenerThread.Abort();
 
             TcpListener.Stop();
             Console.WriteLine("Server stoped");
         }
 
+        public event EventHandler<ClientConnectedEventArgs> ClientConnected;
+
         private static void AcceptClients(object serverObj)
         {
-            TcpServer server = (TcpServer) serverObj;
+            var server = (TcpServer) serverObj;
             Console.WriteLine("Server is startinng...");
             try
             {
@@ -54,7 +61,7 @@ namespace BaseNetworkArchitecture.Server
                 {
                     var result =
                         server.TcpListener.BeginAcceptTcpClient(
-                            new AsyncCallback(server.DoAcceptTcpClientCallback), server.TcpListener);
+                            server.DoAcceptTcpClientCallback, server.TcpListener);
                     result.AsyncWaitHandle.WaitOne();
                 }
             }
@@ -65,24 +72,29 @@ namespace BaseNetworkArchitecture.Server
             }
         }
 
-        public TcpServer(int port)
+        private static void RunClientConnectedEvent(object sender, ClientConnectedEventArgs e)
         {
-            PORT = port;
-            TcpListener = new TcpListener(IPAddress.Parse(LOCALHOST_IP), PORT);
-            Clients = new List<IClient>();
+            ((TcpServer) sender).ClientConnected?.Invoke(sender, e);
         }
 
         public void DoAcceptTcpClientCallback(IAsyncResult ar)
         {
             // Get the listener that handles the client request.
-            TcpListener listener = (TcpListener)ar.AsyncState;
+            var listener = (TcpListener) ar.AsyncState;
 
-            TcpClient tcpClient = listener.EndAcceptTcpClient(ar);
+            var tcpClient = listener.EndAcceptTcpClient(ar);
 
-            Client client = new Client(tcpClient);
+            var client = new Client(tcpClient);
             Clients.Add(client);
             Console.WriteLine("Client connected");
-            ((TcpCommunicator)client.Communicator).StartReadMessages();
+            ((TcpCommunicator) client.Communicator).StartReadMessages();
+
+            RunClientConnectedEvent(this, new ClientConnectedEventArgs {Client = client});
         }
+    }
+
+    public class ClientConnectedEventArgs : EventArgs
+    {
+        public IClient Client { set; get; }
     }
 }

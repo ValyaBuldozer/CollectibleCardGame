@@ -1,35 +1,29 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BaseNetworkArchitecture.Common
 {
     public class TcpCommunicator : INetworkCommunicator
     {
-        public TcpClient Client { set; get; }
-
-        public event EventHandler<MessageEventArgs> MessageRecievedEvent;
-
-        public void RunMessageRecievedEvent(MessageEventArgs e)
+        public TcpCommunicator(TcpClient client)
         {
-            MessageRecievedEvent?.Invoke(this, e);
+            Client = client;
         }
 
-        public bool SendMessage(Message message)
+        public TcpClient Client { set; get; }
+
+        public bool SendMessage(NetworkMessage networkMessage)
         {
-            if (string.IsNullOrEmpty(message.Content))
+            if (string.IsNullOrEmpty(networkMessage.Content))
                 throw new NullReferenceException("Message string was empty");
 
             try
             {
-                byte[] msgBytes = message.Encoder.GetBytes(message.Content);
-                byte[] lengthBytes = new byte[6];
-                byte[] size = message.Encoder.GetBytes(msgBytes.Length.ToString());
-                string length = message.Encoder.GetString(size);
+                var msgBytes = networkMessage.Encoder.GetBytes(networkMessage.Content);
+                var lengthBytes = new byte[6];
+                var size = networkMessage.Encoder.GetBytes(msgBytes.Length.ToString());
+                var length = networkMessage.Encoder.GetString(size);
                 size.CopyTo(lengthBytes, 0);
 
                 if (lengthBytes.Length > 6)
@@ -53,26 +47,26 @@ namespace BaseNetworkArchitecture.Common
             }
         }
 
-        public Message ReadMessage()
+        public NetworkMessage ReadMessage()
         {
             try
             {
-                Message retMessage = new Message();
+                var retNetworkMessage = new NetworkMessage();
 
-                byte[] lengthBytes = new byte[6];
+                var lengthBytes = new byte[6];
 
-                int bytesRead = Client.GetStream().Read(lengthBytes, 0, lengthBytes.Length);
+                var bytesRead = Client.GetStream().Read(lengthBytes, 0, lengthBytes.Length);
 
-                if (int.TryParse(retMessage.Encoder.GetString(lengthBytes), out int length))
+                if (int.TryParse(retNetworkMessage.Encoder.GetString(lengthBytes), out var length))
                 {
-                    byte[] dataBuffer = new byte[length];
+                    var dataBuffer = new byte[length];
                     Client.GetStream().Read(dataBuffer, 0, dataBuffer.Length);
-                    retMessage.Content = retMessage.Encoder.GetString(dataBuffer);
+                    retNetworkMessage.Content = retNetworkMessage.Encoder.GetString(dataBuffer);
 
-                    return retMessage;
+                    return retNetworkMessage;
                 }
-                else
-                    throw new FormatException("Wrong length format");
+
+                throw new FormatException("Wrong length format");
             }
             catch (SocketException e)
             {
@@ -87,46 +81,9 @@ namespace BaseNetworkArchitecture.Common
             }
         }
 
-        public void StartReadMessages()
-        {
-            try
-            {
-                MessageRecievedEvent += OnMessageRecieved;
-                if (Client == null)
-                    throw new NullReferenceException();
-
-                byte[] lengthBytes = new byte[6];
-                Client.GetStream().Read(lengthBytes, 0, 6);
-
-                int msgLength = int.Parse(new Message().Encoder.GetString(lengthBytes));
-                var clientState = new ClientState(Client, msgLength);
-
-                var result = Client.GetStream().BeginRead(clientState.RcvBuffer, 0, clientState.RcvBuffer.Length,
-                    ReadCallback, clientState);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-        }
-
         public bool Connect()
         {
             throw new NotImplementedException();
-        }
-
-        public bool Connect(IPAddress IPadress, int port)
-        {
-            try
-            {
-                Client.Connect(IPadress, port);
-                return true;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                return false;
-            }
         }
 
         public bool Disconnect()
@@ -143,51 +100,75 @@ namespace BaseNetworkArchitecture.Common
             }
         }
 
-        public TcpCommunicator(TcpClient client)
+        public event EventHandler<MessageEventArgs> MessageRecievedEvent;
+
+        public void RunMessageRecievedEvent(MessageEventArgs e)
         {
-            Client = client;
+            MessageRecievedEvent?.Invoke(this, e);
         }
 
-        public void OnMessageRecieved(object sender, MessageEventArgs e)
+        public void StartReadMessages()
         {
-            string answer = "Server answer " + e.Message.Content;
+            try
+            {
+                //MessageRecievedEvent += OnMessageRecieved;
+                if (Client == null)
+                    throw new NullReferenceException();
 
-            byte[] bytes = e.Message.Encoder.GetBytes(answer);
-            var clientState = new ClientState(Client, bytes.Length);
+                var lengthBytes = new byte[6];
+                Client.GetStream().Read(lengthBytes, 0, 6);
 
-            byte[] lengthBytes = new byte[6];
-            e.Message.Encoder.GetBytes(bytes.Length.ToString()).CopyTo(lengthBytes, 0);
+                var msgLength = int.Parse(new NetworkMessage().Encoder.GetString(lengthBytes));
+                var clientState = new ClientState(Client, msgLength);
 
-            clientState.TcpClient.GetStream().Write(lengthBytes, 0, lengthBytes.Length);
-
-            clientState.TcpClient.GetStream().BeginWrite(bytes,
-                0, bytes.Length,
-                WriteCallback, clientState);
+                var result = Client.GetStream().BeginRead(clientState.RcvBuffer, 0, clientState.RcvBuffer.Length,
+                    ReadCallback, clientState);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
-        public void ReadCallback(IAsyncResult asyncResult)
+        public bool Connect(IPAddress IPadress, int port)
         {
-            var clientState = (ClientState)asyncResult.AsyncState;
+            try
+            {
+                if (Client.Connected)
+                    throw new InvalidOperationException("Client is already connected");
+                Client.Connect(IPadress, port);
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+            }
+        }
+
+        private void ReadCallback(IAsyncResult asyncResult)
+        {
+            var clientState = (ClientState) asyncResult.AsyncState;
 
             try
             {
-                Message recivedMessage = new Message();
+                var recivedNetworkMessage = new NetworkMessage();
                 var msgSize = clientState.TcpClient.GetStream().EndRead(asyncResult);
 
                 if (msgSize > 0)
                 {
-                    recivedMessage.Content = recivedMessage.Encoder.GetString(clientState.RcvBuffer);
-                    Console.WriteLine("Recieved message from cliet " + recivedMessage.Content);
+                    recivedNetworkMessage.Content = recivedNetworkMessage.Encoder.GetString(clientState.RcvBuffer);
+                    Console.WriteLine("Recieved message from cliet " + recivedNetworkMessage.Content);
 
-                    RunMessageRecievedEvent(new MessageEventArgs()
+                    RunMessageRecievedEvent(new MessageEventArgs
                     {
-                        Message = recivedMessage
+                        NetworkMessage = recivedNetworkMessage
                     });
 
-                    byte[] lengthBytes = new byte[6];
+                    var lengthBytes = new byte[6];
                     Client.GetStream().Read(lengthBytes, 0, 6);
 
-                    int msgLength = int.Parse(recivedMessage.Encoder.GetString(lengthBytes));
+                    var msgLength = int.Parse(recivedNetworkMessage.Encoder.GetString(lengthBytes));
                     clientState = new ClientState(Client, msgLength);
 
                     var result = Client.GetStream().BeginRead(clientState.RcvBuffer, 0, clientState.RcvBuffer.Length,
@@ -209,9 +190,9 @@ namespace BaseNetworkArchitecture.Common
             }
         }
 
-        public void WriteCallback(IAsyncResult asyncResult)
+        private void WriteCallback(IAsyncResult asyncResult)
         {
-            var clientState = (ClientState)asyncResult.AsyncState;
+            var clientState = (ClientState) asyncResult.AsyncState;
 
             try
             {
@@ -239,7 +220,7 @@ namespace BaseNetworkArchitecture.Common
 
     public class MessageEventArgs : EventArgs
     {
-        public Message Message { set; get; }
+        public NetworkMessage NetworkMessage { set; get; }
         public string Sender { set; get; }
     }
 }

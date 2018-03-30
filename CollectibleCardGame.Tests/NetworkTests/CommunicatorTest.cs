@@ -19,6 +19,7 @@ namespace CollectibleCardGame.Tests.NetworkTests
         public void ConnectionTest()
         {
             TcpServer server = new TcpServer(8800);
+            server.ClientConnected += OnClientConnected;
             server.Start();
 
             TcpClient client = new TcpClient();
@@ -26,10 +27,20 @@ namespace CollectibleCardGame.Tests.NetworkTests
 
             TcpCommunicator clientCommunicator = new TcpCommunicator(client);
 
-            clientCommunicator.SendMessage(new Message() { Content = "test" });
+            clientCommunicator.SendMessage(new NetworkMessage() { Content = "test" });
             var answer = clientCommunicator.ReadMessage();
 
             Assert.IsTrue(answer != null);
+        }
+
+        public void OnMessageRecieved(object sender, MessageEventArgs e)
+        {
+            ((TcpCommunicator) sender).SendMessage(e.NetworkMessage);
+        }
+
+        public void OnClientConnected(object sender, ClientConnectedEventArgs e)
+        {
+            ((TcpCommunicator) e.Client.Communicator).MessageRecievedEvent += OnMessageRecieved;
         }
     }
 }

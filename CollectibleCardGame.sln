@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaseNetworkArchitecture", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CollectibleCardGame.Tests", "CollectibleCardGame.Tests\CollectibleCardGame.Tests.csproj", "{DB6341B4-8DEC-46CB-9A74-8B461CA24110}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server", "Server\Server.csproj", "{D89C11BB-2561-43FD-B577-2F1AB93640FD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{DB6341B4-8DEC-46CB-9A74-8B461CA24110}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DB6341B4-8DEC-46CB-9A74-8B461CA24110}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DB6341B4-8DEC-46CB-9A74-8B461CA24110}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D89C11BB-2561-43FD-B577-2F1AB93640FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D89C11BB-2561-43FD-B577-2F1AB93640FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D89C11BB-2561-43FD-B577-2F1AB93640FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D89C11BB-2561-43FD-B577-2F1AB93640FD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
