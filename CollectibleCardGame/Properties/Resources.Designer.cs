@@ -63,6 +63,16 @@ namespace CollectibleCardGame.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap battle {
+            get {
+                object obj = ResourceManager.GetObject("battle", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap cards {
             get {
                 object obj = ResourceManager.GetObject("cards", resourceCulture);
@@ -77,6 +87,16 @@ namespace CollectibleCardGame.Properties {
             get {
                 object obj = ResourceManager.GetObject("Chronicles_font", resourceCulture);
                 return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap darksidePicture {
+            get {
+                object obj = ResourceManager.GetObject("darksidePicture", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         

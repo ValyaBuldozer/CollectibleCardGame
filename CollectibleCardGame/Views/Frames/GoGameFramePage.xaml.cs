@@ -13,18 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace CollectibleCardGame.Views.UserControls
+namespace CollectibleCardGame.Views.Frames
 {
     /// <summary>
-    /// Логика взаимодействия для FractionUserControl.xaml
+    /// Логика взаимодействия для GoGameFramePage.xaml
     /// </summary>
-    public partial class FractionUserControl : UserControl
+    public partial class GoGameFramePage : Page
     {
-        public FractionUserControl()
+        public GoGameFramePage()
         {
             InitializeComponent();
         }
-
-       
     }
 }

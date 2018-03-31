@@ -64,8 +64,14 @@
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\Frames\CardDecksPageViewModel.cs" />
     <Compile Include="ViewModels\UserControls\FractionUserControlViewModel.cs" />
+    <Compile Include="Views\FramesShell\LogInFramePageShell.xaml.cs">
+      <DependentUpon>LogInFramePageShell.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Frames\CardDecksFramePage.xaml.cs">
       <DependentUpon>CardDecksFramePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Frames\GoGameFramePage.xaml.cs">
+      <DependentUpon>GoGameFramePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Frames\LogInFramePage.xaml.cs">
       <DependentUpon>LogInFramePage.xaml</DependentUpon>
@@ -111,7 +117,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\FramesShell\LogInFramePageShell.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Frames\CardDecksFramePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Frames\GoGameFramePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -196,6 +210,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\southPicture.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\battle.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\darksidePicture.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

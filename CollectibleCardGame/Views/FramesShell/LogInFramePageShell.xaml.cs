@@ -12,19 +12,26 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using CollectibleCardGame.Views.Frames;
 
-namespace CollectibleCardGame.Views.UserControls
+namespace CollectibleCardGame.Views.FramesShell
 {
     /// <summary>
-    /// Логика взаимодействия для FractionUserControl.xaml
+    /// Логика взаимодействия для LogInFramePageShell.xaml
     /// </summary>
-    public partial class FractionUserControl : UserControl
+    public partial class LogInFramePageShell : Page
     {
-        public FractionUserControl()
+        public LogInFramePageShell()
         {
-            InitializeComponent();
-        }
+            //LogInFramePageShell window = new LogInFramePageShell();
 
-       
+
+            //LogInFramePage frame = new LogInFramePage();
+
+
+            //window.LogInFrame.Content = frame;
+            InitializeComponent();
+            
+        }
     }
 }

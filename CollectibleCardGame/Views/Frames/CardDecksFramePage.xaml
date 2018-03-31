@@ -6,18 +6,35 @@
       xmlns:local="clr-namespace:CollectibleCardGame.Views.Frames"
       xmlns:cntrls="clr-namespace:CollectibleCardGame.Views.UserControls"
       mc:Ignorable="d" 
-      d:DesignHeight="350" d:DesignWidth="550" MinHeight="350" MinWidth="550"
+      d:DesignHeight="350" d:DesignWidth="733" MinHeight="350" MinWidth="550"
       Title="CardDecksFramePage">
 
     <Grid Background= "#E7E7E7">
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="0.01*"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <cntrls:FractionPage Grid.Column="0" x:Name="f1" ></cntrls:FractionPage>
-            <cntrls:FractionPage Grid.Column="2" x:Name="f2" ></cntrls:FractionPage>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid Margin="5" Height="Auto">
+                <ScrollViewer  VerticalScrollBarVisibility="Auto">
+                <ItemsControl Margin="5,0,5,0"  >
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel   Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="1" Height="Auto" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+
+
+                    <cntrls:FractionUserControl Grid.Column="0" x:Name="f1" Height="600" Margin="10" ></cntrls:FractionUserControl>
+                    <cntrls:FractionUserControl Grid.Column="1" x:Name="f2"  Height="600"  Margin="10"  ></cntrls:FractionUserControl>
+                    <cntrls:FractionUserControl Grid.Column="2" x:Name="f3"  Height="600"  Margin="10"  ></cntrls:FractionUserControl>
+                    
+
+
+
+
+                </ItemsControl>
+            </ScrollViewer>
+            
         </Grid>
+        
     </Grid>
 </Page>
