@@ -14,11 +14,11 @@ namespace CollectibleCardGame.Tests.UnityTests
         [TestMethod]
         public void ReposSingletoneTest()
         {
-            UnityKernel.InitializeKernel();
-            UnityKernel.Get<IRepositoryController<User>>().Add(new User());
-            UnityKernel.Get<IRepositoryController<User>>().Add(new User());
+            UnityTestKernel.InitializeKernel();
+            UnityTestKernel.Get<IRepositoryController<User>>().Add(new User());
+            UnityTestKernel.Get<IRepositoryController<User>>().Add(new User());
 
-            Assert.IsTrue(((UserRepository)(UnityKernel.Get<IRepository<User>>())).Collection.Count == 3);
+            Assert.IsTrue(((UserRepository)(UnityTestKernel.Get<IRepository<User>>())).Collection.Count == 3);
         }
     }
 
@@ -48,7 +48,7 @@ namespace CollectibleCardGame.Tests.UnityTests
         {
             _collection = new List<User>
             {
-                new User() {Id =1,Password = "test",Userame = "test"}
+                new User() {Id =1,Password = "test",Username = "test"}
             };
         }
     }

@@ -12,12 +12,19 @@ namespace BaseNetworkArchitecture.Server
         private const string LOCALHOST_IP = "127.0.0.1";
         private readonly int PORT;
 
-        public TcpServer(int port)
+        public TcpServer()
         {
-            PORT = port;
+            PORT = 8800;
             TcpListener = new TcpListener(IPAddress.Parse(LOCALHOST_IP), PORT);
             Clients = new List<IClient>();
         }
+
+        //public TcpServer(int port)
+        //{
+        //    PORT = port;
+        //    TcpListener = new TcpListener(IPAddress.Parse(LOCALHOST_IP), PORT);
+        //    Clients = new List<IClient>();
+        //}
 
         public Thread GetListenerThread { get; private set; }
 

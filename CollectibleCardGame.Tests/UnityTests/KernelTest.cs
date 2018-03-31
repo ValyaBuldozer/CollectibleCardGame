@@ -16,20 +16,20 @@ namespace CollectibleCardGame.Tests.UnityTests
         [TestMethod]
         public void KernelUnityTest()
         {
-            UnityKernel.InitializeKernel();
+            UnityTestKernel.InitializeKernel();
             A a = new A() {Number = 1};
             IContent content = new TestContent(){Data = a,AnotherData = a};
             var t = content.GetType();
 
            // var controller = UnityKernel.Get(content.ControllerType);
 
-            var controller = UnityKernel.Get<IContentController<TestContent>>();
+            var controller = UnityTestKernel.Get<IContentController<TestContent>>();
 
             Assert.IsTrue(controller.Execute(content));
         }
     }
 
-    public class UnityKernel
+    public class UnityTestKernel
     {
         private static UnityContainer _container;
 

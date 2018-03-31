@@ -16,6 +16,7 @@ namespace Server.Database
         }
 
         public DbSet<User> Users { set; get; }
+        public DbSet<UserInfo> UsersInfo { set; get; }
 
         public void Save()
         {

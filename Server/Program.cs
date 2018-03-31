@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Server.Database;
 using Server.Models;
+using Server.Unity;
 
 namespace Server
 {
@@ -13,11 +14,12 @@ namespace Server
     {
         static void Main(string[] args)
         {
-            AppDbContext context = new AppDbContext();
-            context.Users.Add(new User() {Userame = "test", Password = "test"});
-            context.Save();
-            IEnumerable<User> users = context.Users;
+            //AppDbContext context = new AppDbContext();
+            //context.Users.Add(new User() {Userame = "test", Password = "test"});
+            //context.Save();
+            //IEnumerable<User> users = context.Users;
             
+            UnityKernel.InitializeKernel();
         }
     }
 }

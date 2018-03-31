@@ -18,7 +18,7 @@ namespace CollectibleCardGame.Tests.NetworkTests
         [TestMethod]
         public void ConnectionTest()
         {
-            TcpServer server = new TcpServer(8800);
+            TcpServer server = new TcpServer();
             server.ClientConnected += OnClientConnected;
             server.Start();
 
