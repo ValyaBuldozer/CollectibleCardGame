@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:CollectibleCardGame.Views.UserControls"
              mc:Ignorable="d" 
              d:DesignHeight="410" d:DesignWidth="220"> <!--410x220-->
-    <Border BorderThickness="5" BorderBrush="Black">
+    <Border BorderThickness="5" BorderBrush="Black" CornerRadius="5">
         <Grid Background="{StaticResource BasicBackGround}">
 
             <Grid>
@@ -25,11 +25,11 @@
                 </Border>
                 <Grid Grid.Row="0" Grid.RowSpan="2">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="0.25*"/>
+                        <RowDefinition Height="0.26*"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.25*"/>
+                        <ColumnDefinition Width="0.2*"/>
                         <ColumnDefinition Width="5*"/>
                         <ColumnDefinition Width="10*"/>
                         <ColumnDefinition Width="4*"/>
@@ -67,7 +67,7 @@
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
                     </Grid>
-                    <Ellipse Grid.Row="0" Stroke="Black" StrokeThickness="3" Grid.Column="1"  HorizontalAlignment="Center" VerticalAlignment="Center" Fill="Gold" Width="55" Height="55" />
+                    <Ellipse Grid.Row="0" Stroke="Black" StrokeThickness="3" Grid.Column="1"  HorizontalAlignment="Center" VerticalAlignment="Center" Fill="Gold" Width="55" Height="55" Margin="0,2,0,0" />
 
                     <TextBlock Grid.Row="0" Name="UnitCost" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Path=Cost}" FontSize="52" FontWeight="Bold" Margin="0,0,0,5"  />
 
