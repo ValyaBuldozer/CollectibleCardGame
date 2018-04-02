@@ -1,4 +1,4 @@
-﻿namespace BaseNetworkArchitecture.Common
+﻿namespace BaseNetworkArchitecture.Common.Messages
 {
     public class NetworkMessage
     {

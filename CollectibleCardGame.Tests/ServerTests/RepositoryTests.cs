@@ -19,12 +19,30 @@ namespace CollectibleCardGame.Tests.ServerTests
         public void RemoveReposTest()
         {
             UnityKernel.InitializeKernel();
-            UnityKernel.Get<UserReposController>().Add(new User(){Username = "testUser",Password = "test"});
-            var user = new User() {Username = "testUser", Password = "test"};
-            if(UnityKernel.Get<UserRepository>().Collection.FirstOrDefault(u=>u.Equals(user))!=null)
-                UnityKernel.Get<UserReposController>().Remove(user);
+            var controller = UnityKernel.Get<UserReposController>();
+            //UnityKernel.Get<UserReposController>().Add(new User(){Username = "testUser",Password = "test"});
+            //var user = new User() {Username = "testUser", Password = "test"};
+            //if(UnityKernel.Get<UserRepository>().Collection.ToList().FirstOrDefault(u=>u.Equals(user))!=null)
+            //    UnityKernel.Get<UserReposController>().Remove(user);
 
-            Assert.IsTrue(UnityKernel.Get<UserRepository>().Collection.FirstOrDefault(u=>u.Username == "testUser")==null);
+            controller.Add(new User(){Username = "repostest",Password = "test"});
+            var deletingUser = controller.GetEnumerable.FirstOrDefault(u => u.Username == "repostest");
+            controller.Remove(deletingUser);
+
+            Assert.IsTrue(UnityKernel.Get<UserRepository>().Collection.FirstOrDefault(u=>u.Username == "repostest") ==null);
+        }
+
+        //[TestMethod]
+        public void ForechRepostTest()
+        {
+            UnityKernel.InitializeKernel();
+            int i=0;
+            foreach (var iUser in UnityKernel.Get<UserRepository>().Collection)
+            {
+                i++;
+            }
+            
+            Assert.IsTrue(i>0);
         }
     }
 }

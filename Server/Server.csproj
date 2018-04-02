@@ -79,6 +79,7 @@
     <Compile Include="Database\AppDbContext.cs" />
     <Compile Include="Database\AppDbContextInitializer.cs" />
     <Compile Include="Database\IContext.cs" />
+    <Compile Include="GameData\GameLobby.cs" />
     <Compile Include="Migrations\201803311641315_Initialize.cs" />
     <Compile Include="Migrations\201803311641315_Initialize.Designer.cs">
       <DependentUpon>201803311641315_Initialize.cs</DependentUpon>
@@ -89,8 +90,13 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Card.cs" />
+    <Compile Include="Models\GameLobby.cs" />
+    <Compile Include="Models\TableCondition.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserInfo.cs" />
+    <Compile Include="Network\Controllers\ClientController.cs" />
+    <Compile Include="Network\Controllers\NetworkMessageConverter.cs" />
+    <Compile Include="Network\Models\Client.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\CardRepository.cs" />
@@ -108,6 +114,10 @@
     <ProjectReference Include="..\BaseNetworkArchitecture\BaseNetworkArchitecture.csproj">
       <Project>{7560c4c2-7bc7-4c0f-ad49-42e5ae3b42bc}</Project>
       <Name>BaseNetworkArchitecture</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GameData\GameData.csproj">
+      <Project>{44cc6790-5c79-4002-9aff-fd688d6a08ba}</Project>
+      <Name>GameData</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -7,6 +7,7 @@ using BaseNetworkArchitecture.Server;
 using Server.Controllers;
 using Server.Database;
 using Server.Models;
+using Server.Network.Controllers;
 using Server.Repositories;
 using Server.Services;
 using Unity;
@@ -47,6 +48,8 @@ namespace Server.Unity
             _container.RegisterType<UserReposController>();
             _container.RegisterType<UserInfoReposController>();
             _container.RegisterType<CardReposController>();
+            _container.RegisterType<NetworkMessageConverter>(new ContainerControlledLifetimeManager());
+            _container.RegisterType<ClientController>(new ContainerControlledLifetimeManager());
 
             //service binding
             _container.RegisterType<UserService>(new ContainerControlledLifetimeManager());

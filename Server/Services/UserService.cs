@@ -16,7 +16,7 @@ namespace Server.Services
     {
         private readonly UserReposController _userReposController;
         private readonly UserInfoReposController _userInfoReposController;
-        private readonly ICollection<IClient> _clients;
+        private readonly ICollection<IClientConnection> _clients;
 
         public UserService(UserReposController userReposController,IServer server,
             UserInfoReposController userInfoReposController)

@@ -89,6 +89,7 @@
   <ItemGroup>
     <Compile Include="ArchitectureTests\MessageHandlerTest.cs" />
     <Compile Include="JsonParserTest\ParserDynamicTest.cs" />
+    <Compile Include="JsonParserTest\ParserInterfaceTest.cs" />
     <Compile Include="NetworkTests\CommunicatorTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServerTests\RepositoryTests.cs" />

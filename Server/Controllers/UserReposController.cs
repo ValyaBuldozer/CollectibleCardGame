@@ -25,8 +25,13 @@ namespace Server.Controllers
             _repository.Update();
         }
 
+        /// <summary>
+        /// Removing object by ID
+        /// </summary>
+        /// <param name="value"></param>
         public void Remove(User value)
         {
+            _repository.Collection.Attach(value);
             _repository.Collection.Remove(value);
             _repository.Update();
         }
@@ -38,8 +43,11 @@ namespace Server.Controllers
             if(dbValue == null)
                 throw new NullReferenceException("No value found");
 
-            _repository.Collection.Remove(dbValue);
-            _repository.Collection.Add(value);
+            //_repository.Collection.Remove(dbValue);
+            //_repository.Collection.Add(value);
+            dbValue.Username = value.Username;
+            dbValue.Password = value.Password;
+            dbValue.UserInfo = value.UserInfo;
 
             _repository.Update();
         }

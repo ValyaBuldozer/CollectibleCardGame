@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BaseNetworkArchitecture;
 using BaseNetworkArchitecture.Common;
+using BaseNetworkArchitecture.Common.Messages;
 using BaseNetworkArchitecture.Server;
 
 namespace CollectibleCardGame.Tests.NetworkTests
@@ -40,7 +41,7 @@ namespace CollectibleCardGame.Tests.NetworkTests
 
         public void OnClientConnected(object sender, ClientConnectedEventArgs e)
         {
-            ((TcpCommunicator) e.Client.Communicator).MessageRecievedEvent += OnMessageRecieved;
+            ((TcpCommunicator) e.ClientConnection.Communicator).MessageRecievedEvent += OnMessageRecieved;
         }
     }
 }

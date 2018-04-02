@@ -16,7 +16,7 @@ namespace BaseNetworkArchitecture.Server
         {
             PORT = 8800;
             TcpListener = new TcpListener(IPAddress.Parse(LOCALHOST_IP), PORT);
-            Clients = new List<IClient>();
+            Clients = new List<IClientConnection>();
         }
 
         //public TcpServer(int port)
@@ -30,7 +30,7 @@ namespace BaseNetworkArchitecture.Server
 
         public TcpListener TcpListener { get; }
 
-        public ICollection<IClient> Clients { set; get; }
+        public ICollection<IClientConnection> Clients { set; get; }
 
         public void Start()
         {
@@ -91,17 +91,17 @@ namespace BaseNetworkArchitecture.Server
 
             var tcpClient = listener.EndAcceptTcpClient(ar);
 
-            var client = new Client(tcpClient);
+            var client = new TcpClientConnection(tcpClient);
             Clients.Add(client);
             Console.WriteLine("Client connected");
             ((TcpCommunicator) client.Communicator).StartReadMessages();
 
-            RunClientConnectedEvent(this, new ClientConnectedEventArgs {Client = client});
+            RunClientConnectedEvent(this, new ClientConnectedEventArgs {ClientConnection = client});
         }
     }
 
     public class ClientConnectedEventArgs : EventArgs
     {
-        public IClient Client { set; get; }
+        public IClientConnection ClientConnection { set; get; }
     }
 }

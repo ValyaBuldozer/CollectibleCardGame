@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.Net.Sockets;
+using BaseNetworkArchitecture.Common.Messages;
 
 namespace BaseNetworkArchitecture.Common
 {
@@ -102,9 +103,16 @@ namespace BaseNetworkArchitecture.Common
 
         public event EventHandler<MessageEventArgs> MessageRecievedEvent;
 
-        public void RunMessageRecievedEvent(MessageEventArgs e)
+        private void RunMessageRecievedEvent(MessageEventArgs e)
         {
             MessageRecievedEvent?.Invoke(this, e);
+        }
+
+        private event EventHandler<BreakConnectionEventArgs> BreakConnectionEvent;
+
+        public void RunBreakConnection(BreakConnectionEventArgs e)
+        {
+            BreakConnectionEvent?.Invoke(this,e);
         }
 
         public void StartReadMessages()
@@ -216,11 +224,5 @@ namespace BaseNetworkArchitecture.Common
                 Console.WriteLine(e);
             }
         }
-    }
-
-    public class MessageEventArgs : EventArgs
-    {
-        public NetworkMessage NetworkMessage { set; get; }
-        public string Sender { set; get; }
     }
 }

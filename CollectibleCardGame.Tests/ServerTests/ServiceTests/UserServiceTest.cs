@@ -38,5 +38,19 @@ namespace CollectibleCardGame.Tests.ServerTests.ServiceTests
             Assert.IsTrue(repos.Collection.
                 FirstOrDefault(u=>u.Username == "testUser8") != null);
         }
+
+        [TestMethod]
+        public void LogIn()
+        {
+            var userCollection = UnityKernel.Get<UserRepository>().Collection;
+            var service = UnityKernel.Get<UserService>();
+
+            if (userCollection.FirstOrDefault(u => u.Username == "test") == null)
+                service.RegisterUser("test", "test");
+
+            var user = service.LogIn("test", "test");
+
+            Assert.IsNotNull(user);
+        }
     }
 }

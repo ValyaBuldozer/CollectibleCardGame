@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace BaseNetworkArchitecture.Common
+namespace BaseNetworkArchitecture.Common.Messages
 {
     public class Encoder
     {

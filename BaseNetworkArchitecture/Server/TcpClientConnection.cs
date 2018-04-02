@@ -3,9 +3,9 @@ using BaseNetworkArchitecture.Common;
 
 namespace BaseNetworkArchitecture.Server
 {
-    internal class Client : IClient
+    internal class TcpClientConnection : IClientConnection
     {
-        public Client(TcpClient tcpClient)
+        public TcpClientConnection(TcpClient tcpClient)
         {
             IsInSystem = false;
             Communicator = new TcpCommunicator(tcpClient);
