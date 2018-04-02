@@ -1,0 +1,28 @@
+﻿<Page x:Class="CollectibleCardGame.Views.Frames.TESTFramePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CollectibleCardGame.Views.Frames"
+      xmlns:cntrls="clr-namespace:CollectibleCardGame.Views.UserControls"
+      mc:Ignorable="d" 
+      d:DesignHeight="1200" d:DesignWidth="1900"
+      Title="TESTFramePage">
+
+    <Grid Background="{StaticResource BasicBackGround}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="220"/>
+
+            <ColumnDefinition/>
+           
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="410"/>
+
+            
+
+        </Grid.RowDefinitions>
+        <cntrls:UnitCardUserControl x:Name="c1" Grid.Column="0"></cntrls:UnitCardUserControl>
+        
+    </Grid>
+</Page>

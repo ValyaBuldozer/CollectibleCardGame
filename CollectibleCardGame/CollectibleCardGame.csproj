@@ -63,7 +63,10 @@
     <Compile Include="Services\RelayCommand.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\Frames\CardDecksPageViewModel.cs" />
+    <Compile Include="ViewModels\Frames\GameProccesPageViewModel.cs" />
+    <Compile Include="ViewModels\Frames\LogInFramePageShellViewModel.cs" />
     <Compile Include="ViewModels\UserControls\FractionUserControlViewModel.cs" />
+    <Compile Include="ViewModels\UserControls\UnitCardUserControlViewModel.cs" />
     <Compile Include="Views\FramesShell\LogInFramePageShell.xaml.cs">
       <DependentUpon>LogInFramePageShell.xaml</DependentUpon>
     </Compile>
@@ -91,11 +94,17 @@
     <Compile Include="Views\Frames\SouthFractionDeckFramePage.xaml.cs">
       <DependentUpon>SouthFractionDeckFramePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Frames\TESTFramePage.xaml.cs">
+      <DependentUpon>TESTFramePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Frames\ToRegisterFramePage.xaml.cs">
       <DependentUpon>ToRegisterFramePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\FractionUserControl.xaml.cs">
       <DependentUpon>FractionUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\UnitCardUserControl.xaml.cs">
+      <DependentUpon>UnitCardUserControl.xaml</DependentUpon>
     </Compile>
     <Page Include="CardGameStyles.xaml">
       <SubType>Designer</SubType>
@@ -153,11 +162,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Frames\TESTFramePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Frames\ToRegisterFramePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\UserControls\FractionUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\UnitCardUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -216,6 +233,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\darksidePicture.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UnitImages\test.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UnitImages\testResize210x253.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

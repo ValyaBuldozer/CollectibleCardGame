@@ -12,22 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using CollectibleCardGame.Views.Frames;
 
-namespace CollectibleCardGame.Views.FramesShell
+namespace CollectibleCardGame.Views.UserControls
 {
     /// <summary>
-    /// Логика взаимодействия для LogInFramePageShell.xaml
+    /// Логика взаимодействия для UnitCardUserControl.xaml
     /// </summary>
-    public partial class LogInFramePageShell : Page
+    public partial class UnitCardUserControl : UserControl
     {
-        public LogInFramePageShell()
+        public UnitCardUserControl()
         {
-            
             InitializeComponent();
-           
         }
-
-        
     }
 }

@@ -1,0 +1,108 @@
+﻿<UserControl x:Class="CollectibleCardGame.Views.UserControls.UnitCardUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CollectibleCardGame.Views.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="410" d:DesignWidth="220"> <!--410x220-->
+    <Border BorderThickness="5" BorderBrush="Black">
+        <Grid Background="{StaticResource BasicBackGround}">
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="8*"/>
+                    <RowDefinition Height="0.8*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="1.85*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+
+                </Grid.ColumnDefinitions>
+                <Border BorderThickness="0" BorderBrush="Black" Grid.Row="0" Width="210" Height="253"  >
+                    <!--картинка юнита 210x253-->
+                    <Image Name="UnitImage" Source="../../UnitImages/testResize210x253.jpg"   />
+                </Border>
+                <Grid Grid.Row="0" Grid.RowSpan="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.25*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.25*"/>
+                        <ColumnDefinition Width="5*"/>
+                        <ColumnDefinition Width="10*"/>
+                        <ColumnDefinition Width="4*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Column="1" Grid.RowSpan="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="3.5*"/>
+                            <ColumnDefinition  Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Grid.Column="1" BorderBrush="{Binding Path=TapeBorderBrush}" BorderThickness="5" Margin="0,40,0,0">
+                            <StackPanel  Background="{Binding Path=TapeBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"   Opacity="0.9"  />
+                        </Border>
+
+                        <ItemsControl x:Name="AbilityStack" Grid.Column="1" Margin="0,30,0,0">ItemsSource="{Binding  ViewModel.Parameters, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel   Orientation="Vertical" Margin="0,40,0,0" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+
+                                    <Grid Width="auto" Height="50" Margin="2,2,2,2">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+
+
+
+                                    </Grid>
+
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </Grid>
+                    <Ellipse Grid.Row="0" Stroke="Black" StrokeThickness="3" Grid.Column="1"  HorizontalAlignment="Center" VerticalAlignment="Center" Fill="Gold" Width="55" Height="55" />
+
+                    <TextBlock Grid.Row="0" Name="UnitCost" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Path=Cost}" FontSize="52" FontWeight="Bold" Margin="0,0,0,5"  />
+
+                </Grid>
+
+
+                <TextBlock Name="UnitStory" Grid.Row="2" Text="{Binding Path=Description}" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center"
+                           FontFamily="/CollectibleCardGame;component/Fonts/#Mason Chronicles" FontSize="12" Margin="5,0,5,0"/>
+
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="3.5*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Name="UnitName" Grid.Column="1" Text="{Binding Path=Name}" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"
+                               FontFamily="/CollectibleCardGame;component/Fonts/#Mason Chronicles" FontSize="16"/>
+                </Grid>
+
+                <Grid Grid.Row="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.25*"/>
+                        <ColumnDefinition Width="6*"/>
+                        <ColumnDefinition Width="10*"/>
+                        <ColumnDefinition Width="6*"/>
+                        <ColumnDefinition Width="0.25*"/>
+                    </Grid.ColumnDefinitions>
+                    <Ellipse Grid.Column="1" Stroke="Black" StrokeThickness="3" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="#EF3F37" Width="55" Height="55" Margin="0,0,0,0" />
+                    <TextBlock Name="UnitAttack" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Path=Attack}" FontSize="52" FontWeight="Bold" Margin="0,0,0,5"/>
+                    <Ellipse Grid.Column="3" Stroke="Black" StrokeThickness="3" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="#66BE61" Width="55" Height="55" Margin="0,0,0,0" />
+                    <TextBlock Name="UnitHealth" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Path=Health}" FontSize="52" FontWeight="Bold" Margin="0,0,0,5"/>
+                </Grid>
+            </Grid>
+
+
+        </Grid>
+    </Border>
+    
+</UserControl>

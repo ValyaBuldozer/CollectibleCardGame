@@ -12,22 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using CollectibleCardGame.Views.Frames;
 
-namespace CollectibleCardGame.Views.FramesShell
+namespace CollectibleCardGame.Views.Frames
 {
     /// <summary>
-    /// Логика взаимодействия для LogInFramePageShell.xaml
+    /// Логика взаимодействия для TESTFramePage.xaml
     /// </summary>
-    public partial class LogInFramePageShell : Page
+    public partial class TESTFramePage : Page
     {
-        public LogInFramePageShell()
+        public TESTFramePage()
         {
-            
             InitializeComponent();
-           
         }
-
-        
     }
 }
