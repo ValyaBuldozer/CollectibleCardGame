@@ -36,7 +36,7 @@ namespace CollectibleCardGame
 
 
             TESTFramePage frame = new TESTFramePage() { DataContext = new GameProccesPageViewModel() };
-            frame.c1.DataContext=new UnitCardUserControlViewModel(){Name = "Владик", Description = "Я хожу в качалку, но только по воскресеньям... Как же круто!", ImagePath = "/UnitImages/testResize375x420.jpg", Cost = 5, Attack = 9, Health = 6, TapeBrush = "#007ACC", TapeBorderBrush = "Blue"};
+            frame.c1.DataContext=new UnitCardUserControlViewModel(){Name = "Владик", Description = "Я хожу в качалку, но только по воскресеньям... Как же круто!", ImagePath = "/UnitImages/testResize210x253.jpg", Cost = 5, Attack = 9, Health = 6, TapeBrush = "#007ACC", TapeBorderBrush = "Blue"};
             //frame.f1.DataContext = new FractionUserControlViewModel() { Name = "Калвария", Description = "Северная фракция", ImagePath = "/Images/northPicture.jpg" };
             //frame.f2.DataContext = new FractionUserControlViewModel() { Name = "Магдебург", Description = "Южная фракцция", ImagePath = "/Images/southPicture.jpg" };
             //frame.f3.DataContext = new FractionUserControlViewModel() { Name = "Чудовища", Description = "Монстры", ImagePath = "/Images/darksidePicture.jpg" };

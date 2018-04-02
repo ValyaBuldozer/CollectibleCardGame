@@ -21,7 +21,7 @@
                 </Grid.ColumnDefinitions>
                 <Border BorderThickness="0" BorderBrush="Black" Grid.Row="0" Width="210" Height="253"  >
                     <!--картинка юнита 210x253-->
-                    <Image Name="UnitImage" Source="../../UnitImages/testResize210x253.jpg"   />
+                    <Image Name="UnitImage" Source="{Binding Path=ImagePath}"   />
                 </Border>
                 <Grid Grid.Row="0" Grid.RowSpan="2">
                     <Grid.RowDefinitions>
