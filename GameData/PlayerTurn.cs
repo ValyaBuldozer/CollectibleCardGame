@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Server.GameData
+namespace GameData
 {
-    public class GameLobby
+    public class PlayerTurn
     {
-        
     }
 }

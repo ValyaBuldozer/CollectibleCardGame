@@ -3,7 +3,7 @@ using BaseNetworkArchitecture.Common;
 
 namespace BaseNetworkArchitecture.Server
 {
-    internal class TcpClientConnection : IClientConnection
+    public class TcpClientConnection : IClientConnection
     {
         public TcpClientConnection(TcpClient tcpClient)
         {

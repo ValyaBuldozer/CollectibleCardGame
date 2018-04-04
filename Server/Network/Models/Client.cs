@@ -40,6 +40,7 @@ namespace Server.Network.Models
             ClientConnection.Communicator.MessageRecievedEvent += OnMessageRecieved;
             ClientConnection.Communicator.BreakConnectionEvent += OnBreakConnection;
             ClientController = UnityKernel.Get<ClientController>();
+            ClientController.Client = this;
 
             MessageRecived += ClientController.OnMessageRecieved;
             BreakConnection += ClientController.OnBreakConnection;

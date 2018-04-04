@@ -88,11 +88,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArchitectureTests\MessageHandlerTest.cs" />
+    <Compile Include="ServerTests\NetworkMessageConverterTest.cs" />
     <Compile Include="JsonParserTest\ParserDynamicTest.cs" />
     <Compile Include="JsonParserTest\ParserInterfaceTest.cs" />
     <Compile Include="NetworkTests\CommunicatorTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServerTests\RepositoryTests.cs" />
+    <Compile Include="ServerTests\ServerClientTests\ClientMessageRecievedTest.cs" />
+    <Compile Include="ServerTests\ServiceTests\ServerStateServiceTest.cs" />
     <Compile Include="ServerTests\ServiceTests\UserServiceTest.cs" />
     <Compile Include="TestOfUnitTests.cs" />
     <Compile Include="UnityTests\KernelTest.cs" />
@@ -110,6 +113,14 @@
     <ProjectReference Include="..\BaseNetworkArchitecture\BaseNetworkArchitecture.csproj">
       <Project>{7560c4c2-7bc7-4c0f-ad49-42e5ae3b42bc}</Project>
       <Name>BaseNetworkArchitecture</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CollectibleCardGame\CollectibleCardGame.csproj">
+      <Project>{0633d1ce-dbf5-4f27-a9af-876bea8d24cb}</Project>
+      <Name>CollectibleCardGame</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GameData\GameData.csproj">
+      <Project>{44cc6790-5c79-4002-9aff-fd688d6a08ba}</Project>
+      <Name>GameData</Name>
     </ProjectReference>
     <ProjectReference Include="..\Server\Server.csproj">
       <Project>{d89c11bb-2561-43fd-b577-2f1ab93640fd}</Project>

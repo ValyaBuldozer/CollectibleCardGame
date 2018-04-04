@@ -8,6 +8,7 @@ using Server.Controllers;
 using Server.Database;
 using Server.Models;
 using Server.Network.Controllers;
+using Server.Network.Controllers.MessageHandlers;
 using Server.Repositories;
 using Server.Services;
 using Unity;
@@ -27,6 +28,9 @@ namespace Server.Unity
 
         public static T Get<T>()
         {
+            if (_container == null)
+                InitializeKernel();
+
             return _container.Resolve<T>();
         }
 
@@ -43,20 +47,31 @@ namespace Server.Unity
             _container.RegisterType<UserRepository>();
             _container.RegisterType<UserInfoRepository>();
             _container.RegisterType<CardRepository>(new ContainerControlledLifetimeManager());
+            _container.RegisterType<AwaitingClientsQueue>(new ContainerControlledLifetimeManager());
 
             //controller binding
             _container.RegisterType<UserReposController>();
             _container.RegisterType<UserInfoReposController>();
             _container.RegisterType<CardReposController>();
+            _container.RegisterType<AwaitingClientsQueueController>(new ContainerControlledLifetimeManager());
             _container.RegisterType<NetworkMessageConverter>(new ContainerControlledLifetimeManager());
-            _container.RegisterType<ClientController>(new ContainerControlledLifetimeManager());
+            _container.RegisterType<ClientController>();
 
             //service binding
             _container.RegisterType<UserService>(new ContainerControlledLifetimeManager());
+            _container.RegisterType<ServerStateService>(new ContainerControlledLifetimeManager());
+
+            //message handlers binding
+            _container.RegisterType<LogInMessageHandler>();
+            _container.RegisterType<RegistrationMessageHandler>();
+            _container.RegisterType<GameStartMessageHandler>();
         }
 
         public static object Get(Type t)
         {
+            if(_container == null)
+                InitializeKernel();
+
             return _container.Resolve(t);
         }
     }

@@ -29,7 +29,7 @@ namespace Server.Services
         public User RegisterUser(string username, string password)
         {
             if(string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
-                throw new NullReferenceException();
+                throw new NullReferenceException("Username or password was empty");
 
             if(_userReposController.GetEnumerable.FirstOrDefault(u=>u.Username == username)
                 !=null)

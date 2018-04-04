@@ -108,9 +108,9 @@ namespace BaseNetworkArchitecture.Common
             MessageRecievedEvent?.Invoke(this, e);
         }
 
-        private event EventHandler<BreakConnectionEventArgs> BreakConnectionEvent;
+        public event EventHandler<BreakConnectionEventArgs> BreakConnectionEvent;
 
-        public void RunBreakConnection(BreakConnectionEventArgs e)
+        private void RunBreakConnection(BreakConnectionEventArgs e)
         {
             BreakConnectionEvent?.Invoke(this,e);
         }

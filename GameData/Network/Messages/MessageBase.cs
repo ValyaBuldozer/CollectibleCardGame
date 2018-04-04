@@ -1,4 +1,5 @@
 ﻿using GameData.Enums;
+using Newtonsoft.Json;
 
 namespace GameData.Network.Messages
 {
@@ -6,20 +7,25 @@ namespace GameData.Network.Messages
     {
         public MessageBaseType Type { get; }
 
-        public IContent Content { get; }
+        /// <summary>
+        /// Object из-за десериализации
+        /// </summary>
+        public object Content { get; }
 
+        [JsonIgnore]
         public IMessageHandler MessageHandler { get; }
 
-        public MessageBase(MessageBaseType type,IContent content,IMessageHandler messageHandler)
+        public MessageBase(MessageBaseType type,object content,IMessageHandler messageHandler)
         {
             Type = type;
             Content = content;
             MessageHandler = messageHandler;
         }
 
-        public IContent HandleMessage(IContent content)
+        public IContent HandleMessage(object sender)
         {
-            return MessageHandler.Execute(content);
+            IContent content = Content as IContent;
+            return MessageHandler.Execute(content,sender);
         }
     }
 }
