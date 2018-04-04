@@ -3,6 +3,7 @@
                     xmlns:local="clr-namespace:CollectibleCardGame">
 
     <SolidColorBrush Color="#E7E7E7" x:Key="BasicBackGround" />
+    <SolidColorBrush Color="#E6D1A2" x:Key="CardBackGround"/>
 
     <Style x:Key="RadioButtonForGame" TargetType="{x:Type RadioButton}" >
         <Setter Property="Template">
@@ -41,4 +42,6 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+   
 </ResourceDictionary>

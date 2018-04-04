@@ -13,16 +13,19 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="220"/>
 
-            <ColumnDefinition/>
-           
+            <ColumnDefinition Width="40"/>
+            <ColumnDefinition Width="220"/>
+            <ColumnDefinition Width="*"/>
+
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="410"/>
 
-            
+
 
         </Grid.RowDefinitions>
-        <cntrls:UnitCardUserControl x:Name="c1" Grid.Column="0"></cntrls:UnitCardUserControl>
-        
+        <cntrls:UnitCardUserControl x:Name="u1" Grid.Column="0"></cntrls:UnitCardUserControl>
+        <cntrls:SpellCardUserControl x:Name="s1" Grid.Column="2"></cntrls:SpellCardUserControl>
+
     </Grid>
 </Page>

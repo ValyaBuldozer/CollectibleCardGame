@@ -66,6 +66,7 @@
     <Compile Include="ViewModels\Frames\GameProccesPageViewModel.cs" />
     <Compile Include="ViewModels\Frames\LogInFramePageShellViewModel.cs" />
     <Compile Include="ViewModels\UserControls\FractionUserControlViewModel.cs" />
+    <Compile Include="ViewModels\UserControls\SpellCardUserControlViewModel.cs" />
     <Compile Include="ViewModels\UserControls\UnitCardUserControlViewModel.cs" />
     <Compile Include="Views\FramesShell\LogInFramePageShell.xaml.cs">
       <DependentUpon>LogInFramePageShell.xaml</DependentUpon>
@@ -102,6 +103,9 @@
     </Compile>
     <Compile Include="Views\UserControls\FractionUserControl.xaml.cs">
       <DependentUpon>FractionUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\SpellCardUserControl.xaml.cs">
+      <DependentUpon>SpellCardUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\UnitCardUserControl.xaml.cs">
       <DependentUpon>UnitCardUserControl.xaml</DependentUpon>
@@ -174,6 +178,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\UserControls\SpellCardUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\UserControls\UnitCardUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -235,10 +243,16 @@
     <Resource Include="Images\darksidePicture.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="UnitImages\test.jpg" />
+    <None Include="ImagesUnit\test.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="UnitImages\testResize210x253.jpg" />
+    <Resource Include="ImagesUnit\testResize210x253.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="IconsUnit\sword.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ImagesSpell\SpellGradStrel.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
