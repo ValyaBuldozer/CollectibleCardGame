@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using CollectibleCardGame.Services;
 using CollectibleCardGame.Views.Frames;
@@ -43,12 +44,19 @@ namespace CollectibleCardGame.ViewModels.Frames
         _toRegisterFramePage = new ToRegisterFramePage();
         _currentFramePage = _logInFramePage;
         _logInFramePage.ToRegisterButton.Click += ToRegisterButton_Click;
+        _toRegisterFramePage.GoBackButton.Click += GoBackButton_Click;
 
+    }
+
+    private void GoBackButton_Click(object sender, RoutedEventArgs e)
+    {
+        CurrentFramePage = _logInFramePage;
     }
 
     private void ToRegisterButton_Click(object sender, System.Windows.RoutedEventArgs e)
     {
         CurrentFramePage = _toRegisterFramePage;
     }
+
     }
 }

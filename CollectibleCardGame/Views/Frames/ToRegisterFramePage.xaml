@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:CollectibleCardGame.Views.Frames"
+      xmlns:framesShell="clr-namespace:CollectibleCardGame.Views.FramesShell"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="600"
       Title="ToRegisterFramePage">
@@ -54,12 +55,18 @@
 
         <Grid Grid.Row="4">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.5*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="0.1*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="0.5*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
            
             <Button Name="ToRegisterButton" Style="{DynamicResource ButtonGreenStyle}" Content="Регистрация" HorizontalAlignment="Stretch" Grid.Column="1"  VerticalAlignment="Center" FontSize="16" />
+            <Button Name="GoBackButton" Style="{DynamicResource ButtonNeutralStyle}" Content="Назад" HorizontalAlignment="Stretch" Grid.Column="3"  VerticalAlignment="Center" FontSize="16"
+                    Command="{Binding RelativeSource=
+                            {RelativeSource Mode=FindAncestor, AncestorType={x:Type framesShell:LogInFramePageShell}}, 
+                            Path=DataContext.SwitchFrameCommand}"/>
         </Grid>
 
     </Grid>

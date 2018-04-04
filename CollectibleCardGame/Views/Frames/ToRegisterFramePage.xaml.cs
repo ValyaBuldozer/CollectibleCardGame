@@ -24,5 +24,8 @@ namespace CollectibleCardGame.Views.Frames
         {
             InitializeComponent();
         }
+
+
+        
     }
 }
