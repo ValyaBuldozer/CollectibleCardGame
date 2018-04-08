@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GameData
+namespace GameData.Models
 {
-    public class PlayerTurn
+    public class Unit
     {
     }
 }

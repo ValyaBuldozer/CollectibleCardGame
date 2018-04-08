@@ -28,4 +28,33 @@ namespace GameData.Enums
         FirstPlayer,
         SecondPlayer
     }
+
+    public enum ActionType
+    {
+        BattleCry,
+        DeathRattle,
+        OnAttack,
+        Spell,
+        Other
+    }
+
+    public enum ActionParameterType
+    {
+        Damage,
+        DamageRandomRange,
+        Heal,
+        HealRandomRange,
+        Buff,
+        BuffRandomRange,
+        Empty
+    }
+
+    public enum SpellTargetType
+    {
+        AlliedUnits,
+        EnemyUnits,
+        AlliedUnit,
+        EnemyUnit,
+        Table
+    }
 }
