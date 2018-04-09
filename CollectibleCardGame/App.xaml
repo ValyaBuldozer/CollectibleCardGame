@@ -1,9 +1,15 @@
 ﻿<Application x:Class="CollectibleCardGame.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:CollectibleCardGame"
-             StartupUri="MainWindow.xaml">
+             xmlns:local="clr-namespace:CollectibleCardGame">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="OldStyles.xaml">
+                </ResourceDictionary>
+                <ResourceDictionary Source="CardGameStyles.xaml">
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

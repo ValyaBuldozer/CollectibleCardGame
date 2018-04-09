@@ -1,0 +1,95 @@
+﻿<UserControl x:Class="CollectibleCardGame.Views.UserControls.SpellCardUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CollectibleCardGame.Views.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="410" d:DesignWidth="220">
+    <!--410x220-->
+    <Border BorderThickness="5" BorderBrush="Black" CornerRadius="5">
+        <Border.Effect>
+            <DropShadowEffect BlurRadius="10" Direction="315" Opacity="0.8"/>
+        </Border.Effect>
+
+        <Grid Background="{StaticResource CardBackGround}">
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="8*"/>
+                    <RowDefinition Height="0.8*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="1.85*"/>
+                </Grid.RowDefinitions>
+
+
+                <!--картинка юнита 210x253-->
+                <Image x:Name="SpellImage" Source="{Binding Path=ImagePath}"  Margin="-1,0,3,5">
+                    <Image.Effect>
+                        <DropShadowEffect   RenderingBias="Quality"/>
+                    </Image.Effect>
+                </Image>
+
+
+                <Grid Grid.Row="1" Background="{StaticResource CardBackGround}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        
+                    </Grid.ColumnDefinitions>
+                    <!--<Grid.Effect>
+                        <DropShadowEffect Color="Gray" BlurRadius="90" Direction="90" RenderingBias="Quality" ShadowDepth="4"/>
+                    </Grid.Effect>-->
+
+                    <TextBlock x:Name="UnitName" Grid.Column="0" Text="{Binding Name}" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"
+                               FontFamily="/CollectibleCardGame;component/Fonts/#Mason Chronicles" FontSize="16" />
+                </Grid>
+
+
+                <Grid Grid.Row="0" Grid.RowSpan="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.26*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.2*"/>
+                        <ColumnDefinition Width="5*"/>
+                        <ColumnDefinition Width="10*"/>
+                        <ColumnDefinition Width="4*"/>
+                    </Grid.ColumnDefinitions>
+
+                    
+
+                    <Ellipse Grid.Row="0" Stroke="Black" StrokeThickness="3" Grid.Column="1"  HorizontalAlignment="Center" VerticalAlignment="Center" Fill="Gold" Width="55" Height="55" Margin="0,2,0,0" />
+
+                    <TextBlock Grid.Row="0" x:Name="UnitCost" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Cost}" FontSize="52" FontWeight="Bold" Margin="0,0,0,5"  />
+
+                </Grid>
+
+                <Grid Grid.Row="2" Background="#E6D1A2">
+                    <TextBlock x:Name="UnitStory" Grid.Row="2" Text="{Binding Description}" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center"
+                               FontFamily="/CollectibleCardGame;component/Fonts/#Mason Chronicles" FontSize="12" Margin="5,0,5,0"/>
+                </Grid>
+
+
+                <Grid Grid.Row="3" Background="#E6D1A2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.25*"/>
+                       
+                        <ColumnDefinition Width="10*"/>
+                       
+                        <ColumnDefinition Width="0.25*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="SPELL CARD" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="30"> 
+
+                    </TextBlock>
+                    
+                </Grid>
+            </Grid>
+
+
+        </Grid>
+    </Border>
+
+</UserControl>
+
+

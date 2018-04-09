@@ -34,8 +34,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CommonServiceLocator, Version=2.0.3.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.8.1\lib\net46\CommonServiceLocator.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -44,6 +48,27 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="Unity.Abstractions, Version=3.3.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.Abstractions.3.3.0\lib\net45\Unity.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Configuration, Version=5.2.1.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.8.1\lib\net46\Unity.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Container, Version=5.8.1.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.Container.5.8.1\lib\net46\Unity.Container.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Interception, Version=5.5.1.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.8.1\lib\net46\Unity.Interception.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Interception.Configuration, Version=5.1.4.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.8.1\lib\net46\Unity.Interception.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RegistrationByConvention, Version=2.1.5.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.8.1\lib\net46\Unity.RegistrationByConvention.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.ServiceLocation, Version=2.1.2.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.8.1\lib\net46\Unity.ServiceLocation.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
@@ -54,6 +79,68 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Services\RelayCommand.cs" />
+    <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\Frames\CardDecksPageViewModel.cs" />
+    <Compile Include="ViewModels\Frames\GameProccesPageViewModel.cs" />
+    <Compile Include="ViewModels\Frames\LogInFramePageShellViewModel.cs" />
+    <Compile Include="ViewModels\UserControls\FractionUserControlViewModel.cs" />
+    <Compile Include="ViewModels\UserControls\SpellCardUserControlViewModel.cs" />
+    <Compile Include="ViewModels\UserControls\UnitCardUserControlViewModel.cs" />
+    <Compile Include="Views\FramesShell\LogInFramePageShell.xaml.cs">
+      <DependentUpon>LogInFramePageShell.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Frames\CardDecksFramePage.xaml.cs">
+      <DependentUpon>CardDecksFramePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Frames\GoGameFramePage.xaml.cs">
+      <DependentUpon>GoGameFramePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Frames\LogInFramePage.xaml.cs">
+      <DependentUpon>LogInFramePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Frames\MainMenuFramePage.xaml.cs">
+      <DependentUpon>MainMenuFramePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Frames\NorthFractionDeckFramePage.xaml.cs">
+      <DependentUpon>NorthFractionDeckFramePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Frames\ObserverGamesFramePage.xaml.cs">
+      <DependentUpon>ObserverGamesFramePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Frames\SettingsFramePage.xaml.cs">
+      <DependentUpon>SettingsFramePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Frames\SouthFractionDeckFramePage.xaml.cs">
+      <DependentUpon>SouthFractionDeckFramePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Frames\TESTFramePage.xaml.cs">
+      <DependentUpon>TESTFramePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Frames\ToRegisterFramePage.xaml.cs">
+      <DependentUpon>ToRegisterFramePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\FractionUserControl.xaml.cs">
+      <DependentUpon>FractionUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\SpellCardUserControl.xaml.cs">
+      <DependentUpon>SpellCardUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\UnitCardMiniUserControl.xaml.cs">
+      <DependentUpon>UnitCardMiniUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\UnitCardUserControl.xaml.cs">
+      <DependentUpon>UnitCardUserControl.xaml</DependentUpon>
+    </Compile>
+    <Page Include="CardGameStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -66,15 +153,74 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="OldStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\FramesShell\LogInFramePageShell.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Frames\CardDecksFramePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Frames\GoGameFramePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Frames\LogInFramePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Frames\MainMenuFramePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Frames\NorthFractionDeckFramePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Frames\ObserverGamesFramePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Frames\SettingsFramePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Frames\SouthFractionDeckFramePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Frames\TESTFramePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Frames\ToRegisterFramePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\FractionUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\SpellCardUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\UnitCardMiniUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\UnitCardUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -83,15 +229,65 @@
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Resource Include="Fonts\Chronicles_font.ttf" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\settingsChange.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\cards.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\question.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\info.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ViewModels\Elements\" />
+    <Folder Include="ViewModels\Windows\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\northPicture.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\southPicture.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\battle.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\darksidePicture.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ImagesUnit\test.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ImagesUnit\testResize210x253.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="IconsUnit\sword.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ImagesSpell\SpellGradStrel.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\210x250.jpg" />
+    <Folder Include="Network\Controllers\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
