@@ -74,6 +74,9 @@
     <Compile Include="Views\Frames\CardDecksFramePage.xaml.cs">
       <DependentUpon>CardDecksFramePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Frames\DecksSettingsFramePage.xaml.cs">
+      <DependentUpon>DecksSettingsFramePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Frames\GoGameFramePage.xaml.cs">
       <DependentUpon>GoGameFramePage.xaml</DependentUpon>
     </Compile>
@@ -138,6 +141,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Frames\CardDecksFramePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Frames\DecksSettingsFramePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -233,6 +240,7 @@
     <Resource Include="Icons\search.png" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Resources\" />
     <Folder Include="ViewModels\Elements\" />
     <Folder Include="ViewModels\Windows\" />
   </ItemGroup>
@@ -261,7 +269,10 @@
     <Resource Include="ImagesSpell\SpellGradStrel.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\210x250.jpg" />
+    <Resource Include="ImagesUnit\210x250.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\mainBattle.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
