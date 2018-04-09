@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.NET.Test.Sdk.15.7.0\build\net45\Microsoft.Net.Test.Sdk.props" Condition="Exists('..\packages\Microsoft.NET.Test.Sdk.15.7.0\build\net45\Microsoft.Net.Test.Sdk.props')" />
   <Import Project="..\packages\MSTest.TestAdapter.1.3.0-beta2\build\net45\MSTest.TestAdapter.props" Condition="Exists('..\packages\MSTest.TestAdapter.1.3.0-beta2\build\net45\MSTest.TestAdapter.props')" />
-  <Import Project="..\packages\Microsoft.NET.Test.Sdk.15.7.0-preview-20180320-02\build\net45\Microsoft.Net.Test.Sdk.props" Condition="Exists('..\packages\Microsoft.NET.Test.Sdk.15.7.0-preview-20180320-02\build\net45\Microsoft.Net.Test.Sdk.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -35,7 +35,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CommonServiceLocator, Version=2.0.3.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
-      <HintPath>..\packages\Unity.5.8.3\lib\net46\CommonServiceLocator.dll</HintPath>
+      <HintPath>..\packages\Unity.5.8.5\lib\net46\CommonServiceLocator.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
@@ -65,38 +65,39 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
     <Reference Include="Unity.Abstractions, Version=3.3.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
-      <HintPath>..\packages\Unity.5.8.3\lib\net46\Unity.Abstractions.dll</HintPath>
+      <HintPath>..\packages\Unity.5.8.5\lib\net46\Unity.Abstractions.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Configuration, Version=5.2.1.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
-      <HintPath>..\packages\Unity.5.8.3\lib\net46\Unity.Configuration.dll</HintPath>
+      <HintPath>..\packages\Unity.5.8.5\lib\net46\Unity.Configuration.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.Container, Version=5.8.3.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
-      <HintPath>..\packages\Unity.5.8.3\lib\net46\Unity.Container.dll</HintPath>
+    <Reference Include="Unity.Container, Version=5.8.5.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.Container.5.8.5\lib\net46\Unity.Container.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Interception, Version=5.5.1.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
-      <HintPath>..\packages\Unity.5.8.3\lib\net46\Unity.Interception.dll</HintPath>
+      <HintPath>..\packages\Unity.5.8.5\lib\net46\Unity.Interception.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Interception.Configuration, Version=5.1.4.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
-      <HintPath>..\packages\Unity.5.8.3\lib\net46\Unity.Interception.Configuration.dll</HintPath>
+      <HintPath>..\packages\Unity.5.8.5\lib\net46\Unity.Interception.Configuration.dll</HintPath>
     </Reference>
     <Reference Include="Unity.RegistrationByConvention, Version=2.1.5.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
-      <HintPath>..\packages\Unity.5.8.3\lib\net46\Unity.RegistrationByConvention.dll</HintPath>
+      <HintPath>..\packages\Unity.5.8.5\lib\net46\Unity.RegistrationByConvention.dll</HintPath>
     </Reference>
     <Reference Include="Unity.ServiceLocation, Version=2.1.2.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
-      <HintPath>..\packages\Unity.5.8.3\lib\net46\Unity.ServiceLocation.dll</HintPath>
+      <HintPath>..\packages\Unity.5.8.5\lib\net46\Unity.ServiceLocation.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArchitectureTests\MessageHandlerTest.cs" />
     <Compile Include="ServerTests\NetworkMessageConverterTest.cs" />
-    <Compile Include="JsonParserTest\ParserDynamicTest.cs" />
     <Compile Include="JsonParserTest\ParserInterfaceTest.cs" />
     <Compile Include="NetworkTests\CommunicatorTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServerTests\RepositoryTests.cs" />
     <Compile Include="ServerTests\ServerClientTests\ClientMessageRecievedTest.cs" />
+    <Compile Include="ServerTests\ServerControllerTest.cs" />
     <Compile Include="ServerTests\ServiceTests\ServerStateServiceTest.cs" />
     <Compile Include="ServerTests\ServiceTests\UserServiceTest.cs" />
+    <Compile Include="ServerTests\UsersConnectionTest.cs" />
     <Compile Include="TestOfUnitTests.cs" />
     <Compile Include="UnityTests\KernelTest.cs" />
     <Compile Include="UnityTests\RepositoryTest.cs" />
@@ -133,11 +134,11 @@
     <PropertyGroup>
       <ErrorText>Данный проект ссылается на пакеты NuGet, отсутствующие на этом компьютере. Используйте восстановление пакетов NuGet, чтобы скачать их.  Дополнительную информацию см. по адресу: http://go.microsoft.com/fwlink/?LinkID=322105. Отсутствует следующий файл: {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Microsoft.NET.Test.Sdk.15.7.0-preview-20180320-02\build\net45\Microsoft.Net.Test.Sdk.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.NET.Test.Sdk.15.7.0-preview-20180320-02\build\net45\Microsoft.Net.Test.Sdk.props'))" />
-    <Error Condition="!Exists('..\packages\Microsoft.NET.Test.Sdk.15.7.0-preview-20180320-02\build\net45\Microsoft.Net.Test.Sdk.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.NET.Test.Sdk.15.7.0-preview-20180320-02\build\net45\Microsoft.Net.Test.Sdk.targets'))" />
     <Error Condition="!Exists('..\packages\MSTest.TestAdapter.1.3.0-beta2\build\net45\MSTest.TestAdapter.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MSTest.TestAdapter.1.3.0-beta2\build\net45\MSTest.TestAdapter.props'))" />
     <Error Condition="!Exists('..\packages\MSTest.TestAdapter.1.3.0-beta2\build\net45\MSTest.TestAdapter.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MSTest.TestAdapter.1.3.0-beta2\build\net45\MSTest.TestAdapter.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.NET.Test.Sdk.15.7.0\build\net45\Microsoft.Net.Test.Sdk.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.NET.Test.Sdk.15.7.0\build\net45\Microsoft.Net.Test.Sdk.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.NET.Test.Sdk.15.7.0\build\net45\Microsoft.Net.Test.Sdk.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.NET.Test.Sdk.15.7.0\build\net45\Microsoft.Net.Test.Sdk.targets'))" />
   </Target>
-  <Import Project="..\packages\Microsoft.NET.Test.Sdk.15.7.0-preview-20180320-02\build\net45\Microsoft.Net.Test.Sdk.targets" Condition="Exists('..\packages\Microsoft.NET.Test.Sdk.15.7.0-preview-20180320-02\build\net45\Microsoft.Net.Test.Sdk.targets')" />
   <Import Project="..\packages\MSTest.TestAdapter.1.3.0-beta2\build\net45\MSTest.TestAdapter.targets" Condition="Exists('..\packages\MSTest.TestAdapter.1.3.0-beta2\build\net45\MSTest.TestAdapter.targets')" />
+  <Import Project="..\packages\Microsoft.NET.Test.Sdk.15.7.0\build\net45\Microsoft.Net.Test.Sdk.targets" Condition="Exists('..\packages\Microsoft.NET.Test.Sdk.15.7.0\build\net45\Microsoft.Net.Test.Sdk.targets')" />
 </Project>

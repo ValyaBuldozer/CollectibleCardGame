@@ -9,10 +9,10 @@ using Newtonsoft.Json.Linq;
 
 namespace CollectibleCardGame.Tests.JsonParserTest
 {
-    [TestClass]
+    //[TestClass]
     public class ParserInterfaceTest
     {
-        [TestMethod]
+        //[TestMethod]
         public void ContentTest()
         {
            // JsonSerializer jsonSerializer = new JsonSerializer();

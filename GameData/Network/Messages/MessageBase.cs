@@ -15,7 +15,7 @@ namespace GameData.Network.Messages
         [JsonIgnore]
         public IMessageHandler MessageHandler { get; }
 
-        public MessageBase(MessageBaseType type,object content,IMessageHandler messageHandler)
+        public MessageBase(MessageBaseType type,object content,IMessageHandler messageHandler=null)
         {
             Type = type;
             Content = content;

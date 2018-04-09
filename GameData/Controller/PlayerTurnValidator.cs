@@ -30,7 +30,7 @@ namespace GameData.Controller
             if(playerTurn == null || tableCondition ==null)
                 throw new NullReferenceException();
 
-
+            throw new NotImplementedException();
         }
     }
 }

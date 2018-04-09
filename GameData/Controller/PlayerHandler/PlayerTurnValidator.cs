@@ -8,6 +8,6 @@ namespace GameData.Controller.PlayerHandler
 {
     public class PlayerTurnValidator
     {
-        public bool Validate
+        public bool Validate;
     }
 }

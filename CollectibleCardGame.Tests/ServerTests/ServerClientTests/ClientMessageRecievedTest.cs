@@ -17,10 +17,10 @@ using Server.Unity;
 
 namespace CollectibleCardGame.Tests.ServerTests.ServerClientTests
 {
-    [TestClass]
+    //[TestClass]
     public class ClientMessageRecievedTest
     {
-        [TestMethod]
+        //[TestMethod]
         public void ClientControllerRegistrationTest()
         {
             //NetworkMessage clientMessage = new NetworkMessage()

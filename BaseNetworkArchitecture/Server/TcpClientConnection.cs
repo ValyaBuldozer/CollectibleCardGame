@@ -5,10 +5,10 @@ namespace BaseNetworkArchitecture.Server
 {
     public class TcpClientConnection : IClientConnection
     {
-        public TcpClientConnection(TcpClient tcpClient)
+        public TcpClientConnection(TcpClient tcpClient,ILogger logger = null)
         {
             IsInSystem = false;
-            Communicator = new TcpCommunicator(tcpClient);
+            Communicator = new TcpCommunicator(tcpClient){Logger = logger};
         }
 
         public string IdentificatorTocken { set; get; }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using GameData;
 using GameData.Enums;
 using GameData.Models;
+using GameData.Models.PlayerTurn;
 using Server.Network.Models;
 
 namespace Server.Models
@@ -27,7 +28,7 @@ namespace Server.Models
             SecondClient = secondClient;
         }
 
-        public PlayerTurn HandlePlayerTurn(PlayerTurn playerTurn)
+        public IPlayerTurn HandlePlayerTurn(IPlayerTurn playerTurn)
         {
             throw new NotImplementedException();
         }

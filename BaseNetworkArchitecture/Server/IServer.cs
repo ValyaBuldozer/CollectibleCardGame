@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace BaseNetworkArchitecture.Server
 {
@@ -7,5 +8,6 @@ namespace BaseNetworkArchitecture.Server
         ICollection<IClientConnection> Clients { set; get; }
         void Start();
         void Stop();
+        event EventHandler<ClientConnectedEventArgs> ClientConnected;
     }
 }

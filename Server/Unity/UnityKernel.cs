@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using BaseNetworkArchitecture.Common;
 using BaseNetworkArchitecture.Server;
 using Server.Controllers;
 using Server.Database;
@@ -13,6 +15,7 @@ using Server.Repositories;
 using Server.Services;
 using Unity;
 using Unity.Lifetime;
+using Unity.Resolution;
 
 namespace Server.Unity
 {
@@ -38,6 +41,7 @@ namespace Server.Unity
         {
             _container = new UnityContainer();
 
+            _container.RegisterType<ILogger, ConsoleLogger>(new ContainerControlledLifetimeManager());
             _container.RegisterType<IServer, TcpServer>(new ContainerControlledLifetimeManager());
 
             //context binding
@@ -48,14 +52,18 @@ namespace Server.Unity
             _container.RegisterType<UserInfoRepository>();
             _container.RegisterType<CardRepository>(new ContainerControlledLifetimeManager());
             _container.RegisterType<AwaitingClientsQueue>(new ContainerControlledLifetimeManager());
+            _container.RegisterType<ConnectedClientsRepository>(new ContainerControlledLifetimeManager());
 
             //controller binding
             _container.RegisterType<UserReposController>();
             _container.RegisterType<UserInfoReposController>();
             _container.RegisterType<CardReposController>();
             _container.RegisterType<AwaitingClientsQueueController>(new ContainerControlledLifetimeManager());
+            _container.RegisterType<ConnectedClientsRepositoryController>(new ContainerControlledLifetimeManager());
+
             _container.RegisterType<NetworkMessageConverter>(new ContainerControlledLifetimeManager());
             _container.RegisterType<ClientController>();
+            _container.RegisterType<ServerController>(new ContainerControlledLifetimeManager());
 
             //service binding
             _container.RegisterType<UserService>(new ContainerControlledLifetimeManager());

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BaseNetworkArchitecture.Common;
 using BaseNetworkArchitecture.Common.Messages;
 using GameData.Enums;
 using GameData.Network.Messages;
@@ -29,13 +30,13 @@ namespace Server.Network.Controllers
                 switch (deserializedObj.Type)
                 {
                     case MessageBaseType.LogInMessage:
-                        return  new MessageBase(type: MessageBaseType.LogInMessage,
-                            content: (((JObject)deserializedObj.Content).ToObject<LogInMessage>()),
+                        return new MessageBase(type: MessageBaseType.LogInMessage,
+                            content: (((JObject) deserializedObj.Content).ToObject<LogInMessage>()),
                             messageHandler: UnityKernel.Get<LogInMessageHandler>());
 
                     case MessageBaseType.RegistrationMessage:
                         return new MessageBase(type: MessageBaseType.RegistrationMessage,
-                            content: (((JObject)deserializedObj.Content).ToObject<RegistrationMessage>()),
+                            content: (((JObject) deserializedObj.Content).ToObject<RegistrationMessage>()),
                             messageHandler: UnityKernel.Get<RegistrationMessageHandler>());
 
                     case MessageBaseType.UserInfoRequestMessage:
@@ -44,7 +45,7 @@ namespace Server.Network.Controllers
                         break;
                     case MessageBaseType.GameRequestMessage:
                         return new MessageBase(type: MessageBaseType.GameRequestMessage,
-                            content: (((JObject)deserializedObj.Content).ToObject<GameRequestMessage>()),
+                            content: (((JObject) deserializedObj.Content).ToObject<GameRequestMessage>()),
                             messageHandler: UnityKernel.Get<GameRequestMessageHandler>());
 
                     case MessageBaseType.GameStartMessage:
@@ -63,8 +64,11 @@ namespace Server.Network.Controllers
                         throw new ArgumentOutOfRangeException();
                 }
             }
-            catch(JsonSerializationException) { }
-            catch(NullReferenceException) { }
+            catch (JsonSerializationException e)
+            {
+                UnityKernel.Get<ILogger>().Log(e);
+            }
+            catch(NullReferenceException e) { }
 
             return null;
         }
@@ -77,10 +81,49 @@ namespace Server.Network.Controllers
             return new NetworkMessage(JsonConvert.SerializeObject(messageBase));
         }
 
-        public NetworkMessage SerializeMessage(IContent messageBase)
+        public NetworkMessage SerializeMessage(IContent content)
         {
-            if (messageBase == null)
+            if (content == null)
                 throw new NullReferenceException();
+
+            MessageBase messageBase;
+
+            switch (content.GetType().Name)
+            {
+                case nameof(LogInMessage):
+                    messageBase = new MessageBase(MessageBaseType.LogInMessage,content);
+                    break;
+                case nameof(RegistrationMessage):
+                    messageBase = new MessageBase(MessageBaseType.RegistrationMessage, content);
+                    break;
+                case nameof(DisconnectMessage):
+                    messageBase = new MessageBase(MessageBaseType.DisconnectMessage, content);
+                    break;
+                case nameof(ErrorMessage):
+                    messageBase = new MessageBase(MessageBaseType.ErrorMessage, content);
+                    break;
+                case nameof(GameRequestMessage):
+                    messageBase = new MessageBase(MessageBaseType.GameRequestMessage, content);
+                    break;
+                case nameof(GameStartMessage):
+                    messageBase = new MessageBase(MessageBaseType.GameStartMessage, content);
+                    break;
+                case nameof(PlayerTurnMessage):
+                    messageBase = new MessageBase(MessageBaseType.PlayerTurnMessage, content);
+                    break;
+                case nameof(PlayerTurnStartMessage):
+                    messageBase = new MessageBase(MessageBaseType.PlayerTurnStartMessage, content);
+                    break;
+                case nameof(SetDeckMessage):
+                    messageBase = new MessageBase(MessageBaseType.SetDeckMesage, content);
+                    break;
+                case nameof(UserInfoRequestMessage):
+                    messageBase = new MessageBase(MessageBaseType.UserInfoRequestMessage, content);
+                    break;
+                default:
+                    messageBase = null;
+                    break;
+            }
 
             return new NetworkMessage(JsonConvert.SerializeObject(messageBase));
         }

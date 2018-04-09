@@ -7,6 +7,8 @@ namespace BaseNetworkArchitecture.Common
 {
     public class TcpCommunicator : INetworkCommunicator
     {
+        public ILogger Logger { set; get; }
+
         public TcpCommunicator(TcpClient client)
         {
             Client = client;
@@ -37,13 +39,13 @@ namespace BaseNetworkArchitecture.Common
             }
             catch (SocketException e)
             {
-                Console.WriteLine(e);
+                Logger?.Log(e);
                 Client.Close();
                 return false;
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                Logger?.Log(e);
                 return false;
             }
         }
@@ -71,13 +73,13 @@ namespace BaseNetworkArchitecture.Common
             }
             catch (SocketException e)
             {
-                Console.WriteLine(e);
+                Logger?.Log(e);
                 Client.Close();
                 return null;
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                Logger?.Log(e);
                 return null;
             }
         }
@@ -96,7 +98,7 @@ namespace BaseNetworkArchitecture.Common
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                Logger?.Log(e);
                 return false;
             }
         }
@@ -134,7 +136,7 @@ namespace BaseNetworkArchitecture.Common
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Logger?.Log(ex.Message);
             }
         }
 
@@ -149,7 +151,7 @@ namespace BaseNetworkArchitecture.Common
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                Logger?.Log(e);
                 return false;
             }
         }
@@ -166,7 +168,7 @@ namespace BaseNetworkArchitecture.Common
                 if (msgSize > 0)
                 {
                     recivedNetworkMessage.Content = recivedNetworkMessage.Encoder.GetString(clientState.RcvBuffer);
-                    Console.WriteLine("Recieved message from cliet " + recivedNetworkMessage.Content);
+                    Logger.Log("Recieved message from cliet " + recivedNetworkMessage.Content);
 
                     RunMessageRecievedEvent(new MessageEventArgs
                     {
@@ -189,12 +191,12 @@ namespace BaseNetworkArchitecture.Common
             }
             catch (SocketException e)
             {
-                Console.WriteLine("Client disconnected");
+                Logger?.LogAndPrint("Client disconnected");
                 Client.Close();
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                Logger?.Log(e);
             }
         }
 
@@ -205,23 +207,15 @@ namespace BaseNetworkArchitecture.Common
             try
             {
                 clientState.TcpClient.GetStream().EndWrite(asyncResult);
-
-                //Console.WriteLine("Send message to client " + 
-                //                  Encoding.UTF8.GetString(clientState.RcvBuffer));
-
-                //clientState = new ClientState(clientState.TcpClient);
-                //clientState.TcpClient.GetStream().BeginRead(clientState.RcvBuffer,
-                //    clientState.RcvBuffer.Length,
-                //    0, ReadCallback, clientState);
             }
             catch (SocketException e)
             {
-                Console.WriteLine("Client disconnected");
+                Logger?.LogAndPrint("Client disconnected");
                 Client.Close();
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                Logger?.Log(e);
             }
         }
     }

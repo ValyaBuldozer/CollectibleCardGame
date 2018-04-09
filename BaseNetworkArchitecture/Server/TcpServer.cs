@@ -4,6 +4,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using BaseNetworkArchitecture.Common;
+using Unity.Attributes;
 
 namespace BaseNetworkArchitecture.Server
 {
@@ -11,6 +12,9 @@ namespace BaseNetworkArchitecture.Server
     {
         private const string LOCALHOST_IP = "127.0.0.1";
         private readonly int PORT;
+
+        [Dependency]
+        public ILogger Logger { set; get; }
 
         public TcpServer()
         {
@@ -23,7 +27,14 @@ namespace BaseNetworkArchitecture.Server
         //{
         //    PORT = port;
         //    TcpListener = new TcpListener(IPAddress.Parse(LOCALHOST_IP), PORT);
-        //    Clients = new List<IClient>();
+        //    Clients = new List<IClientConnection>();
+        //}
+
+        //public TcpServer(IPAddress ipAddress, int port)
+        //{
+        //    PORT = port;
+        //    TcpListener = new TcpListener(ipAddress, PORT);
+        //    Clients = new List<IClientConnection>();
         //}
 
         public Thread GetListenerThread { get; private set; }
@@ -47,12 +58,13 @@ namespace BaseNetworkArchitecture.Server
                 }
                 catch (SocketException e)
                 {
+                    Logger?.Log(e);
                 }
 
             GetListenerThread.Abort();
 
             TcpListener.Stop();
-            Console.WriteLine("Server stoped");
+            Logger?.LogAndPrint("Server stoped");
         }
 
         public event EventHandler<ClientConnectedEventArgs> ClientConnected;
@@ -60,7 +72,7 @@ namespace BaseNetworkArchitecture.Server
         private static void AcceptClients(object serverObj)
         {
             var server = (TcpServer) serverObj;
-            Console.WriteLine("Server is startinng...");
+            server.Logger?.LogAndPrint("Server is startinng...");
             try
             {
                 server.TcpListener.Start();
@@ -74,7 +86,7 @@ namespace BaseNetworkArchitecture.Server
             }
             catch (SocketException e)
             {
-                Console.WriteLine(e);
+                server.Logger?.Log(e);
                 server.TcpListener.Stop();
             }
         }
@@ -91,12 +103,13 @@ namespace BaseNetworkArchitecture.Server
 
             var tcpClient = listener.EndAcceptTcpClient(ar);
 
-            var client = new TcpClientConnection(tcpClient);
+            var client = new TcpClientConnection(tcpClient,Logger);
             Clients.Add(client);
-            Console.WriteLine("Client connected");
+            Logger?.LogAndPrint("Client connected");
+            
+            RunClientConnectedEvent(this, new ClientConnectedEventArgs {ClientConnection = client});
             ((TcpCommunicator) client.Communicator).StartReadMessages();
 
-            RunClientConnectedEvent(this, new ClientConnectedEventArgs {ClientConnection = client});
         }
     }
 
