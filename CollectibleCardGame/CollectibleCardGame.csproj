@@ -79,11 +79,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Services\RelayCommand.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\Frames\CardDecksPageViewModel.cs" />
@@ -237,7 +232,6 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -250,21 +244,22 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Icons\settingsChange.png" />
+    <Resource Include="Images\Icons\settingsChange.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Icons\cards.png" />
+    <Resource Include="Images\Icons\cards.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Icons\question.png" />
+    <Resource Include="Images\Icons\question.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Icons\info.png" />
+    <Resource Include="Images\Icons\info.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Icons\search.png" />
+    <Resource Include="Images\Icons\search.png" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Network\Controllers\" />
     <Folder Include="Resources\" />
     <Folder Include="ViewModels\Elements\" />
     <Folder Include="ViewModels\Windows\" />
@@ -282,24 +277,22 @@
     <Resource Include="Images\darksidePicture.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ImagesUnit\test.jpg" />
+    <None Include="Images\ImagesUnit\test.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="ImagesUnit\testResize210x253.jpg" />
+    <Resource Include="Images\ImagesUnit\testResize210x253.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="IconsUnit\sword.png" />
+    <Resource Include="Images\IconsUnit\sword.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="ImagesSpell\SpellGradStrel.jpg" />
+    <Resource Include="Images\ImagesSpell\SpellGradStrel.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="ImagesUnit\210x250.jpg" />
+    <Resource Include="Images\ImagesUnit\210x250.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\mainBattle.jpg" />
-    <Resource Include="Resources\210x250.jpg" />
-    <Folder Include="Network\Controllers\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

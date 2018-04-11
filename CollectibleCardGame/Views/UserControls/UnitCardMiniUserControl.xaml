@@ -75,7 +75,7 @@
 
                             <Rectangle Grid.Row="0" Stroke="Gold" StrokeThickness="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Width="55" Height="55" >
                                 <Rectangle.Fill>
-                                    <ImageBrush ImageSource="../../IconsUnit/sword.png"/>
+                                    <ImageBrush ImageSource="../../Images/IconsUnit/sword.png"/>
                                 </Rectangle.Fill>
                             </Rectangle>
 
