@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using GameData.Network;
 using GameData.Network.Messages;
-using Server.Services;
+using Server.Controllers.Services;
 using Server.Unity;
 
 namespace Server.Network.Controllers.MessageHandlers

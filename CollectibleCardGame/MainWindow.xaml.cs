@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using CollectibleCardGame.ViewModels.Windows;
+using Unity.Attributes;
 
 namespace CollectibleCardGame
 {
@@ -20,6 +22,14 @@ namespace CollectibleCardGame
     /// </summary>
     public partial class MainWindow : Window
     {
+        [Dependency]
+        public MainWindowViewModel ViewModel
+        {
+            get => DataContext as MainWindowViewModel ??
+                   (MainWindowViewModel) (DataContext = new MainWindowViewModel());
+            set => DataContext = value;
+        }
+
         public MainWindow()
         {
             InitializeComponent();

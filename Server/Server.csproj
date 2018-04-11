@@ -153,8 +153,8 @@
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Repositories\UserInfoRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
-    <Compile Include="Services\ServerStateService.cs" />
-    <Compile Include="Services\UserService.cs" />
+    <Compile Include="Controllers\Services\ServerStateService.cs" />
+    <Compile Include="Controllers\Services\UserService.cs" />
     <Compile Include="Unity\UnityKernel.cs" />
   </ItemGroup>
   <ItemGroup>

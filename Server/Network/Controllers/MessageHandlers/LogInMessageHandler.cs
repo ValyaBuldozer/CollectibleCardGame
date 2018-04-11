@@ -5,8 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using GameData.Network;
 using GameData.Network.Messages;
+using Server.Controllers.Services;
 using Server.Database;
-using Server.Services;
 using Server.Unity;
 
 namespace Server.Network.Controllers.MessageHandlers
@@ -28,6 +28,7 @@ namespace Server.Network.Controllers.MessageHandlers
             }
             catch (Exception e)
             {
+                //todo : запилить тут перехват пользовательского исключения - должна передаваться ошибка
                 return new ErrorMessage();
             }
         }

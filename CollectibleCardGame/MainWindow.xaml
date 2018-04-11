@@ -4,11 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CollectibleCardGame"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
         Title="MainWindow"  Width="1200" MinHeight="375" MinWidth="550">
     <Grid>
-        <Frame Name="MainFrame" NavigationUIVisibility="Hidden"/>
-       <!-- <Grid Background="{DynamicResource BasicBackGround}">
+        <xctk:BusyIndicator IsBusy="{Binding IsBusy}" BusyContent="{Binding BusyMessage}">
+            <Frame Name="MainFrame" NavigationUIVisibility="Hidden" Content="{Binding Page}"/>
+        </xctk:BusyIndicator>
+        <!-- <Grid Background="{DynamicResource BasicBackGround}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="190" MinWidth="190" />
                 <ColumnDefinition Width="Auto" />
