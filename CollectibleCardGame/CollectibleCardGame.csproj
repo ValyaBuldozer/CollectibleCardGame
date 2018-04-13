@@ -140,6 +140,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Controllers\NetworkConnectionController.cs" />
+    <Compile Include="MessageBoxLogger.cs" />
+    <Compile Include="Models\CurrentUser.cs" />
     <Compile Include="Network\Controllers\GlobalAppStateController.cs" />
     <Compile Include="Network\Controllers\MessageHandlers\GameRequestMessageHandler.cs" />
     <Compile Include="Network\Controllers\MessageConverter.cs" />
@@ -154,6 +156,7 @@
     <Compile Include="Unity\UnityKernel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\Frames\CardDecksPageViewModel.cs" />
+    <Compile Include="ViewModels\Frames\ConnectionErrorViewModel.cs" />
     <Compile Include="ViewModels\Frames\GameProccesPageViewModel.cs" />
     <Compile Include="ViewModels\Frames\LogInFramePageShellViewModel.cs" />
     <Compile Include="ViewModels\UserControls\FractionUserControlViewModel.cs" />
@@ -165,6 +168,9 @@
     </Compile>
     <Compile Include="Views\Frames\CardDecksFramePage.xaml.cs">
       <DependentUpon>CardDecksFramePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Frames\ConnectionErrorFramePage.xaml.cs">
+      <DependentUpon>ConnectionErrorFramePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Frames\GoGameFramePage.xaml.cs">
       <DependentUpon>GoGameFramePage.xaml</DependentUpon>
@@ -230,6 +236,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Frames\CardDecksFramePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Frames\ConnectionErrorFramePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

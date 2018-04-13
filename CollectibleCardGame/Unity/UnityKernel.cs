@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using BaseNetworkArchitecture.Common;
 using BaseNetworkArchitecture.Server;
 using CollectibleCardGame.Controllers;
+using CollectibleCardGame.Models;
 using CollectibleCardGame.Network.Controllers;
 using CollectibleCardGame.Network.Controllers.MessageHandlers;
 using CollectibleCardGame.ViewModels.Windows;
@@ -39,8 +40,10 @@ namespace CollectibleCardGame.Unity
         {
             _container = new UnityContainer();
 
+            _container.RegisterType<ILogger, MessageBoxLogger>();
 
             //repository binding
+            _container.RegisterType<CurrentUser>(new ContainerControlledLifetimeManager());
             _container.RegisterType<INetworkCommunicator, TcpCommunicator>(new InjectionConstructor(new object[]
             {
                 new TcpClient() //localhost injection, can be changed
@@ -57,7 +60,7 @@ namespace CollectibleCardGame.Unity
             _container.RegisterType<LogInMessageHandler>();
 
             //viewmodels binding
-            _container.RegisterType<MainWindowViewModel>();
+            _container.RegisterType<MainWindowViewModel>(new ContainerControlledLifetimeManager());
 
             //view binding
             _container.RegisterType<MainWindow>(new ContainerControlledLifetimeManager());

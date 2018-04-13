@@ -7,56 +7,65 @@ using System.Windows;
 using System.Windows.Controls;
 using CollectibleCardGame.Services;
 using CollectibleCardGame.Views.Frames;
+using Unity.Attributes;
 
 namespace CollectibleCardGame.ViewModels.Frames
 {
-    class LogInFramePageShellViewModel: BaseViewModel
+    public class LogInFramePageShellViewModel : BaseViewModel
     {
-    private Page _currentFramePage;
-    private LogInFramePage _logInFramePage;
-    private ToRegisterFramePage _toRegisterFramePage;
-    private RelayCommand _switchFrameCommand;
+        private Page _currentFramePage;
 
-    public Page CurrentFramePage
-    {
-        get => _currentFramePage;
-        set
+        [Dependency]
+        public LogInFramePage LogInFramePage { set; get; }
+
+        [Dependency]
+        public ToRegisterFramePage ToRegisterFramePage { set; get; }
+
+        [Dependency]
+        public ConnectionErrorFramePage ErrorFramePage { set; get; }
+
+        private RelayCommand _switchFrameCommand;
+
+        public Page CurrentFramePage
         {
-            _currentFramePage = value;
-            NotifyPropertyChanged(nameof(CurrentFramePage));
+            get => _currentFramePage;
+            set
+            {
+                _currentFramePage = value;
+                NotifyPropertyChanged(nameof(CurrentFramePage));
+            }
         }
-    }
 
-    public RelayCommand SwitchFrameCommand
-    {
-        get => _switchFrameCommand ?? (_switchFrameCommand = new RelayCommand(obj =>
+        public RelayCommand SwitchFrameCommand
         {
-            if (_currentFramePage is LogInFramePage)
-                _currentFramePage = _toRegisterFramePage;
-            if (_currentFramePage is ToRegisterFramePage)
-                _currentFramePage = _logInFramePage;
-        }));
-    }
+            get => _switchFrameCommand ?? (_switchFrameCommand = new RelayCommand(obj =>
+            {
+                if (_currentFramePage is LogInFramePage)
+                    _currentFramePage = ToRegisterFramePage;
+                if (_currentFramePage is ToRegisterFramePage)
+                    _currentFramePage = LogInFramePage;
+            }));
+        }
 
-    public LogInFramePageShellViewModel()
-    {
-        _logInFramePage = new LogInFramePage();
-        _toRegisterFramePage = new ToRegisterFramePage();
-        _currentFramePage = _logInFramePage;
-        _logInFramePage.ToRegisterButton.Click += ToRegisterButton_Click;
-        _toRegisterFramePage.GoBackButton.Click += GoBackButton_Click;
+        public LogInFramePageShellViewModel()
+        {
+            LogInFramePage = new LogInFramePage();
+            ToRegisterFramePage = new ToRegisterFramePage();
+            _currentFramePage = LogInFramePage;
+            LogInFramePage.ToRegisterButton.Click += ToRegisterButton_Click;
+            ToRegisterFramePage.GoBackButton.Click += GoBackButton_Click;
 
-    }
+        }
 
-    private void GoBackButton_Click(object sender, RoutedEventArgs e)
-    {
-        CurrentFramePage = _logInFramePage;
-    }
+        private void GoBackButton_Click(object sender, RoutedEventArgs e)
+        {
+            CurrentFramePage = LogInFramePage;
+        }
 
-    private void ToRegisterButton_Click(object sender, System.Windows.RoutedEventArgs e)
-    {
-        CurrentFramePage = _toRegisterFramePage;
-    }
+        private void ToRegisterButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            CurrentFramePage = ToRegisterFramePage;
+        }
 
     }
 }

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 using CollectibleCardGame;
+using CollectibleCardGame.Network.Controllers;
 using CollectibleCardGame.Unity;
 using CollectibleCardGame.ViewModels;
 using CollectibleCardGame.ViewModels.Frames;
@@ -15,6 +16,8 @@ using CollectibleCardGame.ViewModels.UserControls;
 using CollectibleCardGame.Views.Frames;
 using CollectibleCardGame.Views.FramesShell;
 using CollectibleCardGame.Views.UserControls;
+using GameData.Network.Messages;
+using Unity;
 
 namespace CollectibleCardGame
 {
@@ -49,10 +52,8 @@ namespace CollectibleCardGame
             //window.Show();
 
             UnityKernel.InitializeKernel();
-            var window = UnityKernel.Get<MainWindow>();
-            window.ViewModel.BusyMessage = "test";
-            window.ViewModel.IsBusy = true;
-            window.Show();
+            UnityKernel.Get<MainWindow>().Show();
+            UnityKernel.Get<GlobalAppStateController>().OnStartup();
         }
     }
 }

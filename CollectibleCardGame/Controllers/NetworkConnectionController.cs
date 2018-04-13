@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using BaseNetworkArchitecture.Common;
@@ -42,12 +43,14 @@ namespace CollectibleCardGame.Controllers
 
         public void Connect(IPAddress ipAddress, int port)
         {
-            ServerCommunicator.Connect(ipAddress, port);
+            if(!ServerCommunicator.Connect(ipAddress, port))
+                throw new SocketException();
         }
 
         public void Disconnect()
         {
-            ServerCommunicator.Disconnect();
+            if(!ServerCommunicator.Disconnect())
+                throw new SocketException();
         }
 
         public void SendMessage(MessageBase message)
