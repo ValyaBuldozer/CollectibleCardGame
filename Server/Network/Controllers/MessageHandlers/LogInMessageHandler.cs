@@ -11,9 +11,9 @@ using Server.Unity;
 
 namespace Server.Network.Controllers.MessageHandlers
 {
-    public class LogInMessageHandler : IMessageHandler
+    public class LogInMessageHandler : MessageHandlerBase<LogInMessage>
     {
-        public IContent Execute(IContent content,object sender = null)
+        public override IContent Execute(IContent content,object sender = null)
         {
             if(!(content is LogInMessage))
                 throw new InvalidOperationException();

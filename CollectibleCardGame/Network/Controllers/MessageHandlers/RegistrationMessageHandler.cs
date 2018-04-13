@@ -8,9 +8,9 @@ using GameData.Network.Messages;
 
 namespace CollectibleCardGame.Network.Controllers.MessageHandlers
 {
-    public class RegistrationMessageHandler : IMessageHandler
+    public class RegistrationMessageHandler : MessageHandlerBase<RegistrationMessage>
     {
-        public IContent Execute(IContent content, object sender)
+        public override IContent Execute(IContent content, object sender)
         {
             throw new NotImplementedException();
         }

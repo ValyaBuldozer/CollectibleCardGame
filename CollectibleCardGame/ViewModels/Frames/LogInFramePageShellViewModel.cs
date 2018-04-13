@@ -14,15 +14,9 @@ namespace CollectibleCardGame.ViewModels.Frames
     public class LogInFramePageShellViewModel : BaseViewModel
     {
         private Page _currentFramePage;
-
-        [Dependency]
-        public LogInFramePage LogInFramePage { set; get; }
-
-        [Dependency]
-        public ToRegisterFramePage ToRegisterFramePage { set; get; }
-
-        [Dependency]
-        public ConnectionErrorFramePage ErrorFramePage { set; get; }
+        private LogInFramePage _logInFramePage;
+        private ToRegisterFramePage _toRegisterFramePage;
+        private ConnectionErrorFramePage _connectionErrorFramePage;
 
         private RelayCommand _switchFrameCommand;
 
@@ -41,31 +35,47 @@ namespace CollectibleCardGame.ViewModels.Frames
             get => _switchFrameCommand ?? (_switchFrameCommand = new RelayCommand(obj =>
             {
                 if (_currentFramePage is LogInFramePage)
-                    _currentFramePage = ToRegisterFramePage;
+                    _currentFramePage = _toRegisterFramePage;
                 if (_currentFramePage is ToRegisterFramePage)
-                    _currentFramePage = LogInFramePage;
+                    _currentFramePage = _logInFramePage;
             }));
         }
 
-        public LogInFramePageShellViewModel()
+        public LogInFramePageShellViewModel(LogInFramePage logInFramePage,
+            ToRegisterFramePage toRegisterFramePage,ConnectionErrorFramePage connectionErrorFramePage)
         {
-            LogInFramePage = new LogInFramePage();
-            ToRegisterFramePage = new ToRegisterFramePage();
-            _currentFramePage = LogInFramePage;
-            LogInFramePage.ToRegisterButton.Click += ToRegisterButton_Click;
-            ToRegisterFramePage.GoBackButton.Click += GoBackButton_Click;
-
+            _logInFramePage = logInFramePage;
+            _toRegisterFramePage = toRegisterFramePage;
+            _connectionErrorFramePage = connectionErrorFramePage;
+            CurrentFramePage = _logInFramePage;
+            //todo : говнокод пределывай
+            _logInFramePage.ToRegisterButton.Click += ToRegisterButton_Click;
+            _toRegisterFramePage.GoBackButton.Click += GoBackButton_Click;
         }
 
         private void GoBackButton_Click(object sender, RoutedEventArgs e)
         {
-            CurrentFramePage = LogInFramePage;
+            CurrentFramePage = _toRegisterFramePage;
         }
 
         private void ToRegisterButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            CurrentFramePage = ToRegisterFramePage;
+            CurrentFramePage = _toRegisterFramePage;
         }
 
+        public void SetLogInPage()
+        {
+            CurrentFramePage = _logInFramePage;
+        }
+
+        public void SetRegisterPage()
+        {
+            CurrentFramePage = _toRegisterFramePage;
+        }
+
+        public void SetErrorPage()
+        {
+            CurrentFramePage = _connectionErrorFramePage;
+        }
     }
 }

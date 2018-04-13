@@ -4,9 +4,9 @@ using GameData.Network.Messages;
 
 namespace CollectibleCardGame.Network.Controllers.MessageHandlers
 {
-    public class GameRequestMessageHandler : IMessageHandler
+    public class GameRequestMessageHandler : MessageHandlerBase<GameRequestMessage>
     {
-        public IContent Execute(IContent content, object sender)
+        public override IContent Execute(IContent content, object sender)
         {
             throw new NotImplementedException();
         }

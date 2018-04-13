@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using CollectibleCardGame.Views.Frames;
+using CollectibleCardGame.Views.FramesShell;
+using Unity.Attributes;
 
 namespace CollectibleCardGame.ViewModels.Windows
 {
@@ -12,6 +15,8 @@ namespace CollectibleCardGame.ViewModels.Windows
         private Page _framePage;
         private bool _isBusy;
         private string _busyMessage;
+        private LogInFramePageShell _logInFramePageShell;
+        private MainMenuFramePage _mainMenuFramePage;
 
         public Page FramePage
         {
@@ -43,9 +48,22 @@ namespace CollectibleCardGame.ViewModels.Windows
             }
         }
 
-        public MainWindowViewModel()
+        public MainWindowViewModel(LogInFramePageShell logInFramePageShell)
         {
+            _logInFramePageShell = logInFramePageShell;
+            //todo : переделать под внедрение зависимостей
+            _mainMenuFramePage = new MainMenuFramePage();
+            _framePage = _logInFramePageShell;
+        }
 
+        public void SetLogInFrame()
+        {
+            FramePage = _logInFramePageShell;
+        }
+
+        public void SetMainMenuFrame()
+        {
+            FramePage = _mainMenuFramePage;
         }
     }
 }

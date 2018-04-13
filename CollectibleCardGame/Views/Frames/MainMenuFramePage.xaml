@@ -9,7 +9,7 @@
       Title="MainMenuFramePage">
 
     <Grid>
-        <Grid Background="{DynamicResource BasicBackGround}">
+       <!-- <Grid Background="{DynamicResource BasicBackGround}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="190" MinWidth="190" />
                 <ColumnDefinition Width="Auto"/>
@@ -23,7 +23,7 @@
             <GridSplitter Grid.Row="1" Grid.Column="1" Width="6"
                           VerticalAlignment="Stretch" HorizontalAlignment="Left" />
 
-            <ListBox Background="#343B49" x:Name="menuList" Grid.Row="0 " Margin="0,-2,0,0" BorderBrush="#343B49"  ItemContainerStyle="{StaticResource ListBoxItemMain}">
+            <ListBox Background="#343B49" x:Name="menuList" Grid.Row="0 " Margin="0,-2,0,0" BorderBrush="#343B49">ItemContainerStyle="{StaticResource ListBoxItemMain}">
                 <ListBoxItem Name="ObserverGameitem">
                     <StackPanel>
                         <Grid>
@@ -74,6 +74,6 @@
                 </ListBoxItem>
             </ListBox>
 
-        </Grid> 
+        </Grid> -->
     </Grid>
 </Page>

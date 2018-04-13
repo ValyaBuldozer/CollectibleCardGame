@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using BaseNetworkArchitecture.Common;
 using BaseNetworkArchitecture.Common.Messages;
 using CollectibleCardGame.Network.Controllers;
+using GameData.Network;
 using GameData.Network.Messages;
 using Unity.Attributes;
 

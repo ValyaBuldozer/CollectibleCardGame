@@ -11,13 +11,21 @@ using CollectibleCardGame.Controllers;
 using CollectibleCardGame.Models;
 using CollectibleCardGame.Network.Controllers;
 using CollectibleCardGame.Network.Controllers.MessageHandlers;
+using CollectibleCardGame.ViewModels.Frames;
 using CollectibleCardGame.ViewModels.Windows;
+using CollectibleCardGame.Views.Frames;
+using CollectibleCardGame.Views.FramesShell;
+using GameData.Network;
+using GameData.Network.Messages;
 using Unity;
 using Unity.Injection;
 using Unity.Lifetime;
 
 namespace CollectibleCardGame.Unity
 {
+    /// <summary>
+    /// Client
+    /// </summary>
     public static class UnityKernel
     {
         private static UnityContainer _container;
@@ -42,6 +50,11 @@ namespace CollectibleCardGame.Unity
 
             _container.RegisterType<ILogger, MessageBoxLogger>();
 
+            //messagehandler binding
+            _container.RegisterType<MessageHandlerBase<GameRequestMessage>, GameRequestMessageHandler>();
+            _container.RegisterType<MessageHandlerBase<LogInMessage>, LogInMessageHandler>();
+            _container.RegisterType<MessageHandlerBase<RegistrationMessage>, RegistrationMessageHandler>();
+
             //repository binding
             _container.RegisterType<CurrentUser>(new ContainerControlledLifetimeManager());
             _container.RegisterType<INetworkCommunicator, TcpCommunicator>(new InjectionConstructor(new object[]
@@ -60,10 +73,16 @@ namespace CollectibleCardGame.Unity
             _container.RegisterType<LogInMessageHandler>();
 
             //viewmodels binding
+            _container.RegisterType<LogInFramePage>(new ContainerControlledLifetimeManager());
+            _container.RegisterType<ToRegisterFramePage>(new ContainerControlledLifetimeManager());
+            _container.RegisterType<ConnectionErrorFramePage>(new ContainerControlledLifetimeManager());
+            _container.RegisterType<LogInFramePageShellViewModel>(new ContainerControlledLifetimeManager());
             _container.RegisterType<MainWindowViewModel>(new ContainerControlledLifetimeManager());
 
             //view binding
+            _container.RegisterType<LogInFramePageShell>(new ContainerControlledLifetimeManager());
             _container.RegisterType<MainWindow>(new ContainerControlledLifetimeManager());
+
         }
 
         public static object Get(Type t)

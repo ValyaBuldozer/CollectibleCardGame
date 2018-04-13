@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BaseNetworkArchitecture.Common;
+using CollectibleCardGame.Logic.Controllers;
 using CollectibleCardGame.Network.Controllers;
 using CollectibleCardGame.Services;
 using CollectibleCardGame.Unity;
@@ -26,8 +27,7 @@ namespace CollectibleCardGame.ViewModels.Frames
                                //todo : Обращение от VM к VM
                            {
                                IsBusy = false;
-                               UnityKernel.Get<LogInFramePageShellViewModel>().CurrentFramePage = 
-                                   UnityKernel.Get<LogInFramePageShellViewModel>().LogInFramePage;
+                               UnityKernel.Get<LogInFramePageShellViewModel>().SetLogInPage();
                                return;
                            }
 

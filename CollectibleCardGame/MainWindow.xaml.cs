@@ -25,8 +25,7 @@ namespace CollectibleCardGame
         [Dependency]
         public MainWindowViewModel ViewModel
         {
-            get => DataContext as MainWindowViewModel ??
-                   (MainWindowViewModel) (DataContext = new MainWindowViewModel());
+            get => DataContext as MainWindowViewModel;
             set => DataContext = value;
         }
 

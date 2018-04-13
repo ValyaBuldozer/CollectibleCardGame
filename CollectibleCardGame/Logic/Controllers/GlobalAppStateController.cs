@@ -1,17 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
 using BaseNetworkArchitecture.Common;
 using CollectibleCardGame.Controllers;
 using CollectibleCardGame.Unity;
+using CollectibleCardGame.ViewModels.Frames;
 using CollectibleCardGame.ViewModels.Windows;
 using Unity.Attributes;
 
-namespace CollectibleCardGame.Network.Controllers
+namespace CollectibleCardGame.Logic.Controllers
 {
     /// <summary>
     /// Класс - контроллер, отвечает за старт, закрытие, запрос на соединение с сервером, обработка разрыва соединения с сервером.
@@ -21,25 +18,31 @@ namespace CollectibleCardGame.Network.Controllers
         [Dependency]
         public NetworkConnectionController ConnectionController { set; get; }
 
+        [Dependency]
+        public MainWindowViewModel MainWindowViewModel { set; get; }
+
+        [Dependency]
+        public LogInFramePageShellViewModel FramePageShellViewModel { set; get; }
+
         public void OnStartup()
         {
-            //UnityKernel.InitializeKernel();
-            var mainViewModel = UnityKernel.Get<MainWindowViewModel>();
-            mainViewModel.BusyMessage = "Подключение к серверу";
-            mainViewModel.IsBusy = true;
+            //todo : говнокод переделать
+            MainWindowViewModel.BusyMessage = "Подключение к серверу";
+            MainWindowViewModel.IsBusy = true;
             if (!TryConnect())
             {
-                mainViewModel.IsBusy = false;
-
+                MainWindowViewModel.IsBusy = false;
+                FramePageShellViewModel.SetErrorPage();
+                return;
             }
 
-            mainViewModel.IsBusy = false;
-            
+            MainWindowViewModel.IsBusy = false;
+            FramePageShellViewModel.SetLogInPage();
         }
 
         public void OnConnectionLost()
         {
-
+            throw new NotImplementedException();
         }
 
         public void OnClose()

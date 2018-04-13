@@ -11,9 +11,9 @@ using Server.Unity;
 
 namespace Server.Network.Controllers.MessageHandlers
 {
-    public class GameRequestMessageHandler : IMessageHandler
+    public class GameRequestMessageHandler : MessageHandlerBase<GameRequestMessage>
     {
-        public IContent Execute(IContent content,object sender)
+        public override IContent Execute(IContent content,object sender)
         {
             if(!(content is GameRequestMessage))
                 throw new InvalidOperationException("Incorrect message type");

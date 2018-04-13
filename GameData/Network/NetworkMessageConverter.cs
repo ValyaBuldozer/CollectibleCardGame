@@ -5,17 +5,52 @@ using System.Text;
 using System.Threading.Tasks;
 using BaseNetworkArchitecture.Common;
 using BaseNetworkArchitecture.Common.Messages;
-using CollectibleCardGame.Network.Controllers.MessageHandlers;
-using CollectibleCardGame.Unity;
 using GameData.Enums;
 using GameData.Network.Messages;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Unity.Attributes;
 
-namespace CollectibleCardGame.Network.Controllers
+namespace GameData.Network
 {
     public class NetworkMessageConverter
     {
+        [Dependency]
+        public MessageHandlerBase<LogInMessage> LogInMessageHandlerBase { set; get; }
+
+        [Dependency]
+        public MessageHandlerBase<RegistrationMessage> RegistrationMessageHandlerBase { set; get; }
+
+        [Dependency]
+        public MessageHandlerBase<GameRequestMessage> GameRequestMessageHandlerBase { set; get; }
+
+        //[Dependency]
+        public MessageHandlerBase<DisconnectMessage> DisconnectMessageHandlerBase { set; get; }
+
+        //[Dependency]
+        public MessageHandlerBase<ErrorMessage> ErrorMessageHandlerBase { set; get; }
+
+        //[Dependency]
+        public MessageHandlerBase<GameResultMessage> GameResultMessageHandlerBase { set; get; }
+
+        //[Dependency]
+        public MessageHandlerBase<GameStartMessage> GameStartMessageHandlerBase { set; get; }
+
+        //[Dependency]
+        public MessageHandlerBase<PlayerTurnMessage> PlayerTurnMessageHandlerBase { set; get; }
+
+        //[Dependency]
+        public MessageHandlerBase<PlayerTurnStartMessage> PlayerTurnStartMessageHandlerBase { set; get; }
+
+        //[Dependency]
+        public MessageHandlerBase<SetDeckMessage> SetDeckMessageHandlerBase { set; get; }
+
+        //[Dependency]
+        public MessageHandlerBase<UserInfoRequestMessage> UserInfoRequestMessageHandlerBase { set; get; }
+
+        [Dependency]
+        public ILogger Logger { set; get; }
+
         public MessageBase DeserializeMessage(NetworkMessage networkMessage)
         {
             if (string.IsNullOrEmpty(networkMessage?.Content))
@@ -30,12 +65,12 @@ namespace CollectibleCardGame.Network.Controllers
                     case MessageBaseType.LogInMessage:
                         return new MessageBase(type: MessageBaseType.LogInMessage,
                             content: (((JObject)deserializedObj.Content).ToObject<LogInMessage>()),
-                            messageHandler: UnityKernel.Get<LogInMessageHandler>());
+                            messageHandler: LogInMessageHandlerBase);
 
                     case MessageBaseType.RegistrationMessage:
                         return new MessageBase(type: MessageBaseType.RegistrationMessage,
                             content: (((JObject)deserializedObj.Content).ToObject<RegistrationMessage>()),
-                            messageHandler: UnityKernel.Get<RegistrationMessageHandler>());
+                            messageHandler: RegistrationMessageHandlerBase);
 
                     case MessageBaseType.UserInfoRequestMessage:
                         break;
@@ -44,7 +79,7 @@ namespace CollectibleCardGame.Network.Controllers
                     case MessageBaseType.GameRequestMessage:
                         return new MessageBase(type: MessageBaseType.GameRequestMessage,
                             content: (((JObject)deserializedObj.Content).ToObject<GameRequestMessage>()),
-                            messageHandler: UnityKernel.Get<GameRequestMessageHandler>());
+                            messageHandler: GameRequestMessageHandlerBase);
 
                     case MessageBaseType.GameStartMessage:
                         break;
@@ -64,7 +99,7 @@ namespace CollectibleCardGame.Network.Controllers
             }
             catch (JsonSerializationException e)
             {
-                UnityKernel.Get<ILogger>().Log(e);
+                Logger.Log(e);
             }
             catch (NullReferenceException e) { }
 

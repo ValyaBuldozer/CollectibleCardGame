@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 using CollectibleCardGame;
+using CollectibleCardGame.Logic.Controllers;
 using CollectibleCardGame.Network.Controllers;
 using CollectibleCardGame.Unity;
 using CollectibleCardGame.ViewModels;

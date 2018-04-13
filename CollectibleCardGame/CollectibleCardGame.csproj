@@ -142,9 +142,8 @@
     <Compile Include="Controllers\NetworkConnectionController.cs" />
     <Compile Include="MessageBoxLogger.cs" />
     <Compile Include="Models\CurrentUser.cs" />
-    <Compile Include="Network\Controllers\GlobalAppStateController.cs" />
+    <Compile Include="Logic\Controllers\GlobalAppStateController.cs" />
     <Compile Include="Network\Controllers\MessageHandlers\GameRequestMessageHandler.cs" />
-    <Compile Include="Network\Controllers\MessageConverter.cs" />
     <Compile Include="Network\Controllers\MessageHandlers\LogInMessageHandler.cs" />
     <Compile Include="Network\Controllers\MessageHandlers\RegistrationMessageHandler.cs" />
     <Compile Include="Properties\Resources.Designer.cs">

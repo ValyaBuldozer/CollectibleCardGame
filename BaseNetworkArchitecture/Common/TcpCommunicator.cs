@@ -9,6 +9,8 @@ namespace BaseNetworkArchitecture.Common
     {
         public ILogger Logger { set; get; }
 
+        public bool IsConnected => Client.Connected;
+
         public TcpCommunicator(TcpClient client)
         {
             Client = client;
@@ -162,6 +164,14 @@ namespace BaseNetworkArchitecture.Common
                 var result = Client.GetStream().BeginRead(clientState.RcvBuffer, 0, clientState.RcvBuffer.Length,
                     ReadCallback, clientState);
             }
+            catch (SocketException ex)
+            {
+                Logger?.Log(ex);
+                RunBreakConnection(new BreakConnectionEventArgs()
+                {
+                    DisconnectReason = ex.ErrorCode.ToString()
+                });
+            }
             catch (Exception ex)
             {
                 Logger?.Log(ex.Message);
@@ -180,7 +190,7 @@ namespace BaseNetworkArchitecture.Common
                 if (msgSize > 0)
                 {
                     recivedNetworkMessage.Content = recivedNetworkMessage.Encoder.GetString(clientState.RcvBuffer);
-                    Logger.Log("Recieved message from cliet " + recivedNetworkMessage.Content);
+                    Logger?.Log("Recieved message from cliet " + recivedNetworkMessage.Content);
 
                     RunMessageRecievedEvent(new MessageEventArgs
                     {

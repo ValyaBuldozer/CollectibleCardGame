@@ -6,6 +6,7 @@ namespace BaseNetworkArchitecture.Common
 {
     public interface INetworkCommunicator
     {
+        bool IsConnected { get; }
         bool SendMessage(NetworkMessage networkMessage);
         NetworkMessage ReadMessage();
         bool Connect();
