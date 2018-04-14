@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CollectibleCardGame.Views.UserControls"
              mc:Ignorable="d" 
+             AllowDrop="True"
              d:DesignHeight="410" d:DesignWidth="220">
     <!--410x220-->
     <Border BorderThickness="5" BorderBrush="Black" CornerRadius="5">
@@ -59,9 +60,11 @@
 
                     
 
-                    <Ellipse Grid.Row="0" Stroke="Black" StrokeThickness="3" Grid.Column="1"  HorizontalAlignment="Center" VerticalAlignment="Center" Fill="Gold" Width="55" Height="55" Margin="0,2,0,0" />
+                    <Ellipse Grid.Row="0" Stroke="Black" StrokeThickness="3" Grid.Column="1"  HorizontalAlignment="Center" VerticalAlignment="Center"
+                             Fill="Gold" Width="55" Height="55" Margin="0,2,0,0" />
 
-                    <TextBlock Grid.Row="0" x:Name="UnitCost" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Cost}" FontSize="52" FontWeight="Bold" Margin="0,0,0,5"  />
+                    <TextBlock Grid.Row="0" x:Name="UnitCost" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"
+                               Text="{Binding Cost}" FontSize="52" FontWeight="Bold" Margin="0,0,0,5"  />
 
                 </Grid>
 
