@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 using GameData.Network;
 using GameData.Network.Messages;
 
-namespace Server.Network.Controllers.MessageHandlers
+namespace CollectibleCardGame.Network.Controllers.MessageHandlers
 {
-    public class GameStartMessageHandler : MessageHandlerBase<GameStartMessage>
+    public class RegistrationMessageHandler : MessageHandlerBase<RegistrationMessage>
     {
-        public override IContent Execute(IContent content,object sender)
+        public override IContent Execute(IContent content, object sender)
         {
             throw new NotImplementedException();
         }

@@ -142,7 +142,6 @@
     <Compile Include="Network\Controllers\MessageHandlers\GameStartMessageHandler.cs" />
     <Compile Include="Network\Controllers\MessageHandlers\LogInMessageHandler.cs" />
     <Compile Include="Network\Controllers\MessageHandlers\RegistrationMessageHandler.cs" />
-    <Compile Include="Network\Controllers\NetworkMessageConverter.cs" />
     <Compile Include="Network\Controllers\ServerController.cs" />
     <Compile Include="Network\Models\Client.cs" />
     <Compile Include="Program.cs" />
@@ -153,8 +152,8 @@
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Repositories\UserInfoRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
-    <Compile Include="Services\ServerStateService.cs" />
-    <Compile Include="Services\UserService.cs" />
+    <Compile Include="Controllers\Services\ServerStateService.cs" />
+    <Compile Include="Controllers\Services\UserService.cs" />
     <Compile Include="Unity\UnityKernel.cs" />
   </ItemGroup>
   <ItemGroup>

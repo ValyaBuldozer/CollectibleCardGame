@@ -12,24 +12,15 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using CollectibleCardGame.ViewModels.Windows;
-using Unity.Attributes;
 
-namespace CollectibleCardGame
+namespace CollectibleCardGame.Views.Frames
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для ConnectionErrorFramePage.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ConnectionErrorFramePage : Page
     {
-        [Dependency]
-        public MainWindowViewModel ViewModel
-        {
-            get => DataContext as MainWindowViewModel;
-            set => DataContext = value;
-        }
-
-        public MainWindow()
+        public ConnectionErrorFramePage()
         {
             InitializeComponent();
         }

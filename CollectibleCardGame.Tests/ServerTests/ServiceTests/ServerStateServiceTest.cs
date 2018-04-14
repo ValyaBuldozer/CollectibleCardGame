@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using BaseNetworkArchitecture.Common.Messages;
 using BaseNetworkArchitecture.Server;
 using GameData.Enums;
+using GameData.Network;
 using GameData.Network.Messages;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Server.Models;
