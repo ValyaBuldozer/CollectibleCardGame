@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Server.Controllers.Services;
 using Server.Models;
 using Server.Repositories;
-using Server.Services;
 using Server.Unity;
 
 namespace CollectibleCardGame.Tests.ServerTests.ServiceTests

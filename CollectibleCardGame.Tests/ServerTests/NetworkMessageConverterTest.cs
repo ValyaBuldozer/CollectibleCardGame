@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GameData.Enums;
+using GameData.Network;
 using GameData.Network.Messages;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Server.Network.Controllers;

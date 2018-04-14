@@ -2,15 +2,10 @@
 using System.Collections.Generic;
 using System.Data.SqlTypes;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using BaseNetworkArchitecture.Server;
-using Server.Controllers;
 using Server.Models;
-using Server.Repositories;
-using Server.Unity;
 
-namespace Server.Services
+namespace Server.Controllers.Services
 {
     public class UserService
     {
@@ -28,6 +23,7 @@ namespace Server.Services
 
         public User RegisterUser(string username, string password)
         {
+            //todo : пользовательские исключения
             if(string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
                 throw new NullReferenceException("Username or password was empty");
 
@@ -43,6 +39,7 @@ namespace Server.Services
 
         public User LogIn(string username, string password)
         {
+            //todo :  пользовательские исключения
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
                 throw new NullReferenceException();
 
