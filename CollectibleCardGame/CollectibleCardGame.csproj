@@ -146,11 +146,11 @@
     <Compile Include="Network\Controllers\MessageHandlers\GameRequestMessageHandler.cs" />
     <Compile Include="Network\Controllers\MessageHandlers\LogInMessageHandler.cs" />
     <Compile Include="Network\Controllers\MessageHandlers\RegistrationMessageHandler.cs" />
-    <Compile Include="Properties\Resources.Designer.cs">
+    <!--<Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
+    </Compile>-->
     <Compile Include="Services\RelayCommand.cs" />
     <Compile Include="Unity\UnityKernel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
@@ -371,9 +371,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\ImagesUnit\210x250.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\210x250.jpg" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BaseNetworkArchitecture\BaseNetworkArchitecture.csproj">
