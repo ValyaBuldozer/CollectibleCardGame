@@ -9,6 +9,8 @@ namespace BaseNetworkArchitecture.Common
     {
         public ILogger Logger { set; get; }
 
+        public bool IsConnected => Client.Connected;
+
         public TcpCommunicator(TcpClient client)
         {
             Client = client;
@@ -86,7 +88,35 @@ namespace BaseNetworkArchitecture.Common
 
         public bool Connect()
         {
-            throw new NotImplementedException();
+            try
+            {
+                //todo : доделать подключение
+                return Client.Connected;
+            }
+            catch (Exception e)
+            {
+                Logger?.Log(e);
+                return false;
+            }
+        }
+
+        public bool Connect(IPAddress ipAddress, int port)
+        {
+            if(Client.Connected)
+                throw new InvalidOperationException("Connection is already exist");
+            try
+            {
+                if(Client == null)
+                    Client=new TcpClient();
+
+                Client.Connect(ipAddress, port);
+                return true;
+            }
+            catch (Exception e)
+            {
+                Logger?.Log(e);
+                return false;
+            }
         }
 
         public bool Disconnect()
@@ -134,25 +164,17 @@ namespace BaseNetworkArchitecture.Common
                 var result = Client.GetStream().BeginRead(clientState.RcvBuffer, 0, clientState.RcvBuffer.Length,
                     ReadCallback, clientState);
             }
+            catch (SocketException ex)
+            {
+                Logger?.Log(ex);
+                RunBreakConnection(new BreakConnectionEventArgs()
+                {
+                    DisconnectReason = ex.ErrorCode.ToString()
+                });
+            }
             catch (Exception ex)
             {
                 Logger?.Log(ex.Message);
-            }
-        }
-
-        public bool Connect(IPAddress IPadress, int port)
-        {
-            try
-            {
-                if (Client.Connected)
-                    throw new InvalidOperationException("Client is already connected");
-                Client.Connect(IPadress, port);
-                return true;
-            }
-            catch (Exception e)
-            {
-                Logger?.Log(e);
-                return false;
             }
         }
 
@@ -168,7 +190,7 @@ namespace BaseNetworkArchitecture.Common
                 if (msgSize > 0)
                 {
                     recivedNetworkMessage.Content = recivedNetworkMessage.Encoder.GetString(clientState.RcvBuffer);
-                    Logger.Log("Recieved message from cliet " + recivedNetworkMessage.Content);
+                    Logger?.Log("Recieved message from cliet " + recivedNetworkMessage.Content);
 
                     RunMessageRecievedEvent(new MessageEventArgs
                     {

@@ -1,14 +1,18 @@
 ﻿using System;
+using System.Net;
 using BaseNetworkArchitecture.Common.Messages;
 
 namespace BaseNetworkArchitecture.Common
 {
     public interface INetworkCommunicator
     {
+        bool IsConnected { get; }
         bool SendMessage(NetworkMessage networkMessage);
         NetworkMessage ReadMessage();
         bool Connect();
-        bool Disconnect(); event EventHandler<MessageEventArgs> MessageRecievedEvent;
+        bool Connect(IPAddress ipAddress, int port);
+        bool Disconnect();
+        event EventHandler<MessageEventArgs> MessageRecievedEvent;
         event EventHandler<BreakConnectionEventArgs> BreakConnectionEvent;
     }
 }

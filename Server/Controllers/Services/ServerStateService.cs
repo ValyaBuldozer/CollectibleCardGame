@@ -1,17 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using GameData.Enums;
 using GameData.Network.Messages;
-using Server.Controllers;
 using Server.Models;
-using Server.Network.Controllers.MessageHandlers;
 using Server.Network.Models;
-using Server.Unity;
 
-namespace Server.Services
+namespace Server.Controllers.Services
 {
     public class ServerStateService
     {

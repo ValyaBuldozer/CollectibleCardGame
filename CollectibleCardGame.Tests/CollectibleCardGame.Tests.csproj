@@ -55,6 +55,8 @@
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -85,11 +87,14 @@
     <Reference Include="Unity.ServiceLocation, Version=2.1.2.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
       <HintPath>..\packages\Unity.5.8.5\lib\net46\Unity.ServiceLocation.dll</HintPath>
     </Reference>
+    <Reference Include="WindowsBase">
+      <HintPath>..\packages\WindowsBase.4.6.1055.0\lib\WindowsBase.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ArchitectureTests\MessageHandlerTest.cs" />
+    <Compile Include="Logic\Contoller\GlobalAppStateConttollerTest.cs" />
     <Compile Include="ServerTests\NetworkMessageConverterTest.cs" />
-    <Compile Include="JsonParserTest\ParserInterfaceTest.cs" />
     <Compile Include="NetworkTests\CommunicatorTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServerTests\RepositoryTests.cs" />
@@ -98,10 +103,6 @@
     <Compile Include="ServerTests\ServiceTests\ServerStateServiceTest.cs" />
     <Compile Include="ServerTests\ServiceTests\UserServiceTest.cs" />
     <Compile Include="ServerTests\UsersConnectionTest.cs" />
-    <Compile Include="TestOfUnitTests.cs" />
-    <Compile Include="UnityTests\KernelTest.cs" />
-    <Compile Include="UnityTests\RepositoryTest.cs" />
-    <Compile Include="UnityTests\UnityContainerTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -128,7 +129,10 @@
       <Name>Server</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="ArchitectureTests\" />
+    <Folder Include="UnityTests\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
