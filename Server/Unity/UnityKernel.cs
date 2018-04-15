@@ -9,7 +9,7 @@ using BaseNetworkArchitecture.Server;
 using GameData.Network;
 using GameData.Network.Messages;
 using Server.Controllers;
-using Server.Controllers.Services;
+using Server.Controllers.Repository;
 using Server.Database;
 using Server.Models;
 using Server.Network.Controllers;

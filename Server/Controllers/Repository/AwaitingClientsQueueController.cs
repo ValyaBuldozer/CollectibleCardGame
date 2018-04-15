@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Server.Network.Models;
 using Server.Repositories;
 
-namespace Server.Controllers
+namespace Server.Controllers.Repository
 {
     public class AwaitingClientsQueueController
     {
