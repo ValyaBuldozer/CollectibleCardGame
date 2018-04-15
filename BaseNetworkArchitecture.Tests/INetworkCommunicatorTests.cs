@@ -15,7 +15,7 @@ namespace BaseNetworkArchitecture.Tests
         private bool _clientConnect;
 
         [TestMethod]
-        public void INWC_Connect() // не понятно
+        public void INwC_Connect() // не понятно
         {
 
             //arrange
