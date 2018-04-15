@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using CollectibleCardGame.Services;
+using CollectibleCardGame.ViewModels.UserControls;
 
 namespace CollectibleCardGame.ViewModels.Frames
 {
