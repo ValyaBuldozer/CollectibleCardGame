@@ -158,10 +158,12 @@
     <Compile Include="ViewModels\Frames\ConnectionErrorViewModel.cs" />
     <Compile Include="ViewModels\Frames\GameProccesPageViewModel.cs" />
     <Compile Include="ViewModels\Frames\LogInFramePageShellViewModel.cs" />
+    <Compile Include="ViewModels\Frames\MainMenuFramePageViewModel.cs" />
     <Compile Include="ViewModels\UserControls\FractionUserControlViewModel.cs" />
     <Compile Include="ViewModels\UserControls\SpellCardUserControlViewModel.cs" />
     <Compile Include="ViewModels\UserControls\UnitCardUserControlViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowViewModel.cs" />
+    <Compile Include="Views\ForComponents\MainMenuPart.cs" />
     <Compile Include="Views\FramesShell\LogInFramePageShell.xaml.cs">
       <DependentUpon>LogInFramePageShell.xaml</DependentUpon>
     </Compile>
@@ -176,6 +178,9 @@
     </Compile>
     <Compile Include="Views\Frames\GoGameFramePage.xaml.cs">
       <DependentUpon>GoGameFramePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Frames\HelpFramePage.xaml.cs">
+      <DependentUpon>HelpFramePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Frames\LogInFramePage.xaml.cs">
       <DependentUpon>LogInFramePage.xaml</DependentUpon>
@@ -250,6 +255,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Frames\GoGameFramePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Frames\HelpFramePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -341,7 +350,6 @@
     <Resource Include="Images\Icons\search.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Network\Controllers\" />
     <Folder Include="Resources\" />
     <Folder Include="ViewModels\Elements\" />
   </ItemGroup>
