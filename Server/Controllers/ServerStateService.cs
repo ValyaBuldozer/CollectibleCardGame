@@ -1,10 +1,11 @@
 ﻿using System;
 using GameData.Enums;
 using GameData.Network.Messages;
+using Server.Controllers.Repository;
 using Server.Models;
 using Server.Network.Models;
 
-namespace Server.Controllers.Services
+namespace Server.Controllers
 {
     public class ServerStateService
     {

@@ -2,7 +2,7 @@
 using System.Net;
 using System.Net.Sockets;
 using BaseNetworkArchitecture.Common;
-using CollectibleCardGame.Controllers;
+using CollectibleCardGame.Network.Controllers;
 using CollectibleCardGame.Unity;
 using CollectibleCardGame.ViewModels.Frames;
 using CollectibleCardGame.ViewModels.Windows;
@@ -13,10 +13,10 @@ namespace CollectibleCardGame.Logic.Controllers
     /// <summary>
     /// Класс - контроллер, отвечает за старт, закрытие, запрос на соединение с сервером, обработка разрыва соединения с сервером.
     /// </summary>
-    public class GlobalAppStateController
+    public class GlobalAppStateController : IGlobalController
     {
         [Dependency]
-        public NetworkConnectionController ConnectionController { set; get; }
+        public INetworkController ConnectionController { set; get; }
 
         [Dependency]
         public MainWindowViewModel MainWindowViewModel { set; get; }
@@ -37,6 +37,7 @@ namespace CollectibleCardGame.Logic.Controllers
             }
 
             MainWindowViewModel.IsBusy = false;
+            MainWindowViewModel.SetLogInFrame();
             FramePageShellViewModel.SetLogInPage();
         }
 

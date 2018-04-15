@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BaseNetworkArchitecture.Server;
-using CollectibleCardGame.Controllers;
 using CollectibleCardGame.Logic.Controllers;
 using CollectibleCardGame.ViewModels.Frames;
 using CollectibleCardGame.ViewModels.Windows;

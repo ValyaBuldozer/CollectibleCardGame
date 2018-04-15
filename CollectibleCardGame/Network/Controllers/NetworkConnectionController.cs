@@ -1,20 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
 using BaseNetworkArchitecture.Common;
 using BaseNetworkArchitecture.Common.Messages;
-using CollectibleCardGame.Network.Controllers;
 using GameData.Network;
 using GameData.Network.Messages;
 using Unity.Attributes;
 
-namespace CollectibleCardGame.Controllers
+namespace CollectibleCardGame.Network.Controllers
 {
-    public class NetworkConnectionController
+    public class NetworkConnectionController : INetworkController
     {
         private INetworkCommunicator _serverCommunicator;
 
@@ -31,6 +26,8 @@ namespace CollectibleCardGame.Controllers
                 }
 
                 _serverCommunicator = value;
+                _serverCommunicator.MessageRecievedEvent += OnMessageRecieved;
+                _serverCommunicator.BreakConnectionEvent += OnBreakConnection;
             }
             get => _serverCommunicator;
         }
@@ -46,6 +43,8 @@ namespace CollectibleCardGame.Controllers
         {
             if(!ServerCommunicator.Connect(ipAddress, port))
                 throw new SocketException();
+
+            ServerCommunicator.StartReadMessages();
         }
 
         public void Disconnect()

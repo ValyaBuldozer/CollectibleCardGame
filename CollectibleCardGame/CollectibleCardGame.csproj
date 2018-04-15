@@ -139,7 +139,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Controllers\NetworkConnectionController.cs" />
+    <Compile Include="Logic\Controllers\IGlobalController.cs" />
+    <Compile Include="Network\Controllers\INetworkController.cs" />
+    <Compile Include="Network\Controllers\NetworkConnectionController.cs" />
+    <Compile Include="Logic\Controllers\UserController.cs" />
     <Compile Include="MessageBoxLogger.cs" />
     <Compile Include="Models\CurrentUser.cs" />
     <Compile Include="Logic\Controllers\GlobalAppStateController.cs" />
@@ -156,8 +159,11 @@
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\Frames\CardDecksPageViewModel.cs" />
     <Compile Include="ViewModels\Frames\ConnectionErrorViewModel.cs" />
+    <Compile Include="ViewModels\Frames\ErrorFramePageViewModel.cs" />
     <Compile Include="ViewModels\Frames\GameProccesPageViewModel.cs" />
     <Compile Include="ViewModels\Frames\LogInFramePageShellViewModel.cs" />
+    <Compile Include="ViewModels\Frames\LogInFramePageViewModel.cs" />
+    <Compile Include="ViewModels\Frames\RegistrationFramePageViewModel.cs" />
     <Compile Include="ViewModels\UserControls\FractionUserControlViewModel.cs" />
     <Compile Include="ViewModels\UserControls\SpellCardUserControlViewModel.cs" />
     <Compile Include="ViewModels\UserControls\UnitCardUserControlViewModel.cs" />

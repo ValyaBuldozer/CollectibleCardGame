@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BaseNetworkArchitecture.Common;
 using BaseNetworkArchitecture.Server;
-using CollectibleCardGame.Controllers;
+using CollectibleCardGame.Logic.Controllers;
 using CollectibleCardGame.Models;
 using CollectibleCardGame.Network.Controllers;
 using CollectibleCardGame.Network.Controllers.MessageHandlers;
@@ -49,40 +49,47 @@ namespace CollectibleCardGame.Unity
             _container = new UnityContainer();
 
             _container.RegisterType<ILogger, MessageBoxLogger>();
+            _container.RegisterType<MainWindowViewModel>(new ContainerControlledLifetimeManager());
+            _container.RegisterType<MainWindow>(new ContainerControlledLifetimeManager());
+            _container.RegisterType<LogInFramePageViewModel>(new ContainerControlledLifetimeManager());
+            _container.RegisterType<LogInFramePage>();
+            _container.RegisterType<RegistrationFramePageViewModel>(new ContainerControlledLifetimeManager());
+            _container.RegisterType<ToRegisterFramePage>();
+            _container.RegisterType<ErrorFramePageViewModel>(new ContainerControlledLifetimeManager());
+            _container.RegisterType<ConnectionErrorFramePage>();
+            _container.RegisterType<LogInFramePageShellViewModel>(new ContainerControlledLifetimeManager());
+            _container.RegisterType<LogInFramePageShell>(new ContainerControlledLifetimeManager());
+
+            //repository binding
+            _container.RegisterType<CurrentUser>(new ContainerControlledLifetimeManager());
+
+
+
+            //controller binding
+            _container.RegisterType<NetworkMessageConverter>();
+            _container.RegisterType<INetworkCommunicator, TcpCommunicator>(new ContainerControlledLifetimeManager(),
+                new InjectionConstructor(new object[]
+                {
+                    new TcpClient() //localhost injection, can be changed
+                }));
+            _container.RegisterType<INetworkController,NetworkConnectionController>(
+                new ContainerControlledLifetimeManager());
+            _container.RegisterType<UserController>(new ContainerControlledLifetimeManager());
+            _container.RegisterType<IGlobalController, GlobalAppStateController>();
+
+            //viewmodels binding
+            _container.RegisterType<LogInFramePageShellViewModel>(new ContainerControlledLifetimeManager());
+
+            //view binding
+            _container.RegisterType<LogInFramePage>(new ContainerControlledLifetimeManager());
+            _container.RegisterType<ToRegisterFramePage>(new ContainerControlledLifetimeManager());
+            _container.RegisterType<ConnectionErrorFramePage>(new ContainerControlledLifetimeManager());
+            _container.RegisterType<LogInFramePageShell>(new ContainerControlledLifetimeManager());
 
             //messagehandler binding
             _container.RegisterType<MessageHandlerBase<GameRequestMessage>, GameRequestMessageHandler>();
             _container.RegisterType<MessageHandlerBase<LogInMessage>, LogInMessageHandler>();
             _container.RegisterType<MessageHandlerBase<RegistrationMessage>, RegistrationMessageHandler>();
-
-            //repository binding
-            _container.RegisterType<CurrentUser>(new ContainerControlledLifetimeManager());
-            _container.RegisterType<INetworkCommunicator, TcpCommunicator>(new InjectionConstructor(new object[]
-            {
-                new TcpClient() //localhost injection, can be changed
-            }));
-
-            //controller binding
-            _container.RegisterType<NetworkMessageConverter>();
-            _container.RegisterType<NetworkConnectionController>(new ContainerControlledLifetimeManager());
-
-
-            //message handlers binding
-            _container.RegisterType<GameRequestMessageHandler>();
-            _container.RegisterType<RegistrationMessageHandler>();
-            _container.RegisterType<LogInMessageHandler>();
-
-            //viewmodels binding
-            _container.RegisterType<LogInFramePage>(new ContainerControlledLifetimeManager());
-            _container.RegisterType<ToRegisterFramePage>(new ContainerControlledLifetimeManager());
-            _container.RegisterType<ConnectionErrorFramePage>(new ContainerControlledLifetimeManager());
-            _container.RegisterType<LogInFramePageShellViewModel>(new ContainerControlledLifetimeManager());
-            _container.RegisterType<MainWindowViewModel>(new ContainerControlledLifetimeManager());
-
-            //view binding
-            _container.RegisterType<LogInFramePageShell>(new ContainerControlledLifetimeManager());
-            _container.RegisterType<MainWindow>(new ContainerControlledLifetimeManager());
-
         }
 
         public static object Get(Type t)
