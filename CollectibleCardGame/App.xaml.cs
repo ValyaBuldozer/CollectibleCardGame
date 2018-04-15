@@ -30,7 +30,7 @@ namespace CollectibleCardGame
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            //MainWindow window = new MainWindow();
+            MainWindow window = new MainWindow();
 
             //CardDecksFramePage frame = new CardDecksFramePage() { DataContext = new CardDecksPageViewModel() };
             //frame.f1.DataContext = new FractionUserControlViewModel() { Name = "Калвария", Description = "Северная фракция", ImagePath = "/Images/northPicture.jpg" };

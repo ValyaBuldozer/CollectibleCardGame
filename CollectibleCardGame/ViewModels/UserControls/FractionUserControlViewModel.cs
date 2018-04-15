@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CollectibleCardGame.ViewModels.Frames
+namespace CollectibleCardGame.ViewModels.UserControls
 {
     public class FractionUserControlViewModel : BaseViewModel
     {
