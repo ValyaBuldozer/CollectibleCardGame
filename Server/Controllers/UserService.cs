@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Data.SqlTypes;
 using System.Linq;
 using BaseNetworkArchitecture.Server;
+using Server.Controllers.Repository;
 using Server.Models;
 
-namespace Server.Controllers.Services
+namespace Server.Controllers
 {
     public class UserService
     {
@@ -21,7 +22,7 @@ namespace Server.Controllers.Services
             _userInfoReposController = userInfoReposController;
         }
 
-        public User RegisterUser(string username, string password)
+        public string RegisterUser(string username, string password)
         {
             //todo : пользовательские исключения
             if(string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
@@ -34,10 +35,10 @@ namespace Server.Controllers.Services
             var user = new User() { Username = username, Password = password };
             _userReposController.Add(user);
 
-            return user;
+            return user.Username;
         }
 
-        public User LogIn(string username, string password)
+        public string LogIn(string username, string password)
         {
             //todo :  пользовательские исключения
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
@@ -56,7 +57,7 @@ namespace Server.Controllers.Services
             if(user.Password != password)
                 throw new Exception("Incorrect password");
 
-            return user;
+            return user.Username;
         }
 
         public UserInfo GetUserInfo(string username)

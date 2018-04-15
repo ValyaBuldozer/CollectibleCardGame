@@ -12,7 +12,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using CollectibleCardGame.ViewModels.Frames;
+using CollectibleCardGame.ViewModels.Windows;
 using CollectibleCardGame.Views.Frames;
+using Unity.Attributes;
 
 namespace CollectibleCardGame.Views.FramesShell
 {
@@ -21,6 +24,13 @@ namespace CollectibleCardGame.Views.FramesShell
     /// </summary>
     public partial class LogInFramePageShell : Page
     {
+        [Dependency]
+        public LogInFramePageShellViewModel ViewModel
+        {
+            get => DataContext as LogInFramePageShellViewModel;
+            set => DataContext = value;
+        }
+
         public LogInFramePageShell()
         {
             
