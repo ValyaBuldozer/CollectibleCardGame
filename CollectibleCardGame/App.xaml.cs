@@ -14,6 +14,7 @@ using CollectibleCardGame.Unity;
 using CollectibleCardGame.ViewModels;
 using CollectibleCardGame.ViewModels.Frames;
 using CollectibleCardGame.ViewModels.UserControls;
+using CollectibleCardGame.ViewModels.Windows;
 using CollectibleCardGame.Views.Frames;
 using CollectibleCardGame.Views.FramesShell;
 using CollectibleCardGame.Views.UserControls;
@@ -49,18 +50,26 @@ namespace CollectibleCardGame
             //frame.f2.DataContext = new FractionUserControlViewModel() { Name = "Магдебург", Description = "Южная фракцция", ImagePath = "/Images/southPicture.jpg" };
             //frame.f3.DataContext = new FractionUserControlViewModel() { Name = "Чудовища", Description = "Монстры", ImagePath = "/Images/darksidePicture.jpg" };
 
+            // window.MainFrame.Content = frame;
+            //window.Show();
 
-            MainMenuFramePage frame = new MainMenuFramePage() {DataContext = new MainMenuFramePageViewModel()};
+            UnityKernel.InitializeKernel();
+            UnityKernel.Get<MainWindow>().Show();
+            UnityKernel.Get<IGlobalController>().OnStartup();
 
-            window.MainFrame.Content = frame;
-            window.Show();
-
-
-
-
-            //UnityKernel.InitializeKernel();
-            //UnityKernel.Get<MainWindow>().Show();
-            //UnityKernel.Get<GlobalAppStateController>().OnStartup();
+            //MainWindow window = new MainWindow() {ViewModel = new MainWindowViewModel(
+            //    new LogInFramePageShell()
+            //    {
+            //        ViewModel = new LogInFramePageShellViewModel(
+            //            new LogInFramePage()
+            //            {
+            //                ViewModel = new LogInFramePageViewModel()
+            //            }, 
+            //            new ToRegisterFramePage(), 
+            //            new ConnectionErrorFramePage()
+            //            )
+            //    })};
+            //window.Show();
         }
     }
 }

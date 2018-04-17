@@ -12,6 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using CollectibleCardGame.ViewModels.Frames;
+using CollectibleCardGame.ViewModels.Windows;
+using Unity.Attributes;
 
 namespace CollectibleCardGame.Views.Frames
 {
@@ -20,6 +23,13 @@ namespace CollectibleCardGame.Views.Frames
     /// </summary>
     public partial class LogInFramePage : Page
     {
+        [Dependency]
+        public LogInFramePageViewModel ViewModel
+        {
+            get => DataContext as LogInFramePageViewModel;
+            set => DataContext = value;
+        }
+
         public LogInFramePage()
         {
             InitializeComponent();

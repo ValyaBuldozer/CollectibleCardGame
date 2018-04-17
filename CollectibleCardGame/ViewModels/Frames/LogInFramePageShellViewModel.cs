@@ -14,9 +14,9 @@ namespace CollectibleCardGame.ViewModels.Frames
     public class LogInFramePageShellViewModel : BaseViewModel
     {
         private Page _currentFramePage;
-        private LogInFramePage _logInFramePage;
-        private ToRegisterFramePage _toRegisterFramePage;
-        private ConnectionErrorFramePage _connectionErrorFramePage;
+        private readonly LogInFramePage _logInFramePage;
+        private readonly ToRegisterFramePage _toRegisterFramePage;
+        private readonly ConnectionErrorFramePage _connectionErrorFramePage;
 
         private RelayCommand _switchFrameCommand;
 
