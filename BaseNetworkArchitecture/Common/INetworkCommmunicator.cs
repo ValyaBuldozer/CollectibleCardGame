@@ -8,6 +8,7 @@ namespace BaseNetworkArchitecture.Common
     {
         bool IsConnected { get; }
         bool SendMessage(NetworkMessage networkMessage);
+        void StartReadMessages();
         NetworkMessage ReadMessage();
         bool Connect();
         bool Connect(IPAddress ipAddress, int port);
