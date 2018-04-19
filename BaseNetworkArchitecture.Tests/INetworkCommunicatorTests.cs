@@ -4,6 +4,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using BaseNetworkArchitecture.Common;
+using BaseNetworkArchitecture.Common.Messages;
 using BaseNetworkArchitecture.Server;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -12,37 +13,191 @@ namespace BaseNetworkArchitecture.Tests
     [TestClass]
     public class INetworkCommunicatorTests
     {
-        private bool _clientConnect;
 
+        #region 1
         [TestMethod]
-        public void INwC_Connect() // не понятно
+        public void INwC_Connect() 
         {
 
             //arrange
+            Random rnd = new Random();
+            int port = rnd.Next(8000, 30001);
             TcpClient сlient = new TcpClient();
             INetworkCommunicator nc = new TcpCommunicator(сlient);
-            TcpListener listener = new TcpListener(IPAddress.Parse("127.0.0.1"), 8800);
+            TcpListener listener = new TcpListener(IPAddress.Parse("127.0.0.1"), port);
             listener.Start();
-            listener.AcceptTcpClientAsync();
+            var result = listener.AcceptTcpClientAsync();
 
-            nc.Connect(IPAddress.Parse("127.0.0.1"), 8800);
+            //act
+            nc.Connect(IPAddress.Parse("127.0.0.1"), port);
+
+            //result.Wait();
+
+            
+            //assert
+            Assert.IsTrue(nc.IsConnected);
+        }
+
+        [TestMethod]
+        public void INwC_ConnectDisconnect() 
+        {
+
+            //arrange
+            Random rnd = new Random();
+            int port = rnd.Next(8000, 30001);
+            TcpClient сlient = new TcpClient();
+            INetworkCommunicator nc = new TcpCommunicator(сlient);
+            TcpListener listener = new TcpListener(IPAddress.Parse("127.0.0.1"), port);
+            listener.Start();
+            var result = listener.AcceptTcpClientAsync();
+
+            //act
+            nc.Connect(IPAddress.Parse("127.0.0.1"), port);
+            nc.Disconnect();
+
+            //result.Wait();
 
 
-            //TcpServer serv = new TcpServer();
-            //serv.ClientConnected += Serv_ClientConnected;
-            //serv.Start();
+            //assert
+            Assert.IsFalse(nc.IsConnected);
+        }
+
+        [TestMethod]
+        public void INwC_ConnectExtraDisconnect() // екстра дисконект = разрыв соединения
+        {
+
+            //arrange
+            Random rnd = new Random();
+            int port = rnd.Next(8000, 30001);
+            TcpClient сlient = new TcpClient();
+            INetworkCommunicator nc = new TcpCommunicator(сlient);
+            TcpListener listener = new TcpListener(IPAddress.Parse("127.0.0.1"), port);
+            listener.Start();
+            var result = listener.AcceptTcpClientAsync();
+
+            //act
+            nc.Connect(IPAddress.Parse("127.0.0.1"), port);
+            listener.Stop();
+
+            //result.Wait();
+
+
+            //assert
+            Assert.IsFalse(nc.IsConnected);
+        }
+        #endregion
+
+        #region 2
+        /// <summary>
+        /// Подключение к TcpListener  и создание второго коммуникатора
+        /// </summary>
+        [TestMethod]
+        public void INwC_2_Connect()  
+        {
+
+            //arrange
+            Random rnd = new Random();
+            int port = rnd.Next(8000, 30001);
+           
+            INetworkCommunicator nc1 = new TcpCommunicator(new TcpClient());
+          
+            TcpListener listener = new TcpListener(IPAddress.Parse("127.0.0.1"), port);
+            listener.Start();
+            var result = listener.AcceptTcpClientAsync();
+
+            //act
+            nc1.Connect(IPAddress.Parse("127.0.0.1"), port);
+            var client = result.GetAwaiter().GetResult();
+            INetworkCommunicator nc2 = new TcpCommunicator(client);
+            //result.Wait();
+
+
+            //assert
+            Assert.IsTrue(nc2.IsConnected);
+          
+         
+        }
+
+        /// <summary>
+        /// Подключение, первый отправляет второму сообщение
+        /// </summary>
+        [TestMethod]
+        public void INwC_2_ConnectAndChat() 
+        {
+
+           
+
+
+
+            //arrange
+            Random rnd = new Random();
+            int port = rnd.Next(8000, 30001);
+
+            INetworkCommunicator nc1 = new TcpCommunicator(new TcpClient());
+
+            TcpListener listener = new TcpListener(IPAddress.Parse("127.0.0.1"), port);
+            listener.Start();
+            var result = listener.AcceptTcpClientAsync();
+            NetworkMessage message = new NetworkMessage("test");
+            
+
+            //act
+            nc1.Connect(IPAddress.Parse("127.0.0.1"), port);
+            var client = result.GetAwaiter().GetResult();
+            INetworkCommunicator nc2 = new TcpCommunicator(client);
+
+            nc1.SendMessage(message);
+            NetworkMessage rezMessage = nc2.ReadMessage();
+            //result.Wait();
+
+
+            //assert
+            Assert.AreEqual(message.Content,rezMessage.Content);
+        }
+
+        /// <summary>
+        /// Подключение, первый отправляет другому, другой принимет и отправляет
+        /// </summary>
+        [TestMethod]
+        public void INwC_2_ConnectAndChatBoth() 
+        {
+
+            //arrange
+            Random rnd = new Random();
+            int port = rnd.Next(8000, 30001);
+
+            INetworkCommunicator nc1 = new TcpCommunicator(new TcpClient());
+
+            TcpListener listener = new TcpListener(IPAddress.Parse("127.0.0.1"), port);
+            listener.Start();
+            var result = listener.AcceptTcpClientAsync();
+            NetworkMessage message = new NetworkMessage("test");
 
 
             //act
-            //сlient.Connect(IPAddress.Parse("127.0.0.1"), 8800);
-            //System.Threading.Thread.Sleep(50);
+            nc1.Connect(IPAddress.Parse("127.0.0.1"), port);
+            var client = result.GetAwaiter().GetResult();
+            INetworkCommunicator nc2 = new TcpCommunicator(client);
+
+            nc1.StartReadMessages();                            //трасировка тут заглыхает, это вообще работает? 
+            nc2.StartReadMessages();
+
+            
+
+            nc1.SendMessage(message);                            //не понятно
+            nc2.ReadMessage();
+            nc2.SendMessage(message);
+            NetworkMessage rezMessage = nc1.ReadMessage();
+            //result.Wait();
+
+
             //assert
-            Assert.IsTrue(_clientConnect);
+            Assert.AreEqual(message.Content, rezMessage.Content);
 
         }
-        private void Serv_ClientConnected(object sender, ClientConnectedEventArgs e)
-        {
-            _clientConnect = true;
-        }
+
+
+        #endregion
+
     }
 }
