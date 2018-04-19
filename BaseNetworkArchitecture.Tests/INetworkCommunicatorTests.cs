@@ -188,14 +188,15 @@ namespace BaseNetworkArchitecture.Tests
             var client = result.GetAwaiter().GetResult();
             INetworkCommunicator nc2 = new TcpCommunicator(client);
 
-            nc1.StartReadMessages();                            //трасировка тут заглыхает, это вообще работает? 
-            nc2.StartReadMessages();
+            //nc1.StartReadMessages();                            
+            //nc2.StartReadMessages();
 
             
 
-            nc1.SendMessage(message);                            //не понятно
-            nc2.ReadMessage();
-            nc2.SendMessage(message);
+            nc1.SendMessage(message);                           
+            NetworkMessage mes = nc2.ReadMessage();
+            
+            nc2.SendMessage(mes);
             NetworkMessage rezMessage = nc1.ReadMessage();
             //result.Wait();
 
