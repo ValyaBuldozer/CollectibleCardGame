@@ -106,6 +106,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArchitectureTests\EventArgsInterfaceTest.cs" />
     <Compile Include="Logic\Contoller\GlobalAppStateConttollerTest.cs" />
     <Compile Include="Logic\Contoller\UserControllerTests.cs" />
     <Compile Include="ServerTests\NetworkMessageConverterTest.cs" />
@@ -144,7 +145,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ArchitectureTests\" />
     <Folder Include="UnityTests\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -24,7 +24,7 @@ namespace BaseNetworkArchitecture.Tests
             int port = rnd.Next(8000, 30001);
             IServer serv = new TcpServer();
             serv.ClientConnected += Serv_ClientConnected;
-            serv.Start();
+            serv.Start(IPAddress.Parse("127.0.0.1"), port);
             TcpClient ñlient = new TcpClient();
 
             //act
@@ -47,7 +47,7 @@ namespace BaseNetworkArchitecture.Tests
             int port = rnd.Next(8000, 30001);
             IServer serv = new TcpServer();
             serv.ClientConnected += Serv_ClientConnected;
-            serv.Start();
+            serv.Start(IPAddress.Parse("127.0.0.1"), port);
             TcpClient ñlient = new TcpClient();
 
 
@@ -71,7 +71,7 @@ namespace BaseNetworkArchitecture.Tests
             int port = rnd.Next(8000, 30001);
             IServer serv = new TcpServer();
             serv.ClientConnected += Serv_ClientConnected;
-            serv.Start();
+            serv.Start(IPAddress.Parse("127.0.0.1"), port);
             TcpClient ñlient1 = new TcpClient();
             TcpClient ñlient2 = new TcpClient();
             TcpClient ñlient3 = new TcpClient();
@@ -101,7 +101,7 @@ namespace BaseNetworkArchitecture.Tests
             int port = rnd.Next(8000, 30001);
             IServer serv = new TcpServer();
             serv.ClientConnected += Serv_ClientConnected;
-            serv.Start();
+            serv.Start(IPAddress.Parse("127.0.0.1"), port);
             TcpClient ñlient = new TcpClient();
 
             
@@ -127,7 +127,7 @@ namespace BaseNetworkArchitecture.Tests
             int port = rnd.Next(8000, 30001);
             IServer serv = new TcpServer();
             serv.ClientConnected += Serv_ClientConnected;
-            serv.Start();
+            serv.Start(IPAddress.Parse("127.0.0.1"), port);
             TcpClient ñlient1 = new TcpClient();
             TcpClient ñlient2 = new TcpClient();
             TcpClient ñlient3 = new TcpClient();
@@ -161,7 +161,7 @@ namespace BaseNetworkArchitecture.Tests
             int port = rnd.Next(8000, 30001);
             IServer serv = new TcpServer();
             serv.ClientConnected += Serv_ClientConnected;
-            serv.Start();
+            serv.Start(IPAddress.Parse("127.0.0.1"), port);
             TcpClient ñlient = new TcpClient();
             
 
@@ -188,7 +188,7 @@ namespace BaseNetworkArchitecture.Tests
             int port = rnd.Next(8000, 30001);
             IServer serv = new TcpServer();
             serv.ClientConnected += Serv_ClientConnected;
-            serv.Start();
+            serv.Start(IPAddress.Parse("127.0.0.1"), port);
             TcpClient ñlient1 = new TcpClient();
             TcpClient ñlient2 = new TcpClient();
             TcpClient ñlient3 = new TcpClient();
