@@ -15,6 +15,9 @@ namespace BaseNetworkArchitecture.Tests
     {
 
         #region 1
+        /// <summary>
+        /// Подключение к TcpListener
+        /// </summary>
         [TestMethod]
         public void INwC_Connect() 
         {
@@ -38,6 +41,9 @@ namespace BaseNetworkArchitecture.Tests
             Assert.IsTrue(nc.IsConnected);
         }
 
+        /// <summary>
+        /// Подлючение к TcpListener и вызов Disconect
+        /// </summary>
         [TestMethod]
         public void INwC_ConnectDisconnect() 
         {
@@ -62,6 +68,9 @@ namespace BaseNetworkArchitecture.Tests
             Assert.IsFalse(nc.IsConnected);
         }
 
+        /// <summary>
+        /// Подключение к TcpListener и разрыв соединения
+        /// </summary>
         [TestMethod]
         public void INwC_ConnectExtraDisconnect() // екстра дисконект = разрыв соединения
         {
