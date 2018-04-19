@@ -2,10 +2,18 @@
 
 namespace GameData.Models.Cards
 {
-    public class SpellCard : Card
+    public class SpellCard : ICard
     {
-        public CardAction.CardAction OnCardPlayedAction { set; get; }
+        public int ID { set; get; }
 
-        public SpellTargetType TargetType { set; get; }
+        public string Name { set; get; }
+
+        public string Description { set; get; }
+
+        public int Cost { set; get; }
+
+        public bool CanBePlayedOnEnemyTurn { set; get; }
+
+        public int ActionID { set; get; }
     }
 }

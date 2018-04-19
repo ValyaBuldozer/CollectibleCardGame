@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 
 namespace GameData.Models
 {
-    public class PlayerInfo
+    public class Player
     {
         public string Username { set; get; }
 
@@ -16,18 +16,15 @@ namespace GameData.Models
 
         public int DeckCardsCount { set; get; }
 
-        public List<Card> HandCards { set; get; }
+        public List<ICard> HandCards { set; get; }
 
         public List<Unit> TableUnits { set; get; }
 
-        [JsonIgnore]
-        public List<Card> DeckCards { set; get; }
-
-        protected bool Equals(PlayerInfo other)
+        protected bool Equals(Player other)
         {
             return string.Equals(Username, other.Username) && Equals(HeroUnit, other.HeroUnit) &&
                    DeckCardsCount == other.DeckCardsCount && Equals(HandCards, other.HandCards) &&
-                   Equals(TableUnits, other.TableUnits) && Equals(DeckCards, other.DeckCards);
+                   Equals(TableUnits, other.TableUnits);
         }
 
         public override int GetHashCode()
@@ -39,7 +36,6 @@ namespace GameData.Models
                 hashCode = (hashCode * 397) ^ DeckCardsCount;
                 hashCode = (hashCode * 397) ^ (HandCards != null ? HandCards.GetHashCode() : 0);
                 hashCode = (hashCode * 397) ^ (TableUnits != null ? TableUnits.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (DeckCards != null ? DeckCards.GetHashCode() : 0);
                 return hashCode;
             }
         }
@@ -49,7 +45,7 @@ namespace GameData.Models
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
             if (obj.GetType() != this.GetType()) return false;
-            return Equals((PlayerInfo) obj);
+            return Equals((Player) obj);
         }
     }
 }

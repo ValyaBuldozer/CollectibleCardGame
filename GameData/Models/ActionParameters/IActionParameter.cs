@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GameData.Models.PlayerTurn
+namespace GameData.Models.ActionParameters
 {
-    public interface IPlayerTurn
+    public interface IActionParameter
     {
-        Player Sender { set; get; }
+        void ChangeValue(int value);
     }
 }

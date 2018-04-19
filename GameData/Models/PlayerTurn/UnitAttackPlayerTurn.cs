@@ -8,7 +8,7 @@ namespace GameData.Models.PlayerTurn
 {
     public class UnitAttackPlayerTurn : IPlayerTurn
     {
-        public PlayerInfo Sender { set; get; }
+        public Player Sender { set; get; }
 
         public Unit Unit { set; get; }
 

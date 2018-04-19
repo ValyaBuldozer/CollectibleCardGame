@@ -2,18 +2,28 @@
 
 namespace GameData.Models.Cards
 {
-    public class UnitCard : Card
+    public class UnitCard : ICard
     {
-        public int Attack { set; get; }
+        public int ID { set; get; }
 
-        public int HP { set; get; }
+        public string Name { set; get; }
 
-        public List<CardAction.CardAction> OnCardPlayedActions { set; get; }
+        public string Description { set; get; }
 
-        public CardAction.CardAction OnUnitDiesAction { set; get; }
+        public int Cost { set; get; }
 
-        public CardAction.CardAction OnUnitAttacksAction { set; get; }
+        public bool CanBePlayedOnEnemyTurn { set; get; }
 
-        public CardAction.CardAction OnUnitWasAttackedAction { set; get; }
+        public int BaseHP { set; get; }
+
+        public int BaseAttack { set; get; }
+
+        public int AttackActionId { set; get; }
+
+        public int DamageRecievedActionId { set; get; }
+
+        public int BattleCryActionId { set; get; }
+
+        public int DeathRattleActionId { set; get; }
     }
 }
