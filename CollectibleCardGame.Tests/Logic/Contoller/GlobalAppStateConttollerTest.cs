@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using BaseNetworkArchitecture.Server;
@@ -24,7 +25,7 @@ namespace CollectibleCardGame.Tests.Logic.Contoller
             UnityKernel.InitializeKernel();
             var globalAppStateController = UnityKernel.Get<GlobalAppStateController>();
 
-            server.Start();
+            server.Start(IPAddress.Parse("127.0.0.1"), 8800);
             globalAppStateController.OnStartup();
 
             Assert.IsTrue(globalAppStateController.ConnectionController.ServerCommunicator.IsConnected);
