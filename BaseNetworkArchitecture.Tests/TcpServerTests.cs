@@ -1,3 +1,4 @@
+using System;
 using System.Net;
 using System.Net.Sockets;
 using System.Security.Cryptography.X509Certificates;
@@ -15,13 +16,15 @@ namespace BaseNetworkArchitecture.Tests
         {
 
             //arrange
+            Random rnd = new Random();
+            int port = rnd.Next(8000, 30001);
             IServer serv = new TcpServer();
             serv.ClientConnected += Serv_ClientConnected;
             serv.Start();
             TcpClient ñlient = new TcpClient();
 
             //act
-            ñlient.Connect(IPAddress.Parse("127.0.0.1"),8800);
+            ñlient.Connect(IPAddress.Parse("127.0.0.1"),port);
             System.Threading.Thread.Sleep(50);
             //assert
             Assert.IsTrue(_clientConnect);
@@ -33,6 +36,8 @@ namespace BaseNetworkArchitecture.Tests
         {
 
             //arrange
+            Random rnd = new Random();
+            int port = rnd.Next(8000, 30001);
             IServer serv = new TcpServer();
             serv.ClientConnected += Serv_ClientConnected;
             serv.Start();
@@ -40,7 +45,7 @@ namespace BaseNetworkArchitecture.Tests
 
 
             //act
-            ñlient.Connect(IPAddress.Parse("127.0.0.1"), 8800);
+            ñlient.Connect(IPAddress.Parse("127.0.0.1"), port);
             System.Threading.Thread.Sleep(50);
             //assert
             Assert.AreEqual(1,serv.Clients.Count);
@@ -52,6 +57,8 @@ namespace BaseNetworkArchitecture.Tests
         {
 
             //arrange
+            Random rnd = new Random();
+            int port = rnd.Next(8000, 30001);
             IServer serv = new TcpServer();
             serv.ClientConnected += Serv_ClientConnected;
             serv.Start();
@@ -61,11 +68,11 @@ namespace BaseNetworkArchitecture.Tests
 
 
             //act
-            ñlient1.Connect(IPAddress.Parse("127.0.0.1"), 8800);
+            ñlient1.Connect(IPAddress.Parse("127.0.0.1"), port);
             //System.Threading.Thread.Sleep(5);
-            ñlient2.Connect(IPAddress.Parse("127.0.0.1"), 8800);
+            ñlient2.Connect(IPAddress.Parse("127.0.0.1"), port);
             //System.Threading.Thread.Sleep(5);
-            ñlient3.Connect(IPAddress.Parse("127.0.0.1"), 8800);
+            ñlient3.Connect(IPAddress.Parse("127.0.0.1"), port);
             System.Threading.Thread.Sleep(50);
             //assert
             Assert.AreEqual(3, serv.Clients.Count);
@@ -77,6 +84,8 @@ namespace BaseNetworkArchitecture.Tests
         {
 
             //arrange
+            Random rnd = new Random();
+            int port = rnd.Next(8000, 30001);
             IServer serv = new TcpServer();
             serv.ClientConnected += Serv_ClientConnected;
             serv.Start();
@@ -84,7 +93,7 @@ namespace BaseNetworkArchitecture.Tests
 
             
             //act
-            ñlient.Connect(IPAddress.Parse("127.0.0.1"), 8800);
+            ñlient.Connect(IPAddress.Parse("127.0.0.1"), port);
             System.Threading.Thread.Sleep(50);
             ñlient.Close();
             
@@ -98,6 +107,8 @@ namespace BaseNetworkArchitecture.Tests
         {
 
             //arrange
+            Random rnd = new Random();
+            int port = rnd.Next(8000, 30001);
             IServer serv = new TcpServer();
             serv.ClientConnected += Serv_ClientConnected;
             serv.Start();
@@ -107,11 +118,11 @@ namespace BaseNetworkArchitecture.Tests
 
 
             //act
-            ñlient1.Connect(IPAddress.Parse("127.0.0.1"), 8800);
+            ñlient1.Connect(IPAddress.Parse("127.0.0.1"), port);
             //System.Threading.Thread.Sleep(50);
-            ñlient2.Connect(IPAddress.Parse("127.0.0.1"), 8800);
+            ñlient2.Connect(IPAddress.Parse("127.0.0.1"), port);
             //System.Threading.Thread.Sleep(50);
-            ñlient3.Connect(IPAddress.Parse("127.0.0.1"), 8800);
+            ñlient3.Connect(IPAddress.Parse("127.0.0.1"), port);
             System.Threading.Thread.Sleep(50);
             ñlient1.Close();
             ñlient2.Close();
@@ -127,6 +138,8 @@ namespace BaseNetworkArchitecture.Tests
         {
 
             //arrange
+            Random rnd = new Random();
+            int port = rnd.Next(8000, 30001);
             IServer serv = new TcpServer();
             serv.ClientConnected += Serv_ClientConnected;
             serv.Start();
@@ -135,7 +148,7 @@ namespace BaseNetworkArchitecture.Tests
 
 
             //act
-            ñlient.Connect(IPAddress.Parse("127.0.0.1"), 8800);
+            ñlient.Connect(IPAddress.Parse("127.0.0.1"), port);
             
             serv.Stop();
             System.Threading.Thread.Sleep(50);
@@ -149,6 +162,8 @@ namespace BaseNetworkArchitecture.Tests
         {
 
             //arrange
+            Random rnd = new Random();
+            int port = rnd.Next(8000, 30001);
             IServer serv = new TcpServer();
             serv.ClientConnected += Serv_ClientConnected;
             serv.Start();
@@ -158,11 +173,11 @@ namespace BaseNetworkArchitecture.Tests
 
 
             //act
-            ñlient1.Connect(IPAddress.Parse("127.0.0.1"), 8800);
+            ñlient1.Connect(IPAddress.Parse("127.0.0.1"), port);
             //System.Threading.Thread.Sleep(5);
-            ñlient2.Connect(IPAddress.Parse("127.0.0.1"), 8800);
+            ñlient2.Connect(IPAddress.Parse("127.0.0.1"), port);
             //System.Threading.Thread.Sleep(5);
-            ñlient3.Connect(IPAddress.Parse("127.0.0.1"), 8800);
+            ñlient3.Connect(IPAddress.Parse("127.0.0.1"), port);
             serv.Stop();
             System.Threading.Thread.Sleep(50);
             //assert
