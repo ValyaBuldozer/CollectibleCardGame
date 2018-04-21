@@ -119,7 +119,7 @@ namespace BaseNetworkArchitecture.Tests
             nc1.Connect(IPAddress.Parse("127.0.0.1"), port);
             nc2.Connect(IPAddress.Parse("127.0.0.1"), port);
             nc3.Connect(IPAddress.Parse("127.0.0.1"), port);
-            System.Threading.Thread.Sleep(50);
+            System.Threading.Thread.Sleep(50); //перестраховка
             //result.Wait();
 
 
@@ -150,9 +150,9 @@ namespace BaseNetworkArchitecture.Tests
 
             //act
             nc1.Connect(IPAddress.Parse("127.0.0.1"), port);
-            System.Threading.Thread.Sleep(50);
+            
             nc2.Connect(IPAddress.Parse("127.0.0.1"), port);
-            System.Threading.Thread.Sleep(50);
+           
             nc2.Connect(IPAddress.Parse("127.0.0.1"), port);
             System.Threading.Thread.Sleep(50);
             nc1.Disconnect();
@@ -170,7 +170,7 @@ namespace BaseNetworkArchitecture.Tests
         /// Старт, подключение, сервер отправляет сообшение
         /// </summary>
         [TestMethod]
-        public void Interaction_StartAndSeverSend()
+        public void Interaction_StartAndServerSend()
         {
 
             //arrange
@@ -202,6 +202,7 @@ namespace BaseNetworkArchitecture.Tests
             Assert.AreEqual("test", mes.Content );
         }
 
+        private bool flag;
         /// <summary>
         /// Старт, подключение, отправка сообщения клиентом
         /// </summary>
@@ -213,30 +214,40 @@ namespace BaseNetworkArchitecture.Tests
             Random rnd = new Random();
             int port = rnd.Next(8000, 30001);
             IServer serv = new TcpServer();
-            TcpClient сlient = new TcpClient();
+            TcpClient сlient1 = new TcpClient();
+            TcpClient сlient2 = new TcpClient();
 
-            INetworkCommunicator nc = new TcpCommunicator(сlient);
+            INetworkCommunicator nc1 = new TcpCommunicator(сlient1);
+            INetworkCommunicator nc2 = new TcpCommunicator(сlient2);
 
             serv.Start(IPAddress.Parse("127.0.0.1"), port);
 
 
 
             //act
-            nc.Connect(IPAddress.Parse("127.0.0.1"), port);
+            nc1.Connect(IPAddress.Parse("127.0.0.1"), port);
+            nc2.Connect(IPAddress.Parse("127.0.0.1"), port);
             System.Threading.Thread.Sleep(50);
+            nc2.StartReadMessages();
+            nc2.MessageRecievedEvent += Nc2_MessageRecievedEvent;
+            serv.
+            nc1.SendMessage(new NetworkMessage("test"));
             
-            foreach (var client in serv.Clients)
-            {
-                client.Communicator.SendMessage(new NetworkMessage("test"));
-            }
-            NetworkMessage mes = nc.ReadMessage();
+            //NetworkMessage mes =nc2.ReadMessage();
+           
 
 
             //result.Wait();
 
 
             //assert
-            Assert.AreEqual("test", mes.Content);
+            Assert.IsTrue(flag);
+            //Assert.AreEqual("test", mes.Content);
+        }
+
+        private void Nc2_MessageRecievedEvent(object sender, MessageEventArgs e)
+        {
+            flag = true;
         }
     }
 }
