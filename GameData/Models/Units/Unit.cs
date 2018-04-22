@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GameData.Models.Action;
+﻿using GameData.Models.Action;
 using GameData.Models.Cards;
 
-namespace GameData.Models
+namespace GameData.Models.Units
 {
     public class Unit
     {
@@ -28,6 +23,17 @@ namespace GameData.Models
 
         public GameActionInfo OnAttackActionInfo { set; get; }
 
+        public Unit(UnitCard unitCard)
+        {
+            BaseCard = unitCard;
+            Attack = BaseCard.BaseAttack;
+            AttackPriority = BaseCard.AttackPriority;
+            HealthPoint = new HealthPoint(this) { Base = BaseCard.BaseHP };
+        }
 
+        public override string ToString()
+        {
+            return BaseCard.Name;
+        }
     }
 }

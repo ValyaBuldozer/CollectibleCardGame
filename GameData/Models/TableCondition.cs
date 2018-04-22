@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using GameData.Enums;
 
 namespace GameData.Models
@@ -10,6 +11,11 @@ namespace GameData.Models
         public TableCondition()
         {
             Players = new List<Player>();
+        }
+
+        public Player GetPlayerByUsername(string username)
+        {
+            return Players.FirstOrDefault(p => p.Username == username);
         }
     }
 }

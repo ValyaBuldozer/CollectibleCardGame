@@ -18,6 +18,8 @@ namespace GameData.Models.Cards
 
         public int BaseAttack { set; get; }
 
+        public byte AttackPriority { set; get; }
+
         public int AttackActionId { set; get; }
 
         public int DamageRecievedActionId { set; get; }
@@ -25,5 +27,10 @@ namespace GameData.Models.Cards
         public int BattleCryActionId { set; get; }
 
         public int DeathRattleActionId { set; get; }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

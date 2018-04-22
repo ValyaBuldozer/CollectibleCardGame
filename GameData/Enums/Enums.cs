@@ -57,4 +57,11 @@ namespace GameData.Enums
         EnemyUnit,
         Table
     }
+
+    public enum GameEndReason
+    {
+        HeroUnitKill,
+        PlayerSurrender,
+        PlayerDisconnected
+    }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GameData.Models.Cards;
+using GameData.Models.Units;
 using Newtonsoft.Json;
 
 namespace GameData.Models
@@ -12,13 +13,23 @@ namespace GameData.Models
     {
         public string Username { set; get; }
 
-        public Unit HeroUnit { set; get; }
+        public HeroUnit HeroUnit { get; }
 
         public int DeckCardsCount { set; get; }
 
         public List<ICard> HandCards { set; get; }
 
         public List<Unit> TableUnits { set; get; }
+
+        public PlayerMana Mana { set; get; }
+
+        public Player(UnitCard hero)
+        {
+            HeroUnit = new HeroUnit(this,hero);
+            HandCards = new List<ICard>();
+            TableUnits = new List<Unit>();
+            Mana = new PlayerMana();
+        }
 
         protected bool Equals(Player other)
         {

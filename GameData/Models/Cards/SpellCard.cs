@@ -15,5 +15,10 @@ namespace GameData.Models.Cards
         public bool CanBePlayedOnEnemyTurn { set; get; }
 
         public int ActionID { set; get; }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }
