@@ -9,11 +9,11 @@ namespace GameData.Models.Repository
 {
     public class DeckRepository
     {
-        public Dictionary<string,Stack<ICard>> Dictionary { set; get; }
+        public Dictionary<string,Stack<Card>> Dictionary { set; get; }
 
         public DeckRepository()
         {
-            Dictionary = new Dictionary<string, Stack<ICard>>();
+            Dictionary = new Dictionary<string, Stack<Card>>();
         }
     }
 }

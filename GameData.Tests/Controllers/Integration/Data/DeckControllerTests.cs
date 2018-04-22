@@ -22,7 +22,7 @@ namespace GameData.Tests.Controllers.Integration.Data
             {
                 Repository = new DeckRepository()
             };
-            Stack<ICard> deck = new Stack<ICard>();
+            Stack<Card> deck = new Stack<Card>();
             deck.Push(testCards.FirstCard);
             deck.Push(testCards.SecondCard);
             deck.Push(testCards.FirstCard);

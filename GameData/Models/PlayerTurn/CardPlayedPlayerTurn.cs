@@ -11,7 +11,7 @@ namespace GameData.Models.PlayerTurn
     {
         public Player Sender { set; get; }
 
-        public ICard Card { set; get; }
+        public Card Card { set; get; }
 
         public object ActionTarget { set; get; }
     }

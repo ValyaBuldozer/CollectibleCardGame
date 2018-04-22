@@ -18,10 +18,5 @@ namespace GameData.Models.Repository
 
             };
         }
-
-        public GameAction FindActionById(int id)
-        {
-            return Collection.FirstOrDefault(a => a.ID == id);
-        }
     }
 }

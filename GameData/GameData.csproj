@@ -89,18 +89,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\Data\DeckController.cs" />
+    <Compile Include="Controllers\Data\GameActionRepositoryController.cs" />
+    <Compile Include="Controllers\Data\IDataRepositoryController.cs" />
     <Compile Include="Controllers\Global\GameStateController.cs" />
     <Compile Include="Controllers\Global\PlayerTurnDispatcher.cs" />
     <Compile Include="Controllers\PlayerTurn\CardPlayedPlayerTurnHandler.cs" />
     <Compile Include="Controllers\PlayerTurn\IPlayerTurnHandler.cs" />
     <Compile Include="Controllers\PlayerTurn\PlayerTurnValidator.cs" />
-    <Compile Include="Controllers\Table\DealCardsDispatcher.cs" />
+    <Compile Include="Controllers\Table\CardDeployDispatcher.cs" />
+    <Compile Include="Controllers\Table\CardDrawController.cs" />
+    <Compile Include="Controllers\Table\UnitDispatcher.cs" />
     <Compile Include="Enums\Enums.cs" />
     <Compile Include="Exceptions\PlayerTurnValidationException.cs" />
     <Compile Include="Models\ActionParameters\DamageActionParameter.cs" />
     <Compile Include="Models\ActionParameters\HealActionParameter.cs" />
     <Compile Include="Models\ActionParameters\IActionParameter.cs" />
-    <Compile Include="Models\Cards\ICard.cs" />
+    <Compile Include="Models\Action\CardActionInfo.cs" />
+    <Compile Include="Models\Cards\Card.cs" />
     <Compile Include="Models\Action\GameAction.cs" />
     <Compile Include="Models\Action\GameActionInfo.cs" />
     <Compile Include="Models\EventArgs.cs" />

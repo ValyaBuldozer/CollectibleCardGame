@@ -1,11 +1,14 @@
-﻿using GameData.Models.ActionParameters;
+﻿using GameData.Enums;
+using GameData.Models.ActionParameters;
 
 namespace GameData.Models.Action
 {
     public class GameActionInfo
     {
-        public IActionParameter Parameter { set; get; }
+        public int Parameter { set; get; }
 
         public GameAction Action { set; get; }
+
+        public ActionParameterType ParameterType { set; get; }
     }
 }

@@ -13,8 +13,8 @@ namespace GameData.Controllers.Global
 {
     public interface IGameStateController
     {
-        void Start(Stack<ICard> firstDeck, string firstUsername, UnitCard firstHero,
-            Stack<ICard> secondDeck, string secondUsername, UnitCard secondHero);
+        void Start(Stack<Card> firstDeck, string firstUsername, UnitCard firstHero,
+            Stack<Card> secondDeck, string secondUsername, UnitCard secondHero);
 
     }
 
@@ -34,8 +34,8 @@ namespace GameData.Controllers.Global
             _playerTurnDispatcher = playerTurnDispatcher;
         }
 
-        public void Start(Stack<ICard> firstDeck, string firstUsername, UnitCard firstHero,
-            Stack<ICard> secondDeck, string secondUsername,UnitCard secondHero)
+        public void Start(Stack<Card> firstDeck, string firstUsername, UnitCard firstHero,
+            Stack<Card> secondDeck, string secondUsername,UnitCard secondHero)
         {
             if(string.IsNullOrEmpty(firstUsername) && string.IsNullOrEmpty(secondUsername))
                 throw new NullReferenceException("Username is null");
