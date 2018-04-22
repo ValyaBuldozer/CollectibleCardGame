@@ -8,6 +8,6 @@ namespace GameData.Models.PlayerTurn
 {
     public class EndPlayerTurn : IPlayerTurn
     {
-        public PlayerInfo Sender { set; get; }
+        public Player Sender { set; get; }
     }
 }

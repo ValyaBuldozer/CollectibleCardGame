@@ -9,9 +9,9 @@ namespace GameData.Models.PlayerTurn
 {
     public class CardPlayedPlayerTurn : IPlayerTurn
     {
-        public PlayerInfo Sender { set; get; }
+        public Player Sender { set; get; }
 
-        public Card Card { set; get; }
+        public ICard Card { set; get; }
 
         public object ActionTarget { set; get; }
     }
