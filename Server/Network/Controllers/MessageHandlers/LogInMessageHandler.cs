@@ -5,15 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using GameData.Network;
 using GameData.Network.Messages;
+using Server.Controllers;
 using Server.Database;
-using Server.Services;
 using Server.Unity;
 
 namespace Server.Network.Controllers.MessageHandlers
 {
-    public class LogInMessageHandler : IMessageHandler
+    public class LogInMessageHandler : MessageHandlerBase<LogInMessage>
     {
-        public IContent Execute(IContent content,object sender = null)
+        public override IContent Execute(IContent content,object sender = null)
         {
             if(!(content is LogInMessage))
                 throw new InvalidOperationException();
@@ -28,6 +28,7 @@ namespace Server.Network.Controllers.MessageHandlers
             }
             catch (Exception e)
             {
+                //todo : запилить тут перехват пользовательского исключения - должна передаваться ошибка
                 return new ErrorMessage();
             }
         }

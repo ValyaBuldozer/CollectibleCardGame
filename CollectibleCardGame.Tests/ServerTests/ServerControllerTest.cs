@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using BaseNetworkArchitecture.Common;
+using GameData.Network;
 using GameData.Network.Messages;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Server.Controllers;
@@ -21,7 +23,7 @@ namespace CollectibleCardGame.Tests.ServerTests
         public void RegistrationTest()
         {
             UnityKernel.InitializeKernel();
-            UnityKernel.Get<ServerController>().Start();
+            UnityKernel.Get<ServerController>().Start(IPAddress.Parse("127.0.0.1"), 8800);
 
             TcpClient tcpClient = new TcpClient("localhost",8800);
             var registrationClient = new TcpCommunicator(tcpClient);

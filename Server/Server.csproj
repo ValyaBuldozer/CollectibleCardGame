@@ -115,12 +115,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\AwaitingClientsQueueController.cs" />
-    <Compile Include="Controllers\CardReposController.cs" />
-    <Compile Include="Controllers\ConnectedClientsRepositoryController.cs" />
+    <Compile Include="Controllers\Repository\AwaitingClientsQueueController.cs" />
+    <Compile Include="Controllers\Repository\CardReposController.cs" />
+    <Compile Include="Controllers\Repository\ConnectedClientsRepositoryController.cs" />
     <Compile Include="Controllers\ConsoleLogger.cs" />
-    <Compile Include="Controllers\UserInfoReposController.cs" />
-    <Compile Include="Controllers\UserReposController.cs" />
+    <Compile Include="Controllers\Repository\UserInfoReposController.cs" />
+    <Compile Include="Controllers\Repository\UserReposController.cs" />
     <Compile Include="Database\AppDbContext.cs" />
     <Compile Include="Database\AppDbContextInitializer.cs" />
     <Compile Include="Database\IContext.cs" />
@@ -142,7 +142,6 @@
     <Compile Include="Network\Controllers\MessageHandlers\GameStartMessageHandler.cs" />
     <Compile Include="Network\Controllers\MessageHandlers\LogInMessageHandler.cs" />
     <Compile Include="Network\Controllers\MessageHandlers\RegistrationMessageHandler.cs" />
-    <Compile Include="Network\Controllers\NetworkMessageConverter.cs" />
     <Compile Include="Network\Controllers\ServerController.cs" />
     <Compile Include="Network\Models\Client.cs" />
     <Compile Include="Program.cs" />
@@ -153,8 +152,8 @@
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Repositories\UserInfoRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
-    <Compile Include="Services\ServerStateService.cs" />
-    <Compile Include="Services\UserService.cs" />
+    <Compile Include="Controllers\ServerStateService.cs" />
+    <Compile Include="Controllers\UserService.cs" />
     <Compile Include="Unity\UnityKernel.cs" />
   </ItemGroup>
   <ItemGroup>

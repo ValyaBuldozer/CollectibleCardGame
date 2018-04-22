@@ -5,14 +5,16 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:CollectibleCardGame.Views.Frames"
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="200"
+      d:DesignHeight="300" d:DesignWidth="250"
       Title="MainMenuFramePage">
 
     <Grid>
-        <Grid Background="{DynamicResource BasicBackGround}">
+        <Grid Background="{DynamicResource BasicBackGround}" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="190" MinWidth="190" />
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto" />
+
+                <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions >
@@ -20,60 +22,28 @@
                 <RowDefinition />
             </Grid.RowDefinitions>
 
-            <GridSplitter Grid.Row="1" Grid.Column="1" Width="6"
+            <GridSplitter  Grid.Column="1" Width="6"
                           VerticalAlignment="Stretch" HorizontalAlignment="Left" />
 
-            <ListBox Background="#343B49" x:Name="menuList" Grid.Row="0 " Margin="0,-2,0,0" BorderBrush="#343B49"  ItemContainerStyle="{StaticResource ListBoxItemMain}">
-                <ListBoxItem Name="ObserverGameitem">
-                    <StackPanel>
+            <ListBox Background="#343B49" x:Name="menuList" Grid.Row="0 " Margin="0,-2,0,0" BorderBrush="#343B49"  ItemContainerStyle="{DynamicResource ListBoxItemMain}"
+                     ItemsSource="{Binding Path=Menus}"
+                     SelectedItem="{Binding Path=CurrentFramePage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="auto" />
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
-                            <Image Grid.Column="0"  Source="/Icons/search.png" Width="20" Height="15" />
-                            <TextBlock Margin="5,0,0,0"  Grid.Column="1" FontSize="16" Text="Выбор игры" FontFamily="/CollectibleCardGame;component/Fonts/#Mason Chronicles" FontWeight="Bold"/>
+                            <Image Grid.Column="0" Width="20" Height="15" Source="{Binding Path=ImagePath}" />
+                            <TextBlock Margin="5,0,0,0"  Grid.Column="1" FontSize="16" Text="{Binding Path=Title}"
+                                       FontFamily="/CollectibleCardGame;component/Fonts/#Mason Chronicles"/>
                         </Grid>
-                    </StackPanel>
-                </ListBoxItem>
-                <ListBoxItem Name="CardDecksItem">
-                    <StackPanel>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="auto" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <Image Grid.Column="0"  Source="/Icons/cards.png" Width="20" Height="15" />
-                            <TextBlock Margin="5,0,0,0"  Grid.Column="1" FontSize="16" Text="Колоды" FontFamily="/CollectibleCardGame;component/Fonts/#Mason Chronicles" FontWeight="Bold"/>
-                        </Grid>
-                    </StackPanel>
-                </ListBoxItem>
-                <ListBoxItem Name="HelpUserItem">
-                    <StackPanel>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="auto" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <Image Grid.Column="0"  Source="/Icons/question.png" Width="20" Height="15" />
-                            <TextBlock Margin="5,0,0,0"  Grid.Column="1" FontSize="16" Text="Помощь" FontFamily="/CollectibleCardGame;component/Fonts/#Mason Chronicles" FontWeight="Bold"/>
-                        </Grid>
-                    </StackPanel>
-                </ListBoxItem>
-                <ListBoxItem Name="SettingsItem">
-                    <StackPanel>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="auto" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <Image Grid.Column="0"  Source="/Icons/settingsChange.png" Width="20" Height="15" />
-                            <TextBlock Margin="5,0,0,0"  Grid.Column="1" FontSize="16" Text="Настройки" FontFamily="/CollectibleCardGame;component/Fonts/#Mason Chronicles" FontWeight="Bold"/>
-                        </Grid>
-                    </StackPanel>
-                </ListBoxItem>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
             </ListBox>
-
+            <Frame Name="CurrentFrame" NavigationUIVisibility="Hidden" Grid.Column="2" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch"
+                   Content="{Binding Path=CurrentPage}"/>
         </Grid> 
     </Grid>
 </Page>

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BaseNetworkArchitecture.Common;
 using BaseNetworkArchitecture.Common.Messages;
+using GameData.Network;
 using GameData.Network.Messages;
 using Server.Network.Models;
 using Unity.Attributes;

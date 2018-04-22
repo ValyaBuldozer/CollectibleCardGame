@@ -5,15 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using GameData.Network;
 using GameData.Network.Messages;
+using Server.Controllers;
 using Server.Network.Models;
-using Server.Services;
 using Server.Unity;
 
 namespace Server.Network.Controllers.MessageHandlers
 {
-    public class GameRequestMessageHandler : IMessageHandler
+    public class GameRequestMessageHandler : MessageHandlerBase<GameRequestMessage>
     {
-        public IContent Execute(IContent content,object sender)
+        public override IContent Execute(IContent content,object sender)
         {
             if(!(content is GameRequestMessage))
                 throw new InvalidOperationException("Incorrect message type");

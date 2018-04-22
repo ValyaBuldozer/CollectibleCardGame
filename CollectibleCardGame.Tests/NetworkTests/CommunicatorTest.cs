@@ -21,7 +21,7 @@ namespace CollectibleCardGame.Tests.NetworkTests
         {
             TcpServer server = new TcpServer();
             server.ClientConnected += OnClientConnected;
-            server.Start();
+            server.Start(IPAddress.Parse("127.0.0.1"), 8800);
 
             TcpClient client = new TcpClient();
             client.Connect(IPAddress.Parse("127.0.0.1"), 8800);

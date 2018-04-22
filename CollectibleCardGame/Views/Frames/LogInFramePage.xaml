@@ -16,7 +16,8 @@
             <RowDefinition Height="1.5*"></RowDefinition>
             <RowDefinition Height="1.5*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Label Content="Вход в систему" HorizontalAlignment="Center"  VerticalAlignment="Center" Grid.Row="0" FontSize="20" FontWeight="Bold"/>
+        <Label Content="Вход в систему" HorizontalAlignment="Center"  VerticalAlignment="Center" 
+               Grid.Row="0" FontSize="20" FontWeight="Bold"/>
 
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
@@ -26,7 +27,10 @@
                 <ColumnDefinition Width="0.5*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Label Content="Логин" HorizontalAlignment="Center" Grid.Column="1" VerticalAlignment="Center" FontSize="16" />
-            <TextBox Name="LoginTextBox" Style="{DynamicResource TextBoxMulti}"  Validation.ErrorTemplate="{StaticResource validationFailed}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Column="2" FontSize="16"/>
+            <TextBox Name="LoginTextBox" Style="{DynamicResource TextBoxMulti}"  
+                     Validation.ErrorTemplate="{DynamicResource validationFailed}"
+                     HorizontalAlignment="Stretch" VerticalAlignment="Center" 
+                     Grid.Column="2" FontSize="16" Text="{Binding Path=Username,Mode=TwoWay}"/>
         </Grid>
 
         <Grid Grid.Row="2">
@@ -37,7 +41,10 @@
                 <ColumnDefinition Width="0.5*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Label Content="Пароль" HorizontalAlignment="Center" Grid.Column="1" VerticalAlignment="Center" FontSize="16" />
-            <TextBox Name="PasswordTextBox" Style="{DynamicResource TextBoxMulti}"  Validation.ErrorTemplate="{StaticResource validationFailed}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Column="2" FontSize="16"/>
+            <TextBox Name="PasswordTextBox" Style="{DynamicResource TextBoxMulti}"  
+                     Validation.ErrorTemplate="{DynamicResource validationFailed}" 
+                     HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Column="2"
+                     FontSize="16" Text="{Binding Path=Password,Mode=TwoWay}"/>
         </Grid>
 
         <Grid Grid.Row="3">
@@ -48,10 +55,14 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="0.5*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Button Name="LogInButton" Style="{DynamicResource ButtonGreenStyle}" Content="Войти" HorizontalAlignment="Stretch" Grid.Column="1"  VerticalAlignment="Center" FontSize="16" />
-            <Button Name="ToRegisterButton" Style="{DynamicResource ButtonNeutralStyle}" Content="Регистрация" HorizontalAlignment="Stretch" Grid.Column="3"  VerticalAlignment="Center" 
+            <Button Name="LogInButton" Style="{DynamicResource ButtonGreenStyle}" Content="Войти" 
+                    HorizontalAlignment="Stretch" Grid.Column="1"  VerticalAlignment="Center" 
+                    FontSize="16" Command="{Binding Path=LogInCommand}"/>
+            <Button Name="ToRegisterButton" Style="{DynamicResource ButtonNeutralStyle}"
+                    Content="Регистрация" HorizontalAlignment="Stretch" Grid.Column="3"  
+                    VerticalAlignment="Center" 
                     Command="{Binding RelativeSource=
-                            {RelativeSource Mode=FindAncestor, AncestorType={x:Type framesShell:LogInFramePageShell}}, 
+                            {RelativeSource Mode=FindAncestor, AncestorLevel=1,AncestorType={x:Type framesShell:LogInFramePageShell}}, 
                             Path=DataContext.SwitchFrameCommand}" FontSize="16"
                     />
         </Grid>

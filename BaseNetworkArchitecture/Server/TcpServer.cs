@@ -18,8 +18,8 @@ namespace BaseNetworkArchitecture.Server
 
         public TcpServer()
         {
-            PORT = 8800;
-            TcpListener = new TcpListener(IPAddress.Parse(LOCALHOST_IP), PORT);
+            //PORT = 8800;
+            //TcpListener = new TcpListener();
             Clients = new List<IClientConnection>();
         }
 
@@ -39,12 +39,14 @@ namespace BaseNetworkArchitecture.Server
 
         public Thread GetListenerThread { get; private set; }
 
-        public TcpListener TcpListener { get; }
+        public TcpListener TcpListener { get; private set; }
 
         public ICollection<IClientConnection> Clients { set; get; }
 
-        public void Start()
+        public void Start(IPAddress ipAddress,int port)
         {
+            TcpListener?.Stop();
+            TcpListener = new TcpListener(ipAddress,port);
             GetListenerThread = new Thread(AcceptClients);
             GetListenerThread.Start(this);
         }
