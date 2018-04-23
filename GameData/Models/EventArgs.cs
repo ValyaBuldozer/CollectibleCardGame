@@ -31,6 +31,29 @@ namespace GameData.Models
         }
     }
 
+    public class UnitRecievedDamageEventArgs : EventArgs
+    {
+        public Unit Unit { get; }
+
+        public int Damage { get; }
+
+        public UnitRecievedDamageEventArgs(Unit unit, int damage)
+        {
+            Unit = unit;
+            Damage = damage;
+        }
+    }
+
+    public class UnitDiesEventargs : EventArgs
+    {
+        public Unit Unit { get; }
+
+        public UnitDiesEventargs(Unit unit)
+        {
+            Unit = unit;
+        }
+    }
+
     public class HeroUnitDiedEventArgs : EventArgs
     {
         public Player Player { get; }

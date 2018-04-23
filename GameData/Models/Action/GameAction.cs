@@ -1,4 +1,5 @@
 ﻿using System;
+using GameData.Controllers.Table;
 using GameData.Enums;
 using GameData.Models.ActionParameters;
 using GameData.Models.Units;
@@ -18,10 +19,10 @@ namespace GameData.Models.Action
         /// <summary>
         /// Action 
         /// </summary>
-        public Action<TableCondition,object,Unit,int> Action { get; }
+        public Action<InActionTableController,object,Unit,int> Action { get; }
 
         public GameAction(string name, int id,string description, ActionParameterType parameterType,
-            Action<TableCondition, object, Unit, int> action)
+            Action<InActionTableController, object, Unit, int> action)
         {
             Name = name;
             ID = id;

@@ -1,4 +1,5 @@
-﻿using GameData.Models.Action;
+﻿using System.CodeDom;
+using GameData.Models.Action;
 using GameData.Models.Cards;
 
 namespace GameData.Models.Units
@@ -14,6 +15,8 @@ namespace GameData.Models.Units
         public byte AttackPriority { set; get; }
 
         public bool CanAttack { set; get; }
+
+        public Player Player { set; get; }
 
         public GameActionInfo BattleCryActionInfo { set; get; }
 

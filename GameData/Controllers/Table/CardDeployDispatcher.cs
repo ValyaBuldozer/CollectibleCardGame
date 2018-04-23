@@ -7,24 +7,35 @@ using GameData.Controllers.Data;
 using GameData.Controllers.Global;
 using GameData.Models;
 using GameData.Models.Cards;
+using GameData.Models.Units;
 
 namespace GameData.Controllers.Table
 {
-    public class CardDeployDispatcher
+    public interface ICardDeployDispatcher
+    {
+        bool CardDeployRequest(Card card, Player sender,Unit actionTarget);
+        void DeployCard(UnitCard card, Player sender,Unit actionTarget);
+        void DeployCard(SpellCard card, Player sender,Unit actionTarget);
+    }
+
+    public class CardDeployDispatcher : ICardDeployDispatcher
     {
         private readonly TableCondition _tableCondition;
-        private readonly IDeckController _deckController;
         private readonly IPlayerTurnDispatcher _playerTurnDispatcher;
+        private readonly IGameActionController _gameActionController;
+        private readonly IUnitDispatcher _unitDispatcher;
 
-        public CardDeployDispatcher(TableCondition tableCondition, IDeckController deckController,
-            IPlayerTurnDispatcher playerTurnDispatcher)
+        public CardDeployDispatcher(TableCondition tableCondition,
+            IPlayerTurnDispatcher playerTurnDispatcher, IGameActionController gameActionController,
+            IUnitDispatcher unitDispatcher)
         {
             _tableCondition = tableCondition;
-            _deckController = deckController;
             _playerTurnDispatcher = playerTurnDispatcher;
+            _gameActionController = gameActionController;
+            _unitDispatcher = unitDispatcher;
         }
 
-        public bool CardDeployRequest(Card card, Player sender)
+        public bool CardDeployRequest(Card card, Player sender,Unit actionTarget)
         {
             //todo : сообщение об ошибках
             if(!_tableCondition.Players.Contains(sender))
@@ -42,29 +53,30 @@ namespace GameData.Controllers.Table
             switch (card.GetType().Name)
             {
                 case nameof(UnitCard):
-                    DeployCard((UnitCard)card,sender);
+                    DeployCard((UnitCard)card,sender,actionTarget);
                     break;
                 case nameof(SpellCard):
-                    DeployCard((SpellCard)card,sender);
+                    DeployCard((SpellCard)card,sender,actionTarget);
                     break;          
             }
 
             return true;
         }
 
-        public void DeployCard(UnitCard card,Player sender)
+        public void DeployCard(UnitCard card,Player sender,Unit actionTarget)
         {
+            if(!_unitDispatcher.CardPlayedSpawn(card,sender,actionTarget))
+                return;
+
             sender.Mana.Current -= card.Cost;
             sender.HandCards.Remove(card);
-
-            
         }
 
-        public void DeployCard(SpellCard card,Player sender)
+        public void DeployCard(SpellCard card,Player sender,Unit actionTarget)
         {
+            _gameActionController.ExecuteAction(card.ActionInfo,sender,actionTarget);
             sender.Mana.Current -= card.Cost;
             sender.HandCards.Remove(card);
-            //todo : выполнение action карты
         }
     }
 }

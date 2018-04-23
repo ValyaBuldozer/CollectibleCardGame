@@ -89,6 +89,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\Data\DeckController.cs" />
+    <Compile Include="Controllers\Data\GameActionController.cs" />
     <Compile Include="Controllers\Data\GameActionRepositoryController.cs" />
     <Compile Include="Controllers\Data\IDataRepositoryController.cs" />
     <Compile Include="Controllers\Global\GameStateController.cs" />
@@ -98,6 +99,7 @@
     <Compile Include="Controllers\PlayerTurn\PlayerTurnValidator.cs" />
     <Compile Include="Controllers\Table\CardDeployDispatcher.cs" />
     <Compile Include="Controllers\Table\CardDrawController.cs" />
+    <Compile Include="Controllers\Table\InActionTableController.cs" />
     <Compile Include="Controllers\Table\UnitDispatcher.cs" />
     <Compile Include="Enums\Enums.cs" />
     <Compile Include="Exceptions\PlayerTurnValidationException.cs" />
