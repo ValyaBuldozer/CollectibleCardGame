@@ -13,14 +13,14 @@ namespace GameData.Controllers.Data
         /// Установить колоды в репозиторий
         /// </summary>
         /// <param name="decksDictionary"></param>
-        void SetDecks(Dictionary<string, Stack<ICard>> decksDictionary);
+        void SetDecks(Dictionary<string, Stack<Card>> decksDictionary);
 
         /// <summary>
         /// Добавить колоду в репозиторий
         /// </summary>
         /// <param name="username">Имя игрока</param>
         /// <param name="deck">Кололда</param>
-        void AddDeck(string username, Stack<ICard> deck);
+        void AddDeck(string username, Stack<Card> deck);
 
         /// <summary>
         /// Перемешать колоду
@@ -38,7 +38,7 @@ namespace GameData.Controllers.Data
         /// </summary>
         /// <param name="username">Ник игрока</param>
         /// <returns>Карта</returns>
-        ICard PopCard(string username);
+        Card PopCard(string username);
 
         /// <summary>
         /// Извлечь несколько карт из колоды игрока
@@ -46,28 +46,28 @@ namespace GameData.Controllers.Data
         /// <param name="username">Имя игрока</param>
         /// <param name="count">Количество карт</param>
         /// <returns>Список карт</returns>
-        List<ICard> PopCards(string username, int count);
+        List<Card> PopCards(string username, int count);
 
         /// <summary>
         /// Посмотреть верхнюю карту колоды
         /// </summary>
         /// <param name="username">Имя игрока</param>
         /// <returns>Карта</returns>
-        ICard PeekCard(string username);
+        Card PeekCard(string username);
 
         /// <summary>
         /// Поместить карту на верх колоды
         /// </summary>
         /// <param name="username">Имя игрока</param>
         /// <param name="card">Карта</param>
-        void PushCard(string username, ICard card);
+        void PushCard(string username, Card card);
 
         /// <summary>
         /// Получить колоду игрока
         /// </summary>
         /// <param name="username">Имя игрока</param>
         /// <returns>Колода</returns>
-        Stack<ICard> GetDeck(string username);
+        Stack<Card> GetDeck(string username);
     }
 
     public class DeckController : IDeckController
@@ -75,12 +75,12 @@ namespace GameData.Controllers.Data
         [Dependency]
         public DeckRepository Repository { set; get; }
 
-        public void SetDecks(Dictionary<string, Stack<ICard>> decksDictionary)
+        public void SetDecks(Dictionary<string, Stack<Card>> decksDictionary)
         {
             Repository.Dictionary = decksDictionary;
         }
 
-        public void AddDeck(string username,Stack<ICard> deck)
+        public void AddDeck(string username,Stack<Card> deck)
         {
             Repository.Dictionary.Add(username,deck);
         }
@@ -89,7 +89,7 @@ namespace GameData.Controllers.Data
         {
             var stack = GetDeck(username);
             Random rnd = new Random();
-            stack = new Stack<ICard>(stack.OrderBy(x => rnd.Next()));
+            stack = new Stack<Card>(stack.OrderBy(x => rnd.Next()));
             Repository.Dictionary.Remove(username);
             Repository.Dictionary.Add(username,stack);
         }
@@ -100,17 +100,17 @@ namespace GameData.Controllers.Data
         }
 
 
-        public ICard PopCard(string username)
+        public Card PopCard(string username)
         {
             var deck = GetDeck(username);
 
             return deck.Count != 0 ? deck.Pop() : null;
         }
 
-        public List<ICard> PopCards(string username, int count)
+        public List<Card> PopCards(string username, int count)
         {
             var deck = GetDeck(username);
-            var retlist = new List<ICard>();
+            var retlist = new List<Card>();
 
             for (int i = 0; i <= count; i++)
             {
@@ -123,17 +123,17 @@ namespace GameData.Controllers.Data
             return retlist;
         }
 
-        public ICard PeekCard(string username)
+        public Card PeekCard(string username)
         {
             return GetDeck(username).Peek();
         }
 
-        public void PushCard(string username, ICard card)
+        public void PushCard(string username, Card card)
         {
             GetDeck(username).Push(card);
         }
 
-        public Stack<ICard> GetDeck(string username)
+        public Stack<Card> GetDeck(string username)
         { 
             if (Repository.Dictionary.TryGetValue(username, out var stack))
                 return stack;

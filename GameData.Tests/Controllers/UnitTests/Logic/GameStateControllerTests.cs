@@ -22,7 +22,7 @@ namespace GameData.Tests.Controllers.UnitTests.Logic
             TestCards testCards = new TestCards();
             TableCondition tableCondition = new TableCondition();
 
-            var firstPLayerDeck = new Stack<ICard>();
+            var firstPLayerDeck = new Stack<Card>();
             firstPLayerDeck.Push(new UnitCard()
             {
                 Name = "testCard1",
@@ -33,12 +33,12 @@ namespace GameData.Tests.Controllers.UnitTests.Logic
                 Name = "spellCard1",
                 Description = "Test"
             });
-            var secondPlayerDeck = new System.Collections.Generic.Stack<ICard>(firstPLayerDeck);
+            var secondPlayerDeck = new System.Collections.Generic.Stack<Card>(firstPLayerDeck);
 
             var deckControllerMock = new Mock<IDeckController>();
             deckControllerMock.Setup(mock => mock.AddDeck("ping", null));
-            deckControllerMock.Setup(mock => mock.PopCards("firstPlayer", 4)).Returns(new List<ICard>());
-            deckControllerMock.Setup(mock => mock.PopCards("secondPlayer", 4)).Returns(new List<ICard>());
+            deckControllerMock.Setup(mock => mock.PopCards("firstPlayer", 4)).Returns(new List<Card>());
+            deckControllerMock.Setup(mock => mock.PopCards("secondPlayer", 4)).Returns(new List<Card>());
 
             var playerTurnDispatcherMock = new Mock<IPlayerTurnDispatcher>();
             playerTurnDispatcherMock.Setup(mock => mock.Start(It.IsAny<double>()));
@@ -58,7 +58,7 @@ namespace GameData.Tests.Controllers.UnitTests.Logic
                 p => p.Username == "secondPlayer");
 
             playerTurnDispatcherMock.Verify(mock=>mock.Start(It.IsAny<double>()),Times.Once);
-            deckControllerMock.Verify(foo=>foo.AddDeck(It.IsAny<string>(),It.IsAny<Stack<ICard>>()),Times.AtLeastOnce);
+            deckControllerMock.Verify(foo=>foo.AddDeck(It.IsAny<string>(),It.IsAny<Stack<Card>>()),Times.AtLeastOnce);
             deckControllerMock.Verify(mock=>mock.PopCards("firstPlayer", 4),Times.Once);
             deckControllerMock.Verify(mock=>mock.PopCards("secondPlayer", 4),Times.Once);
 

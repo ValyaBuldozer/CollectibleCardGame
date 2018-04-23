@@ -8,18 +8,18 @@ using GameData.Models;
 
 namespace GameData.Controllers.Table
 {
-    public interface IDealCardsDispatcher
+    public interface ICardDrawController
     {
         void DealCardsToPlayer(string username, int count);
         void DealCardsToPlayer(Player player, int count);
     }
 
-    public class DealCardsDispatcher
+    public class CardDrawController : ICardDrawController
     {
         private readonly TableCondition _tableCondition;
         private readonly IDeckController _deckController;
 
-        public DealCardsDispatcher(TableCondition tableCondition, IDeckController deckController)
+        public CardDrawController(TableCondition tableCondition, IDeckController deckController)
         {
             _tableCondition = tableCondition;
             _deckController = deckController;

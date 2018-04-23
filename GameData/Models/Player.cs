@@ -17,7 +17,7 @@ namespace GameData.Models
 
         public int DeckCardsCount { set; get; }
 
-        public List<ICard> HandCards { set; get; }
+        public List<Card> HandCards { set; get; }
 
         public List<Unit> TableUnits { set; get; }
 
@@ -26,7 +26,7 @@ namespace GameData.Models
         public Player(UnitCard hero)
         {
             HeroUnit = new HeroUnit(this,hero);
-            HandCards = new List<ICard>();
+            HandCards = new List<Card>();
             TableUnits = new List<Unit>();
             Mana = new PlayerMana();
         }

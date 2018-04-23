@@ -21,7 +21,7 @@ namespace GameData.Tests.Controllers.UnitTests.Logic
         public void StartTest()
         {
             var tableCondition = new TestTableCondition().GetFirstCondition;
-            var dealCardsDispather = new Mock<IDealCardsDispatcher>();
+            var dealCardsDispather = new Mock<ICardDrawController>();
             dealCardsDispather.Setup(mock => mock.DealCardsToPlayer(It.IsAny<Player>(), It.IsAny<int>()));
             PlayerTurnDispatcher playerTurnDispatcher = new PlayerTurnDispatcher
                 (tableCondition,dealCardsDispather.Object);
@@ -38,7 +38,7 @@ namespace GameData.Tests.Controllers.UnitTests.Logic
         public void NextPlayerTest()
         {
             var tableCondition = new TestTableCondition().GetFirstCondition;
-            var dealCardsDispather = new Mock<IDealCardsDispatcher>();
+            var dealCardsDispather = new Mock<ICardDrawController>();
             dealCardsDispather.Setup(mock => mock.DealCardsToPlayer(It.IsAny<Player>(), It.IsAny<int>()));
             PlayerTurnDispatcher playerTurnDispatcher = new PlayerTurnDispatcher(
                 tableCondition,dealCardsDispather.Object);

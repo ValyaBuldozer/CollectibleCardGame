@@ -13,6 +13,7 @@ namespace GameData.Controllers.Global
 {
     public interface IPlayerTurnDispatcher
     {
+        Player CurrentPlayer { get; }
         void NextPlayer();
         void Start(double interval);
         void Stop();
@@ -22,7 +23,7 @@ namespace GameData.Controllers.Global
     {
         private readonly TableCondition _tableCondition;
         private readonly CyclicQueue<Player> _playersCyclicQueue;
-        private readonly IDealCardsDispatcher _cardsDispatcher;
+        private readonly ICardDrawController _cardsDispatcher;
 
         public Timer Timer { set; get; }
 
@@ -30,7 +31,7 @@ namespace GameData.Controllers.Global
 
         public event EventHandler<PlayerTurnStartEventArgs> TurnStart; 
 
-        public PlayerTurnDispatcher(TableCondition tableCondition,IDealCardsDispatcher cardsDispatcher)
+        public PlayerTurnDispatcher(TableCondition tableCondition,ICardDrawController cardsDispatcher)
         {
             _tableCondition = tableCondition;
             _cardsDispatcher = cardsDispatcher;

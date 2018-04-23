@@ -1,29 +1,34 @@
 ﻿using System;
+using GameData.Controllers.Table;
 using GameData.Enums;
 using GameData.Models.ActionParameters;
+using GameData.Models.Units;
 
 namespace GameData.Models.Action
 {
     public class GameAction
     {
+        public int ID { get; }
+
         public string Name { get; }
 
-        public int ID { get; }
+        public string Description { get; }
 
         public ActionParameterType ParameterType { get; }
 
-        public ActionType Type { get; }
+        /// <summary>
+        /// Action 
+        /// </summary>
+        public Action<InActionTableController,object,Unit,int> Action { get; }
 
-        public Action<TableCondition,object,object,IActionParameter> Action { get; }
-
-        public GameAction(string name, int id, ActionParameterType parameterType, ActionType actionType,
-            Action<TableCondition, object, object, IActionParameter> action)
+        public GameAction(string name, int id,string description, ActionParameterType parameterType,
+            Action<InActionTableController, object, Unit, int> action)
         {
             Name = name;
             ID = id;
             ParameterType = parameterType;
-            Type = actionType;
             Action = action;
+            Description = description;
         }
     }
 }
