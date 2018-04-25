@@ -230,7 +230,7 @@ namespace BaseNetworkArchitecture.Tests
             System.Threading.Thread.Sleep(50);
             nc2.StartReadMessages();
             nc2.MessageRecievedEvent += Nc2_MessageRecievedEvent;
-            serv.
+          
             nc1.SendMessage(new NetworkMessage("test"));
             
             //NetworkMessage mes =nc2.ReadMessage();

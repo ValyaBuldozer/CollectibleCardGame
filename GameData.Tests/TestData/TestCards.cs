@@ -13,6 +13,9 @@ namespace GameData.Tests.TestData
 
         public UnitCard SecondCard { set; get; }
 
+        public UnitCard AttackCard { set; get; }
+        public UnitCard DefendCard { set; get; }
+
         public TestCards()
         {
             FirstCard = new UnitCard()
@@ -32,6 +35,26 @@ namespace GameData.Tests.TestData
                 BaseHP = 40,
                 AttackPriority = 1,
                 BaseAttack = 0,
+                Cost = 0,
+                Description = "Test"
+            };
+            AttackCard = new UnitCard()
+            {
+                ID = 3,
+                Name = "test3",
+                BaseHP = 10,
+                AttackPriority = 1,
+                BaseAttack =10,
+                Cost = 0,
+                Description = "Test"
+            };
+            DefendCard = new UnitCard()
+            {
+                ID = 4,
+                Name = "test4",
+                BaseHP = 15,
+                AttackPriority = 1,
+                BaseAttack = 5,
                 Cost = 0,
                 Description = "Test"
             };
