@@ -149,6 +149,11 @@
     <Compile Include="Network\Controllers\MessageHandlers\GameRequestMessageHandler.cs" />
     <Compile Include="Network\Controllers\MessageHandlers\LogInMessageHandler.cs" />
     <Compile Include="Network\Controllers\MessageHandlers\RegistrationMessageHandler.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <!--<Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -329,6 +334,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -395,6 +401,15 @@
       <Project>{44cc6790-5c79-4002-9aff-fd688d6a08ba}</Project>
       <Name>GameData</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\CardsBacks\cardbackSouth220x410.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\CardsBacks\cardbackDarkside220х410.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\CardsBacks\cardbackNorth220х410.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
