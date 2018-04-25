@@ -11,6 +11,10 @@ namespace BaseNetworkArchitecture.Tests
     public class TcpServerTests
     {
         private bool _clientConnect;
+
+        /// <summary>
+        /// Подлключение одного (через event)
+        /// </summary>
         [TestMethod]
         public void IS_TestClientConnect()
         {
@@ -31,6 +35,9 @@ namespace BaseNetworkArchitecture.Tests
 
         }
 
+        /// <summary>
+        /// Подключение одного (через список клиентов)
+        /// </summary>
         [TestMethod]
         public void IS_TestClientConnectList()
         {
@@ -52,6 +59,9 @@ namespace BaseNetworkArchitecture.Tests
 
         }
 
+        /// <summary>
+        /// Подключение нескольких
+        /// </summary>
         [TestMethod]
         public void IS_TestSeveralClientsConnectList() //работает через раз
         {
@@ -79,6 +89,9 @@ namespace BaseNetworkArchitecture.Tests
 
         }
 
+        /// <summary>
+        /// Подключение и разрыв соединения (один пользователь)
+        /// </summary>
         [TestMethod]
         public void IS_TestClientDisconnect()
         {
@@ -102,6 +115,9 @@ namespace BaseNetworkArchitecture.Tests
 
         }
 
+        /// <summary>
+        /// Подлючение и разрыв соединения (несколько пользователей)
+        /// </summary>
         [TestMethod]
         public void IS_TestSeveralClientsDisconnect()
         {
@@ -133,6 +149,9 @@ namespace BaseNetworkArchitecture.Tests
 
         }
 
+        /// <summary>
+        /// Старт сервера, подключение одного клиента, затем остановка сервера
+        /// </summary>
         [TestMethod]
         public void IS_TestServerStop_OneClient() //
         {
@@ -157,6 +176,9 @@ namespace BaseNetworkArchitecture.Tests
 
         }
 
+        /// <summary>
+        /// Старт сервера, подключение несколькиз клиентов, затем остановка сервера
+        /// </summary>
         [TestMethod]
         public void IS_TestServerStop_SeveralClients() //
         {
