@@ -33,10 +33,13 @@ namespace GameData.Tests.Controllers.UnitTests.Logic
             dispatcher.CardPlayedSpawn(cards.SecondCard, p1, null);
             //assert
             actiionMock.Verify(mock => mock.ExecuteAction(It.IsAny<GameActionInfo>(), p1, null));
+            Assert.AreEqual(p1.TableUnits.Count, 1);
+            Assert.AreEqual(p1.TableUnits[0].HealthPoint.Base,40);
+            Assert.AreEqual(p1.TableUnits[0].Attack, 0);
         }
 
         [TestMethod]
-        public void CardPlayedGoToDeckTest()
+        public void CardPlayedGoToTableTest()
         {
             //arrange
             TestCards cards = new TestCards();
@@ -53,7 +56,7 @@ namespace GameData.Tests.Controllers.UnitTests.Logic
             //assert
             actiionMock.Verify(mock => mock.ExecuteAction(It.IsAny<GameActionInfo>(), p1, null));
 
-            //Assert.AreEqual(p1.DeckCardsCount, 1);  //почему с декой не работает? ====> туда походу ничего никогда не заносится
+            
             Assert.AreEqual(p1.TableUnits.Count, 1);
 
         }
@@ -77,12 +80,12 @@ namespace GameData.Tests.Controllers.UnitTests.Logic
             //assert
             actiionMock.Verify(mock => mock.ExecuteAction(It.IsAny<GameActionInfo>(), p1, null));
             Assert.AreEqual(p1.TableUnits.Count, 0);
-            Assert.AreEqual(p1.DeckCardsCount, 0); //он даже при розыгрыше карты равен 0
+          
 
         }
 
         [TestMethod]
-        public void CardSpawnTest()
+        public void SpawnTest() 
         {
             //arrange
             TestCards cards = new TestCards();
@@ -90,17 +93,17 @@ namespace GameData.Tests.Controllers.UnitTests.Logic
 
             Player p1 = new Player(cards.FirstCard);
 
-            var actiionMock = new Mock<IGameActionController>();
-            actiionMock.Setup(mock => mock.ExecuteAction(new GameActionInfo(), null, null));
+          
+           
             //act
-            UnitDispatcher dispatcher = new UnitDispatcher(actiionMock.Object);
+            UnitDispatcher dispatcher = new UnitDispatcher(null);
             dispatcher.Spawn(cards.SecondCard, p1);
 
             //assert
-            actiionMock.Verify(mock => mock.ExecuteAction(It.IsAny<GameActionInfo>(), p1, null)); //не работает, может 
-                                                                                                  //потому что в ExecuteAction три входных, а в спавне всего два
+            
             Assert.AreEqual(p1.TableUnits.Count, 1);
-
+            Assert.AreEqual(p1.TableUnits[0].HealthPoint.Base, 40);
+            Assert.AreEqual(p1.TableUnits[0].Attack, 0);
 
         }
 
