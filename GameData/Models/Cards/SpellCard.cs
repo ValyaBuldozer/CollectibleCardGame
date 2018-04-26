@@ -1,11 +1,10 @@
 ﻿using GameData.Enums;
+using GameData.Models.Action;
 
 namespace GameData.Models.Cards
 {
     public class SpellCard : Card
     {
-        public CardAction.CardAction OnCardPlayedAction { set; get; }
-
-        public SpellTargetType TargetType { set; get; }
+        public CardActionInfo ActionInfo { set; get; }
     }
 }

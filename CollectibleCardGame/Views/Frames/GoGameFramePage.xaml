@@ -48,7 +48,7 @@
                 <ColumnDefinition  Width="3*"/>
                 <ColumnDefinition  Width="*"/>
             </Grid.ColumnDefinitions>
-            <Image Grid.Column="1" Source="../../Images/battle.jpg" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="2" />
+            <Image Grid.Column="1" Source="../../Images/mainBattle.jpg"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="2" />
         </Grid>
         <Grid Grid.Row="3">
             <Grid.ColumnDefinitions>

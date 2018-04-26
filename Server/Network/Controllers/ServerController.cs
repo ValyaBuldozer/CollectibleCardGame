@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using BaseNetworkArchitecture.Common;
 using BaseNetworkArchitecture.Server;
 using Server.Controllers;
+using Server.Controllers.Repository;
 using Server.Network.Models;
 using Server.Unity;
 
@@ -31,9 +32,9 @@ namespace Server.Network.Controllers
             UnityKernel.Get<ILogger>().Print("Client connected");
         }
 
-        public void Start()
+        public void Start(IPAddress ipAddress,int port)
         {
-            _server.Start();
+            _server.Start(ipAddress,port);
         }
 
         public void Stop()

@@ -8,9 +8,9 @@ using GameData.Network.Messages;
 
 namespace Server.Network.Controllers.MessageHandlers
 {
-    public class GameStartMessageHandler : IMessageHandler
+    public class GameStartMessageHandler : MessageHandlerBase<GameStartMessage>
     {
-        public IContent Execute(IContent content,object sender)
+        public override IContent Execute(IContent content,object sender)
         {
             throw new NotImplementedException();
         }

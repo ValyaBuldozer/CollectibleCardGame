@@ -83,6 +83,36 @@ namespace CollectibleCardGame.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap cardbackDarkside220х410 {
+            get {
+                object obj = ResourceManager.GetObject("cardbackDarkside220х410", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap cardbackNorth220х410 {
+            get {
+                object obj = ResourceManager.GetObject("cardbackNorth220х410", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap cardbackSouth220x410 {
+            get {
+                object obj = ResourceManager.GetObject("cardbackSouth220x410", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap cards {
             get {
                 object obj = ResourceManager.GetObject("cards", resourceCulture);
@@ -116,6 +146,16 @@ namespace CollectibleCardGame.Properties {
         internal static System.Drawing.Bitmap info {
             get {
                 object obj = ResourceManager.GetObject("info", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap mainBattle {
+            get {
+                object obj = ResourceManager.GetObject("mainBattle", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

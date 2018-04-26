@@ -6,19 +6,24 @@ using System.Text;
 using System.Threading.Tasks;
 using BaseNetworkArchitecture.Common;
 using BaseNetworkArchitecture.Server;
+using GameData.Network;
+using GameData.Network.Messages;
 using Server.Controllers;
+using Server.Controllers.Repository;
 using Server.Database;
 using Server.Models;
 using Server.Network.Controllers;
 using Server.Network.Controllers.MessageHandlers;
 using Server.Repositories;
-using Server.Services;
 using Unity;
 using Unity.Lifetime;
 using Unity.Resolution;
 
 namespace Server.Unity
 {
+    /// <summary>
+    /// Server
+    /// </summary>
     public class UnityKernel
     {
         private static UnityContainer _container;
@@ -46,6 +51,12 @@ namespace Server.Unity
 
             //context binding
             _container.RegisterType<IContext, AppDbContext>();
+
+            //messagehandler binding
+            _container.RegisterType<MessageHandlerBase<LogInMessage>, LogInMessageHandler>();
+            _container.RegisterType<MessageHandlerBase<RegistrationMessage>, RegistrationMessageHandler>();
+            _container.RegisterType<MessageHandlerBase<GameStartMessage>, GameStartMessageHandler>();
+            _container.RegisterType<MessageHandlerBase<GameRequestMessage>, GameRequestMessageHandler>();
 
             //repository binding
             _container.RegisterType<UserRepository>();
