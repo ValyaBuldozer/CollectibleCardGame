@@ -9,7 +9,7 @@ namespace GameData.Models.Repository
 {
     public class GameActionRepository
     {
-        public List<GameAction> Collection { get; }
+        public List<GameAction> Collection { get; set; }
 
         public GameActionRepository()
         {

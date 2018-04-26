@@ -63,12 +63,14 @@
   <ItemGroup>
     <Compile Include="Controllers\Integration\Data\DeckControllerTests.cs" />
     <Compile Include="Controllers\Integration\Logic\GameStartTest.cs" />
+    <Compile Include="Controllers\UnitTests\Logic\GameActionTests.cs" />
     <Compile Include="Controllers\UnitTests\Logic\GameStateControllerTests.cs" />
     <Compile Include="Controllers\UnitTests\Logic\PlayerTurnDispatherTest.cs" />
     <Compile Include="Controllers\UnitTests\Logic\UnitDispatcherTests.cs" />
     <Compile Include="Network\Controllers\NetworkMessageConverterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestData\TestCards.cs" />
+    <Compile Include="TestData\TestGameActionRepository.cs" />
     <Compile Include="TestData\TestHeroUnit.cs" />
     <Compile Include="TestData\TestTableCondition.cs" />
   </ItemGroup>
