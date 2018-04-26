@@ -1,19 +1,22 @@
 ﻿using System.Collections.Generic;
+using GameData.Models.Action;
 
 namespace GameData.Models.Cards
 {
     public class UnitCard : Card
     {
-        public int Attack { set; get; }
+        public int BaseHP { set; get; }
 
-        public int HP { set; get; }
+        public int BaseAttack { set; get; }
 
-        public List<CardAction.CardAction> OnCardPlayedActions { set; get; }
+        public byte AttackPriority { set; get; }
 
-        public CardAction.CardAction OnUnitDiesAction { set; get; }
+        public CardActionInfo AttackActionInfo { set; get; }
 
-        public CardAction.CardAction OnUnitAttacksAction { set; get; }
+        public CardActionInfo DamageRecievedActionInfo { set; get; }
 
-        public CardAction.CardAction OnUnitWasAttackedAction { set; get; }
+        public CardActionInfo BattleCryActionInfo { set; get; }
+
+        public CardActionInfo DeathRattleActionInfo { set; get; }
     }
 }

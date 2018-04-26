@@ -15,6 +15,9 @@ namespace BaseNetworkArchitecture.Tests
     {
 
         #region 1
+        /// <summary>
+        /// Подключение к TcpListener
+        /// </summary>
         [TestMethod]
         public void INwC_Connect() 
         {
@@ -38,6 +41,9 @@ namespace BaseNetworkArchitecture.Tests
             Assert.IsTrue(nc.IsConnected);
         }
 
+        /// <summary>
+        /// Подлючение к TcpListener и вызов Disconect
+        /// </summary>
         [TestMethod]
         public void INwC_ConnectDisconnect() 
         {
@@ -62,6 +68,9 @@ namespace BaseNetworkArchitecture.Tests
             Assert.IsFalse(nc.IsConnected);
         }
 
+        /// <summary>
+        /// Подключение к TcpListener и разрыв соединения
+        /// </summary>
         [TestMethod]
         public void INwC_ConnectExtraDisconnect() // екстра дисконект = разрыв соединения
         {
@@ -179,14 +188,15 @@ namespace BaseNetworkArchitecture.Tests
             var client = result.GetAwaiter().GetResult();
             INetworkCommunicator nc2 = new TcpCommunicator(client);
 
-            nc1.StartReadMessages();                            //трасировка тут заглыхает, это вообще работает? 
-            nc2.StartReadMessages();
+            //nc1.StartReadMessages();                            
+            //nc2.StartReadMessages();
 
             
 
-            nc1.SendMessage(message);                            //не понятно
-            nc2.ReadMessage();
-            nc2.SendMessage(message);
+            nc1.SendMessage(message);                           
+            NetworkMessage mes = nc2.ReadMessage();
+            
+            nc2.SendMessage(mes);
             NetworkMessage rezMessage = nc1.ReadMessage();
             //result.Wait();
 

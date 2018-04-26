@@ -11,6 +11,10 @@ namespace BaseNetworkArchitecture.Tests
     public class TcpServerTests
     {
         private bool _clientConnect;
+
+        /// <summary>
+        /// Подлключение одного (через event)
+        /// </summary>
         [TestMethod]
         public void IS_TestClientConnect()
         {
@@ -20,7 +24,7 @@ namespace BaseNetworkArchitecture.Tests
             int port = rnd.Next(8000, 30001);
             IServer serv = new TcpServer();
             serv.ClientConnected += Serv_ClientConnected;
-            serv.Start();
+            serv.Start(IPAddress.Parse("127.0.0.1"), port);
             TcpClient сlient = new TcpClient();
 
             //act
@@ -31,6 +35,9 @@ namespace BaseNetworkArchitecture.Tests
 
         }
 
+        /// <summary>
+        /// Подключение одного (через список клиентов)
+        /// </summary>
         [TestMethod]
         public void IS_TestClientConnectList()
         {
@@ -40,7 +47,7 @@ namespace BaseNetworkArchitecture.Tests
             int port = rnd.Next(8000, 30001);
             IServer serv = new TcpServer();
             serv.ClientConnected += Serv_ClientConnected;
-            serv.Start();
+            serv.Start(IPAddress.Parse("127.0.0.1"), port);
             TcpClient сlient = new TcpClient();
 
 
@@ -52,6 +59,9 @@ namespace BaseNetworkArchitecture.Tests
 
         }
 
+        /// <summary>
+        /// Подключение нескольких
+        /// </summary>
         [TestMethod]
         public void IS_TestSeveralClientsConnectList() //работает через раз
         {
@@ -61,7 +71,7 @@ namespace BaseNetworkArchitecture.Tests
             int port = rnd.Next(8000, 30001);
             IServer serv = new TcpServer();
             serv.ClientConnected += Serv_ClientConnected;
-            serv.Start();
+            serv.Start(IPAddress.Parse("127.0.0.1"), port);
             TcpClient сlient1 = new TcpClient();
             TcpClient сlient2 = new TcpClient();
             TcpClient сlient3 = new TcpClient();
@@ -79,6 +89,9 @@ namespace BaseNetworkArchitecture.Tests
 
         }
 
+        /// <summary>
+        /// Подключение и разрыв соединения (один пользователь)
+        /// </summary>
         [TestMethod]
         public void IS_TestClientDisconnect()
         {
@@ -88,7 +101,7 @@ namespace BaseNetworkArchitecture.Tests
             int port = rnd.Next(8000, 30001);
             IServer serv = new TcpServer();
             serv.ClientConnected += Serv_ClientConnected;
-            serv.Start();
+            serv.Start(IPAddress.Parse("127.0.0.1"), port);
             TcpClient сlient = new TcpClient();
 
             
@@ -102,6 +115,9 @@ namespace BaseNetworkArchitecture.Tests
 
         }
 
+        /// <summary>
+        /// Подлючение и разрыв соединения (несколько пользователей)
+        /// </summary>
         [TestMethod]
         public void IS_TestSeveralClientsDisconnect()
         {
@@ -111,7 +127,7 @@ namespace BaseNetworkArchitecture.Tests
             int port = rnd.Next(8000, 30001);
             IServer serv = new TcpServer();
             serv.ClientConnected += Serv_ClientConnected;
-            serv.Start();
+            serv.Start(IPAddress.Parse("127.0.0.1"), port);
             TcpClient сlient1 = new TcpClient();
             TcpClient сlient2 = new TcpClient();
             TcpClient сlient3 = new TcpClient();
@@ -133,6 +149,9 @@ namespace BaseNetworkArchitecture.Tests
 
         }
 
+        /// <summary>
+        /// Старт сервера, подключение одного клиента, затем остановка сервера
+        /// </summary>
         [TestMethod]
         public void IS_TestServerStop_OneClient() //
         {
@@ -142,7 +161,7 @@ namespace BaseNetworkArchitecture.Tests
             int port = rnd.Next(8000, 30001);
             IServer serv = new TcpServer();
             serv.ClientConnected += Serv_ClientConnected;
-            serv.Start();
+            serv.Start(IPAddress.Parse("127.0.0.1"), port);
             TcpClient сlient = new TcpClient();
             
 
@@ -157,6 +176,9 @@ namespace BaseNetworkArchitecture.Tests
 
         }
 
+        /// <summary>
+        /// Старт сервера, подключение несколькиз клиентов, затем остановка сервера
+        /// </summary>
         [TestMethod]
         public void IS_TestServerStop_SeveralClients() //
         {
@@ -166,7 +188,7 @@ namespace BaseNetworkArchitecture.Tests
             int port = rnd.Next(8000, 30001);
             IServer serv = new TcpServer();
             serv.ClientConnected += Serv_ClientConnected;
-            serv.Start();
+            serv.Start(IPAddress.Parse("127.0.0.1"), port);
             TcpClient сlient1 = new TcpClient();
             TcpClient сlient2 = new TcpClient();
             TcpClient сlient3 = new TcpClient();

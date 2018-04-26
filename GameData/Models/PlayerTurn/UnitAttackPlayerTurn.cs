@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GameData.Models.Units;
 
 namespace GameData.Models.PlayerTurn
 {
     public class UnitAttackPlayerTurn : IPlayerTurn
     {
-        public PlayerInfo Sender { set; get; }
+        public Player Sender { set; get; }
 
         public Unit Unit { set; get; }
 

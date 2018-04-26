@@ -155,11 +155,11 @@ namespace BaseNetworkArchitecture.Common
                 if (Client == null)
                     throw new NullReferenceException();
 
-                var lengthBytes = new byte[6];
-                Client.GetStream().Read(lengthBytes, 0, 6);
+                //var lengthBytes = new byte[6];
+                //Client.GetStream().Read(lengthBytes, 0, 6);
 
-                var msgLength = int.Parse(new NetworkMessage().Encoder.GetString(lengthBytes));
-                var clientState = new ClientState(Client, msgLength);
+                //var msgLength = int.Parse(new NetworkMessage().Encoder.GetString(lengthBytes));
+                var clientState = new ClientState(Client, 6);
 
                 var result = Client.GetStream().BeginRead(clientState.RcvBuffer, 0, clientState.RcvBuffer.Length,
                     ReadCallback, clientState);
@@ -189,19 +189,23 @@ namespace BaseNetworkArchitecture.Common
 
                 if (msgSize > 0)
                 {
-                    recivedNetworkMessage.Content = recivedNetworkMessage.Encoder.GetString(clientState.RcvBuffer);
-                    Logger?.Log("Recieved message from cliet " + recivedNetworkMessage.Content);
+                    int messageLength =
+                        int.Parse(recivedNetworkMessage.Encoder.GetString(clientState.RcvBuffer));
+                    byte[] messageBuffer = new byte[messageLength];
+                    //Logger?.Log("Recieved message from cliet " + recivedNetworkMessage.Content);
+
+                    Client.GetStream().Read(messageBuffer, 0, messageBuffer.Length);
+                    recivedNetworkMessage.Content = recivedNetworkMessage.Encoder.GetString(messageBuffer);
 
                     RunMessageRecievedEvent(new MessageEventArgs
                     {
                         NetworkMessage = recivedNetworkMessage
                     });
 
-                    var lengthBytes = new byte[6];
-                    Client.GetStream().Read(lengthBytes, 0, 6);
+                    //var lengthBytes = new byte[6];
 
-                    var msgLength = int.Parse(recivedNetworkMessage.Encoder.GetString(lengthBytes));
-                    clientState = new ClientState(Client, msgLength);
+                    //var msgLength = int.Parse(recivedNetworkMessage.Encoder.GetString(lengthBytes));
+                    clientState = new ClientState(Client, 6);
 
                     var result = Client.GetStream().BeginRead(clientState.RcvBuffer, 0, clientState.RcvBuffer.Length,
                         ReadCallback, clientState);

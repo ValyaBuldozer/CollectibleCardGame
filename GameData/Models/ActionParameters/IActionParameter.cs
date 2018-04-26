@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GameData.Models
+namespace GameData.Models.ActionParameters
 {
-    public class Unit
+    public interface IActionParameter
     {
+        void ChangeValue(int value);
     }
 }

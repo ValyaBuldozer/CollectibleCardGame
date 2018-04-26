@@ -32,9 +32,9 @@ namespace Server.Network.Controllers
             UnityKernel.Get<ILogger>().Print("Client connected");
         }
 
-        public void Start()
+        public void Start(IPAddress ipAddress,int port)
         {
-            _server.Start();
+            _server.Start(ipAddress,port);
         }
 
         public void Stop()

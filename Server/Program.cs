@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using BaseNetworkArchitecture.Common;
@@ -30,7 +31,7 @@ namespace Server
                     {
                         case "start":
                             //Console.WriteLine("Server starts...");
-                            UnityKernel.Get<ServerController>().Start();
+                            UnityKernel.Get<ServerController>().Start(IPAddress.Parse("127.0.0.1"),8800);
                             //Console.WriteLine("Succes");
                             break;
                         case "stop":
