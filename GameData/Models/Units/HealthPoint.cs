@@ -4,6 +4,7 @@ namespace GameData.Models.Units
 {
     public class HealthPoint
     {
+
         public Unit Unit { private set; get; }
 
         public int Base { set; get; }
@@ -21,6 +22,30 @@ namespace GameData.Models.Units
             Unit = unit;
             Damage = 0;
             Base = Unit.BaseCard.BaseHP;
+        }
+
+        protected bool Equals(HealthPoint other)
+        {
+            return Equals(Unit, other.Unit) && Base == other.Base && Damage == other.Damage;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((HealthPoint) obj);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (Unit != null ? Unit.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ Base;
+                hashCode = (hashCode * 397) ^ Damage;
+                return hashCode;
+            }
         }
 
         private void RunZeroHpEvent()
