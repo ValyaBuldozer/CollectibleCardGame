@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GameData.Enums;
-using GameData.Models.ObserverAction;
+using GameData.Models.Observer;
 using GameData.Models.Units;
 
 namespace GameData.Models
@@ -19,7 +19,7 @@ namespace GameData.Models
         }
     }
 
-    public class GameEndEventArgs : BaseObserverActionEventArgs
+    public class GameEndEventArgs : EventArgs
     {
         public GameEndReason Reason { get; }
 
@@ -88,6 +88,29 @@ namespace GameData.Models
             Message = message;
             IsSystemError = isSystemError;
             Player = player;
+        }
+    }
+
+    public class PlayerManaChanged : EventArgs
+    {
+        public int ManaChange { get; }
+
+        public Player Player { get; }
+
+        public PlayerManaChanged(int manaChange, Player player)
+        {
+            ManaChange = manaChange;
+            Player = player;
+        }
+    }
+
+    public class ObserverActionAddedEventArgs : EventArgs
+    {
+        public ObserverAction Item { get; }
+
+        public ObserverActionAddedEventArgs(ObserverAction item)
+        {
+            Item = item;
         }
     }
 }

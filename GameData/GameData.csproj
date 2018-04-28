@@ -92,6 +92,7 @@
     <Compile Include="Controllers\Data\GameActionController.cs" />
     <Compile Include="Controllers\Data\GameActionRepositoryController.cs" />
     <Compile Include="Controllers\Data\IDataRepositoryController.cs" />
+    <Compile Include="Controllers\Data\ObserverActionRepositoryController.cs" />
     <Compile Include="Controllers\Global\GameStateController.cs" />
     <Compile Include="Controllers\Global\GlobalGameObserver.cs" />
     <Compile Include="Controllers\Global\PlayerTurnDispatcher.cs" />
@@ -111,9 +112,18 @@
     <Compile Include="Models\GameActions\GameAction.cs" />
     <Compile Include="Models\GameActions\GameActionInfo.cs" />
     <Compile Include="Models\EventArgs.cs" />
-    <Compile Include="Models\ObserverAction\BaseObserverActionEventArgs.cs" />
+    <Compile Include="Models\Observer\ErrorObserverAction.cs" />
+    <Compile Include="Models\Observer\GameStartObserverAction.cs" />
+    <Compile Include="Models\Observer\ObserverAction.cs" />
+    <Compile Include="Models\Observer\CardDeployObserverAction.cs" />
+    <Compile Include="Models\Observer\CardDrawObserverAction.cs" />
+    <Compile Include="Models\Observer\GameActionTriggerObserverAction.cs" />
+    <Compile Include="Models\Observer\TurnStartObserverAction.cs" />
+    <Compile Include="Models\Observer\UnitDeathObserverAction.cs" />
+    <Compile Include="Models\Observer\UnitSpawnObserverAction.cs" />
     <Compile Include="Models\PlayerMana.cs" />
     <Compile Include="Models\Repository\CyclicQueue.cs" />
+    <Compile Include="Models\Repository\ObserverActionRepository.cs" />
     <Compile Include="Models\Units\HealthPoint.cs" />
     <Compile Include="Models\Player.cs" />
     <Compile Include="Models\PlayerTurn\CardDeployPlayerTurn.cs" />
