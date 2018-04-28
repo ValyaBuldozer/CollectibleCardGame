@@ -3,11 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GameData.Enums;
 
 namespace GameData.Models.PlayerTurn
 {
-    public class EndPlayerTurn : IPlayerTurn
+    public class EndPlayerTurn : PlayerTurn
     {
-        public Player Sender { set; get; }
+        public EndPlayerTurn(Player sender)
+        {
+            Sender = sender;
+            Type = PlayerTurnType.TurnEnd;
+        }
     }
 }

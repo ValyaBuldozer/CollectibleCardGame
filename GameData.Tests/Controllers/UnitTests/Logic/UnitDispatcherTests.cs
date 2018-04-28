@@ -129,8 +129,8 @@ namespace GameData.Tests.Controllers.UnitTests.Logic
             //assert
             actiionMock.Verify(mock => mock.ExecuteAction(It.IsAny<GameActionInfo>(), p1, null));
             actiionMock.Verify(mock => mock.ExecuteAction(It.IsAny<GameActionInfo>(), p2, null));
-            Assert.AreEqual(p1.TableUnits[0].HealthPoint,5);
-            Assert.AreEqual(p2.TableUnits[0].HealthPoint, 5);
+            Assert.AreEqual(p1.TableUnits[0].HealthPoint.GetResult,5);
+            Assert.AreEqual(p2.TableUnits[0].HealthPoint.GetResult, 5);
             
 
 

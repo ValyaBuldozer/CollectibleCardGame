@@ -34,6 +34,43 @@ namespace GameData.Models.Units
             HealthPoint = new HealthPoint(this) { Base = BaseCard.BaseHP };
         }
 
+        protected bool Equals(Unit other)
+        {
+            return BaseCard.ID == other.BaseCard.ID && Attack == other.Attack &&
+                   Equals(HealthPoint, other.HealthPoint) && AttackPriority == other.AttackPriority &&
+                   CanAttack == other.CanAttack && Equals(Player, other.Player) &&
+                   Equals(BattleCryActionInfo, other.BattleCryActionInfo) &&
+                   Equals(DeathRattleActionInfo, other.DeathRattleActionInfo) &&
+                   Equals(OnDamageRecievedActionInfo, other.OnDamageRecievedActionInfo) &&
+                   Equals(OnAttackActionInfo, other.OnAttackActionInfo);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((Unit) obj);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (BaseCard != null ? BaseCard.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ Attack;
+                hashCode = (hashCode * 397) ^ (HealthPoint != null ? HealthPoint.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ AttackPriority.GetHashCode();
+                hashCode = (hashCode * 397) ^ CanAttack.GetHashCode();
+                hashCode = (hashCode * 397) ^ (Player != null ? Player.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (BattleCryActionInfo != null ? BattleCryActionInfo.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (DeathRattleActionInfo != null ? DeathRattleActionInfo.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (OnDamageRecievedActionInfo != null ? OnDamageRecievedActionInfo.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (OnAttackActionInfo != null ? OnAttackActionInfo.GetHashCode() : 0);
+                return hashCode;
+            }
+        }
+
         public override string ToString()
         {
             return BaseCard.Name;
