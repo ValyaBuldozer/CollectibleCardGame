@@ -18,25 +18,30 @@ using Moq;
 namespace GameData.Tests.Controllers.UnitTests.Logic
 {
     [TestClass]
-    class GameActionTests
+    public class GameActionTests //тесты вызова екшенов
     {
         [TestMethod]
         public void DamageAllFriendlyUnitsTest() //тест екшена с id=1
         {
             //arrange
             TestCards cards = new TestCards();
-           
+
             //cardDraw
+
+
+            Unit u2 = new Unit(cards.AttackCard);
+            Unit u3 = new Unit(cards.DefendCard);
 
             TableCondition tc = new TableCondition()
             {
                 Players = new List<Player>()
                 {
-                    new Player(null)
+                    new Player(cards.FirstCard)
                     {
                         Username = "Player1"
+
                     },
-                    new Player(null)
+                    new Player(cards.SecondCard)
                     {
                         Username = "Player2"
                     },
@@ -44,17 +49,16 @@ namespace GameData.Tests.Controllers.UnitTests.Logic
 
             };
 
-           Unit u1 = new Unit(cards.SecondCard);
-           Unit u2 = new Unit(cards.AttackCard);
-           Unit u3 = new Unit(cards.DefendCard);
+
 
             var actiionMock = new Mock<InActionTableController>();
             actiionMock.Setup(mock => mock.GetTableCondition).Returns(tc);
 
-            GameActionController gaC = new GameActionController(new GameActionRepositoryController(new TestGameActionRepository()),
-                    actiionMock.Object);
-           
-            gaC.GetGameActionInfo(new CardActionInfo()
+            GameActionController gaC = new GameActionController(
+                new GameActionRepositoryController(new TestGameActionRepository()),
+                actiionMock.Object);
+
+            var result = gaC.GetGameActionInfo(new CardActionInfo()
             {
                 ActionId = 1,
                 ParameterValue = 1,
@@ -62,23 +66,370 @@ namespace GameData.Tests.Controllers.UnitTests.Logic
             });
 
 
-            tc.Players[1].TableUnits.Add(u1);
+            Assert.AreEqual(result.Action.Name, "DamageAllFriendlyUnits");
+            Assert.AreEqual(result.Action.ID, 1);
+            Assert.AreEqual(result.Action.Description, "test");
+            Assert.AreEqual(result.Action.ParameterType, ActionParameterType.Damage);
 
-            //var actiionMock = new Mock<IGameActionController>();
-            //actiionMock.Setup(mock => mock.ExecuteAction(new GameActionInfo(), null, null));
-
-
-            //act
-            //UnitDispatcher dispatcher = new UnitDispatcher(actiionMock.Object);
-
-            //dispatcher.CardPlayedSpawn(cards.SecondCard, p1, null);
-            //dispatcher.CardPlayedSpawn(cards.AttackCard, p1, null);
-            //dispatcher.CardPlayedSpawn(cards.DefendCard, p1, null);
-
-            //dispatcher.GetUnit(cards.SecondCard);
-
-            //assert
 
         }
+
+        [TestMethod]
+        public void BuffDamageSpellCardsTest() //тест екшена с id=2
+        {
+            //arrange
+            TestCards cards = new TestCards();
+
+
+
+
+            Unit u2 = new Unit(cards.AttackCard);
+            Unit u3 = new Unit(cards.DefendCard);
+
+            TableCondition tc = new TableCondition()
+            {
+                Players = new List<Player>()
+                {
+                    new Player(cards.FirstCard)
+                    {
+                        Username = "Player1"
+
+                    },
+                    new Player(cards.SecondCard)
+                    {
+                        Username = "Player2"
+                    },
+                }
+
+            };
+
+
+
+            var actiionMock = new Mock<InActionTableController>();
+            actiionMock.Setup(mock => mock.GetTableCondition).Returns(tc);
+
+            GameActionController gaC = new GameActionController(
+                new GameActionRepositoryController(new TestGameActionRepository()),
+                actiionMock.Object);
+
+            var result = gaC.GetGameActionInfo(new CardActionInfo()
+            {
+                ActionId = 2,
+                ParameterValue = 1,
+                ParameterType = ActionParameterType.Buff
+            });
+
+            Assert.AreEqual(result.Action.Name, "BuffDamageSpellCards");
+            Assert.AreEqual(result.Action.ID, 2);
+            Assert.AreEqual(result.Action.Description, "test");
+            Assert.AreEqual(result.Action.ParameterType, ActionParameterType.Buff);
+        }
+
+        [TestMethod]
+        public void DamageAllEnemyUnitsTest() //тест екшена с id=3
+        {
+            //arrange
+            TestCards cards = new TestCards();
+
+
+
+
+            Unit u2 = new Unit(cards.AttackCard);
+            Unit u3 = new Unit(cards.DefendCard);
+
+            TableCondition tc = new TableCondition()
+            {
+                Players = new List<Player>()
+                {
+                    new Player(cards.FirstCard)
+                    {
+                        Username = "Player1"
+
+                    },
+                    new Player(cards.SecondCard)
+                    {
+                        Username = "Player2"
+                    },
+                }
+
+            };
+
+
+
+            var actiionMock = new Mock<InActionTableController>();
+            actiionMock.Setup(mock => mock.GetTableCondition).Returns(tc);
+
+            GameActionController gaC = new GameActionController(
+                new GameActionRepositoryController(new TestGameActionRepository()),
+                actiionMock.Object);
+
+            var result = gaC.GetGameActionInfo(new CardActionInfo()
+            {
+                ActionId = 3,
+                ParameterValue = 1,
+                ParameterType = ActionParameterType.Damage
+            });
+
+            Assert.AreEqual(result.Action.Name, "DamageAllEnemyUnits");
+            Assert.AreEqual(result.Action.ID, 3);
+            Assert.AreEqual(result.Action.Description, "test");
+            Assert.AreEqual(result.Action.ParameterType, ActionParameterType.Damage);
+        }
+
+        [TestMethod]
+        public void HealAllFriendlyUnitsTest() //тест екшена с id=4
+        {
+            //arrange
+            TestCards cards = new TestCards();
+
+
+
+
+            Unit u2 = new Unit(cards.AttackCard);
+            Unit u3 = new Unit(cards.DefendCard);
+
+            TableCondition tc = new TableCondition()
+            {
+                Players = new List<Player>()
+                {
+                    new Player(cards.FirstCard)
+                    {
+                        Username = "Player1"
+
+                    },
+                    new Player(cards.SecondCard)
+                    {
+                        Username = "Player2"
+                    },
+                }
+
+            };
+
+
+
+            var actiionMock = new Mock<InActionTableController>();
+            actiionMock.Setup(mock => mock.GetTableCondition).Returns(tc);
+
+            GameActionController gaC = new GameActionController(
+                new GameActionRepositoryController(new TestGameActionRepository()),
+                actiionMock.Object);
+
+            var result = gaC.GetGameActionInfo(new CardActionInfo()
+            {
+                ActionId = 4,
+                ParameterValue = 1,
+                ParameterType = ActionParameterType.Heal
+            });
+
+            Assert.AreEqual(result.Action.Name, "HealAllFriendlyUnits");
+            Assert.AreEqual(result.Action.ID, 4);
+            Assert.AreEqual(result.Action.Description, "test");
+            Assert.AreEqual(result.Action.ParameterType, ActionParameterType.Heal);
+        }
+
+        [TestMethod]
+        public void DamageAllUnitsTest() //тест екшена с id=5
+        {
+            //arrange
+            TestCards cards = new TestCards();
+
+
+
+
+            Unit u2 = new Unit(cards.AttackCard);
+            Unit u3 = new Unit(cards.DefendCard);
+
+            TableCondition tc = new TableCondition()
+            {
+                Players = new List<Player>()
+                {
+                    new Player(cards.FirstCard)
+                    {
+                        Username = "Player1"
+
+                    },
+                    new Player(cards.SecondCard)
+                    {
+                        Username = "Player2"
+                    },
+                }
+
+            };
+
+
+
+            var actiionMock = new Mock<InActionTableController>();
+            actiionMock.Setup(mock => mock.GetTableCondition).Returns(tc);
+
+            GameActionController gaC = new GameActionController(
+                new GameActionRepositoryController(new TestGameActionRepository()),
+                actiionMock.Object);
+
+            var result = gaC.GetGameActionInfo(new CardActionInfo()
+            {
+                ActionId = 5,
+                ParameterValue = 1,
+                ParameterType = ActionParameterType.Damage
+            });
+
+            Assert.AreEqual(result.Action.Name, "DamageAllUnits");
+            Assert.AreEqual(result.Action.ID, 5);
+            Assert.AreEqual(result.Action.Description, "test");
+            Assert.AreEqual(result.Action.ParameterType, ActionParameterType.Damage);
+        }
+
+        [TestMethod]
+        public void BuffAttackFriendlyUnitsTest() //тест екшена с id=6
+        {
+            //arrange
+            TestCards cards = new TestCards();
+
+
+
+
+            Unit u2 = new Unit(cards.AttackCard);
+            Unit u3 = new Unit(cards.DefendCard);
+
+            TableCondition tc = new TableCondition()
+            {
+                Players = new List<Player>()
+                {
+                    new Player(cards.FirstCard)
+                    {
+                        Username = "Player1"
+
+                    },
+                    new Player(cards.SecondCard)
+                    {
+                        Username = "Player2"
+                    },
+                }
+
+            };
+
+
+
+            var actiionMock = new Mock<InActionTableController>();
+            actiionMock.Setup(mock => mock.GetTableCondition).Returns(tc);
+
+            GameActionController gaC = new GameActionController(
+                new GameActionRepositoryController(new TestGameActionRepository()),
+                actiionMock.Object);
+
+            var result = gaC.GetGameActionInfo(new CardActionInfo()
+            {
+                ActionId = 6,
+                ParameterValue = 1,
+                ParameterType = ActionParameterType.Buff
+            });
+
+            Assert.AreEqual(result.Action.Name, "BuffAttackFriendlyUnits");
+            Assert.AreEqual(result.Action.ID, 6);
+            Assert.AreEqual(result.Action.Description, "test");
+            Assert.AreEqual(result.Action.ParameterType, ActionParameterType.Buff);
+        }
+
+        [TestMethod]
+        public void FullBuffFriendlyUnitsTest() //тест екшена с id=7
+        {
+            //arrange
+            TestCards cards = new TestCards();
+
+
+
+
+            Unit u2 = new Unit(cards.AttackCard);
+            Unit u3 = new Unit(cards.DefendCard);
+
+            TableCondition tc = new TableCondition()
+            {
+                Players = new List<Player>()
+                {
+                    new Player(cards.FirstCard)
+                    {
+                        Username = "Player1"
+
+                    },
+                    new Player(cards.SecondCard)
+                    {
+                        Username = "Player2"
+                    },
+                }
+
+            };
+
+
+
+            var actiionMock = new Mock<InActionTableController>();
+            actiionMock.Setup(mock => mock.GetTableCondition).Returns(tc);
+
+            GameActionController gaC = new GameActionController(
+                new GameActionRepositoryController(new TestGameActionRepository()),
+                actiionMock.Object);
+
+            var result = gaC.GetGameActionInfo(new CardActionInfo()
+            {
+                ActionId = 7,
+                ParameterValue = 1,
+                ParameterType = ActionParameterType.Buff
+            });
+
+            Assert.AreEqual(result.Action.Name, "FullBuffFriendlyUnits");
+            Assert.AreEqual(result.Action.ID, 7);
+            Assert.AreEqual(result.Action.Description, "test");
+            Assert.AreEqual(result.Action.ParameterType, ActionParameterType.Buff);
+        }
+
+        [TestMethod]
+        public void DamageRandomEnemyUnitTest() //тест екшена с id=8
+        {
+            //arrange
+            TestCards cards = new TestCards();
+
+
+
+
+            Unit u2 = new Unit(cards.AttackCard);
+            Unit u3 = new Unit(cards.DefendCard);
+
+            TableCondition tc = new TableCondition()
+            {
+                Players = new List<Player>()
+                {
+                    new Player(cards.FirstCard)
+                    {
+                        Username = "Player1"
+
+                    },
+                    new Player(cards.SecondCard)
+                    {
+                        Username = "Player2"
+                    },
+                }
+
+            };
+
+
+
+            var actiionMock = new Mock<InActionTableController>();
+            actiionMock.Setup(mock => mock.GetTableCondition).Returns(tc);
+
+            GameActionController gaC = new GameActionController(
+                new GameActionRepositoryController(new TestGameActionRepository()),
+                actiionMock.Object);
+
+            var result = gaC.GetGameActionInfo(new CardActionInfo()
+            {
+                ActionId = 8,
+                ParameterValue = 1,
+                ParameterType = ActionParameterType.Damage
+            });
+
+            Assert.AreEqual(result.Action.Name, "DamageRandomEnemyUnit");
+            Assert.AreEqual(result.Action.ID, 8);
+            Assert.AreEqual(result.Action.Description, "test");
+            Assert.AreEqual(result.Action.ParameterType, ActionParameterType.Damage);
+        }
+
     }
 }

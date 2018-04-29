@@ -73,6 +73,16 @@ namespace CollectibleCardGame.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap attackSword {
+            get {
+                object obj = ResourceManager.GetObject("attackSword", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap backgroundCard {
             get {
                 object obj = ResourceManager.GetObject("backgroundCard", resourceCulture);
@@ -146,6 +156,26 @@ namespace CollectibleCardGame.Properties {
         internal static System.Drawing.Bitmap darksidePicture {
             get {
                 object obj = ResourceManager.GetObject("darksidePicture", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap goldTexture {
+            get {
+                object obj = ResourceManager.GetObject("goldTexture", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap healthShield {
+            get {
+                object obj = ResourceManager.GetObject("healthShield", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
