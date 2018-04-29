@@ -51,10 +51,10 @@ namespace GameData.Tests.Controllers.UnitTests.Logic
 
 
 
-            var actiionMock = new Mock<InActionTableController>();
+            var actiionMock = new Mock<IActionTableControlller>();
             actiionMock.Setup(mock => mock.GetTableCondition).Returns(tc);
 
-            GameActionController gaC = new GameActionController(
+            IGameActionController gaC = new GameActionController(
                 new GameActionRepositoryController(new TestGameActionRepository()),
                 actiionMock.Object);
 
@@ -108,7 +108,7 @@ namespace GameData.Tests.Controllers.UnitTests.Logic
             var actiionMock = new Mock<InActionTableController>();
             actiionMock.Setup(mock => mock.GetTableCondition).Returns(tc);
 
-            GameActionController gaC = new GameActionController(
+            IGameActionController gaC = new GameActionController(
                 new GameActionRepositoryController(new TestGameActionRepository()),
                 actiionMock.Object);
 
@@ -159,7 +159,7 @@ namespace GameData.Tests.Controllers.UnitTests.Logic
             var actiionMock = new Mock<InActionTableController>();
             actiionMock.Setup(mock => mock.GetTableCondition).Returns(tc);
 
-            GameActionController gaC = new GameActionController(
+            IGameActionController gaC = new GameActionController(
                 new GameActionRepositoryController(new TestGameActionRepository()),
                 actiionMock.Object);
 
@@ -210,7 +210,7 @@ namespace GameData.Tests.Controllers.UnitTests.Logic
             var actiionMock = new Mock<InActionTableController>();
             actiionMock.Setup(mock => mock.GetTableCondition).Returns(tc);
 
-            GameActionController gaC = new GameActionController(
+            IGameActionController gaC = new GameActionController(
                 new GameActionRepositoryController(new TestGameActionRepository()),
                 actiionMock.Object);
 
@@ -261,7 +261,7 @@ namespace GameData.Tests.Controllers.UnitTests.Logic
             var actiionMock = new Mock<InActionTableController>();
             actiionMock.Setup(mock => mock.GetTableCondition).Returns(tc);
 
-            GameActionController gaC = new GameActionController(
+            IGameActionController gaC = new GameActionController(
                 new GameActionRepositoryController(new TestGameActionRepository()),
                 actiionMock.Object);
 
@@ -312,7 +312,7 @@ namespace GameData.Tests.Controllers.UnitTests.Logic
             var actiionMock = new Mock<InActionTableController>();
             actiionMock.Setup(mock => mock.GetTableCondition).Returns(tc);
 
-            GameActionController gaC = new GameActionController(
+            IGameActionController gaC = new GameActionController(
                 new GameActionRepositoryController(new TestGameActionRepository()),
                 actiionMock.Object);
 
@@ -363,7 +363,7 @@ namespace GameData.Tests.Controllers.UnitTests.Logic
             var actiionMock = new Mock<InActionTableController>();
             actiionMock.Setup(mock => mock.GetTableCondition).Returns(tc);
 
-            GameActionController gaC = new GameActionController(
+            IGameActionController gaC = new GameActionController(
                 new GameActionRepositoryController(new TestGameActionRepository()),
                 actiionMock.Object);
 
@@ -414,7 +414,7 @@ namespace GameData.Tests.Controllers.UnitTests.Logic
             var actiionMock = new Mock<InActionTableController>();
             actiionMock.Setup(mock => mock.GetTableCondition).Returns(tc);
 
-            GameActionController gaC = new GameActionController(
+            IGameActionController gaC = new GameActionController(
                 new GameActionRepositoryController(new TestGameActionRepository()),
                 actiionMock.Object);
 
