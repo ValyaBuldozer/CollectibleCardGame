@@ -29,5 +29,7 @@ namespace GameData.Models.Action
             Action = action;
             Description = description;
         }
+
+        public GameAction() { }
     }
 }

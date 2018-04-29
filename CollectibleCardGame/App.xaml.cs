@@ -41,21 +41,21 @@ namespace CollectibleCardGame
             //LogInFramePageShell frame = new LogInFramePageShell() { DataContext = new LogInFramePageShellViewModel() };
 
 
-            // TESTFramePage frame = new TESTFramePage() { DataContext = new GameProccesPageViewModel() };
-            //frame.u1.DataContext = new UnitCardUserControlViewModel() { Name = "Владик", Description = "Я хожу в качалку, но только по воскресеньям... Как же круто!", ImagePath = "/ImagesUnit/testResize210x253.jpg", Cost = 5, Attack = 9, Health = 6, TapeBrush = "#393A3C", TapeBorderBrush = "#CE8239" };
-            //frame.s1.DataContext = new SpellCardUserControlViewModel() { Name = "Град стрел", Description = "Мне показалось, что солнце на секунду пропало...", ImagePath = "/ImagesSpell/SpellGradStrel.jpg", Cost = 6 };
+            TESTFramePage frame = new TESTFramePage() { DataContext = new GameProccesPageViewModel() };
+            frame.u1.DataContext = new UnitCardUserControlViewModel() { Name = "Владик", Description = "Я хожу в качалку, но только по воскресеньям... Как же круто!", ImagePath = "/Images/ImagesUnit/testResize210x253.jpg", Cost = 5, Attack = 9, Health = 6, TapeBrush = "#393A3C", TapeBorderBrush = "#CE8239" };
+            frame.s1.DataContext = new SpellCardUserControlViewModel() { Name = "Град стрел", Description = "Мне показалось, что солнце на секунду пропало...", ImagePath = "/Images/ImagesSpell/SpellGradStrel.jpg", Cost = 6 };
             //frame.mu1.DataContext = new UnitCardUserControlViewModel() { Name = "Владик", Description = "Я хожу в качалку, но только по воскресеньям... Как же круто!", ImagePath = "/ImagesUnit/testResize210x253.jpg", Cost = 5, Attack = 9, Health = 6, TapeBrush = "#393A3C", TapeBorderBrush = "#CE8239" };
 
             //frame.f1.DataContext = new FractionUserControlViewModel() { Name = "Калвария", Description = "Северная фракция", ImagePath = "/Images/northPicture.jpg" };
             //frame.f2.DataContext = new FractionUserControlViewModel() { Name = "Магдебург", Description = "Южная фракцция", ImagePath = "/Images/southPicture.jpg" };
             //frame.f3.DataContext = new FractionUserControlViewModel() { Name = "Чудовища", Description = "Монстры", ImagePath = "/Images/darksidePicture.jpg" };
 
-            // window.MainFrame.Content = frame;
-            //window.Show();
+            window.MainFrame.Content = frame;
+            window.Show();
 
-            UnityKernel.InitializeKernel();
-            UnityKernel.Get<MainWindow>().Show();
-            UnityKernel.Get<IGlobalController>().OnStartup();
+            //UnityKernel.InitializeKernel();
+            //UnityKernel.Get<MainWindow>().Show();
+            //UnityKernel.Get<IGlobalController>().OnStartup();
 
             //MainWindow window = new MainWindow() {ViewModel = new MainWindowViewModel(
             //    new LogInFramePageShell()
