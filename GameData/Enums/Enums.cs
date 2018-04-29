@@ -64,4 +64,26 @@ namespace GameData.Enums
         PlayerSurrender,
         PlayerDisconnected
     }
+
+    public enum PlayerTurnType
+    {
+        CardDeploy,
+        UnitAttack,
+        TurnEnd,
+
+    }
+
+    public enum ObserverActionType
+    {
+        GameStart,
+        CardDeploy,
+        CardDraw,
+        UnitSpawn,
+        UnitDeath,
+        UnitHpChange,
+        PlayerAction,
+        TurnStart,
+        TurnEnd,
+        Error
+    }
 }

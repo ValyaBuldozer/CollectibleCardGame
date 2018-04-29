@@ -28,7 +28,7 @@ namespace Server.Models
             SecondClient = secondClient;
         }
 
-        public IPlayerTurn HandlePlayerTurn(IPlayerTurn playerTurn)
+        public PlayerTurn HandlePlayerTurn(PlayerTurn playerTurn)
         {
             throw new NotImplementedException();
         }

@@ -146,14 +146,14 @@ namespace GameData.Controllers.Table
 
         private void OnUnitDamaged(object sender, UnitRecievedDamageEventArgs e)
         {
-            if(e.Unit.OnDamageRecievedActionInfo.Action != null)
+            if(e.Unit?.OnDamageRecievedActionInfo != null)
                 _actionController.ExecuteAction(e.Unit.OnDamageRecievedActionInfo,
                     e.Unit.Player,null);
         }
 
         private void OnUnitDies(object sender, ZeroHpEventArgs e)
         {
-            if (e.Unit.DeathRattleActionInfo.Action != null)
+            if (e.Unit?.DeathRattleActionInfo != null)
                 _actionController.ExecuteAction(e.Unit.DeathRattleActionInfo,
                     e.Unit.Player, null);
 

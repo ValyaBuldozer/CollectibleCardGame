@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GameData.Models.Cards;
 
-namespace GameData.Models.ActionParameters
+namespace GameData.Models.Observer
 {
-    public interface IActionParameter
+    public class GameStartObserverAction : ObserverAction
     {
-        void ChangeValue(int value);
     }
 }

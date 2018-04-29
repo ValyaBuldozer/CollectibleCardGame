@@ -1,7 +1,6 @@
 ﻿using System;
 using GameData.Controllers.Table;
 using GameData.Enums;
-using GameData.Models.ActionParameters;
 using GameData.Models.Units;
 
 namespace GameData.Models.Action

@@ -15,7 +15,7 @@ namespace GameData.Controllers.Global
     {
         void Start(Stack<Card> firstDeck, string firstUsername, UnitCard firstHero,
             Stack<Card> secondDeck, string secondUsername, UnitCard secondHero);
-
+        event EventHandler<GameEndEventArgs> GameEnd;
     }
 
     public class GameStateController : IGameStateController
