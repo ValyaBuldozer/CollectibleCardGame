@@ -7,6 +7,7 @@ using System.Timers;
 using GameData.Controllers.Data;
 using GameData.Controllers.Table;
 using GameData.Models;
+using GameData.Models.Observer;
 using GameData.Models.Repository;
 
 namespace GameData.Controllers.Global
@@ -17,6 +18,7 @@ namespace GameData.Controllers.Global
         void NextPlayer();
         void Start(double interval);
         void Stop();
+        event EventHandler<TurnStartObserverAction> TurnStart;
     }
 
     public class PlayerTurnDispatcher : IPlayerTurnDispatcher
@@ -29,7 +31,7 @@ namespace GameData.Controllers.Global
 
         public Player CurrentPlayer { private set; get; }
 
-        public event EventHandler<PlayerTurnStartEventArgs> TurnStart; 
+        public event EventHandler<TurnStartObserverAction> TurnStart; 
 
         public PlayerTurnDispatcher(TableCondition tableCondition,ICardDrawController cardsDispatcher)
         {
@@ -51,12 +53,13 @@ namespace GameData.Controllers.Global
         public void NextPlayer()
         {
             CurrentPlayer = _playersCyclicQueue.Dequeue();
+            //todo : настройки
             CurrentPlayer.Mana.Base++;
             CurrentPlayer.Mana.Restore();
 
             _cardsDispatcher.DealCardsToPlayer(CurrentPlayer,1);
 
-            TurnStart?.Invoke(this,new PlayerTurnStartEventArgs(CurrentPlayer));
+            TurnStart?.Invoke(this,new TurnStartObserverAction(CurrentPlayer));
 
             if (Timer.Enabled)
             {

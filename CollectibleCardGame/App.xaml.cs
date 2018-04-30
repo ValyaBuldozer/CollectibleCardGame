@@ -44,7 +44,7 @@ namespace CollectibleCardGame
             TESTFramePage frame = new TESTFramePage() { DataContext = new GameProccesPageViewModel() };
             frame.u1.DataContext = new UnitCardUserControlViewModel() { Name = "Владик", Description = "Я хожу в качалку, но только по воскресеньям... Как же круто!", ImagePath = "/Images/ImagesUnit/testResize210x253.jpg", Cost = 5, Attack = 9, Health = 6, TapeBrush = "#393A3C", TapeBorderBrush = "#CE8239" };
             frame.s1.DataContext = new SpellCardUserControlViewModel() { Name = "Град стрел", Description = "Мне показалось, что солнце на секунду пропало...", ImagePath = "/Images/ImagesSpell/SpellGradStrel.jpg", Cost = 6 };
-            //frame.mu1.DataContext = new UnitCardUserControlViewModel() { Name = "Владик", Description = "Я хожу в качалку, но только по воскресеньям... Как же круто!", ImagePath = "/ImagesUnit/testResize210x253.jpg", Cost = 5, Attack = 9, Health = 6, TapeBrush = "#393A3C", TapeBorderBrush = "#CE8239" };
+            frame.mu1.DataContext = new UnitCardUserControlViewModel() { Name = "Владик", Description = "Я хожу в качалку, но только по воскресеньям... Как же круто!", ImagePath = "/Images/ImagesUnit/testResize210x253.jpg", Cost = 5, Attack = 9, Health = 6, TapeBrush = "#393A3C", TapeBorderBrush = "#CE8239" };
 
             //frame.f1.DataContext = new FractionUserControlViewModel() { Name = "Калвария", Description = "Северная фракция", ImagePath = "/Images/northPicture.jpg" };
             //frame.f2.DataContext = new FractionUserControlViewModel() { Name = "Магдебург", Description = "Южная фракцция", ImagePath = "/Images/southPicture.jpg" };

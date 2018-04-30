@@ -88,7 +88,7 @@ namespace GameData.Tests.TestData
                         }
 
                     })),
-                new GameAction(name:"BuffAttackFriendlyUnits",id:4,description:"test",parameterType:ActionParameterType.Buff,
+                new GameAction(name:"BuffAttackFriendlyUnits",id:6,description:"test",parameterType:ActionParameterType.Buff,
                     action: ((controller, sender, target, parameter) =>
                     {
                         var player = (Player) sender;
@@ -99,7 +99,7 @@ namespace GameData.Tests.TestData
                         }
 
                     })),
-                new GameAction(name:"FullBuffFriendlyUnits",id:4,description:"test",parameterType:ActionParameterType.Buff,
+                new GameAction(name:"FullBuffFriendlyUnits",id:7,description:"test",parameterType:ActionParameterType.Buff,
                     action: ((controller, sender, target, parameter) =>
                     {
                         var player = (Player) sender;
@@ -109,6 +109,29 @@ namespace GameData.Tests.TestData
                             iUnit.Attack += parameter;
                             iUnit.HealthPoint.Base += parameter;
                         }
+
+                    })),
+                new GameAction(name:"DamageRandomEnemyUnit",id:8,description:"test",parameterType:ActionParameterType.Damage,
+                    action: ((controller, sender, target, parameter) =>
+                    {
+                       
+                        var player = (Player) sender;
+                        Player enemyPlayer=null;
+                        foreach (var pplayer in controller.GetTableCondition.Players)
+                        {
+                            if (!Equals(pplayer, player))
+                                enemyPlayer = pplayer;
+
+                        }
+
+                        if (enemyPlayer.TableUnits.Count != 0)
+                        {
+                            var rnd = new Random();
+                            int rndNum = rnd.Next(1, enemyPlayer.TableUnits.Count + 1);
+                            enemyPlayer.TableUnits[rndNum].HealthPoint.RecieveDamage(parameter);
+                        }
+                        
+
 
                     })),
 

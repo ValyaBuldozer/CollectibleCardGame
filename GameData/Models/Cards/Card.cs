@@ -1,6 +1,8 @@
-﻿namespace GameData.Models.Cards
+﻿using GameData.Enums;
+
+namespace GameData.Models.Cards
 {
-    public abstract class Card
+    public abstract class Card : Entity
     {
         public int ID { set; get; }
 
@@ -11,6 +13,11 @@
         public int Cost { set; get; }
 
         public bool CanBePlayedOnEnemyTurn { set; get; }
+
+        protected Card()
+        {
+            EntityType = EntityType.Card;
+        }
 
         protected bool Equals(Card other)
         {
