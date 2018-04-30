@@ -27,11 +27,9 @@ namespace GameData.Controllers.Table
 
         public TableCondition GetTableCondition => _tableCondition;
 
-        public InActionTableController(TableCondition tableCondition, IUnitDispatcher unitDispatcher,
-            ICardDrawController cardDrawController)
+        public InActionTableController(TableCondition tableCondition, ICardDrawController cardDrawController)
         {
             _tableCondition = tableCondition;
-            _unitDispatcher = unitDispatcher;
             _cardDrawController = cardDrawController;
         }
 

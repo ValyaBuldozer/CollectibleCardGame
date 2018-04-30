@@ -80,7 +80,7 @@ namespace GameData.Enums
         CardDraw,
         UnitSpawn,
         UnitDeath,
-        UnitHpChange,
+        UnitStateChange,
         PlayerAction,
         TurnStart,
         TurnEnd,

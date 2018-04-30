@@ -109,6 +109,7 @@
     <Compile Include="Enums\Enums.cs" />
     <Compile Include="Exceptions\PlayerTurnValidationException.cs" />
     <Compile Include="Exceptions\RepositoryItemAlreadyExistsExcepction.cs" />
+    <Compile Include="Kernel\Container.cs" />
     <Compile Include="Models\Entity.cs" />
     <Compile Include="Models\GameActions\CardActionInfo.cs" />
     <Compile Include="Models\Cards\Card.cs" />

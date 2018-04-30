@@ -42,10 +42,18 @@ namespace GameData.Controllers.Global
 
 
             playerTurnValidator.ValidateError += ObserverEventHandler;
+
             gameStateController.GameEnd += ObserverEventHandler;
             gameStateController.GameStart += ObserverEventHandler;
+
             cardDrawController.OnCardDraw += ObserverEventHandler;
             cardDeployDispatcher.OnCardDeploy += ObserverEventHandler;
+
+            gameActionController.ActionTrigerred += ObserverEventHandler;
+
+            unitDispatcher.OnUnitSpawn += ObserverEventHandler;
+            unitDispatcher.OnUnitDeath += ObserverEventHandler;
+            unitDispatcher.OnUnitStateChange += ObserverEventHandler;
         }
 
         private void ObserverEventHandler(object sender, GameEndEventArgs e)

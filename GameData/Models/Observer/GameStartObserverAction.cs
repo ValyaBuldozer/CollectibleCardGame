@@ -10,14 +10,14 @@ namespace GameData.Models.Observer
 {
     public class GameStartObserverAction : ObserverAction
     {
-        public string FirstPlayerUsername { set; get; }
+        public Player FirstPlayer { set; get; }
 
-        public string SecondPlayerUsername { set; get; }
+        public Player SecondPlayer { set; get; }
 
-        public GameStartObserverAction(string firstPlayer,string secondPlayer)
+        public GameStartObserverAction(Player firstPlayer,Player secondPlayer)
         {
-            FirstPlayerUsername = firstPlayer;
-            SecondPlayerUsername = secondPlayer;
+            FirstPlayer = firstPlayer;
+            SecondPlayer = secondPlayer;
             Type = ObserverActionType.GameStart;
         }
 
