@@ -43,10 +43,13 @@ namespace GameData.Controllers.Table
     public class UnitDispatcher : IUnitDispatcher
     {
         private readonly IGameActionController _actionController;
+        private readonly IDataRepositoryController<Entity> _entityRepositoryController;
 
-        public UnitDispatcher(IGameActionController actionController)
+        public UnitDispatcher(IGameActionController actionController, 
+            IDataRepositoryController<Entity> entityRepositoryController)
         {
             _actionController = actionController;
+            _entityRepositoryController = entityRepositoryController;
         }
 
         /// <summary>

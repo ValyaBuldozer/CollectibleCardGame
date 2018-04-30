@@ -1,10 +1,11 @@
 ﻿using System.CodeDom;
+using GameData.Enums;
 using GameData.Models.Action;
 using GameData.Models.Cards;
 
 namespace GameData.Models.Units
 {
-    public class Unit
+    public class Unit : Entity
     {
         public UnitCard BaseCard { set; get; }
 
@@ -28,6 +29,8 @@ namespace GameData.Models.Units
 
         public Unit(UnitCard unitCard)
         {
+            EntityType = EntityType.Unit;
+
             BaseCard = unitCard;
             Attack = BaseCard.BaseAttack;
             AttackPriority = BaseCard.AttackPriority;
