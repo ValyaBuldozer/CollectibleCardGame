@@ -31,12 +31,12 @@ namespace GameData.Controllers.Data
             _repository.Collection.Add(element);
         }
 
-        public void Delete(GameAction element)
+        public void Remove(GameAction element)
         {
             _repository.Collection.Remove(element);
         }
 
-        public void Delete(int id)
+        public void Remove(int id)
         {
             _repository.Collection.Remove(_repository.Collection.FirstOrDefault(a => a.ID == id));
         }

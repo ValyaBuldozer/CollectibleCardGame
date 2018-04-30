@@ -89,6 +89,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\Data\DeckController.cs" />
+    <Compile Include="Controllers\Data\EntityRepositoryController.cs" />
     <Compile Include="Controllers\Data\GameActionController.cs" />
     <Compile Include="Controllers\Data\GameActionRepositoryController.cs" />
     <Compile Include="Controllers\Data\IDataRepositoryController.cs" />
@@ -107,6 +108,8 @@
     <Compile Include="Controllers\Table\UnitDispatcher.cs" />
     <Compile Include="Enums\Enums.cs" />
     <Compile Include="Exceptions\PlayerTurnValidationException.cs" />
+    <Compile Include="Exceptions\RepositoryItemAlreadyExistsExcepction.cs" />
+    <Compile Include="Models\Entity.cs" />
     <Compile Include="Models\GameActions\CardActionInfo.cs" />
     <Compile Include="Models\Cards\Card.cs" />
     <Compile Include="Models\GameActions\GameAction.cs" />
@@ -124,6 +127,7 @@
     <Compile Include="Models\Observer\UnitStateChangeObserverAction.cs" />
     <Compile Include="Models\PlayerMana.cs" />
     <Compile Include="Models\Repository\CyclicQueue.cs" />
+    <Compile Include="Models\Repository\EntityRepository.cs" />
     <Compile Include="Models\Repository\ObserverActionRepository.cs" />
     <Compile Include="Models\Units\HealthPoint.cs" />
     <Compile Include="Models\Player.cs" />
