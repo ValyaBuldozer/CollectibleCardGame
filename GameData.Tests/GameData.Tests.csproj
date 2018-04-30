@@ -67,7 +67,7 @@
   <ItemGroup>
     <Compile Include="Controllers\Integration\Data\DeckControllerTests.cs" />
     <Compile Include="Controllers\Integration\Logic\GameStartTest.cs" />
-    <Compile Include="Controllers\UnitTests\Logic\CheckCallGameActions.cs" />
+    <Compile Include="Controllers\UnitTests\Logic\TestCallGameActions.cs" />
     <Compile Include="Controllers\UnitTests\Logic\GameActionTests.cs" />
     <Compile Include="Controllers\UnitTests\Logic\GameStateControllerTests.cs" />
     <Compile Include="Controllers\UnitTests\Logic\PlayerTurnDispatherTest.cs" />

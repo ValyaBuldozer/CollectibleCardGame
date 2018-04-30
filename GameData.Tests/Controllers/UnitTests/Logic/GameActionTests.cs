@@ -21,7 +21,7 @@ namespace GameData.Tests.Controllers.UnitTests.Logic
     public class GameActionTests //тесты вызова екшенов
     {
         [TestMethod]
-        public void DamageAllFriendlyUnitsTest() //тест екшена с id=1
+        public void CallDamageAllFriendlyUnitsTest() //тест екшена с id=1
         {
             //arrange
             TestCards cards = new TestCards();
@@ -75,7 +75,7 @@ namespace GameData.Tests.Controllers.UnitTests.Logic
         }
 
         [TestMethod]
-        public void BuffDamageSpellCardsTest() //тест екшена с id=2
+        public void CallBuffDamageSpellCardsTest() //тест екшена с id=2
         {
             //arrange
             TestCards cards = new TestCards();
@@ -126,7 +126,7 @@ namespace GameData.Tests.Controllers.UnitTests.Logic
         }
 
         [TestMethod]
-        public void DamageAllEnemyUnitsTest() //тест екшена с id=3
+        public void CallDamageAllEnemyUnitsTest() //тест екшена с id=3
         {
             //arrange
             TestCards cards = new TestCards();
@@ -177,7 +177,7 @@ namespace GameData.Tests.Controllers.UnitTests.Logic
         }
 
         [TestMethod]
-        public void HealAllFriendlyUnitsTest() //тест екшена с id=4
+        public void CallHealAllFriendlyUnitsTest() //тест екшена с id=4
         {
             //arrange
             TestCards cards = new TestCards();
@@ -228,7 +228,7 @@ namespace GameData.Tests.Controllers.UnitTests.Logic
         }
 
         [TestMethod]
-        public void DamageAllUnitsTest() //тест екшена с id=5
+        public void CallDamageAllUnitsTest() //тест екшена с id=5
         {
             //arrange
             TestCards cards = new TestCards();
@@ -279,7 +279,7 @@ namespace GameData.Tests.Controllers.UnitTests.Logic
         }
 
         [TestMethod]
-        public void BuffAttackFriendlyUnitsTest() //тест екшена с id=6
+        public void CallBuffAttackFriendlyUnitsTest() //тест екшена с id=6
         {
             //arrange
             TestCards cards = new TestCards();
@@ -330,7 +330,7 @@ namespace GameData.Tests.Controllers.UnitTests.Logic
         }
 
         [TestMethod]
-        public void FullBuffFriendlyUnitsTest() //тест екшена с id=7
+        public void CallFullBuffFriendlyUnitsTest() //тест екшена с id=7
         {
             //arrange
             TestCards cards = new TestCards();
@@ -381,7 +381,7 @@ namespace GameData.Tests.Controllers.UnitTests.Logic
         }
 
         [TestMethod]
-        public void DamageRandomEnemyUnitTest() //тест екшена с id=8
+        public void CallDamageRandomEnemyUnitTest() //тест екшена с id=8
         {
             //arrange
             TestCards cards = new TestCards();
