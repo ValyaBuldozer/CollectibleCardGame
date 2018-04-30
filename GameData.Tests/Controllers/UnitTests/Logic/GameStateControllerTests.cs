@@ -44,10 +44,7 @@ namespace GameData.Tests.Controllers.UnitTests.Logic
             playerTurnDispatcherMock.Setup(mock => mock.Start(It.IsAny<double>()));
 
             var gameStateController =
-                new GameStateController(tableCondition,playerTurnDispatcherMock.Object)
-                {
-                    DeckController = deckControllerMock.Object
-                };
+                new GameStateController(tableCondition,playerTurnDispatcherMock.Object,deckControllerMock.Object,null);
 
             gameStateController.Start(firstPLayerDeck,"firstPlayer",testCards.FirstCard
                 ,secondPlayerDeck,"secondPlayer",testCards.SecondCard);

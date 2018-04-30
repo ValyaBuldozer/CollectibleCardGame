@@ -10,7 +10,7 @@ using GameData.Models.Repository;
 
 namespace GameData.Controllers.Data
 {
-    public class ObserverActionRepositoryController
+    public class ObserverActionRepositoryController 
     {
         private readonly ObserverActionRepository _repository;
 

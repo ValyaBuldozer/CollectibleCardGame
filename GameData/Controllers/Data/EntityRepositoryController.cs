@@ -31,7 +31,7 @@ namespace GameData.Controllers.Data
             _repository.Collection.Add(item);
         }
 
-        public void AddNewItem(ref Entity item)
+        public void AddNewItem(Entity item)
         {
             if (_repository.Collection.Count != 0)
                 item.EntityId = _repository.Collection.Max(e => e.EntityId) + 1;

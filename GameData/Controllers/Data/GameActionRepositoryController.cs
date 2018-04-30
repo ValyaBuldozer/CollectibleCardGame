@@ -32,7 +32,7 @@ namespace GameData.Controllers.Data
             _repository.Collection.Add(element);
         }
 
-        public void AddNewItem(ref GameAction item)
+        public void AddNewItem(GameAction item)
         {
             if (_repository.Collection.Count != 0)
                 item.ID = _repository.Collection.Max(ga => ga.ID) + 1;
