@@ -20,10 +20,10 @@ namespace GameData.Controllers.Data
     public class GameActionController : IGameActionController
     {
         private readonly IDataRepositoryController<GameAction> _repositoryController;
-        private readonly InActionTableController _tableController;
+        private readonly IActionTableControlller _tableController;
 
         public GameActionController(IDataRepositoryController<GameAction> repositoryController,
-            InActionTableController tableController)
+             IActionTableControlller tableController)
         {
             _repositoryController = repositoryController;
             _tableController = tableController;

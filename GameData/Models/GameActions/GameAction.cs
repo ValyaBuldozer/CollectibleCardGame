@@ -18,10 +18,10 @@ namespace GameData.Models.Action
         /// <summary>
         /// Action 
         /// </summary>
-        public Action<InActionTableController,object,Unit,int> Action { set; get; }
+        public Action<IActionTableControlller,object,Unit,int> Action { set; get; }
 
         public GameAction(string name, int id,string description, ActionParameterType parameterType,
-            Action<InActionTableController, object, Unit, int> action)
+            Action<IActionTableControlller, object, Unit, int> action)
         {
             Name = name;
             ID = id;
