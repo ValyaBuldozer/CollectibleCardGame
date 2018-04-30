@@ -1,4 +1,5 @@
-﻿using GameData.Models.Cards;
+﻿using GameData.Enums;
+using GameData.Models.Cards;
 using GameData.Models.Units;
 
 namespace GameData.Models.Observer
@@ -11,10 +12,14 @@ namespace GameData.Models.Observer
 
         public CardDeployObserverAction(Card card, Unit gameActionTarget)
         {
+            Type = ObserverActionType.CardDeploy;
             Card = card;
             GameActionTarget = gameActionTarget;
         }
 
-        public CardDeployObserverAction() { }
+        public CardDeployObserverAction()
+        {
+            Type = ObserverActionType.CardDeploy;
+        }
     }
 }

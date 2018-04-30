@@ -7,6 +7,7 @@ using GameData.Controllers.Data;
 using GameData.Controllers.Global;
 using GameData.Models;
 using GameData.Models.Cards;
+using GameData.Models.Observer;
 using GameData.Models.Units;
 
 namespace GameData.Controllers.Table
@@ -16,6 +17,7 @@ namespace GameData.Controllers.Table
         bool CardDeployRequest(Card card, Player sender,Unit actionTarget);
         void DeployCard(UnitCard card, Player sender,Unit actionTarget);
         void DeployCard(SpellCard card, Player sender,Unit actionTarget);
+        event EventHandler<CardDeployObserverAction> OnCardDeploy;
     }
 
     public class CardDeployDispatcher : ICardDeployDispatcher
@@ -34,6 +36,8 @@ namespace GameData.Controllers.Table
             _gameActionController = gameActionController;
             _unitDispatcher = unitDispatcher;
         }
+
+        public event EventHandler<CardDeployObserverAction> OnCardDeploy;
 
         public bool CardDeployRequest(Card card, Player sender,Unit actionTarget)
         {
@@ -60,6 +64,7 @@ namespace GameData.Controllers.Table
                     break;          
             }
 
+            OnCardDeploy?.Invoke(this,new CardDeployObserverAction(card,actionTarget));
             return true;
         }
 
