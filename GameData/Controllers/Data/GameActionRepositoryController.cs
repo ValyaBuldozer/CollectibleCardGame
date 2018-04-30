@@ -4,6 +4,7 @@ using System.Data.SqlTypes;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GameData.Exceptions;
 using GameData.Models.Action;
 using GameData.Models.Repository;
 
@@ -26,9 +27,19 @@ namespace GameData.Controllers.Data
         public void Add(GameAction element)
         {
             if(_repository.Collection.Find(a=>a.ID == element.ID) != null)
-                throw new SqlAlreadyFilledException();
+                throw new RepositoryItemAlreadyExistsExcepction();
 
             _repository.Collection.Add(element);
+        }
+
+        public void AddNewItem(ref GameAction item)
+        {
+            if (_repository.Collection.Count != 0)
+                item.ID = _repository.Collection.Max(ga => ga.ID) + 1;
+            else
+                item.ID = 0;
+
+            _repository.Collection.Add(item);
         }
 
         public void Remove(GameAction element)

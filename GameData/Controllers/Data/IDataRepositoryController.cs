@@ -10,6 +10,7 @@ namespace GameData.Controllers.Data
     {
         T GetById(int id);
         void Add(T element);
+        void AddNewItem(ref T element);
         void Remove(T element);
         void Remove(int id);
         void Edit(T elemnt, int id);

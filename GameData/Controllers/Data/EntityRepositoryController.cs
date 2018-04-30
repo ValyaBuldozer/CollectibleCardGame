@@ -25,8 +25,18 @@ namespace GameData.Controllers.Data
 
         public void Add(Entity item)
         {
-            if(_repository.Collection.Exists(e=>e.EntityId == item.EntityId))
+            if (_repository.Collection.Exists(e => e.EntityId == item.EntityId))
                 throw new RepositoryItemAlreadyExistsExcepction("Item with this id is already declared");
+
+            _repository.Collection.Add(item);
+        }
+
+        public void AddNewItem(ref Entity item)
+        {
+            if (_repository.Collection.Count != 0)
+                item.EntityId = _repository.Collection.Max(e => e.EntityId) + 1;
+            else
+                item.EntityId = 0;
 
             _repository.Collection.Add(item);
         }
@@ -47,7 +57,8 @@ namespace GameData.Controllers.Data
         public void Edit(Entity item, int id)
         {
             Remove(id);
-            Add(item);
+            item.EntityId = id;
+            _repository.Collection.Add(item);
         }
     }
 }
