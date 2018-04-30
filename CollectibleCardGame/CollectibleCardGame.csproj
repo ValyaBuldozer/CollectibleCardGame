@@ -416,5 +416,14 @@
   <ItemGroup>
     <Resource Include="Images\backgroundCard.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\attackSword.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\goldTexture.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\healthShield.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
