@@ -72,17 +72,21 @@ namespace GameData.Controllers.Data
 
     public class DeckController : IDeckController
     {
-        [Dependency]
-        public DeckRepository Repository { set; get; }
+        private readonly DeckRepository _repository;
+
+        public DeckController(DeckRepository repository)
+        {
+            _repository = repository;
+        }
 
         public void SetDecks(Dictionary<string, Stack<Card>> decksDictionary)
         {
-            Repository.Dictionary = decksDictionary;
+            _repository.Dictionary = decksDictionary;
         }
 
         public void AddDeck(string username,Stack<Card> deck)
         {
-            Repository.Dictionary.Add(username,deck);
+            _repository.Dictionary.Add(username,deck);
         }
 
         public void ShuffleDeck(string username)
@@ -90,8 +94,8 @@ namespace GameData.Controllers.Data
             var stack = GetDeck(username);
             Random rnd = new Random();
             stack = new Stack<Card>(stack.OrderBy(x => rnd.Next()));
-            Repository.Dictionary.Remove(username);
-            Repository.Dictionary.Add(username,stack);
+            _repository.Dictionary.Remove(username);
+            _repository.Dictionary.Add(username,stack);
         }
 
         public void ShuffleDeck()
@@ -135,7 +139,7 @@ namespace GameData.Controllers.Data
 
         public Stack<Card> GetDeck(string username)
         { 
-            if (Repository.Dictionary.TryGetValue(username, out var stack))
+            if (_repository.Dictionary.TryGetValue(username, out var stack))
                 return stack;
             else
                 throw new InvalidOperationException();
