@@ -33,6 +33,7 @@ namespace GameData.Tests.Controllers.UnitTests.Logic
             dispatcher.CardPlayedSpawn(cards.SecondCard, p1, null);
             //assert
             actiionMock.Verify(mock => mock.ExecuteAction(It.IsAny<GameActionInfo>(), p1, null));
+            Assert.AreNotEqual(p1.TableUnits[0],null);
             Assert.AreEqual(p1.TableUnits.Count, 1);
             Assert.AreEqual(p1.TableUnits[0].HealthPoint.Base,40);
             Assert.AreEqual(p1.TableUnits[0].Attack, 0);
@@ -81,6 +82,7 @@ namespace GameData.Tests.Controllers.UnitTests.Logic
             actiionMock.Verify(mock => mock.ExecuteAction(It.IsAny<GameActionInfo>(), p1, null));
             Assert.AreEqual(p1.TableUnits.Count, 0);
           
+          
 
         }
 
@@ -93,14 +95,17 @@ namespace GameData.Tests.Controllers.UnitTests.Logic
 
             Player p1 = new Player(cards.FirstCard);
 
-          
-           
+
+            var actiionMock = new Mock<IGameActionController>();
+            actiionMock.Setup(mock => mock.GetGameActionInfo(new CardActionInfo()));
+
             //act
-            UnitDispatcher dispatcher = new UnitDispatcher(null);
+            UnitDispatcher dispatcher = new UnitDispatcher(actiionMock.Object);
             dispatcher.Spawn(cards.SecondCard, p1);
 
             //assert
-            
+            actiionMock.Verify(mock => mock.GetGameActionInfo(It.IsAny<CardActionInfo>()));
+            Assert.AreNotEqual(p1.TableUnits[0], null);
             Assert.AreEqual(p1.TableUnits.Count, 1);
             Assert.AreEqual(p1.TableUnits[0].HealthPoint.Base, 40);
             Assert.AreEqual(p1.TableUnits[0].Attack, 0);

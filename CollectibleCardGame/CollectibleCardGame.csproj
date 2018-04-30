@@ -344,7 +344,9 @@
     <Resource Include="Fonts\Chronicles_font.ttf" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Icons\settingsChange.png" />
@@ -410,6 +412,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\CardsBacks\cardbackNorth220х410.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\backgroundCard.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

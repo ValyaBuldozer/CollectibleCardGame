@@ -8,10 +8,18 @@ using GameData.Models.Units;
 
 namespace GameData.Controllers.Table
 {
+    public interface IActionTableControlller
+    {
+        TableCondition GetTableCondition { get; }
+        void DrawCard(Player player);
+        void DrawCard(Player player, int count);
+        void KillUnit(Unit unit);
+    }
+
     /// <summary>
     /// Класс контроллер, отвечающий за взаимодействие с полем внутри Action
     /// </summary>
-    public class InActionTableController
+    public class InActionTableController : IActionTableControlller
     {
         private readonly ICardDrawController _cardDrawController;
         private readonly TableCondition _tableCondition;

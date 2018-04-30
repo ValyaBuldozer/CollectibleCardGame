@@ -10,12 +10,15 @@
              d:DesignHeight="410" d:DesignWidth="220">
 
     <!--410x220-->
-    <Border BorderThickness="5" BorderBrush="Black" CornerRadius="5">
+    <Border BorderThickness="2" BorderBrush="Black" CornerRadius="5">
         <Border.Effect>
             <DropShadowEffect BlurRadius="10" Direction="315" Opacity="0.8"/>
         </Border.Effect>
 
-        <Grid Background="{StaticResource CardBackGround}">
+        <Grid>
+            <Grid.Background>
+                <ImageBrush ImageSource="/Images/backgroundCard.jpg" Stretch="UniformToFill"/>
+            </Grid.Background>
 
             <Grid>
                 <Grid.RowDefinitions>
@@ -27,14 +30,14 @@
 
 
                 <!--картинка юнита 210x250-->
-                <Image x:Name="UnitImage" Source="{Binding Path=ImagePath}"  Margin="-1,0,3,5">
+                <Image x:Name="UnitImage" Source="{Binding Path=ImagePath}"  Margin="0,0,0,0">
                     <Image.Effect>
-                        <DropShadowEffect   RenderingBias="Quality"/>
+                        <DropShadowEffect   RenderingBias="Quality" Direction="270"  BlurRadius="20" ShadowDepth="10" Opacity="0.9"/>
                     </Image.Effect>
                 </Image>
 
                 
-                <Grid Grid.Row="1" Background="{StaticResource CardBackGround}">
+                <Grid Grid.Row="1" Background="Transparent">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="3.5*"/>
@@ -44,7 +47,7 @@
                     </Grid.Effect>-->
 
                     <TextBlock x:Name="UnitName" Grid.Column="1" Text="{Binding Path=Name}" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"
-                               FontFamily="/CollectibleCardGame;component/Fonts/#Mason Chronicles" FontSize="16" />
+                               FontFamily="/CollectibleCardGame;component/Fonts/#Mason Chronicles" FontSize="16" Margin="0,15,0,0" />
                 </Grid>
 
 
@@ -88,10 +91,13 @@
                             <Image Source="../../Icons/settingsChange.png" Margin="2"/>-->
 
 
-                            <Rectangle Grid.Row="0" Stroke="Gold" StrokeThickness="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Width="55" Height="55">
+                            <Rectangle Grid.Row="0" Stroke="Gold" RadiusX="5" RadiusY="5" StrokeThickness="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Width="55" Height="55">
                                 <Rectangle.Fill>
                                     <ImageBrush ImageSource="../../Images/IconsUnit/sword.png"/>
                                 </Rectangle.Fill>
+                                <Rectangle.Effect>
+                                    <DropShadowEffect   RenderingBias="Quality" Direction="315"  BlurRadius="10" ShadowDepth="8"/>
+                                </Rectangle.Effect>
                             </Rectangle>
 
                             <!--<ItemsControl.ItemTemplate>
@@ -120,13 +126,13 @@
 
                 </Grid>
 
-                <Grid Grid.Row="2" Background="#E6D1A2">
+                <Grid Grid.Row="2" Background="Transparent">
                     <TextBlock x:Name="UnitStory" Grid.Row="2" Text="{Binding Description}" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center"
                                FontFamily="/CollectibleCardGame;component/Fonts/#Mason Chronicles" FontSize="12" Margin="5,0,5,0"/>
                 </Grid>
 
 
-                <Grid Grid.Row="3" Background="#E6D1A2">
+                <Grid Grid.Row="3" Background="Transparent">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.25*"/>
                         <ColumnDefinition Width="6*"/>
