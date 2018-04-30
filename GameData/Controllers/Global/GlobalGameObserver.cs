@@ -40,8 +40,12 @@ namespace GameData.Controllers.Global
             //_playerTurnValidator = playerTurnValidator;
             _repositoryController = repositoryController;
 
+
             playerTurnValidator.ValidateError += ObserverEventHandler;
             gameStateController.GameEnd += ObserverEventHandler;
+            gameStateController.GameStart += ObserverEventHandler;
+            cardDrawController.OnCardDraw += ObserverEventHandler;
+            cardDeployDispatcher.OnCardDeploy += ObserverEventHandler;
         }
 
         private void ObserverEventHandler(object sender, GameEndEventArgs e)
@@ -52,6 +56,16 @@ namespace GameData.Controllers.Global
         private void ObserverEventHandler(object sender, ErrorEventArgs e)
         {
             _repositoryController.Add(new ErrorObserverAction(e.Message));
+        }
+
+        //private void ObserverEventHandler(object sender, GameStartObserverAction e)
+        //{
+        //    _repositoryController.Add(e);
+        //}
+
+        private void ObserverEventHandler(object sender, ObserverAction e)
+        {
+            _repositoryController.Add(e);
         }
     }
 }

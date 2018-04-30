@@ -86,4 +86,12 @@ namespace GameData.Enums
         TurnEnd,
         Error
     }
+
+    public enum EntityType
+    {
+        Unit,
+        Card,
+        Player,
+        Scene
+    }
 }
