@@ -72,6 +72,8 @@
     <Compile Include="Controllers\UnitTests\Logic\PlayerTurnDispatherTest.cs" />
     <Compile Include="Controllers\UnitTests\Logic\TestCallGameActions.cs" />
     <Compile Include="Controllers\UnitTests\Logic\UnitDispatcherTests.cs" />
+    <Compile Include="Gameplay\GameStartTest.cs" />
+    <Compile Include="Kernel\ContainerTest.cs" />
     <Compile Include="Network\Controllers\NetworkMessageConverterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestData\TestCards.cs" />
@@ -92,6 +94,7 @@
       <Name>GameData</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

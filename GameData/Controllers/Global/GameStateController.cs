@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GameData.Controllers.Data;
+using GameData.Controllers.Table;
 using GameData.Models;
 using GameData.Models.Cards;
 using GameData.Models.Observer;
@@ -26,18 +27,21 @@ namespace GameData.Controllers.Global
         private readonly IPlayerTurnDispatcher _playerTurnDispatcher;
         private readonly IDeckController _deckController;
         private readonly IDataRepositoryController<Entity> _entitytRepositoryController;
+        private readonly ICardDrawController _cardDrawController;
 
         public event EventHandler<GameEndEventArgs> GameEnd;
 
         public event EventHandler<GameStartObserverAction> GameStart; 
 
         public GameStateController(TableCondition tableCondition,IPlayerTurnDispatcher playerTurnDispatcher,
-            IDeckController deckController,IDataRepositoryController<Entity> entitytRepositoryController)
+            IDeckController deckController,IDataRepositoryController<Entity> entitytRepositoryController,
+            ICardDrawController cardDrawController)
         {
             _tableCondition = tableCondition;
             _playerTurnDispatcher = playerTurnDispatcher;
             _deckController = deckController;
             _entitytRepositoryController = entitytRepositoryController;
+            _cardDrawController = cardDrawController;
         }
 
         public void Start(Stack<Card> firstDeck, string firstUsername, UnitCard firstHero,
@@ -68,7 +72,7 @@ namespace GameData.Controllers.Global
 
             //выдача стартовой руки
             foreach (var iplayer in _tableCondition.Players)
-                iplayer.HandCards.AddRange(_deckController.PopCards(iplayer.Username,4));
+                _cardDrawController.DealCardsToPlayer(iplayer,4);
 
             //начинаем отсчет ходов (период хода в мс)
             _playerTurnDispatcher.Start(30000);
