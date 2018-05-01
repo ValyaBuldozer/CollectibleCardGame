@@ -26,5 +26,10 @@ namespace GameData.Models.Repository
         {
             _queue.Enqueue(element);
         }
+
+        public int Count()
+        {
+            return _queue.Count;
+        }
     }
 }

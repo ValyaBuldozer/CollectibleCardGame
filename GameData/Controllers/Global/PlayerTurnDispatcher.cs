@@ -24,7 +24,7 @@ namespace GameData.Controllers.Global
     public class PlayerTurnDispatcher : IPlayerTurnDispatcher
     {
         private readonly TableCondition _tableCondition;
-        private readonly CyclicQueue<Player> _playersCyclicQueue;
+        private CyclicQueue<Player> _playersCyclicQueue;
         private readonly ICardDrawController _cardsDispatcher;
 
         public Timer Timer { set; get; }
@@ -42,7 +42,7 @@ namespace GameData.Controllers.Global
             Timer = new Timer();
             Timer.Elapsed += Timer_Elapsed;
             Timer.AutoReset = true;
-            CurrentPlayer = _playersCyclicQueue.Dequeue();
+            //CurrentPlayer = _playersCyclicQueue.Dequeue();
         }
 
         private void Timer_Elapsed(object sender, ElapsedEventArgs e)
@@ -70,6 +70,9 @@ namespace GameData.Controllers.Global
 
         public void Start(double interval)
         {
+            if(_playersCyclicQueue.Count() == 0)
+                _playersCyclicQueue = new CyclicQueue<Player>(_tableCondition.Players);
+
             Timer.Enabled = false;
             Timer.Interval = interval;
             Timer.Enabled = true;

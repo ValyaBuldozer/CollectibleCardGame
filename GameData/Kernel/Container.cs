@@ -29,6 +29,14 @@ namespace GameData.Kernel
 
         public void Initialize()
         {
+            RegisterBindings();
+
+            //ititializing observer for events bindings
+            Get<GlobalGameObserver>();
+        }
+
+        private void RegisterBindings()
+        {
             //models
             _container.RegisterType<TableCondition>(new ContainerControlledLifetimeManager());
 
@@ -53,6 +61,8 @@ namespace GameData.Kernel
             _container.RegisterType<IPlayerTurnDispatcher, PlayerTurnDispatcher>(
                 new ContainerControlledLifetimeManager());
             _container.RegisterType<IActionTableControlller, InActionTableController>();
+            _container.RegisterType<IGameActionController, GameActionController>(
+                new ContainerControlledLifetimeManager());
             _container.RegisterType<IUnitDispatcher, UnitDispatcher>(
                 new ContainerControlledLifetimeManager());
             _container.RegisterType<ICardDeployDispatcher, CardDeployDispatcher>(
