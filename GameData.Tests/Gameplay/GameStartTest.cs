@@ -57,6 +57,7 @@ namespace GameData.Tests.Gameplay
             var observerRepository = container.Get<ObserverActionRepository>();
             var startGameObserver =
                 observerRepository.Collection.FirstOrDefault(o => o.Type == ObserverActionType.GameStart);
+            
 
             Assert.AreNotEqual(startGameObserver,null);
             Assert.IsTrue(startGameObserver is GameStartObserverAction action);

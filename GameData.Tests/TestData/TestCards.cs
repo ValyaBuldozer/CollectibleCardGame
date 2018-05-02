@@ -148,6 +148,8 @@ namespace GameData.Tests.TestData
                 Cost = 0,
                 Description = "Test"
             };
+
+
             AttackCard = new UnitCard()
             {
                 ID = 3,
