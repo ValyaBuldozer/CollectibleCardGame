@@ -152,6 +152,7 @@
     <Compile Include="Network\Messages\IContent.cs" />
     <Compile Include="Network\Messages\LogInMessage.cs" />
     <Compile Include="Network\Messages\MessageBase.cs" />
+    <Compile Include="Network\Messages\ObserverActionMessage.cs" />
     <Compile Include="Network\Messages\PlayerTurnMessage.cs" />
     <Compile Include="Network\Messages\PlayerTurnStartMessage.cs" />
     <Compile Include="Network\Messages\RegistrationMessage.cs" />

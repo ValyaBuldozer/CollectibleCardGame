@@ -3,15 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GameData.Models.Cards;
+using GameData.Models.Observer;
 
 namespace GameData.Network.Messages
 {
-    public class GameRequestMessage :IContent
+    public class ObserverActionMessage : IContent
     {
-        public List<int> CardDeckIdList { set; get; }
-        
-        public UnitCard HeroUnitCard { set; get; }
+        public ObserverAction ObserverAction { set; get; }
 
         public object AnswerData { set; get; }
     }

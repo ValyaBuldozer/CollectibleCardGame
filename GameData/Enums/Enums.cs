@@ -13,7 +13,8 @@ namespace GameData.Enums
         PlayerTurnStartMessage,
         GameResultMessage,
         DisconnectMessage,
-        ErrorMessage
+        ErrorMessage,
+        ObserverActionMessage
     }
 
     public enum Fraction

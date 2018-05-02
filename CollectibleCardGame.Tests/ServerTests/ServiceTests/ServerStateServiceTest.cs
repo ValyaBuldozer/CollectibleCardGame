@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using BaseNetworkArchitecture.Common.Messages;
 using BaseNetworkArchitecture.Server;
 using GameData.Enums;
+using GameData.Models.Cards;
 using GameData.Network;
 using GameData.Network.Messages;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -32,7 +33,15 @@ namespace CollectibleCardGame.Tests.ServerTests.ServiceTests
                 User = new User() { Username = "test2"}
             };
             var gameRequestNetworkMessage = UnityKernel.Get<NetworkMessageConverter>().SerializeMessage(
-                new MessageBase(MessageBaseType.GameRequestMessage, new GameRequestMessage(), null));
+                new MessageBase(MessageBaseType.GameRequestMessage, new GameRequestMessage()
+                {
+                    CardDeckIdList = new List<int>() { 1,1,1,1,1,1,1,1},
+                    HeroUnitCard = new UnitCard()
+                    {
+                        Name = "test"
+                    }
+                }, null));
+
 
             firstClient.ClientController.OnMessageRecieved(firstClient,new MessageEventArgs()
             {
@@ -45,6 +54,8 @@ namespace CollectibleCardGame.Tests.ServerTests.ServiceTests
 
             Assert.IsNotNull(firstClient.CurrentLobby);
             Assert.IsNotNull(secondClient.CurrentLobby);
+
+
         }
     }
 }
