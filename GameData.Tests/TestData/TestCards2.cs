@@ -44,21 +44,21 @@ namespace GameData.Tests.TestData
         {
             new UnitCard()
             {
-            ID = 3,
-            Name = "Мечник",
-            BaseHP = 5,
-            AttackPriority = 1,
-            BaseAttack = 5,
-            Cost = 0,
-            Description = "Test"
-            },
-            new UnitCard()
-            {
                 ID = 4,
                 Name = "Лучник",
                 BaseHP = 3,
                 AttackPriority = 1,
                 BaseAttack = 7,
+                Cost = 0,
+                Description = "Test"
+            },
+            new UnitCard()
+            {
+                ID = 7,
+                Name = "Павший рыцарь",
+                BaseHP = 10,
+                AttackPriority = 1,
+                BaseAttack = 10,
                 Cost = 0,
                 Description = "Test"
             },
@@ -82,7 +82,17 @@ namespace GameData.Tests.TestData
                     ActionId = 3, ParameterType = ActionParameterType.Damage,ParameterValue = 2
                 }
             },
-          
+            new UnitCard()
+            {
+                ID = 3,
+                Name = "Мечник",
+                BaseHP = 5,
+                AttackPriority = 1,
+                BaseAttack = 5,
+                Cost = 0,
+                Description = "Test"
+            },
+
         });
     }
 }
