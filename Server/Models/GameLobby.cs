@@ -4,28 +4,48 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GameData;
+using GameData.Controllers.Data;
+using GameData.Controllers.Global;
 using GameData.Enums;
+using GameData.Kernel;
 using GameData.Models;
+using GameData.Models.Cards;
 using GameData.Models.PlayerTurn;
+using GameData.Models.Repository;
+using GameData.Network.Messages;
 using Server.Network.Models;
+using NullReferenceException = System.NullReferenceException;
 
 namespace Server.Models
 {
     public class GameLobby
     {
+        private readonly Container _gameDataContainer;
+
         public Client FirstClient { set; get; }
+
+        public Stack<Card> FirstPlayerDeck { set; get; }
+
+        public UnitCard FirstPlayerHeroUnit { set; get; }
 
         public Client SecondClient { set; get; }
 
-        public PlayerSequencing PlayerSequencing { set; get; }
+        public Stack<Card> SecondPlayerDeck { set; get; }
 
-        public TableCondition TableCondition { set; get; }
+        public UnitCard SecondPlayerHeroUnit { set; get; }
+
+        public TableCondition GeTableCondition => _gameDataContainer.Get<TableCondition>();
 
         public GameLobby(Client firstClient,Client secondClient)
         {
-            TableCondition = new TableCondition();
+            _gameDataContainer = new Container();
             FirstClient = firstClient;
             SecondClient = secondClient;
+        }
+
+        public GameLobby()
+        {
+            _gameDataContainer = new Container();
         }
 
         public PlayerTurn HandlePlayerTurn(PlayerTurn playerTurn)
@@ -38,7 +58,39 @@ namespace Server.Models
             if(FirstClient == null && SecondClient == null)
                 throw new NullReferenceException();
 
-            //todo: запилить инициализацию
+            _gameDataContainer.Initialize();
+            _gameDataContainer.Get<ObserverActionRepositoryController>().ItemAdded += OnObserverActionAdded;
+            //todo : внедрение настроек
+
+        }
+
+        public void StartGame()
+        {
+            if(FirstClient == null || SecondClient == null)
+                throw new NullReferenceException("Players are null");
+
+            if(FirstPlayerDeck == null || SecondPlayerDeck == null)
+                throw new NullReferenceException("Decks are null");
+
+            if(FirstPlayerHeroUnit == null || SecondPlayerHeroUnit == null)
+                throw new NullReferenceException("HeroUnits are null");
+
+            _gameDataContainer.Get<GameStateController>().Start(FirstPlayerDeck,FirstClient.User.Username,
+                FirstPlayerHeroUnit,SecondPlayerDeck,SecondClient.User.Username,SecondPlayerHeroUnit);
+        }
+
+        private void OnObserverActionAdded(object sender, ObserverActionAddedEventArgs e)
+        {
+            var message = new MessageBase(MessageBaseType.ObserverActionMessage, new ObserverActionMessage()
+            {
+                ObserverAction = e.Item
+            });
+
+            if(e.Item.TargetPlayer == null || FirstClient.User.Username == e.Item.TargetPlayer.Username)
+                FirstClient.ClientController.SendMessage(message);
+
+            if(e.Item.TargetPlayer == null || SecondClient.User.Username == e.Item.TargetPlayer.Username)
+                SecondClient.ClientController.SendMessage(message);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using GameData.Models.Cards;
 using Server.Models;
 using Server.Repositories;
 
@@ -31,7 +32,7 @@ namespace Server.Controllers.Repository
 
         public void Edit(Card value)
         {
-            var rValue = _repository.Collection.FirstOrDefault(c => c.Id == value.Id);
+            var rValue = _repository.Collection.FirstOrDefault(c => c.ID == value.ID);
 
             if(rValue == null)
                 throw new NullReferenceException("No value was found");
@@ -40,6 +41,23 @@ namespace Server.Controllers.Repository
             _repository.Collection.Add(value);
 
             _repository.Update();
+        }
+
+        public Stack<Card> GetDeckById(IEnumerable<int> idCollection)
+        {
+            if (idCollection == null)
+                return null;
+
+            Stack<Card> deck = new Stack<Card>();
+
+            foreach (var id in idCollection)
+            {
+                Card card = _repository.Collection.FirstOrDefault(c => c.ID == id);
+                if(card !=null)
+                    deck.Push(card);
+            }
+
+            return deck;
         }
     }
 }
