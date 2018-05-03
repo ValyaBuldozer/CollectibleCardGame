@@ -1,4 +1,5 @@
-﻿using GameData.Models.Units;
+﻿using GameData.Enums;
+using GameData.Models.Units;
 
 namespace GameData.Models.Observer
 {
@@ -9,8 +10,12 @@ namespace GameData.Models.Observer
         public UnitSpawnObserverAction(Unit unit)
         {
             Unit = unit;
+            Type = ObserverActionType.UnitSpawn;
         }
 
-        public UnitSpawnObserverAction() { }
+        public UnitSpawnObserverAction()
+        {
+            Type = ObserverActionType.UnitSpawn;
+        }
     }
 }
