@@ -79,9 +79,12 @@ namespace GameData.Tests.Gameplay
            
 
             var player = container.Get<IPlayerTurnDispatcher>().CurrentPlayer;
-            var card = player.HandCards.FirstOrDefault(c => c.Name == "Павший рыцарь");
-            CardDeployPlayerTurn playerTurn = new CardDeployPlayerTurn(player, card);
-            container.Get<IPlayerTurnHandler<CardDeployPlayerTurn>>().Execute(playerTurn);
+            var card1 = player.HandCards.FirstOrDefault(c => c.Name == "Лучник");
+            CardDeployPlayerTurn archerDeployTurn = new CardDeployPlayerTurn(player, card1);
+            container.Get<IPlayerTurnHandler<CardDeployPlayerTurn>>().Execute(archerDeployTurn);
+            var card2 = player.HandCards.FirstOrDefault(c => c.Name == "Павший рыцарь");
+            CardDeployPlayerTurn ditrixDelpoyTurn = new CardDeployPlayerTurn(player, card2);
+            container.Get<IPlayerTurnHandler<CardDeployPlayerTurn>>().Execute(ditrixDelpoyTurn);
 
             var observerRepository = container.Get<ObserverActionRepository>();
             var gameActionObserver =
@@ -92,6 +95,7 @@ namespace GameData.Tests.Gameplay
             Assert.AreNotEqual(gameActionObserver, null);
             Assert.IsTrue(gameActionObserver is GameActionTriggerObserverAction action);
             Assert.AreEqual(1, ((GameActionTriggerObserverAction)gameActionObserver).GameActionId);
+            Assert.AreEqual(2,player.TableUnits.FirstOrDefault(c => c.BaseCard.Name == "Лучник").HealthPoint.GetResult);
             
 
         }
@@ -114,12 +118,14 @@ namespace GameData.Tests.Gameplay
 
             //формируем первый ход - спавн юнита первого игрока
             var firstPlayerUnitCard1 = firstPlayer.HandCards.FirstOrDefault(c => c.Name == "Мечник");
-            CardDeployPlayerTurn playerTurn = new CardDeployPlayerTurn(firstPlayer, firstPlayerUnitCard1);
+            CardDeployPlayerTurn knightDeployTurnP1 = new CardDeployPlayerTurn(firstPlayer, firstPlayerUnitCard1);
+
+            container.Get<IPlayerTurnHandler<CardDeployPlayerTurn>>().Execute(knightDeployTurnP1);
 
             var firstPlayerUnitCard2 = firstPlayer.HandCards.FirstOrDefault(c => c.Name == "Лекарь");
-            CardDeployPlayerTurn playerTurn2 = new CardDeployPlayerTurn(firstPlayer, firstPlayerUnitCard2);
+            CardDeployPlayerTurn medicDeployTurn = new CardDeployPlayerTurn(firstPlayer, firstPlayerUnitCard2);
 
-            container.Get<IPlayerTurnHandler<CardDeployPlayerTurn>>().Execute(playerTurn);
+            container.Get<IPlayerTurnHandler<CardDeployPlayerTurn>>().Execute(medicDeployTurn);
 
             //передаем ход
             container.Get<IPlayerTurnDispatcher>().NextPlayer();
@@ -127,9 +133,9 @@ namespace GameData.Tests.Gameplay
 
             //формируем второй ход - спавн второго игрока
             var secondPlayerUnitCard = secondPlayer.HandCards.FirstOrDefault(c => c.Name == "Мечник");
-            CardDeployPlayerTurn playerTurn3 = new CardDeployPlayerTurn(secondPlayer, secondPlayerUnitCard);
+            CardDeployPlayerTurn knightDeployTurnP2 = new CardDeployPlayerTurn(secondPlayer, secondPlayerUnitCard);
+            container.Get<IPlayerTurnHandler<CardDeployPlayerTurn>>().Execute(knightDeployTurnP2);
             firstPlayer.TableUnits.FirstOrDefault(c => c.BaseCard.Name == "Мечник").HealthPoint.RecieveDamage(3);
-            container.Get<IPlayerTurnHandler<CardDeployPlayerTurn>>().Execute(playerTurn2);
 
             UnitAttackPlayerTurn unitAttackPlayerTurn = new UnitAttackPlayerTurn(
                 secondPlayer, secondPlayer.TableUnits.First(), firstPlayer.TableUnits.FirstOrDefault(c => c.BaseCard.Name=="Лекарь"));
@@ -165,8 +171,8 @@ namespace GameData.Tests.Gameplay
 
             //формируем первый ход - спавн юнита первого игрока
             var firstPlayerUnitCard = firstPlayer.HandCards.FirstOrDefault(c => c.Name == "Мечник");
-            CardDeployPlayerTurn playerTurn = new CardDeployPlayerTurn(firstPlayer, firstPlayerUnitCard);
-            container.Get<IPlayerTurnHandler<CardDeployPlayerTurn>>().Execute(playerTurn);
+            CardDeployPlayerTurn knightDeployTurn = new CardDeployPlayerTurn(firstPlayer, firstPlayerUnitCard);
+            container.Get<IPlayerTurnHandler<CardDeployPlayerTurn>>().Execute(knightDeployTurn);
 
             //передаем ход
             container.Get<IPlayerTurnDispatcher>().NextPlayer();
@@ -174,8 +180,8 @@ namespace GameData.Tests.Gameplay
 
             //формируем второй ход - спавн второго игрока
             var secondPlayerUnitCard = secondPlayer.HandCards.FirstOrDefault(c => c.Name == "Лагерта");
-            CardDeployPlayerTurn playerTurn2 = new CardDeployPlayerTurn(secondPlayer, secondPlayerUnitCard);
-            container.Get<IPlayerTurnHandler<CardDeployPlayerTurn>>().Execute(playerTurn2);
+            CardDeployPlayerTurn lagertaDeployTurn = new CardDeployPlayerTurn(secondPlayer, secondPlayerUnitCard);
+            container.Get<IPlayerTurnHandler<CardDeployPlayerTurn>>().Execute(lagertaDeployTurn);
 
             UnitAttackPlayerTurn unitAttackPlayerTurn = new UnitAttackPlayerTurn(
                 secondPlayer, secondPlayer.TableUnits.First(), firstPlayer.TableUnits.First());
@@ -193,7 +199,7 @@ namespace GameData.Tests.Gameplay
         }
 
         [TestMethod]
-        public void PlayUnitCardBattleCryActionTest()
+        public void PlayUnitCardDamageRecievedActionTest()
         {
             var testCards = new TestCards2();
             var firstDeck = testCards.FirstRandomDeck;
@@ -210,8 +216,8 @@ namespace GameData.Tests.Gameplay
 
             //формируем первый ход - спавн юнита первого игрока
             var firstPlayerUnitCard = firstPlayer.HandCards.FirstOrDefault(c => c.Name == "Дитрих Черный");
-            CardDeployPlayerTurn playerTurn = new CardDeployPlayerTurn(firstPlayer, firstPlayerUnitCard);
-            container.Get<IPlayerTurnHandler<CardDeployPlayerTurn>>().Execute(playerTurn);
+            CardDeployPlayerTurn ditrihDeployTurn = new CardDeployPlayerTurn(firstPlayer, firstPlayerUnitCard);
+            container.Get<IPlayerTurnHandler<CardDeployPlayerTurn>>().Execute(ditrihDeployTurn);
 
             //передаем ход
             container.Get<IPlayerTurnDispatcher>().NextPlayer();
@@ -219,8 +225,8 @@ namespace GameData.Tests.Gameplay
 
             //формируем второй ход - спавн второго игрока
             var secondPlayerUnitCard = secondPlayer.HandCards.FirstOrDefault(c => c.Name == "Мечник");
-            CardDeployPlayerTurn playerTurn2 = new CardDeployPlayerTurn(secondPlayer, secondPlayerUnitCard);
-            container.Get<IPlayerTurnHandler<CardDeployPlayerTurn>>().Execute(playerTurn2);
+            CardDeployPlayerTurn knightDeployTurn = new CardDeployPlayerTurn(secondPlayer, secondPlayerUnitCard);
+            container.Get<IPlayerTurnHandler<CardDeployPlayerTurn>>().Execute(knightDeployTurn);
 
             UnitAttackPlayerTurn unitAttackPlayerTurn = new UnitAttackPlayerTurn(
                 secondPlayer, secondPlayer.TableUnits.First(), firstPlayer.TableUnits.First());
@@ -233,7 +239,7 @@ namespace GameData.Tests.Gameplay
             Assert.AreNotEqual(gameActionObserver, null);
             Assert.IsTrue(gameActionObserver is GameActionTriggerObserverAction action);
             Assert.AreEqual(11, ((GameActionTriggerObserverAction)gameActionObserver).GameActionId);
-            Assert.AreEqual(6,firstPlayer.TableUnits.First().HealthPoint.GetResult);
+            Assert.AreEqual(8,firstPlayer.TableUnits.First().Attack);
 
         }
 
@@ -340,7 +346,7 @@ namespace GameData.Tests.Gameplay
 
 
             //формируем второй ход - спавн второго игрока
-            var secondPlayerUnitCard = secondPlayer.HandCards.FirstOrDefault(c => c.Name == "Лучник");
+            var secondPlayerUnitCard = secondPlayer.HandCards.FirstOrDefault(с => с.Name == "Лучник"); //если заменить Лучника например на Мечника то сработает
             CardDeployPlayerTurn playerTurn2 = new CardDeployPlayerTurn(secondPlayer, secondPlayerUnitCard);
             container.Get<IPlayerTurnHandler<CardDeployPlayerTurn>>().Execute(playerTurn2);
 

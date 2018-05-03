@@ -94,7 +94,7 @@ namespace GameData.Tests.TestData
                 BaseAttack = 6,
                 Cost = 0,
                 Description = "Test",
-                DamageRecievedActionInfo = new CardActionInfo(){ActionId = 11,ParameterType = ActionParameterType.Buff,ParameterValue = 2}
+                DamageRecievedActionInfo = new CardActionInfo(){ActionId = 10,ParameterType = ActionParameterType.Buff,ParameterValue = 2}
             },
             new UnitCard()
             {
