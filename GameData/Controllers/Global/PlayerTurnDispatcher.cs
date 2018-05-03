@@ -63,8 +63,11 @@ namespace GameData.Controllers.Global
 
             if (Timer.Enabled)
             {
+                //выключаем таймер чтобы не вызывать событие
+                Timer.Enabled = false;
                 Timer.Stop();
                 Timer.Start();
+                Timer.Enabled = true;
             }
         }
 

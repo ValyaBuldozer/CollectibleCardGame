@@ -35,6 +35,9 @@ namespace GameData.Controllers.Data
 
         public GameActionInfo GetGameActionInfo(CardActionInfo cardInfo)
         {
+            if (cardInfo == null)
+                return null;
+
             var action = _repositoryController.GetById(cardInfo.ActionId);
             if (action == null)
                 return null;
@@ -52,6 +55,9 @@ namespace GameData.Controllers.Data
 
         public void ExecuteAction(GameActionInfo actionInfo, Entity sender, Unit target)
         {
+            if(actionInfo == null)
+                return;
+
             actionInfo.Action?.Action.Invoke(_tableController,sender,target,actionInfo.Parameter);
             ActionTrigerred?.Invoke(this,new GameActionTriggerObserverAction(actionInfo.Action.ID,
                 sender,target));
