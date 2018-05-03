@@ -41,8 +41,8 @@ namespace GameData.Tests.Gameplay
             //var startGameObserver =
             //    observerRepository.Collection.FirstOrDefault(o => o.Type == ObserverActionType.GameStart);
 
-            var player = container.Get<TableCondition>().Players.First();
-            var card = player.HandCards.First();
+            var player = container.Get<IPlayerTurnDispatcher>().CurrentPlayer;
+            var card = player.HandCards.FirstOrDefault(c=>c is UnitCard);
             CardDeployPlayerTurn playerTurn = new CardDeployPlayerTurn(player, card);
             container.Get<IPlayerTurnHandler<CardDeployPlayerTurn>>().Execute(playerTurn);
 
@@ -54,7 +54,7 @@ namespace GameData.Tests.Gameplay
             Assert.IsTrue(startGameObserver is CardDeployObserverAction action);
             Assert.AreEqual(3,((CardDeployObserverAction)startGameObserver).Card.ID);
             Assert.AreEqual(1, container.Get<TableCondition>().Players.First().TableUnits.Count);
-            Assert.AreEqual(5, container.Get<TableCondition>().Players.First().TableUnits[0].HealthPoint);
+            Assert.AreEqual(5, container.Get<TableCondition>().Players.First().TableUnits[0].HealthPoint.GetResult);
 
         }
 
@@ -73,7 +73,7 @@ namespace GameData.Tests.Gameplay
 
 
             var player = container.Get<TableCondition>().Players.First();
-            var card = player.HandCards[1];
+            var card = player.HandCards.FirstOrDefault(c => c is SpellCard);
             CardDeployPlayerTurn playerTurn = new CardDeployPlayerTurn(player, card);
             container.Get<IPlayerTurnHandler<CardDeployPlayerTurn>>().Execute(playerTurn);
 
@@ -84,7 +84,7 @@ namespace GameData.Tests.Gameplay
             Assert.AreNotEqual(startGameObserver, null);
             Assert.IsTrue(startGameObserver is CardDeployObserverAction action);
             Assert.AreEqual(6, ((CardDeployObserverAction)startGameObserver).Card.ID);
-            Assert.AreEqual(1, container.Get<TableCondition>().Players.First().TableUnits.Count);
+            //Assert.AreEqual(1, container.Get<TableCondition>().Players.First().TableUnits.Count);
             
 
         }
@@ -104,25 +104,29 @@ namespace GameData.Tests.Gameplay
                 secondDeck, "SecondPlayer", testCards.SecondCard);
 
 
-            var player1 = container.Get<TableCondition>().Players.First();
-            var player2 = container.Get<TableCondition>().Players.FirstOrDefault(p => p.Username != player1.Username);
+            var firstPlayer = container.Get<IPlayerTurnDispatcher>().CurrentPlayer;
 
-            var card1 = player1.HandCards.First();
-            CardDeployPlayerTurn playerTurn = new CardDeployPlayerTurn(player1, card1);
+            //формируем первый ход - спавн юнита первого игрока
+            var firstPlayerUnitCard = firstPlayer.HandCards.FirstOrDefault(c=>c is UnitCard);
+            CardDeployPlayerTurn playerTurn = new CardDeployPlayerTurn(firstPlayer, firstPlayerUnitCard);
             container.Get<IPlayerTurnHandler<CardDeployPlayerTurn>>().Execute(playerTurn);
 
-            var card2 = player2.HandCards[3];
-            CardDeployPlayerTurn playerTurn2 = new CardDeployPlayerTurn(player2, card2);
-            container.Get<IPlayerTurnHandler<CardDeployPlayerTurn>>().Execute(playerTurn);
+            //передаем ход
+            container.Get<IPlayerTurnDispatcher>().NextPlayer();
+            var secondPlayer = container.Get<IPlayerTurnDispatcher>().CurrentPlayer;
 
-            UnitAttackPlayerTurn playerTurn3 = new UnitAttackPlayerTurn(player1, player1.TableUnits.First(), player2.TableUnits.First());
+            //формируем второй ход - спавн второго игрока
+            var secondPlayerUnitCard = secondPlayer.HandCards.FirstOrDefault(c=>c.Name == "Павший рыцарь");
+            CardDeployPlayerTurn playerTurn2 = new CardDeployPlayerTurn(secondPlayer, secondPlayerUnitCard);
+            container.Get<IPlayerTurnHandler<CardDeployPlayerTurn>>().Execute(playerTurn2);
 
+            UnitAttackPlayerTurn unitAttackPlayerTurn = new UnitAttackPlayerTurn(
+                secondPlayer, secondPlayer.TableUnits.First(), firstPlayer.TableUnits.First());
+            container.Get<IPlayerTurnHandler<UnitAttackPlayerTurn>>().Execute(unitAttackPlayerTurn);
 
-            Assert.AreEqual(0, player1.TableUnits.Count);
-            Assert.AreEqual(1, player2.TableUnits.Count);
-            Assert.AreEqual(5, player2.TableUnits.First().HealthPoint);
-
-
+            Assert.AreEqual(0, firstPlayer.TableUnits.Count);
+            Assert.AreEqual(1, secondPlayer.TableUnits.Count);
+            Assert.AreEqual(5, secondPlayer.TableUnits.First().HealthPoint.GetResult);
 
         }
 
@@ -140,19 +144,21 @@ namespace GameData.Tests.Gameplay
                 secondDeck, "SecondPlayer", testCards.SecondCard);
 
 
-            var player1 = container.Get<TableCondition>().Players.First();
-            var player2 = container.Get<TableCondition>().Players.FirstOrDefault(p => p.Username != player1.Username);
+            var player1 = container.Get<IPlayerTurnDispatcher>().CurrentPlayer;
                 
             var card1 = player1.HandCards.First();
             CardDeployPlayerTurn playerTurn = new CardDeployPlayerTurn(player1, card1);
             container.Get<IPlayerTurnHandler<CardDeployPlayerTurn>>().Execute(playerTurn);
 
+            container.Get<IPlayerTurnDispatcher>().NextPlayer();
+            var player2 = container.Get<IPlayerTurnDispatcher>().CurrentPlayer;
             var card2 = player2.HandCards[2];
+
             CardDeployPlayerTurn playerTurn2 = new CardDeployPlayerTurn(player2, card2);
-            container.Get<IPlayerTurnHandler<CardDeployPlayerTurn>>().Execute(playerTurn);
+            container.Get<IPlayerTurnHandler<CardDeployPlayerTurn>>().Execute(playerTurn2);
 
-            UnitAttackPlayerTurn playerTurn3 = new  UnitAttackPlayerTurn(player1,player1.TableUnits.First(),player2.TableUnits.First());
-
+            UnitAttackPlayerTurn unitAttackPlayerTurn = new  UnitAttackPlayerTurn(player1,player1.TableUnits.First(),player2.TableUnits.First());
+            container.Get<IPlayerTurnHandler<UnitAttackPlayerTurn>>().Execute(unitAttackPlayerTurn);
 
             Assert.AreEqual(0, player1.TableUnits.Count);
             Assert.AreEqual(0, player2.TableUnits.Count);
