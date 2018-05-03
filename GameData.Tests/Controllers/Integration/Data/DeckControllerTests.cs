@@ -18,10 +18,8 @@ namespace GameData.Tests.Controllers.Integration.Data
         public void ShuffleTest()
         {
             TestCards testCards = new TestCards();
-            DeckController controller = new DeckController()
-            {
-                Repository = new DeckRepository()
-            };
+            DeckController controller = new DeckController(new DeckRepository());
+
             Stack<Card> deck = new Stack<Card>();
             deck.Push(testCards.FirstCard);
             deck.Push(testCards.SecondCard);

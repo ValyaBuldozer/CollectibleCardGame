@@ -16,6 +16,116 @@ namespace GameData.Tests.TestData
         public UnitCard AttackCard { set; get; }
         public UnitCard DefendCard { set; get; }
 
+        public Stack<Card> FirstRandomDeck => new Stack<Card>(new List<Card>()
+        {
+            new UnitCard()
+            {
+            ID = 1,
+            Name = "test1",
+            BaseHP = 30,
+            AttackPriority = 1,
+            BaseAttack = 0,
+            Cost = 0,
+            Description = "Test"
+            },
+            new UnitCard()
+            {
+            ID = 1,
+            Name = "test1",
+            BaseHP = 30,
+            AttackPriority = 1,
+            BaseAttack = 0,
+            Cost = 0,
+            Description = "Test"
+            },
+            new UnitCard()
+            {
+                ID = 1,
+                Name = "test1",
+                BaseHP = 30,
+                AttackPriority = 1,
+                BaseAttack = 0,
+                Cost = 0,
+                Description = "Test"
+            },
+            new SpellCard()
+            {
+                ID = 3,
+                Name = "SpellTest1",
+                Description = "test"
+            },
+            new SpellCard()
+            {
+                ID = 3,
+                Name = "SpellTest1",
+                Description = "test"
+            },
+            new SpellCard()
+            {
+                ID = 3,
+                Name = "SpellTest1",
+                Description = "test"
+            },
+            new SpellCard()
+            {
+                ID = 3,
+                Name = "SpellTest1",
+                Description = "test"
+            },
+            new SpellCard()
+            {
+                ID = 3,
+                Name = "SpellTest1",
+                Description = "test"
+            },
+            new SpellCard()
+            {
+                ID = 3,
+                Name = "SpellTest1",
+                Description = "test"
+            },
+            new UnitCard()
+            {
+                ID = 2,
+                Name = "test2",
+                BaseHP = 40,
+                AttackPriority = 1,
+                BaseAttack = 0,
+                Cost = 0,
+                Description = "Test"
+            },
+            new UnitCard()
+            {
+                ID = 2,
+                Name = "test2",
+                BaseHP = 40,
+                AttackPriority = 1,
+                BaseAttack = 0,
+                Cost = 0,
+                Description = "Test"
+            },
+            new UnitCard()
+            {
+                ID = 2,
+                Name = "test2",
+                BaseHP = 40,
+                AttackPriority = 1,
+                BaseAttack = 0,
+                Cost = 0,
+                Description = "Test"
+            },
+            new UnitCard()
+            {
+                ID = 2,
+                Name = "test2",
+                BaseHP = 40,
+                AttackPriority = 1,
+                BaseAttack = 0,
+                Cost = 0,
+                Description = "Test"
+            }
+        });
+
         public TestCards()
         {
             FirstCard = new UnitCard()
@@ -38,6 +148,8 @@ namespace GameData.Tests.TestData
                 Cost = 0,
                 Description = "Test"
             };
+
+
             AttackCard = new UnitCard()
             {
                 ID = 3,

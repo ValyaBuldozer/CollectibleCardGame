@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using GameData.Controllers.Data;
 using GameData.Models;
 using GameData.Models.Cards;
+using GameData.Models.Observer;
 using GameData.Models.Units;
 
 namespace GameData.Controllers.Table
@@ -38,6 +39,21 @@ namespace GameData.Controllers.Table
         /// <param name="sender">Атакующий юнит</param>
         /// <param name="target">Цель атаки</param>
         void HandleAttack(Unit sender, Unit target);
+
+        /// <summary>
+        /// Событие спавна юнита
+        /// </summary>
+        event EventHandler<UnitSpawnObserverAction> OnUnitSpawn;
+
+        /// <summary>
+        /// Событие смерти юнита
+        /// </summary>
+        event EventHandler<UnitDeathObserverAction> OnUnitDeath;
+
+        /// <summary>
+        /// Событие изменения состояия юнита - урон, хил, бафф
+        /// </summary>
+        event EventHandler<UnitStateChangeObserverAction> OnUnitStateChange;
     }
 
     public class UnitDispatcher : IUnitDispatcher
@@ -51,6 +67,10 @@ namespace GameData.Controllers.Table
             _actionController = actionController;
             _entityRepositoryController = entityRepositoryController;
         }
+
+        public event EventHandler<UnitSpawnObserverAction> OnUnitSpawn;
+        public event EventHandler<UnitDeathObserverAction> OnUnitDeath;
+        public event EventHandler<UnitStateChangeObserverAction> OnUnitStateChange;
 
         /// <summary>
         /// Спавн юнита при розыгрше карты (с боевым кличем)
@@ -74,6 +94,9 @@ namespace GameData.Controllers.Table
             unit.Player = sender;
             _actionController.ExecuteAction(unit.BattleCryActionInfo,sender,actionTarget);
             sender.TableUnits.Add(unit);
+            _entityRepositoryController.AddNewItem(unit);
+
+            OnUnitSpawn?.Invoke(this,new UnitSpawnObserverAction(unit));
             return true;
         }
 
@@ -97,6 +120,9 @@ namespace GameData.Controllers.Table
             unit.HealthPoint.DamageRecieved += OnUnitDamaged;
             unit.Player = sender;
             sender.TableUnits.Add(unit);
+            _entityRepositoryController.AddNewItem(unit);
+
+            OnUnitSpawn?.Invoke(this,new UnitSpawnObserverAction(unit));
             return true;
         }
 
@@ -106,8 +132,9 @@ namespace GameData.Controllers.Table
         /// <param name="unit">Юнит</param>
         public void Kill(Unit unit)
         {
-            if (unit.Player.TableUnits.Contains(unit))
-                unit.Player.TableUnits.Remove(unit);
+            if (!unit.Player.TableUnits.Contains(unit)) return;
+            unit.Player.TableUnits.Remove(unit);
+            OnUnitDeath?.Invoke(this,new UnitDeathObserverAction(unit));
         }
         
         /// <summary>
@@ -149,9 +176,11 @@ namespace GameData.Controllers.Table
 
         private void OnUnitDamaged(object sender, UnitRecievedDamageEventArgs e)
         {
-            if(e.Unit?.OnDamageRecievedActionInfo != null)
-                _actionController.ExecuteAction(e.Unit.OnDamageRecievedActionInfo,
-                    e.Unit.Player,null);
+            if(e.Unit?.OnDamageRecievedActionInfo == null) return;
+
+            OnUnitStateChange?.Invoke(this,new UnitStateChangeObserverAction(e.Unit,e.Unit.EntityId));
+            _actionController.ExecuteAction(e.Unit.OnDamageRecievedActionInfo,
+                e.Unit.Player, null);
         }
 
         private void OnUnitDies(object sender, ZeroHpEventArgs e)

@@ -133,7 +133,6 @@
       <DependentUpon>201803311858065_UsernameFix.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\Card.cs" />
     <Compile Include="Models\GameLobby.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserInfo.cs" />

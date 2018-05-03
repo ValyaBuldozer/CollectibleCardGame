@@ -81,9 +81,11 @@ namespace Server.Unity
             _container.RegisterType<ServerStateService>(new ContainerControlledLifetimeManager());
 
             //message handlers binding
-            _container.RegisterType<LogInMessageHandler>();
-            _container.RegisterType<RegistrationMessageHandler>();
-            _container.RegisterType<GameStartMessageHandler>();
+            _container.RegisterType<MessageHandlerBase<LogInMessage>,
+                LogInMessageHandler>();
+            _container.RegisterType<MessageHandlerBase<RegistrationMessage>,
+                RegistrationMessageHandler>();
+            _container.RegisterType<MessageHandlerBase<GameStartMessage>,GameStartMessageHandler>();
         }
 
         public static object Get(Type t)

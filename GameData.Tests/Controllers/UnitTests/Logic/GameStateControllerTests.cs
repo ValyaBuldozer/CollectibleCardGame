@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using GameData.Controllers.Data;
 using GameData.Controllers.Global;
+using GameData.Controllers.Table;
 using GameData.Models;
 using GameData.Models.Cards;
 using GameData.Tests.TestData;
@@ -43,11 +44,12 @@ namespace GameData.Tests.Controllers.UnitTests.Logic
             var playerTurnDispatcherMock = new Mock<IPlayerTurnDispatcher>();
             playerTurnDispatcherMock.Setup(mock => mock.Start(It.IsAny<double>()));
 
+            var cardDrawMock = new Mock<ICardDrawController>();
+            cardDrawMock.Setup(mock => mock.DealCardsToPlayer(It.IsAny<Player>(), 0));
+
             var gameStateController =
-                new GameStateController(tableCondition,playerTurnDispatcherMock.Object)
-                {
-                    DeckController = deckControllerMock.Object
-                };
+                new GameStateController(tableCondition,playerTurnDispatcherMock.Object,
+                    deckControllerMock.Object,null,cardDrawMock.Object);
 
             gameStateController.Start(firstPLayerDeck,"firstPlayer",testCards.FirstCard
                 ,secondPlayerDeck,"secondPlayer",testCards.SecondCard);
@@ -59,8 +61,8 @@ namespace GameData.Tests.Controllers.UnitTests.Logic
 
             playerTurnDispatcherMock.Verify(mock=>mock.Start(It.IsAny<double>()),Times.Once);
             deckControllerMock.Verify(foo=>foo.AddDeck(It.IsAny<string>(),It.IsAny<Stack<Card>>()),Times.AtLeastOnce);
-            deckControllerMock.Verify(mock=>mock.PopCards("firstPlayer", 4),Times.Once);
-            deckControllerMock.Verify(mock=>mock.PopCards("secondPlayer", 4),Times.Once);
+            
+            cardDrawMock.Verify(mock=>mock.DealCardsToPlayer(It.IsAny<Player>(),4));
 
             Assert.AreEqual(2,tableCondition.Players.Count);
             Assert.IsNotNull(firstPlayer,"Первый игрок не найден");

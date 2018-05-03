@@ -109,6 +109,7 @@
     <Compile Include="Enums\Enums.cs" />
     <Compile Include="Exceptions\PlayerTurnValidationException.cs" />
     <Compile Include="Exceptions\RepositoryItemAlreadyExistsExcepction.cs" />
+    <Compile Include="Kernel\Container.cs" />
     <Compile Include="Models\Entity.cs" />
     <Compile Include="Models\GameActions\CardActionInfo.cs" />
     <Compile Include="Models\Cards\Card.cs" />
@@ -151,6 +152,7 @@
     <Compile Include="Network\Messages\IContent.cs" />
     <Compile Include="Network\Messages\LogInMessage.cs" />
     <Compile Include="Network\Messages\MessageBase.cs" />
+    <Compile Include="Network\Messages\ObserverActionMessage.cs" />
     <Compile Include="Network\Messages\PlayerTurnMessage.cs" />
     <Compile Include="Network\Messages\PlayerTurnStartMessage.cs" />
     <Compile Include="Network\Messages\RegistrationMessage.cs" />

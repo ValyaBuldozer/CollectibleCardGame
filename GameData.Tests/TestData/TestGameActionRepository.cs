@@ -42,20 +42,15 @@ namespace GameData.Tests.TestData
                     action: ((controller, sender, target, parameter) =>
                     {
                         var player = (Player) sender;
-                        Player enemyPlayer=null;
-                        foreach (var pplayer in controller.GetTableCondition.Players)
-                        {
-                            if (!Equals(pplayer, player))
-                                 enemyPlayer = pplayer;
-
-                        }
+                        Player enemyPlayer =
+                            controller.GetTableCondition.Players.FirstOrDefault(p => p.Username != player.Username);
                         foreach (var iUnit in enemyPlayer.TableUnits)
                         {
                             iUnit.HealthPoint.RecieveDamage(parameter);
                         }
 
                     })),
-                new GameAction(name:"HealAllFriendlyUnits",id:4,description:"test",parameterType:ActionParameterType.Buff,
+                new GameAction(name:"HealAllFriendlyUnits",id:4,description:"test",parameterType:ActionParameterType.Heal,
                     action: ((controller, sender, target, parameter) =>
                     {
                         var player = (Player) sender;
@@ -75,13 +70,9 @@ namespace GameData.Tests.TestData
                             iUnit.HealthPoint.RecieveDamage(parameter);
                         }
 
-                        Player enemyPlayer=null;
-                        foreach (var pplayer in controller.GetTableCondition.Players)
-                        {
-                            if (!Equals(pplayer, player))
-                                enemyPlayer = pplayer;
+                        Player enemyPlayer =
+                            controller.GetTableCondition.Players.FirstOrDefault(p => p.Username != player.Username);
 
-                        }
                         foreach (var iUnit in enemyPlayer.TableUnits)
                         {
                             iUnit.HealthPoint.RecieveDamage(parameter);
@@ -116,13 +107,8 @@ namespace GameData.Tests.TestData
                     {
                        
                         var player = (Player) sender;
-                        Player enemyPlayer=null;
-                        foreach (var pplayer in controller.GetTableCondition.Players)
-                        {
-                            if (!Equals(pplayer, player))
-                                enemyPlayer = pplayer;
-
-                        }
+                        Player enemyPlayer =
+                            controller.GetTableCondition.Players.FirstOrDefault(p => p.Username != player.Username);
 
                         if (enemyPlayer.TableUnits.Count != 0)
                         {

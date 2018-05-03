@@ -1,18 +1,28 @@
-﻿using GameData.Models.Action;
+﻿using GameData.Enums;
+using GameData.Models.Action;
 using GameData.Models.Units;
 
 namespace GameData.Models.Observer
 {
     public class GameActionTriggerObserverAction : ObserverAction
     {
-        public GameAction GameAction { set; get; }
+        public int GameActionId { set; get; }
 
-        public Unit SenderUnit { set; get; }
+        public Entity Sender { set; get; }
 
-        public GameActionTriggerObserverAction(GameAction gameAction, Unit sender = null)
+        public Entity Target { set; get; }
+
+        public GameActionTriggerObserverAction(int gameActionId, Entity sender, Entity target)
         {
-            GameAction = gameAction;
-            SenderUnit = sender;
+            Type = ObserverActionType.PlayerAction;
+            GameActionId = gameActionId;
+            Sender = sender;
+            Target = target;
+        }
+
+        public GameActionTriggerObserverAction()
+        {
+            Type = ObserverActionType.PlayerAction;
         }
     }
 }

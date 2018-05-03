@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GameData.Enums;
 using GameData.Models.Cards;
 using GameData.Models.Units;
 using Newtonsoft.Json;
 
 namespace GameData.Models
 {
-    public class Player
+    public class Player : Entity
     {
         public string Username { set; get; }
 
@@ -25,6 +26,7 @@ namespace GameData.Models
 
         public Player(UnitCard hero)
         {
+            EntityType = EntityType.Player;
             HeroUnit = new HeroUnit(this,hero);
             HandCards = new List<Card>();
             TableUnits = new List<Unit>();

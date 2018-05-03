@@ -8,11 +8,42 @@ namespace GameData.Controllers.Data
 {
     public interface IDataRepositoryController<T>
     {
+        /// <summary>
+        /// Получить элемент по индексу
+        /// </summary>
+        /// <param name="id">Индекс</param>
+        /// <returns></returns>
         T GetById(int id);
+
+        /// <summary>
+        /// Добавить элемент с указанным индексом
+        /// </summary>
+        /// <param name="element">Элемент</param>
         void Add(T element);
-        void AddNewItem(ref T element);
+
+        /// <summary>
+        /// Добавть элемент с присвоением индекса (переданнному элементу будет присвоен новый индекс)
+        /// </summary>
+        /// <param name="element">Элемент</param>
+        void AddNewItem(T element);
+
+        /// <summary>
+        /// Удалить элемент из репозитория
+        /// </summary>
+        /// <param name="element">Элемент</param>
         void Remove(T element);
+
+        /// <summary>
+        /// Удалить элемент с указанным id из репозитория
+        /// </summary>
+        /// <param name="id">Индекс</param>
         void Remove(int id);
+
+        /// <summary>
+        /// Переприсвоить элемент с указанным индексом в репозитории
+        /// </summary>
+        /// <param name="elemnt">Элемент</param>
+        /// <param name="id">Индекс</param>
         void Edit(T elemnt, int id);
     }
 }

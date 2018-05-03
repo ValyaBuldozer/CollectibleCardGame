@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Castle.Components.DictionaryAdapter;
 using GameData.Controllers.Data;
 using GameData.Enums;
 using GameData.Models;
+using GameData.Models.Cards;
 using GameData.Models.Repository;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -49,6 +51,25 @@ namespace GameData.Tests.Controllers.UnitTests.Data
             Assert.AreEqual(cardItem.EntityId, 0);
             Assert.AreEqual(playerItem.EntityId,  1);
             Assert.AreEqual(sceneItem.EntityId, 2);
+        }
+
+        [TestMethod]
+        public void AddIdReferenceTest()
+        {
+            UnitCard card = new UnitCard();
+            EntityRepository repository = new EntityRepository()
+            {
+                Collection = new EditableList<Entity>()
+                { 
+                    new Entity(0,EntityType.Card),
+                    new Entity(1,EntityType.Card)
+                }
+            };
+            EntityRepositoryController controller = new EntityRepositoryController(repository);
+            
+            controller.AddNewItem(card);
+
+            Assert.AreEqual(card.EntityId,2);
         }
     }
 }

@@ -13,7 +13,8 @@ namespace GameData.Enums
         PlayerTurnStartMessage,
         GameResultMessage,
         DisconnectMessage,
-        ErrorMessage
+        ErrorMessage,
+        ObserverActionMessage
     }
 
     public enum Fraction
@@ -80,7 +81,7 @@ namespace GameData.Enums
         CardDraw,
         UnitSpawn,
         UnitDeath,
-        UnitHpChange,
+        UnitStateChange,
         PlayerAction,
         TurnStart,
         TurnEnd,

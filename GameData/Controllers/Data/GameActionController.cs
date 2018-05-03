@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using GameData.Controllers.Table;
 using GameData.Models;
 using GameData.Models.Action;
+using GameData.Models.Observer;
 using GameData.Models.Units;
 
 namespace GameData.Controllers.Data
@@ -13,21 +14,24 @@ namespace GameData.Controllers.Data
     public interface IGameActionController
     {
         GameActionInfo GetGameActionInfo(CardActionInfo cardInfo);
-        void ExecuteAction(GameActionInfo actionInfo, object sender, Unit target);
-        void ExecuteAction(CardActionInfo actionInfo, object sender, Unit target);
+        void ExecuteAction(GameActionInfo actionInfo, Entity sender, Unit target);
+        void ExecuteAction(CardActionInfo actionInfo, Entity sender, Unit target);
+        event EventHandler<GameActionTriggerObserverAction> ActionTrigerred;
     }
 
     public class GameActionController : IGameActionController
     {
         private readonly IDataRepositoryController<GameAction> _repositoryController;
-        private readonly InActionTableController _tableController;
+        private readonly IActionTableControlller _tableController;
 
         public GameActionController(IDataRepositoryController<GameAction> repositoryController,
-            InActionTableController tableController)
+             IActionTableControlller tableController)
         {
             _repositoryController = repositoryController;
             _tableController = tableController;
         }
+
+        public event EventHandler<GameActionTriggerObserverAction> ActionTrigerred;
 
         public GameActionInfo GetGameActionInfo(CardActionInfo cardInfo)
         {
@@ -46,15 +50,23 @@ namespace GameData.Controllers.Data
             };
         }
 
-        public void ExecuteAction(GameActionInfo actionInfo, object sender, Unit target)
+        public void ExecuteAction(GameActionInfo actionInfo, Entity sender, Unit target)
         {
             actionInfo.Action?.Action.Invoke(_tableController,sender,target,actionInfo.Parameter);
+            ActionTrigerred?.Invoke(this,new GameActionTriggerObserverAction(actionInfo.Action.ID,
+                sender,target));
         }
 
-        public void ExecuteAction(CardActionInfo actionInfo, object sender, Unit target)
+        public void ExecuteAction(CardActionInfo actionInfo, Entity sender, Unit target)
         {
-            GetGameActionInfo(actionInfo)?.Action.Action.Invoke(
+            var action = GetGameActionInfo(actionInfo);
+
+            if(action == null) return;
+
+            GetGameActionInfo(actionInfo).Action.Action.Invoke(
                 _tableController, sender, target, actionInfo.ParameterValue);
+            ActionTrigerred?.Invoke(this,new GameActionTriggerObserverAction(action.Action.ID,
+                sender,target));
         }
     }
 }

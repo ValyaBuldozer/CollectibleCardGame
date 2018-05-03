@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using GameData.Enums;
+using GameData.Models.Cards;
 using GameData.Network.Messages;
 using Server.Controllers.Repository;
 using Server.Models;
@@ -25,21 +27,44 @@ namespace Server.Controllers
         /// </summary>
         /// <param name="client"></param>
         /// <returns>true - лобби создано, false - игрок добавлен в очередь</returns>
-        public bool FindLobby(Client client)
+        public bool FindLobby(Client client,Stack<Card> deck, UnitCard heroUnit)
         {
             if (_clientsQueueController.GetClientsQueue().Count == 0)
             {
+                client.CurrentLobby = new GameLobby()
+                {
+                    FirstClient = client,
+                    FirstPlayerDeck = deck,
+                    FirstPlayerHeroUnit = heroUnit
+                };
                 _clientsQueueController.Enqueue(client);
                 return false;
             }
 
-            var secondClient = _clientsQueueController.Dequeue();
+            var firstPlayerClient = _clientsQueueController.Dequeue();
 
             //todo: запалить многопоточность - слабое место
 
             try
             {
-                CreateLobby(firstClient: client, secondClient: secondClient);
+                //todo : говнокод что делать то
+                //отправляем сообщения о начале игры обоим клиентам
+                var message = new MessageBase(MessageBaseType.GameStartMessage, new GameStartMessage()
+                {
+                    EnemyUsername = firstPlayerClient.User.Username
+                }, null);
+                client.ClientController.SendMessage(message);
+                ((GameStartMessage)message.Content).EnemyUsername = client.User.Username;
+                firstPlayerClient.ClientController.SendMessage(message);
+
+                client.CurrentLobby = firstPlayerClient.CurrentLobby;
+                firstPlayerClient.CurrentLobby.SecondClient = client;
+                firstPlayerClient.CurrentLobby.SecondPlayerDeck = deck;
+                firstPlayerClient.CurrentLobby.SecondPlayerHeroUnit = heroUnit;
+
+                client.CurrentLobby.InitializeGame();
+                client.CurrentLobby.StartGame();
+
                 return true;
             }
             catch (NullReferenceException)
@@ -62,14 +87,14 @@ namespace Server.Controllers
 
             var message = new MessageBase(MessageBaseType.GameStartMessage, new GameStartMessage()
             {
-                TableCondition = gameLobby.TableCondition,
+                //TableCondition = gameLobby.TableCondition,
                 EnemyUsername = secondClient.User.Username
             }, null);
 
             firstClient.ClientController.SendMessage(message);
             firstClient.CurrentLobby = gameLobby;
 
-            (message.Content as GameStartMessage).EnemyUsername = firstClient.User.Username;
+            ((GameStartMessage) message.Content).EnemyUsername = firstClient.User.Username;
             secondClient.ClientController.SendMessage(message);
             secondClient.CurrentLobby = gameLobby;
 
