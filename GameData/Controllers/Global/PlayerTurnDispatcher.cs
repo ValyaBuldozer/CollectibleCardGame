@@ -79,7 +79,6 @@ namespace GameData.Controllers.Global
         {
             if(_playersCyclicQueue.Count() == 0)
                 _playersCyclicQueue = new CyclicQueue<Player>(_tableCondition.Players);
-            CurrentPlayer = _playersCyclicQueue.Dequeue();
 
             Timer.Enabled = _settings.IsPlayerTurnTimerEnabled;
         }

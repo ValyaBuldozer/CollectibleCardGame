@@ -14,7 +14,7 @@ namespace GameData.Models.Observer
 
         public GameActionTriggerObserverAction(int gameActionId, Entity sender, Entity target)
         {
-            Type = ObserverActionType.PlayerAction;
+            Type = ObserverActionType.GameAction;
             GameActionId = gameActionId;
             Sender = sender;
             Target = target;
@@ -22,7 +22,7 @@ namespace GameData.Models.Observer
 
         public GameActionTriggerObserverAction()
         {
-            Type = ObserverActionType.PlayerAction;
+            Type = ObserverActionType.GameAction;
         }
     }
 }

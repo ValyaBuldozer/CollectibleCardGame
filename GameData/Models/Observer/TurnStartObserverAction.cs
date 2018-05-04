@@ -1,4 +1,6 @@
-﻿namespace GameData.Models.Observer
+﻿using GameData.Enums;
+
+namespace GameData.Models.Observer
 {
     public class TurnStartObserverAction : Observer.ObserverAction
     {
@@ -7,8 +9,12 @@
         public TurnStartObserverAction(Player player)
         {
             CurrentPlayer = player;
+            Type = ObserverActionType.TurnStart;
         }
 
-        public TurnStartObserverAction() { }
+        public TurnStartObserverAction()
+        {
+            Type = ObserverActionType.TurnStart;
+        }
     }
 }
