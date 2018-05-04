@@ -44,6 +44,16 @@ namespace GameData.Tests.TestData
         {
             new UnitCard()
             {
+                ID = 5,
+                Name = "Требушет",
+                BaseHP = 2,
+                AttackPriority = 1,
+                BaseAttack = 8,
+                Cost = 0,
+                Description = "Test"
+            },
+            new UnitCard()
+            {
                 ID = 4,
                 Name = "Лучник",
                 BaseHP = 3,
@@ -95,16 +105,6 @@ namespace GameData.Tests.TestData
                 Cost = 0,
                 Description = "Test",
                 DamageRecievedActionInfo = new CardActionInfo(){ActionId = 10,ParameterType = ActionParameterType.Buff,ParameterValue = 2}
-            },
-            new UnitCard()
-            {
-                ID = 5,
-                Name = "Требушет",
-                BaseHP = 2,
-                AttackPriority = 1,
-                BaseAttack = 8,
-                Cost = 0,
-                Description = "Test"
             },
             new SpellCard()
             {

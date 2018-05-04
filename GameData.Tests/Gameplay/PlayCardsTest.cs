@@ -67,8 +67,14 @@ namespace GameData.Tests.Gameplay
             var firstDeck = testCards.FirstRandomDeck;
             var secondDeck = testCards.FirstRandomDeck;
 
+            var archerCard = firstDeck.FirstOrDefault(c => c.Name == "Лучник");
+            var downKnightCard = firstDeck.FirstOrDefault(c => c.Name == "Павший рыцарь");
+            firstDeck.Push(archerCard);
+            firstDeck.Push(downKnightCard);
+
             Container container = new Container();
             container.Initialize();
+
 
             container.Get<IGameStateController>().Start(firstDeck, "FirstPlayer", testCards.FirstCard,
                 secondDeck, "SecondPlayer", testCards.SecondCard);
@@ -106,6 +112,8 @@ namespace GameData.Tests.Gameplay
             var testCards = new TestCards2();
             var firstDeck = testCards.FirstRandomDeck;
             var secondDeck = testCards.FirstRandomDeck;
+
+
 
             Container container = new Container();
             container.Initialize();
@@ -346,7 +354,7 @@ namespace GameData.Tests.Gameplay
 
 
             //формируем второй ход - спавн второго игрока
-            var secondPlayerUnitCard = secondPlayer.HandCards.FirstOrDefault(с => с.Name == "Лучник"); //если заменить Лучника например на Мечника то сработает
+            var secondPlayerUnitCard = secondPlayer.HandCards.FirstOrDefault(с => с.Name == "Лучник"); 
             CardDeployPlayerTurn playerTurn2 = new CardDeployPlayerTurn(secondPlayer, secondPlayerUnitCard);
             container.Get<IPlayerTurnHandler<CardDeployPlayerTurn>>().Execute(playerTurn2);
 
