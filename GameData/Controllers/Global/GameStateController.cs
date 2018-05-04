@@ -75,7 +75,7 @@ namespace GameData.Controllers.Global
                 _cardDrawController.DealCardsToPlayer(iplayer,4);
 
             //начинаем отсчет ходов (период хода в мс)
-            _playerTurnDispatcher.Start(30000);
+            _playerTurnDispatcher.Start();
 
         }
 

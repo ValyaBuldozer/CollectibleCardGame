@@ -60,12 +60,15 @@ namespace GameData.Controllers.Table
     {
         private readonly IGameActionController _actionController;
         private readonly IDataRepositoryController<Entity> _entityRepositoryController;
+        private readonly GameSettings _settings;
 
         public UnitDispatcher(IGameActionController actionController, 
-            IDataRepositoryController<Entity> entityRepositoryController)
+            IDataRepositoryController<Entity> entityRepositoryController,
+            GameSettings settings)
         {
             _actionController = actionController;
             _entityRepositoryController = entityRepositoryController;
+            _settings = settings;
         }
 
         public event EventHandler<UnitSpawnObserverAction> OnUnitSpawn;
@@ -81,7 +84,7 @@ namespace GameData.Controllers.Table
         /// <returns></returns>
         public bool CardPlayedSpawn(UnitCard card, Player sender, Unit actionTarget)
         {
-            if (sender.TableUnits.Count >= 10)
+            if (sender.TableUnits.Count >= _settings.PlayerTableUnitsMaxCount)
                 return false;
 
             var unit = GetUnit(card);
@@ -180,7 +183,7 @@ namespace GameData.Controllers.Table
 
             OnUnitStateChange?.Invoke(this,new UnitStateChangeObserverAction(e.Unit,e.Unit.EntityId));
             _actionController.ExecuteAction(e.Unit.OnDamageRecievedActionInfo,
-                e.Unit.Player, null);
+                e.Unit, null);
         }
 
         private void OnUnitDies(object sender, ZeroHpEventArgs e)

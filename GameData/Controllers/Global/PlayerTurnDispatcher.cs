@@ -16,7 +16,7 @@ namespace GameData.Controllers.Global
     {
         Player CurrentPlayer { get; }
         void NextPlayer();
-        void Start(double interval);
+        void Start();
         void Stop();
         event EventHandler<TurnStartObserverAction> TurnStart;
     }
@@ -26,6 +26,7 @@ namespace GameData.Controllers.Global
         private readonly TableCondition _tableCondition;
         private CyclicQueue<Player> _playersCyclicQueue;
         private readonly ICardDrawController _cardsDispatcher;
+        private readonly GameSettings _settings;
 
         public Timer Timer { set; get; }
 
@@ -33,16 +34,19 @@ namespace GameData.Controllers.Global
 
         public event EventHandler<TurnStartObserverAction> TurnStart; 
 
-        public PlayerTurnDispatcher(TableCondition tableCondition,ICardDrawController cardsDispatcher)
+        public PlayerTurnDispatcher(TableCondition tableCondition,ICardDrawController cardsDispatcher,
+            GameSettings settings)
         {
             _tableCondition = tableCondition;
             _cardsDispatcher = cardsDispatcher;
+            _settings = settings;
 
             _playersCyclicQueue = new CyclicQueue<Player>(tableCondition.Players);
             Timer = new Timer();
             Timer.Elapsed += Timer_Elapsed;
             Timer.AutoReset = true;
-            //CurrentPlayer = _playersCyclicQueue.Dequeue();
+
+            Timer.Interval = _settings.PlayerTurnInterval;
         }
 
         private void Timer_Elapsed(object sender, ElapsedEventArgs e)
@@ -71,15 +75,13 @@ namespace GameData.Controllers.Global
             }
         }
 
-        public void Start(double interval)
+        public void Start()
         {
             if(_playersCyclicQueue.Count() == 0)
                 _playersCyclicQueue = new CyclicQueue<Player>(_tableCondition.Players);
             CurrentPlayer = _playersCyclicQueue.Dequeue();
 
-            Timer.Enabled = false;
-            Timer.Interval = interval;
-            Timer.Enabled = true;
+            Timer.Enabled = _settings.IsPlayerTurnTimerEnabled;
         }
 
         public void Stop()

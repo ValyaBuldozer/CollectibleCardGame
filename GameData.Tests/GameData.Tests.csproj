@@ -80,6 +80,7 @@
     <Compile Include="TestData\TestCards.cs" />
     <Compile Include="TestData\TestCards2.cs" />
     <Compile Include="TestData\TestGameActionRepository.cs" />
+    <Compile Include="TestData\TestGameSettings.cs" />
     <Compile Include="TestData\TestHeroUnit.cs" />
     <Compile Include="TestData\TestTableCondition.cs" />
   </ItemGroup>

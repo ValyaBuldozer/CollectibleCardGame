@@ -29,7 +29,7 @@ namespace GameData.Tests.Gameplay
             var secondDeck = testCards.FirstRandomDeck;
 
             Container container = new Container();
-            container.Initialize();
+            container.Initialize(TestGameSettings.Get);
 
             container.Get<IGameStateController>().Start(firstDeck, "FirstPlayer", testCards.FirstCard,
                 secondDeck, "SecondPlayer", testCards.SecondCard);
@@ -68,7 +68,7 @@ namespace GameData.Tests.Gameplay
             var secondDeck = testCards.FirstRandomDeck;
 
             Container container = new Container();
-            container.Initialize();
+            container.Initialize(TestGameSettings.Get);
 
             container.Get<IGameStateController>().Start(firstDeck, "FirstPlayer", testCards.FirstCard,
                 secondDeck, "SecondPlayer", testCards.SecondCard);
@@ -108,7 +108,7 @@ namespace GameData.Tests.Gameplay
             var secondDeck = testCards.FirstRandomDeck;
 
             Container container = new Container();
-            container.Initialize();
+            container.Initialize(TestGameSettings.Get);
 
             container.Get<IGameStateController>().Start(firstDeck, "FirstPlayer", testCards.FirstCard,
                 secondDeck, "SecondPlayer", testCards.SecondCard);
@@ -161,7 +161,7 @@ namespace GameData.Tests.Gameplay
             var secondDeck = testCards.FirstRandomDeck;
 
             Container container = new Container();
-            container.Initialize();
+            container.Initialize(TestGameSettings.Get);
 
             container.Get<IGameStateController>().Start(firstDeck, "FirstPlayer", testCards.FirstCard,
                 secondDeck, "SecondPlayer", testCards.SecondCard);
@@ -206,7 +206,7 @@ namespace GameData.Tests.Gameplay
             var secondDeck = testCards.FirstRandomDeck;
 
             Container container = new Container();
-            container.Initialize();
+            container.Initialize(TestGameSettings.Get);
 
             container.Get<IGameStateController>().Start(firstDeck, "FirstPlayer", testCards.FirstCard,
                 secondDeck, "SecondPlayer", testCards.SecondCard);
@@ -253,7 +253,7 @@ namespace GameData.Tests.Gameplay
             var secondDeck = testCards.FirstRandomDeck;
 
             Container container = new Container();
-            container.Initialize();
+            container.Initialize(TestGameSettings.Get);
 
             container.Get<IGameStateController>().Start(firstDeck, "FirstPlayer", testCards.FirstCard,
                 secondDeck, "SecondPlayer", testCards.SecondCard);
@@ -287,7 +287,7 @@ namespace GameData.Tests.Gameplay
             var secondDeck = testCards.FirstRandomDeck;
 
             Container container = new Container();
-            container.Initialize();
+            container.Initialize(TestGameSettings.Get);
 
             container.Get<IGameStateController>().Start(firstDeck, "FirstPlayer", testCards.FirstCard,
                 secondDeck, "SecondPlayer", testCards.SecondCard);
@@ -327,7 +327,7 @@ namespace GameData.Tests.Gameplay
             var secondDeck = testCards.FirstRandomDeck;
 
             Container container = new Container();
-            container.Initialize();
+            container.Initialize(TestGameSettings.Get);
 
             container.Get<IGameStateController>().Start(firstDeck, "FirstPlayer", testCards.FirstCard,
                 secondDeck, "SecondPlayer", testCards.SecondCard);
