@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using GameData.Enums;
 using GameData.Models.Action;
 using GameData.Models.Cards;
+using GameData.Models.Units;
 
 namespace GameData.Models.Repository
 {
@@ -128,6 +129,26 @@ namespace GameData.Models.Repository
                             controller.GetTableCondition.Players.FirstOrDefault(p => p.Username != player.Username);
 
                         enemyPlayer.HeroUnit.HealthPoint.RecieveDamage(parameter);
+
+
+
+                    })),
+                new GameAction(name:"SelfIncreaseAttack",id:10,description:"Юнит увеличивает свой показатель атаки",parameterType:ActionParameterType.Buff,
+                    action: ((controller, sender, target, parameter) =>
+                    {
+                        var unit = (Unit) sender;
+                        unit.Attack += parameter;
+                        
+
+
+
+                    })),
+                new GameAction(name:"SelfIncreaseHealth",id:11,description:"Юнит увеличивает свой показатель здоровья",parameterType:ActionParameterType.Buff,
+                    action: ((controller, sender, target, parameter) =>
+                    {
+
+                        var unit = (Unit) sender;
+                        unit.HealthPoint.Heal(parameter);
 
 
 
