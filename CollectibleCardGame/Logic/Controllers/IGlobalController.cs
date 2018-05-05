@@ -9,7 +9,6 @@ namespace CollectibleCardGame.Logic.Controllers
 {
     public interface IGlobalController
     {
-        INetworkController ConnectionController { set; get; }
         void OnStartup();
         void OnConnectionLost();
         void OnClose();

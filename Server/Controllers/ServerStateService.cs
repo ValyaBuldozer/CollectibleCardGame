@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using GameData.Enums;
+using GameData.Models;
 using GameData.Models.Cards;
 using GameData.Network.Messages;
 using Server.Controllers.Repository;
@@ -62,7 +63,18 @@ namespace Server.Controllers
                 firstPlayerClient.CurrentLobby.SecondPlayerDeck = deck;
                 firstPlayerClient.CurrentLobby.SecondPlayerHeroUnit = heroUnit;
 
-                client.CurrentLobby.InitializeGame();
+                //todo :изменение настроек
+
+                var defaultSettings = new GameSettings()
+                {
+                    PlayerTurnInterval = 60000,
+                    IsPlayerTurnTimerEnabled = true,
+                    MaxDeckCardsCount = 30,
+                    PlayerHandCardsMaxCount = 10,
+                    PlayersCount = 2,
+                    PlayerTableUnitsMaxCount = 10
+                };
+                client.CurrentLobby.InitializeGame(defaultSettings);
                 client.CurrentLobby.StartGame();
 
                 return true;
@@ -82,7 +94,7 @@ namespace Server.Controllers
                 throw new NullReferenceException();
 
             var gameLobby = new GameLobby(firstClient, secondClient);
-            gameLobby.InitializeGame();
+            //gameLobby.InitializeGame();
 
 
             var message = new MessageBase(MessageBaseType.GameStartMessage, new GameStartMessage()

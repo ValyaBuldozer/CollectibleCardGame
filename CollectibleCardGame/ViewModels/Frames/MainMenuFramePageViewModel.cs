@@ -60,7 +60,11 @@ namespace CollectibleCardGame.ViewModels.Frames
            
         }
 
-        public ObservableCollection<MainMenuPart> Menus { set; get; }
+        public ObservableCollection<MainMenuPart> Menus
+        {
+            set;
+            get;
+        }
 
         public MainMenuPart SelectedMenuItem
         {

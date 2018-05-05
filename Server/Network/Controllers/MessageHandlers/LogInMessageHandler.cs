@@ -22,7 +22,7 @@ namespace Server.Network.Controllers.MessageHandlers
 
             try
             {
-                var user = UnityKernel.Get<UserService>().LogIn(message.Username, message.Password);
+                string user = UnityKernel.Get<UserService>().LogIn(message.Username, message.Password);
                 message.AnswerData = user;
                 return message;
             }

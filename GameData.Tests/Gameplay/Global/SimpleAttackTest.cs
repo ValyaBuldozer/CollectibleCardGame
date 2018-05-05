@@ -27,7 +27,7 @@ namespace GameData.Tests.Gameplay.Global
             var secondDeck = testDeck.GetFirstDeck;
 
             Container container = new Container();
-            container.Initialize();
+            container.Initialize(TestGameSettings.Get);
             var observerRepository = container.Get<ObserverActionRepository>();
             var turnDispatcher = container.Get<IPlayerTurnDispatcher>();
             var cardDeployHandler = container.Get<IPlayerTurnHandler<CardDeployPlayerTurn>>();

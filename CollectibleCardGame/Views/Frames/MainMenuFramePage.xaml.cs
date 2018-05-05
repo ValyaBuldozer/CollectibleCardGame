@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using CollectibleCardGame.ViewModels.Windows;
+using Unity.Attributes;
 
 namespace CollectibleCardGame.Views.Frames
 {
@@ -20,6 +22,13 @@ namespace CollectibleCardGame.Views.Frames
     /// </summary>
     public partial class MainMenuFramePage : Page
     {
+        [Dependency]
+        public MainWindowViewModel ViewModel
+        {
+            get => DataContext as MainWindowViewModel;
+            set => DataContext = value;
+        }
+
         public MainMenuFramePage()
         {
             InitializeComponent();
