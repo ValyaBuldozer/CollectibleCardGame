@@ -7,7 +7,7 @@
              xmlns:System="clr-namespace:System;assembly=mscorlib" x:Class="CollectibleCardGame.Views.UserControls.UnitCardUserControl"
              mc:Ignorable="d" 
              AllowDrop="True"
-             d:DesignHeight="410" d:DesignWidth="220">
+             d:DesignHeight="410" d:DesignWidth="220" SizeChanged="UserControl_SizeChanged">
 
     <!--410x220-->
     <Border BorderThickness="2" BorderBrush="Black" CornerRadius="5">
@@ -78,11 +78,20 @@
                             </Border.Effect>
                         </Border>
 
-                        <ItemsControl x:Name="AbilityStack" Grid.Column="0" Grid.ColumnSpan="3" Margin="0,30,0,0">
+                       
+
+                        
+                    </Grid>
+                    <Grid Grid.Column="1" Grid.Row="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <ItemsControl x:Name="AbilityStack" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center" Grid.ColumnSpan="3" >
                             <!--ItemsSource="{Binding  ViewModel.Parameters, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">-->
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
-                                    <WrapPanel   Orientation="Vertical" Margin="0,40,0,0" />
+                                    <WrapPanel   Orientation="Vertical" />
                                 </ItemsPanelTemplate>
                             </ItemsControl.ItemsPanel>
 
@@ -118,11 +127,23 @@
                         </ItemsControl>
                     </Grid>
 
-                    <Ellipse Grid.Row="0" Stroke="Black" StrokeThickness="3" Grid.Column="1"  HorizontalAlignment="Center" VerticalAlignment="Center"
-                             Fill="Gold" Width="55" Height="55" Margin="0,2,0,0" />
+                    <!--<Ellipse Grid.Row="0" Stroke="Black" StrokeThickness="3" Grid.Column="1"  HorizontalAlignment="Center" VerticalAlignment="Center"
+                             Fill="Gold" Width="55" Height="55" Margin="0,2,0,0" />-->
+                    <!--<TextBlock Grid.Row="0" x:Name="UnitCost" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"
+                               Text="{Binding Cost}" FontSize="52" FontWeight="Bold" Margin="0,0,0,5"  />-->
 
-                    <TextBlock Grid.Row="0" x:Name="UnitCost" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"
-                               Text="{Binding Cost}" FontSize="52" FontWeight="Bold" Margin="0,0,0,5"  />
+                    <Border CornerRadius="50"
+                            Width="55"
+                            Height="55"
+                            Background="Gold"
+                            BorderBrush="Black"
+                            BorderThickness="3"
+                            Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <TextBlock  x:Name="UnitCost" HorizontalAlignment="Center" VerticalAlignment="Center" Margin=" 0,0,1,5"
+                                   Text="{Binding Cost}" FontWeight="Bold" FontSize="42" />
+                    </Border>
+
+                    
 
                 </Grid>
 
@@ -147,7 +168,7 @@
                             BorderBrush="Black"
                             BorderThickness="3"
                             Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Margin=" 0,0,1,5"
+                        <TextBlock  x:Name="UnitAttck" HorizontalAlignment="Center" VerticalAlignment="Center" Margin=" 0,0,1,5"
                                    Text="{Binding Path=Attack}" FontWeight="Bold" FontSize="42" />
                     </Border>
                     <Border CornerRadius="50"
@@ -157,7 +178,7 @@
                             BorderBrush="Black"
                             BorderThickness="3"
                             Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Margin=" 0,0,1,5"
+                        <TextBlock  x:Name="UnitHealth" HorizontalAlignment="Center" VerticalAlignment="Center" Margin=" 0,0,1,5"
                                    Text="{Binding Path=Health}" FontWeight="Bold" FontSize="42" />
                     </Border>
                     <!--<Ellipse Grid.Column="1" Stroke="Black" StrokeThickness="3" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="#EF3F37" Width="55" Height="55" Margin="0,0,0,0" />

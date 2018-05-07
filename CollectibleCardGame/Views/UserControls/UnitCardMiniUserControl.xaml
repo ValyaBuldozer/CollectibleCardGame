@@ -60,11 +60,18 @@
                             </Border.Effect>
                         </Border>-->
 
-                        <ItemsControl x:Name="AbilityStack" Grid.Column="0" Grid.ColumnSpan="3">
+                        
+                    </Grid>
+                    <Grid Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Top" HorizontalAlignment="Center">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="2"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <ItemsControl x:Name="AbilityStack" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center" Grid.ColumnSpan="3" >
                             <!--ItemsSource="{Binding  ViewModel.Parameters, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">-->
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
-                                    <WrapPanel   Orientation="Vertical" Margin="0,2,0,0" />
+                                    <WrapPanel   Orientation="Vertical" />
                                 </ItemsPanelTemplate>
                             </ItemsControl.ItemsPanel>
 
@@ -73,10 +80,13 @@
                             <Image Source="../../Icons/settingsChange.png" Margin="2"/>-->
 
 
-                            <Rectangle Grid.Row="0" Stroke="Gold" StrokeThickness="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Width="55" Height="55" >
+                            <Rectangle Grid.Row="0" Stroke="Gold" RadiusX="5" RadiusY="5" StrokeThickness="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Width="55" Height="55">
                                 <Rectangle.Fill>
                                     <ImageBrush ImageSource="../../Images/IconsUnit/sword.png"/>
                                 </Rectangle.Fill>
+                                <Rectangle.Effect>
+                                    <DropShadowEffect   RenderingBias="Quality" Direction="315"  BlurRadius="10" ShadowDepth="8"/>
+                                </Rectangle.Effect>
                             </Rectangle>
 
                             <!--<ItemsControl.ItemTemplate>
@@ -97,7 +107,8 @@
                         </ItemsControl>
                     </Grid>
 
-                    
+
+
 
                 </Grid>
 
