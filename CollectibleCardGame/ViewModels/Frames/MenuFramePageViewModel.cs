@@ -10,7 +10,7 @@ using CollectibleCardGame.Views.Frames;
 
 namespace CollectibleCardGame.ViewModels.Frames
 {
-    class MainMenuFramePageViewModel : BaseViewModel
+    public class MenuFramePageViewModel : BaseViewModel
     {
         private Page _currentPage;
         private MainMenuPart _selectedMenuItem;
@@ -25,7 +25,7 @@ namespace CollectibleCardGame.ViewModels.Frames
             get => _currentPage;
         }
 
-        public MainMenuFramePageViewModel()
+        public MenuFramePageViewModel(GoGameFramePage goGameFramePage)
         {
             Menus = new ObservableCollection<MainMenuPart>
             {
@@ -33,7 +33,7 @@ namespace CollectibleCardGame.ViewModels.Frames
                 {
                     ImagePath = "/Images/Icons/search.png",
                     Title = "Играть",
-                    FramePage = new GoGameFramePage()
+                    FramePage = goGameFramePage
                 },
                 new MainMenuPart
                 {

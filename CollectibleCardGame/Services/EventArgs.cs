@@ -18,4 +18,14 @@ namespace CollectibleCardGame.Services
             Password = password;
         }
     }
+
+    public class GameRequestEventArgs : EventArgs
+    {
+        public string Fraction { get; }
+
+        public GameRequestEventArgs(string fraction)
+        {
+            Fraction = fraction;
+        }
+    }
 }

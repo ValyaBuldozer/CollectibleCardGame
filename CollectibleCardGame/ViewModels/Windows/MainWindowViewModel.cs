@@ -17,6 +17,7 @@ namespace CollectibleCardGame.ViewModels.Windows
         private string _busyMessage;
         private readonly LogInFramePageShell _logInFramePageShell;
         private readonly MainMenuFramePage _mainMenuFramePage;
+        private readonly GameEngineFramePage _gameEngineFramePage;
 
         public Page FramePage
         {
@@ -49,11 +50,11 @@ namespace CollectibleCardGame.ViewModels.Windows
         }
 
         public MainWindowViewModel(LogInFramePageShell logInFramePageShell,
-            MainMenuFramePage mainMenuFramePage)
+            MainMenuFramePage mainMenuFramePage,GameEngineFramePage gameEngineFramePage)
         {
             _logInFramePageShell = logInFramePageShell;
             _mainMenuFramePage = mainMenuFramePage;
-
+            _gameEngineFramePage = gameEngineFramePage;
             _framePage = _logInFramePageShell;
         }
 
@@ -65,6 +66,11 @@ namespace CollectibleCardGame.ViewModels.Windows
         public void SetMainMenuFrame()
         {
             FramePage = _mainMenuFramePage;
+        }
+
+        public void SetGameEngineFrame()
+        {
+            FramePage = _gameEngineFramePage;
         }
 
         public void StartBusyIndicator(string busyMessage)
