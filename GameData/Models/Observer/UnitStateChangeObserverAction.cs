@@ -23,5 +23,10 @@ namespace GameData.Models.Observer
             NewUnitState = newUnit;
             EntityId = entityId;
         }
+
+        public UnitStateChangeObserverAction()
+        {
+            Type = ObserverActionType.UnitStateChange;
+        }
     }
 }

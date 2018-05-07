@@ -60,5 +60,10 @@ namespace GameData.Models
             if (obj.GetType() != this.GetType()) return false;
             return Equals((Player) obj);
         }
+
+        public override string ToString()
+        {
+            return Username;
+        }
     }
 }
