@@ -108,10 +108,14 @@ namespace GameData.Network
 
         public NetworkMessage SerializeMessage(MessageBase messageBase)
         {
+            var settings = new JsonSerializerSettings()
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            };
             if (messageBase?.Content == null)
                 throw new NullReferenceException();
 
-            return new NetworkMessage(JsonConvert.SerializeObject(messageBase));
+            return new NetworkMessage(JsonConvert.SerializeObject(messageBase,settings));
         }
 
         public NetworkMessage SerializeMessage(IContent content)
@@ -158,7 +162,12 @@ namespace GameData.Network
                     break;
             }
 
-            return new NetworkMessage(JsonConvert.SerializeObject(messageBase));
+            var settings = new JsonSerializerSettings()
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            };
+
+            return new NetworkMessage(JsonConvert.SerializeObject(messageBase,settings));
         }
     }
 }

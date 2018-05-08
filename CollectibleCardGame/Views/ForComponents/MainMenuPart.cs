@@ -7,7 +7,7 @@ using System.Windows.Controls;
 
 namespace CollectibleCardGame.Views.ForComponents
 {
-    class MainMenuPart
+    public class MainMenuPart
     {
         public string Title { get; set; } // название
 

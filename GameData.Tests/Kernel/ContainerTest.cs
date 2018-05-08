@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GameData.Kernel;
+using GameData.Tests.TestData;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GameData.Tests.Kernel
@@ -16,7 +17,7 @@ namespace GameData.Tests.Kernel
         {
             Container container = new Container();
 
-            container.Initialize();
+            container.Initialize(TestGameSettings.Get);
 
             Assert.IsTrue(container != null);
         }

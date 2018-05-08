@@ -53,12 +53,12 @@ namespace Server.Models
             throw new NotImplementedException();
         }
 
-        public void InitializeGame()
+        public void InitializeGame(GameSettings settings)
         {
             if(FirstClient == null && SecondClient == null)
                 throw new NullReferenceException();
 
-            _gameDataContainer.Initialize();
+            _gameDataContainer.Initialize(settings);
             _gameDataContainer.Get<ObserverActionRepositoryController>().ItemAdded += OnObserverActionAdded;
             //todo : внедрение настроек
 

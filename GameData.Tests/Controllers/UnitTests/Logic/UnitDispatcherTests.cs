@@ -29,7 +29,7 @@ namespace GameData.Tests.Controllers.UnitTests.Logic
             var actiionMock = new Mock<IGameActionController>();
             actiionMock.Setup(mock => mock.ExecuteAction(new GameActionInfo(), null, null));
             //act
-            UnitDispatcher dispatcher = new UnitDispatcher(actiionMock.Object,null);
+            UnitDispatcher dispatcher = new UnitDispatcher(actiionMock.Object,null,TestGameSettings.Get);
             dispatcher.CardPlayedSpawn(cards.SecondCard, p1, null);
             //assert
             actiionMock.Verify(mock => mock.ExecuteAction(It.IsAny<GameActionInfo>(), p1, null));
@@ -51,7 +51,7 @@ namespace GameData.Tests.Controllers.UnitTests.Logic
             var actiionMock = new Mock<IGameActionController>();
             actiionMock.Setup(mock => mock.ExecuteAction(new GameActionInfo(), null, null));
             //act
-            UnitDispatcher dispatcher = new UnitDispatcher(actiionMock.Object,null);
+            UnitDispatcher dispatcher = new UnitDispatcher(actiionMock.Object,null, TestGameSettings.Get);
             dispatcher.CardPlayedSpawn(cards.SecondCard, p1, null);
             
             //assert
@@ -74,7 +74,7 @@ namespace GameData.Tests.Controllers.UnitTests.Logic
             var actiionMock = new Mock<IGameActionController>();
             actiionMock.Setup(mock => mock.ExecuteAction(new GameActionInfo(), null, null));
             //act
-            UnitDispatcher dispatcher = new UnitDispatcher(actiionMock.Object,null);
+            UnitDispatcher dispatcher = new UnitDispatcher(actiionMock.Object,null, TestGameSettings.Get);
             dispatcher.CardPlayedSpawn(cards.SecondCard, p1, null);
             dispatcher.Kill(p1.TableUnits[0]);
 
@@ -100,7 +100,7 @@ namespace GameData.Tests.Controllers.UnitTests.Logic
             actiionMock.Setup(mock => mock.GetGameActionInfo(new CardActionInfo()));
 
             //act
-            UnitDispatcher dispatcher = new UnitDispatcher(actiionMock.Object,null);
+            UnitDispatcher dispatcher = new UnitDispatcher(actiionMock.Object,null, TestGameSettings.Get);
             dispatcher.Spawn(cards.SecondCard, p1);
 
             //assert
@@ -126,7 +126,7 @@ namespace GameData.Tests.Controllers.UnitTests.Logic
             var actiionMock = new Mock<IGameActionController>();
             actiionMock.Setup(mock => mock.ExecuteAction(new GameActionInfo(), null, null));
             //act
-            UnitDispatcher dispatcher = new UnitDispatcher(actiionMock.Object,null);
+            UnitDispatcher dispatcher = new UnitDispatcher(actiionMock.Object,null, TestGameSettings.Get);
             dispatcher.CardPlayedSpawn(cards.AttackCard, p1,null);
             dispatcher.CardPlayedSpawn(cards.DefendCard, p2, null);
             dispatcher.HandleAttack(p1.TableUnits[0],p2.TableUnits[0]);  // dont work here

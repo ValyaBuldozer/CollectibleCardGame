@@ -42,7 +42,7 @@ namespace GameData.Tests.Controllers.UnitTests.Logic
             deckControllerMock.Setup(mock => mock.PopCards("secondPlayer", 4)).Returns(new List<Card>());
 
             var playerTurnDispatcherMock = new Mock<IPlayerTurnDispatcher>();
-            playerTurnDispatcherMock.Setup(mock => mock.Start(It.IsAny<double>()));
+            playerTurnDispatcherMock.Setup(mock => mock.Start());
 
             var cardDrawMock = new Mock<ICardDrawController>();
             cardDrawMock.Setup(mock => mock.DealCardsToPlayer(It.IsAny<Player>(), 0));
@@ -59,7 +59,7 @@ namespace GameData.Tests.Controllers.UnitTests.Logic
             var secondPlayer = tableCondition.Players.FirstOrDefault(
                 p => p.Username == "secondPlayer");
 
-            playerTurnDispatcherMock.Verify(mock=>mock.Start(It.IsAny<double>()),Times.Once);
+            playerTurnDispatcherMock.Verify(mock=>mock.Start(),Times.Once);
             deckControllerMock.Verify(foo=>foo.AddDeck(It.IsAny<string>(),It.IsAny<Stack<Card>>()),Times.AtLeastOnce);
             
             cardDrawMock.Verify(mock=>mock.DealCardsToPlayer(It.IsAny<Player>(),4));
