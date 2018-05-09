@@ -155,7 +155,7 @@ namespace GameData.Tests.Gameplay
 
             Assert.AreNotEqual(gameActionObserver, null);
             Assert.IsTrue(gameActionObserver is GameActionTriggerObserverAction action);
-            Assert.AreEqual(3, ((GameActionTriggerObserverAction)gameActionObserver).GameActionId);
+            Assert.AreEqual(4, ((GameActionTriggerObserverAction)gameActionObserver).GameActionId);
             Assert.AreEqual(5, firstPlayer.TableUnits.FirstOrDefault(c => c.BaseCard.Name == "Мечник").HealthPoint.GetResult);
 
 

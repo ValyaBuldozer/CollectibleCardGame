@@ -82,7 +82,7 @@ namespace GameData.Tests.TestData
                 BaseAttack = 4,
                 Cost = 0,
                 Description = "Test",
-                DeathRattleActionInfo = new CardActionInfo() {ActionId = 3, ParameterType = ActionParameterType.Heal, ParameterValue = 3}
+                DeathRattleActionInfo = new CardActionInfo() {ActionId = 4, ParameterType = ActionParameterType.Heal, ParameterValue = 3}
             },
             new UnitCard()
             {
