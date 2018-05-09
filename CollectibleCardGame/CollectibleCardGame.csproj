@@ -170,6 +170,7 @@
     <Compile Include="ViewModels\Frames\MainMenuFramePageViewModel.cs" />
     <Compile Include="ViewModels\Frames\LogInFramePageViewModel.cs" />
     <Compile Include="ViewModels\Frames\RegistrationFramePageViewModel.cs" />
+    <Compile Include="ViewModels\UserControls\CardUserControlViewModel.cs" />
     <Compile Include="ViewModels\UserControls\FractionUserControlViewModel.cs" />
     <Compile Include="ViewModels\UserControls\SpellCardUserControlViewModel.cs" />
     <Compile Include="ViewModels\UserControls\UnitCardUserControlViewModel.cs" />
@@ -216,6 +217,9 @@
     </Compile>
     <Compile Include="Views\Frames\ToRegisterFramePage.xaml.cs">
       <DependentUpon>ToRegisterFramePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\CardUserControl.xaml.cs">
+      <DependentUpon>CardUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\FractionUserControl.xaml.cs">
       <DependentUpon>FractionUserControl.xaml</DependentUpon>
@@ -302,6 +306,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Frames\ToRegisterFramePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\CardUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

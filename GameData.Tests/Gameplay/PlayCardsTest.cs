@@ -94,7 +94,7 @@ namespace GameData.Tests.Gameplay
 
             var observerRepository = container.Get<ObserverActionRepository>();
             var gameActionObserver =
-                    observerRepository.Collection.FirstOrDefault(o => o.Type == ObserverActionType.PlayerAction);
+                    observerRepository.Collection.FirstOrDefault(o => o.Type == ObserverActionType.GameAction);
 
                 
 
@@ -151,7 +151,7 @@ namespace GameData.Tests.Gameplay
 
             var observerRepository = container.Get<ObserverActionRepository>();
             var gameActionObserver =
-                observerRepository.Collection.FirstOrDefault(o => o.Type == ObserverActionType.PlayerAction);
+                observerRepository.Collection.FirstOrDefault(o => o.Type == ObserverActionType.GameAction);
 
             Assert.AreNotEqual(gameActionObserver, null);
             Assert.IsTrue(gameActionObserver is GameActionTriggerObserverAction action);
@@ -197,7 +197,7 @@ namespace GameData.Tests.Gameplay
 
             var observerRepository = container.Get<ObserverActionRepository>();
             var gameActionObserver =
-                observerRepository.Collection.FirstOrDefault(o => o.Type == ObserverActionType.PlayerAction);
+                observerRepository.Collection.FirstOrDefault(o => o.Type == ObserverActionType.GameAction);
 
             Assert.AreNotEqual(gameActionObserver, null);
             Assert.IsTrue(gameActionObserver is GameActionTriggerObserverAction action);
@@ -242,7 +242,7 @@ namespace GameData.Tests.Gameplay
 
             var observerRepository = container.Get<ObserverActionRepository>();
             var gameActionObserver =
-                observerRepository.Collection.FirstOrDefault(o => o.Type == ObserverActionType.PlayerAction);
+                observerRepository.Collection.FirstOrDefault(o => o.Type == ObserverActionType.GameAction);
 
             Assert.AreNotEqual(gameActionObserver, null);
             Assert.IsTrue(gameActionObserver is GameActionTriggerObserverAction action);
