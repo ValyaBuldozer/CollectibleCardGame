@@ -21,14 +21,14 @@ namespace GameData.Tests.Gameplay
     public class GameplayScenarioTests
     {
         [TestMethod]
-        public void GameplayScenatio_1()
+        public void GameplayScenario_1()
         {
             var testCards = new TestCards3();
             var firstDeck = testCards.FirstRandomDeck;
             var secondDeck = testCards.FirstRandomDeck;
 
-            Assert.AreEqual(7,firstDeck.Count);
-            Assert.AreEqual(7, secondDeck.Count);
+            Assert.AreEqual(8,firstDeck.Count);
+            Assert.AreEqual(8, secondDeck.Count);
 
             Container container = new Container();
             container.Initialize(TestGameSettings.Get);
@@ -46,15 +46,15 @@ namespace GameData.Tests.Gameplay
             Assert.AreNotEqual(null, secondPlayer);
             Assert.AreEqual(1,firstPlayer.Mana.Current);
             Assert.AreEqual(1, secondPlayer.Mana.Current);
-            Assert.AreEqual(2,firstDeck.Count);
-            Assert.AreEqual(2, secondDeck.Count);
+            Assert.AreEqual(3,firstDeck.Count);
+            Assert.AreEqual(3, secondDeck.Count);
             Assert.AreEqual(5,firstPlayer.HandCards.Count);
             Assert.AreEqual(5, secondPlayer.HandCards.Count);
 
         }
 
         [TestMethod]
-        public void GameplayScenatio_5()
+        public void GameplayScenario_5()
         {
             var testCards = new TestCards3();
             var firstDeck = testCards.FirstRandomDeck;
@@ -108,7 +108,7 @@ namespace GameData.Tests.Gameplay
         }
 
         [TestMethod]
-        public void GameplayScenatio_9()
+        public void GameplayScenario_9()
         {
             var testCards = new TestCards3();
             var firstDeck = testCards.FirstRandomDeck;
@@ -146,7 +146,7 @@ namespace GameData.Tests.Gameplay
         }
 
         [TestMethod]
-        public void GameplayScenatio_10()
+        public void GameplayScenario_10()
         {
             var testCards = new TestCards3();
             var firstDeck = testCards.FirstRandomDeck;
@@ -184,7 +184,7 @@ namespace GameData.Tests.Gameplay
         }
 
         [TestMethod]
-        public void GameplayScenatio_11()
+        public void GameplayScenario_11()
         {
             var testCards = new TestCards3();
             var firstDeck = testCards.FirstRandomDeck;
