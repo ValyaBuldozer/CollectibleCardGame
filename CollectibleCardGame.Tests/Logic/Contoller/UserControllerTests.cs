@@ -9,6 +9,7 @@ using BaseNetworkArchitecture.Common.Messages;
 using CollectibleCardGame.Logic.Controllers;
 using CollectibleCardGame.Models;
 using CollectibleCardGame.Network.Controllers;
+using CollectibleCardGame.ViewModels.Frames;
 using GameData.Network.Messages;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -24,10 +25,8 @@ namespace CollectibleCardGame.Tests.Logic.Contoller
             TestNetworkController testController = new TestNetworkController();
             //var mock = new Mock<INetworkController>();
 
-            UserController controller =  new UserController(null)
-            {
-                NetworkConnectionController = testController
-            };
+            UserController controller = new UserController(null, testController,
+                new LogInFramePageViewModel(), new RegistrationFramePageViewModel());
 
             controller.LogInRequest("test","test");
 
@@ -39,10 +38,8 @@ namespace CollectibleCardGame.Tests.Logic.Contoller
         public void RegistrationRequestTest()
         {
             TestNetworkController testController = new TestNetworkController();
-            UserController controller = new UserController(null)
-            {
-                NetworkConnectionController = testController
-            };
+            UserController controller = new UserController(null, testController,
+                new LogInFramePageViewModel(), new RegistrationFramePageViewModel());
 
             controller.RegistrationRequest("test","test");
 
@@ -54,10 +51,8 @@ namespace CollectibleCardGame.Tests.Logic.Contoller
         public void SetUserTest()
         {
             TestNetworkController testController = new TestNetworkController();
-            UserController controller = new UserController(null)
-            {
-                NetworkConnectionController = testController
-            };
+            UserController controller = new UserController(null, testController,
+                new LogInFramePageViewModel(), new RegistrationFramePageViewModel());
 
             controller.SetUser("test");
 
@@ -68,11 +63,8 @@ namespace CollectibleCardGame.Tests.Logic.Contoller
         public void ResetUser()
         {
             TestNetworkController testController = new TestNetworkController();
-            UserController controller = new UserController(null)
-            {
-                NetworkConnectionController = testController,
-                CurrentUser = new CurrentUser()
-            };
+            UserController controller = new UserController(null, testController,
+                new LogInFramePageViewModel(), new RegistrationFramePageViewModel());
 
             controller.ResetUser();
 

@@ -37,8 +37,12 @@ namespace CollectibleCardGame.ViewModels.Frames
 
         public RelayCommand RegistrationCommand => _registrationCommand ?? (_registrationCommand = new RelayCommand(obj =>
         {
-            //todo : валидация пароля логина
-            UnityKernel.Get<UserController>().RegistrationRequest(Username, Password);
+            if (string.IsNullOrEmpty(_username) || string.IsNullOrEmpty(_password))
+                return;
+
+            RegisterRequest?.Invoke(this, new LogInRegisterRequestEventArgs(_username, _password));
         }));
+
+        public event EventHandler<LogInRegisterRequestEventArgs> RegisterRequest;
     }
 }

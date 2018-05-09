@@ -88,6 +88,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\Data\CardRepositroryController.cs" />
     <Compile Include="Controllers\Data\DeckController.cs" />
     <Compile Include="Controllers\Data\EntityRepositoryController.cs" />
     <Compile Include="Controllers\Data\GameActionController.cs" />
@@ -128,6 +129,7 @@
     <Compile Include="Models\Observer\UnitSpawnObserverAction.cs" />
     <Compile Include="Models\Observer\UnitStateChangeObserverAction.cs" />
     <Compile Include="Models\PlayerMana.cs" />
+    <Compile Include="Models\Repository\CardRepository.cs" />
     <Compile Include="Models\Repository\CyclicQueue.cs" />
     <Compile Include="Models\Repository\EntityRepository.cs" />
     <Compile Include="Models\Repository\ObserverActionRepository.cs" />

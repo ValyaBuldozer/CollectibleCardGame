@@ -38,7 +38,7 @@ namespace Server.Controllers
             return user.Username;
         }
 
-        public string LogIn(string username, string password)
+        public User LogIn(string username, string password)
         {
             //todo :  пользовательские исключения
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
@@ -57,7 +57,7 @@ namespace Server.Controllers
             if(user.Password != password)
                 throw new Exception("Incorrect password");
 
-            return user.Username;
+            return user;
         }
 
         public UserInfo GetUserInfo(string username)

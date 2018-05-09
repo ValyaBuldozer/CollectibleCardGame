@@ -9,7 +9,7 @@ namespace GameData.Models.Units
 {
     public class HeroUnit : Unit
     {
-        public Player Player { get; }
+        //public Player Player { get; }
 
         public event EventHandler<HeroUnitDiedEventArgs> DiedEvent; 
 

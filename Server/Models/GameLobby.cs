@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using GameData;
 using GameData.Controllers.Data;
 using GameData.Controllers.Global;
+using GameData.Controllers.PlayerTurn;
 using GameData.Enums;
 using GameData.Kernel;
 using GameData.Models;
@@ -48,17 +49,27 @@ namespace Server.Models
             _gameDataContainer = new Container();
         }
 
-        public PlayerTurn HandlePlayerTurn(PlayerTurn playerTurn)
+        public void HandlePlayerTurn(CardDeployPlayerTurn playerTurn)
         {
-            throw new NotImplementedException();
+            _gameDataContainer.Get<IPlayerTurnHandler<CardDeployPlayerTurn>>().Execute(playerTurn);
         }
 
-        public void InitializeGame()
+        public void HandlePlayerTurn(UnitAttackPlayerTurn playerTurn)
+        {
+            _gameDataContainer.Get<IPlayerTurnHandler<UnitAttackPlayerTurn>>().Execute(playerTurn);
+        }
+
+        public void HandlePlayerTurn(EndPlayerTurn playerTurn)
+        {
+            _gameDataContainer.Get<IPlayerTurnHandler<EndPlayerTurn>>().Execute(playerTurn);
+        }
+
+        public void InitializeGame(GameSettings settings)
         {
             if(FirstClient == null && SecondClient == null)
                 throw new NullReferenceException();
 
-            _gameDataContainer.Initialize();
+            _gameDataContainer.Initialize(settings);
             _gameDataContainer.Get<ObserverActionRepositoryController>().ItemAdded += OnObserverActionAdded;
             //todo : внедрение настроек
 
