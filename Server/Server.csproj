@@ -140,6 +140,7 @@
     <Compile Include="Network\Controllers\MessageHandlers\GameRequestMessageHandler.cs" />
     <Compile Include="Network\Controllers\MessageHandlers\GameStartMessageHandler.cs" />
     <Compile Include="Network\Controllers\MessageHandlers\LogInMessageHandler.cs" />
+    <Compile Include="Network\Controllers\MessageHandlers\PlayerTurnMessageHandler.cs" />
     <Compile Include="Network\Controllers\MessageHandlers\RegistrationMessageHandler.cs" />
     <Compile Include="Network\Controllers\ServerController.cs" />
     <Compile Include="Network\Models\Client.cs" />

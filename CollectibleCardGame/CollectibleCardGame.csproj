@@ -139,6 +139,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Logic\Controllers\GameController.cs" />
+    <Compile Include="Logic\Controllers\GameEngineController.cs" />
     <Compile Include="Logic\Controllers\IGlobalController.cs" />
     <Compile Include="Network\Controllers\INetworkController.cs" />
     <Compile Include="Network\Controllers\NetworkConnectionController.cs" />
@@ -154,6 +156,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Services\EventArgs.cs" />
     <!--<Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -162,12 +165,15 @@
     <Compile Include="Services\RelayCommand.cs" />
     <Compile Include="Unity\UnityKernel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\Elements\CardViewModel.cs" />
     <Compile Include="ViewModels\Frames\CardDecksPageViewModel.cs" />
     <Compile Include="ViewModels\Frames\ConnectionErrorViewModel.cs" />
     <Compile Include="ViewModels\Frames\ErrorFramePageViewModel.cs" />
+    <Compile Include="ViewModels\Frames\GameEngineViewModel.cs" />
     <Compile Include="ViewModels\Frames\GameProccesPageViewModel.cs" />
+    <Compile Include="ViewModels\Frames\GoGameFramePageViewModel.cs" />
     <Compile Include="ViewModels\Frames\LogInFramePageShellViewModel.cs" />
-    <Compile Include="ViewModels\Frames\MainMenuFramePageViewModel.cs" />
+    <Compile Include="ViewModels\Frames\MenuFramePageViewModel.cs" />
     <Compile Include="ViewModels\Frames\LogInFramePageViewModel.cs" />
     <Compile Include="ViewModels\Frames\RegistrationFramePageViewModel.cs" />
     <Compile Include="ViewModels\UserControls\CardUserControlViewModel.cs" />
@@ -187,6 +193,9 @@
     </Compile>
     <Compile Include="Views\Frames\DecksSettingsFramePage.xaml.cs">
       <DependentUpon>DecksSettingsFramePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Frames\GameEngineFramePage.xaml.cs">
+      <DependentUpon>GameEngineFramePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Frames\GoGameFramePage.xaml.cs">
       <DependentUpon>GoGameFramePage.xaml</DependentUpon>
@@ -266,6 +275,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Frames\ConnectionErrorFramePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Frames\GameEngineFramePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -372,8 +385,9 @@
     <Resource Include="Images\Icons\search.png" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Data\Controllers\" />
+    <Folder Include="Data\Repository\" />
     <Folder Include="Resources\" />
-    <Folder Include="ViewModels\Elements\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\northPicture.jpg" />

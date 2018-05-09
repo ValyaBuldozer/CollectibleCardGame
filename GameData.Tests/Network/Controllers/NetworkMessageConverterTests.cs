@@ -5,6 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using BaseNetworkArchitecture.Common.Messages;
 using GameData.Enums;
+using GameData.Models;
+using GameData.Models.Cards;
+using GameData.Models.Observer;
+using GameData.Models.PlayerTurn;
+using GameData.Models.Units;
 using GameData.Network;
 using GameData.Network.Messages;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -61,6 +66,40 @@ namespace GameData.Tests.Network.Controllers
             Assert.IsTrue((handlerResult is LogInMessage message) && (message.Username == "test"));
         }
 
+
+        [TestMethod]
+        public void PlayerTurnDeserializeTest()
+        {
+            NetworkMessageConverter converter = new NetworkMessageConverter();
+            MessageBase message = new MessageBase(MessageBaseType.PlayerTurnMessage,
+                new PlayerTurnMessage()
+                {
+                    PlayerTurn = new CardDeployPlayerTurn(null, new UnitCard())
+                });
+
+            var json = converter.SerializeMessage(message);
+
+            var deserialized = converter.DeserializeMessage(json);
+
+            Assert.AreEqual(message.Content as PlayerTurnMessage,deserialized.Content as PlayerTurnMessage);
+        }
+
+        [TestMethod]
+        public void ObserverActionDeserializeTest()
+        {
+            NetworkMessageConverter converter = new NetworkMessageConverter();
+            MessageBase message = new MessageBase(MessageBaseType.ObserverActionMessage,
+                new ObserverActionMessage()
+                {
+                    ObserverAction = new CardDeployObserverAction(new UnitCard(), null)
+                });
+            var json = converter.SerializeMessage(message);
+
+            var deserialized = converter.DeserializeMessage(json);
+
+            Assert.AreEqual(message.Content as ObserverActionMessage,
+                deserialized.Content as ObserverActionMessage);
+        }
     }
 
     public class TestLogInMessageHandler : MessageHandlerBase<LogInMessage>
@@ -73,4 +112,6 @@ namespace GameData.Tests.Network.Controllers
             return (LogInMessage) content;
         }
     }
+
+
 }

@@ -15,6 +15,10 @@ using CollectibleCardGame.ViewModels.Frames;
 using CollectibleCardGame.ViewModels.Windows;
 using CollectibleCardGame.Views.Frames;
 using CollectibleCardGame.Views.FramesShell;
+using GameData.Controllers.Data;
+using GameData.Models;
+using GameData.Models.Cards;
+using GameData.Models.Repository;
 using GameData.Network;
 using GameData.Network.Messages;
 using Unity;
@@ -49,24 +53,45 @@ namespace CollectibleCardGame.Unity
             _container = new UnityContainer();
 
             _container.RegisterType<ILogger, MessageBoxLogger>();
-            _container.RegisterType<MainWindowViewModel>(new ContainerControlledLifetimeManager());
-            _container.RegisterType<MainWindow>(new ContainerControlledLifetimeManager());
+
+            //view and viewmodels bindings
             _container.RegisterType<LogInFramePageViewModel>(new ContainerControlledLifetimeManager());
-            _container.RegisterType<LogInFramePage>();
+            _container.RegisterType<LogInFramePage>(new ContainerControlledLifetimeManager());
             _container.RegisterType<RegistrationFramePageViewModel>(new ContainerControlledLifetimeManager());
-            _container.RegisterType<ToRegisterFramePage>();
+            _container.RegisterType<ToRegisterFramePage>(new ContainerControlledLifetimeManager());
             _container.RegisterType<ErrorFramePageViewModel>(new ContainerControlledLifetimeManager());
-            _container.RegisterType<ConnectionErrorFramePage>();
+            _container.RegisterType<ConnectionErrorFramePage>(new ContainerControlledLifetimeManager());
+
             _container.RegisterType<LogInFramePageShellViewModel>(new ContainerControlledLifetimeManager());
             _container.RegisterType<LogInFramePageShell>(new ContainerControlledLifetimeManager());
 
+            _container.RegisterType<GoGameFramePageViewModel>(new ContainerControlledLifetimeManager());
+            _container.RegisterType<GoGameFramePage>(new ContainerControlledLifetimeManager());
+
+            _container.RegisterType<MenuFramePageViewModel>(new ContainerControlledLifetimeManager());
+            _container.RegisterType<MainMenuFramePage>(new ContainerControlledLifetimeManager());
+
+            _container.RegisterType<GameEngineViewModel>(new ContainerControlledLifetimeManager());
+            _container.RegisterType<GameEngineFramePage>(new ContainerControlledLifetimeManager());
+
+            _container.RegisterType<MainWindowViewModel>(new ContainerControlledLifetimeManager());
+            _container.RegisterType<MainWindow>(new ContainerControlledLifetimeManager());
+
             //repository binding
             _container.RegisterType<CurrentUser>(new ContainerControlledLifetimeManager());
-
+            _container.RegisterType<EntityRepository>(new ContainerControlledLifetimeManager());
+            _container.RegisterType<CardRepository>(new ContainerControlledLifetimeManager());
 
 
             //controller binding
-            _container.RegisterType<NetworkMessageConverter>();
+            //repository
+            _container.RegisterType<IDataRepositoryController<Entity>, EntityRepositoryController>(
+                new ContainerControlledLifetimeManager());
+            _container.RegisterType<IDataRepositoryController<Card>, CardRepositroryController>(
+                new ContainerControlledLifetimeManager());
+
+            //network
+            _container.RegisterType<NetworkMessageConverter>(new PerResolveLifetimeManager());
             _container.RegisterType<INetworkCommunicator, TcpCommunicator>(new ContainerControlledLifetimeManager(),
                 new InjectionConstructor(new object[]
                 {
@@ -74,22 +99,26 @@ namespace CollectibleCardGame.Unity
                 }));
             _container.RegisterType<INetworkController,NetworkConnectionController>(
                 new ContainerControlledLifetimeManager());
+
+            //logic
             _container.RegisterType<UserController>(new ContainerControlledLifetimeManager());
-            _container.RegisterType<IGlobalController, GlobalAppStateController>();
+            _container.RegisterType<IGlobalController, GlobalAppStateController>(
+                new ContainerControlledLifetimeManager());
+            _container.RegisterType<GameController>(new ContainerControlledLifetimeManager());
 
-            //viewmodels binding
-            _container.RegisterType<LogInFramePageShellViewModel>(new ContainerControlledLifetimeManager());
+            //messagehandlers
+            _container.RegisterType<MessageHandlerBase<LogInMessage>, LogInMessageHandler>(
+                new ContainerControlledLifetimeManager());
+            _container.RegisterType<MessageHandlerBase<RegistrationMessage>, RegistrationMessageHandler>(
+                new ContainerControlledLifetimeManager());
+            _container.RegisterType<MessageHandlerBase<GameRequestMessage>, GameRequestMessageHandler>(
+                new ContainerControlledLifetimeManager());
 
-            //view binding
-            _container.RegisterType<LogInFramePage>(new ContainerControlledLifetimeManager());
-            _container.RegisterType<ToRegisterFramePage>(new ContainerControlledLifetimeManager());
-            _container.RegisterType<ConnectionErrorFramePage>(new ContainerControlledLifetimeManager());
-            _container.RegisterType<LogInFramePageShell>(new ContainerControlledLifetimeManager());
-
-            //messagehandler binding
-            _container.RegisterType<MessageHandlerBase<GameRequestMessage>, GameRequestMessageHandler>();
-            _container.RegisterType<MessageHandlerBase<LogInMessage>, LogInMessageHandler>();
-            _container.RegisterType<MessageHandlerBase<RegistrationMessage>, RegistrationMessageHandler>();
+            _container.Resolve<MainWindow>();
+            //initializating observer controllers
+            _container.Resolve<UserController>();
+            _container.Resolve<IGlobalController>();
+            _container.Resolve<GameController>();
         }
 
         public static object Get(Type t)

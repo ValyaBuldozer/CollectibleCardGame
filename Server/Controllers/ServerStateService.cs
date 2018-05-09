@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using GameData.Enums;
+using GameData.Models;
 using GameData.Models.Cards;
 using GameData.Network.Messages;
 using Server.Controllers.Repository;
@@ -49,20 +51,40 @@ namespace Server.Controllers
             {
                 //todo : говнокод что делать то
                 //отправляем сообщения о начале игры обоим клиентам
-                var message = new MessageBase(MessageBaseType.GameStartMessage, new GameStartMessage()
-                {
-                    EnemyUsername = firstPlayerClient.User.Username
-                }, null);
-                client.ClientController.SendMessage(message);
-                ((GameStartMessage)message.Content).EnemyUsername = client.User.Username;
-                firstPlayerClient.ClientController.SendMessage(message);
+                //var message = new MessageBase(MessageBaseType.GameStartMessage, new GameStartMessage()
+                //{
+                //    EnemyUsername = firstPlayerClient.User.Username
+                //}, null);
+                //client.ClientController.SendMessage(message);
+                //((GameStartMessage)message.Content).EnemyUsername = client.User.Username;
+                //firstPlayerClient.ClientController.SendMessage(message);
 
                 client.CurrentLobby = firstPlayerClient.CurrentLobby;
                 firstPlayerClient.CurrentLobby.SecondClient = client;
                 firstPlayerClient.CurrentLobby.SecondPlayerDeck = deck;
                 firstPlayerClient.CurrentLobby.SecondPlayerHeroUnit = heroUnit;
 
-                client.CurrentLobby.InitializeGame();
+                //todo :изменение настроек
+                var msg = new MessageBase(MessageBaseType.GameRequestMessage
+                    , new GameRequestMessage()
+                    {
+                        HeroUnitCard = heroUnit,
+                        CardDeckIdList = new List<int>(),
+                        AnswerData = true
+                    });
+                firstPlayerClient.ClientController.SendMessage(msg);
+                client.ClientController.SendMessage(msg);
+
+                var defaultSettings = new GameSettings()
+                {
+                    PlayerTurnInterval = 60000,
+                    IsPlayerTurnTimerEnabled = true,
+                    MaxDeckCardsCount = 30,
+                    PlayerHandCardsMaxCount = 10,
+                    PlayersCount = 2,
+                    PlayerTableUnitsMaxCount = 10
+                };
+                client.CurrentLobby.InitializeGame(defaultSettings);
                 client.CurrentLobby.StartGame();
 
                 return true;
@@ -82,7 +104,7 @@ namespace Server.Controllers
                 throw new NullReferenceException();
 
             var gameLobby = new GameLobby(firstClient, secondClient);
-            gameLobby.InitializeGame();
+            //gameLobby.InitializeGame();
 
 
             var message = new MessageBase(MessageBaseType.GameStartMessage, new GameStartMessage()

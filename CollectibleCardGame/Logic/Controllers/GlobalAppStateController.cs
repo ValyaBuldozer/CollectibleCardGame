@@ -15,30 +15,34 @@ namespace CollectibleCardGame.Logic.Controllers
     /// </summary>
     public class GlobalAppStateController : IGlobalController
     {
-        [Dependency]
-        public INetworkController ConnectionController { set; get; }
+        private readonly INetworkController _connectionController;
+        private readonly MainWindowViewModel _mainWindowViewModel;
+        private readonly LogInFramePageShellViewModel _framePageShellViewModel;
+        private readonly ILogger _logger;
 
-        [Dependency]
-        public MainWindowViewModel MainWindowViewModel { set; get; }
-
-        [Dependency]
-        public LogInFramePageShellViewModel FramePageShellViewModel { set; get; }
+        public GlobalAppStateController(INetworkController networkController,
+            MainWindowViewModel mainWindowViewModel, LogInFramePageShellViewModel framePageShellViewModel,
+            ILogger logger)
+        {
+            _connectionController = networkController;
+            _mainWindowViewModel = mainWindowViewModel;
+            _framePageShellViewModel = framePageShellViewModel;
+            _logger = logger;
+        }
 
         public void OnStartup()
         {
-            //todo : говнокод переделать
-            MainWindowViewModel.BusyMessage = "Подключение к серверу";
-            MainWindowViewModel.IsBusy = true;
+            _mainWindowViewModel.StartBusyIndicator("Подключение к серверу");
             if (!TryConnect())
             {
-                MainWindowViewModel.IsBusy = false;
-                FramePageShellViewModel.SetErrorPage();
+                _mainWindowViewModel.StopBusyIndicator();
+                _framePageShellViewModel.SetErrorPage();
                 return;
             }
 
-            MainWindowViewModel.IsBusy = false;
-            MainWindowViewModel.SetLogInFrame();
-            FramePageShellViewModel.SetLogInPage();
+            _mainWindowViewModel.StopBusyIndicator();
+            _mainWindowViewModel.SetLogInFrame();
+            _framePageShellViewModel.SetLogInPage();
         }
 
         public void OnConnectionLost()
@@ -56,12 +60,12 @@ namespace CollectibleCardGame.Logic.Controllers
             try
             {
                 //todo : изменение ip и порта
-                ConnectionController.Connect(IPAddress.Parse("127.0.0.1"), 8800);
+                _connectionController.Connect(IPAddress.Parse("127.0.0.1"), 8800);
                 return true;
             }
             catch (SocketException)
             {
-                UnityKernel.Get<ILogger>().LogAndPrint("Ошибка при попытке подключения");
+               _logger.LogAndPrint("Ошибка при попытке подключения");
                 return false;
             }
         }
