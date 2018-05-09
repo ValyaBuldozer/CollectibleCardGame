@@ -2,7 +2,7 @@
 
 namespace GameData.Models.Cards
 {
-    public abstract class Card : Entity
+    public class Card : Entity
     {
         public int ID { set; get; }
 
@@ -13,6 +13,10 @@ namespace GameData.Models.Cards
         public int Cost { set; get; }
 
         public bool CanBePlayedOnEnemyTurn { set; get; }
+
+        public string ImagePath { set; get; }
+
+        public Fraction Fraction { set; get; }
 
         protected Card()
         {

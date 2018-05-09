@@ -1,13 +1,16 @@
 ﻿using System;
+using GameData.Controllers.Data;
 using GameData.Controllers.Global;
 using GameData.Models;
+using GameData.Models.Cards;
 using GameData.Models.PlayerTurn;
+using GameData.Models.Units;
 
 namespace GameData.Controllers.PlayerTurn
 {
     public interface IPlayerTurnValidator
     {
-        bool Validate(Models.PlayerTurn.PlayerTurn playerTurn);
+        Models.PlayerTurn.PlayerTurn Validate(Models.PlayerTurn.PlayerTurn playerTurn);
         event EventHandler<ErrorEventArgs> ValidateError;
     }
 
@@ -16,16 +19,19 @@ namespace GameData.Controllers.PlayerTurn
     {
         private readonly TableCondition _tableCondition;
         private readonly IPlayerTurnDispatcher _playerTurnDispatcher;
+        private readonly IDataRepositoryController<Entity> _entityRepositoryController;
 
         public event EventHandler<ErrorEventArgs> ValidateError; 
 
-        public PlayerTurnValidator(TableCondition tableCondition,IPlayerTurnDispatcher playerTurnDispatcher)
+        public PlayerTurnValidator(TableCondition tableCondition,IPlayerTurnDispatcher playerTurnDispatcher,
+            IDataRepositoryController<Entity> entityRepositoryController)
         {
             _tableCondition = tableCondition;
             _playerTurnDispatcher = playerTurnDispatcher;
+            _entityRepositoryController = entityRepositoryController;
         }
 
-        public bool Validate(Models.PlayerTurn.PlayerTurn playerTurn)
+        public Models.PlayerTurn.PlayerTurn Validate(Models.PlayerTurn.PlayerTurn playerTurn)
         {
             switch (playerTurn.GetType().Name)
             {
@@ -40,60 +46,82 @@ namespace GameData.Controllers.PlayerTurn
             }
         }
 
-        public bool Validate(CardDeployPlayerTurn playerTurn)
+        public CardDeployPlayerTurn Validate(CardDeployPlayerTurn playerTurn)
         {
-            if (!playerTurn.Sender.HandCards.Exists(c => c.Equals(playerTurn.Card)))
+            if (!(_entityRepositoryController.GetById(playerTurn.Card.EntityId) is Card card &&
+                  _entityRepositoryController.GetById(playerTurn.Sender.EntityId) is Player sender &&
+                  _entityRepositoryController.GetById(playerTurn.ActionTarget.EntityId) is Unit target))
             {
-                RunValidateError(new ErrorEventArgs("No such card in hand",true,playerTurn.Sender));
-                return false;
+                RunValidateError(new ErrorEventArgs("EntityID not found", true, playerTurn.Sender));
+                return null;
             }
 
-            if (!_playerTurnDispatcher.CurrentPlayer.Equals(playerTurn.Sender) || 
-                !playerTurn.Card.CanBePlayedOnEnemyTurn)
+            if (!playerTurn.Sender.HandCards.Exists(c => c.Equals(card)))
+            {
+                RunValidateError(new ErrorEventArgs("No such card in hand",true,playerTurn.Sender));
+                return null;
+            }
+
+            if (!_playerTurnDispatcher.CurrentPlayer.Equals(sender) || 
+                !card.CanBePlayedOnEnemyTurn)
             {
                 RunValidateError(new ErrorEventArgs("Нельзя разыграть эту карту во время хода протиника",
                     false,playerTurn.Sender));
-                return false;
+                return null;
             }
 
-            if (playerTurn.Sender.Mana.Current < playerTurn.Card.Cost)
+            if (sender.Mana.Current < card.Cost)
             {
                 RunValidateError(new ErrorEventArgs("Недостаточно маны", true,playerTurn.Sender));
-                return false;
+                return null;
             }
 
-            return true;
+            return new CardDeployPlayerTurn(sender,card,target);
         }
 
-        public bool Validate(UnitAttackPlayerTurn playerTurn)
+        public UnitAttackPlayerTurn Validate(UnitAttackPlayerTurn playerTurn)
         {
-            if (!playerTurn.Sender.TableUnits.Exists(u => u.Equals(playerTurn.Unit)))
+            if (!(_entityRepositoryController.GetById(playerTurn.Unit.EntityId) is Unit senderUnit &&
+                  _entityRepositoryController.GetById(playerTurn.TargetUnit.EntityId) is Unit target &&
+                  _entityRepositoryController.GetById(playerTurn.Sender.EntityId) is Player sender))
+            {
+                RunValidateError(new ErrorEventArgs("EntityID not found", true, playerTurn.Sender));
+                return null;
+            }
+
+            if (!sender.TableUnits.Exists(u => u.Equals(senderUnit)))
             {
                 RunValidateError(new ErrorEventArgs("No such unit found", true,playerTurn.Sender));
-                return false;
+                return null;
             }
             
-            if(!_playerTurnDispatcher.CurrentPlayer.Equals(playerTurn.Sender))
+            if(!_playerTurnDispatcher.CurrentPlayer.Equals(sender))
             {
                 RunValidateError(new ErrorEventArgs("Нельзя атаковать во время хода протиника",
                     false,playerTurn.Sender));
-                return false;
+                return null;
             }
 
             //todo : проверка провокаторов и тд
 
-            return true;
+            return new UnitAttackPlayerTurn(sender,senderUnit,target);
         }
 
-        public bool Validate(EndPlayerTurn playerTurn)
+        public EndPlayerTurn Validate(EndPlayerTurn playerTurn)
         {
-            if (!_playerTurnDispatcher.CurrentPlayer.Equals(playerTurn.Sender))
+            if (!(_entityRepositoryController.GetById(playerTurn.Sender.EntityId) is Player sender))
             {
-                RunValidateError(new ErrorEventArgs("Not your turn",true,playerTurn.Sender));
-                return false;
+                RunValidateError(new ErrorEventArgs("EntityID not found", true, playerTurn.Sender));
+                return null;
             }
 
-            return true;
+            if (!_playerTurnDispatcher.CurrentPlayer.Equals(sender))
+            {
+                RunValidateError(new ErrorEventArgs("Not your turn",true,playerTurn.Sender));
+                return null;
+            }
+
+            return new EndPlayerTurn(sender);
         }
 
         private void RunValidateError(ErrorEventArgs e)

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GameData.Models.PlayerTurn;
 
 namespace CollectibleCardGame.Services
 {
@@ -26,6 +27,16 @@ namespace CollectibleCardGame.Services
         public GameRequestEventArgs(string fraction)
         {
             Fraction = fraction;
+        }
+    }
+
+    public class PlayerTurnRequestEventArgs : EventArgs
+    {
+        public PlayerTurn PlayerTurn { get; }
+
+        public PlayerTurnRequestEventArgs(PlayerTurn playerTurn)
+        {
+            PlayerTurn = playerTurn;
         }
     }
 }

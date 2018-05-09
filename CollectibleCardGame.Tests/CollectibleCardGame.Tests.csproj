@@ -109,6 +109,7 @@
     <Compile Include="ArchitectureTests\EventArgsInterfaceTest.cs" />
     <Compile Include="Logic\Contoller\GlobalAppStateConttollerTest.cs" />
     <Compile Include="Logic\Contoller\UserControllerTests.cs" />
+    <Compile Include="OutConnectionTest.cs" />
     <Compile Include="ServerTests\NetworkMessageConverterTest.cs" />
     <Compile Include="NetworkTests\CommunicatorTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -118,6 +119,7 @@
     <Compile Include="ServerTests\ServiceTests\ServerStateServiceTest.cs" />
     <Compile Include="ServerTests\ServiceTests\UserServiceTest.cs" />
     <Compile Include="ServerTests\UsersConnectionTest.cs" />
+    <Compile Include="ViewModelTests\GameEngineVMTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

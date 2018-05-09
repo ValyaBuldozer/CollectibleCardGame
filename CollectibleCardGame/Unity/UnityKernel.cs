@@ -15,6 +15,10 @@ using CollectibleCardGame.ViewModels.Frames;
 using CollectibleCardGame.ViewModels.Windows;
 using CollectibleCardGame.Views.Frames;
 using CollectibleCardGame.Views.FramesShell;
+using GameData.Controllers.Data;
+using GameData.Models;
+using GameData.Models.Cards;
+using GameData.Models.Repository;
 using GameData.Network;
 using GameData.Network.Messages;
 using Unity;
@@ -75,10 +79,18 @@ namespace CollectibleCardGame.Unity
 
             //repository binding
             _container.RegisterType<CurrentUser>(new ContainerControlledLifetimeManager());
-
+            _container.RegisterType<EntityRepository>(new ContainerControlledLifetimeManager());
+            _container.RegisterType<CardRepository>(new ContainerControlledLifetimeManager());
 
 
             //controller binding
+            //repository
+            _container.RegisterType<IDataRepositoryController<Entity>, EntityRepositoryController>(
+                new ContainerControlledLifetimeManager());
+            _container.RegisterType<IDataRepositoryController<Card>, CardRepositroryController>(
+                new ContainerControlledLifetimeManager());
+
+            //network
             _container.RegisterType<NetworkMessageConverter>(new PerResolveLifetimeManager());
             _container.RegisterType<INetworkCommunicator, TcpCommunicator>(new ContainerControlledLifetimeManager(),
                 new InjectionConstructor(new object[]
@@ -87,12 +99,14 @@ namespace CollectibleCardGame.Unity
                 }));
             _container.RegisterType<INetworkController,NetworkConnectionController>(
                 new ContainerControlledLifetimeManager());
+
+            //logic
             _container.RegisterType<UserController>(new ContainerControlledLifetimeManager());
             _container.RegisterType<IGlobalController, GlobalAppStateController>(
                 new ContainerControlledLifetimeManager());
             _container.RegisterType<GameController>(new ContainerControlledLifetimeManager());
 
-            //messagehandler binding
+            //messagehandlers
             _container.RegisterType<MessageHandlerBase<LogInMessage>, LogInMessageHandler>(
                 new ContainerControlledLifetimeManager());
             _container.RegisterType<MessageHandlerBase<RegistrationMessage>, RegistrationMessageHandler>(

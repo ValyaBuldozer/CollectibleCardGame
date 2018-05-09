@@ -76,5 +76,10 @@ namespace GameData.Models.Units
             else
                 Damage -= value;
         }
+
+        public override string ToString()
+        {
+            return GetResult.ToString();
+        }
     }
 }

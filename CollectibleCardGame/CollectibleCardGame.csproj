@@ -140,6 +140,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Logic\Controllers\GameController.cs" />
+    <Compile Include="Logic\Controllers\GameEngineController.cs" />
     <Compile Include="Logic\Controllers\IGlobalController.cs" />
     <Compile Include="Network\Controllers\INetworkController.cs" />
     <Compile Include="Network\Controllers\NetworkConnectionController.cs" />
@@ -164,6 +165,7 @@
     <Compile Include="Services\RelayCommand.cs" />
     <Compile Include="Unity\UnityKernel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\Elements\CardViewModel.cs" />
     <Compile Include="ViewModels\Frames\CardDecksPageViewModel.cs" />
     <Compile Include="ViewModels\Frames\ConnectionErrorViewModel.cs" />
     <Compile Include="ViewModels\Frames\ErrorFramePageViewModel.cs" />
@@ -375,8 +377,9 @@
     <Resource Include="Images\Icons\search.png" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Data\Controllers\" />
+    <Folder Include="Data\Repository\" />
     <Folder Include="Resources\" />
-    <Folder Include="ViewModels\Elements\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\northPicture.jpg" />

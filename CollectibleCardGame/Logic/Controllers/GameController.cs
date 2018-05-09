@@ -25,8 +25,17 @@ namespace CollectibleCardGame.Logic.Controllers
 
         private void GameRequestEventHandler(object sender, Services.GameRequestEventArgs e)
         {
-            var deck = new List<int>(){1,1,1,1,1,1,1,1,1,1,1,1,1};
-            var card = new UnitCard();
+            var deck = new List<int>()
+            {
+                301,302,303,304,301,302,303,304,301,302,303,304,301,302,303,304
+            };
+            var card = new UnitCard()
+            {
+                BaseHP = 30,
+                BaseAttack = 0,
+                AttackPriority = 1,
+                Name = "TestHero"
+            };
             SendGameRequest(deck,card);
         }
 
