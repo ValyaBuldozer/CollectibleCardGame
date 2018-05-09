@@ -246,7 +246,7 @@ namespace GameData.Tests.Gameplay
 
             Assert.AreNotEqual(gameActionObserver, null);
             Assert.IsTrue(gameActionObserver is GameActionTriggerObserverAction action);
-            Assert.AreEqual(11, ((GameActionTriggerObserverAction)gameActionObserver).GameActionId);
+            Assert.AreEqual(10, ((GameActionTriggerObserverAction)gameActionObserver).GameActionId);
             Assert.AreEqual(8,firstPlayer.TableUnits.First().Attack);
 
         }
