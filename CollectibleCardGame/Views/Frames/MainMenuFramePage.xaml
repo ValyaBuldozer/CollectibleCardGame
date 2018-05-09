@@ -17,17 +17,12 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
-            <Grid.RowDefinitions >
-
-                <RowDefinition />
-            </Grid.RowDefinitions>
-
             <GridSplitter  Grid.Column="1" Width="6"
                           VerticalAlignment="Stretch" HorizontalAlignment="Left" />
 
             <ListBox Background="#343B49" x:Name="menuList" Grid.Row="0 " Margin="0,-2,0,0" BorderBrush="#343B49"  ItemContainerStyle="{DynamicResource ListBoxItemMain}"
                      ItemsSource="{Binding Path=Menus}"
-                     SelectedItem="{Binding Path=CurrentFramePage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                     SelectedItem="{Binding Path=SelectedMenuItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid>

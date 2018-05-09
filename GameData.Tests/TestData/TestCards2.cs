@@ -44,6 +44,16 @@ namespace GameData.Tests.TestData
         {
             new UnitCard()
             {
+                ID = 5,
+                Name = "Требушет",
+                BaseHP = 2,
+                AttackPriority = 1,
+                BaseAttack = 8,
+                Cost = 0,
+                Description = "Test"
+            },
+            new UnitCard()
+            {
                 ID = 4,
                 Name = "Лучник",
                 BaseHP = 3,
@@ -60,17 +70,41 @@ namespace GameData.Tests.TestData
                 AttackPriority = 1,
                 BaseAttack = 10,
                 Cost = 0,
-                Description = "Test"
+                Description = "Test",
+                BattleCryActionInfo = new CardActionInfo() {ActionId = 1,ParameterType = ActionParameterType.Damage,ParameterValue = 1}
             },
             new UnitCard()
             {
-                ID = 5,
-                Name = "Требушет",
+                ID = 8,
+                Name = "Лекарь",
                 BaseHP = 2,
+                AttackPriority = 1,
+                BaseAttack = 4,
+                Cost = 0,
+                Description = "Test",
+                DeathRattleActionInfo = new CardActionInfo() {ActionId = 3, ParameterType = ActionParameterType.Heal, ParameterValue = 3}
+            },
+            new UnitCard()
+            {
+                ID = 9,
+                Name = "Лагерта",
+                BaseHP = 7,
                 AttackPriority = 1,
                 BaseAttack = 8,
                 Cost = 0,
-                Description = "Test"
+                Description = "Test",
+                AttackActionInfo = new CardActionInfo(){ActionId = 10,ParameterType = ActionParameterType.Buff,ParameterValue = 2}
+            },
+            new UnitCard()
+            {
+                ID = 10,
+                Name = "Дитрих Черный",
+                BaseHP = 9,
+                AttackPriority = 1,
+                BaseAttack = 6,
+                Cost = 0,
+                Description = "Test",
+                DamageRecievedActionInfo = new CardActionInfo(){ActionId = 10,ParameterType = ActionParameterType.Buff,ParameterValue = 2}
             },
             new SpellCard()
             {

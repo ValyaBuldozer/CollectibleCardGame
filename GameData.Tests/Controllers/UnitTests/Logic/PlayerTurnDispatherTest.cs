@@ -23,12 +23,17 @@ namespace GameData.Tests.Controllers.UnitTests.Logic
             var tableCondition = new TestTableCondition().GetFirstCondition;
             var dealCardsDispather = new Mock<ICardDrawController>();
             dealCardsDispather.Setup(mock => mock.DealCardsToPlayer(It.IsAny<Player>(), It.IsAny<int>()));
+            GameSettings settings = new GameSettings()
+            {
+                IsPlayerTurnTimerEnabled = true,
+                PlayerTurnInterval = 5
+            };
             PlayerTurnDispatcher playerTurnDispatcher = new PlayerTurnDispatcher
-                (tableCondition,dealCardsDispather.Object);
+                (tableCondition,dealCardsDispather.Object, settings );
             bool eventWasDispatchered = false;
             playerTurnDispatcher.TurnStart += (sender, args) => eventWasDispatchered = true;
 
-            playerTurnDispatcher.Start(5);
+            playerTurnDispatcher.Start();
             Thread.Sleep(30);
 
             Assert.IsTrue(eventWasDispatchered);
@@ -41,7 +46,7 @@ namespace GameData.Tests.Controllers.UnitTests.Logic
             var dealCardsDispather = new Mock<ICardDrawController>();
             dealCardsDispather.Setup(mock => mock.DealCardsToPlayer(It.IsAny<Player>(), It.IsAny<int>()));
             PlayerTurnDispatcher playerTurnDispatcher = new PlayerTurnDispatcher(
-                tableCondition,dealCardsDispather.Object);
+                tableCondition,dealCardsDispather.Object, TestGameSettings.Get);
 
             var currentPlayer = playerTurnDispatcher.CurrentPlayer;
             bool eventWasDispatchered = false;

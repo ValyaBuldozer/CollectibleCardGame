@@ -25,14 +25,15 @@ namespace Server.Network.Controllers.MessageHandlers
 
         public override IContent Execute(IContent content,object sender)
         {
-            if(!(content is GameRequestMessage))
+            if(!(content is GameRequestMessage message))
                 throw new InvalidOperationException("Incorrect message type");
 
-            if(!(sender is Client))
+            if(!(sender is Client client))
                 throw new InvalidOperationException("Incorrect sender");
 
-            var message = (GameRequestMessage) content;
-            var client = (Client) sender;
+            if(client.CurrentLobby != null)
+                return new ErrorMessage();
+
             Stack<Card> deck = _cardReposController.GetDeckById(message.CardDeckIdList);
 
             message.AnswerData = UnityKernel.Get<ServerStateService>().FindLobby(

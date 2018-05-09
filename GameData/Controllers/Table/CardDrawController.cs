@@ -20,11 +20,14 @@ namespace GameData.Controllers.Table
     {
         private readonly TableCondition _tableCondition;
         private readonly IDeckController _deckController;
+        private readonly GameSettings _settings;
 
-        public CardDrawController(TableCondition tableCondition, IDeckController deckController)
+        public CardDrawController(TableCondition tableCondition, IDeckController deckController,
+            GameSettings settings)
         {
             _tableCondition = tableCondition;
             _deckController = deckController;
+            _settings = settings;
         }
 
         public event EventHandler<CardDrawObserverAction> OnCardDraw; 
@@ -40,7 +43,7 @@ namespace GameData.Controllers.Table
 
             foreach (var iCard in cards)
             {
-                if (player.HandCards.Count < 10)
+                if (player.HandCards.Count < _settings.PlayerHandCardsMaxCount)
                 {
                     player.HandCards.Add(iCard);
                     OnCardDraw?.Invoke(this,new CardDrawObserverAction(iCard,player));

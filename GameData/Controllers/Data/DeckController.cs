@@ -116,7 +116,7 @@ namespace GameData.Controllers.Data
             var deck = GetDeck(username);
             var retlist = new List<Card>();
 
-            for (int i = 0; i <= count; i++)
+            for (int i = 0; i < count; i++)
             {
                 if(deck.Count != 0)
                     retlist.Add(deck.Pop());

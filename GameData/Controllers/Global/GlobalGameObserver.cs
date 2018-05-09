@@ -54,6 +54,8 @@ namespace GameData.Controllers.Global
             unitDispatcher.OnUnitSpawn += ObserverEventHandler;
             unitDispatcher.OnUnitDeath += ObserverEventHandler;
             unitDispatcher.OnUnitStateChange += ObserverEventHandler;
+
+            playerTurnDispatcher.TurnStart += ObserverEventHandler;
         }
 
         private void ObserverEventHandler(object sender, GameEndEventArgs e)

@@ -82,7 +82,7 @@ namespace GameData.Enums
         UnitSpawn,
         UnitDeath,
         UnitStateChange,
-        PlayerAction,
+        GameAction,
         TurnStart,
         TurnEnd,
         Error

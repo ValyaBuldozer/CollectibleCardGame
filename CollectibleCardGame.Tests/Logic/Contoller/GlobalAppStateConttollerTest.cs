@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BaseNetworkArchitecture.Server;
 using CollectibleCardGame.Logic.Controllers;
+using CollectibleCardGame.Network.Controllers;
 using CollectibleCardGame.ViewModels.Frames;
 using CollectibleCardGame.ViewModels.Windows;
 using CollectibleCardGame.Views.Frames;
@@ -24,11 +25,12 @@ namespace CollectibleCardGame.Tests.Logic.Contoller
             IServer server = new TcpServer();
             UnityKernel.InitializeKernel();
             var globalAppStateController = UnityKernel.Get<GlobalAppStateController>();
+            var connectionController = UnityKernel.Get<INetworkController>();
 
             server.Start(IPAddress.Parse("127.0.0.1"), 8800);
             globalAppStateController.OnStartup();
 
-            Assert.IsTrue(globalAppStateController.ConnectionController.ServerCommunicator.IsConnected);
+            Assert.IsTrue(connectionController.ServerCommunicator.IsConnected);
         }
 
         [TestMethod]
@@ -37,10 +39,11 @@ namespace CollectibleCardGame.Tests.Logic.Contoller
             UnityKernel.InitializeKernel();
             var globalAppStateController = UnityKernel.Get<GlobalAppStateController>();
             var framePage = UnityKernel.Get<LogInFramePageShellViewModel>();
+            var connectionController = UnityKernel.Get<INetworkController>();
 
             globalAppStateController.OnStartup();
 
-            Assert.IsFalse(globalAppStateController.ConnectionController.ServerCommunicator.IsConnected);
+            Assert.IsFalse(connectionController.ServerCommunicator.IsConnected);
             Assert.IsTrue(framePage.CurrentFramePage is ConnectionErrorFramePage);
         }
     }

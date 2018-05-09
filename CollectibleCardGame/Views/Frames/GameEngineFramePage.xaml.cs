@@ -12,25 +12,24 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using CollectibleCardGame.ViewModels.Windows;
-using Unity.Attributes;
 using CollectibleCardGame.ViewModels.Frames;
+using Unity.Attributes;
 
 namespace CollectibleCardGame.Views.Frames
 {
     /// <summary>
-    /// Логика взаимодействия для MainMenuFramePage.xaml
+    /// Логика взаимодействия для GameEngineFramePage.xaml
     /// </summary>
-    public partial class MainMenuFramePage : Page
+    public partial class GameEngineFramePage : Page
     {
         [Dependency]
-        public MenuFramePageViewModel ViewModel
+        public GameEngineViewModel ViewModel
         {
-            get => DataContext as MenuFramePageViewModel;
             set => DataContext = value;
+            get => DataContext as GameEngineViewModel;
         }
 
-        public MainMenuFramePage()
+        public GameEngineFramePage()
         {
             InitializeComponent();
         }

@@ -116,6 +116,7 @@
     <Compile Include="Models\GameActions\GameAction.cs" />
     <Compile Include="Models\GameActions\GameActionInfo.cs" />
     <Compile Include="Models\EventArgs.cs" />
+    <Compile Include="Models\GameSettings.cs" />
     <Compile Include="Models\Observer\ErrorObserverAction.cs" />
     <Compile Include="Models\Observer\GameStartObserverAction.cs" />
     <Compile Include="Models\Observer\ObserverAction.cs" />

@@ -27,8 +27,10 @@ namespace GameData.Kernel
             _container = new UnityContainer();
         }
 
-        public void Initialize()
+        public void Initialize(GameSettings settings)
         {
+            _container.RegisterInstance(settings, new ContainerControlledLifetimeManager());
+
             RegisterBindings();
 
             //ititializing observer for events bindings
