@@ -23,6 +23,21 @@ namespace GameData.Controllers.Data
             return _repository.Collection.FirstOrDefault(e => e.EntityId == id);
         }
 
+        public IEnumerable<Entity> GetById(IEnumerable<int> idCollection)
+        {
+            if (idCollection == null)
+                return null;
+
+            List<Entity> retList = new List<Entity>();
+
+            foreach (var id in idCollection)
+            {
+                retList.Add(GetById(id));
+            }
+
+            return retList;
+        }
+
         public void Add(Entity item)
         {
             if (_repository.Collection.Exists(e => e.EntityId == item.EntityId))

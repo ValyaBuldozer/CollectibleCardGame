@@ -21,7 +21,8 @@ namespace GameData.Models.Units
         {
             Unit = unit;
             Damage = 0;
-            Base = Unit.BaseCard.BaseHP;
+            if(unit!=null)
+                Base = Unit.BaseCard.BaseHP;
         }
 
         protected bool Equals(HealthPoint other)

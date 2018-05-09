@@ -50,7 +50,7 @@ namespace GameData.Network
         //[Dependency]
         public MessageHandlerBase<UserInfoRequestMessage> UserInfoRequestMessageHandlerBase { set; get; }
 
-        //[Dependency]
+        [Dependency]
         public MessageHandlerBase<ObserverActionMessage> ObserverActionMessageHandlerBase { set; get; }
 
         [Dependency]
@@ -120,7 +120,9 @@ namespace GameData.Network
                     case MessageBaseType.DisconnectMessage:
                         break;
                     case MessageBaseType.ErrorMessage:
-                        break;
+                        return new MessageBase(type: MessageBaseType.ErrorMessage,
+                            content: (((JObject)deserializedObj.Content).ToObject<ErrorMessage>()),
+                            messageHandler: ErrorMessageHandlerBase);
                     case MessageBaseType.ObserverActionMessage:
                     {
                         var message = ((JObject) deserializedObj.Content).ToObject<dynamic>();

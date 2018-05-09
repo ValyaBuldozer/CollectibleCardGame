@@ -48,10 +48,13 @@ namespace CollectibleCardGame.Logic.Controllers
         {
             _entityRepositoryController.Add(action.Card);
 
-            if(action.ToPlayer.Username == _user.Username)
-                _gameViewModel.PlayerCards.Add(new CardViewModel(action.Card));
-            else
-                _gameViewModel.EnemyCards.Add(new CardViewModel(action.Card));
+            _gameViewModel.CurrentDispatcher.Invoke(() =>
+            {
+                if (action.ToPlayer.Username == _user.Username)
+                    _gameViewModel.PlayerCards.Add(new CardViewModel(action.Card));
+                else
+                    _gameViewModel.EnemyCards.Add(new CardViewModel(action.Card));
+            });
         }
     }
 }

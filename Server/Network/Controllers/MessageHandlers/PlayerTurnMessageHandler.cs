@@ -11,7 +11,7 @@ using Server.Network.Models;
 
 namespace Server.Network.Controllers.MessageHandlers
 {
-    public class PlayerTurnMessageHandler : MessageHandlerBase<PlayerTurn>
+    public class PlayerTurnMessageHandler : MessageHandlerBase<PlayerTurnMessage>
     {
         public override IContent Execute(IContent content,object sender)
         {

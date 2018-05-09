@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GameData.Controllers.Data;
 using GameData.Models.Cards;
 using GameData.Network;
 using GameData.Network.Messages;
@@ -16,9 +17,9 @@ namespace Server.Network.Controllers.MessageHandlers
 {
     public class GameRequestMessageHandler : MessageHandlerBase<GameRequestMessage>
     {
-        private readonly CardReposController _cardReposController;
+        private readonly IDataRepositoryController<Card> _cardReposController;
 
-        public GameRequestMessageHandler(CardReposController cardReposController)
+        public GameRequestMessageHandler(IDataRepositoryController<Card> cardReposController)
         {
             _cardReposController = cardReposController;
         }
@@ -34,7 +35,7 @@ namespace Server.Network.Controllers.MessageHandlers
             if(client.CurrentLobby != null)
                 return new ErrorMessage();
 
-            Stack<Card> deck = _cardReposController.GetDeckById(message.CardDeckIdList);
+            Stack<Card> deck = new Stack<Card>(_cardReposController.GetById(message.CardDeckIdList));
 
             message.AnswerData = UnityKernel.Get<ServerStateService>().FindLobby(
                 client,deck,message.HeroUnitCard);

@@ -21,13 +21,15 @@ namespace GameData.Controllers.Table
         private readonly TableCondition _tableCondition;
         private readonly IDeckController _deckController;
         private readonly GameSettings _settings;
+        private readonly IDataRepositoryController<Entity> _entityController;
 
         public CardDrawController(TableCondition tableCondition, IDeckController deckController,
-            GameSettings settings)
+            GameSettings settings,IDataRepositoryController<Entity> entityController)
         {
             _tableCondition = tableCondition;
             _deckController = deckController;
             _settings = settings;
+            _entityController = entityController;
         }
 
         public event EventHandler<CardDrawObserverAction> OnCardDraw; 
@@ -46,6 +48,7 @@ namespace GameData.Controllers.Table
                 if (player.HandCards.Count < _settings.PlayerHandCardsMaxCount)
                 {
                     player.HandCards.Add(iCard);
+                    _entityController.AddNewItem(iCard);
                     OnCardDraw?.Invoke(this,new CardDrawObserverAction(iCard,player));
                 }
                 else

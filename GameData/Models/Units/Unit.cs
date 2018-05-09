@@ -11,7 +11,7 @@ namespace GameData.Models.Units
 
         public int Attack { set; get; }
 
-        public HealthPoint HealthPoint { set; get; }
+        public virtual HealthPoint HealthPoint { set; get; }
 
         public byte AttackPriority { set; get; }
 
@@ -30,6 +30,8 @@ namespace GameData.Models.Units
         public Unit(UnitCard unitCard)
         {
             EntityType = EntityType.Unit;
+
+            if(unitCard == null) return;
 
             BaseCard = unitCard;
             Attack = BaseCard.BaseAttack;

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Configuration;
 using System.Data;
 using System.Drawing;
@@ -13,7 +12,6 @@ using CollectibleCardGame.Logic.Controllers;
 using CollectibleCardGame.Network.Controllers;
 using CollectibleCardGame.Unity;
 using CollectibleCardGame.ViewModels;
-using CollectibleCardGame.ViewModels.Elements;
 using CollectibleCardGame.ViewModels.Frames;
 using CollectibleCardGame.ViewModels.UserControls;
 using CollectibleCardGame.ViewModels.Windows;
@@ -32,6 +30,8 @@ namespace CollectibleCardGame
     {
         protected override void OnStartup(StartupEventArgs e)
         {
+            MainWindow window = new MainWindow();
+
             //CardDecksFramePage frame = new CardDecksFramePage() { DataContext = new CardDecksPageViewModel() };
             //frame.f1.DataContext = new FractionUserControlViewModel() { Name = "Калвария", Description = "Северная фракция", ImagePath = "/Images/northPicture.jpg" };
             //frame.f2.DataContext = new FractionUserControlViewModel() { Name = "Магдебург", Description = "Южная фракцция", ImagePath = "/Images/southPicture.jpg" };
@@ -54,10 +54,8 @@ namespace CollectibleCardGame
             //window.Show();
 
             UnityKernel.InitializeKernel();
-            var window = UnityKernel.Get<MainWindow>();
-            var gameEngineVM = UnityKernel.Get<GameEngineViewModel>();
-            gameEngineVM.PlayerCards = new ObservableCollection<CardViewModel>();
-            //UnityKernel.Get<IGlobalController>().OnStartup();
+            UnityKernel.Get<MainWindow>().Show();
+            UnityKernel.Get<IGlobalController>().OnStartup();
 
             //MainWindow window = new MainWindow() {ViewModel = new MainWindowViewModel(
             //    new LogInFramePageShell()

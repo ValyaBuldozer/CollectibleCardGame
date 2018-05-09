@@ -81,6 +81,7 @@ namespace GameData.Controllers.Global
                 _playersCyclicQueue = new CyclicQueue<Player>(_tableCondition.Players);
 
             Timer.Enabled = _settings.IsPlayerTurnTimerEnabled;
+            NextPlayer();
         }
 
         public void Stop()

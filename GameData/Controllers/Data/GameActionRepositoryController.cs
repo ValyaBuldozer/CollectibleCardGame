@@ -24,6 +24,21 @@ namespace GameData.Controllers.Data
             return _repository.Collection.FirstOrDefault(a => a.ID == id);
         }
 
+        public IEnumerable<GameAction> GetById(IEnumerable<int> idCollection)
+        {
+            if (idCollection == null)
+                return null;
+
+            List<GameAction> retList = new List<GameAction>();
+
+            foreach (var id in idCollection)
+            {
+                retList.Add(GetById(id));
+            }
+
+            return retList;
+        }
+
         public void Add(GameAction item)
         {
             if(_repository.Collection.Find(a=>a.ID == item.ID) != null)
