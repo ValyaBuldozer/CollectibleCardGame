@@ -294,6 +294,10 @@ namespace GameData.Tests.Gameplay
             var firstDeck = testCards.FirstRandomDeck;
             var secondDeck = testCards.FirstRandomDeck;
 
+            
+            var downKnightCard = secondDeck.FirstOrDefault(c => c.Name == "Павший рыцарь");
+            secondDeck.Push(downKnightCard);
+
             Container container = new Container();
             container.Initialize(TestGameSettings.Get);
 
@@ -333,6 +337,8 @@ namespace GameData.Tests.Gameplay
             var testCards = new TestCards2();
             var firstDeck = testCards.FirstRandomDeck;
             var secondDeck = testCards.FirstRandomDeck;
+            var archerCard = secondDeck.FirstOrDefault(c => c.Name == "Лучник");
+            secondDeck.Push(archerCard);
 
             Container container = new Container();
             container.Initialize(TestGameSettings.Get);
