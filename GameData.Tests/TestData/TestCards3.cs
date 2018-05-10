@@ -42,6 +42,16 @@ namespace GameData.Tests.TestData
 
         public Stack<Card> FirstRandomDeck => new Stack<Card>(new List<Card>()
         {
+            new SpellCard()
+            {
+                ID = 9,
+                Name = "SpellCard3_5",
+                Description = "Бахает случайного вражеского юнита на 5",
+                ActionInfo = new CardActionInfo()
+                {
+                    ActionId = 8, ParameterType = ActionParameterType.Damage,ParameterValue = 5
+                }
+            },
             new UnitCard()
             {
                 ID = 1,
@@ -118,7 +128,7 @@ namespace GameData.Tests.TestData
             },
             new SpellCard()
             {
-                ID = 7,
+                ID = 8,
                 Name = "SpellCard2_5",
                 Description = "Бахает вражеского героя на 5",
                 ActionInfo = new CardActionInfo()
@@ -126,6 +136,7 @@ namespace GameData.Tests.TestData
                     ActionId = 9, ParameterType = ActionParameterType.Damage,ParameterValue = 5
                 }
             },
+           
 
 
         });
