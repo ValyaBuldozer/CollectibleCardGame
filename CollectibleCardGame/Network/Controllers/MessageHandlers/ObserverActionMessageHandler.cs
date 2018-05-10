@@ -32,6 +32,8 @@ namespace CollectibleCardGame.Network.Controllers.MessageHandlers
                         (GameStartObserverAction)message.ObserverAction);
                     break;
                 case ObserverActionType.CardDeploy:
+                    _gameEngineController.HandleObserverAction(
+                        (CardDeployObserverAction)message.ObserverAction);
                     break;
                 case ObserverActionType.CardDraw:
                     _gameEngineController.HandleObserverAction(

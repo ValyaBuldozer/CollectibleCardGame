@@ -17,10 +17,18 @@ namespace CollectibleCardGame.Logic.Controllers
         private readonly INetworkController _networkController;
 
         public GameController(INetworkController networkController,
-            GoGameFramePageViewModel goGameFramePageViewModel)
+            GoGameFramePageViewModel goGameFramePageViewModel,GameEngineViewModel gameEngineViewModel)
         {
             _networkController = networkController;
             goGameFramePageViewModel.GameRequest += GameRequestEventHandler;
+            gameEngineViewModel.PlayerTurnEvent += PlayerTurnEvent;
+        }
+
+        private void PlayerTurnEvent(object sender, Services.PlayerTurnRequestEventArgs e)
+        {
+            MessageBase message = new MessageBase(MessageBaseType.PlayerTurnMessage,
+                new PlayerTurnMessage(){PlayerTurn = e.PlayerTurn});
+            _networkController.SendMessage(message);
         }
 
         private void GameRequestEventHandler(object sender, Services.GameRequestEventArgs e)

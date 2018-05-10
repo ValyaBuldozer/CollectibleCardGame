@@ -32,6 +32,7 @@
                         <StackPanel>
                             <TextBlock Text="{Binding Path=Name}"/>
                             <TextBlock Text="{Binding Path=Description}"/>
+                            <TextBlock Text="{Binding Path=Cost}"/>
                         </StackPanel>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
@@ -62,6 +63,7 @@
                         <StackPanel>
                             <TextBlock Text="{Binding Path=Name}"/>
                             <TextBlock Text="{Binding Path=Description}"/>
+                            <TextBlock Text="{Binding Path=Cost}"/>
                         </StackPanel>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>

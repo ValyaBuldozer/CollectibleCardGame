@@ -7,14 +7,18 @@ using System.Threading.Tasks;
 using System.Windows.Threading;
 using CollectibleCardGame.Services;
 using CollectibleCardGame.ViewModels.Elements;
+using GameData.Models;
 using GameData.Models.Cards;
+using GameData.Models.PlayerTurn;
 using GameData.Models.Units;
 using Xceed.Wpf.Toolkit;
 
 namespace CollectibleCardGame.ViewModels.Frames
 {
     public class GameEngineViewModel : BaseViewModel
-    { 
+    {
+        private Player _player;
+        private Player _enemyPlayer;
         private HeroUnit _playerHeroUnit;
         private HeroUnit _enemyHeroUnit;
         private ObservableCollection<CardViewModel> _playerCards;
@@ -25,6 +29,26 @@ namespace CollectibleCardGame.ViewModels.Frames
         private RelayCommand _cardDeployCommand;
 
         public Dispatcher CurrentDispatcher { get; }
+
+        public Player Player
+        {
+            get => _player;
+            set
+            {
+                _player = value;
+                NotifyPropertyChanged(nameof(Player));
+            }
+        }
+
+        public Player EnemyPlayer
+        {
+            get => _enemyPlayer;
+            set
+            {
+                _enemyPlayer = value;
+                NotifyPropertyChanged(nameof(EnemyPlayer));
+            }
+        }
 
         public HeroUnit PlayerHeroUnit
         {
@@ -103,7 +127,7 @@ namespace CollectibleCardGame.ViewModels.Frames
                {
                    if(!(o is Card card))
                        return;
-                   MessageBox.Show(card.Name);
+                   //PlayerTurnEvent.Invoke(this,new PlayerTurnRequestEventArgs(new CardDeployPlayerTurn()));
                }));
     }
 }

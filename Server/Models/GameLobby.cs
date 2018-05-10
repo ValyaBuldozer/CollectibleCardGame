@@ -86,7 +86,7 @@ namespace Server.Models
             if(FirstPlayerHeroUnit == null || SecondPlayerHeroUnit == null)
                 throw new NullReferenceException("HeroUnits are null");
 
-            _gameDataContainer.Get<GameStateController>().Start(FirstPlayerDeck,FirstClient.User.Username,
+            _gameDataContainer.Get<IGameStateController>().Start(FirstPlayerDeck,FirstClient.User.Username,
                 FirstPlayerHeroUnit,SecondPlayerDeck,SecondClient.User.Username,SecondPlayerHeroUnit);
         }
 

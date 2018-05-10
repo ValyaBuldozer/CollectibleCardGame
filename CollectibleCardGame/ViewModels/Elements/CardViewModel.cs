@@ -13,6 +13,8 @@ namespace CollectibleCardGame.ViewModels.Elements
         private string _name;
         private string _description;
 
+        public Card Card { get; }
+
         public int Cost
         {
             get => _cost;
@@ -45,9 +47,11 @@ namespace CollectibleCardGame.ViewModels.Elements
 
         public CardViewModel(Card card)
         {
+            Card = card;
             _cost = card.Cost;
             _description = card.Description;
             _name = card.Name;
+
         }
     }
 }

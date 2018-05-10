@@ -41,8 +41,8 @@ namespace GameData.Controllers.Data
         public void Add(Entity item)
         {
             if (_repository.Collection.Exists(e => e.EntityId == item.EntityId))
-                throw new RepositoryItemAlreadyExistsExcepction("Item with this id is already declared");
-
+                //throw new RepositoryItemAlreadyExistsExcepction("Item with this id is already declared");
+                return;
             _repository.Collection.Add(item);
         }
 
