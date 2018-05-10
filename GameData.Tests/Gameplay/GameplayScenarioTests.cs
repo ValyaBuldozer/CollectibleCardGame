@@ -215,5 +215,88 @@ namespace GameData.Tests.Gameplay
         }
 
 
+        [TestMethod]
+        public void GameplayScenario_12()
+        {
+            var testCards = new TestCards3();
+            var firstDeck = testCards.FirstRandomDeck;
+            var secondDeck = testCards.FirstRandomDeck;
+
+
+            Container container = new Container();
+            container.Initialize(TestGameSettings.Get);
+
+            container.Get<IGameStateController>().Start(firstDeck, "FirstPlayer", testCards.FirstHero,
+                secondDeck, "SecondPlayer", testCards.SecondHero);
+
+
+            var firstPlayer = container.Get<IPlayerTurnDispatcher>().CurrentPlayer;
+            var secondPlayer = container.Get<TableCondition>().GetPlayerByUsername("SecondPlayer");
+            secondPlayer.HeroUnit.HealthPoint.Base = 5;
+
+            //формируем первый ход - спавн юнита первого игрока
+            var firstPlayerUnitCard = firstPlayer.HandCards.FirstOrDefault(c => c.Name == "UnitCard5_6/4");
+            CardDeployPlayerTurn deployTurnUnit4 = new CardDeployPlayerTurn(firstPlayer, firstPlayerUnitCard);
+            container.Get<IPlayerTurnHandler<CardDeployPlayerTurn>>().Execute(deployTurnUnit4);
+
+            //передаем ход
+            container.Get<IPlayerTurnDispatcher>().NextPlayer();
+            secondPlayer = container.Get<IPlayerTurnDispatcher>().CurrentPlayer;
+
+            //формируем второй ход 
+            var secondPlayerSpellCard = secondPlayer.HandCards.FirstOrDefault(c => c.Name == "UnitCard6_6/6");
+            CardDeployPlayerTurn deployTurnSpell_1 = new CardDeployPlayerTurn(secondPlayer, secondPlayerSpellCard);
+            container.Get<IPlayerTurnHandler<CardDeployPlayerTurn>>().Execute(deployTurnSpell_1);
+
+            //передаем ход
+            container.Get<IPlayerTurnDispatcher>().NextPlayer();
+            //формируем третий ход 
+            UnitAttackPlayerTurn unitAttackPlayerTurn = new UnitAttackPlayerTurn(
+                firstPlayer, firstPlayer.TableUnits.First(), secondPlayer.HeroUnit);
+            container.Get<IPlayerTurnHandler<UnitAttackPlayerTurn>>().Execute(unitAttackPlayerTurn);
+
+            Assert.AreEqual(-1, secondPlayer.HeroUnit.HealthPoint.GetResult);
+
+
+
+        }
+
+        [TestMethod]
+        public void GameplayScenario_13()
+        {
+            var testCards = new TestCards3();
+            var firstDeck = testCards.FirstRandomDeck;
+            var secondDeck = testCards.FirstRandomDeck;
+
+
+            Container container = new Container();
+            container.Initialize(TestGameSettings.Get);
+
+            container.Get<IGameStateController>().Start(firstDeck, "FirstPlayer", testCards.FirstHero,
+                secondDeck, "SecondPlayer", testCards.SecondHero);
+
+
+            var firstPlayer = container.Get<IPlayerTurnDispatcher>().CurrentPlayer;
+
+            var secondPlayer = container.Get<TableCondition>().GetPlayerByUsername("SecondPlayer");
+
+
+            secondPlayer.HeroUnit.HealthPoint.Base = 5;
+            //формируем первый ход 
+            var firstPlayerSpellCard = firstPlayer.HandCards.FirstOrDefault(c => c.Name == "SpellCard2_5");
+            CardDeployPlayerTurn deployTurnSpell_2 = new CardDeployPlayerTurn(firstPlayer, firstPlayerSpellCard);
+            container.Get<IPlayerTurnHandler<CardDeployPlayerTurn>>().Execute(deployTurnSpell_2);
+
+
+
+
+            Assert.AreEqual(0, secondPlayer.HeroUnit.HealthPoint.GetResult);
+           
+
+
+
+        }
+
+
     }
 }
