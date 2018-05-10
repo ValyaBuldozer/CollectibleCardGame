@@ -15,19 +15,22 @@ namespace GameData.Models.Action
 
         public ActionParameterType ParameterType { set; get; }
 
+        public bool IsTargeted { set; get; }
+
         /// <summary>
         /// Action - контроллер стола, sender, Цель, параметр
         /// </summary>
         public Action<IActionTableControlller,Entity,Unit,int> Action { set; get; }
 
         public GameAction(string name, int id,string description, ActionParameterType parameterType,
-            Action<IActionTableControlller, Entity, Unit, int> action)
+            Action<IActionTableControlller, Entity, Unit, int> action,bool isTargeted=false)
         {
             Name = name;
             ID = id;
             ParameterType = parameterType;
             Action = action;
             Description = description;
+            IsTargeted = isTargeted;
         }
 
         public GameAction() { }

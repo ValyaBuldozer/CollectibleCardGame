@@ -45,7 +45,7 @@ namespace GameData.Tests.TestData
             new UnitCard()
             {
                 ID = 1,
-                Name = "UnitCard1",
+                Name = "UnitCard1_5/5",
                 BaseHP = 5,
                 AttackPriority = 1,
                 BaseAttack = 5,
@@ -55,7 +55,7 @@ namespace GameData.Tests.TestData
             new UnitCard()
             {
                 ID = 2,
-                Name = "UnitCard2",
+                Name = "UnitCard2_3/6",
                 BaseHP = 6,
                 AttackPriority = 1,
                 BaseAttack = 3,
@@ -65,7 +65,7 @@ namespace GameData.Tests.TestData
             new UnitCard()
             {
                 ID = 3,
-                Name = "UnitCard3",
+                Name = "UnitCard3_4/5",
                 BaseHP = 5,
                 AttackPriority = 1,
                 BaseAttack = 4,
@@ -76,7 +76,7 @@ namespace GameData.Tests.TestData
             new UnitCard()
             {
                 ID = 4,
-                Name = "UnitCard4",
+                Name = "UnitCard4_4/4",
                 BaseHP = 4,
                 AttackPriority = 1,
                 BaseAttack = 4,
@@ -87,7 +87,7 @@ namespace GameData.Tests.TestData
             new UnitCard()
             {
                 ID = 5,
-                Name = "UnitCard5",
+                Name = "UnitCard5_6/4",
                 BaseHP = 4,
                 AttackPriority = 1,
                 BaseAttack = 6,
@@ -98,7 +98,7 @@ namespace GameData.Tests.TestData
             new UnitCard()
             {
                 ID = 6,
-                Name = "UnitCard6",
+                Name = "UnitCard6_6/6",
                 BaseHP = 6,
                 AttackPriority = 1,
                 BaseAttack = 6,
@@ -109,14 +109,24 @@ namespace GameData.Tests.TestData
             new SpellCard()
             {
                 ID = 7,
-                Name = "CardDamageSpell",
-                Description = "Бахает всех врагов на 6",
+                Name = "SpellCard1_5",
+                Description = "Бахает всех врагов на 5",
                 ActionInfo = new CardActionInfo()
                 {
-                    ActionId = 3, ParameterType = ActionParameterType.Damage,ParameterValue = 6
+                    ActionId = 3, ParameterType = ActionParameterType.Damage,ParameterValue = 5
                 }
             },
-           
+            new SpellCard()
+            {
+                ID = 7,
+                Name = "SpellCard2_5",
+                Description = "Бахает вражеского героя на 5",
+                ActionInfo = new CardActionInfo()
+                {
+                    ActionId = 9, ParameterType = ActionParameterType.Damage,ParameterValue = 5
+                }
+            },
+
 
         });
     }
