@@ -6,7 +6,6 @@
              xmlns:local="clr-namespace:CollectibleCardGame.Views.UserControls"
              mc:Ignorable="d" 
              d:DesignHeight="410" d:DesignWidth="220">
-
     <Grid>
         <Grid.RenderTransform>
             <!-- ScaleX/Y = k -->
@@ -24,7 +23,6 @@
             </Grid.Background>
 
             <Grid>
-                
                 <Grid.RowDefinitions>
                     <RowDefinition Height="8*"/>
                     <RowDefinition Height="0.8*"/>
@@ -163,6 +161,5 @@
         </Grid>
     </Border>
     </Grid>
-
 </UserControl>
 
