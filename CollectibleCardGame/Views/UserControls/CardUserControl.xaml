@@ -24,11 +24,13 @@
 
             <Grid>
                 <Grid.RowDefinitions>
+                   
                     <RowDefinition Height="8*"/>
                     <RowDefinition Height="0.8*"/>
                     <RowDefinition Height="2*"/>
                     <RowDefinition Height="1.85*"/>
-                </Grid.RowDefinitions>
+                    
+                    </Grid.RowDefinitions>
 
                 <!--картинка юнита 210x250-->
                 <Image x:Name="Image" Source="{Binding Path=ImagePath}"  Margin="0,0,0,0">
@@ -98,12 +100,11 @@
                     </Grid>
 
                     <Border CornerRadius="50"
-                            Width="55"
-                            Height="55"
+                            
                             Background="Gold"
                             BorderBrush="Black"
                             BorderThickness="3"
-                            Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                         <TextBlock  x:Name="Cost" HorizontalAlignment="Center" VerticalAlignment="Center" Margin=" 0,0,1,5"
                                    Text="{Binding Cost}" FontWeight="Bold" FontSize="42" />
                     </Border>
@@ -143,7 +144,7 @@
                             Background="#66BE61"
                             BorderBrush="Black"
                             BorderThickness="3"
-                            Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            Grid.Column="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                         <TextBlock  x:Name="UnitHealth" HorizontalAlignment="Center" VerticalAlignment="Center" Margin=" 0,0,1,5"
                                    Text="{Binding Path=Health}" FontWeight="Bold" FontSize="42" />
                     </Border>
