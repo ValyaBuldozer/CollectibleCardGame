@@ -7,6 +7,9 @@
              mc:Ignorable="d" 
              d:DesignHeight="410" d:DesignWidth="220">
     <!--410x220-->
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"></BooleanToVisibilityConverter>
+    </UserControl.Resources>
     <Border BorderThickness="2" BorderBrush="Black" CornerRadius="5">
         <Border.Effect>
             <DropShadowEffect BlurRadius="10" Direction="315" Opacity="0.8"/>
@@ -25,7 +28,6 @@
                     <RowDefinition Height="1.85*"/>
                 </Grid.RowDefinitions>
 
-
                 <!--картинка юнита 210x250-->
                 <Image x:Name="Image" Source="{Binding Path=ImagePath}"  Margin="0,0,0,0">
                     <Image.Effect>
@@ -33,18 +35,15 @@
                     </Image.Effect>
                 </Image>
 
-
                 <Grid Grid.Row="1" Background="Transparent">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="3.5*"/>
                     </Grid.ColumnDefinitions>
                   
-
                     <TextBlock x:Name="CardName" Grid.Column="1" Text="{Binding Path=Name}" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"
                                FontFamily="/CollectibleCardGame;component/Fonts/#Mason Chronicles" FontSize="16" Margin="0,15,0,0" />
                 </Grid>
-
 
                 <Grid Grid.Row="0" Grid.RowSpan="2">
                     <Grid.RowDefinitions>
@@ -65,26 +64,25 @@
                             <ColumnDefinition  Width="*"/>
                         </Grid.ColumnDefinitions>
 
-
-                        <Border  Visibility="{Binding Visibility}" 
-                            Grid.Column="1" BorderBrush="{Binding TapeBorderBrush}" BorderThickness="5" Margin="0,40,0,0">
-                            <Rectangle  Fill="{Binding TapeBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"   Opacity="0.9"  />
+                        <Border  Visibility="{Binding IsUnitCard,Converter={StaticResource BooleanToVisibilityConverter}}" 
+                            Grid.Column="1" BorderBrush="{Binding TapeBorderBrush}"
+                                 BorderThickness="5" Margin="0,40,0,0">
+                            <Rectangle  Fill="{Binding TapeBrush}" HorizontalAlignment="Stretch"
+                                        VerticalAlignment="Stretch"   Opacity="0.9"  />
                             <Border.Effect>
                                 <DropShadowEffect BlurRadius="10" Direction="270" Opacity="0.8"/>
                             </Border.Effect>
                         </Border>
 
-
-
-
                     </Grid>
-                    <Grid Grid.Column="1" Grid.Row="1" Visibility="{Binding Visibility}" >
+                    <Grid Grid.Column="1" Grid.Row="1"  Visibility="{Binding IsUnitCard,
+                        Converter={StaticResource BooleanToVisibilityConverter}}"  >
                         <Grid.RowDefinitions>
                             <RowDefinition Height="30"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
                         <ItemsControl x:Name="AbilityStack" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center" Grid.ColumnSpan="3" >
-                            
+
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <WrapPanel   Orientation="Vertical" />
@@ -93,12 +91,9 @@
 
                             <!--здесь иконки-->
 
-                          
-
                         </ItemsControl>
                     </Grid>
 
-                   
                     <Border CornerRadius="50"
                             Width="55"
                             Height="55"
@@ -109,8 +104,6 @@
                         <TextBlock  x:Name="Cost" HorizontalAlignment="Center" VerticalAlignment="Center" Margin=" 0,0,1,5"
                                    Text="{Binding Cost}" FontWeight="Bold" FontSize="42" />
                     </Border>
-
-
 
                 </Grid>
 
@@ -128,17 +121,19 @@
                         <ColumnDefinition Width="6*"/>
                         <ColumnDefinition Width="0.25*"/>
                     </Grid.ColumnDefinitions>
-                    <Border CornerRadius="50" Visibility="{Binding Visibility}"
+                    <Border CornerRadius="50"  
                             Width="55"
                             Height="55"
                             Background="#EF3F37"
                             BorderBrush="Black"
                             BorderThickness="3"
                             Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <TextBlock  x:Name="UnitAttck" HorizontalAlignment="Center" VerticalAlignment="Center" Margin=" 0,0,1,5"
+                        <TextBlock  x:Name="UnitAttck" HorizontalAlignment="Center" 
+                                    VerticalAlignment="Center" Margin=" 0,0,1,5"
                                    Text="{Binding Path=Attack}" FontWeight="Bold" FontSize="42" />
                     </Border>
-                    <Border CornerRadius="50"  Visibility="{Binding Visibility}"
+                    <Border CornerRadius="50"   Visibility="{Binding IsUnitCard,
+                        Converter={StaticResource BooleanToVisibilityConverter}}" 
                             Width="55"
                             Height="55"
                             Background="#66BE61"

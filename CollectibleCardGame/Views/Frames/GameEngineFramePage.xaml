@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:CollectibleCardGame.Views.Frames"
+      xmlns:uc="clr-namespace:CollectibleCardGame.Views.UserControls"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="900"
       Title="GameEngineFramePage"
@@ -14,7 +15,7 @@
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="8*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
@@ -30,9 +31,7 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
-                            <TextBlock Text="{Binding Path=Name}"/>
-                            <TextBlock Text="{Binding Path=Description}"/>
-                            <TextBlock Text="{Binding Path=Cost}"/>
+                            <uc:CardUserControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                         </StackPanel>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
@@ -61,9 +60,8 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
-                            <TextBlock Text="{Binding Path=Name}"/>
-                            <TextBlock Text="{Binding Path=Description}"/>
-                            <TextBlock Text="{Binding Path=Cost}"/>
+                            <uc:CardUserControl VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                                                Height="410" Width="220"/>
                         </StackPanel>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
