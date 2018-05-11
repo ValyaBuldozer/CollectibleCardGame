@@ -7,8 +7,14 @@
              mc:Ignorable="d" 
              AllowDrop="True"
              d:DesignHeight="250" d:DesignWidth="210" MaxHeight="250" MaxWidth="210">
-    <!--410x220-->
-    <Border BorderThickness="5" BorderBrush="Black" CornerRadius="5">
+    <Grid>
+        <Grid.RenderTransform>
+            <!-- ScaleX/Y = k -->
+            <ScaleTransform CenterX="0" CenterY="0" ScaleX="1" ScaleY="1"/>
+        </Grid.RenderTransform>
+
+        <!--250x210-->
+    <Border BorderThickness="2" BorderBrush="Black" CornerRadius="5">
         <Border.Effect>
             <DropShadowEffect BlurRadius="10" Direction="315" Opacity="0.8"/>
         </Border.Effect>
@@ -23,7 +29,7 @@
 
 
                 <!--картинка юнита 210x250-->
-                <Image x:Name="UnitImage" Source="{Binding Path=ImagePath}"  Margin="-1,0,0,0" Grid.RowSpan="2">
+                <Image x:Name="UnitImage" Source="{Binding Path=ImagePath}"   Margin="0,0,0,0" Grid.RowSpan="2">
                     <Image.Effect>
                         <DropShadowEffect   RenderingBias="Quality"/>
                     </Image.Effect>
@@ -153,6 +159,6 @@
 
         </Grid>
     </Border>
-
+    </Grid>
 </UserControl>
 

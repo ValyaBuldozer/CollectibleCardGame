@@ -27,8 +27,8 @@ namespace GameData.Tests.Gameplay
             var firstDeck = testCards.FirstRandomDeck;
             var secondDeck = testCards.FirstRandomDeck;
 
-            Assert.AreEqual(8,firstDeck.Count);
-            Assert.AreEqual(8, secondDeck.Count);
+            Assert.AreEqual(9,firstDeck.Count);
+            Assert.AreEqual(9, secondDeck.Count);
 
             Container container = new Container();
             container.Initialize(TestGameSettings.Get);
@@ -46,8 +46,8 @@ namespace GameData.Tests.Gameplay
             Assert.AreNotEqual(null, secondPlayer);
             Assert.AreEqual(1,firstPlayer.Mana.Current);
             Assert.AreEqual(1, secondPlayer.Mana.Current);
-            Assert.AreEqual(3,firstDeck.Count);
-            Assert.AreEqual(3, secondDeck.Count);
+            Assert.AreEqual(4,firstDeck.Count);
+            Assert.AreEqual(4, secondDeck.Count);
             Assert.AreEqual(5,firstPlayer.HandCards.Count);
             Assert.AreEqual(5, secondPlayer.HandCards.Count);
 
@@ -293,6 +293,51 @@ namespace GameData.Tests.Gameplay
             Assert.AreEqual(0, secondPlayer.HeroUnit.HealthPoint.GetResult);
            
 
+
+
+        }
+        [TestMethod]
+        public void GameplayScenario_17()
+        {
+            var testCards = new TestCards3();
+            var firstDeck = testCards.FirstRandomDeck;
+            var secondDeck = testCards.FirstRandomDeck;
+           
+            var card2 = secondDeck.FirstOrDefault(c => c.Name == "SpellCard3_5");
+            secondDeck.Push(card2);
+
+            Container container = new Container();
+            container.Initialize(TestGameSettings.Get);
+
+            container.Get<IGameStateController>().Start(firstDeck, "FirstPlayer", testCards.FirstHero,
+                secondDeck, "SecondPlayer", testCards.SecondHero);
+
+
+            var firstPlayer = container.Get<IPlayerTurnDispatcher>().CurrentPlayer;
+
+            
+            
+            //формируем первый ход 
+            var firstPlayerUnitCard1 = firstPlayer.HandCards.FirstOrDefault(c => c.Name == "UnitCard6_6/6");
+            CardDeployPlayerTurn deployTurnUnit6 = new CardDeployPlayerTurn(firstPlayer, firstPlayerUnitCard1);
+            container.Get<IPlayerTurnHandler<CardDeployPlayerTurn>>().Execute(deployTurnUnit6);
+            var firstPlayerUnitCard2 = firstPlayer.HandCards.FirstOrDefault(c => c.Name == "UnitCard5_6/4");
+            CardDeployPlayerTurn deployTurnUnit5 = new CardDeployPlayerTurn(firstPlayer, firstPlayerUnitCard2);
+            container.Get<IPlayerTurnHandler<CardDeployPlayerTurn>>().Execute(deployTurnUnit5);
+
+            //передаем ход
+            container.Get<IPlayerTurnDispatcher>().NextPlayer();
+            var secondPlayer = container.Get<IPlayerTurnDispatcher>().CurrentPlayer;
+
+            var secondPlayerSpellCard = secondPlayer.HandCards.FirstOrDefault(c => c.Name == "SpellCard3_5");
+            CardDeployPlayerTurn deployTurnSpell_3 = new CardDeployPlayerTurn(firstPlayer, secondPlayerSpellCard);
+            container.Get<IPlayerTurnHandler<CardDeployPlayerTurn>>().Execute(deployTurnSpell_3);
+
+
+            bool ORfirst = firstPlayer.TableUnits.FirstOrDefault(c => c.BaseCard.Name == "UnitCard6_6/6").HealthPoint
+                             .GetResult ==1;
+            bool ORtsecond = firstPlayer.TableUnits.Count == 1;
+            Assert.IsTrue(ORfirst||ORtsecond);
 
 
         }
