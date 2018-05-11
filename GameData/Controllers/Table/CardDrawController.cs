@@ -49,7 +49,7 @@ namespace GameData.Controllers.Table
                 {
                     player.HandCards.Add(iCard);
                     _entityController.AddNewItem(iCard);
-                    OnCardDraw?.Invoke(this,new CardDrawObserverAction(iCard,player));
+                    OnCardDraw?.Invoke(this,new CardDrawObserverAction(iCard,player.Username));
                 }
                 else
                 //todo : card burn event

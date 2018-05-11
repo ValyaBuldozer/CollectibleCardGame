@@ -62,7 +62,7 @@ namespace CollectibleCardGame.Logic.Controllers
 
             _gameViewModel.CurrentDispatcher.Invoke(() =>
             {
-                if (action.ToPlayer.Username == _user.Username)
+                if (action.ToPlayerUsername == _user.Username)
                     _gameViewModel.PlayerCards.Add(new CardViewModel(card));
                 else
                     _gameViewModel.EnemyCards.Add(new CardViewModel(card));
@@ -96,6 +96,14 @@ namespace CollectibleCardGame.Logic.Controllers
             _entityRepositoryController.Add(action.Unit);
 
             _gameViewModel.CurrentDispatcher.Invoke(() => { });
+        }
+
+        public void HandleObserverAction(TurnStartObserverAction action)
+        {
+            _gameViewModel.CurrentDispatcher.Invoke(() =>
+            {
+                _gameViewModel.CurrentPlayerUsername = action.CurrentPlayerUsername;
+            });
         }
     }
 }

@@ -18,19 +18,19 @@ namespace Server.Network.Controllers.MessageHandlers
             if(!(sender is Client client && content is PlayerTurnMessage message))
                 throw new InvalidOperationException();
 
-            if(message.PlayerTurn.Sender.Username != client.User.Username)
-                return new ErrorMessage(){ AnswerData = "Username error"};
-
             switch (message.PlayerTurn.Type)
             {
                 case PlayerTurnType.CardDeploy:
-                    client.CurrentLobby.HandlePlayerTurn((CardDeployPlayerTurn)message.PlayerTurn);
+                    client.CurrentLobby.HandlePlayerTurn((CardDeployPlayerTurn)message.PlayerTurn,
+                        client.User.Username);
                     break;
                 case PlayerTurnType.UnitAttack:
-                    client.CurrentLobby.HandlePlayerTurn((UnitAttackPlayerTurn)message.PlayerTurn);
+                    client.CurrentLobby.HandlePlayerTurn((UnitAttackPlayerTurn)message.PlayerTurn,
+                        client.User.Username);
                     break;
                 case PlayerTurnType.TurnEnd:
-                    client.CurrentLobby.HandlePlayerTurn((EndPlayerTurn)message.PlayerTurn);
+                    client.CurrentLobby.HandlePlayerTurn((EndPlayerTurn)message.PlayerTurn,
+                        client.User.Username);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

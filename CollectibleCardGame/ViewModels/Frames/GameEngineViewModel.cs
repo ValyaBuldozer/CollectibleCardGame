@@ -18,6 +18,7 @@ namespace CollectibleCardGame.ViewModels.Frames
     {
         private Player _player;
         private Player _enemyPlayer;
+        private string _currentPlayerUsername;
         private HeroUnit _playerHeroUnit;
         private HeroUnit _enemyHeroUnit;
         private ObservableCollection<CardViewModel> _playerCards;
@@ -48,6 +49,16 @@ namespace CollectibleCardGame.ViewModels.Frames
                 _enemyPlayer = value;
                 EnemyHeroUnit = value?.HeroUnit;
                 NotifyPropertyChanged(nameof(EnemyPlayer));
+            }
+        }
+
+        public string CurrentPlayerUsername
+        {
+            get => _currentPlayerUsername;
+            set
+            {
+                _currentPlayerUsername = value;
+                NotifyPropertyChanged(nameof(CurrentPlayerUsername));
             }
         }
 
@@ -126,10 +137,10 @@ namespace CollectibleCardGame.ViewModels.Frames
         public RelayCommand CardDeployCommand => _cardDeployCommand ??
                (_cardDeployCommand = new RelayCommand(o =>
                {
-                   if(!(o is Card card))
+                   if(!(o is CardViewModel cardViewModel))
                        return;
                    PlayerTurnEvent?.Invoke(this,new PlayerTurnRequestEventArgs(new CardDeployPlayerTurn(
-                       _player,card)));
+                       _player,cardViewModel.Card)));
                }));
     }
 }

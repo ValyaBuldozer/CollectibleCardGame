@@ -49,18 +49,36 @@ namespace Server.Models
             _gameDataContainer = new Container();
         }
 
-        public void HandlePlayerTurn(CardDeployPlayerTurn playerTurn)
+        public void HandlePlayerTurn(CardDeployPlayerTurn playerTurn,string senderUsername)
         {
+            var sender = GeTableCondition.Players.FirstOrDefault(p => p.Username == senderUsername);
+
+            if(sender == null)
+                return;
+
+            playerTurn.Sender = sender;
             _gameDataContainer.Get<IPlayerTurnHandler<CardDeployPlayerTurn>>().Execute(playerTurn);
         }
 
-        public void HandlePlayerTurn(UnitAttackPlayerTurn playerTurn)
+        public void HandlePlayerTurn(UnitAttackPlayerTurn playerTurn,string senderUsername)
         {
+            var sender = GeTableCondition.Players.FirstOrDefault(p => p.Username == senderUsername);
+
+            if (sender == null)
+                return;
+
+            playerTurn.Sender = sender;
             _gameDataContainer.Get<IPlayerTurnHandler<UnitAttackPlayerTurn>>().Execute(playerTurn);
         }
 
-        public void HandlePlayerTurn(EndPlayerTurn playerTurn)
+        public void HandlePlayerTurn(EndPlayerTurn playerTurn,string senderUsername)
         {
+            var sender = GeTableCondition.Players.FirstOrDefault(p => p.Username == senderUsername);
+
+            if (sender == null)
+                return;
+
+            playerTurn.Sender = sender;
             _gameDataContainer.Get<IPlayerTurnHandler<EndPlayerTurn>>().Execute(playerTurn);
         }
 

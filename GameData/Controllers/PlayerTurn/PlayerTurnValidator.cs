@@ -49,12 +49,16 @@ namespace GameData.Controllers.PlayerTurn
         public CardDeployPlayerTurn Validate(CardDeployPlayerTurn playerTurn)
         {
             if (!(_entityRepositoryController.GetById(playerTurn.Card.EntityId) is Card card &&
-                  _entityRepositoryController.GetById(playerTurn.Sender.EntityId) is Player sender &&
-                  _entityRepositoryController.GetById(playerTurn.ActionTarget.EntityId) is Unit target))
+                  _entityRepositoryController.GetById(playerTurn.Sender.EntityId) is Player sender))
             {
                 RunValidateError(new ErrorEventArgs("EntityID not found", true, playerTurn.Sender));
                 return null;
             }
+
+            Unit target = null;
+
+            if (playerTurn.ActionTarget != null)
+                target = _entityRepositoryController.GetById(playerTurn.ActionTarget.EntityId) as Unit;
 
             if (!playerTurn.Sender.HandCards.Exists(c => c.Equals(card)))
             {
@@ -62,8 +66,8 @@ namespace GameData.Controllers.PlayerTurn
                 return null;
             }
 
-            if (!_playerTurnDispatcher.CurrentPlayer.Equals(sender) || 
-                !card.CanBePlayedOnEnemyTurn)
+            if (_playerTurnDispatcher.CurrentPlayer.Username != sender.Username || 
+                card.CanBePlayedOnEnemyTurn)
             {
                 RunValidateError(new ErrorEventArgs("Нельзя разыграть эту карту во время хода протиника",
                     false,playerTurn.Sender));
@@ -95,7 +99,7 @@ namespace GameData.Controllers.PlayerTurn
                 return null;
             }
             
-            if(!_playerTurnDispatcher.CurrentPlayer.Equals(sender))
+            if(_playerTurnDispatcher.CurrentPlayer.Username!=sender.Username)
             {
                 RunValidateError(new ErrorEventArgs("Нельзя атаковать во время хода протиника",
                     false,playerTurn.Sender));
@@ -115,7 +119,7 @@ namespace GameData.Controllers.PlayerTurn
                 return null;
             }
 
-            if (!_playerTurnDispatcher.CurrentPlayer.Equals(sender))
+            if (_playerTurnDispatcher.CurrentPlayer.Username == sender.Username)
             {
                 RunValidateError(new ErrorEventArgs("Not your turn",true,playerTurn.Sender));
                 return null;

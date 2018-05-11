@@ -48,6 +48,8 @@ namespace CollectibleCardGame.Network.Controllers.MessageHandlers
                 case ObserverActionType.GameAction:
                     break;
                 case ObserverActionType.TurnStart:
+                    _gameEngineController.HandleObserverAction(
+                        (TurnStartObserverAction)message.ObserverAction);
                     break;
                 case ObserverActionType.TurnEnd:
                     break;

@@ -38,7 +38,7 @@ namespace GameData.Network
         //[Dependency]
         public MessageHandlerBase<GameStartMessage> GameStartMessageHandlerBase { set; get; }
 
-        //[Dependency]
+        [Dependency]
         public MessageHandlerBase<PlayerTurnMessage> PlayerTurnMessageHandlerBase { set; get; }
 
         //[Dependency]
@@ -174,10 +174,11 @@ namespace GameData.Network
             }
             catch (JsonSerializationException e)
             {
-                Logger.Log(e);
+                Logger?.Log(e);
             }
+            catch(JsonReaderException e) { }
             catch (NullReferenceException e) { }
-
+            //todo : вставить обработку Exceprion - так точно не вылетит
             return null;
         }
 
