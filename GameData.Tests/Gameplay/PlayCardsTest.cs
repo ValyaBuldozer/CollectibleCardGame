@@ -155,7 +155,7 @@ namespace GameData.Tests.Gameplay
 
             Assert.AreNotEqual(gameActionObserver, null);
             Assert.IsTrue(gameActionObserver is GameActionTriggerObserverAction action);
-            Assert.AreEqual(3, ((GameActionTriggerObserverAction)gameActionObserver).GameActionId);
+            Assert.AreEqual(4, ((GameActionTriggerObserverAction)gameActionObserver).GameActionId);
             Assert.AreEqual(5, firstPlayer.TableUnits.FirstOrDefault(c => c.BaseCard.Name == "Мечник").HealthPoint.GetResult);
 
 
@@ -246,7 +246,7 @@ namespace GameData.Tests.Gameplay
 
             Assert.AreNotEqual(gameActionObserver, null);
             Assert.IsTrue(gameActionObserver is GameActionTriggerObserverAction action);
-            Assert.AreEqual(11, ((GameActionTriggerObserverAction)gameActionObserver).GameActionId);
+            Assert.AreEqual(10, ((GameActionTriggerObserverAction)gameActionObserver).GameActionId);
             Assert.AreEqual(8,firstPlayer.TableUnits.First().Attack);
 
         }
@@ -294,6 +294,10 @@ namespace GameData.Tests.Gameplay
             var firstDeck = testCards.FirstRandomDeck;
             var secondDeck = testCards.FirstRandomDeck;
 
+            
+            var downKnightCard = secondDeck.FirstOrDefault(c => c.Name == "Павший рыцарь");
+            secondDeck.Push(downKnightCard);
+
             Container container = new Container();
             container.Initialize(TestGameSettings.Get);
 
@@ -333,6 +337,8 @@ namespace GameData.Tests.Gameplay
             var testCards = new TestCards2();
             var firstDeck = testCards.FirstRandomDeck;
             var secondDeck = testCards.FirstRandomDeck;
+            var archerCard = secondDeck.FirstOrDefault(c => c.Name == "Лучник");
+            secondDeck.Push(archerCard);
 
             Container container = new Container();
             container.Initialize(TestGameSettings.Get);

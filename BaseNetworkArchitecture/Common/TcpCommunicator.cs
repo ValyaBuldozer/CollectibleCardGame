@@ -220,10 +220,10 @@ namespace BaseNetworkArchitecture.Common
                 Logger?.LogAndPrint("Client disconnected");
                 Client.Close();
             }
-            catch (Exception e)
-            {
-                Logger?.Log(e);
-            }
+            //catch (Exception e)
+            //{
+            //    Logger?.Log(e);
+            //}
         }
 
         private void WriteCallback(IAsyncResult asyncResult)

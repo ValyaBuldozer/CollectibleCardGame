@@ -27,7 +27,20 @@ namespace CollectibleCardGame.Views.UserControls
             //this.MouseLeftButtonDown += new MouseButtonEventHandler(Control_MouseLeftButtonDown);
             //this.MouseLeftButtonUp += new MouseButtonEventHandler(Control_MouseLeftButtonUp);
             //this.MouseMove += new MouseEventHandler(Control_MouseMove);
+          
         }
+
+        private void UserControl_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+
+            double a = Convert.ToDouble(UserControl.ActualHeightProperty) / 25.625;
+            double b = Convert.ToDouble(UserControl.ActualHeightProperty)/ 34.17;
+            double с = Convert.ToDouble(UserControl.ActualHeightProperty) / 9.76;
+            UnitName.FontSize = a;
+            UnitStory.FontSize = b;
+            UnitCost.FontSize=UnitAttck.FontSize=UnitHealth.FontSize = с; //+высота ширина кругов(бордеров)
+        }
+
 
         //protected bool isDragging;
         //private Point clickPosition;
@@ -66,7 +79,7 @@ namespace CollectibleCardGame.Views.UserControls
         //        transform.Y = currentPosition.Y - clickPosition.Y;
         //    }
         //}
-        
+
 
     }
 

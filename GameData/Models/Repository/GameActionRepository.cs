@@ -22,7 +22,7 @@ namespace GameData.Models.Repository
                     {
                         var player = (Player) sender;
                         //controller.DrawCard((Player)sender);
-                        foreach (var iUnit in player.TableUnits)
+                        foreach (var iUnit in player.TableUnits.ToArray())
                         {
                             iUnit.HealthPoint.RecieveDamage(parameter);
                         }
@@ -31,7 +31,7 @@ namespace GameData.Models.Repository
                     action:((controller, sender, target, parameter) =>
                     {
                         var player = (Player) sender;
-                        foreach (var iCard in player.HandCards)
+                        foreach (var iCard in player.HandCards.ToArray())
                         {
                             var cCard = iCard as SpellCard;
                             if (cCard?.ActionInfo.ParameterType == ActionParameterType.Damage)
@@ -44,7 +44,7 @@ namespace GameData.Models.Repository
                         var player = (Player) sender;
                         Player enemyPlayer =
                             controller.GetTableCondition.Players.FirstOrDefault(p => p.Username != player.Username);
-                        foreach (var iUnit in enemyPlayer.TableUnits)
+                        foreach (var iUnit in enemyPlayer.TableUnits.ToArray())
                         {
                             iUnit.HealthPoint.RecieveDamage(parameter);
                         }
@@ -55,7 +55,7 @@ namespace GameData.Models.Repository
                     {
                         var player = (Player) sender;
                         //controller.DrawCard((Player)sender);
-                        foreach (var iUnit in player.TableUnits)
+                        foreach (var iUnit in player.TableUnits.ToArray())
                         {
                             iUnit.HealthPoint.Heal(parameter);
                         }
@@ -65,7 +65,7 @@ namespace GameData.Models.Repository
                     action: ((controller, sender, target, parameter) =>
                     {
                         var player = (Player) sender;
-                        foreach (var iUnit in player.TableUnits)
+                        foreach (var iUnit in player.TableUnits.ToArray())
                         {
                             iUnit.HealthPoint.RecieveDamage(parameter);
                         }
@@ -73,7 +73,7 @@ namespace GameData.Models.Repository
                         Player enemyPlayer =
                             controller.GetTableCondition.Players.FirstOrDefault(p => p.Username != player.Username);
 
-                        foreach (var iUnit in enemyPlayer.TableUnits)
+                        foreach (var iUnit in enemyPlayer.TableUnits.ToArray())
                         {
                             iUnit.HealthPoint.RecieveDamage(parameter);
                         }
@@ -84,7 +84,7 @@ namespace GameData.Models.Repository
                     {
                         var player = (Player) sender;
                         //controller.DrawCard((Player)sender);
-                        foreach (var iUnit in player.TableUnits)
+                        foreach (var iUnit in player.TableUnits.ToArray())
                         {
                             iUnit.Attack += parameter;
                         }
@@ -95,7 +95,7 @@ namespace GameData.Models.Repository
                     {
                         var player = (Player) sender;
                         //controller.DrawCard((Player)sender);
-                        foreach (var iUnit in player.TableUnits)
+                        foreach (var iUnit in player.TableUnits.ToArray())
                         {
                             iUnit.Attack += parameter;
                             iUnit.HealthPoint.Base += parameter;

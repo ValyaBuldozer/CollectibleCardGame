@@ -24,6 +24,7 @@ namespace GameData.Network.Messages
 
         public IContent HandleMessage(object sender)
         {
+            //todo : тут вылетает NullReference рандомно
             IContent content = Content as IContent;
             return MessageHandler.Execute(content,sender);
         }

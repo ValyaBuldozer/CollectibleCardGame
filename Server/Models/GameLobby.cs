@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using GameData;
 using GameData.Controllers.Data;
 using GameData.Controllers.Global;
+using GameData.Controllers.PlayerTurn;
 using GameData.Enums;
 using GameData.Kernel;
 using GameData.Models;
@@ -48,9 +49,37 @@ namespace Server.Models
             _gameDataContainer = new Container();
         }
 
-        public PlayerTurn HandlePlayerTurn(PlayerTurn playerTurn)
+        public void HandlePlayerTurn(CardDeployPlayerTurn playerTurn,string senderUsername)
         {
-            throw new NotImplementedException();
+            var sender = GeTableCondition.Players.FirstOrDefault(p => p.Username == senderUsername);
+
+            if(sender == null)
+                return;
+
+            playerTurn.Sender = sender;
+            _gameDataContainer.Get<IPlayerTurnHandler<CardDeployPlayerTurn>>().Execute(playerTurn);
+        }
+
+        public void HandlePlayerTurn(UnitAttackPlayerTurn playerTurn,string senderUsername)
+        {
+            var sender = GeTableCondition.Players.FirstOrDefault(p => p.Username == senderUsername);
+
+            if (sender == null)
+                return;
+
+            playerTurn.Sender = sender;
+            _gameDataContainer.Get<IPlayerTurnHandler<UnitAttackPlayerTurn>>().Execute(playerTurn);
+        }
+
+        public void HandlePlayerTurn(EndPlayerTurn playerTurn,string senderUsername)
+        {
+            var sender = GeTableCondition.Players.FirstOrDefault(p => p.Username == senderUsername);
+
+            if (sender == null)
+                return;
+
+            playerTurn.Sender = sender;
+            _gameDataContainer.Get<IPlayerTurnHandler<EndPlayerTurn>>().Execute(playerTurn);
         }
 
         public void InitializeGame(GameSettings settings)
@@ -75,7 +104,7 @@ namespace Server.Models
             if(FirstPlayerHeroUnit == null || SecondPlayerHeroUnit == null)
                 throw new NullReferenceException("HeroUnits are null");
 
-            _gameDataContainer.Get<GameStateController>().Start(FirstPlayerDeck,FirstClient.User.Username,
+            _gameDataContainer.Get<IGameStateController>().Start(FirstPlayerDeck,FirstClient.User.Username,
                 FirstPlayerHeroUnit,SecondPlayerDeck,SecondClient.User.Username,SecondPlayerHeroUnit);
         }
 

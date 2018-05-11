@@ -9,7 +9,7 @@ namespace GameData.Network.Messages
 {
     public class PlayerTurnMessage : IContent
     {
-        public PlayerTurn Player { set; get; }
+        public PlayerTurn PlayerTurn { set; get; }
 
         public object AnswerData { set; get; }
     }

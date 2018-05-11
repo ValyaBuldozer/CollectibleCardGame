@@ -9,6 +9,7 @@ using BaseNetworkArchitecture.Common;
 using Server.Database;
 using Server.Models;
 using Server.Network.Controllers;
+using Server.Repositories;
 using Server.Unity;
 
 namespace Server
@@ -19,6 +20,7 @@ namespace Server
         {            
             Console.WriteLine("Initializing Kernel...");
             UnityKernel.InitializeKernel();
+            UnityKernel.Get<UserRepository>().Collection.Count();
 
             bool conFlag = true;
             while (conFlag)

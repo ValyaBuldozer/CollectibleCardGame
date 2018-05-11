@@ -140,8 +140,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Logic\Controllers\GameController.cs" />
+    <Compile Include="Logic\Controllers\GameEngineController.cs" />
     <Compile Include="Logic\Controllers\IGlobalController.cs" />
     <Compile Include="Network\Controllers\INetworkController.cs" />
+    <Compile Include="Network\Controllers\MessageHandlers\ObserverActionMessageHandler.cs" />
     <Compile Include="Network\Controllers\NetworkConnectionController.cs" />
     <Compile Include="Logic\Controllers\UserController.cs" />
     <Compile Include="MessageBoxLogger.cs" />
@@ -164,6 +166,7 @@
     <Compile Include="Services\RelayCommand.cs" />
     <Compile Include="Unity\UnityKernel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\Elements\CardViewModel.cs" />
     <Compile Include="ViewModels\Frames\CardDecksPageViewModel.cs" />
     <Compile Include="ViewModels\Frames\ConnectionErrorViewModel.cs" />
     <Compile Include="ViewModels\Frames\ErrorFramePageViewModel.cs" />
@@ -174,6 +177,7 @@
     <Compile Include="ViewModels\Frames\MenuFramePageViewModel.cs" />
     <Compile Include="ViewModels\Frames\LogInFramePageViewModel.cs" />
     <Compile Include="ViewModels\Frames\RegistrationFramePageViewModel.cs" />
+    <Compile Include="ViewModels\UserControls\CardUserControlViewModel.cs" />
     <Compile Include="ViewModels\UserControls\FractionUserControlViewModel.cs" />
     <Compile Include="ViewModels\UserControls\SpellCardUserControlViewModel.cs" />
     <Compile Include="ViewModels\UserControls\UnitCardUserControlViewModel.cs" />
@@ -223,6 +227,9 @@
     </Compile>
     <Compile Include="Views\Frames\ToRegisterFramePage.xaml.cs">
       <DependentUpon>ToRegisterFramePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\CardUserControl.xaml.cs">
+      <DependentUpon>CardUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\FractionUserControl.xaml.cs">
       <DependentUpon>FractionUserControl.xaml</DependentUpon>
@@ -316,6 +323,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\UserControls\CardUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\UserControls\FractionUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -375,8 +386,9 @@
     <Resource Include="Images\Icons\search.png" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Data\Controllers\" />
+    <Folder Include="Data\Repository\" />
     <Folder Include="Resources\" />
-    <Folder Include="ViewModels\Elements\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\northPicture.jpg" />

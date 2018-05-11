@@ -33,5 +33,21 @@ namespace CollectibleCardGame.Views.Frames
         {
             InitializeComponent();
         }
+
+        private void ViewBoxOnMouseEnter(object sender, MouseEventArgs e)
+        {
+            var viewBox = sender as Viewbox;
+
+            viewBox.Height *= 1.5;
+            viewBox.Width *= 1.5;
+        }
+
+        private void ViewBoxOnMouseLeave(object sender, MouseEventArgs e)
+        {
+            var viewBox = sender as Viewbox;
+
+            viewBox.Height /= 1.5;
+            viewBox.Width /= 1.5;
+        }
     }
 }

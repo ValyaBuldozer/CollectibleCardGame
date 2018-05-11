@@ -8,14 +8,14 @@ namespace GameData.Models.Observer
         /// <summary>
         /// Кому была дана карта
         /// </summary>
-        public Player ToPlayer { set; get; }
+        public string ToPlayerUsername { set; get; }
 
         public Card Card { set; get; }
 
-        public CardDrawObserverAction(Card card, Player toPlayer)
+        public CardDrawObserverAction(Card card, string toPlayerUsername)
         {
             Type = ObserverActionType.CardDraw;
-            ToPlayer = toPlayer;
+            ToPlayerUsername = toPlayerUsername;
             Card = card;
         }
 

@@ -63,7 +63,7 @@ namespace GameData.Controllers.Global
 
             _cardsDispatcher.DealCardsToPlayer(CurrentPlayer,1);
 
-            TurnStart?.Invoke(this,new TurnStartObserverAction(CurrentPlayer));
+            TurnStart?.Invoke(this,new TurnStartObserverAction(CurrentPlayer.Username));
 
             if (Timer.Enabled)
             {
@@ -81,6 +81,7 @@ namespace GameData.Controllers.Global
                 _playersCyclicQueue = new CyclicQueue<Player>(_tableCondition.Players);
 
             Timer.Enabled = _settings.IsPlayerTurnTimerEnabled;
+            NextPlayer();
         }
 
         public void Stop()

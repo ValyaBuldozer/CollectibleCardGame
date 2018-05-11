@@ -7,8 +7,14 @@
              mc:Ignorable="d" 
              AllowDrop="True"
              d:DesignHeight="250" d:DesignWidth="210" MaxHeight="250" MaxWidth="210">
-    <!--410x220-->
-    <Border BorderThickness="5" BorderBrush="Black" CornerRadius="5">
+    <Grid>
+        <Grid.RenderTransform>
+            <!-- ScaleX/Y = k -->
+            <ScaleTransform CenterX="0" CenterY="0" ScaleX="1" ScaleY="1"/>
+        </Grid.RenderTransform>
+
+        <!--250x210-->
+    <Border BorderThickness="2" BorderBrush="Black" CornerRadius="5">
         <Border.Effect>
             <DropShadowEffect BlurRadius="10" Direction="315" Opacity="0.8"/>
         </Border.Effect>
@@ -23,7 +29,7 @@
 
 
                 <!--картинка юнита 210x250-->
-                <Image x:Name="UnitImage" Source="{Binding Path=ImagePath}"  Margin="-1,0,0,0" Grid.RowSpan="2">
+                <Image x:Name="UnitImage" Source="{Binding Path=ImagePath}"   Margin="0,0,0,0" Grid.RowSpan="2">
                     <Image.Effect>
                         <DropShadowEffect   RenderingBias="Quality"/>
                     </Image.Effect>
@@ -60,11 +66,18 @@
                             </Border.Effect>
                         </Border>-->
 
-                        <ItemsControl x:Name="AbilityStack" Grid.Column="0" Grid.ColumnSpan="3">
+                        
+                    </Grid>
+                    <Grid Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Top" HorizontalAlignment="Center">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="2"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <ItemsControl x:Name="AbilityStack" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center" Grid.ColumnSpan="3" >
                             <!--ItemsSource="{Binding  ViewModel.Parameters, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">-->
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
-                                    <WrapPanel   Orientation="Vertical" Margin="0,2,0,0" />
+                                    <WrapPanel   Orientation="Vertical" />
                                 </ItemsPanelTemplate>
                             </ItemsControl.ItemsPanel>
 
@@ -73,10 +86,13 @@
                             <Image Source="../../Icons/settingsChange.png" Margin="2"/>-->
 
 
-                            <Rectangle Grid.Row="0" Stroke="Gold" StrokeThickness="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Width="55" Height="55" >
+                            <Rectangle Grid.Row="0" Stroke="Gold" RadiusX="5" RadiusY="5" StrokeThickness="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Width="55" Height="55">
                                 <Rectangle.Fill>
                                     <ImageBrush ImageSource="../../Images/IconsUnit/sword.png"/>
                                 </Rectangle.Fill>
+                                <Rectangle.Effect>
+                                    <DropShadowEffect   RenderingBias="Quality" Direction="315"  BlurRadius="10" ShadowDepth="8"/>
+                                </Rectangle.Effect>
                             </Rectangle>
 
                             <!--<ItemsControl.ItemTemplate>
@@ -97,7 +113,8 @@
                         </ItemsControl>
                     </Grid>
 
-                    
+
+
 
                 </Grid>
 
@@ -142,6 +159,6 @@
 
         </Grid>
     </Border>
-
+    </Grid>
 </UserControl>
 

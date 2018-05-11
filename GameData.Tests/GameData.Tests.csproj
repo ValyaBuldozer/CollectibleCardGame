@@ -72,6 +72,7 @@
     <Compile Include="Controllers\UnitTests\Logic\PlayerTurnDispatherTest.cs" />
     <Compile Include="Controllers\UnitTests\Logic\TestCallGameActions.cs" />
     <Compile Include="Controllers\UnitTests\Logic\UnitDispatcherTests.cs" />
+    <Compile Include="Gameplay\GameplayScenarioTests.cs" />
     <Compile Include="Gameplay\GameStartTest.cs" />
     <Compile Include="Gameplay\Global\SimpleAttackTest.cs" />
     <Compile Include="Gameplay\PlayCardsTest.cs" />
@@ -81,6 +82,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestData\TestCards.cs" />
     <Compile Include="TestData\TestCards2.cs" />
+    <Compile Include="TestData\TestCards3.cs" />
     <Compile Include="TestData\TestDeck.cs" />
     <Compile Include="TestData\TestGameActionRepository.cs" />
     <Compile Include="TestData\TestGameSettings.cs" />

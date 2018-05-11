@@ -7,6 +7,10 @@
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="420" MinHeight="300" MinWidth="240">
     <Grid  Background="{DynamicResource BasicBackGround}">
+        <Grid.RenderTransform>
+            <!-- ScaleX/Y = k -->
+            <ScaleTransform CenterX="0" CenterY="0" ScaleX="1" ScaleY="1"/>
+        </Grid.RenderTransform>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.6*"/>
             <RowDefinition Height="2*"/>

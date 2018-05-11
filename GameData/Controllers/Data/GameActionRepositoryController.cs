@@ -24,12 +24,27 @@ namespace GameData.Controllers.Data
             return _repository.Collection.FirstOrDefault(a => a.ID == id);
         }
 
-        public void Add(GameAction element)
+        public IEnumerable<GameAction> GetById(IEnumerable<int> idCollection)
         {
-            if(_repository.Collection.Find(a=>a.ID == element.ID) != null)
+            if (idCollection == null)
+                return null;
+
+            List<GameAction> retList = new List<GameAction>();
+
+            foreach (var id in idCollection)
+            {
+                retList.Add(GetById(id));
+            }
+
+            return retList;
+        }
+
+        public void Add(GameAction item)
+        {
+            if(_repository.Collection.Find(a=>a.ID == item.ID) != null)
                 throw new RepositoryItemAlreadyExistsExcepction();
 
-            _repository.Collection.Add(element);
+            _repository.Collection.Add(item);
         }
 
         public void AddNewItem(GameAction item)

@@ -63,11 +63,21 @@
 
                     
 
-                    <Ellipse Grid.Row="0" Stroke="Black" StrokeThickness="3" Grid.Column="1"  HorizontalAlignment="Center" VerticalAlignment="Center"
+                    <!--<Ellipse Grid.Row="0" Stroke="Black" StrokeThickness="3" Grid.Column="1"  HorizontalAlignment="Center" VerticalAlignment="Center"
                              Fill="Gold" Width="55" Height="55" Margin="0,2,0,0" />
 
                     <TextBlock Grid.Row="0" x:Name="UnitCost" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"
-                               Text="{Binding Cost}" FontSize="52" FontWeight="Bold" Margin="0,0,0,5"  />
+                               Text="{Binding Cost}" FontSize="52" FontWeight="Bold" Margin="0,0,0,5"  />-->
+                    <Border CornerRadius="50"
+                            Width="55"
+                            Height="55"
+                            Background="Gold"
+                            BorderBrush="Black"
+                            BorderThickness="3"
+                            Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <TextBlock  x:Name="UnitCost" HorizontalAlignment="Center" VerticalAlignment="Center" Margin=" 0,0,1,5"
+                                    Text="{Binding Cost}" FontWeight="Bold" FontSize="42" />
+                    </Border>
 
                 </Grid>
 

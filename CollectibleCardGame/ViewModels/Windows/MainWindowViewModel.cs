@@ -15,6 +15,7 @@ namespace CollectibleCardGame.ViewModels.Windows
         private Page _framePage;
         private bool _isBusy;
         private string _busyMessage;
+        private string _title;
         private readonly LogInFramePageShell _logInFramePageShell;
         private readonly MainMenuFramePage _mainMenuFramePage;
         private readonly GameEngineFramePage _gameEngineFramePage;
@@ -26,6 +27,16 @@ namespace CollectibleCardGame.ViewModels.Windows
             {
                 _framePage = value;
                 NotifyPropertyChanged(nameof(FramePage));
+            }
+        }
+
+        public string Title
+        {
+            get => _title;
+            set
+            {
+                _title = value;
+                NotifyPropertyChanged(nameof(Title));
             }
         }
 
@@ -56,6 +67,8 @@ namespace CollectibleCardGame.ViewModels.Windows
             _mainMenuFramePage = mainMenuFramePage;
             _gameEngineFramePage = gameEngineFramePage;
             _framePage = _logInFramePageShell;
+
+            _title = "Collectible card game";
         }
 
         public void SetLogInFrame()
