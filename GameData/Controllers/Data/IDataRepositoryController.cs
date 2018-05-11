@@ -16,6 +16,13 @@ namespace GameData.Controllers.Data
         T GetById(int id);
 
         /// <summary>
+        /// Получить список элементов по их индексам
+        /// </summary>
+        /// <param name="idCollection">Список индексов</param>
+        /// <returns></returns>
+        IEnumerable<T> GetById(IEnumerable<int> idCollection);
+
+        /// <summary>
         /// Добавить элемент с указанным индексом
         /// </summary>
         /// <param name="item">Элемент</param>

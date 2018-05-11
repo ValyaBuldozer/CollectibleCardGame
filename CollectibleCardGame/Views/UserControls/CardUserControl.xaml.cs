@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using CollectibleCardGame.ViewModels.Elements;
 
 namespace CollectibleCardGame.Views.UserControls
 {
@@ -20,6 +21,12 @@ namespace CollectibleCardGame.Views.UserControls
     /// </summary>
     public partial class CardUserControl : UserControl
     {
+        public CardViewModel ViewModel
+        {
+            set => DataContext = value;
+            get => DataContext as CardViewModel;
+        }
+
         public CardUserControl()
         {
             InitializeComponent();

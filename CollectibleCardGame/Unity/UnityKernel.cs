@@ -113,6 +113,8 @@ namespace CollectibleCardGame.Unity
                 new ContainerControlledLifetimeManager());
             _container.RegisterType<MessageHandlerBase<GameRequestMessage>, GameRequestMessageHandler>(
                 new ContainerControlledLifetimeManager());
+            _container.RegisterType<MessageHandlerBase<ObserverActionMessage>, ObserverActionMessageHandler>(
+                new ContainerControlledLifetimeManager());
 
             _container.Resolve<MainWindow>();
             //initializating observer controllers

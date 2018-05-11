@@ -7,7 +7,7 @@ using GameData.Network.Messages;
 
 namespace GameData.Network
 {
-    public abstract class MessageHandlerBase<T> : IMessageHandler
+    public class MessageHandlerBase<T> : IMessageHandler
     {
         public virtual IContent Execute(IContent content,object sender)
         {

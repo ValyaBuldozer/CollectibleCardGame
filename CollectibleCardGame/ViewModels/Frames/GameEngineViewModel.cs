@@ -4,16 +4,21 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Threading;
 using CollectibleCardGame.Services;
 using CollectibleCardGame.ViewModels.Elements;
+using GameData.Models;
 using GameData.Models.Cards;
+using GameData.Models.PlayerTurn;
 using GameData.Models.Units;
-using Xceed.Wpf.Toolkit;
 
 namespace CollectibleCardGame.ViewModels.Frames
 {
     public class GameEngineViewModel : BaseViewModel
     {
+        private Player _player;
+        private Player _enemyPlayer;
+        private string _currentPlayerUsername;
         private HeroUnit _playerHeroUnit;
         private HeroUnit _enemyHeroUnit;
         private ObservableCollection<CardViewModel> _playerCards;
@@ -22,6 +27,40 @@ namespace CollectibleCardGame.ViewModels.Frames
         private ObservableCollection<Unit> _enemyUnits;
 
         private RelayCommand _cardDeployCommand;
+
+        public Dispatcher CurrentDispatcher { get; }
+
+        public Player Player
+        {
+            get => _player;
+            set
+            {
+                _player = value;
+                PlayerHeroUnit = value?.HeroUnit;
+                NotifyPropertyChanged(nameof(Player));
+            }
+        }
+
+        public Player EnemyPlayer
+        {
+            get => _enemyPlayer;
+            set
+            {
+                _enemyPlayer = value;
+                EnemyHeroUnit = value?.HeroUnit;
+                NotifyPropertyChanged(nameof(EnemyPlayer));
+            }
+        }
+
+        public string CurrentPlayerUsername
+        {
+            get => _currentPlayerUsername;
+            set
+            {
+                _currentPlayerUsername = value;
+                NotifyPropertyChanged(nameof(CurrentPlayerUsername));
+            }
+        }
 
         public HeroUnit PlayerHeroUnit
         {
@@ -85,7 +124,12 @@ namespace CollectibleCardGame.ViewModels.Frames
 
         public GameEngineViewModel()
         {
+            CurrentDispatcher = Dispatcher.CurrentDispatcher;
 
+            PlayerCards = new ObservableCollection<CardViewModel>();
+            EnemyCards = new ObservableCollection<CardViewModel>();
+            PlayerUnits = new ObservableCollection<Unit>();
+            EnemyUnits  = new ObservableCollection<Unit>();
         }
 
         public event EventHandler<PlayerTurnRequestEventArgs> PlayerTurnEvent;
@@ -93,9 +137,10 @@ namespace CollectibleCardGame.ViewModels.Frames
         public RelayCommand CardDeployCommand => _cardDeployCommand ??
                (_cardDeployCommand = new RelayCommand(o =>
                {
-                   if(!(o is Card card))
+                   if(!(o is CardViewModel cardViewModel))
                        return;
-                   MessageBox.Show(card.Name);
+                   PlayerTurnEvent?.Invoke(this,new PlayerTurnRequestEventArgs(new CardDeployPlayerTurn(
+                       _player,cardViewModel.Card)));
                }));
     }
 }

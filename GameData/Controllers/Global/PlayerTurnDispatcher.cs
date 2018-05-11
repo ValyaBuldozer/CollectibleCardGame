@@ -63,7 +63,7 @@ namespace GameData.Controllers.Global
 
             _cardsDispatcher.DealCardsToPlayer(CurrentPlayer,1);
 
-            TurnStart?.Invoke(this,new TurnStartObserverAction(CurrentPlayer));
+            TurnStart?.Invoke(this,new TurnStartObserverAction(CurrentPlayer.Username));
 
             if (Timer.Enabled)
             {

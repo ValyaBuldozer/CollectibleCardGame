@@ -74,7 +74,8 @@ namespace GameData.Kernel
             _container.RegisterType<GlobalGameObserver>(new ContainerControlledLifetimeManager());
 
             //player turn handlers
-            _container.RegisterType<IPlayerTurnValidator, PlayerTurnValidator>();
+            _container.RegisterType<IPlayerTurnValidator, PlayerTurnValidator>(
+                new ContainerControlledLifetimeManager());
             _container.RegisterType<IPlayerTurnHandler<CardDeployPlayerTurn>,
                 CardDeployPlayerTurnHandler>();
             _container.RegisterType<IPlayerTurnHandler<UnitAttackPlayerTurn>,

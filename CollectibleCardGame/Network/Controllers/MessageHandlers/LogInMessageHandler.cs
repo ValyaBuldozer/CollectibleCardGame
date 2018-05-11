@@ -27,6 +27,7 @@ namespace CollectibleCardGame.Network.Controllers.MessageHandlers
             {
                 _user.Username = username;
                 _mainWindowViewModel.SetMainMenuFrame();
+                _mainWindowViewModel.Title = "Collectible card game - " + username;
             }
 
             return content;

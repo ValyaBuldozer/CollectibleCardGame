@@ -24,6 +24,78 @@ namespace GameData.Models.Repository
                 //test cards
                 new UnitCard()
                 {
+                    ID = 0,
+                    Name = "TestUnit1_1",
+                    Cost = 1,
+                    CanBePlayedOnEnemyTurn = false,
+                    AttackPriority = 1,
+                    BaseHP = 1,
+                    BaseAttack = 1,
+                },
+                new UnitCard()
+                {
+                    ID = 1,
+                    Name = "TestUnit3_3",
+                    Cost = 3,
+                    CanBePlayedOnEnemyTurn = false,
+                    AttackPriority = 1,
+                    BaseHP = 3,
+                    BaseAttack = 3,
+                },
+                new UnitCard()
+                {
+                    ID = 2,
+                    Name = "TestUnitBAaction",
+                    Cost = 1,
+                    CanBePlayedOnEnemyTurn = false,
+                    AttackPriority = 1,
+                    BaseHP = 1,
+                    BaseAttack = 1,
+                    BattleCryActionInfo = new CardActionInfo()
+                    {
+                        ActionId = 1,
+                        ParameterType = ActionParameterType.Damage,
+                        ParameterValue = 1
+                    }
+                },
+                new UnitCard()
+                {
+                    ID = 3,
+                    Name = "TestUnit10_10",
+                    Cost = 10,
+                    CanBePlayedOnEnemyTurn = false,
+                    AttackPriority = 2,
+                    BaseHP = 10,
+                    BaseAttack = 10,
+                },
+                new SpellCard()
+                {
+                    ID = 4,
+                    Name = "TestSpell1",
+                    Cost = 1,
+                    CanBePlayedOnEnemyTurn = false,
+                    ActionInfo = new CardActionInfo()
+                    {
+                        ActionId = 2,
+                        ParameterType = ActionParameterType.Damage,
+                        ParameterValue = 2
+                    }
+                },
+                new SpellCard()
+                {
+                    ID = 5,
+                    Name = "TestSpell2",
+                    Cost = 1,
+                    CanBePlayedOnEnemyTurn = false,
+                    ActionInfo = new CardActionInfo()
+                    {
+                        ActionId = 3,
+                        ParameterType = ActionParameterType.Empty,
+                        ParameterValue = 0
+                    }
+                },
+                new UnitCard()
+                {
                     ID = 301,
                     Name = "TestUnitCard1",
                     Cost = 0,

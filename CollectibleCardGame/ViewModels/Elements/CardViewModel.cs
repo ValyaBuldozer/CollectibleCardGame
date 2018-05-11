@@ -12,6 +12,21 @@ namespace CollectibleCardGame.ViewModels.Elements
         private int _cost;
         private string _name;
         private string _description;
+        private int _attack;
+        private int _health;
+        private bool _isUnitCard;
+
+        public Card Card { get; }
+
+        public bool IsUnitCard
+        {
+            get => _isUnitCard;
+            set
+            {
+                _isUnitCard = value;
+                NotifyPropertyChanged(nameof(IsUnitCard));
+            }
+        }
 
         public int Cost
         {
@@ -43,11 +58,39 @@ namespace CollectibleCardGame.ViewModels.Elements
             }
         }
 
+        public int Attack
+        {
+            get => _attack;
+            set
+            {
+                _attack = value;
+                NotifyPropertyChanged(nameof(Attack));
+            }
+        }
+
+        public int Health
+        {
+            get => _health;
+            set
+            {
+                _health = value;
+                NotifyPropertyChanged(nameof(Health));
+            }
+        }
+
         public CardViewModel(Card card)
         {
+            Card = card;
             _cost = card.Cost;
             _description = card.Description;
             _name = card.Name;
+
+            if (card is UnitCard unitCard)
+            {
+                _isUnitCard = true;
+                _attack = unitCard.BaseAttack;
+                _health = unitCard.BaseHP;
+            }
         }
     }
 }

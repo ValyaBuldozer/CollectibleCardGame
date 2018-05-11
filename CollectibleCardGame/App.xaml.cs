@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Configuration;
 using System.Data;
 using System.Drawing;
@@ -20,6 +19,7 @@ using CollectibleCardGame.ViewModels.Windows;
 using CollectibleCardGame.Views.Frames;
 using CollectibleCardGame.Views.FramesShell;
 using CollectibleCardGame.Views.UserControls;
+using GameData.Models.Cards;
 using GameData.Network.Messages;
 using Unity;
 
@@ -32,46 +32,43 @@ namespace CollectibleCardGame
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            //CardDecksFramePage frame = new CardDecksFramePage() { DataContext = new CardDecksPageViewModel() };
-            //frame.f1.DataContext = new FractionUserControlViewModel() { Name = "Калвария", Description = "Северная фракция", ImagePath = "/Images/northPicture.jpg" };
-            //frame.f2.DataContext = new FractionUserControlViewModel() { Name = "Магдебург", Description = "Южная фракцция", ImagePath = "/Images/southPicture.jpg" };
-            //frame.f3.DataContext = new FractionUserControlViewModel() { Name = "Чудовища", Description = "Монстры", ImagePath = "/Images/darksidePicture.jpg" };
-
-
-            //LogInFramePageShell frame = new LogInFramePageShell() { DataContext = new LogInFramePageShellViewModel() };
-
-
-            //TESTFramePage frame = new TESTFramePage() { DataContext = new GameProccesPageViewModel() };
-            //frame.u1.DataContext = new UnitCardUserControlViewModel() { Name = "Владик", Description = "Я хожу в качалку, но только по воскресеньям... Как же круто!", ImagePath = "/Images/ImagesUnit/testResize210x253.jpg", Cost = 5, Attack = 9, Health = 6, TapeBrush = "#393A3C", TapeBorderBrush = "#CE8239" };
-            //frame.s1.DataContext = new SpellCardUserControlViewModel() { Name = "Град стрел", Description = "Мне показалось, что солнце на секунду пропало...", ImagePath = "/Images/ImagesSpell/SpellGradStrel.jpg", Cost = 6 };
-            //frame.mu1.DataContext = new UnitCardUserControlViewModel() { Name = "Владик", Description = "Я хожу в качалку, но только по воскресеньям... Как же круто!", ImagePath = "/Images/ImagesUnit/testResize210x253.jpg", Cost = 5, Attack = 9, Health = 6, TapeBrush = "#393A3C", TapeBorderBrush = "#CE8239" };
-
-            //frame.f1.DataContext = new FractionUserControlViewModel() { Name = "Калвария", Description = "Северная фракция", ImagePath = "/Images/northPicture.jpg" };
-            //frame.f2.DataContext = new FractionUserControlViewModel() { Name = "Магдебург", Description = "Южная фракцция", ImagePath = "/Images/southPicture.jpg" };
-            //frame.f3.DataContext = new FractionUserControlViewModel() { Name = "Чудовища", Description = "Монстры", ImagePath = "/Images/darksidePicture.jpg" };
-
-            //window.MainFrame.Content = frame;
-            //window.Show();
-
-            UnityKernel.InitializeKernel();
-            var window = UnityKernel.Get<MainWindow>();
-            var gameEngineVM = UnityKernel.Get<GameEngineViewModel>();
-            gameEngineVM.PlayerCards = new ObservableCollection<CardViewModel>();
-            //UnityKernel.Get<IGlobalController>().OnStartup();
-
-            //MainWindow window = new MainWindow() {ViewModel = new MainWindowViewModel(
-            //    new LogInFramePageShell()
+            //MainWindow window = new MainWindow();
+            //GameEngineFramePage framePage = new GameEngineFramePage();
+            //GameEngineViewModel viewModel = new GameEngineViewModel();
+            //    viewModel.PlayerCards.Add(new CardViewModel(new UnitCard()
             //    {
-            //        ViewModel = new LogInFramePageShellViewModel(
-            //            new LogInFramePage()
-            //            {
-            //                ViewModel = new LogInFramePageViewModel()
-            //            }, 
-            //            new ToRegisterFramePage(), 
-            //            new ConnectionErrorFramePage()
-            //            )
-            //    })};
+            //        Cost = 5, Name = "test", Description = "test", BaseAttack = 1, BaseHP = 1
+            //    }));
+            //viewModel.PlayerCards.Add(new CardViewModel(new UnitCard()
+            //{
+            //    Cost = 5,
+            //    Name = "test",
+            //    Description = "test",
+            //    BaseAttack = 1,
+            //    BaseHP = 1
+            //}));
+            //viewModel.PlayerCards.Add(new CardViewModel(new UnitCard()
+            //{
+            //    Cost = 5,
+            //    Name = "test",
+            //    Description = "test",
+            //    BaseAttack = 1,
+            //    BaseHP = 1
+            //}));
+            //viewModel.PlayerCards.Add(new CardViewModel(new SpellCard()
+            //{
+            //    Cost = 5,
+            //    Name = "test",
+            //    Description = "test"
+            //}));
+            //framePage.ViewModel = viewModel;
+            //window.MainFrame.Content = framePage;
             //window.Show();
+            UnityKernel.InitializeKernel();
+            UnityKernel.Get<MainWindow>().Show();
+            UnityKernel.Get<IGlobalController>().OnStartup();
+
+
         }
     }
 }

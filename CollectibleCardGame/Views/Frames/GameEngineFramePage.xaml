@@ -4,68 +4,80 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:CollectibleCardGame.Views.Frames"
+      xmlns:uc="clr-namespace:CollectibleCardGame.Views.UserControls"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="900"
       Title="GameEngineFramePage"
       Background="White">
 
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="5*"/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <ItemsControl Grid.Column="0" ItemsSource="{Binding Path=EnemyCards,Mode=TwoWay}" >
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel HorizontalAlignment="Stretch" Orientation="Horizontal"/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel>
-                            <TextBlock Text="{Binding Path=Name}"/>
-                            <TextBlock Text="{Binding Path=Description}"/>
-                        </StackPanel>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-            <StackPanel Grid.Column="1" DataContext="{Binding Path=EnemyHeroUnit}">
-                <TextBlock Text="{Binding Name}"/>
-                <TextBlock Text="{Binding HealthPoint}"/>
-            </StackPanel>
-        </Grid>
+        <Button Content="{Binding CurrentPlayerUsername}" VerticalAlignment="Center" HorizontalAlignment="Right"
+                Height="25" Width="150"/>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1.5*"/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition Height="1.5*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="5*"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <ItemsControl Grid.Column="0" ItemsSource="{Binding Path=EnemyCards,Mode=TwoWay}" >
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel HorizontalAlignment="Stretch" Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <uc:CardUserControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <StackPanel Grid.Column="1" DataContext="{Binding Path=EnemyHeroUnit}">
+                    <TextBlock Text="{Binding Name}"/>
+                    <TextBlock Text="{Binding HealthPoint}"/>
+                </StackPanel>
+            </Grid>
 
-        <Grid Grid.Row="3">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="5*"/>
-            </Grid.ColumnDefinitions>
-            <StackPanel Grid.Column="1" DataContext="{Binding Path=PlayerHeroUnit}">
-                <TextBlock Text="{Binding Name}"/>
-                <TextBlock Text="{Binding HealthPoint}"/>
-            </StackPanel>
-            <ItemsControl Grid.Column="1" ItemsSource="{Binding Path=PlayerCards,Mode=TwoWay}" >
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel HorizontalAlignment="Stretch" Orientation="Horizontal"/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel>
-                            <TextBlock Text="{Binding Path=Name}"/>
-                            <TextBlock Text="{Binding Path=Description}"/>
-                        </StackPanel>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
+            <Grid Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="5*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="1" DataContext="{Binding Path=PlayerHeroUnit}">
+                    <TextBlock Text="{Binding Name}"/>
+                    <TextBlock Text="{Binding HealthPoint}"/>
+                </StackPanel>
+                <ItemsControl Grid.Column="1" ItemsSource="{Binding Path=PlayerCards,Mode=TwoWay}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel HorizontalAlignment="Stretch" Orientation="Horizontal"
+                                    />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Viewbox Stretch="Fill" Width="110" Height="205" 
+                                     MouseEnter="ViewBoxOnMouseEnter"
+                                     MouseLeave="ViewBoxOnMouseLeave"
+                                     >
+                                <Button Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, 
+                                AncestorType={x:Type Page}}, Path=ViewModel.CardDeployCommand}" 
+                                    CommandParameter="{Binding}"
+                                    BorderThickness="0" BorderBrush="{x:Null}">
+                                    <uc:CardUserControl Width="220" Height="410"/>
+                                </Button>
+                            </Viewbox>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </Grid>
         </Grid>
     </Grid>
 </Page>

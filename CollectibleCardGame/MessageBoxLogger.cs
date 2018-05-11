@@ -3,13 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Threading;
 using BaseNetworkArchitecture.Common;
-using Xceed.Wpf.Toolkit;
 
 namespace CollectibleCardGame
 {
     public class MessageBoxLogger : ILogger
     {
+        private readonly Dispatcher _uiDispatcher;
+
+        public MessageBoxLogger()
+        {
+            _uiDispatcher = Dispatcher.CurrentDispatcher;
+        }
+
         public void Print(string message)
         {
             MessageBox.Show(message);
@@ -22,7 +30,15 @@ namespace CollectibleCardGame
 
         public void LogAndPrint(string message)
         {
-            MessageBox.Show(message);
+            try
+            {
+                _uiDispatcher.Invoke(() => { MessageBox.Show(message); });
+
+            }
+            catch (InvalidOperationException e)
+            {
+                
+            }
         }
 
         public void Log(Exception e)
