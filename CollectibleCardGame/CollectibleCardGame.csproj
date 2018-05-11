@@ -227,6 +227,9 @@
     <Compile Include="Views\Frames\ToRegisterFramePage.xaml.cs">
       <DependentUpon>ToRegisterFramePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\CardBackUserControl.xaml.cs">
+      <DependentUpon>CardBackUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControls\CardUserControl.xaml.cs">
       <DependentUpon>CardUserControl.xaml</DependentUpon>
     </Compile>
@@ -319,6 +322,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Frames\ToRegisterFramePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\CardBackUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

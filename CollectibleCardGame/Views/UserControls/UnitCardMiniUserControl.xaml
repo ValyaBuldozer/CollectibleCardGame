@@ -13,7 +13,7 @@
             <ScaleTransform CenterX="0" CenterY="0" ScaleX="1" ScaleY="1"/>
         </Grid.RenderTransform>
 
-        <!--250x210-->
+        <!--210x250-->
     <Border BorderThickness="2" BorderBrush="Black" CornerRadius="5">
         <Border.Effect>
             <DropShadowEffect BlurRadius="10" Direction="315" Opacity="0.8"/>
