@@ -21,11 +21,14 @@ namespace CollectibleCardGame.Logic.Controllers
         {
             _networkController = networkController;
             goGameFramePageViewModel.GameRequest += GameRequestEventHandler;
-            gameEngineViewModel.PlayerTurnEvent += PlayerTurnEvent;
+            gameEngineViewModel.PlayerTurnEvent += ViewModelPlayerTurnEventHandler;
         }
 
-        private void PlayerTurnEvent(object sender, Services.PlayerTurnRequestEventArgs e)
+        private void ViewModelPlayerTurnEventHandler(object sender, Services.PlayerTurnRequestEventArgs e)
         {
+            if(e.PlayerTurn == null)
+                return;
+
             MessageBase message = new MessageBase(MessageBaseType.PlayerTurnMessage,
                 new PlayerTurnMessage(){PlayerTurn = e.PlayerTurn});
             _networkController.SendMessage(message);

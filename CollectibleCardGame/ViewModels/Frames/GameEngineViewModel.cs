@@ -11,7 +11,6 @@ using GameData.Models;
 using GameData.Models.Cards;
 using GameData.Models.PlayerTurn;
 using GameData.Models.Units;
-using Xceed.Wpf.Toolkit;
 
 namespace CollectibleCardGame.ViewModels.Frames
 {
@@ -36,6 +35,7 @@ namespace CollectibleCardGame.ViewModels.Frames
             set
             {
                 _player = value;
+                PlayerHeroUnit = value?.HeroUnit;
                 NotifyPropertyChanged(nameof(Player));
             }
         }
@@ -46,6 +46,7 @@ namespace CollectibleCardGame.ViewModels.Frames
             set
             {
                 _enemyPlayer = value;
+                EnemyHeroUnit = value?.HeroUnit;
                 NotifyPropertyChanged(nameof(EnemyPlayer));
             }
         }
@@ -127,7 +128,8 @@ namespace CollectibleCardGame.ViewModels.Frames
                {
                    if(!(o is Card card))
                        return;
-                   //PlayerTurnEvent.Invoke(this,new PlayerTurnRequestEventArgs(new CardDeployPlayerTurn()));
+                   PlayerTurnEvent?.Invoke(this,new PlayerTurnRequestEventArgs(new CardDeployPlayerTurn(
+                       _player,card)));
                }));
     }
 }
