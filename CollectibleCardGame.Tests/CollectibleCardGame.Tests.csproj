@@ -107,6 +107,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArchitectureTests\EventArgsInterfaceTest.cs" />
+    <Compile Include="JsonReadTest.cs" />
     <Compile Include="Logic\Contoller\GlobalAppStateConttollerTest.cs" />
     <Compile Include="Logic\Contoller\UserControllerTests.cs" />
     <Compile Include="OutConnectionTest.cs" />
