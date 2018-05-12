@@ -167,6 +167,7 @@
     <Compile Include="Unity\UnityKernel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\Elements\CardViewModel.cs" />
+    <Compile Include="ViewModels\Elements\UnitViewModel.cs" />
     <Compile Include="ViewModels\Frames\CardDecksPageViewModel.cs" />
     <Compile Include="ViewModels\Frames\ConnectionErrorViewModel.cs" />
     <Compile Include="ViewModels\Frames\ErrorFramePageViewModel.cs" />
@@ -370,7 +371,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Resources\CardsRepository.json" />
+    <EmbeddedResource Include="Resources\CardsRepository.json" />
     <Resource Include="Fonts\Chronicles_font.ttf" />
   </ItemGroup>
   <ItemGroup>

@@ -124,6 +124,7 @@
     <Compile Include="Models\Observer\CardDeployObserverAction.cs" />
     <Compile Include="Models\Observer\CardDrawObserverAction.cs" />
     <Compile Include="Models\Observer\GameActionTriggerObserverAction.cs" />
+    <Compile Include="Models\Observer\PlayerStateChangesObserverAction.cs" />
     <Compile Include="Models\Observer\TurnStartObserverAction.cs" />
     <Compile Include="Models\Observer\UnitDeathObserverAction.cs" />
     <Compile Include="Models\Observer\UnitSpawnObserverAction.cs" />

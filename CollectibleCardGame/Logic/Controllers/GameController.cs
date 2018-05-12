@@ -9,6 +9,7 @@ using CollectibleCardGame.ViewModels.Windows;
 using GameData.Enums;
 using GameData.Models.Cards;
 using GameData.Network.Messages;
+using Unity.Interception.Utilities;
 
 namespace CollectibleCardGame.Logic.Controllers
 {
@@ -36,10 +37,18 @@ namespace CollectibleCardGame.Logic.Controllers
 
         private void GameRequestEventHandler(object sender, Services.GameRequestEventArgs e)
         {
-            var deck = new List<int>()
+            Random rnd = new Random();
+            var array = new int[] {20,20,20,21,21,21,22,22,22,23,23,23,24,24,24,25,25,25,26,26,26,27,27,27};
+            for (int i = 0; i < 24; i++)
             {
-                301,302,303,304,301,302,303,304,301,302,303,304,301,302,303,304
-            };
+                int randomItem = rnd.Next(0, 24);
+                int item = array[randomItem];
+                array[randomItem] = array[i];
+                array[i] = item;
+            }
+
+            var deck = new List<int>(array);
+            
             var card = new UnitCard()
             {
                 BaseHP = 30,

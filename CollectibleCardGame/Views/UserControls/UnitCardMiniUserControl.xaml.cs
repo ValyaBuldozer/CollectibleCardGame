@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using CollectibleCardGame.ViewModels.Elements;
+using Unity.Attributes;
 
 namespace CollectibleCardGame.Views.UserControls
 {
@@ -20,6 +22,13 @@ namespace CollectibleCardGame.Views.UserControls
     /// </summary>
     public partial class UnitCardMiniUserControl : UserControl
     {
+        [Dependency]
+        public UnitViewModel ViewModel
+        {
+            get => DataContext as UnitViewModel;
+            set => DataContext = value;
+        }
+
         public UnitCardMiniUserControl()
         {
             InitializeComponent();

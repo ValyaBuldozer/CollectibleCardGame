@@ -32,7 +32,10 @@ namespace CollectibleCardGame
         {
             try
             {
-                _uiDispatcher.Invoke(() => { MessageBox.Show(message); });
+                _uiDispatcher.Invoke(() =>
+                {
+                    Xceed.Wpf.Toolkit.MessageBox.Show(message);
+                });
 
             }
             catch (InvalidOperationException e)

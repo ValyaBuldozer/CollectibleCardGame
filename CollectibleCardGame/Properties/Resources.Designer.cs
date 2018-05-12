@@ -141,6 +141,34 @@ namespace CollectibleCardGame.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на [
+        ///	{
+        ///		&quot;$type&quot;: &quot;GameData.Models.Cards.UnitCard, GameData&quot;,
+        ///		&quot;ID&quot;: 1,
+        ///		&quot;Name&quot;: &quot;jsontest&quot;,
+        ///		&quot;Description&quot;: &quot;jsonTest&quot;,
+        ///		&quot;Cost&quot;: 1,
+        ///		&quot;CanBePlayedOnEnemyTurn&quot;: false,
+        ///		&quot;ImagePath&quot;: &quot;../../Images/ImagesUnit/North/Легкая кавалерия.jpg&quot;,
+        ///		&quot;Fraction&quot;: 0,
+        ///		&quot;BaseHP&quot;: 1,
+        ///		&quot;BaseAttack&quot;: 1,
+        ///		&quot;AttackPriority&quot;: 1,
+        ///		&quot;AttackActionInfo&quot;: {
+        ///			&quot;$type&quot;: &quot;GameData.Models.Action.CardActionInfo, GameData&quot;,
+        ///			&quot;ActionId&quot;: 1,
+        ///			&quot;ParameterValue&quot;: 1,
+        ///			&quot;ParameterType&quot;: 4
+        ///		},
+        ///		&quot;DamageRecievedActionI [остаток строки не уместился]&quot;;.
+        /// </summary>
+        internal static string CardsRepository {
+            get {
+                return ResourceManager.GetString("CardsRepository", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Поиск локализованного ресурса типа System.Byte[].
         /// </summary>
         internal static byte[] Chronicles_font {

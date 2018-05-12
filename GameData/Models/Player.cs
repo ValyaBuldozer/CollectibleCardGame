@@ -30,7 +30,7 @@ namespace GameData.Models
             HeroUnit = new HeroUnit(this,hero);
             HandCards = new List<Card>();
             TableUnits = new List<Unit>();
-            Mana = new PlayerMana();
+            Mana = new PlayerMana(){Player = this};
         }
 
         protected bool Equals(Player other)

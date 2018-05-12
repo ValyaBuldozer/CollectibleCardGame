@@ -40,6 +40,12 @@ namespace CollectibleCardGame.Network.Controllers.MessageHandlers
                         (CardDrawObserverAction)message.ObserverAction);
                     break;
                 case ObserverActionType.UnitSpawn:
+                    _gameEngineController.HandleObserverAction(
+                        (UnitSpawnObserverAction)message.ObserverAction);
+                    break;
+                case ObserverActionType.PlayerStateChange:
+                    _gameEngineController.HandleObserverAction(
+                        (PlayerStateChangesObserverAction)message.ObserverAction);
                     break;
                 case ObserverActionType.UnitDeath:
                     break;
