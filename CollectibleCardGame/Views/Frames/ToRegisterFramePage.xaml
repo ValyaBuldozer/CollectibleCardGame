@@ -69,7 +69,7 @@
                 <ColumnDefinition Width="0.5*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
            
-            <Button Name="ToRegisterButton" Style="{DynamicResource ButtonGreenStyle}" Content="Регистрация"
+            <Button Name="ToRegisterButton" Style="{DynamicResource ButtonGreenStyle}" Content="Зарегистрироваться"
                     HorizontalAlignment="Stretch" Grid.Column="1"  VerticalAlignment="Center" FontSize="16" 
                     Command="{Binding RegistrationCommand}"/>
             <Button Name="GoBackButton" Style="{DynamicResource ButtonNeutralStyle}" Content="Назад" HorizontalAlignment="Stretch" Grid.Column="3"  VerticalAlignment="Center" FontSize="16"

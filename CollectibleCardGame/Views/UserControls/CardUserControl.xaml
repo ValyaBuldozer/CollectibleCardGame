@@ -47,7 +47,7 @@
                     </Grid.ColumnDefinitions>
                   
                     <TextBlock x:Name="CardName" Grid.Column="1" Text="{Binding Path=Name}" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"
-                               FontFamily="/CollectibleCardGame;component/Fonts/#Mason Chronicles" FontSize="16" Margin="0,15,0,0" />
+                               FontFamily="/CollectibleCardGame;component/Fonts/#Mason Chronicles" FontSize="20" Margin="0,15,0,0" /> <!--было фонтсайз 16-->
                 </Grid>
 
                 <Grid Grid.Row="0" Grid.RowSpan="2">
@@ -113,7 +113,7 @@
 
                 <Grid Grid.Row="2" Background="Transparent">
                     <TextBlock x:Name="Story" Grid.Row="2" Text="{Binding Description}" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center"
-                               FontFamily="/CollectibleCardGame;component/Fonts/#Mason Chronicles" FontSize="12" Margin="5,0,5,0"/>
+                               FontFamily="/CollectibleCardGame;component/Fonts/#Mason Chronicles" FontSize="16" Margin="5,0,5,0"/> <!--было фонтсайз 12-->
                 </Grid>
 
 
