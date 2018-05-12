@@ -24,7 +24,14 @@ namespace CollectibleCardGame.ViewModels.Elements
                 Attack = value.Attack;
                 Health = value.HealthPoint.GetResult;
                 Name = value.BaseCard.Name;
+                NotifyPropertyChanged(nameof(ImagePath));
             }
+        }
+
+        public string ImagePath
+        {
+            get => _baseUnit.BaseCard.ImagePath;
+            set => _baseUnit.BaseCard.ImagePath = value;
         }
 
         public int Attack

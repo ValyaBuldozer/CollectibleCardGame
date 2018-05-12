@@ -162,6 +162,7 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <EmbeddedResource Include="Resources\CardsRepository.json" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BaseNetworkArchitecture\BaseNetworkArchitecture.csproj">
@@ -176,7 +177,6 @@
   <ItemGroup>
     <Folder Include="Exceptions\" />
     <Folder Include="GameData\" />
-    <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201803311641315_Initialize.resx">

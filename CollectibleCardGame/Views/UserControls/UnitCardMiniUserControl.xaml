@@ -67,7 +67,10 @@
                                         <WrapPanel   Orientation="Vertical" />
                                     </ItemsPanelTemplate>
                                 </ItemsControl.ItemsPanel>
-                                <Rectangle Grid.Row="0" Stroke="Gold" RadiusX="5" RadiusY="5" StrokeThickness="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Width="55" Height="55">
+                                <Rectangle Grid.Row="0" Stroke="Gold" RadiusX="5" RadiusY="5" 
+                                           StrokeThickness="1" HorizontalAlignment="Stretch"
+                                           VerticalAlignment="Stretch"  Width="55" Height="55"
+                                           Visibility="Hidden">
                                     <Rectangle.Fill>
                                         <ImageBrush ImageSource="../../Images/IconsUnit/sword.png"/>
                                     </Rectangle.Fill>

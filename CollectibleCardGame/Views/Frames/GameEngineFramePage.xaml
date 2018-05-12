@@ -62,10 +62,12 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
-                            <Viewbox Stretch="Fill" Height="250" Width="210">
-                                <uc:UnitCardMiniUserControl Width="210" Height="250"
-                                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-                            </Viewbox>
+                            <StackPanel>
+                                <Viewbox Stretch="Fill" Height="100" Width="80">
+                                    <uc:UnitCardMiniUserControl Width="210" Height="250"
+                                                                HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                </Viewbox>
+                            </StackPanel>
                         </StackPanel>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>

@@ -59,5 +59,45 @@ namespace Server.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Byte[].
+        /// </summary>
+        internal static byte[] CardsRepository {
+            get {
+                object obj = ResourceManager.GetObject("CardsRepository", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Byte[].
+        /// </summary>
+        internal static byte[] CardsRepository1 {
+            get {
+                object obj = ResourceManager.GetObject("CardsRepository1", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Byte[].
+        /// </summary>
+        internal static byte[] CardsRepository2 {
+            get {
+                object obj = ResourceManager.GetObject("CardsRepository2", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Byte[].
+        /// </summary>
+        internal static byte[] CardsRepository3 {
+            get {
+                object obj = ResourceManager.GetObject("CardsRepository3", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }
