@@ -11,6 +11,8 @@ namespace GameData.Models.Cards
 
         public byte AttackPriority { set; get; }
 
+        public bool CanAttack { set; get; }
+
         public CardActionInfo AttackActionInfo { set; get; }
 
         public CardActionInfo DamageRecievedActionInfo { set; get; }

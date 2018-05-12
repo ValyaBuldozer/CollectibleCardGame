@@ -19,6 +19,7 @@ namespace GameData.Enums
 
     public enum Fraction
     {
+        Common,
         North,
         South,
         Dark
