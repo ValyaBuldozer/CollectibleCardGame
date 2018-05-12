@@ -363,6 +363,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Resources\CardsRepository.json" />
     <Resource Include="Fonts\Chronicles_font.ttf" />
   </ItemGroup>
   <ItemGroup>
@@ -388,7 +389,6 @@
   <ItemGroup>
     <Folder Include="Data\Controllers\" />
     <Folder Include="Data\Repository\" />
-    <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\northPicture.jpg" />
