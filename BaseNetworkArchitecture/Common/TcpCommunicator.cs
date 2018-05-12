@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using BaseNetworkArchitecture.Common.Messages;
@@ -224,6 +225,17 @@ namespace BaseNetworkArchitecture.Common
             //{
             //    Logger?.Log(e);
             //}
+            catch (FormatException e)
+            {
+                Logger?.LogAndPrint("Message read error");
+                StartReadMessages();
+            }
+            catch (IOException e)
+            {
+                Logger?.LogAndPrint("Соединение разорвано");
+                Logger?.Log(e.Message);
+                BreakConnectionEvent?.Invoke(this,new BreakConnectionEventArgs());
+            }
         }
 
         private void WriteCallback(IAsyncResult asyncResult)

@@ -11,8 +11,12 @@
       Background="White">
 
     <Grid>
-        <Button Content="{Binding CurrentPlayerUsername}" VerticalAlignment="Center" HorizontalAlignment="Right"
-                Height="25" Width="150"/>
+        <Button Content="{Binding CurrentPlayerUsername}" VerticalAlignment="Center" 
+                HorizontalAlignment="Right"
+                Height="25" Width="150"
+                Command="{Binding TransferTurnCommand}"/>
+        
+        <!--Enemy cards-->
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="1.5*"/>
@@ -34,7 +38,10 @@
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <StackPanel>
-                                <uc:CardUserControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                <Viewbox Stretch="Fill" Width="110" Height="205">
+                                    <uc:CardUserControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                                        Width="220" Height="420"/>
+                                </Viewbox>
                             </StackPanel>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
@@ -44,15 +51,55 @@
                     <TextBlock Text="{Binding HealthPoint}"/>
                 </StackPanel>
             </Grid>
+            
+            <!--Enemy units-->
+            <ItemsControl Grid.Row="1" ItemsSource="{Binding Path=EnemyUnits,Mode=TwoWay}" >
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel HorizontalAlignment="Stretch" Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <Viewbox Stretch="Fill" Height="250" Width="210">
+                                <uc:UnitCardMiniUserControl Width="210" Height="250"
+                                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                            </Viewbox>
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
 
+            <!--Player units-->
+            <ItemsControl Grid.Row="2" ItemsSource="{Binding Path=PlayerUnits,Mode=TwoWay}" >
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel HorizontalAlignment="Stretch" Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <Viewbox Stretch="Fill" Height="100" Width="80">
+                                <uc:UnitCardMiniUserControl Width="210" Height="250"
+                                                            HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                            </Viewbox>
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+            <!-- Player cards-->
             <Grid Grid.Row="3">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="5*"/>
                 </Grid.ColumnDefinitions>
-                <StackPanel Grid.Column="1" DataContext="{Binding Path=PlayerHeroUnit}">
-                    <TextBlock Text="{Binding Name}"/>
+                <StackPanel Grid.Column="0">
+                    <TextBlock Text="{Binding BaseCard.Name}"/>
                     <TextBlock Text="{Binding HealthPoint}"/>
+                    <TextBlock Text="{Binding PlayerMana}"/>
                 </StackPanel>
                 <ItemsControl Grid.Column="1" ItemsSource="{Binding Path=PlayerCards,Mode=TwoWay}">
                     <ItemsControl.ItemsPanel>
@@ -81,3 +128,4 @@
         </Grid>
     </Grid>
 </Page>
+

@@ -19,6 +19,7 @@ namespace GameData.Controllers.Global
             Stack<Card> secondDeck, string secondUsername, UnitCard secondHero);
         event EventHandler<GameEndEventArgs> GameEnd;
         event EventHandler<GameStartObserverAction> GameStart;
+        event EventHandler<PlayerStateChangesObserverAction> PlayerStateChanged;
     }
 
     public class GameStateController : IGameStateController
@@ -31,7 +32,9 @@ namespace GameData.Controllers.Global
 
         public event EventHandler<GameEndEventArgs> GameEnd;
 
-        public event EventHandler<GameStartObserverAction> GameStart; 
+        public event EventHandler<GameStartObserverAction> GameStart;
+
+        public event EventHandler<PlayerStateChangesObserverAction> PlayerStateChanged;
 
         public GameStateController(TableCondition tableCondition,IPlayerTurnDispatcher playerTurnDispatcher,
             IDeckController deckController,IDataRepositoryController<Entity> entitytRepositoryController,
@@ -65,8 +68,14 @@ namespace GameData.Controllers.Global
             _entitytRepositoryController.AddNewItem(firstPLayer);
             _entitytRepositoryController.AddNewItem(secondPlayer);
 
+            _entitytRepositoryController.AddNewItem(firstPLayer.HeroUnit);
+            _entitytRepositoryController.AddNewItem(secondPlayer.HeroUnit);
+
             _deckController.AddDeck(firstUsername,firstDeck);
             _deckController.AddDeck(secondUsername,secondDeck);
+
+            firstPLayer.Mana.Changed += Mana_Changed;
+            secondPlayer.Mana.Changed += Mana_Changed;
 
             GameStart?.Invoke(this,new GameStartObserverAction(firstPLayer,secondPlayer));
 
@@ -79,7 +88,11 @@ namespace GameData.Controllers.Global
 
         }
 
-        
+        private void Mana_Changed(object sender, PlayerManaChangeEventArgs e)
+        {
+            PlayerStateChanged?.Invoke(this,new PlayerStateChangesObserverAction(
+                (sender as Player)?.Username,e.PlayerMana));
+        }
 
         private void RunGameEndEvent(GameEndEventArgs e)
         {

@@ -226,6 +226,7 @@ namespace GameData.Tests.Gameplay
             Container container = new Container();
             container.Initialize(TestGameSettings.Get);
 
+            var observer = container.Get<ObserverActionRepository>();
             container.Get<IGameStateController>().Start(firstDeck, "FirstPlayer", testCards.FirstHero,
                 secondDeck, "SecondPlayer", testCards.SecondHero);
 
@@ -308,6 +309,7 @@ namespace GameData.Tests.Gameplay
 
             Container container = new Container();
             container.Initialize(TestGameSettings.Get);
+            var observerRepository = container.Get<ObserverActionRepository>();
 
             container.Get<IGameStateController>().Start(firstDeck, "FirstPlayer", testCards.FirstHero,
                 secondDeck, "SecondPlayer", testCards.SecondHero);
@@ -330,7 +332,7 @@ namespace GameData.Tests.Gameplay
             var secondPlayer = container.Get<IPlayerTurnDispatcher>().CurrentPlayer;
 
             var secondPlayerSpellCard = secondPlayer.HandCards.FirstOrDefault(c => c.Name == "SpellCard3_5");
-            CardDeployPlayerTurn deployTurnSpell_3 = new CardDeployPlayerTurn(firstPlayer, secondPlayerSpellCard);
+            CardDeployPlayerTurn deployTurnSpell_3 = new CardDeployPlayerTurn(secondPlayer, secondPlayerSpellCard);
             container.Get<IPlayerTurnHandler<CardDeployPlayerTurn>>().Execute(deployTurnSpell_3);
 
 

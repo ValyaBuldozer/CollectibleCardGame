@@ -45,6 +45,7 @@ namespace GameData.Controllers.Global
 
             gameStateController.GameEnd += ObserverEventHandler;
             gameStateController.GameStart += ObserverEventHandler;
+            gameStateController.PlayerStateChanged += ObserverEventHandler;
 
             cardDrawController.OnCardDraw += ObserverEventHandler;
             cardDeployDispatcher.OnCardDeploy += ObserverEventHandler;

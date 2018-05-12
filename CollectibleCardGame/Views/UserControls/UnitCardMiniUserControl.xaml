@@ -14,150 +14,100 @@
         </Grid.RenderTransform>
 
         <!--210x250-->
-    <Border BorderThickness="2" BorderBrush="Black" CornerRadius="5">
-        <Border.Effect>
-            <DropShadowEffect BlurRadius="10" Direction="315" Opacity="0.8"/>
-        </Border.Effect>
+        <Border BorderThickness="2" BorderBrush="Black" CornerRadius="5">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="10" Direction="315" Opacity="0.8"/>
+            </Border.Effect>
 
-        <Grid Background="{StaticResource CardBackGround}">
+            <Grid Background="{StaticResource CardBackGround}">
 
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="8*"/>
-                    <RowDefinition Height="2.6*"/>
-                    <RowDefinition Height="0.75"/>
-                    </Grid.RowDefinitions>
-
-
-                <!--картинка юнита 210x250-->
-                <Image x:Name="UnitImage" Source="{Binding Path=ImagePath}" Grid.RowSpan="2">
-                    <Image.Effect>
-                        <DropShadowEffect   RenderingBias="Quality"/>
-                    </Image.Effect>
-                </Image>
-
-
-                
-
-
-                <Grid Grid.Row="0" Grid.RowSpan="2">
+                <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="0.32*"/>
-                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="8*"/>
+                        <RowDefinition Height="2.6*"/>
+                        <RowDefinition Height="0.75"/>
                     </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.2*"/>
-                        <ColumnDefinition Width="5.5*"/>
-                        <ColumnDefinition Width="10*"/>
-                        <ColumnDefinition Width="4*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <Grid Grid.Column="1" Grid.RowSpan="2">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="3.5*"/>
-                            <ColumnDefinition  Width="*"/>
-                        </Grid.ColumnDefinitions>
 
 
-                        <!--<Border Grid.Column="1" BorderBrush="{Binding TapeBorderBrush}" BorderThickness="5" Margin="0,0,0,70">
-                            <Rectangle  Fill="{Binding TapeBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"   Opacity="0.9"  />
-                            <Border.Effect>
-                                <DropShadowEffect BlurRadius="10" Direction="270" Opacity="0.8"/>
-                            </Border.Effect>
-                        </Border>-->
+                    <!--картинка юнита 210x250-->
+                    <Image x:Name="UnitImage" Source="{Binding Path=ImagePath}" Grid.RowSpan="2">
+                        <Image.Effect>
+                            <DropShadowEffect   RenderingBias="Quality"/>
+                        </Image.Effect>
+                    </Image>
 
-                        
-                    </Grid>
-                    <Grid Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Top" HorizontalAlignment="Center">
+                    <Grid Grid.Row="0" Grid.RowSpan="2">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="2"/>
+                            <RowDefinition Height="0.32*"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        <ItemsControl x:Name="AbilityStack" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center" Grid.ColumnSpan="3" >
-                            <!--ItemsSource="{Binding  ViewModel.Parameters, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">-->
-                            <ItemsControl.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <WrapPanel   Orientation="Vertical" />
-                                </ItemsPanelTemplate>
-                            </ItemsControl.ItemsPanel>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.2*"/>
+                            <ColumnDefinition Width="5.5*"/>
+                            <ColumnDefinition Width="10*"/>
+                            <ColumnDefinition Width="4*"/>
+                        </Grid.ColumnDefinitions>
 
+                        <Grid Grid.Column="1" Grid.RowSpan="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="3.5*"/>
+                                <ColumnDefinition  Width="*"/>
+                            </Grid.ColumnDefinitions>
+                        </Grid>
 
-                            <!--<Image Source="../../Icons/info.png" Margin="2"/>
-                            <Image Source="../../Icons/settingsChange.png" Margin="2"/>-->
-
-
-                            <Rectangle Grid.Row="0" Stroke="Gold" RadiusX="5" RadiusY="5" StrokeThickness="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Width="55" Height="55">
-                                <Rectangle.Fill>
-                                    <ImageBrush ImageSource="../../Images/IconsUnit/sword.png"/>
-                                </Rectangle.Fill>
-                                <Rectangle.Effect>
-                                    <DropShadowEffect   RenderingBias="Quality" Direction="315"  BlurRadius="10" ShadowDepth="8"/>
-                                </Rectangle.Effect>
-                            </Rectangle>
-
-                            <!--<ItemsControl.ItemTemplate>
-                                <DataTemplate>
-
-                                    <Grid Width="auto" Height="50" Margin="2,2,2,2">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*" />
-                                        </Grid.ColumnDefinitions>
-                                     <Image Grid.Column="0" Source="../../Icons/info.png"/>
-
-
-                                    </Grid>
-
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>-->
-
-                        </ItemsControl>
+                        <Grid Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Top" HorizontalAlignment="Center">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="2"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <ItemsControl x:Name="AbilityStack" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center" Grid.ColumnSpan="3" >
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel   Orientation="Vertical" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <Rectangle Grid.Row="0" Stroke="Gold" RadiusX="5" RadiusY="5" StrokeThickness="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Width="55" Height="55">
+                                    <Rectangle.Fill>
+                                        <ImageBrush ImageSource="../../Images/IconsUnit/sword.png"/>
+                                    </Rectangle.Fill>
+                                    <Rectangle.Effect>
+                                        <DropShadowEffect   RenderingBias="Quality" Direction="315"  BlurRadius="10" ShadowDepth="8"/>
+                                    </Rectangle.Effect>
+                                </Rectangle>
+                            </ItemsControl>
+                        </Grid>
                     </Grid>
 
-
-
-
-                </Grid>
-
-                
-
-
-                <Grid Grid.Row="1">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.75"/>
-                        <ColumnDefinition Width="1.6*"/>
-                        <ColumnDefinition Width="2.5*"/>
-                        <ColumnDefinition Width="1.6*"/>
-                        <ColumnDefinition Width="0.75"/>
-                    </Grid.ColumnDefinitions>
-                    <Border CornerRadius="50"
-                           
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.75"/>
+                            <ColumnDefinition Width="1.6*"/>
+                            <ColumnDefinition Width="2.5*"/>
+                            <ColumnDefinition Width="1.6*"/>
+                            <ColumnDefinition Width="0.75"/>
+                        </Grid.ColumnDefinitions>
+                        <Border CornerRadius="50"
                             Background="#EF3F37"
                             BorderBrush="Black"
                             BorderThickness="3"
                             Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Margin=" 0,0,1,5"
-                                   Text="{Binding Path=Attack}" FontWeight="Bold" FontSize="42" />
-                    </Border>
-                    <Border CornerRadius="50"
-                            
+                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                       Margin=" 0,0,1,5"
+                                       Text="{Binding Path=Attack}" FontWeight="Bold" FontSize="42" />
+                        </Border>
+                        <Border CornerRadius="50"
                             Background="#66BE61"
                             BorderBrush="Black"
                             BorderThickness="3"
                             Grid.Column="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Margin=" 0,0,1,5"
+                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Margin=" 0,0,1,5"
                                    Text="{Binding Path=Health}" FontWeight="Bold" FontSize="42" />
-                    </Border>
-                    <!--<Ellipse Grid.Column="1" Stroke="Black" StrokeThickness="3" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="#EF3F37" Width="55" Height="55" Margin="0,0,0,0" />
-                    <TextBlock x:Name="UnitAttack" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Text="1" FontSize="42" FontWeight="Bold" Margin="0,0,0,5"/>
-                    <Ellipse Grid.Column="3" Stroke="Black" StrokeThickness="3" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="#66BE61" Width="55" Height="55" Margin="0,0,0,0" />
-                    <TextBlock x:Name="UnitHealth" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Health}" FontSize="52" FontWeight="Bold" Margin="0,0,0,5"/>-->
+                        </Border>
+                    </Grid>
                 </Grid>
             </Grid>
-
-
-        </Grid>
-    </Border>
+        </Border>
     </Grid>
 </UserControl>
 
