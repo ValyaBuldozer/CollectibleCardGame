@@ -343,6 +343,16 @@ namespace CollectibleCardGame.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Град_стрел {
+            get {
+                object obj = ResourceManager.GetObject("Град_стрел", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Джулия_Гевейн {
             get {
                 object obj = ResourceManager.GetObject("Джулия_Гевейн", resourceCulture);
@@ -393,6 +403,26 @@ namespace CollectibleCardGame.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Огненный_дождь {
+            get {
+                object obj = ResourceManager.GetObject("Огненный_дождь", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Огненный_шар {
+            get {
+                object obj = ResourceManager.GetObject("Огненный_шар", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Отряд_гданьских_мечников {
             get {
                 object obj = ResourceManager.GetObject("Отряд_гданьских_мечников", resourceCulture);
@@ -406,6 +436,36 @@ namespace CollectibleCardGame.Properties {
         internal static System.Drawing.Bitmap Пехтурная_чернь {
             get {
                 object obj = ResourceManager.GetObject("Пехтурная_чернь", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Последний_призыв {
+            get {
+                object obj = ResourceManager.GetObject("Последний_призыв", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Пробивающий_разряд {
+            get {
+                object obj = ResourceManager.GetObject("Пробивающий_разряд", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Проклятье_темной_звезды {
+            get {
+                object obj = ResourceManager.GetObject("Проклятье_темной_звезды", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -433,6 +493,16 @@ namespace CollectibleCardGame.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Сфера_поглощения {
+            get {
+                object obj = ResourceManager.GetObject("Сфера_поглощения", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Тенсельт_Темный {
             get {
                 object obj = ResourceManager.GetObject("Тенсельт_Темный", resourceCulture);
@@ -446,6 +516,16 @@ namespace CollectibleCardGame.Properties {
         internal static System.Drawing.Bitmap Тенсельтские_мечницы {
             get {
                 object obj = ResourceManager.GetObject("Тенсельтские_мечницы", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Энергетический_выброс {
+            get {
+                object obj = ResourceManager.GetObject("Энергетический_выброс", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

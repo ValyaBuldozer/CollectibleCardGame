@@ -321,11 +321,29 @@ namespace GameData.Models.Repository
                         target.HealthPoint.Base += parameter;
 
                     })),
+                new GameAction(name:"Урон всем",id:46,description:"Наносит всем юнитам на столе",parameterType:ActionParameterType.Damage,
+                    action: ((controller, sender, target, parameter) =>
+                    {
+                        var player = (Player) sender;
+                        foreach (var iUnit in player.TableUnits.ToArray())
+                        {
+                            iUnit.HealthPoint.RecieveDamage(parameter);
+                        }
+
+                        Player enemyPlayer =
+                            controller.GetTableCondition.Players.FirstOrDefault(p => p.Username != player.Username);
+
+                        foreach (var iUnit in enemyPlayer.TableUnits.ToArray())
+                        {
+                            iUnit.HealthPoint.RecieveDamage(parameter);
+                        }
+
+                    })),
 
                 #endregion
 
                 #region Независимые
-                new GameAction(name:"Удар с неба",id:50,description:"Случайно распределяет урон по вражеским юнитам",parameterType:ActionParameterType.Damage,
+                new GameAction(name:"Энергетический выброс",id:50,description:"Случайно распределяет урон по вражеским юнитам",parameterType:ActionParameterType.Damage,
                     action: ((controller, sender, target, parameter) =>
                     {
                         var player = (Player) sender;
@@ -376,25 +394,8 @@ namespace GameData.Models.Repository
                         }
 
                     })),
-                new GameAction(name:"Проклятье темной звезды",id:53,description:"Наносит всем юнитам на столе 4 урона",parameterType:ActionParameterType.Damage,
-                    action: ((controller, sender, target, parameter) =>
-                    {
-                        var player = (Player) sender;
-                        foreach (var iUnit in player.TableUnits.ToArray())
-                        {
-                            iUnit.HealthPoint.RecieveDamage(parameter);
-                        }
-
-                        Player enemyPlayer =
-                            controller.GetTableCondition.Players.FirstOrDefault(p => p.Username != player.Username);
-
-                        foreach (var iUnit in enemyPlayer.TableUnits.ToArray())
-                        {
-                            iUnit.HealthPoint.RecieveDamage(parameter);
-                        }
-
-                    })),
-                new GameAction(name:"Техника клонирования",id:54,description:"При выборе какого-либо юнита, его карта разыгрвается на стороне игрока (копируется)",parameterType:ActionParameterType.Empty,
+                
+                new GameAction(name:"Техника клонирования",id:53,description:"При выборе какого-либо юнита, его карта разыгрвается на стороне игрока (копируется)",parameterType:ActionParameterType.Empty,
                     action: ((controller, sender, target, parameter) =>
                     {
                         //todo: DrawCard для опредленного юнита
@@ -402,7 +403,7 @@ namespace GameData.Models.Repository
                         
 
                     })),
-                new GameAction(name:"Подкуп",id:55,description:"Выбранная карта уничтожается, а её копия разыгрывается на стороне игрока (переходит на сторону игрока)",parameterType:ActionParameterType.Empty,
+                new GameAction(name:"Подкуп",id:54,description:"Выбранная карта уничтожается, а её копия разыгрывается на стороне игрока (переходит на сторону игрока)",parameterType:ActionParameterType.Empty,
                     action: ((controller, sender, target, parameter) =>
                     {
                         //todo: DrawCard для опредленного юнита
@@ -410,7 +411,7 @@ namespace GameData.Models.Repository
 
 
                     })),
-                new GameAction(name:"Тактическое отступление",id:56,description:"Выбранная карта уходит в руку к игроку, на ее месте разыгрывается карта Чучела (провокатор 0/2)",parameterType:ActionParameterType.Empty,
+                new GameAction(name:"Тактическое отступление",id:55,description:"Выбранная карта уходит в руку к игроку, на ее месте разыгрывается карта Чучела (провокатор 0/2)",parameterType:ActionParameterType.Empty,
                     action: ((controller, sender, target, parameter) =>
                     {
                         //todo: DrawCard для опредленного юнита
@@ -418,7 +419,7 @@ namespace GameData.Models.Repository
 
 
                     })),
-                new GameAction(name:"Всеобщее отступление",id:57,description:"Все карты игрока возвращаются к нему в руку",parameterType:ActionParameterType.Empty,
+                new GameAction(name:"Всеобщее отступление",id:56,description:"Все карты игрока возвращаются к нему в руку",parameterType:ActionParameterType.Empty,
                     action: ((controller, sender, target, parameter) =>
                     {
                         //todo: DrawCard для опредленного юнита
@@ -426,7 +427,7 @@ namespace GameData.Models.Repository
 
 
                     })),
-                new GameAction(name:"Казнь",id:58,description:"Уничтожает рандомный юнит противника",parameterType:ActionParameterType.Damage,
+                new GameAction(name:"Казнь",id:57,description:"Уничтожает рандомный юнит противника",parameterType:ActionParameterType.Damage,
                     action: ((controller, sender, target, parameter) =>
                     {
 
@@ -439,7 +440,7 @@ namespace GameData.Models.Repository
 
 
                     })),
-                new GameAction(name:"Крещение огнем",id:59,description:"Здоровье выбранного юнита понижается на 2, атака повышается на 4",parameterType:ActionParameterType.Buff,
+                new GameAction(name:"Крещение огнем",id:58,description:"Здоровье выбранного юнита понижается на 2, атака повышается на 4",parameterType:ActionParameterType.Buff,
                     action: ((controller, sender, target, parameter) =>
                     {
 
@@ -448,7 +449,7 @@ namespace GameData.Models.Repository
                         target.Attack += 4;
 
                     })),
-                new GameAction(name:"Живой щит",id:60,description:"Выбранный союзный юнит становится провокатором и его здоровье повышается на 2",parameterType:ActionParameterType.Buff,
+                new GameAction(name:"Живой щит",id:59,description:"Выбранный союзный юнит становится провокатором и его здоровье повышается на 2",parameterType:ActionParameterType.Buff,
                     action: ((controller, sender, target, parameter) =>
                     {
 
@@ -457,7 +458,7 @@ namespace GameData.Models.Repository
                         //todo: сделать юнит провокатором 
 
                     })),
-                new GameAction(name:"Деморализация",id:61,description:"Понижает атаку и здоровье выбранного юнита до 0/2 и наделяет способностью провокация",parameterType:ActionParameterType.Empty,
+                new GameAction(name:"Деморализация",id:60,description:"Понижает атаку и здоровье выбранного юнита до 0/2 и наделяет способностью провокация",parameterType:ActionParameterType.Empty,
                     action: ((controller, sender, target, parameter) =>
                     {
 
@@ -466,7 +467,7 @@ namespace GameData.Models.Repository
                         //todo: сделать юнит провокатором 
 
                     })),
-                new GameAction(name:"Последнйи призыв",id:62,description:"Унчтожает все карты на столе",parameterType:ActionParameterType.Damage,
+                new GameAction(name:"Последний призыв",id:61,description:"Унчтожает все карты на столе",parameterType:ActionParameterType.Damage,
                     action: ((controller, sender, target, parameter) =>
                     {
 
@@ -485,7 +486,7 @@ namespace GameData.Models.Repository
                         }
 
                     })),
-                new GameAction(name:"Резня",id:63,description:"Уничтожает все отряды противника кроме одного случайного",parameterType:ActionParameterType.Damage,
+                new GameAction(name:"Резня",id:62,description:"Уничтожает все отряды противника кроме одного случайного",parameterType:ActionParameterType.Damage,
                     action: ((controller, sender, target, parameter) =>
                     {
 
@@ -507,14 +508,14 @@ namespace GameData.Models.Repository
                         }
 
                     })),
-                new GameAction(name:"Обледенение",id:64,description:"Все юниты на столе замораживаются на 1 ход",parameterType:ActionParameterType.Empty,
+                new GameAction(name:"Обледенение",id:63,description:"Все юниты на столе замораживаются на 1 ход",parameterType:ActionParameterType.Empty,
                     action: ((controller, sender, target, parameter) =>
                     {
 
                         //todo: сделать заморозку юнита
 
                     })),
-                new GameAction(name:"Метель",id:65,description:"Снижает атаку отрядов до 1 у обоих игроков",parameterType:ActionParameterType.Empty,
+                new GameAction(name:"Метель",id:64,description:"Снижает атаку отрядов до 1 у обоих игроков",parameterType:ActionParameterType.Empty,
                     action: ((controller, sender, target, parameter) =>
                     {
                         var player = (Player) sender;

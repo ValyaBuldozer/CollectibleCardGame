@@ -504,5 +504,29 @@
   <ItemGroup>
     <Resource Include="Images\ImagesUnit\South\Отряд гданьских мечников.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImagesSpell\Энергетический выброс.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImagesSpell\Град стрел.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImagesSpell\Огненный дождь.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImagesSpell\Огненный шар.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImagesSpell\Последний призыв.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImagesSpell\Пробивающий разряд.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImagesSpell\Проклятье темной звезды.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImagesSpell\Сфера поглощения.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
