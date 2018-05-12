@@ -397,6 +397,8 @@
   <ItemGroup>
     <Folder Include="Data\Controllers\" />
     <Folder Include="Data\Repository\" />
+    <Folder Include="Images\ImagesUnit\Darkside\" />
+    <Folder Include="Images\ImagesUnit\South\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\northPicture.jpg" />
@@ -455,6 +457,30 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Images\healthShield.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImagesUnit\North\Пехтурная чернь.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImagesUnit\North\Рейнская бригада.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImagesUnit\North\Тенсельт Темный.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImagesUnit\North\Тенсельтские мечницы.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImagesUnit\North\Алый рацарь.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImagesUnit\North\Боец Синей Марвы.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImagesUnit\North\Королевский кондотьер.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImagesUnit\North\Легкая кавалерия.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

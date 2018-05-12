@@ -245,9 +245,9 @@ namespace GameData.Tests.Gameplay
             secondPlayer = container.Get<IPlayerTurnDispatcher>().CurrentPlayer;
 
             //формируем второй ход 
-            var secondPlayerSpellCard = secondPlayer.HandCards.FirstOrDefault(c => c.Name == "UnitCard6_6/6");
-            CardDeployPlayerTurn deployTurnSpell_1 = new CardDeployPlayerTurn(secondPlayer, secondPlayerSpellCard);
-            container.Get<IPlayerTurnHandler<CardDeployPlayerTurn>>().Execute(deployTurnSpell_1);
+            var secondPlayerUnitCard = secondPlayer.HandCards.FirstOrDefault(c => c.Name == "UnitCard6_6/6");
+            CardDeployPlayerTurn deployTurnUnit_6 = new CardDeployPlayerTurn(secondPlayer, secondPlayerUnitCard);
+            container.Get<IPlayerTurnHandler<CardDeployPlayerTurn>>().Execute(deployTurnUnit_6);
 
             //передаем ход
             container.Get<IPlayerTurnDispatcher>().NextPlayer();
