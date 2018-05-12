@@ -6,17 +6,15 @@ using System.Threading.Tasks;
 using GameData.Enums;
 using GameData.Models.Action;
 using GameData.Models.Cards;
+using Newtonsoft.Json;
 using Unity.Attributes;
 
 namespace GameData.Models.Repository
 {
     public class CardRepository
     {
-        private readonly string _filePath;
-
         public List<Card> Collection { private set; get; }
 
-        [InjectionConstructor]
         public CardRepository()
         {
             Collection = new List<Card>()
@@ -137,11 +135,14 @@ namespace GameData.Models.Repository
             };
         }
 
-        public CardRepository(string filePath)
+        [InjectionConstructor]
+        public CardRepository(string json)
         {
-            _filePath = filePath;
-
-            //todo : чтение из файла
+            JsonSerializerSettings settings = new JsonSerializerSettings()
+            {
+                TypeNameHandling = TypeNameHandling.Objects
+            };
+            Collection = JsonConvert.DeserializeObject<List<Card>>(json, settings);
         }
 
         public CardRepository(IEnumerable<Card> collection)

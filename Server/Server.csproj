@@ -145,6 +145,11 @@
     <Compile Include="Network\Models\Client.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Repositories\AwaitingClientsQueue.cs" />
     <Compile Include="Repositories\ConnectedClientsRepository.cs" />
     <Compile Include="Repositories\IRepository.cs" />
@@ -171,6 +176,7 @@
   <ItemGroup>
     <Folder Include="Exceptions\" />
     <Folder Include="GameData\" />
+    <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201803311641315_Initialize.resx">
@@ -178,6 +184,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201803311858065_UsernameFix.resx">
       <DependentUpon>201803311858065_UsernameFix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

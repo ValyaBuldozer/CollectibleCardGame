@@ -371,7 +371,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Resources\CardsRepository.json" />
+    <EmbeddedResource Include="Resources\CardsRepository.json" />
     <Resource Include="Fonts\Chronicles_font.ttf" />
   </ItemGroup>
   <ItemGroup>
