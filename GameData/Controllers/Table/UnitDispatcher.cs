@@ -99,7 +99,7 @@ namespace GameData.Controllers.Table
             sender.TableUnits.Add(unit);
             _entityRepositoryController.AddNewItem(unit);
 
-            OnUnitSpawn?.Invoke(this,new UnitSpawnObserverAction(unit));
+            OnUnitSpawn?.Invoke(this,new UnitSpawnObserverAction(unit,unit.Player.Username));
             return true;
         }
 
@@ -125,7 +125,7 @@ namespace GameData.Controllers.Table
             sender.TableUnits.Add(unit);
             _entityRepositoryController.AddNewItem(unit);
 
-            OnUnitSpawn?.Invoke(this,new UnitSpawnObserverAction(unit));
+            OnUnitSpawn?.Invoke(this,new UnitSpawnObserverAction(unit,unit.Player.Username));
             return true;
         }
 

@@ -2,6 +2,7 @@
 using GameData.Enums;
 using GameData.Models.Action;
 using GameData.Models.Cards;
+using Newtonsoft.Json;
 
 namespace GameData.Models.Units
 {
@@ -17,6 +18,7 @@ namespace GameData.Models.Units
 
         public bool CanAttack { set; get; }
 
+        [JsonIgnore]
         public Player Player { set; get; }
 
         public GameActionInfo BattleCryActionInfo { set; get; }

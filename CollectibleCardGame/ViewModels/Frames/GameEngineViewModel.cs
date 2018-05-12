@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Threading;
+using CollectibleCardGame.Models;
 using CollectibleCardGame.Services;
 using CollectibleCardGame.ViewModels.Elements;
 using GameData.Models;
@@ -16,17 +17,21 @@ namespace CollectibleCardGame.ViewModels.Frames
 {
     public class GameEngineViewModel : BaseViewModel
     {
+        private readonly CurrentUser _user;
+
         private Player _player;
         private Player _enemyPlayer;
         private string _currentPlayerUsername;
+        private PlayerMana _playerMana;
         private HeroUnit _playerHeroUnit;
         private HeroUnit _enemyHeroUnit;
         private ObservableCollection<CardViewModel> _playerCards;
         private ObservableCollection<CardViewModel> _enemyCards;
-        private ObservableCollection<Unit> _playerUnits;
-        private ObservableCollection<Unit> _enemyUnits;
+        private ObservableCollection<UnitViewModel> _playerUnits;
+        private ObservableCollection<UnitViewModel> _enemyUnits;
 
         private RelayCommand _cardDeployCommand;
+        private RelayCommand _transferTurnCommand;
 
         public Dispatcher CurrentDispatcher { get; }
 
@@ -59,6 +64,17 @@ namespace CollectibleCardGame.ViewModels.Frames
             {
                 _currentPlayerUsername = value;
                 NotifyPropertyChanged(nameof(CurrentPlayerUsername));
+                NotifyPropertyChanged(nameof(TransferTurnCommand));
+            }
+        }
+
+        public PlayerMana PlayerMana
+        {
+            get => _playerMana;
+            set
+            {
+                _playerMana = value;
+                NotifyPropertyChanged(nameof(PlayerMana));
             }
         }
 
@@ -102,7 +118,7 @@ namespace CollectibleCardGame.ViewModels.Frames
             }
         }
 
-        public ObservableCollection<Unit> PlayerUnits
+        public ObservableCollection<UnitViewModel> PlayerUnits
         {
             get => _playerUnits;
             set
@@ -112,7 +128,7 @@ namespace CollectibleCardGame.ViewModels.Frames
             }
         }
 
-        public ObservableCollection<Unit> EnemyUnits
+        public ObservableCollection<UnitViewModel> EnemyUnits
         {
             get => _enemyUnits;
             set
@@ -122,14 +138,15 @@ namespace CollectibleCardGame.ViewModels.Frames
             }
         }
 
-        public GameEngineViewModel()
+        public GameEngineViewModel(CurrentUser user)
         {
             CurrentDispatcher = Dispatcher.CurrentDispatcher;
 
             PlayerCards = new ObservableCollection<CardViewModel>();
             EnemyCards = new ObservableCollection<CardViewModel>();
-            PlayerUnits = new ObservableCollection<Unit>();
-            EnemyUnits  = new ObservableCollection<Unit>();
+            PlayerUnits = new ObservableCollection<UnitViewModel>();
+            EnemyUnits  = new ObservableCollection<UnitViewModel>();
+            _user = user;
         }
 
         public event EventHandler<PlayerTurnRequestEventArgs> PlayerTurnEvent;
@@ -142,5 +159,13 @@ namespace CollectibleCardGame.ViewModels.Frames
                    PlayerTurnEvent?.Invoke(this,new PlayerTurnRequestEventArgs(new CardDeployPlayerTurn(
                        _player,cardViewModel.Card)));
                }));
+
+        public RelayCommand TransferTurnCommand => _transferTurnCommand ??
+                           (_transferTurnCommand = new RelayCommand(o =>
+                           {
+                                var playerTurn = new EndPlayerTurn(null);
+                               PlayerTurnEvent?.Invoke(this,new PlayerTurnRequestEventArgs(playerTurn));
+                           },
+                               c=>_currentPlayerUsername == _user?.Username));
     }
 }

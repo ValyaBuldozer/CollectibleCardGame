@@ -16,4 +16,8 @@
     <ProjectReference Include="..\BaseNetworkArchitecture\BaseNetworkArchitecture.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Concotination\" />
+  </ItemGroup>
+
 </Project>

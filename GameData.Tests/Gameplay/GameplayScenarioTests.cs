@@ -226,6 +226,7 @@ namespace GameData.Tests.Gameplay
             Container container = new Container();
             container.Initialize(TestGameSettings.Get);
 
+            var observer = container.Get<ObserverActionRepository>();
             container.Get<IGameStateController>().Start(firstDeck, "FirstPlayer", testCards.FirstHero,
                 secondDeck, "SecondPlayer", testCards.SecondHero);
 
@@ -308,6 +309,7 @@ namespace GameData.Tests.Gameplay
 
             Container container = new Container();
             container.Initialize(TestGameSettings.Get);
+            var observerRepository = container.Get<ObserverActionRepository>();
 
             container.Get<IGameStateController>().Start(firstDeck, "FirstPlayer", testCards.FirstHero,
                 secondDeck, "SecondPlayer", testCards.SecondHero);

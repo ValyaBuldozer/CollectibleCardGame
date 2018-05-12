@@ -113,4 +113,14 @@ namespace GameData.Models
             Item = item;
         }
     }
+
+    public class PlayerManaChangeEventArgs : EventArgs
+    {
+        public PlayerMana PlayerMana { get; }
+
+        public PlayerManaChangeEventArgs(PlayerMana mana)
+        {
+            PlayerMana = mana;
+        }
+    }
 }

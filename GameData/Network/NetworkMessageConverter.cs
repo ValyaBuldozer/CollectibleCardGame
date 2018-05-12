@@ -155,6 +155,9 @@ namespace GameData.Network
                             case ObserverActionType.TurnStart:
                                 observerAction = ((JObject)message.ObserverAction).ToObject<TurnStartObserverAction>();
                                     break;
+                            case ObserverActionType.PlayerStateChange:
+                                observerAction = ((JObject)message.ObserverAction).ToObject<PlayerStateChangesObserverAction>();
+                                    break;
                             case ObserverActionType.TurnEnd:
                                 observerAction = null;
                                     break;
