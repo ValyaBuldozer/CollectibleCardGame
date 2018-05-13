@@ -48,6 +48,8 @@ namespace CollectibleCardGame.Network.Controllers.MessageHandlers
                         (PlayerStateChangesObserverAction)message.ObserverAction);
                     break;
                 case ObserverActionType.UnitDeath:
+                    _gameEngineController.HandleObserverAction(
+                        (UnitDeathObserverAction)message.ObserverAction);
                     break;
                 case ObserverActionType.UnitStateChange:
                     break;

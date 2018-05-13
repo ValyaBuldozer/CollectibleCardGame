@@ -64,8 +64,14 @@
                         <StackPanel>
                             <StackPanel>
                                 <Viewbox Stretch="Fill" Height="100" Width="80">
-                                    <uc:UnitCardMiniUserControl Width="210" Height="250"
-                                                                HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                    <Button Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, 
+                                AncestorType={x:Type Page}}, Path=ViewModel.UnitTargetCommand}" 
+                                            CommandParameter="{Binding}"
+                                            BorderThickness="0" BorderBrush="{x:Null}">
+                                        <uc:UnitCardMiniUserControl Width="210" Height="250"
+                                                                    HorizontalAlignment="Stretch" 
+                                                                    VerticalAlignment="Stretch"/>
+                                    </Button>
                                 </Viewbox>
                             </StackPanel>
                         </StackPanel>
@@ -84,8 +90,14 @@
                     <DataTemplate>
                         <StackPanel>
                             <Viewbox Stretch="Fill" Height="100" Width="80">
-                                <uc:UnitCardMiniUserControl Width="210" Height="250"
-                                                            HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                <Button Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, 
+                                AncestorType={x:Type Page}}, Path=ViewModel.UnitTargetCommand}" 
+                                        CommandParameter="{Binding}"
+                                        BorderThickness="0" BorderBrush="{x:Null}">
+                                    <uc:UnitCardMiniUserControl Width="210" Height="250"
+                                                            HorizontalAlignment="Stretch" 
+                                                                VerticalAlignment="Stretch"/>
+                                </Button>
                             </Viewbox>
                         </StackPanel>
                     </DataTemplate>

@@ -136,12 +136,38 @@ namespace CollectibleCardGame.Logic.Controllers
         {
             var entity = _entityRepositoryController.GetById(action.EntityId);
 
-            if (action.EntityState is Unit unit)
-            {
-                if (!(entity is Unit oldUnitState)) return;
+            if (!(action.EntityState is Unit unit)) return;
+            if (!(entity is Unit oldUnitState)) return;
 
+            _gameViewModel.CurrentDispatcher.Invoke(()=>
+            {
                 oldUnitState.State.SetState = unit.State;
-            }
+            });
+        }
+
+        public void HandleObserverAction(UnitDeathObserverAction action)
+        {
+            var entity = _entityRepositoryController.GetById(action.Unit.EntityId);
+
+            if(!(entity is Unit unit)) return;
+
+            _gameViewModel.CurrentDispatcher.Invoke(() =>
+            {
+                UnitViewModel unitViewModel = _gameViewModel.PlayerUnits.FirstOrDefault(
+                    vm => vm.BaseUnit.EntityId == unit.EntityId);
+
+                if (unitViewModel != null)
+                {
+                    _gameViewModel.PlayerUnits.Remove(unitViewModel);
+                    return;
+                }
+
+                unitViewModel = _gameViewModel.EnemyUnits.FirstOrDefault(
+                    vm => vm.BaseUnit.EntityId == unit.EntityId);
+
+                if (unitViewModel != null)
+                    _gameViewModel.EnemyUnits.Remove(unitViewModel);
+            });
         }
     }
 }

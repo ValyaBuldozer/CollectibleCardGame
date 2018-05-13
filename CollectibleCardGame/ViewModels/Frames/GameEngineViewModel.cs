@@ -32,6 +32,12 @@ namespace CollectibleCardGame.ViewModels.Frames
 
         private RelayCommand _cardDeployCommand;
         private RelayCommand _transferTurnCommand;
+        private RelayCommand _unitTargetCommand;
+
+        private bool _isSpellTargeting;
+        private CardViewModel _spellTargetingViewModel;
+        private bool _isAttackTargeting;
+        private UnitViewModel _unitTargetingViewModel;
 
         public Dispatcher CurrentDispatcher { get; }
 
@@ -159,6 +165,32 @@ namespace CollectibleCardGame.ViewModels.Frames
                    PlayerTurnEvent?.Invoke(this,new PlayerTurnRequestEventArgs(new CardDeployPlayerTurn(
                        _player,cardViewModel.Card)));
                }));
+
+        public RelayCommand UnitTargetCommand => _unitTargetCommand ??
+                            (_unitTargetCommand = new RelayCommand(o =>
+                            {
+                                if(!(o is UnitViewModel unitViewModel))
+                                    return;
+
+                                if (_isAttackTargeting)
+                                {
+                                    PlayerTurnEvent?.Invoke(this, new PlayerTurnRequestEventArgs(
+                                        new UnitAttackPlayerTurn(_player,
+                                            _unitTargetingViewModel.BaseUnit, unitViewModel.BaseUnit)));
+                                    return;
+                                }
+
+                                if (_isSpellTargeting)
+                                {
+                                    PlayerTurnEvent?.Invoke(this, new PlayerTurnRequestEventArgs(
+                                        new CardDeployPlayerTurn(
+                                            _player, _spellTargetingViewModel.Card, unitViewModel.BaseUnit)));
+                                    return;
+                                }
+
+                                _isAttackTargeting = true;
+                                _unitTargetingViewModel = unitViewModel;
+                            }));
 
         public RelayCommand TransferTurnCommand => _transferTurnCommand ??
                            (_transferTurnCommand = new RelayCommand(o =>

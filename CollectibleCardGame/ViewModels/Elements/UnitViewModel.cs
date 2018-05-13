@@ -31,8 +31,8 @@ namespace CollectibleCardGame.ViewModels.Elements
 
         private void State_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            _attack = _baseUnit.State.Attack;
-            _health = _baseUnit.State.GetResultHealth;
+            Attack = _baseUnit.State.Attack;
+            Health = _baseUnit.State.GetResultHealth;
         }
 
         public string ImagePath
