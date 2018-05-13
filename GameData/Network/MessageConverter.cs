@@ -172,7 +172,7 @@ namespace GameData.Network
         //[Dependency]
         public MessageHandlerBase<DisconnectMessage> DisconnectMessageHandlerBase { set; get; }
 
-        //[Dependency]
+        [Dependency]
         public MessageHandlerBase<ErrorMessage> ErrorMessageHandlerBase { set; get; }
 
         //[Dependency]

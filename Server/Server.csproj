@@ -123,6 +123,7 @@
     <Compile Include="Database\AppDbContext.cs" />
     <Compile Include="Database\AppDbContextInitializer.cs" />
     <Compile Include="Database\IContext.cs" />
+    <Compile Include="Exceptions\UserServiceException.cs" />
     <Compile Include="Migrations\201803311641315_Initialize.cs" />
     <Compile Include="Migrations\201803311641315_Initialize.Designer.cs">
       <DependentUpon>201803311641315_Initialize.cs</DependentUpon>
@@ -175,7 +176,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Exceptions\" />
     <Folder Include="GameData\" />
   </ItemGroup>
   <ItemGroup>

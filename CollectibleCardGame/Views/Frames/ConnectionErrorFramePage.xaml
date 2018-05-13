@@ -4,14 +4,16 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:CollectibleCardGame.Views.Frames"
+      xmlns:framesShell="clr-namespace:CollectibleCardGame.Views.FramesShell"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
       Title="ConnectionErrorFramePage">
 
     <Grid>
-        <Button Content="Переподключится" HorizontalAlignment="Center" Margin="0" 
+        <Button Content="Переподключится" HorizontalAlignment="Center" Margin="0" Name="ReconnectButton"
                 VerticalAlignment="Center" Width="150" Height="25"
-                Command="{Binding ReconnectCommand}"/>
-
+                Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, 
+                                AncestorType={x:Type framesShell:LogInFramePageShell}},
+            Path=ViewModel.ReconnectCommand}"/>
     </Grid>
 </Page>
