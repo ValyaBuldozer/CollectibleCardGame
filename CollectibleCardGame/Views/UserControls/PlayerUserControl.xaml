@@ -1,0 +1,81 @@
+﻿<UserControl x:Class="CollectibleCardGame.Views.UserControls.PlayerUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CollectibleCardGame.Views.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="330" d:DesignWidth="400">
+    <Grid>
+        <Grid.RenderTransform>
+            <!-- ScaleX/Y = k -->
+            <ScaleTransform CenterX="0" CenterY="0" ScaleX="1" ScaleY="1"/>
+        </Grid.RenderTransform>
+        <Border BorderThickness="2" BorderBrush="Black" CornerRadius="5">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="10" Direction="315" Opacity="0.8"/>
+            </Border.Effect>
+            <Grid>
+                <Grid.Background>
+                    <ImageBrush ImageSource="/Images/backgroundCard.jpg" Stretch="UniformToFill"/>
+                </Grid.Background>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition Width="210"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="250"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"   
+                           Text="{Binding HeroName}" FontFamily="/CollectibleCardGame;component/Fonts/#Mason Chronicles"
+                           FontWeight="Bold" FontSize="32"
+                           Grid.ColumnSpan="3"/>
+                <local:UnitCardMiniUserControl Grid.Row="1" Grid.Column="1"></local:UnitCardMiniUserControl>
+                <TextBlock Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center"   
+                           Text="{Binding PlayerName}" FontFamily="/CollectibleCardGame;component/Fonts/#Mason Chronicles"
+                           FontWeight="Bold" FontSize="32"
+                           Grid.ColumnSpan="3"/>
+                
+                <Grid Grid.Column="2" Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Image  Source="../../Images/Icons/getCoins.png"  Margin="10,5,5,5" Grid.Row="0"
+                           ></Image>
+                    <!--<TextBlock Margin="10,0,0,0" Grid.Row="0"  Text="Золото:" FontWeight="Bold" FontSize="24"/>-->
+                    <TextBlock Grid.Column="1"  Grid.Row="0"  Text="{Binding ManaCurrent}" FontWeight="Bold" FontSize="28"
+                               HorizontalAlignment="Center" VerticalAlignment="Center"
+                               Margin="0,0,30,0"/>
+                    <TextBlock Grid.Column="1"  Grid.Row="0"  Text="/" FontWeight="Bold" FontSize="28"
+                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Column="1"  Grid.Row="0"  Text="{Binding MaxMana}" FontWeight="Bold" FontSize="28"
+                               HorizontalAlignment="Center" VerticalAlignment="Center"
+                               Margin="30,0,0,0"/>
+
+                    <Image Source="../../Images/Icons/handCards.png"  Margin="10,5,5,5" Grid.Row="1" ></Image>
+                    <!--<TextBlock Margin="10,0,0,0" Grid.Row="1" Text="Карт в руке:" FontWeight="Bold" FontSize="24"/>-->
+                    <TextBlock Grid.Column="1"  Grid.Row="1"  Text="{Binding CardsInHand}" FontWeight="Bold" FontSize="28"
+                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                    <Image Source="../../Images/Icons/deckCards.png"  Margin="10,5,5,5" Grid.Row="2"></Image>
+                    <!--<TextBlock Margin="10,0,0,0" Grid.Row="2" Text="Карт в колоде:" FontWeight="Bold" FontSize="24"/>-->
+                    <TextBlock Grid.Column="1"  Grid.Row="2" Text="{Binding CardsInDeck}" FontWeight="Bold" FontSize="28"
+                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                </Grid>
+
+
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>
