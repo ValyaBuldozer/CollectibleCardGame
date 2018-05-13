@@ -33,7 +33,7 @@
                  </Grid.RowDefinitions>
 
                 <!--картинка юнита 210x250-->
-                <Image x:Name="Image" Source="{Binding Path=ImagePath}"  Margin="0,0,0,0">
+                <Image x:Name="Image" Source="{Binding ImagePath}"  Margin="0,0,0,0">
                     <Image.Effect>
                         <DropShadowEffect   RenderingBias="Quality" Direction="270" 
                                             BlurRadius="20" ShadowDepth="10" Opacity="0.9"/>
@@ -43,11 +43,11 @@
                 <Grid Grid.Row="1" Background="Transparent">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="3.5*"/>
+                        <!--<ColumnDefinition Width="3.5*"/>-->
                     </Grid.ColumnDefinitions>
-                  
-                    <TextBlock x:Name="CardName" Grid.Column="1" Text="{Binding Path=Name}" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"
-                               FontFamily="/CollectibleCardGame;component/Fonts/#Mason Chronicles" FontSize="20" Margin="0,15,0,0" /> <!--было фонтсайз 16-->
+
+                        <TextBlock x:Name="CardName" Grid.Column="1" Text="{Binding Name}" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"
+                               FontFamily="/CollectibleCardGame;component/Fonts/#Mason Chronicles" FontSize="18" Margin="0,13,0,0" /> <!--было фонтсайз 16-->
                 </Grid>
 
                 <Grid Grid.Row="0" Grid.RowSpan="2">
@@ -71,7 +71,7 @@
 
                         <Border  Visibility="{Binding IsUnitCard,Converter={StaticResource BooleanToVisibilityConverter}}" 
                             Grid.Column="1" BorderBrush="{Binding TapeBorderBrush}"
-                                 BorderThickness="5" Margin="0,40,0,0">
+                                 BorderThickness="5" Margin="0,40,0,22">
                             <Rectangle  Fill="{Binding TapeBrush}" HorizontalAlignment="Stretch"
                                         VerticalAlignment="Stretch"   Opacity="0.9"  />
                             <Border.Effect>
@@ -112,8 +112,9 @@
                 </Grid>
 
                 <Grid Grid.Row="2" Background="Transparent">
-                    <TextBlock x:Name="Story" Grid.Row="2" Text="{Binding Description}" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center"
-                               FontFamily="/CollectibleCardGame;component/Fonts/#Mason Chronicles" FontSize="16" Margin="5,0,5,0"/> <!--было фонтсайз 12-->
+                        <TextBlock x:Name="Story" Grid.Row="2" Text="{Binding Description}" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center"
+                               FontFamily="/CollectibleCardGame;component/Fonts/#Mason Chronicles" LineHeight="14" 
+                                   LineStackingStrategy="BlockLineHeight" FontSize="16" Margin="5,0,5,0" FontWeight="Normal"/> <!--было фонтсайз 12-->
                 </Grid>
 
 

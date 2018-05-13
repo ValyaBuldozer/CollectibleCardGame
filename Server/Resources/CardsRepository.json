@@ -228,7 +228,7 @@
   {
     "$type": "GameData.Models.Cards.UnitCard, GameData",
     "ID": 29,
-    "Name": "Отряд гданьских мечников",
+    "Name": "Гданьские мечники",
     "Description": "Северянин размахнулся, нанес удар... но меч оставил лишь небольшую вмятину...",
     "Cost": 1,
     "CanBePlayedOnEnemyTurn": false,
@@ -382,7 +382,7 @@
     "ID": 37,
     "Name": "Огненный дождь",
     "Description": "Наносит 6 урона герою противника",
-    "Cost": 1,
+    "Cost": 4,
     "CanBePlayedOnEnemyTurn": false,
     "ImagePath": "../../Images/ImagesSpell/Огненный дождь.jpg",
     "Fraction": 0,
