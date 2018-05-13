@@ -80,7 +80,8 @@ namespace Server.Unity
             _container.RegisterType<AwaitingClientsQueueController>(new ContainerControlledLifetimeManager());
             _container.RegisterType<ConnectedClientsRepositoryController>(new ContainerControlledLifetimeManager());
 
-            _container.RegisterType<NetworkMessageConverter>(new ContainerControlledLifetimeManager());
+            _container.RegisterType<IMessageConverter,MessageConverter>(
+                new ContainerControlledLifetimeManager());
             _container.RegisterType<ClientController>();
             _container.RegisterType<ServerController>(new ContainerControlledLifetimeManager());
 

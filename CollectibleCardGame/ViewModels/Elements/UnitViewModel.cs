@@ -21,11 +21,18 @@ namespace CollectibleCardGame.ViewModels.Elements
             {
                 _baseUnit = value;
                 NotifyPropertyChanged(nameof(BaseUnit));
-                Attack = value.Attack;
-                Health = value.HealthPoint.GetResult;
+                Attack = value.State.Attack;
+                Health = value.State.GetResultHealth;
                 Name = value.BaseCard.Name;
+                _baseUnit.State.PropertyChanged += State_PropertyChanged;
                 NotifyPropertyChanged(nameof(ImagePath));
             }
+        }
+
+        private void State_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            _attack = _baseUnit.State.Attack;
+            _health = _baseUnit.State.GetResultHealth;
         }
 
         public string ImagePath
@@ -68,5 +75,7 @@ namespace CollectibleCardGame.ViewModels.Elements
         {
             BaseUnit = unit;
         }
+
+
     }
 }

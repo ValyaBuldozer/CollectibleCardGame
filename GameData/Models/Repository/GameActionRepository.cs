@@ -26,7 +26,7 @@ namespace GameData.Models.Repository
                         //controller.DrawCard((Player)sender);
                         foreach (var iUnit in player.TableUnits.ToArray())
                         {
-                            iUnit.HealthPoint.RecieveDamage(parameter);
+                            iUnit.State.RecieveDamage(parameter);
                         }
                     })),
                 new GameAction(name: "BuffDamageSpellCards",id: 2,description:"Увеличение урона атакуюших заклинаний, находящихся в руке",parameterType: ActionParameterType.Buff,
@@ -48,7 +48,7 @@ namespace GameData.Models.Repository
                             controller.GetTableCondition.Players.FirstOrDefault(p => p.Username != player.Username);
                         foreach (var iUnit in enemyPlayer.TableUnits.ToArray())
                         {
-                            iUnit.HealthPoint.RecieveDamage(parameter);
+                            iUnit.State.RecieveDamage(parameter);
                         }
 
                     })),
@@ -59,7 +59,7 @@ namespace GameData.Models.Repository
                         //controller.DrawCard((Player)sender);
                         foreach (var iUnit in player.TableUnits.ToArray())
                         {
-                            iUnit.HealthPoint.Heal(parameter);
+                            iUnit.State.Heal(parameter);
                         }
 
                     })),
@@ -69,7 +69,7 @@ namespace GameData.Models.Repository
                         var player = (Player) sender;
                         foreach (var iUnit in player.TableUnits.ToArray())
                         {
-                            iUnit.HealthPoint.RecieveDamage(parameter);
+                            iUnit.State.RecieveDamage(parameter);
                         }
 
                         Player enemyPlayer =
@@ -77,7 +77,7 @@ namespace GameData.Models.Repository
 
                         foreach (var iUnit in enemyPlayer.TableUnits.ToArray())
                         {
-                            iUnit.HealthPoint.RecieveDamage(parameter);
+                            iUnit.State.RecieveDamage(parameter);
                         }
 
                     })),
@@ -88,7 +88,7 @@ namespace GameData.Models.Repository
                         //controller.DrawCard((Player)sender);
                         foreach (var iUnit in player.TableUnits.ToArray())
                         {
-                            iUnit.Attack += parameter;
+                            iUnit.State.Attack += parameter;
                         }
 
                     })),
@@ -99,8 +99,8 @@ namespace GameData.Models.Repository
                         //controller.DrawCard((Player)sender);
                         foreach (var iUnit in player.TableUnits.ToArray())
                         {
-                            iUnit.Attack += parameter;
-                            iUnit.HealthPoint.Base += parameter;
+                            iUnit.State.Attack += parameter;
+                            iUnit.State.BaseHealth += parameter;
                         }
 
                     })),
@@ -110,13 +110,14 @@ namespace GameData.Models.Repository
 
                         var player = (Player) sender;
                         Player enemyPlayer =
-                            controller.GetTableCondition.Players.FirstOrDefault(p => p.Username != player.Username);
+                            controller.GetTableCondition.Players.FirstOrDefault(
+                                p => p.Username != player.Username);
 
                         if (enemyPlayer.TableUnits.Count != 0)
                         {
                             var rnd = new Random();
                             int rndNum = rnd.Next(0, enemyPlayer.TableUnits.Count + 1);
-                            enemyPlayer.TableUnits[rndNum].HealthPoint.RecieveDamage(parameter);
+                            enemyPlayer.TableUnits[rndNum].State.RecieveDamage(parameter);
                         }
 
 
@@ -128,9 +129,10 @@ namespace GameData.Models.Repository
 
                         var player = (Player) sender;
                         Player enemyPlayer =
-                            controller.GetTableCondition.Players.FirstOrDefault(p => p.Username != player.Username);
+                            controller.GetTableCondition.Players.FirstOrDefault(
+                                p => p.Username != player.Username);
 
-                        enemyPlayer.HeroUnit.HealthPoint.RecieveDamage(parameter);
+                        enemyPlayer.HeroUnit.State.RecieveDamage(parameter);
 
 
 
@@ -139,7 +141,7 @@ namespace GameData.Models.Repository
                     action: ((controller, sender, target, parameter) =>
                     {
                         var unit = (Unit) sender;
-                        unit.Attack += parameter;
+                        unit.State.Attack += parameter;
                         
 
 
@@ -150,7 +152,7 @@ namespace GameData.Models.Repository
                     {
 
                         var unit = (Unit) sender;
-                        unit.HealthPoint.Heal(parameter);
+                        unit.State.Heal(parameter);
 
 
 
@@ -168,8 +170,8 @@ namespace GameData.Models.Repository
                         var player = (Player) sender;
                         foreach (var iUnit in player.TableUnits.ToArray())
                         {
-                            iUnit.Attack += parameter;
-                            iUnit.HealthPoint.Base += parameter;
+                            iUnit.State.Attack += parameter;
+                            iUnit.State.BaseHealth += parameter;
                         }
 
 
@@ -180,7 +182,7 @@ namespace GameData.Models.Repository
                     {
 
                         var unit = (Unit) sender;
-                        unit.Attack += parameter;
+                        unit.State.Attack += parameter;
 
 
 
@@ -191,7 +193,7 @@ namespace GameData.Models.Repository
                         var player = (Player) sender;
                         Player enemyPlayer =
                             controller.GetTableCondition.Players.FirstOrDefault(p => p.Username != player.Username);
-                        enemyPlayer.HeroUnit.HealthPoint.RecieveDamage(parameter);
+                        enemyPlayer.HeroUnit.State.RecieveDamage(parameter);
 
 
 
@@ -201,7 +203,7 @@ namespace GameData.Models.Repository
                     {
                         var player = (Player) sender;
                         if (Equals(target.Player, player))
-                        target.HealthPoint.Heal(target.HealthPoint.Base-target.HealthPoint.GetResult);
+                        target.State.Heal(target.State.BaseHealth-target.State.GetResultHealth);
 
 
 
@@ -219,7 +221,7 @@ namespace GameData.Models.Repository
                     action: ((controller, sender, target, parameter) =>
                     {
                         var player = (Player) sender;
-                       target.HealthPoint.RecieveDamage(parameter);
+                       target.State.RecieveDamage(parameter);
                         
 
                     })),
@@ -258,7 +260,7 @@ namespace GameData.Models.Repository
                     action: ((controller, sender, target, parameter) =>
                     {
 
-                        target.HealthPoint.Heal(parameter);
+                        target.State.Heal(parameter);
 
 
                     })),
@@ -276,7 +278,7 @@ namespace GameData.Models.Repository
                             controller.GetTableCondition.Players.FirstOrDefault(p => p.Username != player.Username);
                         foreach (var iUnit in enemyPlayer.TableUnits.ToArray())
                         {
-                            iUnit.HealthPoint.RecieveDamage(parameter);
+                            iUnit.State.RecieveDamage(parameter);
                         }
 
 
@@ -292,7 +294,7 @@ namespace GameData.Models.Repository
                 new GameAction(name:"Мягкая сталь",id:42,description:"Понижает атаку вражеского юнита",parameterType:ActionParameterType.Buff,
                     action: ((controller, sender, target, parameter) =>
                     {
-                        target.Attack-=parameter;
+                        target.State.Attack-=parameter;
 
 
 
@@ -301,8 +303,8 @@ namespace GameData.Models.Repository
                     action: ((controller, sender, target, parameter) =>
                     {
 
-                        target.HealthPoint.Base+=parameter;
-                        target.Attack += parameter;
+                        target.State.BaseHealth+=parameter;
+                        target.State.Attack += parameter;
 
                     })),
                 new GameAction(name:"Заточенные клинки",id:44,description:"Повышение атаки выбранному юниту",parameterType:ActionParameterType.Buff,
@@ -310,7 +312,7 @@ namespace GameData.Models.Repository
                     {
 
 
-                        target.Attack += parameter;
+                        target.State.Attack += parameter;
 
                     })),
                 new GameAction(name:"Прилив сил",id:45,description:"Повышение здоровья выбранному юниту",parameterType:ActionParameterType.Buff,
@@ -318,7 +320,7 @@ namespace GameData.Models.Repository
                     {
 
 
-                        target.HealthPoint.Base += parameter;
+                        target.State.BaseHealth += parameter;
 
                     })),
                 new GameAction(name:"Урон всем",id:46,description:"Наносит всем юнитам на столе",parameterType:ActionParameterType.Damage,
@@ -352,7 +354,7 @@ namespace GameData.Models.Repository
                             {
 
                                 int rndNum = rnd.Next(0, enemyPlayer.TableUnits.Count + 1);
-                                enemyPlayer.TableUnits[rndNum].HealthPoint.RecieveDamage(1);
+                                enemyPlayer.TableUnits[rndNum].State.RecieveDamage(1);
                             }
                         }
 
@@ -370,10 +372,10 @@ namespace GameData.Models.Repository
                         var player = (Player) sender;
                         Player enemyPlayer =
                             controller.GetTableCondition.Players.FirstOrDefault(p => p.Username != player.Username);
-                        enemyPlayer.HeroUnit.HealthPoint.RecieveDamage(3);
+                        enemyPlayer.HeroUnit.State.RecieveDamage(3);
                         foreach (var iUnit in enemyPlayer.TableUnits.ToArray())
                         {
-                            iUnit.HealthPoint.RecieveDamage(1);
+                            iUnit.State.RecieveDamage(1);
                         }
 
 
@@ -387,15 +389,15 @@ namespace GameData.Models.Repository
                             controller.GetTableCondition.Players.FirstOrDefault(p => p.Username != player.Username);
                         foreach (var iUnit in player.TableUnits.ToArray())
                         {
-                            iUnit.HealthPoint.Base += 1;
+                            iUnit.State.BaseHealth += 1;
                         }
                         foreach (var iUnit in enemyPlayer.TableUnits.ToArray())
                         {
-                            iUnit.HealthPoint.RecieveDamage(1);
+                            iUnit.State.RecieveDamage(1);
                         }
 
                     })),
-                
+   
                 new GameAction(name:"Техника клонирования",id:52,description:"При выборе какого-либо юнита, его карта разыгрвается на стороне игрока (копируется)",parameterType:ActionParameterType.Empty,
                     action: ((controller, sender, target, parameter) =>
                     {
@@ -446,8 +448,8 @@ namespace GameData.Models.Repository
                     {
 
 
-                        target.HealthPoint.Base -= 2;
-                        target.Attack += 4;
+                        target.State.BaseHealth -= 2;
+                        target.State.Attack += 4;
 
                     })),
                 new GameAction(name:"Живой щит",id:58,description:"Выбранный союзный юнит становится провокатором и его здоровье повышается на 2",parameterType:ActionParameterType.Buff,
@@ -455,7 +457,7 @@ namespace GameData.Models.Repository
                     {
 
 
-                        target.HealthPoint.Base += 2;
+                        target.State.BaseHealth += 2;
                         //todo: сделать юнит провокатором 
 
                     })),
@@ -463,8 +465,8 @@ namespace GameData.Models.Repository
                     action: ((controller, sender, target, parameter) =>
                     {
 
-                        target.Attack = 0;
-                        target.HealthPoint.Base = 2;
+                        target.State.Attack = 0;
+                        target.State.BaseHealth = 2;
                         //todo: сделать юнит провокатором 
 
                     })),
@@ -522,7 +524,7 @@ namespace GameData.Models.Repository
                         var player = (Player) sender;
                         foreach (var iUnit in player.TableUnits.ToArray())
                         {
-                            iUnit.Attack = 1;
+                            iUnit.State.Attack = 1;
                         }
 
                         Player enemyPlayer =
@@ -530,7 +532,7 @@ namespace GameData.Models.Repository
 
                         foreach (var iUnit in enemyPlayer.TableUnits.ToArray())
                         {
-                            iUnit.Attack = 1;
+                            iUnit.State.Attack = 1;
                         }
 
 

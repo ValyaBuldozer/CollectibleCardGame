@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -92,8 +93,8 @@ namespace GameData.Controllers.Table
             if (unit == null)
                 return false;
 
-            unit.HealthPoint.ZeroHpEvent += OnUnitDies;
-            unit.HealthPoint.DamageRecieved += OnUnitDamaged;
+            unit.State.ZeroHpEvent += OnUnitDies;
+            unit.State.PropertyChanged += OnUnitStateChanges;
             unit.Player = sender;
             _actionController.ExecuteAction(unit.BattleCryActionInfo,sender,actionTarget);
             sender.TableUnits.Add(unit);
@@ -119,8 +120,8 @@ namespace GameData.Controllers.Table
             if (unit == null)
                 return false;
 
-            unit.HealthPoint.ZeroHpEvent += OnUnitDies;
-            unit.HealthPoint.DamageRecieved += OnUnitDamaged;
+            unit.State.ZeroHpEvent += OnUnitDies;
+            unit.State.PropertyChanged += OnUnitStateChanges;
             unit.Player = sender;
             sender.TableUnits.Add(unit);
             _entityRepositoryController.AddNewItem(unit);
@@ -147,16 +148,16 @@ namespace GameData.Controllers.Table
         /// <param name="target">Цель атаки</param>
         public void HandleAttack(Unit sender, Unit target)
         {
-            if(target.AttackPriority == 0)
+            if(target.State.AttackPriority == 0)
                 //атака маскировки
                 return;
-            if(target.AttackPriority !=2 && target.Player.TableUnits.Exists(u=>u.AttackPriority == 2))
+            if(target.State.AttackPriority !=2 && target.Player.TableUnits.Exists(u=>u.State.AttackPriority == 2))
                 //есть провокатор у противника
                 return;
 
             _actionController.ExecuteAction(sender.OnAttackActionInfo,sender,target);
-            target.HealthPoint.RecieveDamage(sender.Attack);
-            sender.HealthPoint.RecieveDamage(target.Attack);
+            target.State.RecieveDamage(sender.State.Attack);
+            sender.State.RecieveDamage(target.State.Attack);
         }
 
         public Unit GetUnit(UnitCard card)
@@ -175,6 +176,11 @@ namespace GameData.Controllers.Table
                 OnDamageRecievedActionInfo = 
                     _actionController.GetGameActionInfo(card.DamageRecievedActionInfo)
             };
+        }
+
+        private void OnUnitStateChanges(object sender, PropertyChangedEventArgs e)
+        {
+
         }
 
         private void OnUnitDamaged(object sender, UnitRecievedDamageEventArgs e)

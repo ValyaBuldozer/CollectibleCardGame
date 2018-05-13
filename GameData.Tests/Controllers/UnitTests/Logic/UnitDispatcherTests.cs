@@ -35,8 +35,8 @@ namespace GameData.Tests.Controllers.UnitTests.Logic
             actiionMock.Verify(mock => mock.ExecuteAction(It.IsAny<GameActionInfo>(), p1, null));
             Assert.AreNotEqual(p1.TableUnits[0],null);
             Assert.AreEqual(p1.TableUnits.Count, 1);
-            Assert.AreEqual(p1.TableUnits[0].HealthPoint.Base,40);
-            Assert.AreEqual(p1.TableUnits[0].Attack, 0);
+            Assert.AreEqual(p1.TableUnits[0].State.BaseHealth,40);
+            Assert.AreEqual(p1.TableUnits[0].State.Attack, 0);
         }
 
         [TestMethod]
@@ -107,8 +107,8 @@ namespace GameData.Tests.Controllers.UnitTests.Logic
             actiionMock.Verify(mock => mock.GetGameActionInfo(It.IsAny<CardActionInfo>()));
             Assert.AreNotEqual(p1.TableUnits[0], null);
             Assert.AreEqual(p1.TableUnits.Count, 1);
-            Assert.AreEqual(p1.TableUnits[0].HealthPoint.Base, 40);
-            Assert.AreEqual(p1.TableUnits[0].Attack, 0);
+            Assert.AreEqual(p1.TableUnits[0].State.BaseHealth, 40);
+            Assert.AreEqual(p1.TableUnits[0].State.Attack, 0);
 
         }
 
@@ -134,8 +134,8 @@ namespace GameData.Tests.Controllers.UnitTests.Logic
             //assert
             actiionMock.Verify(mock => mock.ExecuteAction(It.IsAny<GameActionInfo>(), p1, null));
             actiionMock.Verify(mock => mock.ExecuteAction(It.IsAny<GameActionInfo>(), p2, null));
-            Assert.AreEqual(p1.TableUnits[0].HealthPoint.GetResult,5);
-            Assert.AreEqual(p2.TableUnits[0].HealthPoint.GetResult, 5);
+            Assert.AreEqual(p1.TableUnits[0].State.GetResultHealth,5);
+            Assert.AreEqual(p2.TableUnits[0].State.GetResultHealth, 5);
             
 
 

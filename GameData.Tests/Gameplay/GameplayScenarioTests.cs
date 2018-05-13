@@ -97,12 +97,12 @@ namespace GameData.Tests.Gameplay
 
            
             Assert.AreEqual(1,firstPlayer.TableUnits.Count);
-            Assert.AreEqual(5, firstPlayer.TableUnits.FirstOrDefault().Attack);
-            Assert.AreEqual(5, firstPlayer.TableUnits.FirstOrDefault().HealthPoint.GetResult);
-            Assert.AreEqual(3,secondPlayer.TableUnits.FirstOrDefault().Attack);
-            Assert.AreEqual(6, secondPlayer.TableUnits.FirstOrDefault().HealthPoint.GetResult);
+            Assert.AreEqual(5, firstPlayer.TableUnits.FirstOrDefault().State.Attack);
+            Assert.AreEqual(5, firstPlayer.TableUnits.FirstOrDefault().State.GetResultHealth);
+            Assert.AreEqual(3,secondPlayer.TableUnits.FirstOrDefault().State.Attack);
+            Assert.AreEqual(6, secondPlayer.TableUnits.FirstOrDefault().State.GetResultHealth);
             Assert.AreEqual(1, secondPlayer.TableUnits.Count);
-            Assert.AreEqual(25,secondPlayer.HeroUnit.HealthPoint.GetResult);
+            Assert.AreEqual(25,secondPlayer.HeroUnit.State.GetResultHealth);
 
 
         }
@@ -139,8 +139,8 @@ namespace GameData.Tests.Gameplay
             container.Get<IPlayerTurnHandler<CardDeployPlayerTurn>>().Execute(deployTurnSpell_1);
             
 
-            Assert.AreEqual(1, firstPlayer.TableUnits.FirstOrDefault().HealthPoint.GetResult);
-            Assert.AreEqual(6, firstPlayer.TableUnits.FirstOrDefault().Attack);
+            Assert.AreEqual(1, firstPlayer.TableUnits.FirstOrDefault().State.GetResultHealth);
+            Assert.AreEqual(6, firstPlayer.TableUnits.FirstOrDefault().State.Attack);
 
 
         }
@@ -208,7 +208,8 @@ namespace GameData.Tests.Gameplay
            
 
 
-            Assert.AreEqual(25, container.Get<TableCondition>().Players.FirstOrDefault(c => c.Username == "SecondPlayer").HeroUnit.HealthPoint.GetResult);
+            Assert.AreEqual(25, container.Get<TableCondition>().Players.FirstOrDefault(
+                c => c.Username == "SecondPlayer").HeroUnit.State.GetResultHealth);
 
 
 
@@ -233,7 +234,7 @@ namespace GameData.Tests.Gameplay
 
             var firstPlayer = container.Get<IPlayerTurnDispatcher>().CurrentPlayer;
             var secondPlayer = container.Get<TableCondition>().GetPlayerByUsername("SecondPlayer");
-            secondPlayer.HeroUnit.HealthPoint.Base = 5;
+            secondPlayer.HeroUnit.State.BaseHealth = 5;
 
             //формируем первый ход - спавн юнита первого игрока
             var firstPlayerUnitCard = firstPlayer.HandCards.FirstOrDefault(c => c.Name == "UnitCard5_6/4");
@@ -256,7 +257,7 @@ namespace GameData.Tests.Gameplay
                 firstPlayer, firstPlayer.TableUnits.First(), secondPlayer.HeroUnit);
             container.Get<IPlayerTurnHandler<UnitAttackPlayerTurn>>().Execute(unitAttackPlayerTurn);
 
-            Assert.AreEqual(-1, secondPlayer.HeroUnit.HealthPoint.GetResult);
+            Assert.AreEqual(-1, secondPlayer.HeroUnit.State.GetResultHealth);
 
 
 
@@ -282,7 +283,7 @@ namespace GameData.Tests.Gameplay
             var secondPlayer = container.Get<TableCondition>().GetPlayerByUsername("SecondPlayer");
 
 
-            secondPlayer.HeroUnit.HealthPoint.Base = 5;
+            secondPlayer.HeroUnit.State.BaseHealth = 5;
             //формируем первый ход 
             var firstPlayerSpellCard = firstPlayer.HandCards.FirstOrDefault(c => c.Name == "SpellCard2_5");
             CardDeployPlayerTurn deployTurnSpell_2 = new CardDeployPlayerTurn(firstPlayer, firstPlayerSpellCard);
@@ -291,7 +292,7 @@ namespace GameData.Tests.Gameplay
 
 
 
-            Assert.AreEqual(0, secondPlayer.HeroUnit.HealthPoint.GetResult);
+            Assert.AreEqual(0, secondPlayer.HeroUnit.State.GetResultHealth);
            
 
 
@@ -336,8 +337,8 @@ namespace GameData.Tests.Gameplay
             container.Get<IPlayerTurnHandler<CardDeployPlayerTurn>>().Execute(deployTurnSpell_3);
 
 
-            bool ORfirst = firstPlayer.TableUnits.FirstOrDefault(c => c.BaseCard.Name == "UnitCard6_6/6").HealthPoint
-                             .GetResult ==1;
+            bool ORfirst = firstPlayer.TableUnits.FirstOrDefault(c => c.BaseCard.Name == "UnitCard6_6/6").State
+                             .GetResultHealth ==1;
             bool ORtsecond = firstPlayer.TableUnits.Count == 1;
             Assert.IsTrue(ORfirst||ORtsecond);
 

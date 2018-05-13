@@ -32,9 +32,9 @@ namespace CollectibleCardGame.Network.Controllers
             get => _serverCommunicator;
         }
 
-        private readonly NetworkMessageConverter _converter;
+        private readonly IMessageConverter _converter;
 
-        public NetworkConnectionController(NetworkMessageConverter converter)
+        public NetworkConnectionController(IMessageConverter converter)
         {
             _converter = converter;
         }

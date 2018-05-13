@@ -24,7 +24,7 @@ namespace GameData.Tests.TestData
                         //controller.DrawCard((Player)sender);
                         foreach (var iUnit in player.TableUnits)
                         {
-                            iUnit.HealthPoint.RecieveDamage(parameter);
+                            iUnit.State.RecieveDamage(parameter);
                         }
                     })),
                 new GameAction(name: "BuffDamageSpellCards",id: 2,description:"test",parameterType: ActionParameterType.Buff,
@@ -46,7 +46,7 @@ namespace GameData.Tests.TestData
                             controller.GetTableCondition.Players.FirstOrDefault(p => p.Username != player.Username);
                         foreach (var iUnit in enemyPlayer.TableUnits)
                         {
-                            iUnit.HealthPoint.RecieveDamage(parameter);
+                            iUnit.State.RecieveDamage(parameter);
                         }
 
                     })),
@@ -57,7 +57,7 @@ namespace GameData.Tests.TestData
                         //controller.DrawCard((Player)sender);
                         foreach (var iUnit in player.TableUnits)
                         {
-                            iUnit.HealthPoint.Heal(parameter);
+                            iUnit.State.Heal(parameter);
                         }
 
                     })),
@@ -67,7 +67,7 @@ namespace GameData.Tests.TestData
                         var player = (Player) sender;
                         foreach (var iUnit in player.TableUnits)
                         {
-                            iUnit.HealthPoint.RecieveDamage(parameter);
+                            iUnit.State.RecieveDamage(parameter);
                         }
 
                         Player enemyPlayer =
@@ -75,7 +75,7 @@ namespace GameData.Tests.TestData
 
                         foreach (var iUnit in enemyPlayer.TableUnits)
                         {
-                            iUnit.HealthPoint.RecieveDamage(parameter);
+                            iUnit.State.RecieveDamage(parameter);
                         }
 
                     })),
@@ -86,7 +86,7 @@ namespace GameData.Tests.TestData
                         //controller.DrawCard((Player)sender);
                         foreach (var iUnit in player.TableUnits)
                         {
-                            iUnit.Attack += parameter;
+                            iUnit.State.Attack += parameter;
                         }
 
                     })),
@@ -97,8 +97,8 @@ namespace GameData.Tests.TestData
                         //controller.DrawCard((Player)sender);
                         foreach (var iUnit in player.TableUnits)
                         {
-                            iUnit.Attack += parameter;
-                            iUnit.HealthPoint.Base += parameter;
+                            iUnit.State.Attack += parameter;
+                            iUnit.State.BaseHealth += parameter;
                         }
 
                     })),
@@ -114,7 +114,7 @@ namespace GameData.Tests.TestData
                         {
                             var rnd = new Random();
                             int rndNum = rnd.Next(1, enemyPlayer.TableUnits.Count + 1);
-                            enemyPlayer.TableUnits[rndNum].HealthPoint.RecieveDamage(parameter);
+                            enemyPlayer.TableUnits[rndNum].State.RecieveDamage(parameter);
                         }
                         
 

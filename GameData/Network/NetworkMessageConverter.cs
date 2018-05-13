@@ -15,7 +15,15 @@ using Unity.Attributes;
 
 namespace GameData.Network
 {
-    public class NetworkMessageConverter
+    public interface IMessageConverter
+    {
+        MessageBase DeserializeMessage(NetworkMessage networkMessage);
+        NetworkMessage SerializeMessage(MessageBase messageBase);
+        NetworkMessage SerializeMessage(IContent content);
+    }
+
+    [Obsolete("Obsolete class. User MessageConverter",false)]
+    public class NetworkMessageConverter : IMessageConverter
     {
         [Dependency]
         public MessageHandlerBase<LogInMessage> LogInMessageHandlerBase { set; get; }

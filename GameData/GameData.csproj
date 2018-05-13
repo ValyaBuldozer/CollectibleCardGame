@@ -118,6 +118,7 @@
     <Compile Include="Models\GameActions\GameActionInfo.cs" />
     <Compile Include="Models\EventArgs.cs" />
     <Compile Include="Models\GameSettings.cs" />
+    <Compile Include="Models\Observer\EntityStateChangeObserverAction.cs" />
     <Compile Include="Models\Observer\ErrorObserverAction.cs" />
     <Compile Include="Models\Observer\GameStartObserverAction.cs" />
     <Compile Include="Models\Observer\ObserverAction.cs" />
@@ -146,7 +147,9 @@
     <Compile Include="Models\Units\HeroUnit.cs" />
     <Compile Include="Models\Units\Unit.cs" />
     <Compile Include="Models\Cards\UnitCard.cs" />
+    <Compile Include="Models\Units\UnitState.cs" />
     <Compile Include="Network\IMessageHandler.cs" />
+    <Compile Include="Network\MessageConverter.cs" />
     <Compile Include="Network\MessageHandlerBase.cs" />
     <Compile Include="Network\Messages\DisconnectMessage.cs" />
     <Compile Include="Network\Messages\ErrorMessage.cs" />
