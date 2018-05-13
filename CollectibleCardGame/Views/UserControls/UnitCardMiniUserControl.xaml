@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:CollectibleCardGame.Views.UserControls"
              mc:Ignorable="d" 
              AllowDrop="True"
-             d:DesignHeight="250" d:DesignWidth="210" MaxHeight="250" MaxWidth="210">
+             d:DesignHeight="250" d:DesignWidth="210" >
     <Grid>
         <Grid.RenderTransform>
             <!-- ScaleX/Y = k -->

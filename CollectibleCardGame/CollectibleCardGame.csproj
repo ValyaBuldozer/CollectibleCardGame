@@ -180,6 +180,7 @@
     <Compile Include="ViewModels\Frames\RegistrationFramePageViewModel.cs" />
     <Compile Include="ViewModels\UserControls\CardUserControlViewModel.cs" />
     <Compile Include="ViewModels\UserControls\FractionUserControlViewModel.cs" />
+    <Compile Include="ViewModels\UserControls\PlayerUserControlViewModel.cs" />
     <Compile Include="ViewModels\UserControls\SpellCardUserControlViewModel.cs" />
     <Compile Include="ViewModels\UserControls\UnitCardUserControlViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowViewModel.cs" />
@@ -237,6 +238,9 @@
     </Compile>
     <Compile Include="Views\UserControls\FractionUserControl.xaml.cs">
       <DependentUpon>FractionUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\PlayerUserControl.xaml.cs">
+      <DependentUpon>PlayerUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\SpellCardUserControl.xaml.cs">
       <DependentUpon>SpellCardUserControl.xaml</DependentUpon>
@@ -339,6 +343,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\UserControls\PlayerUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\UserControls\SpellCardUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -397,7 +405,7 @@
   <ItemGroup>
     <Folder Include="Data\Controllers\" />
     <Folder Include="Data\Repository\" />
-    <Folder Include="Images\ImagesUnit\Darkside\" />
+    <Folder Include="Images\ImagesUnit\Darkside\Heroes\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\northPicture.jpg" />
@@ -528,6 +536,24 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\ImagesSpell\Сфера поглощения.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\getCoins.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\inHand.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImagesUnit\South\Heroes\Тайвин вар Эрмрейс.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImagesUnit\North\Heroes\Король Виктим Суровый.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\deckCards.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\handCards.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

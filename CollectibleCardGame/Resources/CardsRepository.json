@@ -229,7 +229,7 @@
 	},
 	{
 		"$type": "GameData.Models.Cards.UnitCard, GameData",
-		"ID": 29,
+		"ID": 30,
 		"Name": "Боец Имперы",
 		"Description": "[Превентивный удар] Солдаты императорской гвардии фанатично преданны и сражаются до последнего",
 		"Cost": 2,
@@ -252,7 +252,7 @@
 	},
 	{
 		"$type": "GameData.Models.Cards.UnitCard, GameData",
-		"ID": 30,
+		"ID": 31,
 		"Name": "Бригада Импера",
 		"Description": "[Провокатор] Бригада Импера не сдается. Никогда.",
 		"Cost": 3,
@@ -270,7 +270,7 @@
 	},
 	{
 		"$type": "GameData.Models.Cards.UnitCard, GameData",
-		"ID": 31,
+		"ID": 32,
 		"Name": "Батарея Жан-По",
 		"Description": "[Мастер осады] Еще не одна стена не устояла под градом наших снарядов",
 		"Cost": 6,
@@ -293,7 +293,7 @@
 	},
 	{
 		"$type": "GameData.Models.Cards.UnitCard, GameData",
-		"ID": 32,
+		"ID": 33,
 		"Name": "Союзные дантарии",
 		"Description": "[Маскировка] Император обещал нам с братвой горы золота",
 		"Cost": 2,
@@ -311,7 +311,7 @@
 	},
 	{
 		"$type": "GameData.Models.Cards.UnitCard, GameData",
-		"ID": 33,
+		"ID": 34,
 		"Name": "Джулия Гевейн",
 		"Description": "В книгах - знания, а в знаниях - сила!",
 		"Cost": 5,
@@ -329,7 +329,7 @@
 	},
 	{
 		"$type": "GameData.Models.Cards.UnitCard, GameData",
-		"ID": 34,
+		"ID": 35,
 		"Name": "Мильва Тардская",
 		"Description": "Лучше сражаться, чем вот так сидеть и ждать. В сражении ты не чувствуешь себя беспомощной.",
 		"Cost": 4,
@@ -347,7 +347,7 @@
 	},
 	{
 		"$type": "GameData.Models.Cards.SpellCard, GameData",
-		"ID": 35,
+		"ID": 36,
 		"Name": "Град стрел",
 		"Description": "Наносит 3 урона всем отрядам противника",
 		"Cost": 5,
@@ -363,7 +363,7 @@
 	},
 	{
 		"$type": "GameData.Models.Cards.SpellCard, GameData",
-		"ID": 36,
+		"ID": 37,
 		"Name": "Огненный дождь",
 		"Description": "Наносит 6 урона герою противника",
 		"Cost": 1,
@@ -379,7 +379,7 @@
 	},
 	{
 		"$type": "GameData.Models.Cards.SpellCard, GameData",
-		"ID": 37,
+		"ID": 38,
 		"Name": "Огненный шар",
 		"Description": "Наносит 5 урона выбранному юниту",
 		"Cost": 4,
@@ -395,12 +395,28 @@
 	},
 	{
 		"$type": "GameData.Models.Cards.SpellCard, GameData",
-		"ID": 38,
+		"ID": 39,
 		"Name": "Энергетический выброс",
 		"Description": "Случайно распределяет 5 урона по юнитам противника",
 		"Cost": 4,
 		"CanBePlayedOnEnemyTurn": false,
 		"ImagePath": "../../Images/ImagesSpell/Энергетический выброс.jpg",
+		"Fraction": 0,
+		"ActionInfo": {
+			"$type": "GameData.Models.Action.CardActionInfo, GameData",
+			"ActionId": 47,
+			"ParameterValue": 5,
+			"ParameterType": 0
+		}
+	},
+	{
+		"$type": "GameData.Models.Cards.SpellCard, GameData",
+		"ID": 40,
+		"Name": "Пробивающий разряд",
+		"Description": "Наносит 3 урона крепости противника и 1 урон всем вражеским юнитам",
+		"Cost": 6,
+		"CanBePlayedOnEnemyTurn": false,
+		"ImagePath": "../../Images/ImagesSpell/Пробивающий разряд.jpg",
 		"Fraction": 0,
 		"ActionInfo": {
 			"$type": "GameData.Models.Action.CardActionInfo, GameData",
@@ -411,12 +427,12 @@
 	},
 	{
 		"$type": "GameData.Models.Cards.SpellCard, GameData",
-		"ID": 39,
-		"Name": "Пробивающий разряд",
-		"Description": "Наносит 3 урона крепости противника и 1 урон всем вражеским юнитам",
-		"Cost": 6,
+		"ID": 41,
+		"Name": "Сфера поглощения",
+		"Description": "Высасывает по 1 здоровья у всех юнитов противника  и повышает всем союзным юнитам здоровье на 1",
+		"Cost": 3,
 		"CanBePlayedOnEnemyTurn": false,
-		"ImagePath": "../../Images/ImagesSpell/Пробивающий разряд.jpg",
+		"ImagePath": "../../Images/ImagesSpell/Сфера поглощения.jpg",
 		"Fraction": 0,
 		"ActionInfo": {
 			"$type": "GameData.Models.Action.CardActionInfo, GameData",
@@ -427,23 +443,7 @@
 	},
 	{
 		"$type": "GameData.Models.Cards.SpellCard, GameData",
-		"ID": 40,
-		"Name": "Сфера поглощения",
-		"Description": "Высасывает по 1 здоровья у всех юнитов противника  и повышает всем союзным юнитам здоровье на 1",
-		"Cost": 3,
-		"CanBePlayedOnEnemyTurn": false,
-		"ImagePath": "../../Images/ImagesSpell/Сфера поглощения.jpg",
-		"Fraction": 0,
-		"ActionInfo": {
-			"$type": "GameData.Models.Action.CardActionInfo, GameData",
-			"ActionId": 52,
-			"ParameterValue": 0,
-			"ParameterType": 0
-		}
-	},
-	{
-		"$type": "GameData.Models.Cards.SpellCard, GameData",
-		"ID": 41,
+		"ID": 42,
 		"Name": "Проклятье темной звезды",
 		"Description": "Наносит всем юнитам на столе 4 урона",
 		"Cost": 7,
@@ -459,7 +459,7 @@
 	},
 	{
 		"$type": "GameData.Models.Cards.SpellCard, GameData",
-		"ID": 42,
+		"ID": 43,
 		"Name": "Последний призыв",
 		"Description": "Уничтожает все карты на столе",
 		"Cost": 8,
@@ -468,10 +468,46 @@
 		"Fraction": 0,
 		"ActionInfo": {
 			"$type": "GameData.Models.Action.CardActionInfo, GameData",
-			"ActionId": 61,
+			"ActionId": 60,
 			"ParameterValue": 0,
 			"ParameterType": 0
 		}
+	},
+	{
+		"$type": "GameData.Models.Cards.UnitCard, GameData",
+		"ID": 44,
+		"Name": "Тайвин вар Эрмрейс",
+		"Description": "Золото полезный металл, но войны выигрываются железом.",
+		"Cost": 0,
+		"CanBePlayedOnEnemyTurn": false,
+		"ImagePath": "../../Images/ImagesUnit/South/Heroes/Тайвин вар Эрмрейс.jpg",
+		"Fraction": 2,
+		"BaseHP": 30,
+		"BaseAttack": 0,
+		"AttackPriority": 1,
+		"CanAttack": false,
+		"AttackActionInfo": null,
+		"DamageRecievedActionInfo": null,
+		"BattleCryActionInfo": null,
+		"DeathRattleActionInfo": null
+	},
+	{
+		"$type": "GameData.Models.Cards.UnitCard, GameData",
+		"ID": 45,
+		"Name": "Король Виктим Суровый",
+		"Description": "Я доверяю только своему оружию.",
+		"Cost": 0,
+		"CanBePlayedOnEnemyTurn": false,
+		"ImagePath": "../../Images/ImagesUnit/North/Heroes/Король Виктим Суровый.jpg",
+		"Fraction": 1,
+		"BaseHP": 30,
+		"BaseAttack": 0,
+		"AttackPriority": 1,
+		"CanAttack": false,
+		"AttackActionInfo": null,
+		"DamageRecievedActionInfo": null,
+		"BattleCryActionInfo": null,
+		"DeathRattleActionInfo": null
 	}
 
 

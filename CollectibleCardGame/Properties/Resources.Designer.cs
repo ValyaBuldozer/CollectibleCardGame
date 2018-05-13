@@ -149,7 +149,7 @@ namespace CollectibleCardGame.Properties {
         ///		&quot;Description&quot;: &quot;jsonTest&quot;,
         ///		&quot;Cost&quot;: 1,
         ///		&quot;CanBePlayedOnEnemyTurn&quot;: false,
-        ///		&quot;ImagePath&quot;: &quot;../../Images/ImagesUnit/North/Легкая кавалерия.jpg&quot;,
+        ///		&quot;ImagePath&quot;: null,
         ///		&quot;Fraction&quot;: 0,
         ///		&quot;BaseHP&quot;: 1,
         ///		&quot;BaseAttack&quot;: 1,
@@ -160,7 +160,9 @@ namespace CollectibleCardGame.Properties {
         ///			&quot;ParameterValue&quot;: 1,
         ///			&quot;ParameterType&quot;: 4
         ///		},
-        ///		&quot;DamageRecievedActionI [остаток строки не уместился]&quot;;.
+        ///		&quot;DamageRecievedActionInfo&quot;: null,
+        ///		&quot;BattleCryActionInfo&quot;: null,
+        ///		&quot; [остаток строки не уместился]&quot;;.
         /// </summary>
         internal static string CardsRepository {
             get {
@@ -191,9 +193,39 @@ namespace CollectibleCardGame.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap deckCards {
+            get {
+                object obj = ResourceManager.GetObject("deckCards", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap getCoins {
+            get {
+                object obj = ResourceManager.GetObject("getCoins", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap goldTexture {
             get {
                 object obj = ResourceManager.GetObject("goldTexture", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap handCards {
+            get {
+                object obj = ResourceManager.GetObject("handCards", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -214,6 +246,16 @@ namespace CollectibleCardGame.Properties {
         internal static System.Drawing.Bitmap info {
             get {
                 object obj = ResourceManager.GetObject("info", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap inHand {
+            get {
+                object obj = ResourceManager.GetObject("inHand", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -411,6 +453,16 @@ namespace CollectibleCardGame.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Король_Виктим_Суровый {
+            get {
+                object obj = ResourceManager.GetObject("Король_Виктим_Суровый", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Легкая_кавалерия {
             get {
                 object obj = ResourceManager.GetObject("Легкая_кавалерия", resourceCulture);
@@ -524,6 +576,16 @@ namespace CollectibleCardGame.Properties {
         internal static System.Drawing.Bitmap Сфера_поглощения {
             get {
                 object obj = ResourceManager.GetObject("Сфера_поглощения", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Тайвин_вар_Эрмрейс {
+            get {
+                object obj = ResourceManager.GetObject("Тайвин_вар_Эрмрейс", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
