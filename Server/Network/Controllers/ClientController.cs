@@ -14,19 +14,23 @@ namespace Server.Network.Controllers
 {
     public class ClientController
     {
-        [Dependency]
-        public NetworkMessageConverter MessageConverter { set; get; }
+        private readonly IMessageConverter _messageConverter;
+
+        public ClientController(IMessageConverter converter)
+        {
+            _messageConverter = converter;
+        }
 
         public Client Client { set; get; }
 
         public void OnMessageRecieved(object sender, MessageEventArgs e)
         {
-            var deserializedMessage = MessageConverter.DeserializeMessage(e.NetworkMessage);
+            var deserializedMessage = _messageConverter.DeserializeMessage(e.NetworkMessage);
             var returnMessage = deserializedMessage.HandleMessage(sender);
 
             if(returnMessage!=null)
                 Client.ClientConnection.Communicator.SendMessage(
-                    MessageConverter.SerializeMessage(returnMessage));
+                    _messageConverter.SerializeMessage(returnMessage));
         }
 
         public void OnBreakConnection(object sender, BreakConnectionEventArgs e)
@@ -35,17 +39,12 @@ namespace Server.Network.Controllers
             ((Client) sender).BreakConnection -= OnBreakConnection;
         }
 
-        public ClientController(NetworkMessageConverter messageConverter)
-        {
-            this.MessageConverter = messageConverter;
-        }
-
         public void SendMessage(MessageBase message)
         {
             if(message == null)
                 throw new NullReferenceException();
 
-            var networkMessage = MessageConverter.SerializeMessage(message);
+            var networkMessage = _messageConverter.SerializeMessage(message);
             Client.ClientConnection.Communicator.SendMessage(networkMessage);
         }
     }

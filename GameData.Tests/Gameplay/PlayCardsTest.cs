@@ -56,7 +56,7 @@ namespace GameData.Tests.Gameplay
             Assert.IsTrue(startGameObserver is CardDeployObserverAction action);
             Assert.AreEqual(3,((CardDeployObserverAction)startGameObserver).Card.ID);
             Assert.AreEqual(1, container.Get<TableCondition>().Players.First().TableUnits.Count);
-            Assert.AreEqual(5, container.Get<TableCondition>().Players.First().TableUnits[0].HealthPoint.GetResult);
+            Assert.AreEqual(5, container.Get<TableCondition>().Players.First().TableUnits[0].State.GetResultHealth);
 
         }
 
@@ -101,7 +101,7 @@ namespace GameData.Tests.Gameplay
             Assert.AreNotEqual(gameActionObserver, null);
             Assert.IsTrue(gameActionObserver is GameActionTriggerObserverAction action);
             Assert.AreEqual(1, ((GameActionTriggerObserverAction)gameActionObserver).GameActionId);
-            Assert.AreEqual(2,player.TableUnits.FirstOrDefault(c => c.BaseCard.Name == "Лучник").HealthPoint.GetResult);
+            Assert.AreEqual(2,player.TableUnits.FirstOrDefault(c => c.BaseCard.Name == "Лучник").State.GetResultHealth);
             
 
         }
@@ -143,7 +143,7 @@ namespace GameData.Tests.Gameplay
             var secondPlayerUnitCard = secondPlayer.HandCards.FirstOrDefault(c => c.Name == "Мечник");
             CardDeployPlayerTurn knightDeployTurnP2 = new CardDeployPlayerTurn(secondPlayer, secondPlayerUnitCard);
             container.Get<IPlayerTurnHandler<CardDeployPlayerTurn>>().Execute(knightDeployTurnP2);
-            firstPlayer.TableUnits.FirstOrDefault(c => c.BaseCard.Name == "Мечник").HealthPoint.RecieveDamage(3);
+            firstPlayer.TableUnits.FirstOrDefault(c => c.BaseCard.Name == "Мечник").State.RecieveDamage(3);
 
             UnitAttackPlayerTurn unitAttackPlayerTurn = new UnitAttackPlayerTurn(
                 secondPlayer, secondPlayer.TableUnits.First(), firstPlayer.TableUnits.FirstOrDefault(c => c.BaseCard.Name=="Лекарь"));
@@ -156,7 +156,7 @@ namespace GameData.Tests.Gameplay
             Assert.AreNotEqual(gameActionObserver, null);
             Assert.IsTrue(gameActionObserver is GameActionTriggerObserverAction action);
             Assert.AreEqual(4, ((GameActionTriggerObserverAction)gameActionObserver).GameActionId);
-            Assert.AreEqual(5, firstPlayer.TableUnits.FirstOrDefault(c => c.BaseCard.Name == "Мечник").HealthPoint.GetResult);
+            Assert.AreEqual(5, firstPlayer.TableUnits.FirstOrDefault(c => c.BaseCard.Name == "Мечник").State.GetResultHealth);
 
 
         }
@@ -202,7 +202,7 @@ namespace GameData.Tests.Gameplay
             Assert.AreNotEqual(gameActionObserver, null);
             Assert.IsTrue(gameActionObserver is GameActionTriggerObserverAction action);
             Assert.AreEqual(10, ((GameActionTriggerObserverAction)gameActionObserver).GameActionId);
-            Assert.AreEqual(10,secondPlayer.TableUnits.First().Attack);
+            Assert.AreEqual(10,secondPlayer.TableUnits.First().State.Attack);
 
         }
 
@@ -247,7 +247,7 @@ namespace GameData.Tests.Gameplay
             Assert.AreNotEqual(gameActionObserver, null);
             Assert.IsTrue(gameActionObserver is GameActionTriggerObserverAction action);
             Assert.AreEqual(10, ((GameActionTriggerObserverAction)gameActionObserver).GameActionId);
-            Assert.AreEqual(8,firstPlayer.TableUnits.First().Attack);
+            Assert.AreEqual(8,firstPlayer.TableUnits.First().State.Attack);
 
         }
 
@@ -327,7 +327,7 @@ namespace GameData.Tests.Gameplay
 
             Assert.AreEqual(0, firstPlayer.TableUnits.Count);
             Assert.AreEqual(1, secondPlayer.TableUnits.Count);
-            Assert.AreEqual(5, secondPlayer.TableUnits.First().HealthPoint.GetResult);
+            Assert.AreEqual(5, secondPlayer.TableUnits.First().State.GetResultHealth);
 
         }
 

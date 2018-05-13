@@ -13,7 +13,7 @@ namespace GameData.Network.Messages
         public object Content { get; }
 
         [JsonIgnore]
-        public IMessageHandler MessageHandler { get; }
+        public IMessageHandler MessageHandler { set; get; }
 
         public MessageBase(MessageBaseType type,object content,IMessageHandler messageHandler=null)
         {

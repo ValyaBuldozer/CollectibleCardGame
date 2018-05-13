@@ -21,8 +21,8 @@ namespace CollectibleCardGame.ViewModels.Elements
             {
                 _baseUnit = value;
                 NotifyPropertyChanged(nameof(BaseUnit));
-                Attack = value.Attack;
-                Health = value.HealthPoint.GetResult;
+                Attack = value.State.Attack;
+                Health = value.State.GetResultHealth;
                 Name = value.BaseCard.Name;
                 NotifyPropertyChanged(nameof(ImagePath));
             }

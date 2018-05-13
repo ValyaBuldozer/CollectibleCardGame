@@ -94,7 +94,8 @@ namespace CollectibleCardGame.Unity
                 new ContainerControlledLifetimeManager());
 
             //network
-            _container.RegisterType<NetworkMessageConverter>(new PerResolveLifetimeManager());
+            _container.RegisterType<IMessageConverter,MessageConverter>(
+                new ContainerControlledLifetimeManager());
             _container.RegisterType<INetworkCommunicator, TcpCommunicator>(new ContainerControlledLifetimeManager(),
                 new InjectionConstructor(new object[]
                 {
