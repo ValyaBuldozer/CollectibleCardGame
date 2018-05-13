@@ -63,6 +63,10 @@ namespace CollectibleCardGame.Network.Controllers.MessageHandlers
                     _gameEngineController.HandleObserverAction(
                         (ErrorObserverAction)message.ObserverAction);
                     break;
+                case ObserverActionType.EntityStateChange:
+                    _gameEngineController.HandleObserverAction(
+                        (EntityStateChangeObserverAction)message.ObserverAction);
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }

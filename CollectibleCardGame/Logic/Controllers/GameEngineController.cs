@@ -12,6 +12,7 @@ using GameData.Controllers.Data;
 using GameData.Models;
 using GameData.Models.Cards;
 using GameData.Models.Observer;
+using GameData.Models.Units;
 using Unity.Attributes;
 using Xceed.Wpf.Toolkit;
 
@@ -129,6 +130,18 @@ namespace CollectibleCardGame.Logic.Controllers
                 {
                     _gameViewModel.PlayerMana = action.PlayerMana;
                 });
+        }
+
+        public void HandleObserverAction(EntityStateChangeObserverAction action)
+        {
+            var entity = _entityRepositoryController.GetById(action.EntityId);
+
+            if (action.EntityState is Unit unit)
+            {
+                if (!(entity is Unit oldUnitState)) return;
+
+                oldUnitState.State.SetState = unit.State;
+            }
         }
     }
 }

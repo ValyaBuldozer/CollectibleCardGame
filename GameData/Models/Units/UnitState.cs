@@ -26,6 +26,7 @@ namespace GameData.Models.Units
             get => _unit;
             set
             {
+                _unit = value;
                 if (value != null)
                 {
                     _baseHealth = value.BaseCard.BaseHP;
@@ -142,7 +143,6 @@ namespace GameData.Models.Units
         public bool Equals(UnitState other)
         {
             return other != null &&
-                   EqualityComparer<Unit>.Default.Equals(Unit, other.Unit) &&
                    AttackPriority == other.AttackPriority &&
                    CanAttack == other.CanAttack &&
                    BaseHealth == other.BaseHealth &&

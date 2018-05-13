@@ -110,7 +110,8 @@ namespace GameData.Models.Repository
 
                         var player = (Player) sender;
                         Player enemyPlayer =
-                            controller.GetTableCondition.Players.FirstOrDefault(p => p.Username != player.Username);
+                            controller.GetTableCondition.Players.FirstOrDefault(
+                                p => p.Username != player.Username);
 
                         if (enemyPlayer.TableUnits.Count != 0)
                         {
@@ -128,7 +129,8 @@ namespace GameData.Models.Repository
 
                         var player = (Player) sender;
                         Player enemyPlayer =
-                            controller.GetTableCondition.Players.FirstOrDefault(p => p.Username != player.Username);
+                            controller.GetTableCondition.Players.FirstOrDefault(
+                                p => p.Username != player.Username);
 
                         enemyPlayer.HeroUnit.State.RecieveDamage(parameter);
 

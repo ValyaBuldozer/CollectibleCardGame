@@ -2,6 +2,7 @@
 
 namespace GameData.Models.Units
 {
+    [Obsolete("Obsolte class. Use UnitState",false)]
     public class HealthPoint
     {
 
