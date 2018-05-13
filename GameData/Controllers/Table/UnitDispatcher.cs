@@ -54,7 +54,7 @@ namespace GameData.Controllers.Table
         /// <summary>
         /// Событие изменения состояия юнита - урон, хил, бафф
         /// </summary>
-        event EventHandler<UnitStateChangeObserverAction> OnUnitStateChange;
+        event EventHandler<EntityStateChangeObserverAction> OnUnitStateChange;
     }
 
     public class UnitDispatcher : IUnitDispatcher
@@ -74,7 +74,7 @@ namespace GameData.Controllers.Table
 
         public event EventHandler<UnitSpawnObserverAction> OnUnitSpawn;
         public event EventHandler<UnitDeathObserverAction> OnUnitDeath;
-        public event EventHandler<UnitStateChangeObserverAction> OnUnitStateChange;
+        public event EventHandler<EntityStateChangeObserverAction> OnUnitStateChange;
 
         /// <summary>
         /// Спавн юнита при розыгрше карты (с боевым кличем)
@@ -136,6 +136,7 @@ namespace GameData.Controllers.Table
         /// <param name="unit">Юнит</param>
         public void Kill(Unit unit)
         {
+            if(unit == null) return;
             if (!unit.Player.TableUnits.Contains(unit)) return;
             unit.Player.TableUnits.Remove(unit);
             OnUnitDeath?.Invoke(this,new UnitDeathObserverAction(unit));
@@ -180,16 +181,20 @@ namespace GameData.Controllers.Table
 
         private void OnUnitStateChanges(object sender, PropertyChangedEventArgs e)
         {
+            if(!(sender is UnitState unitState))
+                return;
 
+            OnUnitStateChange?.Invoke(this,new EntityStateChangeObserverAction(
+                unitState.Unit.EntityId,unitState.Unit));
         }
 
         private void OnUnitDamaged(object sender, UnitRecievedDamageEventArgs e)
         {
             if(e.Unit?.OnDamageRecievedActionInfo == null) return;
 
-            OnUnitStateChange?.Invoke(this,new UnitStateChangeObserverAction(e.Unit,e.Unit.EntityId));
-            _actionController.ExecuteAction(e.Unit.OnDamageRecievedActionInfo,
-                e.Unit, null);
+            //OnUnitStateChange?.Invoke(this,new UnitStateChangeObserverAction(e.Unit,e.Unit.EntityId));
+            //_actionController.ExecuteAction(e.Unit.OnDamageRecievedActionInfo,
+            //    e.Unit, null);
         }
 
         private void OnUnitDies(object sender, ZeroHpEventArgs e)

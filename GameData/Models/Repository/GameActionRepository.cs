@@ -329,7 +329,7 @@ namespace GameData.Models.Repository
                         var player = (Player) sender;
                         foreach (var iUnit in player.TableUnits.ToArray())
                         {
-                            iUnit.HealthPoint.RecieveDamage(parameter);
+                            iUnit.State.RecieveDamage(parameter);
                         }
 
                         Player enemyPlayer =
@@ -337,7 +337,7 @@ namespace GameData.Models.Repository
 
                         foreach (var iUnit in enemyPlayer.TableUnits.ToArray())
                         {
-                            iUnit.HealthPoint.RecieveDamage(parameter);
+                            iUnit.State.RecieveDamage(parameter);
                         }
 
                     })),

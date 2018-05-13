@@ -99,6 +99,8 @@ namespace GameData.Models.Units
             }
         }
 
+        
+
         public void RecieveDamage(int value)
         {
             if(value == 0)
@@ -124,6 +126,21 @@ namespace GameData.Models.Units
         {
             Unit = unit;
             _recievedDamage = 0;
+        }
+
+        public UnitState SetState
+        {
+            set
+            {
+                if(value == null) return;
+
+                Attack = value.Attack;
+                AttackPriority = value.AttackPriority;
+                BaseHealth = value.BaseHealth;
+                CanAttack = value.CanAttack;
+                RecievedDamage = value.RecievedDamage;
+                
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
