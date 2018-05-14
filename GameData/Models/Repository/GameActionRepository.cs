@@ -439,7 +439,14 @@ namespace GameData.Models.Repository
                             controller.GetTableCondition.Players.FirstOrDefault(p => p.Username != player.Username);
                         var rnd = new Random();
                         int rndNum = rnd.Next(0, enemyPlayer.TableUnits.Count + 1);
-                        controller.KillUnit(enemyPlayer.TableUnits[rndNum]);
+                        Unit rndUnit = enemyPlayer.TableUnits[rndNum];
+                       
+                        foreach (var iUnit in enemyPlayer.TableUnits.ToArray())
+                         {
+                             if (!Equals(iUnit,rndUnit))
+                             controller.KillUnit(iUnit);
+                         }
+                       
 
 
                     })),

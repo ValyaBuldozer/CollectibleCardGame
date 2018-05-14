@@ -33,6 +33,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Images\Icons\icoGame.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="CommonServiceLocator, Version=2.0.3.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
       <HintPath>..\packages\Unity.5.8.5\lib\net46\CommonServiceLocator.dll</HintPath>
@@ -457,13 +460,13 @@
     <Resource Include="Images\backgroundCard.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Images\attackSword.png" />
+    <Resource Include="Images\attackSword.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Images\goldTexture.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Images\healthShield.png" />
+    <Resource Include="Images\healthShield.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\ImagesUnit\North\Пехтурная чернь.jpg" />
@@ -554,6 +557,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Icons\handCards.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\cemeteryBackground.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\icoGame.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
