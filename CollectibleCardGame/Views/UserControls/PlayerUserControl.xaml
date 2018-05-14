@@ -33,7 +33,9 @@
                            Text="{Binding HeroName}" FontFamily="/CollectibleCardGame;component/Fonts/#Mason Chronicles"
                            FontWeight="Bold" FontSize="32"
                            Grid.ColumnSpan="3"/>
-                <local:UnitCardMiniUserControl Grid.Row="1" Grid.Column="1"></local:UnitCardMiniUserControl>
+                <local:UnitCardMiniUserControl Grid.Row="1" Grid.Column="1" 
+                                               DataContext="{Binding Path = HeroUnitViewModel,
+                    UpdateSourceTrigger=PropertyChanged}"/>
                 <TextBlock Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center"   
                            Text="{Binding PlayerName}" FontFamily="/CollectibleCardGame;component/Fonts/#Mason Chronicles"
                            FontWeight="Bold" FontSize="32"
@@ -53,12 +55,12 @@
                     <Image  Source="../../Images/Icons/getCoins.png"  Margin="10,5,5,5" Grid.Row="0"
                            ></Image>
                     <!--<TextBlock Margin="10,0,0,0" Grid.Row="0"  Text="Золото:" FontWeight="Bold" FontSize="24"/>-->
-                    <TextBlock Grid.Column="1"  Grid.Row="0"  Text="{Binding ManaCurrent}" FontWeight="Bold" FontSize="28"
+                    <TextBlock Grid.Column="1"  Grid.Row="0"  Text="{Binding ManaСurrent}" FontWeight="Bold" FontSize="28"
                                HorizontalAlignment="Center" VerticalAlignment="Center"
                                Margin="0,0,30,0"/>
                     <TextBlock Grid.Column="1"  Grid.Row="0"  Text="/" FontWeight="Bold" FontSize="28"
                                HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    <TextBlock Grid.Column="1"  Grid.Row="0"  Text="{Binding MaxMana}" FontWeight="Bold" FontSize="28"
+                    <TextBlock Grid.Column="1"  Grid.Row="0"  Text="{Binding ManaMax}" FontWeight="Bold" FontSize="28"
                                HorizontalAlignment="Center" VerticalAlignment="Center"
                                Margin="30,0,0,0"/>
 

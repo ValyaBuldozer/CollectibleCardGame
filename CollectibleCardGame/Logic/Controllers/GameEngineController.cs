@@ -7,6 +7,7 @@ using BaseNetworkArchitecture.Common;
 using CollectibleCardGame.Models;
 using CollectibleCardGame.ViewModels.Elements;
 using CollectibleCardGame.ViewModels.Frames;
+using CollectibleCardGame.ViewModels.UserControls;
 using CollectibleCardGame.ViewModels.Windows;
 using GameData.Controllers.Data;
 using GameData.Models;
@@ -45,10 +46,24 @@ namespace CollectibleCardGame.Logic.Controllers
         {
             _entityRepositoryController.Add(action.FirstPlayer);
             _entityRepositoryController.Add(action.SecondPlayer);
-            _gameViewModel.Player =
-                action.FirstPlayer.Username == _user.Username ? action.FirstPlayer : action.SecondPlayer;
-            _gameViewModel.EnemyPlayer =
-                action.FirstPlayer.Username == _user.Username ? action.SecondPlayer : action.FirstPlayer;
+
+            if (action.FirstPlayer.Username == _user.Username)
+            {
+                _gameViewModel.Player = action.FirstPlayer;
+                //_gameViewModel.PlayerViewModel = new PlayerUserControlViewModel(action.FirstPlayer);
+                _gameViewModel.EnemyPlayer = action.SecondPlayer;
+            }
+            else
+            {
+                _gameViewModel.Player = action.SecondPlayer;
+                //_gameViewModel.PlayerViewModel = new PlayerUserControlViewModel(action.SecondPlayer);
+                _gameViewModel.EnemyPlayer = action.FirstPlayer;
+            }
+
+            //_gameViewModel.Player =
+            //    action.FirstPlayer.Username == _user.Username ? action.FirstPlayer : action.SecondPlayer;
+            //_gameViewModel.EnemyPlayer =
+            //    action.FirstPlayer.Username == _user.Username ? action.SecondPlayer : action.FirstPlayer;
         }
 
         public void HandleObserverAction(ErrorObserverAction action)
@@ -128,7 +143,7 @@ namespace CollectibleCardGame.Logic.Controllers
             if (action.PlayerUsername == _user.Username)
                 _gameViewModel.CurrentDispatcher.Invoke(() =>
                 {
-                    _gameViewModel.PlayerMana = action.PlayerMana;
+                    _gameViewModel.PlayerViewModel.PlayerMana = action.PlayerMana;
                 });
         }
 

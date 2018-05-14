@@ -8,6 +8,7 @@ using System.Windows.Threading;
 using CollectibleCardGame.Models;
 using CollectibleCardGame.Services;
 using CollectibleCardGame.ViewModels.Elements;
+using CollectibleCardGame.ViewModels.UserControls;
 using GameData.Models;
 using GameData.Models.Cards;
 using GameData.Models.PlayerTurn;
@@ -25,6 +26,7 @@ namespace CollectibleCardGame.ViewModels.Frames
         private PlayerMana _playerMana;
         private HeroUnit _playerHeroUnit;
         private HeroUnit _enemyHeroUnit;
+
         private ObservableCollection<CardViewModel> _playerCards;
         private ObservableCollection<CardViewModel> _enemyCards;
         private ObservableCollection<UnitViewModel> _playerUnits;
@@ -39,6 +41,9 @@ namespace CollectibleCardGame.ViewModels.Frames
         private bool _isAttackTargeting;
         private UnitViewModel _unitTargetingViewModel;
 
+        private PlayerUserControlViewModel _playerViewModel;
+        private PlayerUserControlViewModel _enemyViewModel;
+
         public Dispatcher CurrentDispatcher { get; }
 
         public Player Player
@@ -49,6 +54,8 @@ namespace CollectibleCardGame.ViewModels.Frames
                 _player = value;
                 PlayerHeroUnit = value?.HeroUnit;
                 NotifyPropertyChanged(nameof(Player));
+                PlayerViewModel.Player = value;
+                //PlayerViewModel = new PlayerUserControlViewModel(_player);
             }
         }
 
@@ -60,6 +67,27 @@ namespace CollectibleCardGame.ViewModels.Frames
                 _enemyPlayer = value;
                 EnemyHeroUnit = value?.HeroUnit;
                 NotifyPropertyChanged(nameof(EnemyPlayer));
+                EnemyViewModel.Player = value;
+            }
+        }
+
+        public PlayerUserControlViewModel PlayerViewModel
+        {
+            get => _playerViewModel;
+            set
+            {
+                _playerViewModel = value;
+                NotifyPropertyChanged(nameof(PlayerViewModel));
+            }
+        }
+
+        public PlayerUserControlViewModel EnemyViewModel
+        {
+            get => _enemyViewModel;
+            set
+            {
+                _enemyViewModel = value;
+                NotifyPropertyChanged(nameof(EnemyViewModel));
             }
         }
 
@@ -148,10 +176,13 @@ namespace CollectibleCardGame.ViewModels.Frames
         {
             CurrentDispatcher = Dispatcher.CurrentDispatcher;
 
-            PlayerCards = new ObservableCollection<CardViewModel>();
-            EnemyCards = new ObservableCollection<CardViewModel>();
-            PlayerUnits = new ObservableCollection<UnitViewModel>();
-            EnemyUnits  = new ObservableCollection<UnitViewModel>();
+            _playerCards = new ObservableCollection<CardViewModel>();
+            _enemyCards = new ObservableCollection<CardViewModel>();
+            _playerUnits = new ObservableCollection<UnitViewModel>();
+            _enemyUnits  = new ObservableCollection<UnitViewModel>();
+
+            _playerViewModel = new PlayerUserControlViewModel();
+            _enemyViewModel = new PlayerUserControlViewModel();
             _user = user;
         }
 

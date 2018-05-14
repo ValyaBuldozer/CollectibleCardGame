@@ -14,7 +14,7 @@ namespace GameData.Models
     {
         public string Username { set; get; }
 
-        public HeroUnit HeroUnit { get; }
+        public HeroUnit HeroUnit { get; set; }
 
         public int DeckCardsCount { set; get; }
 
