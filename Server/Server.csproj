@@ -123,6 +123,8 @@
     <Compile Include="Database\AppDbContext.cs" />
     <Compile Include="Database\AppDbContextInitializer.cs" />
     <Compile Include="Database\IContext.cs" />
+    <Compile Include="Exceptions\SqlServerConnectionError.cs" />
+    <Compile Include="Exceptions\UserServiceException.cs" />
     <Compile Include="Migrations\201803311641315_Initialize.cs" />
     <Compile Include="Migrations\201803311641315_Initialize.Designer.cs">
       <DependentUpon>201803311641315_Initialize.cs</DependentUpon>
@@ -145,6 +147,11 @@
     <Compile Include="Network\Models\Client.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Repositories\AwaitingClientsQueue.cs" />
     <Compile Include="Repositories\ConnectedClientsRepository.cs" />
     <Compile Include="Repositories\IRepository.cs" />
@@ -157,6 +164,7 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <EmbeddedResource Include="Resources\CardsRepository.json" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BaseNetworkArchitecture\BaseNetworkArchitecture.csproj">
@@ -169,7 +177,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Exceptions\" />
     <Folder Include="GameData\" />
   </ItemGroup>
   <ItemGroup>
@@ -178,6 +185,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201803311858065_UsernameFix.resx">
       <DependentUpon>201803311858065_UsernameFix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

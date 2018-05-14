@@ -40,8 +40,16 @@ namespace CollectibleCardGame.Network.Controllers.MessageHandlers
                         (CardDrawObserverAction)message.ObserverAction);
                     break;
                 case ObserverActionType.UnitSpawn:
+                    _gameEngineController.HandleObserverAction(
+                        (UnitSpawnObserverAction)message.ObserverAction);
+                    break;
+                case ObserverActionType.PlayerStateChange:
+                    _gameEngineController.HandleObserverAction(
+                        (PlayerStateChangesObserverAction)message.ObserverAction);
                     break;
                 case ObserverActionType.UnitDeath:
+                    _gameEngineController.HandleObserverAction(
+                        (UnitDeathObserverAction)message.ObserverAction);
                     break;
                 case ObserverActionType.UnitStateChange:
                     break;
@@ -56,6 +64,10 @@ namespace CollectibleCardGame.Network.Controllers.MessageHandlers
                 case ObserverActionType.Error:
                     _gameEngineController.HandleObserverAction(
                         (ErrorObserverAction)message.ObserverAction);
+                    break;
+                case ObserverActionType.EntityStateChange:
+                    _gameEngineController.HandleObserverAction(
+                        (EntityStateChangeObserverAction)message.ObserverAction);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

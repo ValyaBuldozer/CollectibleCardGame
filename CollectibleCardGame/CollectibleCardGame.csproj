@@ -33,6 +33,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Images\Icons\icoGame.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="CommonServiceLocator, Version=2.0.3.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
       <HintPath>..\packages\Unity.5.8.5\lib\net46\CommonServiceLocator.dll</HintPath>
@@ -143,6 +146,7 @@
     <Compile Include="Logic\Controllers\GameEngineController.cs" />
     <Compile Include="Logic\Controllers\IGlobalController.cs" />
     <Compile Include="Network\Controllers\INetworkController.cs" />
+    <Compile Include="Network\Controllers\MessageHandlers\ErrorMessageHandler.cs" />
     <Compile Include="Network\Controllers\MessageHandlers\ObserverActionMessageHandler.cs" />
     <Compile Include="Network\Controllers\NetworkConnectionController.cs" />
     <Compile Include="Logic\Controllers\UserController.cs" />
@@ -167,6 +171,7 @@
     <Compile Include="Unity\UnityKernel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\Elements\CardViewModel.cs" />
+    <Compile Include="ViewModels\Elements\UnitViewModel.cs" />
     <Compile Include="ViewModels\Frames\CardDecksPageViewModel.cs" />
     <Compile Include="ViewModels\Frames\ConnectionErrorViewModel.cs" />
     <Compile Include="ViewModels\Frames\ErrorFramePageViewModel.cs" />
@@ -179,6 +184,7 @@
     <Compile Include="ViewModels\Frames\RegistrationFramePageViewModel.cs" />
     <Compile Include="ViewModels\UserControls\CardUserControlViewModel.cs" />
     <Compile Include="ViewModels\UserControls\FractionUserControlViewModel.cs" />
+    <Compile Include="ViewModels\UserControls\PlayerUserControlViewModel.cs" />
     <Compile Include="ViewModels\UserControls\SpellCardUserControlViewModel.cs" />
     <Compile Include="ViewModels\UserControls\UnitCardUserControlViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowViewModel.cs" />
@@ -228,11 +234,17 @@
     <Compile Include="Views\Frames\ToRegisterFramePage.xaml.cs">
       <DependentUpon>ToRegisterFramePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\CardBackUserControl.xaml.cs">
+      <DependentUpon>CardBackUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControls\CardUserControl.xaml.cs">
       <DependentUpon>CardUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\FractionUserControl.xaml.cs">
       <DependentUpon>FractionUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\PlayerUserControl.xaml.cs">
+      <DependentUpon>PlayerUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\SpellCardUserControl.xaml.cs">
       <DependentUpon>SpellCardUserControl.xaml</DependentUpon>
@@ -323,11 +335,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\UserControls\CardBackUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\UserControls\CardUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\UserControls\FractionUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\PlayerUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -363,6 +383,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <EmbeddedResource Include="Resources\CardsRepository.json" />
     <Resource Include="Fonts\Chronicles_font.ttf" />
   </ItemGroup>
   <ItemGroup>
@@ -388,7 +409,7 @@
   <ItemGroup>
     <Folder Include="Data\Controllers\" />
     <Folder Include="Data\Repository\" />
-    <Folder Include="Resources\" />
+    <Folder Include="Images\ImagesUnit\Darkside\Heroes\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\northPicture.jpg" />
@@ -440,13 +461,109 @@
     <Resource Include="Images\backgroundCard.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Images\attackSword.png" />
+    <Resource Include="Images\attackSword.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Images\goldTexture.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Images\healthShield.png" />
+    <Resource Include="Images\healthShield.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImagesUnit\North\Пехтурная чернь.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImagesUnit\North\Рейнская бригада.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImagesUnit\North\Тенсельт Темный.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImagesUnit\North\Тенсельтские мечницы.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImagesUnit\North\Алый рацарь.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImagesUnit\North\Боец Синей Марвы.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImagesUnit\North\Королевский кондотьер.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImagesUnit\North\Легкая кавалерия.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImagesUnit\South\Союзные дантарии.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImagesUnit\South\Батарея Жан-По.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImagesUnit\South\Боец Имперы.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImagesUnit\South\Бригада Импера.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImagesUnit\South\Джулия Гевейн.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImagesUnit\South\Императорская сотня.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImagesUnit\South\Мильва Тардская.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImagesUnit\South\Отряд гданьских мечников.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImagesSpell\Энергетический выброс.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImagesSpell\Град стрел.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImagesSpell\Огненный дождь.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImagesSpell\Огненный шар.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImagesSpell\Последний призыв.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImagesSpell\Пробивающий разряд.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImagesSpell\Проклятье темной звезды.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImagesSpell\Сфера поглощения.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\getCoins.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\inHand.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImagesUnit\South\Heroes\Тайвин вар Эрмрейс.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImagesUnit\North\Heroes\Король Виктим Суровый.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\deckCards.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\handCards.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\cemeteryBackground.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\icoGame.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

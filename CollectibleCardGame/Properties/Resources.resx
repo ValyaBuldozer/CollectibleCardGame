@@ -187,4 +187,100 @@
   <data name="healthShield" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\healthShield.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Алый_рацарь" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\ImagesUnit\North\Алый рацарь.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Боец_Синей_Марвы" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\ImagesUnit\North\Боец Синей Марвы.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Королевский_кондотьер" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\ImagesUnit\North\Королевский кондотьер.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Легкая_кавалерия" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\ImagesUnit\North\Легкая кавалерия.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Пехтурная_чернь" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\ImagesUnit\North\Пехтурная чернь.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Рейнская_бригада" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\ImagesUnit\North\Рейнская бригада.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Тенсельт_Темный" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\ImagesUnit\North\Тенсельт Темный.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Тенсельтские_мечницы" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\ImagesUnit\North\Тенсельтские мечницы.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Батарея_Жан_По" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\ImagesUnit\South\Батарея Жан-По.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Боец_Имперы" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\ImagesUnit\South\Боец Имперы.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Бригада_Импера" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\ImagesUnit\South\Бригада Импера.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Джулия_Гевейн" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\ImagesUnit\South\Джулия Гевейн.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Императорская_сотня" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\ImagesUnit\South\Императорская сотня.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Мильва_Тардская" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\ImagesUnit\South\Мильва Тардская.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Отряд_гданьских_мечников" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\ImagesUnit\South\Отряд гданьских мечников.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Союзные_дантарии" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\ImagesUnit\South\Союзные дантарии.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Град_стрел" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\ImagesSpell\Град стрел.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Огненный_дождь" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\ImagesSpell\Огненный дождь.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Огненный_шар" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\ImagesSpell\Огненный шар.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Последний_призыв" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\ImagesSpell\Последний призыв.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Пробивающий_разряд" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\ImagesSpell\Пробивающий разряд.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Проклятье_темной_звезды" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\ImagesSpell\Проклятье темной звезды.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Сфера_поглощения" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\ImagesSpell\Сфера поглощения.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Энергетический_выброс" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\ImagesSpell\Энергетический выброс.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CardsRepository" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\cardsrepository.json;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="getCoins" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\Icons\getCoins.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="inHand" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\Icons\inHand.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Король_Виктим_Суровый" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\ImagesUnit\North\Heroes\Король Виктим Суровый.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Тайвин_вар_Эрмрейс" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\ImagesUnit\South\Heroes\Тайвин вар Эрмрейс.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="deckCards" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\Icons\deckCards.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="handCards" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\Icons\handCards.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="cemeteryBackground" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\cemeteryBackground.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

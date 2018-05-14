@@ -19,6 +19,7 @@ namespace GameData.Enums
 
     public enum Fraction
     {
+        Common,
         North,
         South,
         Dark
@@ -82,6 +83,8 @@ namespace GameData.Enums
         UnitSpawn,
         UnitDeath,
         UnitStateChange,
+        PlayerStateChange,
+        EntityStateChange,
         GameAction,
         TurnStart,
         TurnEnd,

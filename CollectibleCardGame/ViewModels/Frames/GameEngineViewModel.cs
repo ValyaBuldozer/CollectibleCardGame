@@ -5,8 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Threading;
+using CollectibleCardGame.Models;
 using CollectibleCardGame.Services;
 using CollectibleCardGame.ViewModels.Elements;
+using CollectibleCardGame.ViewModels.UserControls;
 using GameData.Models;
 using GameData.Models.Cards;
 using GameData.Models.PlayerTurn;
@@ -16,17 +18,31 @@ namespace CollectibleCardGame.ViewModels.Frames
 {
     public class GameEngineViewModel : BaseViewModel
     {
+        private readonly CurrentUser _user;
+
         private Player _player;
         private Player _enemyPlayer;
         private string _currentPlayerUsername;
+        private PlayerMana _playerMana;
         private HeroUnit _playerHeroUnit;
         private HeroUnit _enemyHeroUnit;
+
         private ObservableCollection<CardViewModel> _playerCards;
         private ObservableCollection<CardViewModel> _enemyCards;
-        private ObservableCollection<Unit> _playerUnits;
-        private ObservableCollection<Unit> _enemyUnits;
+        private ObservableCollection<UnitViewModel> _playerUnits;
+        private ObservableCollection<UnitViewModel> _enemyUnits;
 
         private RelayCommand _cardDeployCommand;
+        private RelayCommand _transferTurnCommand;
+        private RelayCommand _unitTargetCommand;
+
+        private bool _isSpellTargeting;
+        private CardViewModel _spellTargetingViewModel;
+        private bool _isAttackTargeting;
+        private UnitViewModel _unitTargetingViewModel;
+
+        private PlayerUserControlViewModel _playerViewModel;
+        private PlayerUserControlViewModel _enemyViewModel;
 
         public Dispatcher CurrentDispatcher { get; }
 
@@ -38,6 +54,8 @@ namespace CollectibleCardGame.ViewModels.Frames
                 _player = value;
                 PlayerHeroUnit = value?.HeroUnit;
                 NotifyPropertyChanged(nameof(Player));
+                PlayerViewModel.Player = value;
+                //PlayerViewModel = new PlayerUserControlViewModel(_player);
             }
         }
 
@@ -49,6 +67,27 @@ namespace CollectibleCardGame.ViewModels.Frames
                 _enemyPlayer = value;
                 EnemyHeroUnit = value?.HeroUnit;
                 NotifyPropertyChanged(nameof(EnemyPlayer));
+                EnemyViewModel.Player = value;
+            }
+        }
+
+        public PlayerUserControlViewModel PlayerViewModel
+        {
+            get => _playerViewModel;
+            set
+            {
+                _playerViewModel = value;
+                NotifyPropertyChanged(nameof(PlayerViewModel));
+            }
+        }
+
+        public PlayerUserControlViewModel EnemyViewModel
+        {
+            get => _enemyViewModel;
+            set
+            {
+                _enemyViewModel = value;
+                NotifyPropertyChanged(nameof(EnemyViewModel));
             }
         }
 
@@ -59,6 +98,17 @@ namespace CollectibleCardGame.ViewModels.Frames
             {
                 _currentPlayerUsername = value;
                 NotifyPropertyChanged(nameof(CurrentPlayerUsername));
+                NotifyPropertyChanged(nameof(TransferTurnCommand));
+            }
+        }
+
+        public PlayerMana PlayerMana
+        {
+            get => _playerMana;
+            set
+            {
+                _playerMana = value;
+                NotifyPropertyChanged(nameof(PlayerMana));
             }
         }
 
@@ -102,7 +152,7 @@ namespace CollectibleCardGame.ViewModels.Frames
             }
         }
 
-        public ObservableCollection<Unit> PlayerUnits
+        public ObservableCollection<UnitViewModel> PlayerUnits
         {
             get => _playerUnits;
             set
@@ -112,7 +162,7 @@ namespace CollectibleCardGame.ViewModels.Frames
             }
         }
 
-        public ObservableCollection<Unit> EnemyUnits
+        public ObservableCollection<UnitViewModel> EnemyUnits
         {
             get => _enemyUnits;
             set
@@ -122,14 +172,18 @@ namespace CollectibleCardGame.ViewModels.Frames
             }
         }
 
-        public GameEngineViewModel()
+        public GameEngineViewModel(CurrentUser user)
         {
             CurrentDispatcher = Dispatcher.CurrentDispatcher;
 
-            PlayerCards = new ObservableCollection<CardViewModel>();
-            EnemyCards = new ObservableCollection<CardViewModel>();
-            PlayerUnits = new ObservableCollection<Unit>();
-            EnemyUnits  = new ObservableCollection<Unit>();
+            _playerCards = new ObservableCollection<CardViewModel>();
+            _enemyCards = new ObservableCollection<CardViewModel>();
+            _playerUnits = new ObservableCollection<UnitViewModel>();
+            _enemyUnits  = new ObservableCollection<UnitViewModel>();
+
+            _playerViewModel = new PlayerUserControlViewModel();
+            _enemyViewModel = new PlayerUserControlViewModel();
+            _user = user;
         }
 
         public event EventHandler<PlayerTurnRequestEventArgs> PlayerTurnEvent;
@@ -142,5 +196,39 @@ namespace CollectibleCardGame.ViewModels.Frames
                    PlayerTurnEvent?.Invoke(this,new PlayerTurnRequestEventArgs(new CardDeployPlayerTurn(
                        _player,cardViewModel.Card)));
                }));
+
+        public RelayCommand UnitTargetCommand => _unitTargetCommand ??
+                            (_unitTargetCommand = new RelayCommand(o =>
+                            {
+                                if(!(o is UnitViewModel unitViewModel))
+                                    return;
+
+                                if (_isAttackTargeting)
+                                {
+                                    PlayerTurnEvent?.Invoke(this, new PlayerTurnRequestEventArgs(
+                                        new UnitAttackPlayerTurn(_player,
+                                            _unitTargetingViewModel.BaseUnit, unitViewModel.BaseUnit)));
+                                    return;
+                                }
+
+                                if (_isSpellTargeting)
+                                {
+                                    PlayerTurnEvent?.Invoke(this, new PlayerTurnRequestEventArgs(
+                                        new CardDeployPlayerTurn(
+                                            _player, _spellTargetingViewModel.Card, unitViewModel.BaseUnit)));
+                                    return;
+                                }
+
+                                _isAttackTargeting = true;
+                                _unitTargetingViewModel = unitViewModel;
+                            }));
+
+        public RelayCommand TransferTurnCommand => _transferTurnCommand ??
+                           (_transferTurnCommand = new RelayCommand(o =>
+                           {
+                                var playerTurn = new EndPlayerTurn(null);
+                               PlayerTurnEvent?.Invoke(this,new PlayerTurnRequestEventArgs(playerTurn));
+                           },
+                               c=>_currentPlayerUsername == _user?.Username));
     }
 }

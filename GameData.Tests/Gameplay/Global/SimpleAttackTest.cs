@@ -92,8 +92,8 @@ namespace GameData.Tests.Gameplay.Global
 
             var enemyPlayer = container.Get<TableCondition>().Players.Find
                 (p => p.Username != firstPlayer.Username);
-            var senderAttackUnit = firstPlayer.TableUnits.Find(u => u.HealthPoint.GetResult == 3);
-            var targetAttackUnit = enemyPlayer.TableUnits.Find(u => u.HealthPoint.GetResult == 1);
+            var senderAttackUnit = firstPlayer.TableUnits.Find(u => u.State.GetResultHealth == 3);
+            var targetAttackUnit = enemyPlayer.TableUnits.Find(u => u.State.GetResultHealth == 1);
 
             UnitAttackPlayerTurn attackPlayerTurn = new UnitAttackPlayerTurn(
                 firstPlayer,senderAttackUnit,targetAttackUnit);
@@ -102,7 +102,7 @@ namespace GameData.Tests.Gameplay.Global
             Assert.AreEqual(1,observerRepository.Collection.Count(
                 o=>o.Type == ObserverActionType.UnitDeath));
             Assert.AreEqual(1,enemyPlayer.TableUnits.Count);
-            Assert.AreEqual(2,senderAttackUnit.HealthPoint.GetResult);
+            Assert.AreEqual(2,senderAttackUnit.State.GetResultHealth);
         }
     }
 }

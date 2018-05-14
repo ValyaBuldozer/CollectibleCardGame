@@ -11,8 +11,16 @@
       Background="White">
 
     <Grid>
-        <Button Content="{Binding CurrentPlayerUsername}" VerticalAlignment="Center" HorizontalAlignment="Right"
-                Height="25" Width="150"/>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Images/cemeteryBackground.jpg" Stretch="UniformToFill" Opacity="0.9"/>
+        </Grid.Background>
+        <Button Content="{Binding CurrentPlayerUsername}" VerticalAlignment="Center" 
+                HorizontalAlignment="Right"
+                Height="25" Width="150"
+                Command="{Binding TransferTurnCommand}"
+                Style="{DynamicResource ButtonNeutralStyle}"/>
+        
+        <!--Enemy cards-->
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="1.5*"/>
@@ -23,7 +31,7 @@
             <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="5*"/>
-                    <ColumnDefinition/>
+                    <ColumnDefinition Width="250"/>
                 </Grid.ColumnDefinitions>
                 <ItemsControl Grid.Column="0" ItemsSource="{Binding Path=EnemyCards,Mode=TwoWay}" >
                     <ItemsControl.ItemsPanel>
@@ -34,26 +42,88 @@
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <StackPanel>
-                                <uc:CardUserControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                <Viewbox Stretch="Fill" Width="110" Height="205">
+                                    <uc:CardUserControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                                        Width="220" Height="420"/>
+                                </Viewbox>
                             </StackPanel>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
-                <StackPanel Grid.Column="1" DataContext="{Binding Path=EnemyHeroUnit}">
-                    <TextBlock Text="{Binding Name}"/>
-                    <TextBlock Text="{Binding HealthPoint}"/>
-                </StackPanel>
+                <Viewbox Grid.Column="1" Height="205" Width="250">
+                    <Button Command="{Binding CardDeployCommand}" CommandParameter="{Binding PlayerViewModel}">
+                        <uc:PlayerUserControl Height="330" Width="400" 
+                                              DataContext="{Binding Path=EnemyViewModel,
+                                                UpdateSourceTrigger=PropertyChanged}"/>
+                    </Button>
+                </Viewbox>
             </Grid>
+            
+            <!--Enemy units-->
+            <ItemsControl Grid.Row="1" ItemsSource="{Binding Path=EnemyUnits,Mode=TwoWay}" >
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel HorizontalAlignment="Stretch" Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <StackPanel>
+                                <Viewbox Stretch="Fill" Height="100" Width="80">
+                                    <Button Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, 
+                                AncestorType={x:Type Page}}, Path=ViewModel.UnitTargetCommand}" 
+                                            CommandParameter="{Binding}"
+                                            BorderThickness="0" BorderBrush="{x:Null}">
+                                        <uc:UnitCardMiniUserControl Width="210" Height="250"
+                                                                    HorizontalAlignment="Stretch" 
+                                                                    VerticalAlignment="Stretch"/>
+                                    </Button>
+                                </Viewbox>
+                            </StackPanel>
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
 
+            <!--Player units-->
+            <ItemsControl Grid.Row="2" ItemsSource="{Binding Path=PlayerUnits,Mode=TwoWay}" >
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel HorizontalAlignment="Stretch" Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <Viewbox Stretch="Fill" Height="100" Width="80">
+                                <Button Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, 
+                                AncestorType={x:Type Page}}, Path=ViewModel.UnitTargetCommand}" 
+                                        CommandParameter="{Binding}"
+                                        BorderThickness="0" BorderBrush="{x:Null}">
+                                    <uc:UnitCardMiniUserControl Width="210" Height="250"
+                                                            HorizontalAlignment="Stretch" 
+                                                                VerticalAlignment="Stretch"/>
+                                </Button>
+                            </Viewbox>
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+            <!-- Player cards-->
             <Grid Grid.Row="3">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="250"/>
                     <ColumnDefinition Width="5*"/>
                 </Grid.ColumnDefinitions>
-                <StackPanel Grid.Column="1" DataContext="{Binding Path=PlayerHeroUnit}">
-                    <TextBlock Text="{Binding Name}"/>
-                    <TextBlock Text="{Binding HealthPoint}"/>
-                </StackPanel>
+                <Viewbox Height="205" Width="250">
+                    <Button Command="{Binding CardDeployCommand}" CommandParameter="{Binding PlayerViewModel}">
+                        <uc:PlayerUserControl Height="330" Width="400" 
+                                              DataContext="{Binding Path=PlayerViewModel,
+                            UpdateSourceTrigger=PropertyChanged}"/>
+                    </Button>
+                </Viewbox>
                 <ItemsControl Grid.Column="1" ItemsSource="{Binding Path=PlayerCards,Mode=TwoWay}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
@@ -81,3 +151,4 @@
         </Grid>
     </Grid>
 </Page>
+

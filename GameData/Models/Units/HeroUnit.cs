@@ -9,19 +9,33 @@ namespace GameData.Models.Units
 {
     public class HeroUnit : Unit
     {
-        private HealthPoint _healthPoint;
+        //private HealthPoint _healthPoint;
+        private UnitState _state;
 
-        public override HealthPoint HealthPoint
+        //public override HealthPoint HealthPoint
+        //{
+        //    set
+        //    {
+        //        if(_healthPoint != null)
+        //            _healthPoint.ZeroHpEvent -= HealthPoint_ZeroHpEvent;
+
+        //        _healthPoint = value;
+        //        _healthPoint.ZeroHpEvent += HealthPoint_ZeroHpEvent;
+        //    }
+        //    get => _healthPoint;
+        //}
+
+        public override UnitState State
         {
+            get => _state;
             set
             {
-                if(_healthPoint != null)
-                    _healthPoint.ZeroHpEvent -= HealthPoint_ZeroHpEvent;
+                if (_state != null)
+                    _state.ZeroHpEvent -= HealthPoint_ZeroHpEvent;
 
-                _healthPoint = value;
-                _healthPoint.ZeroHpEvent += HealthPoint_ZeroHpEvent;
+                _state = value;
+                _state.ZeroHpEvent += HealthPoint_ZeroHpEvent;
             }
-            get => _healthPoint;
         }
 
         public event EventHandler<HeroUnitDiedEventArgs> DiedEvent; 
@@ -30,8 +44,8 @@ namespace GameData.Models.Units
         {
             Player = player;
 
-            if(HealthPoint!=null)
-                 HealthPoint.ZeroHpEvent += HealthPoint_ZeroHpEvent;
+            if(State!=null)
+                 State.ZeroHpEvent += HealthPoint_ZeroHpEvent;
         }
 
         private void HealthPoint_ZeroHpEvent(object sender, ZeroHpEventArgs e)

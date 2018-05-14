@@ -5,10 +5,13 @@ namespace GameData.Models.Observer
 {
     public class UnitSpawnObserverAction : Observer.ObserverAction
     {
+        public string PlayerUsername { set; get; }
+
         public Unit Unit { set; get; }
 
-        public UnitSpawnObserverAction(Unit unit)
+        public UnitSpawnObserverAction(Unit unit,string playerUsername)
         {
+            PlayerUsername = playerUsername;
             Unit = unit;
             Type = ObserverActionType.UnitSpawn;
         }

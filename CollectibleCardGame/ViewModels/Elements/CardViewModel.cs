@@ -12,6 +12,7 @@ namespace CollectibleCardGame.ViewModels.Elements
         private int _cost;
         private string _name;
         private string _description;
+        private string _imagePath;
         private int _attack;
         private int _health;
         private bool _isUnitCard;
@@ -58,6 +59,16 @@ namespace CollectibleCardGame.ViewModels.Elements
             }
         }
 
+        public string ImagePath
+        {
+            get => _imagePath;
+            set
+            {
+                _imagePath = value;
+                NotifyPropertyChanged(nameof(ImagePath));
+            }
+        }
+
         public int Attack
         {
             get => _attack;
@@ -84,6 +95,7 @@ namespace CollectibleCardGame.ViewModels.Elements
             _cost = card.Cost;
             _description = card.Description;
             _name = card.Name;
+            _imagePath = card.ImagePath;
 
             if (card is UnitCard unitCard)
             {

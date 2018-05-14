@@ -24,14 +24,16 @@
 
             <Grid>
                 <Grid.RowDefinitions>
+                   
                     <RowDefinition Height="8*"/>
                     <RowDefinition Height="0.8*"/>
                     <RowDefinition Height="2*"/>
                     <RowDefinition Height="1.85*"/>
-                </Grid.RowDefinitions>
+                    
+                 </Grid.RowDefinitions>
 
                 <!--картинка юнита 210x250-->
-                <Image x:Name="Image" Source="{Binding Path=ImagePath}"  Margin="0,0,0,0">
+                <Image x:Name="Image" Source="{Binding ImagePath}"  Margin="0,0,0,0">
                     <Image.Effect>
                         <DropShadowEffect   RenderingBias="Quality" Direction="270" 
                                             BlurRadius="20" ShadowDepth="10" Opacity="0.9"/>
@@ -41,11 +43,11 @@
                 <Grid Grid.Row="1" Background="Transparent">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="3.5*"/>
+                        <!--<ColumnDefinition Width="3.5*"/>-->
                     </Grid.ColumnDefinitions>
-                  
-                    <TextBlock x:Name="CardName" Grid.Column="1" Text="{Binding Path=Name}" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"
-                               FontFamily="/CollectibleCardGame;component/Fonts/#Mason Chronicles" FontSize="16" Margin="0,15,0,0" />
+
+                        <TextBlock x:Name="CardName" Grid.Column="1" Text="{Binding Name}" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"
+                               FontFamily="/CollectibleCardGame;component/Fonts/#Mason Chronicles" FontSize="18" Margin="0,13,0,0" /> <!--было фонтсайз 16-->
                 </Grid>
 
                 <Grid Grid.Row="0" Grid.RowSpan="2">
@@ -69,7 +71,7 @@
 
                         <Border  Visibility="{Binding IsUnitCard,Converter={StaticResource BooleanToVisibilityConverter}}" 
                             Grid.Column="1" BorderBrush="{Binding TapeBorderBrush}"
-                                 BorderThickness="5" Margin="0,40,0,0">
+                                 BorderThickness="5" Margin="0,40,0,22">
                             <Rectangle  Fill="{Binding TapeBrush}" HorizontalAlignment="Stretch"
                                         VerticalAlignment="Stretch"   Opacity="0.9"  />
                             <Border.Effect>
@@ -98,12 +100,11 @@
                     </Grid>
 
                     <Border CornerRadius="50"
-                            Width="55"
-                            Height="55"
+                            Margin="0,2,0,0"
                             Background="Gold"
                             BorderBrush="Black"
                             BorderThickness="3"
-                            Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                         <TextBlock  x:Name="Cost" HorizontalAlignment="Center" VerticalAlignment="Center" Margin=" 0,0,1,5"
                                    Text="{Binding Cost}" FontWeight="Bold" FontSize="42" />
                     </Border>
@@ -111,8 +112,9 @@
                 </Grid>
 
                 <Grid Grid.Row="2" Background="Transparent">
-                    <TextBlock x:Name="Story" Grid.Row="2" Text="{Binding Description}" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center"
-                               FontFamily="/CollectibleCardGame;component/Fonts/#Mason Chronicles" FontSize="12" Margin="5,0,5,0"/>
+                        <TextBlock x:Name="Story" Grid.Row="2" Text="{Binding Description}" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center"
+                               FontFamily="/CollectibleCardGame;component/Fonts/#Mason Chronicles" LineHeight="14" 
+                                   LineStackingStrategy="BlockLineHeight" FontSize="16" Margin="5,0,5,0" FontWeight="Normal"/> <!--было фонтсайз 12-->
                 </Grid>
 
 
@@ -126,24 +128,22 @@
                     </Grid.ColumnDefinitions>
                         <Border CornerRadius="50"   Visibility="{Binding IsUnitCard,
                         Converter={StaticResource BooleanToVisibilityConverter}}"
-                            Width="55"
-                            Height="55"
+                            Margin="0,0,0,2"
                             Background="#EF3F37"
                             BorderBrush="Black"
                             BorderThickness="3"
-                            Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                         <TextBlock  x:Name="UnitAttck" HorizontalAlignment="Center" 
                                     VerticalAlignment="Center" Margin=" 0,0,1,5"
                                    Text="{Binding Path=Attack}" FontWeight="Bold" FontSize="42" />
                     </Border>
                     <Border CornerRadius="50"   Visibility="{Binding IsUnitCard,
                         Converter={StaticResource BooleanToVisibilityConverter}}" 
-                            Width="55"
-                            Height="55"
+                            Margin="0,0,0,2"
                             Background="#66BE61"
                             BorderBrush="Black"
                             BorderThickness="3"
-                            Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            Grid.Column="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                         <TextBlock  x:Name="UnitHealth" HorizontalAlignment="Center" VerticalAlignment="Center" Margin=" 0,0,1,5"
                                    Text="{Binding Path=Health}" FontWeight="Bold" FontSize="42" />
                     </Border>

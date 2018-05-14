@@ -14,7 +14,7 @@ namespace GameData.Models
     {
         public string Username { set; get; }
 
-        public HeroUnit HeroUnit { get; }
+        public HeroUnit HeroUnit { get; set; }
 
         public int DeckCardsCount { set; get; }
 
@@ -30,7 +30,7 @@ namespace GameData.Models
             HeroUnit = new HeroUnit(this,hero);
             HandCards = new List<Card>();
             TableUnits = new List<Unit>();
-            Mana = new PlayerMana();
+            Mana = new PlayerMana(){Player = this};
         }
 
         protected bool Equals(Player other)

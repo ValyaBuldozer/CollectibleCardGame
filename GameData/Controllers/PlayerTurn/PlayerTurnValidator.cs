@@ -39,7 +39,7 @@ namespace GameData.Controllers.PlayerTurn
                     return Validate((CardDeployPlayerTurn)playerTurn);
                 case nameof(UnitAttackPlayerTurn):
                     return Validate((UnitAttackPlayerTurn)playerTurn);
-                case nameof(EndPlayerTurnHandler):
+                case nameof(EndPlayerTurn):
                     return Validate((EndPlayerTurn)playerTurn);
                 default:
                     throw new InvalidOperationException("No such player turn was found");
@@ -119,7 +119,7 @@ namespace GameData.Controllers.PlayerTurn
                 return null;
             }
 
-            if (_playerTurnDispatcher.CurrentPlayer.Username == sender.Username)
+            if (_playerTurnDispatcher.CurrentPlayer.Username != sender.Username)
             {
                 RunValidateError(new ErrorEventArgs("Not your turn",true,playerTurn.Sender));
                 return null;

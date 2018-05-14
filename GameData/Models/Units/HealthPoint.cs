@@ -2,16 +2,17 @@
 
 namespace GameData.Models.Units
 {
+    [Obsolete("Obsolte class. Use UnitState",false)]
     public class HealthPoint
     {
 
         public Unit Unit { private set; get; }
 
-        public int Base { set; get; }
+        public int BaseHealth { set; get; }
 
-        public int Damage { private set; get; }
+        public int RecievedDamage { private set; get; }
 
-        public int GetResult => Base - Damage;
+        public int GetResultHealth => BaseHealth - RecievedDamage;
 
         public event EventHandler<ZeroHpEventArgs> ZeroHpEvent;
 
@@ -20,14 +21,14 @@ namespace GameData.Models.Units
         public HealthPoint(Unit unit)
         {
             Unit = unit;
-            Damage = 0;
+            RecievedDamage = 0;
             if(unit!=null)
-                Base = Unit.BaseCard.BaseHP;
+                BaseHealth = Unit.BaseCard.BaseHP;
         }
 
         protected bool Equals(HealthPoint other)
         {
-            return Equals(Unit, other.Unit) && Base == other.Base && Damage == other.Damage;
+            return Equals(Unit, other.Unit) && BaseHealth == other.BaseHealth && RecievedDamage == other.RecievedDamage;
         }
 
         public override bool Equals(object obj)
@@ -43,8 +44,8 @@ namespace GameData.Models.Units
             unchecked
             {
                 var hashCode = (Unit != null ? Unit.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ Base;
-                hashCode = (hashCode * 397) ^ Damage;
+                hashCode = (hashCode * 397) ^ BaseHealth;
+                hashCode = (hashCode * 397) ^ RecievedDamage;
                 return hashCode;
             }
         }
@@ -63,8 +64,8 @@ namespace GameData.Models.Units
         {
             if(value == 0)
                 return;
-            Damage += value;
-            if(GetResult <= 0)
+            RecievedDamage += value;
+            if(GetResultHealth <= 0)
                 RunZeroHpEvent();
 
             RunDamageRecievedEvent(value);
@@ -72,15 +73,15 @@ namespace GameData.Models.Units
 
         public void Heal(int value)
         {
-            if (Damage <= value)
-                Damage = 0;
+            if (RecievedDamage <= value)
+                RecievedDamage = 0;
             else
-                Damage -= value;
+                RecievedDamage -= value;
         }
 
         public override string ToString()
         {
-            return GetResult.ToString();
+            return GetResultHealth.ToString();
         }
     }
 }

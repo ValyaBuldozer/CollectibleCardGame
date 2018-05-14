@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using GameData.Network;
 using GameData.Network.Messages;
 using Server.Controllers;
+using Server.Exceptions;
 using Server.Unity;
 
 namespace Server.Network.Controllers.MessageHandlers
@@ -25,10 +26,9 @@ namespace Server.Network.Controllers.MessageHandlers
                 message.AnswerData = user;
                 return message;
             }
-            catch (Exception e)
+            catch (UserServiceException e)
             {
-                //TODO: запилить отпарвку ошибки
-                return new ErrorMessage();
+                return new ErrorMessage(){ErrorInfo = e.Message};
             }
         }
     }

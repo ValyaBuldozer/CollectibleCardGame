@@ -6,22 +6,27 @@ using System.Threading.Tasks;
 using CollectibleCardGame.Network.Controllers;
 using CollectibleCardGame.ViewModels.Frames;
 using CollectibleCardGame.ViewModels.Windows;
+using GameData.Controllers.Data;
 using GameData.Enums;
 using GameData.Models.Cards;
 using GameData.Network.Messages;
+using Unity.Interception.Utilities;
 
 namespace CollectibleCardGame.Logic.Controllers
 {
     public class GameController
     {
         private readonly INetworkController _networkController;
+        private readonly IDataRepositoryController<Card> _cardRepositoryController;
 
         public GameController(INetworkController networkController,
-            GoGameFramePageViewModel goGameFramePageViewModel,GameEngineViewModel gameEngineViewModel)
+            GoGameFramePageViewModel goGameFramePageViewModel,GameEngineViewModel gameEngineViewModel,
+            IDataRepositoryController<Card> cardRepositoryController)
         {
             _networkController = networkController;
             goGameFramePageViewModel.GameRequest += GameRequestEventHandler;
             gameEngineViewModel.PlayerTurnEvent += ViewModelPlayerTurnEventHandler;
+            _cardRepositoryController = cardRepositoryController;
         }
 
         private void ViewModelPlayerTurnEventHandler(object sender, Services.PlayerTurnRequestEventArgs e)
@@ -36,17 +41,19 @@ namespace CollectibleCardGame.Logic.Controllers
 
         private void GameRequestEventHandler(object sender, Services.GameRequestEventArgs e)
         {
-            var deck = new List<int>()
+            Random rnd = new Random();
+            var array = new int[] {20,20,3,21,21,3,22,22,3,23,23,3,24,24,3,25,25,3,26,26,3,27,27,3};
+            for (int i = 0; i < 24; i++)
             {
-                301,302,303,304,301,302,303,304,301,302,303,304,301,302,303,304
-            };
-            var card = new UnitCard()
-            {
-                BaseHP = 30,
-                BaseAttack = 0,
-                AttackPriority = 1,
-                Name = "TestHero"
-            };
+                int randomItem = rnd.Next(0, 24);
+                int item = array[randomItem];
+                array[randomItem] = array[i];
+                array[i] = item;
+            }
+
+            var deck = new List<int>(array);
+
+            var card = (UnitCard)_cardRepositoryController.GetById(44);
             SendGameRequest(deck,card);
         }
 

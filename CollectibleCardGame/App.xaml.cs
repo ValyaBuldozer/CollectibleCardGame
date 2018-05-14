@@ -35,10 +35,14 @@ namespace CollectibleCardGame
             //MainWindow window = new MainWindow();
             //GameEngineFramePage framePage = new GameEngineFramePage();
             //GameEngineViewModel viewModel = new GameEngineViewModel();
-            //    viewModel.PlayerCards.Add(new CardViewModel(new UnitCard()
-            //    {
-            //        Cost = 5, Name = "test", Description = "test", BaseAttack = 1, BaseHP = 1
-            //    }));
+            //viewModel.PlayerCards.Add(new CardViewModel(new UnitCard()
+            //{
+            //    Cost = 5,
+            //    Name = "test",
+            //    Description = "test",
+            //    BaseAttack = 1,
+            //    BaseHP = 1
+            //}));
             //viewModel.PlayerCards.Add(new CardViewModel(new UnitCard()
             //{
             //    Cost = 5,

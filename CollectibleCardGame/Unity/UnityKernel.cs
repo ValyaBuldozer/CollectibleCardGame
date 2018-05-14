@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using BaseNetworkArchitecture.Common;
@@ -80,7 +82,8 @@ namespace CollectibleCardGame.Unity
             //repository binding
             _container.RegisterType<CurrentUser>(new ContainerControlledLifetimeManager());
             _container.RegisterType<EntityRepository>(new ContainerControlledLifetimeManager());
-            _container.RegisterType<CardRepository>(new ContainerControlledLifetimeManager());
+            _container.RegisterType<CardRepository>(new ContainerControlledLifetimeManager(),
+                new InjectionConstructor(LoadCardsFile()));
 
 
             //controller binding
@@ -91,7 +94,8 @@ namespace CollectibleCardGame.Unity
                 new ContainerControlledLifetimeManager());
 
             //network
-            _container.RegisterType<NetworkMessageConverter>(new PerResolveLifetimeManager());
+            _container.RegisterType<IMessageConverter,MessageConverter>(
+                new ContainerControlledLifetimeManager());
             _container.RegisterType<INetworkCommunicator, TcpCommunicator>(new ContainerControlledLifetimeManager(),
                 new InjectionConstructor(new object[]
                 {
@@ -115,7 +119,10 @@ namespace CollectibleCardGame.Unity
                 new ContainerControlledLifetimeManager());
             _container.RegisterType<MessageHandlerBase<ObserverActionMessage>, ObserverActionMessageHandler>(
                 new ContainerControlledLifetimeManager());
+            _container.RegisterType<MessageHandlerBase<ErrorMessage>, ErrorMessageHandler>(
+                new ContainerControlledLifetimeManager());
 
+            _container.Resolve<CardRepository>();
             _container.Resolve<MainWindow>();
             //initializating observer controllers
             _container.Resolve<UserController>();
@@ -129,6 +136,20 @@ namespace CollectibleCardGame.Unity
                 InitializeKernel();
 
             return _container.Resolve(t);
+        }
+
+        private static string LoadCardsFile()
+        {
+            var assembly = Assembly.GetExecutingAssembly();
+            var resourceName = "CollectibleCardGame.Resources.CardsRepository.json";
+
+            using (Stream stream = assembly.GetManifestResourceStream(resourceName))
+            {
+                StreamReader streamReader = new StreamReader(stream);
+                var readedString = streamReader.ReadToEnd();
+                streamReader.Close();
+                return readedString;
+            }
         }
     }
 }
