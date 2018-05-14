@@ -11,6 +11,9 @@
       Background="White">
 
     <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Images/cemeteryBackground.jpg" Stretch="UniformToFill" Opacity="0.9"/>
+        </Grid.Background>
         <Button Content="{Binding CurrentPlayerUsername}" VerticalAlignment="Center" 
                 HorizontalAlignment="Right"
                 Height="25" Width="150"
