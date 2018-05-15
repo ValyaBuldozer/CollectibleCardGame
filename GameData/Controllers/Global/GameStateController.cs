@@ -29,6 +29,7 @@ namespace GameData.Controllers.Global
         private readonly IDeckController _deckController;
         private readonly IDataRepositoryController<Entity> _entitytRepositoryController;
         private readonly ICardDrawController _cardDrawController;
+        private readonly IUnitDispatcher _unitDispatcher;
 
         public event EventHandler<GameEndEventArgs> GameEnd;
 
@@ -38,13 +39,14 @@ namespace GameData.Controllers.Global
 
         public GameStateController(TableCondition tableCondition,IPlayerTurnDispatcher playerTurnDispatcher,
             IDeckController deckController,IDataRepositoryController<Entity> entitytRepositoryController,
-            ICardDrawController cardDrawController)
+            ICardDrawController cardDrawController,IUnitDispatcher unitDispatcher)
         {
             _tableCondition = tableCondition;
             _playerTurnDispatcher = playerTurnDispatcher;
             _deckController = deckController;
             _entitytRepositoryController = entitytRepositoryController;
             _cardDrawController = cardDrawController;
+            _unitDispatcher = unitDispatcher;
         }
 
         public void Start(Stack<Card> firstDeck, string firstUsername, UnitCard firstHero,
@@ -70,6 +72,9 @@ namespace GameData.Controllers.Global
 
             _entitytRepositoryController.AddNewItem(firstPLayer.HeroUnit);
             _entitytRepositoryController.AddNewItem(secondPlayer.HeroUnit);
+
+            firstPLayer.HeroUnit.State.PropertyChanged += _unitDispatcher.OnUnitStateChanges;
+            secondPlayer.HeroUnit.State.PropertyChanged += _unitDispatcher.OnUnitStateChanges;
 
             _deckController.AddDeck(firstUsername,firstDeck);
             _deckController.AddDeck(secondUsername,secondDeck);

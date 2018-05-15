@@ -14,6 +14,8 @@ namespace GameData.Network
 {
     public class MessageConverter : IMessageConverter
     {
+        private string _concotinationMessage;
+
         public MessageBase DeserializeMessage(NetworkMessage networkMessage)
         {
             if (string.IsNullOrEmpty(networkMessage?.Content))
@@ -72,6 +74,7 @@ namespace GameData.Network
                         throw new ArgumentOutOfRangeException();
                 }
 
+                _concotinationMessage = null;
                 return deserializedMessage;
             }
             catch (JsonSerializationException e)
@@ -80,7 +83,13 @@ namespace GameData.Network
             }
             catch (JsonReaderException e)
             {
+                //if (_concotinationMessage != null)
+                //{
+                //    _concotinationMessage += networkMessage.Content;
+                //    return DeserializeMessage(new NetworkMessage(_concotinationMessage));
+                //}
 
+                //_concotinationMessage = networkMessage.Content;
             }
             catch (NullReferenceException e)
             {

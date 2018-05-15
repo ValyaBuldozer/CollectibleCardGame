@@ -35,6 +35,7 @@ namespace CollectibleCardGame.ViewModels.Frames
         private RelayCommand _cardDeployCommand;
         private RelayCommand _transferTurnCommand;
         private RelayCommand _unitTargetCommand;
+        private RelayCommand _playerTargetCommand;
 
         private bool _isSpellTargeting;
         private CardViewModel _spellTargetingViewModel;
@@ -208,6 +209,8 @@ namespace CollectibleCardGame.ViewModels.Frames
                                     PlayerTurnEvent?.Invoke(this, new PlayerTurnRequestEventArgs(
                                         new UnitAttackPlayerTurn(_player,
                                             _unitTargetingViewModel.BaseUnit, unitViewModel.BaseUnit)));
+                                    _unitTargetingViewModel = null;
+                                    _isAttackTargeting = false;
                                     return;
                                 }
 
@@ -216,11 +219,40 @@ namespace CollectibleCardGame.ViewModels.Frames
                                     PlayerTurnEvent?.Invoke(this, new PlayerTurnRequestEventArgs(
                                         new CardDeployPlayerTurn(
                                             _player, _spellTargetingViewModel.Card, unitViewModel.BaseUnit)));
+                                    _unitTargetingViewModel = null;
+                                    _isSpellTargeting = false;
                                     return;
                                 }
 
                                 _isAttackTargeting = true;
                                 _unitTargetingViewModel = unitViewModel;
+                            }));
+
+        public RelayCommand PlayerTargetCommand => _playerTargetCommand ?? (_playerTargetCommand =
+                            new RelayCommand(o =>
+                            {
+                                if(!(o is PlayerUserControlViewModel viewModel))
+                                    return;
+
+                                if (_isAttackTargeting)
+                                {
+                                    PlayerTurnEvent?.Invoke(this, new PlayerTurnRequestEventArgs(
+                                        new UnitAttackPlayerTurn(_player,
+                                            _unitTargetingViewModel.BaseUnit, viewModel.HeroUnit)));
+                                    _unitTargetingViewModel = null;
+                                    _isAttackTargeting = false;
+                                    return;
+                                }
+
+                                if (_isSpellTargeting)
+                                {
+                                    PlayerTurnEvent?.Invoke(this, new PlayerTurnRequestEventArgs(
+                                        new CardDeployPlayerTurn(
+                                            _player, _spellTargetingViewModel.Card, viewModel.HeroUnit)));
+                                    _unitTargetingViewModel = null;
+                                    _isSpellTargeting = false;
+                                    return;
+                                }
                             }));
 
         public RelayCommand TransferTurnCommand => _transferTurnCommand ??

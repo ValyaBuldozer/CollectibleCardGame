@@ -46,6 +46,8 @@ namespace CollectibleCardGame.Logic.Controllers
         {
             _entityRepositoryController.Add(action.FirstPlayer);
             _entityRepositoryController.Add(action.SecondPlayer);
+            _entityRepositoryController.Add(action.FirstPlayer.HeroUnit);
+            _entityRepositoryController.Add(action.SecondPlayer.HeroUnit);
 
             if (action.FirstPlayer.Username == _user.Username)
             {
