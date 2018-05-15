@@ -13,6 +13,7 @@ namespace CollectibleCardGame.ViewModels.Elements
         private int _attack;
         private int _health;
         private string _name;
+        private bool _isNotHeroUnit;
 
         public Unit BaseUnit
         {
@@ -21,6 +22,11 @@ namespace CollectibleCardGame.ViewModels.Elements
             {
                 _baseUnit = value;
                 NotifyPropertyChanged(nameof(BaseUnit));
+
+                IsNotHeroUnit = !(value is HeroUnit);
+
+                if(value?.State == null) return;
+
                 Attack = value.State.Attack;
                 Health = value.State.GetResultHealth;
                 Name = value.BaseCard.Name;
@@ -29,15 +35,9 @@ namespace CollectibleCardGame.ViewModels.Elements
             }
         }
 
-        private void State_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-            Attack = _baseUnit.State.Attack;
-            Health = _baseUnit.State.GetResultHealth;
-        }
-
         public string ImagePath
         {
-            get => _baseUnit.BaseCard.ImagePath;
+            get => _baseUnit?.BaseCard?.ImagePath;
             set => _baseUnit.BaseCard.ImagePath = value;
         }
 
@@ -71,11 +71,32 @@ namespace CollectibleCardGame.ViewModels.Elements
             }
         }
 
+        public bool IsNotHeroUnit
+        {
+            get => _isNotHeroUnit;
+            set
+            {
+                _isNotHeroUnit = value;
+                NotifyPropertyChanged(nameof(IsNotHeroUnit));
+            }
+        }
+
+        private void State_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            Attack = _baseUnit.State.Attack;
+            Health = _baseUnit.State.GetResultHealth;
+        }
+
         public UnitViewModel(Unit unit)
         {
+            _isNotHeroUnit = !(unit is HeroUnit);
+
             BaseUnit = unit;
         }
 
-
+        public UnitViewModel()
+        {
+            BaseUnit = null;
+        }
     }
 }

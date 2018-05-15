@@ -60,6 +60,7 @@ namespace GameData.Controllers.Global
             //todo : настройки
             CurrentPlayer.Mana.Base++;
             CurrentPlayer.Mana.Restore();
+            CurrentPlayer.TableUnits.ForEach(u=>u.State.CanAttack = true);
 
             _cardsDispatcher.DealCardsToPlayer(CurrentPlayer,1);
 

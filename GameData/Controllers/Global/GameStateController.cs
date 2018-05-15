@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using GameData.Controllers.Data;
 using GameData.Controllers.Table;
+using GameData.Enums;
 using GameData.Models;
 using GameData.Models.Cards;
 using GameData.Models.Observer;
@@ -29,6 +30,7 @@ namespace GameData.Controllers.Global
         private readonly IDeckController _deckController;
         private readonly IDataRepositoryController<Entity> _entitytRepositoryController;
         private readonly ICardDrawController _cardDrawController;
+        private readonly IUnitDispatcher _unitDispatcher;
 
         public event EventHandler<GameEndEventArgs> GameEnd;
 
@@ -38,13 +40,14 @@ namespace GameData.Controllers.Global
 
         public GameStateController(TableCondition tableCondition,IPlayerTurnDispatcher playerTurnDispatcher,
             IDeckController deckController,IDataRepositoryController<Entity> entitytRepositoryController,
-            ICardDrawController cardDrawController)
+            ICardDrawController cardDrawController,IUnitDispatcher unitDispatcher)
         {
             _tableCondition = tableCondition;
             _playerTurnDispatcher = playerTurnDispatcher;
             _deckController = deckController;
             _entitytRepositoryController = entitytRepositoryController;
             _cardDrawController = cardDrawController;
+            _unitDispatcher = unitDispatcher;
         }
 
         public void Start(Stack<Card> firstDeck, string firstUsername, UnitCard firstHero,
@@ -71,6 +74,12 @@ namespace GameData.Controllers.Global
             _entitytRepositoryController.AddNewItem(firstPLayer.HeroUnit);
             _entitytRepositoryController.AddNewItem(secondPlayer.HeroUnit);
 
+            firstPLayer.HeroUnit.State.PropertyChanged += _unitDispatcher.OnUnitStateChanges;
+            secondPlayer.HeroUnit.State.PropertyChanged += _unitDispatcher.OnUnitStateChanges;
+
+            firstPLayer.HeroUnit.DiedEvent += OnUnitDies;
+            secondPlayer.HeroUnit.DiedEvent += OnUnitDies;
+
             _deckController.AddDeck(firstUsername,firstDeck);
             _deckController.AddDeck(secondUsername,secondDeck);
 
@@ -94,9 +103,10 @@ namespace GameData.Controllers.Global
                 (sender as Player)?.Username,e.PlayerMana));
         }
 
-        private void RunGameEndEvent(GameEndEventArgs e)
+        private void OnUnitDies(object sender, HeroUnitDiedEventArgs e)
         {
-            GameEnd?.Invoke(this,e);
+            GameEnd?.Invoke(this,new GameEndEventArgs(GameEndReason.HeroUnitKill,
+                e.Player.Username));
         }
     }
 }

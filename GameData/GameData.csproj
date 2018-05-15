@@ -120,6 +120,7 @@
     <Compile Include="Models\GameSettings.cs" />
     <Compile Include="Models\Observer\EntityStateChangeObserverAction.cs" />
     <Compile Include="Models\Observer\ErrorObserverAction.cs" />
+    <Compile Include="Models\Observer\GameEndObserverAction.cs" />
     <Compile Include="Models\Observer\GameStartObserverAction.cs" />
     <Compile Include="Models\Observer\ObserverAction.cs" />
     <Compile Include="Models\Observer\CardDeployObserverAction.cs" />

@@ -60,7 +60,7 @@ namespace GameData.Controllers.Data
 
             actionInfo.Action?.Action.Invoke(_tableController,sender,target,actionInfo.Parameter);
             ActionTrigerred?.Invoke(this,new GameActionTriggerObserverAction(actionInfo.Action.ID,
-                sender,target));
+                sender.EntityId,target.EntityId));
         }
 
         public void ExecuteAction(CardActionInfo actionInfo, Entity sender, Unit target)
@@ -72,7 +72,7 @@ namespace GameData.Controllers.Data
             GetGameActionInfo(actionInfo).Action.Action.Invoke(
                 _tableController, sender, target, actionInfo.ParameterValue);
             ActionTrigerred?.Invoke(this,new GameActionTriggerObserverAction(action.Action.ID,
-                sender,target));
+                sender.EntityId,target?.EntityId));
         }
     }
 }

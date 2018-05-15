@@ -8,6 +8,7 @@ using System.Windows.Threading;
 using CollectibleCardGame.Models;
 using CollectibleCardGame.Services;
 using CollectibleCardGame.ViewModels.Elements;
+using CollectibleCardGame.ViewModels.UserControls;
 using GameData.Models;
 using GameData.Models.Cards;
 using GameData.Models.PlayerTurn;
@@ -25,6 +26,7 @@ namespace CollectibleCardGame.ViewModels.Frames
         private PlayerMana _playerMana;
         private HeroUnit _playerHeroUnit;
         private HeroUnit _enemyHeroUnit;
+
         private ObservableCollection<CardViewModel> _playerCards;
         private ObservableCollection<CardViewModel> _enemyCards;
         private ObservableCollection<UnitViewModel> _playerUnits;
@@ -33,11 +35,15 @@ namespace CollectibleCardGame.ViewModels.Frames
         private RelayCommand _cardDeployCommand;
         private RelayCommand _transferTurnCommand;
         private RelayCommand _unitTargetCommand;
+        private RelayCommand _playerTargetCommand;
 
         private bool _isSpellTargeting;
         private CardViewModel _spellTargetingViewModel;
         private bool _isAttackTargeting;
         private UnitViewModel _unitTargetingViewModel;
+
+        private PlayerUserControlViewModel _playerViewModel;
+        private PlayerUserControlViewModel _enemyViewModel;
 
         public Dispatcher CurrentDispatcher { get; }
 
@@ -49,6 +55,8 @@ namespace CollectibleCardGame.ViewModels.Frames
                 _player = value;
                 PlayerHeroUnit = value?.HeroUnit;
                 NotifyPropertyChanged(nameof(Player));
+                PlayerViewModel.Player = value;
+                //PlayerViewModel = new PlayerUserControlViewModel(_player);
             }
         }
 
@@ -60,6 +68,27 @@ namespace CollectibleCardGame.ViewModels.Frames
                 _enemyPlayer = value;
                 EnemyHeroUnit = value?.HeroUnit;
                 NotifyPropertyChanged(nameof(EnemyPlayer));
+                EnemyViewModel.Player = value;
+            }
+        }
+
+        public PlayerUserControlViewModel PlayerViewModel
+        {
+            get => _playerViewModel;
+            set
+            {
+                _playerViewModel = value;
+                NotifyPropertyChanged(nameof(PlayerViewModel));
+            }
+        }
+
+        public PlayerUserControlViewModel EnemyViewModel
+        {
+            get => _enemyViewModel;
+            set
+            {
+                _enemyViewModel = value;
+                NotifyPropertyChanged(nameof(EnemyViewModel));
             }
         }
 
@@ -148,10 +177,13 @@ namespace CollectibleCardGame.ViewModels.Frames
         {
             CurrentDispatcher = Dispatcher.CurrentDispatcher;
 
-            PlayerCards = new ObservableCollection<CardViewModel>();
-            EnemyCards = new ObservableCollection<CardViewModel>();
-            PlayerUnits = new ObservableCollection<UnitViewModel>();
-            EnemyUnits  = new ObservableCollection<UnitViewModel>();
+            _playerCards = new ObservableCollection<CardViewModel>();
+            _enemyCards = new ObservableCollection<CardViewModel>();
+            _playerUnits = new ObservableCollection<UnitViewModel>();
+            _enemyUnits  = new ObservableCollection<UnitViewModel>();
+
+            _playerViewModel = new PlayerUserControlViewModel();
+            _enemyViewModel = new PlayerUserControlViewModel();
             _user = user;
         }
 
@@ -177,6 +209,8 @@ namespace CollectibleCardGame.ViewModels.Frames
                                     PlayerTurnEvent?.Invoke(this, new PlayerTurnRequestEventArgs(
                                         new UnitAttackPlayerTurn(_player,
                                             _unitTargetingViewModel.BaseUnit, unitViewModel.BaseUnit)));
+                                    _unitTargetingViewModel = null;
+                                    _isAttackTargeting = false;
                                     return;
                                 }
 
@@ -185,11 +219,40 @@ namespace CollectibleCardGame.ViewModels.Frames
                                     PlayerTurnEvent?.Invoke(this, new PlayerTurnRequestEventArgs(
                                         new CardDeployPlayerTurn(
                                             _player, _spellTargetingViewModel.Card, unitViewModel.BaseUnit)));
+                                    _unitTargetingViewModel = null;
+                                    _isSpellTargeting = false;
                                     return;
                                 }
 
                                 _isAttackTargeting = true;
                                 _unitTargetingViewModel = unitViewModel;
+                            }));
+
+        public RelayCommand PlayerTargetCommand => _playerTargetCommand ?? (_playerTargetCommand =
+                            new RelayCommand(o =>
+                            {
+                                if(!(o is PlayerUserControlViewModel viewModel))
+                                    return;
+
+                                if (_isAttackTargeting)
+                                {
+                                    PlayerTurnEvent?.Invoke(this, new PlayerTurnRequestEventArgs(
+                                        new UnitAttackPlayerTurn(_player,
+                                            _unitTargetingViewModel.BaseUnit, viewModel.HeroUnit)));
+                                    _unitTargetingViewModel = null;
+                                    _isAttackTargeting = false;
+                                    return;
+                                }
+
+                                if (_isSpellTargeting)
+                                {
+                                    PlayerTurnEvent?.Invoke(this, new PlayerTurnRequestEventArgs(
+                                        new CardDeployPlayerTurn(
+                                            _player, _spellTargetingViewModel.Card, viewModel.HeroUnit)));
+                                    _unitTargetingViewModel = null;
+                                    _isSpellTargeting = false;
+                                    return;
+                                }
                             }));
 
         public RelayCommand TransferTurnCommand => _transferTurnCommand ??

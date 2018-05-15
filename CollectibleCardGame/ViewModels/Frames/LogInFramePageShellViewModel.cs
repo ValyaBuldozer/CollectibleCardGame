@@ -5,7 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using CollectibleCardGame.Logic.Controllers;
 using CollectibleCardGame.Services;
+using CollectibleCardGame.Unity;
 using CollectibleCardGame.Views.Frames;
 using Unity.Attributes;
 
@@ -19,6 +21,7 @@ namespace CollectibleCardGame.ViewModels.Frames
         private readonly ConnectionErrorFramePage _connectionErrorFramePage;
 
         private RelayCommand _switchFrameCommand;
+        private RelayCommand _reconnectCommand;
 
         public Page CurrentFramePage
         {
@@ -30,16 +33,20 @@ namespace CollectibleCardGame.ViewModels.Frames
             }
         }
 
-        public RelayCommand SwitchFrameCommand
+        public RelayCommand SwitchFrameCommand => _switchFrameCommand ?? (
+                                                      _switchFrameCommand = new RelayCommand(obj =>
         {
-            get => _switchFrameCommand ?? (_switchFrameCommand = new RelayCommand(obj =>
-            {
-                if (_currentFramePage is LogInFramePage)
-                    _currentFramePage = _toRegisterFramePage;
-                if (_currentFramePage is ToRegisterFramePage)
-                    _currentFramePage = _logInFramePage;
-            }));
-        }
+            if (_currentFramePage is LogInFramePage)
+                _currentFramePage = _toRegisterFramePage;
+            if (_currentFramePage is ToRegisterFramePage)
+                _currentFramePage = _logInFramePage;
+        }));
+
+        public RelayCommand ReconnectCommand => _reconnectCommand ?? (
+                            _reconnectCommand = new RelayCommand(o =>
+                            {
+                                UnityKernel.Get<GlobalAppStateController>().TryConnect();
+                            }));
 
         public LogInFramePageShellViewModel(LogInFramePage logInFramePage,
             ToRegisterFramePage toRegisterFramePage,ConnectionErrorFramePage connectionErrorFramePage)
@@ -48,14 +55,20 @@ namespace CollectibleCardGame.ViewModels.Frames
             _toRegisterFramePage = toRegisterFramePage;
             _connectionErrorFramePage = connectionErrorFramePage;
             CurrentFramePage = _logInFramePage;
-            //todo : говнокод пределывай
+            //todo : пeределывай
             _logInFramePage.ToRegisterButton.Click += ToRegisterButton_Click;
             _toRegisterFramePage.GoBackButton.Click += GoBackButton_Click;
+            _connectionErrorFramePage.ReconnectButton.Click += ReconnectButton_Click;
+        }
+
+        private void ReconnectButton_Click(object sender, RoutedEventArgs e)
+        {
+            UnityKernel.Get<GlobalAppStateController>().OnStartup();
         }
 
         private void GoBackButton_Click(object sender, RoutedEventArgs e)
         {
-            CurrentFramePage = _toRegisterFramePage;
+            CurrentFramePage = _logInFramePage;
         }
 
         private void ToRegisterButton_Click(object sender, System.Windows.RoutedEventArgs e)

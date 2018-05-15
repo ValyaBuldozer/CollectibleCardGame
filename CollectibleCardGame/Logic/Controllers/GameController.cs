@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using CollectibleCardGame.Network.Controllers;
 using CollectibleCardGame.ViewModels.Frames;
 using CollectibleCardGame.ViewModels.Windows;
+using GameData.Controllers.Data;
 using GameData.Enums;
 using GameData.Models.Cards;
 using GameData.Network.Messages;
@@ -16,13 +17,16 @@ namespace CollectibleCardGame.Logic.Controllers
     public class GameController
     {
         private readonly INetworkController _networkController;
+        private readonly IDataRepositoryController<Card> _cardRepositoryController;
 
         public GameController(INetworkController networkController,
-            GoGameFramePageViewModel goGameFramePageViewModel,GameEngineViewModel gameEngineViewModel)
+            GoGameFramePageViewModel goGameFramePageViewModel,GameEngineViewModel gameEngineViewModel,
+            IDataRepositoryController<Card> cardRepositoryController)
         {
             _networkController = networkController;
             goGameFramePageViewModel.GameRequest += GameRequestEventHandler;
             gameEngineViewModel.PlayerTurnEvent += ViewModelPlayerTurnEventHandler;
+            _cardRepositoryController = cardRepositoryController;
         }
 
         private void ViewModelPlayerTurnEventHandler(object sender, Services.PlayerTurnRequestEventArgs e)
@@ -48,14 +52,8 @@ namespace CollectibleCardGame.Logic.Controllers
             }
 
             var deck = new List<int>(array);
-            
-            var card = new UnitCard()
-            {
-                BaseHP = 30,
-                BaseAttack = 0,
-                AttackPriority = 1,
-                Name = "TestHero"
-            };
+
+            var card = (UnitCard)_cardRepositoryController.GetById(44);
             SendGameRequest(deck,card);
         }
 

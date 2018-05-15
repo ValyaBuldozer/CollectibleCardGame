@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CollectibleCardGame.ViewModels.Elements;
+using GameData.Models;
+using GameData.Models.Units;
 
 namespace CollectibleCardGame.ViewModels.UserControls
 {
-    class PlayerUserControlViewModel:BaseViewModel
+    public class PlayerUserControlViewModel:BaseViewModel
     {
         private string _playerName;
         private string _heroName;
@@ -14,45 +17,111 @@ namespace CollectibleCardGame.ViewModels.UserControls
         private int _manaMax;
         private int _cardsInHand;
         private int _cardsInDeck;
-       
 
+        private HeroUnit _heroUnit;
+        private Player _player;
+        private PlayerMana _playerMana;
+        private UnitViewModel _unitViewModel;
+
+        public HeroUnit HeroUnit
+        {
+            get => _heroUnit;
+            set
+            {
+                _heroUnit = value;
+                NotifyPropertyChanged(nameof(HeroUnit));
+
+                if(value == null) return;
+
+                HeroName = value.BaseCard?.Name;
+                HeroUnitViewModel.BaseUnit = value;
+                NotifyPropertyChanged(nameof(HeroName));
+                NotifyPropertyChanged(nameof(HeroUnitViewModel));
+                //HeroUnitViewModel = new UnitViewModel(_heroUnit);
+            }
+        }
+
+        public UnitViewModel HeroUnitViewModel
+        {
+            get => _unitViewModel;
+            set
+            {
+                _unitViewModel = value;
+                NotifyPropertyChanged(nameof(HeroUnitViewModel));
+            }
+        }
+
+        public Player Player
+        {
+            get => _player;
+            set
+            {
+                if(value == null) return;
+
+                _player = value;
+                NotifyPropertyChanged(nameof(Player));
+
+                HeroUnit = _player.HeroUnit;
+                HeroName = _player.HeroUnit?.BaseCard?.Name;
+                PlayerName = _player.Username;
+                PlayerMana = _player.Mana;
+            }
+        }
+
+        public PlayerMana PlayerMana
+        {
+            get => _playerMana;
+            set
+            {
+                if(value == null) return;
+
+                _playerMana = value;
+                NotifyPropertyChanged(nameof(PlayerMana));
+                NotifyPropertyChanged(nameof(ManaMax));
+                NotifyPropertyChanged(nameof(ManaСurrent));
+            }
+        }
 
         public string PlayerName
         {
-            get => _playerName;
+            get => _player?.Username;
             set
             {
-                _playerName = value;
+                if(value == null) return;
+
+                _player.Username = value;
                 NotifyPropertyChanged(nameof(PlayerName));
             }
         }
 
         public string HeroName
         {
-            get => _heroName;
+            get => _heroUnit?.BaseCard?.Name;
             set
             {
-                _heroName = value;
+                if(value == null) return;
+
+                _heroUnit.BaseCard.Name = value;
                 NotifyPropertyChanged(nameof(HeroName));
             }
         }
 
         public int ManaСurrent
         {
-            get => _manaСurrent;
+            get => _playerMana.Current;
             set
             {
-                _manaСurrent = value;
+                _playerMana.Current = value;
                 NotifyPropertyChanged(nameof(ManaСurrent));
             }
         }
 
         public int ManaMax
         {
-            get => _manaMax;
+            get => _playerMana.Base;
             set
             {
-                _manaMax = value;
+                _playerMana.Base = value;
                 NotifyPropertyChanged(nameof(ManaMax));
             }
         }
@@ -76,6 +145,20 @@ namespace CollectibleCardGame.ViewModels.UserControls
             }
         }
 
-       
+        public PlayerUserControlViewModel()
+        {
+            _heroUnit = new HeroUnit(null,null);
+            _playerMana = new PlayerMana();
+            _player = new Player(null);
+            _unitViewModel = new UnitViewModel();
+        }
+
+        public PlayerUserControlViewModel(Player player)
+        {
+            _unitViewModel = new UnitViewModel(player?.HeroUnit);
+            _player = player;
+            _heroUnit = player.HeroUnit;
+            _playerMana = player.Mana;
+        }
     }
 }

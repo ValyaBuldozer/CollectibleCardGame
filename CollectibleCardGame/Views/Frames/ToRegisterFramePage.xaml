@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:CollectibleCardGame.Views.Frames"
       xmlns:framesShell="clr-namespace:CollectibleCardGame.Views.FramesShell"
+      xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="600"
       Title="ToRegisterFramePage">
@@ -41,8 +42,12 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="0.5*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Label Content="Подтверждение пароля" HorizontalAlignment="Center" Grid.Column="1" VerticalAlignment="Center" FontSize="16" />
-            <TextBox Name="PasswordTwiceTextBox" Style="{DynamicResource TextBoxMulti}"  Validation.ErrorTemplate="{DynamicResource validationFailed}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Column="2" FontSize="16"/>
+            <Label Content="Подтверждение пароля" HorizontalAlignment="Center" Grid.Column="1" 
+                   VerticalAlignment="Center" FontSize="16" Visibility="Hidden"/>
+            <TextBox Name="PasswordTwiceTextBox" Style="{DynamicResource TextBoxMulti}"  
+                     Validation.ErrorTemplate="{DynamicResource validationFailed}" 
+                     HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Column="2" FontSize="16"
+                     Visibility="Hidden"/>
         </Grid>
 
         <Grid Grid.Row="2">
@@ -53,7 +58,7 @@
                 <ColumnDefinition Width="0.5*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Label Content="Пароль" HorizontalAlignment="Center" Grid.Column="1" VerticalAlignment="Center" FontSize="16" />
-            <TextBox Name="PasswordTextBox" Style="{DynamicResource TextBoxMulti}"  
+            <TextBox Name="PasswordTextBox" Style="{DynamicResource TextBoxMulti}" 
                      Validation.ErrorTemplate="{DynamicResource validationFailed}"
                      HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Column="2" 
                      FontSize="16" Text="{Binding Path=Password,Mode=TwoWay}"/>
@@ -72,7 +77,8 @@
             <Button Name="ToRegisterButton" Style="{DynamicResource ButtonGreenStyle}" Content="Зарегистрироваться"
                     HorizontalAlignment="Stretch" Grid.Column="1"  VerticalAlignment="Center" FontSize="16" 
                     Command="{Binding RegistrationCommand}"/>
-            <Button Name="GoBackButton" Style="{DynamicResource ButtonNeutralStyle}" Content="Назад" HorizontalAlignment="Stretch" Grid.Column="3"  VerticalAlignment="Center" FontSize="16"
+            <Button Name="GoBackButton" Style="{DynamicResource ButtonNeutralStyle}" 
+                    Content="Назад" HorizontalAlignment="Stretch" Grid.Column="3"  VerticalAlignment="Center" FontSize="16"
                     Command="{Binding RelativeSource=
                             {RelativeSource Mode=FindAncestor, AncestorType={x:Type framesShell:LogInFramePageShell}}, 
                             Path=DataContext.SwitchFrameCommand}"/>

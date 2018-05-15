@@ -7,6 +7,7 @@ using GameData.Network;
 using GameData.Network.Messages;
 using Server.Controllers;
 using Server.Database;
+using Server.Exceptions;
 using Server.Network.Models;
 using Server.Unity;
 
@@ -34,10 +35,9 @@ namespace Server.Network.Controllers.MessageHandlers
 
                 return message;
             }
-            catch (Exception e)
+            catch (UserServiceException e)
             {
-                //todo : запилить тут перехват пользовательского исключения - должна передаваться ошибка
-                return new ErrorMessage();
+                return new ErrorMessage() {ErrorInfo = e.Message};
             }
         }
     }
