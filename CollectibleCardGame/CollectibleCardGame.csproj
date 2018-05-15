@@ -564,5 +564,11 @@
   <ItemGroup>
     <Resource Include="Images\Icons\icoGame.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\IconsUnit\shieldIco.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\IconsUnit\disguiestIco.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

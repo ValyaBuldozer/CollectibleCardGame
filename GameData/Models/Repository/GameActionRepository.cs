@@ -465,6 +465,7 @@ namespace GameData.Models.Repository
 
 
                         target.State.BaseHealth += 2;
+                        //target.State.AttackPriority
                         //todo: сделать юнит провокатором 
 
                     })),

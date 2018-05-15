@@ -211,6 +211,16 @@ namespace CollectibleCardGame.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap disguiestIco {
+            get {
+                object obj = ResourceManager.GetObject("disguiestIco", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap getCoins {
             get {
                 object obj = ResourceManager.GetObject("getCoins", resourceCulture);
@@ -314,6 +324,16 @@ namespace CollectibleCardGame.Properties {
         internal static System.Drawing.Bitmap settingsChange {
             get {
                 object obj = ResourceManager.GetObject("settingsChange", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap shieldIco {
+            get {
+                object obj = ResourceManager.GetObject("shieldIco", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
