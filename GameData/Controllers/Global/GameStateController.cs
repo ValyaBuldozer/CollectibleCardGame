@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using GameData.Controllers.Data;
 using GameData.Controllers.Table;
+using GameData.Enums;
 using GameData.Models;
 using GameData.Models.Cards;
 using GameData.Models.Observer;
@@ -76,6 +77,9 @@ namespace GameData.Controllers.Global
             firstPLayer.HeroUnit.State.PropertyChanged += _unitDispatcher.OnUnitStateChanges;
             secondPlayer.HeroUnit.State.PropertyChanged += _unitDispatcher.OnUnitStateChanges;
 
+            firstPLayer.HeroUnit.DiedEvent += OnUnitDies;
+            secondPlayer.HeroUnit.DiedEvent += OnUnitDies;
+
             _deckController.AddDeck(firstUsername,firstDeck);
             _deckController.AddDeck(secondUsername,secondDeck);
 
@@ -99,9 +103,10 @@ namespace GameData.Controllers.Global
                 (sender as Player)?.Username,e.PlayerMana));
         }
 
-        private void RunGameEndEvent(GameEndEventArgs e)
+        private void OnUnitDies(object sender, HeroUnitDiedEventArgs e)
         {
-            GameEnd?.Invoke(this,e);
+            GameEnd?.Invoke(this,new GameEndEventArgs(GameEndReason.HeroUnitKill,
+                e.Player.Username));
         }
     }
 }

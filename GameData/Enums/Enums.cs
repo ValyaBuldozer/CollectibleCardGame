@@ -78,6 +78,7 @@ namespace GameData.Enums
     public enum ObserverActionType
     {
         GameStart,
+        GameEnd,
         CardDeploy,
         CardDraw,
         UnitSpawn,

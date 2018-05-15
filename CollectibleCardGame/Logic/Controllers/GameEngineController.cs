@@ -186,5 +186,14 @@ namespace CollectibleCardGame.Logic.Controllers
                     _gameViewModel.EnemyUnits.Remove(unitViewModel);
             });
         }
+
+        public void HandleObserverAction(GameEndObserverAction action)
+        {
+            _gameViewModel.CurrentDispatcher.Invoke(() =>
+            {
+                MessageBox.Show(action.WinnerUsername == 
+                                _user.Username ? "ВЫ ПОБЕДИЛИ!!!" : "ВЫ ПРОИГРАЛИ!!!");
+            });
+        }
     }
 }
