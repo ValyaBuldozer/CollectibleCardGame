@@ -22,9 +22,9 @@ namespace GameData.Models.Repository
                 new GameAction(name: "DamageAllFriendlyUnits",id: 1,description:"Нанесение урона по всем дружественным юнитам",parameterType: ActionParameterType.Damage,
                     action:((controller, sender, target, parameter) =>
                     {
-                        var player = (Player) sender;
-                        //controller.DrawCard((Player)sender);
-                        foreach (var iUnit in player.TableUnits.ToArray())
+                        if(!(sender is Player player)) return;
+
+                        foreach (var iUnit in player.TableUnits)
                         {
                             iUnit.State.RecieveDamage(parameter);
                         }
@@ -32,21 +32,23 @@ namespace GameData.Models.Repository
                 new GameAction(name: "BuffDamageSpellCards",id: 2,description:"Увеличение урона атакуюших заклинаний, находящихся в руке",parameterType: ActionParameterType.Buff,
                     action:((controller, sender, target, parameter) =>
                     {
-                        var player = (Player) sender;
-                        foreach (var iCard in player.HandCards.ToArray())
+                        if(!(sender is Player player)) return;
+                        
+                        foreach (var iCard in player.HandCards)
                         {
                             var cCard = iCard as SpellCard;
                             if (cCard?.ActionInfo.ParameterType == ActionParameterType.Damage)
-                                cCard.ActionInfo.ParameterValue+=parameter;
+                                cCard.ActionInfo.ParameterValue += parameter;
                         }
                     })),
                 new GameAction(name:"DamageAllEnemyUnits",id:3,description:"Нанесение урона всем вражеским юнитам",parameterType:ActionParameterType.Damage,
                     action: ((controller, sender, target, parameter) =>
                     {
-                        var player = (Player) sender;
+                        if(!(sender is Player player)) return;
+						
                         Player enemyPlayer =
                             controller.GetTableCondition.Players.FirstOrDefault(p => p.Username != player.Username);
-                        foreach (var iUnit in enemyPlayer.TableUnits.ToArray())
+                        foreach (var iUnit in enemyPlayer.TableUnits)
                         {
                             iUnit.State.RecieveDamage(parameter);
                         }
@@ -55,9 +57,9 @@ namespace GameData.Models.Repository
                 new GameAction(name:"HealAllFriendlyUnits",id:4,description:"Восстановление здоровья всех дружественных юнитов",parameterType:ActionParameterType.Heal,
                     action: ((controller, sender, target, parameter) =>
                     {
-                        var player = (Player) sender;
-                        //controller.DrawCard((Player)sender);
-                        foreach (var iUnit in player.TableUnits.ToArray())
+                        if(!(sender is Player player)) return;
+
+                        foreach (var iUnit in player.TableUnits)
                         {
                             iUnit.State.Heal(parameter);
                         }
@@ -66,8 +68,9 @@ namespace GameData.Models.Repository
                 new GameAction(name:"DamageAllUnits",id:5,description:"Нанесение урона всем юнитам на столе",parameterType:ActionParameterType.Damage,
                     action: ((controller, sender, target, parameter) =>
                     {
-                        var player = (Player) sender;
-                        foreach (var iUnit in player.TableUnits.ToArray())
+                        if(!(sender is Player player)) return;
+						
+                        foreach (var iUnit in player.TableUnits)
                         {
                             iUnit.State.RecieveDamage(parameter);
                         }
@@ -75,7 +78,7 @@ namespace GameData.Models.Repository
                         Player enemyPlayer =
                             controller.GetTableCondition.Players.FirstOrDefault(p => p.Username != player.Username);
 
-                        foreach (var iUnit in enemyPlayer.TableUnits.ToArray())
+                        foreach (var iUnit in enemyPlayer.TableUnits)
                         {
                             iUnit.State.RecieveDamage(parameter);
                         }
@@ -84,20 +87,19 @@ namespace GameData.Models.Repository
                 new GameAction(name:"BuffAttackFriendlyUnits",id:6,description:"Повышение атаки всем дружественным юнитам",parameterType:ActionParameterType.Buff,
                     action: ((controller, sender, target, parameter) =>
                     {
-                        var player = (Player) sender;
-                        //controller.DrawCard((Player)sender);
-                        foreach (var iUnit in player.TableUnits.ToArray())
+                        if(!(sender is Player player)) return;
+						
+                        foreach (var iUnit in player.TableUnits)
                         {
                             iUnit.State.Attack += parameter;
                         }
-
                     })),
                 new GameAction(name:"FullBuffFriendlyUnits",id:7,description:"Повышение атаки и здоровья всем дружественным юнитам",parameterType:ActionParameterType.Buff,
                     action: ((controller, sender, target, parameter) =>
                     {
-                        var player = (Player) sender;
-                        //controller.DrawCard((Player)sender);
-                        foreach (var iUnit in player.TableUnits.ToArray())
+                        if(!(sender is Player player)) return;
+						
+                        foreach (var iUnit in player.TableUnits)
                         {
                             iUnit.State.Attack += parameter;
                             iUnit.State.BaseHealth += parameter;
@@ -107,8 +109,8 @@ namespace GameData.Models.Repository
                 new GameAction(name:"DamageRandomEnemyUnit",id:8,description:"Нанесение урона случайному вражескому юниту",parameterType:ActionParameterType.Damage,
                     action: ((controller, sender, target, parameter) =>
                     {
-
-                        var player = (Player) sender;
+                        if(!(sender is Player player)) return;
+						
                         Player enemyPlayer =
                             controller.GetTableCondition.Players.FirstOrDefault(
                                 p => p.Username != player.Username);
@@ -119,15 +121,12 @@ namespace GameData.Models.Repository
                             int rndNum = rnd.Next(0, enemyPlayer.TableUnits.Count + 1);
                             enemyPlayer.TableUnits[rndNum].State.RecieveDamage(parameter);
                         }
-
-
-
                     })),
                 new GameAction(name:"DamageEnemyFortress",id:9,description:"Нанесение урона вражеской крепости (герою)",parameterType:ActionParameterType.Damage,
                     action: ((controller, sender, target, parameter) =>
                     {
-
-                        var player = (Player) sender;
+                        if(!(sender is Player player)) return;
+						
                         Player enemyPlayer =
                             controller.GetTableCondition.Players.FirstOrDefault(
                                 p => p.Username != player.Username);
@@ -140,22 +139,16 @@ namespace GameData.Models.Repository
                 new GameAction(name:"SelfIncreaseAttack",id:10,description:"Юнит увеличивает свой показатель атаки",parameterType:ActionParameterType.Buff,
                     action: ((controller, sender, target, parameter) =>
                     {
-                        var unit = (Unit) sender;
+                        if(!(sender is Unit unit)) return;
+						
                         unit.State.Attack += parameter;
-                        
-
-
-
                     })),
                 new GameAction(name:"SelfIncreaseHealth",id:11,description:"Юнит восстанавливает здоровье",parameterType:ActionParameterType.Buff,
                     action: ((controller, sender, target, parameter) =>
                     {
-
-                        var unit = (Unit) sender;
+                        if(!(sender is Unit unit)) return;
+						
                         unit.State.Heal(parameter);
-
-
-
                     })),
                 #endregion
 
@@ -166,64 +159,49 @@ namespace GameData.Models.Repository
                 new GameAction(name:"Полное усиление",id:20,description:"Повышение атаки и здоровья всем дружественным юнитам",parameterType:ActionParameterType.Buff,
                     action: ((controller, sender, target, parameter) =>
                     {
-
-                        var player = (Player) sender;
-                        foreach (var iUnit in player.TableUnits.ToArray())
+                        if(!(sender is Player player)) return;
+						
+                        foreach (var iUnit in player.TableUnits)
                         {
                             iUnit.State.Attack += parameter;
                             iUnit.State.BaseHealth += parameter;
                         }
-
-
-
                     })),
                 new GameAction(name:"Повышение атаки",id:21,description:"Юнит повышает показатель атаки",parameterType:ActionParameterType.Buff,
                     action: ((controller, sender, target, parameter) =>
                     {
-
-                        var unit = (Unit) sender;
+                        if(!(sender is Unit unit)) return;
+						
                         unit.State.Attack += parameter;
-
-
-
                     })),
                 new GameAction(name:"Нанесение урона герою",id:22,description:"Наносит урон герою противника",parameterType:ActionParameterType.Damage,
                     action: ((controller, sender, target, parameter) =>
                     {
-                        var player = (Player) sender;
+                        if(!(sender is Player player)) return;
+						
                         Player enemyPlayer =
                             controller.GetTableCondition.Players.FirstOrDefault(p => p.Username != player.Username);
                         enemyPlayer.HeroUnit.State.RecieveDamage(parameter);
-
-
-
                     })),
                 new GameAction(name:"Полное выздоровление",id:23,description:"Восстанавливает здоровье выбранного союзного юнита до максимума",parameterType:ActionParameterType.Heal,
                     action: ((controller, sender, target, parameter) =>
                     {
-                        var player = (Player) sender;
+                        if(!(sender is Player player)) return;
+						
                         if (Equals(target.Player, player))
                         target.State.Heal(target.State.BaseHealth-target.State.GetResultHealth);
-
-
-
                     })),
                 new GameAction(name:"Выдача карт(ы)",id:24,description:"Выдает карту(ы) из колоды игрока",parameterType:ActionParameterType.Buff,
                     action: ((controller, sender, target, parameter) =>
                     {
-                        var player = (Player) sender;
+                        if(!(sender is Player player)) return;
+						
                         controller.DrawCard(player,parameter);
-
-
-
                     })),
                 new GameAction(name:"Урон по юниту",id:25,description:"Нанесение урона выбранному юниту",parameterType:ActionParameterType.Damage,
                     action: ((controller, sender, target, parameter) =>
                     {
-                        var player = (Player) sender;
-                       target.State.RecieveDamage(parameter);
-                        
-
+                       target.State.RecieveDamage(parameter); 
                     })),
                 new GameAction(name:"Улучшение заклинаний",id:26,description:"Повышение силы атакующих заклинаний в руке",parameterType:ActionParameterType.Buff,
                     action: ((controller, sender, target, parameter) =>

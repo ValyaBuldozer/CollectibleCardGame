@@ -119,6 +119,8 @@ namespace CollectibleCardGame.Unity
                 new ContainerControlledLifetimeManager());
             _container.RegisterType<MessageHandlerBase<ObserverActionMessage>, ObserverActionMessageHandler>(
                 new ContainerControlledLifetimeManager());
+            _container.RegisterType<MessageHandlerBase<ErrorMessage>, ErrorMessageHandler>(
+                new ContainerControlledLifetimeManager());
 
             _container.Resolve<CardRepository>();
             _container.Resolve<MainWindow>();

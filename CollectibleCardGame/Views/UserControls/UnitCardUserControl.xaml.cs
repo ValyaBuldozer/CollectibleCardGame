@@ -33,12 +33,12 @@ namespace CollectibleCardGame.Views.UserControls
         private void UserControl_SizeChanged(object sender, SizeChangedEventArgs e)
         {
 
-            double a = Convert.ToDouble(UserControl.ActualHeightProperty) / 25.625;
-            double b = Convert.ToDouble(UserControl.ActualHeightProperty)/ 34.17;
-            double с = Convert.ToDouble(UserControl.ActualHeightProperty) / 9.76;
-            UnitName.FontSize = a;
-            UnitStory.FontSize = b;
-            UnitCost.FontSize=UnitAttck.FontSize=UnitHealth.FontSize = с; //+высота ширина кругов(бордеров)
+            //double a = Convert.ToDouble(UserControl.ActualHeightProperty) / 25.625;
+            //double b = Convert.ToDouble(UserControl.ActualHeightProperty)/ 34.17;
+            //double с = Convert.ToDouble(UserControl.ActualHeightProperty) / 9.76;
+            //UnitName.FontSize = a;
+            //UnitStory.FontSize = b;
+            //UnitCost.FontSize=UnitAttck.FontSize=UnitHealth.FontSize = с; //+высота ширина кругов(бордеров)
         }
 
 

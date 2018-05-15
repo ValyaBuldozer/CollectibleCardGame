@@ -61,18 +61,13 @@ namespace GameData.Controllers.Global
 
         private void ObserverEventHandler(object sender, GameEndEventArgs e)
         {
-
+            _repositoryController.Add(new GameEndObserverAction(e.WinnerUsername,e.Reason));
         }
 
         private void ObserverEventHandler(object sender, ErrorEventArgs e)
         {
-            _repositoryController.Add(new ErrorObserverAction(e.Message));
+            _repositoryController.Add(new ErrorObserverAction(e.Message,e.Player));
         }
-
-        //private void ObserverEventHandler(object sender, GameStartObserverAction e)
-        //{
-        //    _repositoryController.Add(e);
-        //}
 
         private void ObserverEventHandler(object sender, ObserverAction e)
         {

@@ -13,8 +13,9 @@ namespace GameData.Models.Observer
 
         public bool IsSystemError { set; get; }
 
-        public ErrorObserverAction(string errorMessage)
+        public ErrorObserverAction(string errorMessage,Player targetPlayer)
         {
+            TargetPlayer = targetPlayer;
             ErrorMessage = errorMessage;
             Type = ObserverActionType.Error;
         }
