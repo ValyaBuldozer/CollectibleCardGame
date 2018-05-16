@@ -17,7 +17,32 @@ namespace CollectibleCardGame.ViewModels.Elements
         private int _health;
         private bool _isUnitCard;
 
-        public Card Card { get; }
+        private Card _card;
+
+        public Card Card
+        {
+            get => _card;
+            set
+            {
+                _card = value;
+                NotifyPropertyChanged(nameof(Card));
+
+                if(value == null) return;
+
+                Description = _card.Description;
+                Name = _card.Name;
+                Cost = _card.Cost;
+
+                _imagePath = _card.ImagePath;
+
+                if (_card is UnitCard unitCard)
+                {
+                    _isUnitCard = true;
+                    _attack = unitCard.BaseAttack;
+                    _health = unitCard.BaseHP;
+                }
+            }
+        }
 
         public bool IsUnitCard
         {
@@ -103,6 +128,11 @@ namespace CollectibleCardGame.ViewModels.Elements
                 _attack = unitCard.BaseAttack;
                 _health = unitCard.BaseHP;
             }
+        }
+
+        public CardViewModel()
+        {
+            Card = new SpellCard();
         }
     }
 }

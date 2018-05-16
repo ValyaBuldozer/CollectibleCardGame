@@ -64,18 +64,29 @@
             <ItemsControl Grid.Row="1" ItemsSource="{Binding Path=EnemyUnits,Mode=TwoWay}" >
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <StackPanel HorizontalAlignment="Stretch" Orientation="Horizontal"/>
+                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal"
+                                    VerticalAlignment="Stretch"/>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
                             <StackPanel>
-                                <Viewbox Stretch="Fill" Height="100" Width="80">
+                                <Viewbox Stretch="Fill" Height="120" Width="96">
                                     <Button Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, 
                                 AncestorType={x:Type Page}}, Path=ViewModel.UnitTargetCommand}" 
                                             CommandParameter="{Binding}"
-                                            BorderThickness="0" BorderBrush="{x:Null}">
+                                            BorderThickness="0" BorderBrush="{x:Null}" Background="{x:Null}">
+                                        <Button.ToolTip>
+                                            <ToolTip Background="{x:Null}" BorderThickness="0"
+                                                     Width="220" Height="410"
+                                                     HasDropShadow="True">
+                                                <Viewbox  Stretch="Fill" Width="220" Height="410">
+                                                    <uc:CardUserControl Width="220" Height="410"
+                                                                        DataContext="{Binding Path=BaseCardViewModel}"/>
+                                                </Viewbox>
+                                            </ToolTip>
+                                        </Button.ToolTip>
                                         <uc:UnitCardMiniUserControl Width="210" Height="250"
                                                                     HorizontalAlignment="Stretch" 
                                                                     VerticalAlignment="Stretch"/>
@@ -91,18 +102,28 @@
             <ItemsControl Grid.Row="2" ItemsSource="{Binding Path=PlayerUnits,Mode=TwoWay}" >
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <StackPanel HorizontalAlignment="Stretch" Orientation="Horizontal"/>
+                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal"/>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
-                            <Viewbox Stretch="Fill" Height="100" Width="80">
+                            <Viewbox Stretch="Fill" Height="120" Width="96">
                                 <Button Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, 
                                 AncestorType={x:Type Page}}, Path=ViewModel.UnitTargetCommand}" 
                                         CommandParameter="{Binding}"
                                         BorderThickness="0" BorderBrush="{x:Null}">
-                                    <uc:UnitCardMiniUserControl Width="210" Height="250"
+                                    <Button.ToolTip>
+                                        <ToolTip Background="{x:Null}" BorderThickness="0"
+                                                 Width="220" Height="410"
+                                                 HasDropShadow="True">
+                                            <Viewbox  Stretch="Fill" Width="220" Height="410">
+                                                <uc:CardUserControl Width="220" Height="410"
+                                                                    DataContext="{Binding Path=BaseCardViewModel}"/>
+                                            </Viewbox>
+                                        </ToolTip>
+                                    </Button.ToolTip>
+                                    <uc:UnitCardMiniUserControl Height="250" Width="210"
                                                             HorizontalAlignment="Stretch" 
                                                                 VerticalAlignment="Stretch"/>
                                 </Button>
