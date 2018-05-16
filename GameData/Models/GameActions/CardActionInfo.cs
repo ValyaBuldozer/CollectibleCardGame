@@ -9,5 +9,7 @@ namespace GameData.Models.Action
         public int ParameterValue { set; get; }
 
         public ActionParameterType ParameterType { set; get; }
+
+        public bool IsTargeted {set; get; }
     }
 }
