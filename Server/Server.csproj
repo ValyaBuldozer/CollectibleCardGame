@@ -123,6 +123,7 @@
     <Compile Include="Database\AppDbContext.cs" />
     <Compile Include="Database\AppDbContextInitializer.cs" />
     <Compile Include="Database\IContext.cs" />
+    <Compile Include="EventArgs.cs" />
     <Compile Include="Exceptions\SqlServerConnectionError.cs" />
     <Compile Include="Exceptions\UserServiceException.cs" />
     <Compile Include="Migrations\201803311641315_Initialize.cs" />

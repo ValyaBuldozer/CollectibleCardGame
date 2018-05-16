@@ -37,9 +37,20 @@ namespace CollectibleCardGame.ViewModels.Elements
                 _baseUnit.State.PropertyChanged += State_PropertyChanged;
                 NotifyPropertyChanged(nameof(ImagePath));
 
-                AbilityImagePath = value.State.AttackPriority != 2 ? "../../Images/IconsUnit/sword.png" :
-                    "../../Images/healthShield.png";
-
+                switch (value.State.AttackPriority)
+                {
+                    case 0:
+                        AbilityImagePath = "../../Images/IconsUnit/disguiestIco.png";
+                        break;
+                    case 1:
+                        AbilityImagePath = "../../Images/IconsUnit/sword.png";
+                        break;
+                    case 2:
+                        AbilityImagePath = "../../Images/IconsUnit/shieldIco.png";
+                        break;
+                    default:
+                        break;
+                }
             }
         }
 
@@ -113,6 +124,21 @@ namespace CollectibleCardGame.ViewModels.Elements
         {
             Attack = _baseUnit.State.Attack;
             Health = _baseUnit.State.GetResultHealth;
+
+            switch (_baseUnit.State.AttackPriority)
+            {
+                case 0:
+                    AbilityImagePath = "../../Images/IconsUnit/disguiestIco.png";
+                    break;
+                case 1:
+                    AbilityImagePath = "../../Images/IconsUnit/sword.png";
+                    break;
+                case 2:
+                    AbilityImagePath = "../../Images/IconsUnit/shieldIco.png";
+                    break;
+                default:
+                    break;
+            }
         }
 
         public UnitViewModel(Unit unit)

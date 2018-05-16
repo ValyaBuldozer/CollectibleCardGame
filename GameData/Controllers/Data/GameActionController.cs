@@ -60,7 +60,7 @@ namespace GameData.Controllers.Data
 
             actionInfo.Action?.Action.Invoke(_tableController,sender,target,actionInfo.Parameter);
             ActionTrigerred?.Invoke(this,new GameActionTriggerObserverAction(actionInfo.Action.ID,
-                sender.EntityId,target.EntityId));
+                sender.EntityId,target?.EntityId));
         }
 
         public void ExecuteAction(CardActionInfo actionInfo, Entity sender, Unit target)
