@@ -184,6 +184,7 @@ namespace GameData.Models.Repository
                         enemyPlayer.HeroUnit.State.RecieveDamage(parameter);
                     })),
                 new GameAction(name:"Полное выздоровление",id:23,description:"Восстанавливает здоровье выбранного союзного юнита до максимума",parameterType:ActionParameterType.Heal,
+                    isTargeted:true,
                     action: ((controller, sender, target, parameter) =>
                     {
                         var player = (Player) sender;
@@ -199,6 +200,7 @@ namespace GameData.Models.Repository
                         controller.DrawCard(player,parameter);
                     })),
                 new GameAction(name:"Урон по юниту",id:25,description:"Нанесение урона выбранному юниту",parameterType:ActionParameterType.Damage,
+                    isTargeted:true,
                     action: ((controller, sender, target, parameter) =>
                     {
                        target.State.RecieveDamage(parameter); 
@@ -236,6 +238,7 @@ namespace GameData.Models.Repository
 
                     })),
                 new GameAction(name:"Восстановление здоровья",id:28,description:"Восстановление здоровья выбранному юниту",parameterType:ActionParameterType.Heal,
+                    isTargeted:true,
                     action: ((controller, sender, target, parameter) =>
                     {
 
@@ -262,17 +265,9 @@ namespace GameData.Models.Repository
                     {
 
                         if(!(sender is Unit unit)) return;
-
-
-                        int unitCount=0;
-
-                        foreach (var iUnit in unit.Player.TableUnits)
-                        {
-                            unitCount++;
-                        }
-
-                        unit.State.Attack += unitCount;
-                        unit.State.BaseHealth += unitCount;
+                        
+                        unit.State.Attack+=unit.Player.TableUnits.Count;
+                        unit.State.BaseHealth += unit.Player.TableUnits.Count;
 
 
                     })),
@@ -315,6 +310,7 @@ namespace GameData.Models.Repository
 
                     })),
                 new GameAction(name:"Мягкая сталь",id:42,description:"Понижает атаку вражеского юнита",parameterType:ActionParameterType.Buff,
+                    isTargeted:true,
                     action: ((controller, sender, target, parameter) =>
                     {
                         target.State.Attack-=parameter;
@@ -323,6 +319,7 @@ namespace GameData.Models.Repository
 
                     })),
                 new GameAction(name:"Внезапное усиление",id:43,description:"Повышение атаки и здоровья выбранному юниту",parameterType:ActionParameterType.BuffRandomRange,
+                    isTargeted:true,
                     action: ((controller, sender, target, parameter) =>
                     {
 
@@ -331,6 +328,7 @@ namespace GameData.Models.Repository
 
                     })),
                 new GameAction(name:"Заточенные клинки",id:44,description:"Повышение атаки выбранному юниту",parameterType:ActionParameterType.Buff,
+                    isTargeted:true,
                     action: ((controller, sender, target, parameter) =>
                     {
 
@@ -339,6 +337,7 @@ namespace GameData.Models.Repository
 
                     })),
                 new GameAction(name:"Прилив сил",id:45,description:"Повышение здоровья выбранному юниту",parameterType:ActionParameterType.Buff,
+                    isTargeted:true,
                     action: ((controller, sender, target, parameter) =>
                     {
 
@@ -346,7 +345,7 @@ namespace GameData.Models.Repository
                         target.State.BaseHealth += parameter;
 
                     })),
-                new GameAction(name:"Урон всем",id:46,description:"Наносит всем юнитам на столе",parameterType:ActionParameterType.Damage,
+                new GameAction(name:"Урон всем",id:46,description:"Наносит урон всем юнитам на столе",parameterType:ActionParameterType.Damage,
                     action: ((controller, sender, target, parameter) =>
                     {
                         var player = (Player) sender;
@@ -368,21 +367,17 @@ namespace GameData.Models.Repository
                     action: ((controller, sender, target, parameter) =>
                     {
                         var player = (Player) sender;
-                        Player enemyPlayer =
+                        var enemyPlayer =
                             controller.GetTableCondition.Players.FirstOrDefault(p => p.Username != player.Username);
                         var rnd = new Random();
-                        if (enemyPlayer.TableUnits.Count != 0)
-                        {
-                            for (int i = 0; i <= parameter; i++)
-                            {
 
-                                int rndNum = rnd.Next(0, enemyPlayer.TableUnits.Count + 1);
+
+                        for (var i = 0; i <= parameter; i++)
+                            if (enemyPlayer.TableUnits.Count != 0)
+                            {
+                                var rndNum = rnd.Next(0, enemyPlayer.TableUnits.Count + 1);
                                 enemyPlayer.TableUnits[rndNum].State.RecieveDamage(1);
                             }
-                        }
-
-
-
                     })),
 
                 #endregion
@@ -422,6 +417,7 @@ namespace GameData.Models.Repository
                     })),
    
                 new GameAction(name:"Техника клонирования",id:52,description:"При выборе какого-либо юнита, его карта разыгрвается на стороне игрока (копируется)",parameterType:ActionParameterType.Empty,
+                    isTargeted:true,
                     action: ((controller, sender, target, parameter) =>
                     {
                         //todo: DrawCard для опредленного юнита
@@ -430,6 +426,7 @@ namespace GameData.Models.Repository
 
                     })),
                 new GameAction(name:"Подкуп",id:53,description:"Выбранная карта уничтожается, а её копия разыгрывается на стороне игрока (переходит на сторону игрока)",parameterType:ActionParameterType.Empty,
+                    isTargeted:true,
                     action: ((controller, sender, target, parameter) =>
                     {
                         //todo: DrawCard для опредленного юнита
@@ -438,6 +435,7 @@ namespace GameData.Models.Repository
 
                     })),
                 new GameAction(name:"Тактическое отступление",id:54,description:"Выбранная карта уходит в руку к игроку, на ее месте разыгрывается карта Чучела (провокатор 0/2)",parameterType:ActionParameterType.Empty,
+                    isTargeted:true,
                     action: ((controller, sender, target, parameter) =>
                     {
                         //todo: DrawCard для опредленного юнита
@@ -474,6 +472,7 @@ namespace GameData.Models.Repository
 
                     })),
                 new GameAction(name:"Крещение огнем",id:57,description:"Здоровье выбранного юнита понижается на 2, атака повышается на 4",parameterType:ActionParameterType.Buff,
+                    isTargeted:true,
                     action: ((controller, sender, target, parameter) =>
                     {
 
@@ -483,6 +482,7 @@ namespace GameData.Models.Repository
 
                     })),
                 new GameAction(name:"Живой щит",id:58,description:"Выбранный союзный юнит становится провокатором и его здоровье повышается на 2",parameterType:ActionParameterType.Buff,
+                    isTargeted:true,
                     action: ((controller, sender, target, parameter) =>
                     {
 
@@ -493,6 +493,7 @@ namespace GameData.Models.Repository
 
                     })),
                 new GameAction(name:"Деморализация",id:59,description:"Понижает атаку и здоровье выбранного юнита до 0/2 и наделяет способностью провокация",parameterType:ActionParameterType.Empty,
+                    isTargeted:true,
                     action: ((controller, sender, target, parameter) =>
                     {
 
