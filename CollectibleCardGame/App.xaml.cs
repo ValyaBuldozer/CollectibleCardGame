@@ -70,7 +70,7 @@ namespace CollectibleCardGame
             //window.Show();
             UnityKernel.InitializeKernel();
             UnityKernel.Get<MainWindow>().Show();
-            UnityKernel.Get<IGlobalController>().OnStartup();
+            UnityKernel.Get<IGlobalController>().OnStartup("178.57.33.158",8800);
 
 
         }

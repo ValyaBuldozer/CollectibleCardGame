@@ -45,7 +45,7 @@ namespace CollectibleCardGame.ViewModels.Frames
         public RelayCommand ReconnectCommand => _reconnectCommand ?? (
                             _reconnectCommand = new RelayCommand(o =>
                             {
-                                UnityKernel.Get<GlobalAppStateController>().TryConnect();
+                                UnityKernel.Get<GlobalAppStateController>().TryConnect("127.0.0.1",8800);
                             }));
 
         public LogInFramePageShellViewModel(LogInFramePage logInFramePage,
@@ -63,7 +63,8 @@ namespace CollectibleCardGame.ViewModels.Frames
 
         private void ReconnectButton_Click(object sender, RoutedEventArgs e)
         {
-            UnityKernel.Get<GlobalAppStateController>().OnStartup();
+            //todo : ИЗМЕНЕНИЕ АДРЕСА
+            UnityKernel.Get<GlobalAppStateController>().OnStartup("127.0.0.1",8800);
         }
 
         private void GoBackButton_Click(object sender, RoutedEventArgs e)
