@@ -114,7 +114,7 @@
                 <Grid Grid.Row="2" Background="Transparent">
                         <TextBlock x:Name="Story" Grid.Row="2" Text="{Binding Description}" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center"
                                FontFamily="/CollectibleCardGame;component/Fonts/#Mason Chronicles" LineHeight="14" 
-                                   LineStackingStrategy="BlockLineHeight" FontSize="16" Margin="5,0,5,0" FontWeight="Normal"/> <!--было фонтсайз 12-->
+                                   LineStackingStrategy="BlockLineHeight" FontSize="16" Margin="5,0,5,0" FontWeight="Bold"/> <!--было фонтсайз 12-->
                 </Grid>
 
 
