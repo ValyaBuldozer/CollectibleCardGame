@@ -118,7 +118,7 @@ namespace GameData.Models.Repository
                         if (enemyPlayer.TableUnits.Count != 0)
                         {
                             var rnd = new Random();
-                            int rndNum = rnd.Next(0, enemyPlayer.TableUnits.Count + 1);
+                            int rndNum = rnd.Next(0, enemyPlayer.TableUnits.Count);
                             enemyPlayer.TableUnits[rndNum].State.RecieveDamage(parameter);
                         }
                     })),
@@ -381,7 +381,7 @@ namespace GameData.Models.Repository
                         for (var i = 0; i <= parameter; i++)
                             if (enemyPlayer.TableUnits.Count != 0)
                             {
-                                var rndNum = rnd.Next(0, enemyPlayer.TableUnits.Count + 1);
+                                var rndNum = rnd.Next(0, enemyPlayer.TableUnits.Count);
                                 enemyPlayer.TableUnits[rndNum].State.RecieveDamage(1);
                             }
                     })),
@@ -465,7 +465,7 @@ namespace GameData.Models.Repository
                         Player enemyPlayer =
                             controller.GetTableCondition.Players.FirstOrDefault(p => p.Username != player.Username);
                         var rnd = new Random();
-                        int rndNum = rnd.Next(0, enemyPlayer.TableUnits.Count + 1);
+                        int rndNum = rnd.Next(0, enemyPlayer.TableUnits.Count);
                         Unit rndUnit = enemyPlayer.TableUnits[rndNum];
                        
                         foreach (var iUnit in enemyPlayer.TableUnits.ToArray())
@@ -539,13 +539,15 @@ namespace GameData.Models.Repository
                         if (enemyPlayer.TableUnits.Count>1)
                         {
                             var rnd = new Random();
-                            int rndNum = rnd.Next(0, enemyPlayer.TableUnits.Count + 1);
+                            int rndNum = rnd.Next(0, enemyPlayer.TableUnits.Count);
+                            var unit = enemyPlayer.TableUnits[rndNum];
 
-                            for (int i = 0; i <=enemyPlayer.TableUnits.Count ; i++)
+                            foreach (var iUnit in enemyPlayer.TableUnits.ToArray())
                             {
-                                if (i!=rndNum)
-                                    controller.KillUnit(enemyPlayer.TableUnits[i]);
+                                if (!Equals(iUnit,unit)) controller.KillUnit(iUnit);
                             }
+
+                           
                            
                         }
 
