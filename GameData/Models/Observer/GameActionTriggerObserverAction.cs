@@ -8,16 +8,26 @@ namespace GameData.Models.Observer
     {
         public int GameActionId { set; get; }
 
-        public Entity Sender { set; get; }
+        public int SenderEntityId { set; get; }
 
-        public Entity Target { set; get; }
+        public int TargetEntityId { set; get; }
 
-        public GameActionTriggerObserverAction(int gameActionId, Entity sender, Entity target)
+        public GameActionTriggerObserverAction(int gameActionId, int senderEntityId, int targetEntityId)
         {
             Type = ObserverActionType.GameAction;
             GameActionId = gameActionId;
-            Sender = sender;
-            Target = target;
+            SenderEntityId = senderEntityId;
+            TargetEntityId = targetEntityId;
+        }
+
+        public GameActionTriggerObserverAction(int gameActionId, int senderEntityId, int? targetEntityId)
+        {
+            Type = ObserverActionType.GameAction;
+            GameActionId = gameActionId;
+            SenderEntityId = senderEntityId;
+
+            if(targetEntityId != null)
+                TargetEntityId = (int)targetEntityId;
         }
 
         public GameActionTriggerObserverAction()

@@ -46,6 +46,8 @@ namespace CollectibleCardGame.Logic.Controllers
         {
             _entityRepositoryController.Add(action.FirstPlayer);
             _entityRepositoryController.Add(action.SecondPlayer);
+            _entityRepositoryController.Add(action.FirstPlayer.HeroUnit);
+            _entityRepositoryController.Add(action.SecondPlayer.HeroUnit);
 
             if (action.FirstPlayer.Username == _user.Username)
             {
@@ -140,10 +142,12 @@ namespace CollectibleCardGame.Logic.Controllers
 
         public void HandleObserverAction(PlayerStateChangesObserverAction action)
         {
-            if (action.PlayerUsername == _user.Username)
                 _gameViewModel.CurrentDispatcher.Invoke(() =>
                 {
-                    _gameViewModel.PlayerViewModel.PlayerMana = action.PlayerMana;
+                    if (action.PlayerUsername == _user.Username)
+                        _gameViewModel.PlayerViewModel.PlayerMana = action.PlayerMana;
+                    else
+                        _gameViewModel.EnemyViewModel.PlayerMana = action.PlayerMana;
                 });
         }
 
@@ -182,6 +186,15 @@ namespace CollectibleCardGame.Logic.Controllers
 
                 if (unitViewModel != null)
                     _gameViewModel.EnemyUnits.Remove(unitViewModel);
+            });
+        }
+
+        public void HandleObserverAction(GameEndObserverAction action)
+        {
+            _gameViewModel.CurrentDispatcher.Invoke(() =>
+            {
+                MessageBox.Show(action.WinnerUsername == 
+                                _user.Username ? "ВЫ ПОБЕДИЛИ!!!" : "ВЫ ПРОИГРАЛИ!!!");
             });
         }
     }

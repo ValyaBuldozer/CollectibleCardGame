@@ -30,10 +30,10 @@ namespace CollectibleCardGame.Logic.Controllers
             _logger = logger;
         }
 
-        public void OnStartup()
+        public void OnStartup(string adress,int port)
         {
             _mainWindowViewModel.StartBusyIndicator("Подключение к серверу");
-            if (!TryConnect())
+            if (!TryConnect(adress, port))
             {
                 _mainWindowViewModel.StopBusyIndicator();
                 _framePageShellViewModel.SetErrorPage();
@@ -55,12 +55,12 @@ namespace CollectibleCardGame.Logic.Controllers
             throw new NotImplementedException();
         }
 
-        public bool TryConnect()
+        public bool TryConnect(string address,int port)
         {
             try
             {
                 //todo : изменение ip и порта
-                _connectionController.Connect(IPAddress.Parse("127.0.0.1"), 8800);
+                _connectionController.Connect(IPAddress.Parse(address), port);
                 return true;
             }
             catch (SocketException)

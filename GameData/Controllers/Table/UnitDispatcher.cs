@@ -55,6 +55,8 @@ namespace GameData.Controllers.Table
         /// Событие изменения состояия юнита - урон, хил, бафф
         /// </summary>
         event EventHandler<EntityStateChangeObserverAction> OnUnitStateChange;
+
+        void OnUnitStateChanges(object sender, PropertyChangedEventArgs e);
     }
 
     public class UnitDispatcher : IUnitDispatcher
@@ -96,7 +98,7 @@ namespace GameData.Controllers.Table
             unit.State.ZeroHpEvent += OnUnitDies;
             unit.State.PropertyChanged += OnUnitStateChanges;
             unit.Player = sender;
-            _actionController.ExecuteAction(unit.BattleCryActionInfo,sender,actionTarget);
+            _actionController.ExecuteAction(unit.BattleCryActionInfo,unit,actionTarget);
             sender.TableUnits.Add(unit);
             _entityRepositoryController.AddNewItem(unit);
 
@@ -152,13 +154,18 @@ namespace GameData.Controllers.Table
             if(target.State.AttackPriority == 0)
                 //атака маскировки
                 return;
+
             if(target.State.AttackPriority !=2 && target.Player.TableUnits.Exists(u=>u.State.AttackPriority == 2))
                 //есть провокатор у противника
+                return;
+
+            if(!sender.State.CanAttack)
                 return;
 
             _actionController.ExecuteAction(sender.OnAttackActionInfo,sender,target);
             target.State.RecieveDamage(sender.State.Attack);
             sender.State.RecieveDamage(target.State.Attack);
+            sender.State.CanAttack = false;
         }
 
         public Unit GetUnit(UnitCard card)
@@ -179,7 +186,7 @@ namespace GameData.Controllers.Table
             };
         }
 
-        private void OnUnitStateChanges(object sender, PropertyChangedEventArgs e)
+        public void OnUnitStateChanges(object sender, PropertyChangedEventArgs e)
         {
             if(!(sender is UnitState unitState))
                 return;

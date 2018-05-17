@@ -50,14 +50,6 @@ namespace Server.Controllers
             try
             {
                 //todo : говнокод что делать то
-                //отправляем сообщения о начале игры обоим клиентам
-                //var message = new MessageBase(MessageBaseType.GameStartMessage, new GameStartMessage()
-                //{
-                //    EnemyUsername = firstPlayerClient.User.Username
-                //}, null);
-                //client.ClientController.SendMessage(message);
-                //((GameStartMessage)message.Content).EnemyUsername = client.User.Username;
-                //firstPlayerClient.ClientController.SendMessage(message);
 
                 client.CurrentLobby = firstPlayerClient.CurrentLobby;
                 firstPlayerClient.CurrentLobby.SecondClient = client;
@@ -85,6 +77,7 @@ namespace Server.Controllers
                     PlayerTableUnitsMaxCount = 10
                 };
                 client.CurrentLobby.InitializeGame(defaultSettings);
+                client.CurrentLobby.OnClose += OnLobbyClose;
                 client.CurrentLobby.StartGame();
 
                 return true;
@@ -98,14 +91,10 @@ namespace Server.Controllers
 
         public GameLobby CreateLobby(Client firstClient, Client secondClient)
         {
-            //todo : МНОГОПОТОЧНОСТЬ
-            //todo : ЗАПРЕТИТЬ ИГРАТЬ С САМИМ СОБОЙ - ПРОВЕРКИ
             if(firstClient == null || secondClient == null)
                 throw new NullReferenceException();
 
             var gameLobby = new GameLobby(firstClient, secondClient);
-            //gameLobby.InitializeGame();
-
 
             var message = new MessageBase(MessageBaseType.GameStartMessage, new GameStartMessage()
             {
@@ -121,6 +110,17 @@ namespace Server.Controllers
             secondClient.CurrentLobby = gameLobby;
 
             return gameLobby;
+        }
+
+        private void OnLobbyClose(object sender, GameLobbyCloseEventArgs e)
+        {
+            if(!(sender is GameLobby lobby)) return;
+
+            lobby.FirstClient.CurrentLobby = null;
+            lobby.SecondClient.CurrentLobby = null;
+            //todo : запись в статистику
+
+            lobby.OnClose -= OnLobbyClose;
         }
     }
 }

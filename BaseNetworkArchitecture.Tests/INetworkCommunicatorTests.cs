@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 using BaseNetworkArchitecture.Common;
 using BaseNetworkArchitecture.Common.Messages;
 using BaseNetworkArchitecture.Server;
@@ -133,11 +134,6 @@ namespace BaseNetworkArchitecture.Tests
         [TestMethod]
         public void INwC_2_ConnectAndChat() 
         {
-
-           
-
-
-
             //arrange
             Random rnd = new Random();
             int port = rnd.Next(8000, 30001);
@@ -208,6 +204,65 @@ namespace BaseNetworkArchitecture.Tests
 
 
         #endregion
+
+
+        [TestMethod]
+        public void BigLengthMessageTest()
+        {
+            //arrange
+            Random rnd = new Random();
+            int port = rnd.Next(8000, 30001);
+
+            INetworkCommunicator nc1 = new TcpCommunicator(new TcpClient());
+
+            TcpListener listener = new TcpListener(IPAddress.Parse("127.0.0.1"), port);
+            listener.Start();
+            var result = listener.AcceptTcpClientAsync();
+
+            //act
+            nc1.Connect(IPAddress.Parse("127.0.0.1"), port);
+            var client = result.GetAwaiter().GetResult();
+            INetworkCommunicator nc2 = new TcpCommunicator(client);
+
+            var message = new NetworkMessage(_bigText);
+            bool flag = false;
+
+            nc2.MessageRecievedEvent += (sender, args) =>
+            {
+                if (args.NetworkMessage.Content == _bigText)
+                    flag = true;
+            };
+
+            nc2.StartReadMessages();
+            nc1.SendMessage(message);
+
+            Thread.Sleep(10);
+            //Assert.IsTrue(flag);
+        }
+
+
+        private readonly string _bigText =
+            "testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest"+
+        "testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest" +
+        "testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest" +
+        "testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest" +
+        "testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest"+
+        "testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest"+
+        "testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest"+
+        "testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest"+
+        "testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest"+
+        "testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest"+
+        "testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest"+
+        "testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest"+
+        "testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest"+
+        "testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest"+
+        "testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest"+
+        "testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest"+
+        "testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest"+
+        "testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest"+
+        "testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest"+
+        "testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest"+ 
+        "testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest";
 
     }
 }

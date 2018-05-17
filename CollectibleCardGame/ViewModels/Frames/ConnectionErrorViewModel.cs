@@ -23,7 +23,7 @@ namespace CollectibleCardGame.ViewModels.Frames
                        {
                            BusyMessage = "Подключаемся...";
                            IsBusy = true;
-                           if (UnityKernel.Get<GlobalAppStateController>().TryConnect())
+                           if (UnityKernel.Get<GlobalAppStateController>().TryConnect("127.0.0.1",8800))
                                //todo : Обращение от VM к VM
                            {
                                IsBusy = false;

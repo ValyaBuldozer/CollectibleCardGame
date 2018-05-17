@@ -14,6 +14,9 @@ namespace CollectibleCardGame.ViewModels.Elements
         private int _health;
         private string _name;
         private bool _isNotHeroUnit;
+        private CardViewModel _baseCardViewModel;
+
+        private string _abilityImagePath;
 
         public Unit BaseUnit
         {
@@ -26,12 +29,38 @@ namespace CollectibleCardGame.ViewModels.Elements
                 IsNotHeroUnit = !(value is HeroUnit);
 
                 if(value?.State == null) return;
+                BaseCardViewModel.Card = _baseUnit.BaseCard;
 
                 Attack = value.State.Attack;
                 Health = value.State.GetResultHealth;
                 Name = value.BaseCard.Name;
                 _baseUnit.State.PropertyChanged += State_PropertyChanged;
                 NotifyPropertyChanged(nameof(ImagePath));
+
+                switch (value.State.AttackPriority)
+                {
+                    case 0:
+                        AbilityImagePath = "../../Images/IconsUnit/disguiestIco.png";
+                        break;
+                    case 1:
+                        AbilityImagePath = "../../Images/IconsUnit/sword.png";
+                        break;
+                    case 2:
+                        AbilityImagePath = "../../Images/IconsUnit/shieldIco.png";
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+        public CardViewModel BaseCardViewModel
+        {
+            get => _baseCardViewModel;
+            set
+            {
+                _baseCardViewModel = value;
+                NotifyPropertyChanged(nameof(BaseCardViewModel));
             }
         }
 
@@ -39,6 +68,16 @@ namespace CollectibleCardGame.ViewModels.Elements
         {
             get => _baseUnit?.BaseCard?.ImagePath;
             set => _baseUnit.BaseCard.ImagePath = value;
+        }
+
+        public string AbilityImagePath
+        {
+            get => _abilityImagePath;
+            set
+            {
+                _abilityImagePath = value;
+                NotifyPropertyChanged(nameof(AbilityImagePath));
+            }
         }
 
         public int Attack
@@ -85,17 +124,33 @@ namespace CollectibleCardGame.ViewModels.Elements
         {
             Attack = _baseUnit.State.Attack;
             Health = _baseUnit.State.GetResultHealth;
+
+            switch (_baseUnit.State.AttackPriority)
+            {
+                case 0:
+                    AbilityImagePath = "../../Images/IconsUnit/disguiestIco.png";
+                    break;
+                case 1:
+                    AbilityImagePath = "../../Images/IconsUnit/sword.png";
+                    break;
+                case 2:
+                    AbilityImagePath = "../../Images/IconsUnit/shieldIco.png";
+                    break;
+                default:
+                    break;
+            }
         }
 
         public UnitViewModel(Unit unit)
         {
             _isNotHeroUnit = !(unit is HeroUnit);
-
+            _baseCardViewModel = new CardViewModel();
             BaseUnit = unit;
         }
 
         public UnitViewModel()
         {
+            _baseCardViewModel = new CardViewModel();
             BaseUnit = null;
         }
     }

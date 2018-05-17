@@ -8,7 +8,7 @@
       d:DesignHeight="300" d:DesignWidth="300"
       Title="HelpFramePage">
 
-    <Grid Background="Brown">
+    <Grid Background="{DynamicResource BasicBackGround}">
         
     </Grid>
 </Page>

@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BaseNetworkArchitecture.Common;
 using GameData.Controllers.Table;
 using GameData.Models;
 using GameData.Models.Action;
 using GameData.Models.Observer;
 using GameData.Models.Units;
+using Exception = System.Exception;
 
 namespace GameData.Controllers.Data
 {
@@ -23,10 +25,12 @@ namespace GameData.Controllers.Data
     {
         private readonly IDataRepositoryController<GameAction> _repositoryController;
         private readonly IActionTableControlller _tableController;
+        private readonly ILogger _logger;
 
         public GameActionController(IDataRepositoryController<GameAction> repositoryController,
-             IActionTableControlller tableController)
+             IActionTableControlller tableController,ILogger logger)
         {
+            _logger = logger;
             _repositoryController = repositoryController;
             _tableController = tableController;
         }
@@ -58,9 +62,17 @@ namespace GameData.Controllers.Data
             if(actionInfo == null)
                 return;
 
-            actionInfo.Action?.Action.Invoke(_tableController,sender,target,actionInfo.Parameter);
-            ActionTrigerred?.Invoke(this,new GameActionTriggerObserverAction(actionInfo.Action.ID,
-                sender,target));
+            try
+            {
+                actionInfo.Action?.Action.Invoke(_tableController, sender, target, actionInfo.Parameter);
+                ActionTrigerred?.Invoke(this, new GameActionTriggerObserverAction(actionInfo.Action.ID,
+                    sender.EntityId, target?.EntityId));
+            }
+            catch (Exception e)
+            {
+                //любые исключение в экшене
+                _logger?.Log(e);
+            }
         }
 
         public void ExecuteAction(CardActionInfo actionInfo, Entity sender, Unit target)
@@ -69,10 +81,18 @@ namespace GameData.Controllers.Data
 
             if(action == null) return;
 
-            GetGameActionInfo(actionInfo).Action.Action.Invoke(
-                _tableController, sender, target, actionInfo.ParameterValue);
-            ActionTrigerred?.Invoke(this,new GameActionTriggerObserverAction(action.Action.ID,
-                sender,target));
+            try
+            {
+                GetGameActionInfo(actionInfo).Action.Action.Invoke(
+                    _tableController, sender, target, actionInfo.ParameterValue);
+                ActionTrigerred?.Invoke(this,new GameActionTriggerObserverAction(action.Action.ID,
+                    sender.EntityId,target?.EntityId));
+            }
+            catch (Exception e)
+            {
+                //любые исключение в экшене
+                _logger?.Log(e);
+            }
         }
     }
 }

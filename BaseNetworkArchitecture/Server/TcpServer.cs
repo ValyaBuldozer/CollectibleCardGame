@@ -11,7 +11,6 @@ namespace BaseNetworkArchitecture.Server
     public class TcpServer : IServer
     {
         private const string LOCALHOST_IP = "127.0.0.1";
-        private readonly int PORT;
 
         [Dependency]
         public ILogger Logger { set; get; }
