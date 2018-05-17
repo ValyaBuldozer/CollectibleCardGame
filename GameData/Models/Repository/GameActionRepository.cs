@@ -159,9 +159,9 @@ namespace GameData.Models.Repository
                 new GameAction(name:"Полное усиление",id:20,description:"Повышение атаки и здоровья всем дружественным юнитам",parameterType:ActionParameterType.Buff,
                     action: ((controller, sender, target, parameter) =>
                     {
-                        var player = (Player) sender;
+                        if(!(sender is Unit unit)) return;
 
-                        foreach (var iUnit in player.TableUnits)
+                        foreach (var iUnit in unit.Player.TableUnits)
                         {
                             iUnit.State.Attack += parameter;
                             iUnit.State.BaseHealth += parameter;
@@ -176,26 +176,28 @@ namespace GameData.Models.Repository
                     })),
                 new GameAction(name:"Нанесение урона герою",id:22,description:"Наносит урон герою противника",parameterType:ActionParameterType.Damage,
                     action: ((controller, sender, target, parameter) =>
-                    {
+                    
+                        {Player player = sender is Player ? (Player) sender : (sender as Unit).Player;
 
-                         var player = (Player) sender;
+                        
                         Player enemyPlayer =
                             controller.GetTableCondition.Players.FirstOrDefault(p => p.Username != player.Username);
                         enemyPlayer.HeroUnit.State.RecieveDamage(parameter);
                     })),
+                  //(не параметровый)
                 new GameAction(name:"Полное выздоровление",id:23,description:"Восстанавливает здоровье выбранного союзного юнита до максимума",parameterType:ActionParameterType.Heal,
                     isTargeted:true,
                     action: ((controller, sender, target, parameter) =>
                     {
-                        var player = (Player) sender;
+                        if(!(sender is Unit unit)) return;
 
-                        if (Equals(target.Player, player))
+                        if (Equals(target.Player, unit.Player))
                         target.State.Heal(target.State.BaseHealth-target.State.GetResultHealth);
                     })),
                 new GameAction(name:"Выдача карт(ы)",id:24,description:"Выдает карту(ы) из колоды игрока",parameterType:ActionParameterType.Empty,
                     action: ((controller, sender, target, parameter) =>
                     {
-                        var player = (Player) sender;
+                        Player player = sender is Player ? (Player) sender : (sender as Unit).Player;
 
                         controller.DrawCard(player,parameter);
                     })),
@@ -203,13 +205,14 @@ namespace GameData.Models.Repository
                     isTargeted:true,
                     action: ((controller, sender, target, parameter) =>
                     {
+                       
                        target.State.RecieveDamage(parameter); 
                     })),
                 new GameAction(name:"Улучшение заклинаний",id:26,description:"Повышение силы атакующих заклинаний в руке",parameterType:ActionParameterType.Buff,
                     action: ((controller, sender, target, parameter) =>
                     {
-                        var player = (Player) sender;
-                        foreach (var iCard in player.HandCards.ToArray())
+                        if(!(sender is Unit unit)) return;
+                        foreach (var iCard in unit.Player.HandCards.ToArray())
                         {
                             var cCard = iCard as SpellCard;
                             if (cCard?.ActionInfo.ParameterType == ActionParameterType.Damage)
@@ -241,7 +244,7 @@ namespace GameData.Models.Repository
                     isTargeted:true,
                     action: ((controller, sender, target, parameter) =>
                     {
-
+                       
                         target.State.Heal(parameter);
 
 
@@ -249,10 +252,10 @@ namespace GameData.Models.Repository
                 new GameAction(name:"Всеобщее восстановление",id:29,description:"Восстановление здоровья всем дружественным юнитам",parameterType:ActionParameterType.Heal,
                     action: ((controller, sender, target, parameter) =>
                     {
+                        if(!(sender is Unit unit)) return;
+                       
 
-                        var player = (Player) sender;
-
-                        foreach (var iUnit in player.TableUnits)
+                        foreach (var iUnit in unit.Player.TableUnits)
                         {
                             iUnit.State.Heal(parameter);
                         }
@@ -291,7 +294,7 @@ namespace GameData.Models.Repository
                 new GameAction(name:"Урон всем вражеским отрядам",id:40,description:"Наносит урон всем вражеским отрядам",parameterType:ActionParameterType.Damage,
                     action: ((controller, sender, target, parameter) =>
                     {
-                        var player = (Player) sender;
+                        if(!(sender is Player player)) return;
                         Player enemyPlayer =
                             controller.GetTableCondition.Players.FirstOrDefault(p => p.Username != player.Username);
                         foreach (var iUnit in enemyPlayer.TableUnits.ToArray())
@@ -301,11 +304,14 @@ namespace GameData.Models.Repository
 
 
                     })),
-                new GameAction(name:"Выдача золота",id:41,description:"Выдает дополнительное золото игроку",parameterType:ActionParameterType.Buff,
+                //(не параметровый)
+                new GameAction(name:"Выдача золота",id:41,description:"Выдает дополнительнsq золотой игроку на текущий ход",parameterType:ActionParameterType.Buff,
                     action: ((controller, sender, target, parameter) =>
                     {
-                       //todo: Выдача золота игроку
-
+                      
+                        if(!(sender is Player player)) return;
+                        if(player.Mana.Current<10)
+                        player.Mana.Current = player.Mana.Base+1;
 
 
                     })),
@@ -348,7 +354,7 @@ namespace GameData.Models.Repository
                 new GameAction(name:"Урон всем",id:46,description:"Наносит урон всем юнитам на столе",parameterType:ActionParameterType.Damage,
                     action: ((controller, sender, target, parameter) =>
                     {
-                        var player = (Player) sender;
+                        if(!(sender is Player player)) return;
                         foreach (var iUnit in player.TableUnits.ToArray())
                         {
                             iUnit.State.RecieveDamage(parameter);
@@ -366,7 +372,7 @@ namespace GameData.Models.Repository
                 new GameAction(name:"Энергетический выброс",id:47,description:"Случайно распределяет урон по вражеским юнитам",parameterType:ActionParameterType.Damage,
                     action: ((controller, sender, target, parameter) =>
                     {
-                        var player = (Player) sender;
+                        if(!(sender is Player player)) return;
                         var enemyPlayer =
                             controller.GetTableCondition.Players.FirstOrDefault(p => p.Username != player.Username);
                         var rnd = new Random();
@@ -387,7 +393,7 @@ namespace GameData.Models.Repository
                 new GameAction(name:"Пробивающий разряд",id:50,description:"Наносит 3 урона герою противника и 1 урон всем вражеским юнитам",parameterType:ActionParameterType.Damage,
                     action: ((controller, sender, target, parameter) =>
                     {
-                        var player = (Player) sender;
+                        if(!(sender is Player player)) return;
                         Player enemyPlayer =
                             controller.GetTableCondition.Players.FirstOrDefault(p => p.Username != player.Username);
                         enemyPlayer.HeroUnit.State.RecieveDamage(3);
@@ -402,7 +408,7 @@ namespace GameData.Models.Repository
                 new GameAction(name:"Сфера поглощения",id:51,description:"Высасывает 1 единицу здоровья у всех юнитов противника и повышает всем союзным юнитам 1 единицу здоровья",parameterType:ActionParameterType.Damage,
                     action: ((controller, sender, target, parameter) =>
                     {
-                        var player = (Player) sender;
+                        if(!(sender is Player player)) return;
                         Player enemyPlayer =
                             controller.GetTableCondition.Players.FirstOrDefault(p => p.Username != player.Username);
                         foreach (var iUnit in player.TableUnits.ToArray())
@@ -455,7 +461,7 @@ namespace GameData.Models.Repository
                     action: ((controller, sender, target, parameter) =>
                     {
 
-                        var player = (Player) sender;
+                        if(!(sender is Player player)) return;
                         Player enemyPlayer =
                             controller.GetTableCondition.Players.FirstOrDefault(p => p.Username != player.Username);
                         var rnd = new Random();
@@ -507,7 +513,7 @@ namespace GameData.Models.Repository
                     action: ((controller, sender, target, parameter) =>
                     {
 
-                        var player = (Player) sender;
+                        if(!(sender is Player player)) return;
                         foreach (var iUnit in player.TableUnits.ToArray())
                         {
                             controller.KillUnit(iUnit);
@@ -526,8 +532,8 @@ namespace GameData.Models.Repository
                     action: ((controller, sender, target, parameter) =>
                     {
 
-                        var player = (Player) sender;
-                       
+                        if(!(sender is Player player)) return;
+
                         Player enemyPlayer =
                             controller.GetTableCondition.Players.FirstOrDefault(p => p.Username != player.Username);
                         if (enemyPlayer.TableUnits.Count>1)
@@ -554,7 +560,7 @@ namespace GameData.Models.Repository
                 new GameAction(name:"Метель",id:63,description:"Снижает атаку отрядов до 1 у обоих игроков",parameterType:ActionParameterType.Empty,
                     action: ((controller, sender, target, parameter) =>
                     {
-                        var player = (Player) sender;
+                        if(!(sender is Player player)) return;
                         foreach (var iUnit in player.TableUnits.ToArray())
                         {
                             iUnit.State.Attack = 1;
@@ -570,6 +576,8 @@ namespace GameData.Models.Repository
 
 
                     })),
+               
+                
                
                 #endregion
                 #endregion

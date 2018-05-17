@@ -258,13 +258,13 @@
 		"CanAttack": false,
 		"AttackActionInfo": null,
 		"DamageRecievedActionInfo": null,
-			"BattleCryActionInfo": {
-				"$type": "GameData.Models.Action.CardActionInfo, GameData",
-				"ActionId": 25,
-				"ParameterValue": 2,
-				"ParameterType": 0,
-				"IsTargeted": true
-			},
+		"BattleCryActionInfo": {
+			"$type": "GameData.Models.Action.CardActionInfo, GameData",
+			"ActionId": 25,
+			"ParameterValue": 2,
+			"ParameterType": 0,
+			"IsTargeted": true
+		},
 		"DeathRattleActionInfo": null
 	},
 	{
@@ -384,7 +384,7 @@
 		"ActionInfo": {
 			"$type": "GameData.Models.Action.CardActionInfo, GameData",
 			"ActionId": 40,
-			"ParameterValue": 3,
+			"ParameterValue": 2,
 			"ParameterType": 0
 		}
 	},
@@ -418,7 +418,7 @@
 			"ActionId": 25,
 			"ParameterValue": 5,
 			"ParameterType": 0,
-			"IsTargeted": true 
+			"IsTargeted": true
 		}
 	},
 	{
@@ -1026,13 +1026,13 @@
 		"CanAttack": false,
 		"AttackActionInfo": null,
 		"DamageRecievedActionInfo": null,
-			"BattleCryActionInfo": {
-				"$type": "GameData.Models.Action.CardActionInfo, GameData",
-				"ActionId": 25,
-				"ParameterValue": 2,
-				"ParameterType": 0,
-				"IsTargeted": true
-			},
+		"BattleCryActionInfo": {
+			"$type": "GameData.Models.Action.CardActionInfo, GameData",
+			"ActionId": 25,
+			"ParameterValue": 2,
+			"ParameterType": 0,
+			"IsTargeted": true
+		},
 		"DeathRattleActionInfo": null
 	},
 	{
@@ -1294,14 +1294,14 @@
 		"ID": 83,
 		"Name": "Накеры",
 		"Description": "Мелкие, быстрые, гнусные...",
-		"Cost": 2,
+		"Cost": 1,
 		"CanBePlayedOnEnemyTurn": false,
 		"ImagePath": "../../Images/ImagesUnit/Darkside/Накеры.jpg",
 		"Fraction": 3,
-		"BaseHP": 3,
-		"BaseAttack": 2,
+		"BaseHP": 1,
+		"BaseAttack": 1,
 		"AttackPriority": 1,
-		"CanAttack": false,
+		"CanAttack": true,
 		"AttackActionInfo": null,
 		"DamageRecievedActionInfo": null,
 		"BattleCryActionInfo": null,
@@ -1368,13 +1368,13 @@
 		"CanAttack": false,
 		"AttackActionInfo": null,
 		"DamageRecievedActionInfo": null,
-			"BattleCryActionInfo": {
-				"$type": "GameData.Models.Action.CardActionInfo, GameData",
-				"ActionId": 25,
-				"ParameterValue": 2,
-				"ParameterType": 0,
-				"IsTargeted": true
-			},
+		"BattleCryActionInfo": {
+			"$type": "GameData.Models.Action.CardActionInfo, GameData",
+			"ActionId": 25,
+			"ParameterValue": 2,
+			"ParameterType": 0,
+			"IsTargeted": true
+		},
 		"DeathRattleActionInfo": null
 	},
 	{
@@ -1405,14 +1405,14 @@
 		"ID": 88,
 		"Name": "Восставшие",
 		"Description": "[Рывок] Ни скорости, ни ловкости, не говоря уже о хитрости, просто тупое повиновение.",
-		"Cost": 1,
+		"Cost": 2,
 		"CanBePlayedOnEnemyTurn": false,
 		"ImagePath": "../../Images/ImagesUnit/Darkside/Восставшие.jpg",
 		"Fraction": 3,
-		"BaseHP": 1,
-		"BaseAttack": 1,
+		"BaseHP": 3,
+		"BaseAttack": 2,
 		"AttackPriority": 1,
-		"CanAttack": true,
+		"CanAttack": false,
 		"AttackActionInfo": null,
 		"DamageRecievedActionInfo": null,
 		"BattleCryActionInfo": null,
@@ -1559,13 +1559,13 @@
 		"CanAttack": false,
 		"AttackActionInfo": null,
 		"DamageRecievedActionInfo": null,
-			"BattleCryActionInfo": {
-				"$type": "GameData.Models.Action.CardActionInfo, GameData",
-				"ActionId": 25,
-				"ParameterValue": 2,
-				"ParameterType": 0,
-				"IsTargeted": true
-			},
+		"BattleCryActionInfo": {
+			"$type": "GameData.Models.Action.CardActionInfo, GameData",
+			"ActionId": 25,
+			"ParameterValue": 2,
+			"ParameterType": 0,
+			"IsTargeted": true
+		},
 		"DeathRattleActionInfo": null
 	},
 	{
@@ -1713,7 +1713,489 @@
 		"DamageRecievedActionInfo": null,
 		"BattleCryActionInfo": null,
 		"DeathRattleActionInfo": null
+	},
+	{
+		"$type": "GameData.Models.Cards.UnitCard, GameData",
+		"ID": 104,
+		"Name": "Полевой медик",
+		"Description": "Он должен был бороться со злом, а не примкнуть к нему.",
+		"Cost": 5,
+		"CanBePlayedOnEnemyTurn": false,
+		"ImagePath": "../../Images/ImagesUnit/Neutral/Полевой медик.jpg",
+		"Fraction": 0,
+		"BaseHP": 2,
+		"BaseAttack": 2,
+		"AttackPriority": 1,
+		"CanAttack": false,
+		"AttackActionInfo": null,
+		"DamageRecievedActionInfo": null,
+		"BattleCryActionInfo": {
+			"$type": "GameData.Models.Action.CardActionInfo, GameData",
+			"ActionId": 23,
+			"ParameterValue": 0,
+			"ParameterType": 2,
+			"IsTargeted": true
+		},
+		"DeathRattleActionInfo": null
+	},
+	{
+		"$type": "GameData.Models.Cards.UnitCard, GameData",
+		"ID": 105,
+		"Name": "Наемные аллебардисты",
+		"Description": "[Провокатор]  За пару сотен, думаю, пополним ваши ряды...",
+		"Cost": 3,
+		"CanBePlayedOnEnemyTurn": false,
+		"ImagePath": "../../Images/ImagesUnit/Neutral/Наемные аллебардисты.jpg",
+		"Fraction": 0,
+		"BaseHP": 4,
+		"BaseAttack": 3,
+		"AttackPriority": 2,
+		"CanAttack": false,
+		"AttackActionInfo": null,
+		"DamageRecievedActionInfo": null,
+		"BattleCryActionInfo": null,
+		"DeathRattleActionInfo": null
+	},
+	{
+		"$type": "GameData.Models.Cards.UnitCard, GameData",
+		"ID": 106,
+		"Name": "Блуждающая лучница",
+		"Description": "[Превентивный удар] Берусь за любую работу...выполняю всегда профессионально...",
+		"Cost": 4,
+		"CanBePlayedOnEnemyTurn": false,
+		"ImagePath": "../../Images/ImagesUnit/Neutral/Блуждающая лучница.jpg",
+		"Fraction": 0,
+		"BaseHP": 2,
+		"BaseAttack": 3,
+		"AttackPriority": 1,
+		"CanAttack": false,
+		"AttackActionInfo": null,
+		"DamageRecievedActionInfo": null,
+		"BattleCryActionInfo": {
+			"$type": "GameData.Models.Action.CardActionInfo, GameData",
+			"ActionId": 25,
+			"ParameterValue": 2,
+			"ParameterType": 0,
+			"IsTargeted": true
+		},
+		"DeathRattleActionInfo": null
+	},
+	{
+		"$type": "GameData.Models.Cards.UnitCard, GameData",
+		"ID": 107,
+		"Name": "Павший рыцарь",
+		"Description": "[Мастер осады] Разыскивается за убийство, дезертирство, воровство и подделку документов.",
+		"Cost": 8,
+		"CanBePlayedOnEnemyTurn": false,
+		"ImagePath": "../../Images/ImagesUnit/Neutral/Павший рыцарь.jpg",
+		"Fraction": 0,
+		"BaseHP": 4,
+		"BaseAttack": 6,
+		"AttackPriority": 1,
+		"CanAttack": false,
+		"AttackActionInfo": null,
+		"DamageRecievedActionInfo": null,
+		"BattleCryActionInfo": {
+			"$type": "GameData.Models.Action.CardActionInfo, GameData",
+			"ActionId": 22,
+			"ParameterValue": 5,
+			"ParameterType": 0
+		},
+		"DeathRattleActionInfo": null
+	},
+	{
+		"$type": "GameData.Models.Cards.UnitCard, GameData",
+		"ID": 108,
+		"Name": "Доспешная воительница",
+		"Description": "Сколько славных рыцарей из-за неё потеряло сначала рассудок, а потом и жизнь...",
+		"Cost": 4,
+		"CanBePlayedOnEnemyTurn": false,
+		"ImagePath": "../../Images/ImagesUnit/Neutral/Доспешная воительница.jpg",
+		"Fraction": 0,
+		"BaseHP": 4,
+		"BaseAttack": 5,
+		"AttackPriority": 1,
+		"CanAttack": false,
+		"AttackActionInfo": null,
+		"DamageRecievedActionInfo": null,
+		"BattleCryActionInfo": null,
+		"DeathRattleActionInfo": null
+	},
+	{
+		"$type": "GameData.Models.Cards.UnitCard, GameData",
+		"ID": 109,
+		"Name": "Наемные варяги",
+		"Description": "[Берсерк] От северных льдов до южных пустынь...мы были везде, а теперь мы тут.",
+		"Cost": 5,
+		"CanBePlayedOnEnemyTurn": false,
+		"ImagePath": "../../Images/ImagesUnit/Neutral/Наемные варяги.jpg",
+		"Fraction": 0,
+		"BaseHP": 6,
+		"BaseAttack": 2,
+		"AttackPriority": 1,
+		"CanAttack": false,
+		"AttackActionInfo": null,
+		"DamageRecievedActionInfo": {
+			"$type": "GameData.Models.Action.CardActionInfo, GameData",
+			"ActionId": 21,
+			"ParameterValue": 3,
+			"ParameterType": 4
+		},
+		"BattleCryActionInfo": null,
+		"DeathRattleActionInfo": null
+	},
+	{
+		"$type": "GameData.Models.Cards.UnitCard, GameData",
+		"ID": 110,
+		"Name": "Чучело",
+		"Description": "[Провокатор] Это их точно отвлечет, так ведь?",
+		"Cost": 1,
+		"CanBePlayedOnEnemyTurn": false,
+		"ImagePath": "../../Images/ImagesUnit/Neutral/Чучело.jpg",
+		"Fraction": 0,
+		"BaseHP": 2,
+		"BaseAttack": 0,
+		"AttackPriority": 2,
+		"CanAttack": false,
+		"AttackActionInfo": null,
+		"DamageRecievedActionInfo": null,
+		"BattleCryActionInfo": null,
+		"DeathRattleActionInfo": null
+	},
+	{
+		"$type": "GameData.Models.Cards.UnitCard, GameData",
+		"ID": 111,
+		"Name": "Заморская дружина",
+		"Description": "Вы разве никогда не слышали о Киевской Руси?",
+		"Cost": 2,
+		"CanBePlayedOnEnemyTurn": false,
+		"ImagePath": "../../Images/ImagesUnit/Neutral/Заморская дружина.jpg",
+		"Fraction": 0,
+		"BaseHP": 2,
+		"BaseAttack": 3,
+		"AttackPriority": 1,
+		"CanAttack": false,
+		"AttackActionInfo": null,
+		"DamageRecievedActionInfo": null,
+		"BattleCryActionInfo": null,
+		"DeathRattleActionInfo": null
+	},
+	{
+		"$type": "GameData.Models.Cards.UnitCard, GameData",
+		"ID": 112,
+		"Name": "Лесные разбойники",
+		"Description": "[Маскировка] Все эти их партизанские штучки...такая низость и бесчестье...",
+		"Cost": 4,
+		"CanBePlayedOnEnemyTurn": false,
+		"ImagePath": "../../Images/ImagesUnit/Neutral/Лесные разбойники.jpg",
+		"Fraction": 0,
+		"BaseHP": 2,
+		"BaseAttack": 5,
+		"AttackPriority": 0,
+		"CanAttack": false,
+		"AttackActionInfo": {
+			"$type": "GameData.Models.Action.CardActionInfo, GameData",
+			"ActionId": 31,
+			"ParameterValue": 0,
+			"ParameterType": 6
+		},
+		"DamageRecievedActionInfo": null,
+		"BattleCryActionInfo": null,
+		"DeathRattleActionInfo": null
+	},
+	{
+		"$type": "GameData.Models.Cards.UnitCard, GameData",
+		"ID": 113,
+		"Name": "Мутант-убийца",
+		"Description": "[Мастер клинка] Обычно мутанты не слишком сговорчивы...",
+		"Cost": 5,
+		"CanBePlayedOnEnemyTurn": false,
+		"ImagePath": "../../Images/ImagesUnit/Neutral/Мутант-убийца.jpg",
+		"Fraction": 0,
+		"BaseHP": 7,
+		"BaseAttack": 3,
+		"AttackPriority": 1,
+		"CanAttack": false,
+		"AttackActionInfo": {
+			"$type": "GameData.Models.Action.CardActionInfo, GameData",
+			"ActionId": 21,
+			"ParameterValue": 2,
+			"ParameterType": 4
+		},
+		"DamageRecievedActionInfo": null,
+		"BattleCryActionInfo": null,
+		"DeathRattleActionInfo": null
+	},
+	{
+		"$type": "GameData.Models.Cards.UnitCard, GameData",
+		"ID": 114,
+		"Name": "Боевой слон",
+		"Description": "Говорят они боятся мышей...но проверять это особого желания нет.",
+		"Cost": 2,
+		"CanBePlayedOnEnemyTurn": false,
+		"ImagePath": "../../Images/ImagesUnit/Neutral/Боевой слон.jpg",
+		"Fraction": 0,
+		"BaseHP": 3,
+		"BaseAttack": 2,
+		"AttackPriority": 1,
+		"CanAttack": false,
+		"AttackActionInfo": null,
+		"DamageRecievedActionInfo": null,
+		"BattleCryActionInfo": null,
+		"DeathRattleActionInfo": null
+	},
+	{
+		"$type": "GameData.Models.Cards.UnitCard, GameData",
+		"ID": 115,
+		"Name": "Кочевники",
+		"Description": "[Рывок] И вышел другой конь, рыжий, и сидящему на нем дано взять мир с земли.",
+		"Cost": 3,
+		"CanBePlayedOnEnemyTurn": false,
+		"ImagePath": "../../Images/ImagesUnit/Neutral/Кочевники.jpg",
+		"Fraction": 0,
+		"BaseHP": 2,
+		"BaseAttack": 4,
+		"AttackPriority": 1,
+		"CanAttack": true,
+		"AttackActionInfo": null,
+		"DamageRecievedActionInfo": null,
+		"BattleCryActionInfo": null,
+		"DeathRattleActionInfo": null
+	},
+	{
+		"$type": "GameData.Models.Cards.SpellCard, GameData",
+		"ID": 116,
+		"Name": "Затерянная казна",
+		"Description": "Игрок получает 1 золотой на тукущий ход",
+		"Cost": 0,
+		"CanBePlayedOnEnemyTurn": false,
+		"ImagePath": "../../Images/ImagesSpell/Затерянная казна.jpg",
+		"Fraction": 0,
+		"ActionInfo": {
+			"$type": "GameData.Models.Action.CardActionInfo, GameData",
+			"ActionId": 41,
+			"ParameterValue": 0,
+			"ParameterType": 4
+		}
+	},
+	{
+		"$type": "GameData.Models.Cards.SpellCard, GameData",
+		"ID": 121,
+		"Name": "Казнь",
+		"Description": "Уничтожает случаный отряд противника",
+		"Cost": 4,
+		"CanBePlayedOnEnemyTurn": false,
+		"ImagePath": "../../Images/ImagesSpell/Казнь.jpg",
+		"Fraction": 0,
+		"ActionInfo": {
+			"$type": "GameData.Models.Action.CardActionInfo, GameData",
+			"ActionId": 56,
+			"ParameterValue": 0,
+			"ParameterType": 0
+		}
+	},
+	{
+		"$type": "GameData.Models.Cards.SpellCard, GameData",
+		"ID": 122,
+		"Name": "Подкрепление",
+		"Description": "Возьмите 2 карты из своей колоды",
+		"Cost": 5,
+		"CanBePlayedOnEnemyTurn": false,
+		"ImagePath": "../../Images/ImagesSpell/Подкрепление.jpg",
+		"Fraction": 0,
+		"ActionInfo": {
+			"$type": "GameData.Models.Action.CardActionInfo, GameData",
+			"ActionId": 24,
+			"ParameterValue": 2,
+			"ParameterType": 6
+		}
+	},
+	{
+		"$type": "GameData.Models.Cards.SpellCard, GameData",
+		"ID": 123,
+		"Name": "Малое восстановление",
+		"Description": "Восстанавливает 3 здоровья выбранному юниту",
+		"Cost": 2,
+		"CanBePlayedOnEnemyTurn": false,
+		"ImagePath": "../../Images/ImagesSpell/Малое восстановление.jpg",
+		"Fraction": 0,
+		"ActionInfo": {
+			"$type": "GameData.Models.Action.CardActionInfo, GameData",
+			"ActionId": 28,
+			"ParameterValue": 3,
+			"ParameterType": 2,
+			"IsTargeted": true
+		}
+	},
+	{
+		"$type": "GameData.Models.Cards.SpellCard, GameData",
+		"ID": 124,
+		"Name": "Восстановление",
+		"Description": "Восстанавливает 6 здоровья выбранному юниту",
+		"Cost": 3,
+		"CanBePlayedOnEnemyTurn": false,
+		"ImagePath": "../../Images/ImagesSpell/Восстановление.jpg",
+		"Fraction": 0,
+		"ActionInfo": {
+			"$type": "GameData.Models.Action.CardActionInfo, GameData",
+			"ActionId": 28,
+			"ParameterValue": 6,
+			"ParameterType": 2,
+			"IsTargeted": true
+		}
+	},
+	{
+		"$type": "GameData.Models.Cards.SpellCard, GameData",
+		"ID": 125,
+		"Name": "Внезапное усиление",
+		"Description": "+2/+2 выбранному юниту",
+		"Cost": 3,
+		"CanBePlayedOnEnemyTurn": false,
+		"ImagePath": "../../Images/ImagesSpell/Внезапное усиление.jpg",
+		"Fraction": 0,
+		"ActionInfo": {
+			"$type": "GameData.Models.Action.CardActionInfo, GameData",
+			"ActionId": 43,
+			"ParameterValue": 2,
+			"ParameterType": 4,
+			"IsTargeted": true
+		}
+	},
+	{
+		"$type": "GameData.Models.Cards.SpellCard, GameData",
+		"ID": 126,
+		"Name": "Заточенные клинки",
+		"Description": "Увеличивает атаку выбранного юнита на 3",
+		"Cost": 3,
+		"CanBePlayedOnEnemyTurn": false,
+		"ImagePath": "../../Images/ImagesSpell/Заточенные клинки.jpg",
+		"Fraction": 0,
+		"ActionInfo": {
+			"$type": "GameData.Models.Action.CardActionInfo, GameData",
+			"ActionId": 44,
+			"ParameterValue": 3,
+			"ParameterType": 4,
+			"IsTargeted": true
+		}
+	},
+	{
+		"$type": "GameData.Models.Cards.SpellCard, GameData",
+		"ID": 127,
+		"Name": "Прилив сил",
+		"Description": "Здоровье выбранного юнита повышается на 4",
+		"Cost": 3,
+		"CanBePlayedOnEnemyTurn": false,
+		"ImagePath": "../../Images/ImagesSpell/Прилив сил.jpg",
+		"Fraction": 0,
+		"ActionInfo": {
+			"$type": "GameData.Models.Action.CardActionInfo, GameData",
+			"ActionId": 45,
+			"ParameterValue": 4,
+			"ParameterType": 4,
+			"IsTargeted": true
+		}
+	},
+	{
+		"$type": "GameData.Models.Cards.SpellCard, GameData",
+		"ID": 128,
+		"Name": "Крещение огнем",
+		"Description": "Здоровье союзного юнита понижается на 2, атака повышается на 4",
+		"Cost": 3,
+		"CanBePlayedOnEnemyTurn": false,
+		"ImagePath": "../../Images/ImagesSpell/Крещение огнем.jpg",
+		"Fraction": 0,
+		"ActionInfo": {
+			"$type": "GameData.Models.Action.CardActionInfo, GameData",
+			"ActionId": 57,
+			"ParameterValue": 0,
+			"ParameterType": 4,
+			"IsTargeted": true
+		}
+	},
+	{
+		"$type": "GameData.Models.Cards.SpellCard, GameData",
+		"ID": 129,
+		"Name": "Живой щит",
+		"Description": "Выбранный союзный юнит становится провокатором и его здоровье повышается на 2",
+		"Cost": 4,
+		"CanBePlayedOnEnemyTurn": false,
+		"ImagePath": "../../Images/ImagesSpell/Живой щит.jpg",
+		"Fraction": 0,
+		"ActionInfo": {
+			"$type": "GameData.Models.Action.CardActionInfo, GameData",
+			"ActionId": 58,
+			"ParameterValue": 0,
+			"ParameterType": 4,
+			"IsTargeted": true
+		}
+	},
+	{
+		"$type": "GameData.Models.Cards.SpellCard, GameData",
+		"ID": 130,
+		"Name": "Деморализация",
+		"Description": "Понижает атаку и здоровье вражеского юнита до 0/2 и наделяет способностью &quot;провокация&quot;",
+		"Cost": 5,
+		"CanBePlayedOnEnemyTurn": false,
+		"ImagePath": "../../Images/ImagesSpell/Деморализация.jpg",
+		"Fraction": 0,
+		"ActionInfo": {
+			"$type": "GameData.Models.Action.CardActionInfo, GameData",
+			"ActionId": 59,
+			"ParameterValue": 0,
+			"ParameterType": 6,
+			"IsTargeted": true
+		}
+	},
+	{
+		"$type": "GameData.Models.Cards.SpellCard, GameData",
+		"ID": 131,
+		"Name": "Мягкая сталь",
+		"Description": "Понижает атаку вражеского юнита на 4",
+		"Cost": 3,
+		"CanBePlayedOnEnemyTurn": false,
+		"ImagePath": "../../Images/ImagesSpell/Мягкая сталь.jpg",
+		"Fraction": 0,
+		"ActionInfo": {
+			"$type": "GameData.Models.Action.CardActionInfo, GameData",
+			"ActionId": 42,
+			"ParameterValue": 4,
+			"ParameterType": 4,
+			"IsTargeted": true
+		}
+	},
+	{
+		"$type": "GameData.Models.Cards.SpellCard, GameData",
+		"ID": 132,
+		"Name": "Резня",
+		"Description": "Уничтожает все отряды противника кроме одного случайного",
+		"Cost": 8,
+		"CanBePlayedOnEnemyTurn": false,
+		"ImagePath": "../../Images/ImagesSpell/Резня.jpg",
+		"Fraction": 0,
+		"ActionInfo": {
+			"$type": "GameData.Models.Action.CardActionInfo, GameData",
+			"ActionId": 61,
+			"ParameterValue": 0,
+			"ParameterType": 0
+		}
+	},
+	{
+		"$type": "GameData.Models.Cards.SpellCard, GameData",
+		"ID": 134,
+		"Name": "Метель",
+		"Description": " Снижает атаку отрядов до 1 у обоих игроков",
+		"Cost": 9,
+		"CanBePlayedOnEnemyTurn": false,
+		"ImagePath": "../../Images/ImagesSpell/Метель.jpg",
+		"Fraction": 0,
+		"ActionInfo": {
+			"$type": "GameData.Models.Action.CardActionInfo, GameData",
+			"ActionId": 63,
+			"ParameterValue": 0,
+			"ParameterType": 0
+		}
 	}
+
 
 
 ]

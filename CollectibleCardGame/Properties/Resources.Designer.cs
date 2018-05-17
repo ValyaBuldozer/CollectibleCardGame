@@ -301,6 +301,16 @@ namespace CollectibleCardGame.Properties {
         }
         
         /// <summary>
+        ///   Поиск локализованного ресурса типа System.Byte[].
+        /// </summary>
+        internal static byte[] PF_Din_Text_Cond_Pro {
+            get {
+                object obj = ResourceManager.GetObject("PF_Din_Text_Cond_Pro", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap question {
@@ -836,6 +846,16 @@ namespace CollectibleCardGame.Properties {
         internal static System.Drawing.Bitmap Король_Дунган {
             get {
                 object obj = ResourceManager.GetObject("Король_Дунган", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Кочевники {
+            get {
+                object obj = ResourceManager.GetObject("Кочевники", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -160,9 +160,6 @@
   <data name="_210x250" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\ImagesUnit\210x250.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="mainBattle" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\mainBattle.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="cardbackDarkside220х410" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\CardsBacks\cardbackDarkside220х410.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -549,5 +546,14 @@
   </data>
   <data name="sword" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\IconsUnit\sword.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PF_Din_Text_Cond_Pro" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Fonts\PF Din Text Cond Pro.ttf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="mainBattle" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\mainBattle.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Кочевники" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Кочевники.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
