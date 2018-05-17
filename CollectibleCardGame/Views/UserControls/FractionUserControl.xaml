@@ -24,7 +24,7 @@
                 <ColumnDefinition Width="0.5*"/>
             </Grid.ColumnDefinitions>
             <TextBlock Name="Fraction" Grid.Column="1" HorizontalAlignment="Center" Text="{Binding Path=Name}"
-                       VerticalAlignment="Center" FontWeight="Bold" FontFamily="/CollectibleCardGame;component/Fonts/#Mason Chronicles" FontSize="24"/>
+                       VerticalAlignment="Center" FontWeight="Bold" FontFamily="./#PF Din Text Pro" FontSize="30"/>
         </Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
@@ -44,7 +44,7 @@
             <Border BorderThickness="1" BorderBrush="LightGray"  Grid.Column="1" Margin="5" >
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
                     <TextBlock Name="AboutTextBlock"  HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="{Binding Path=Description}" 
-                          VerticalAlignment="Stretch" FontFamily="/CollectibleCardGame;component/Fonts/#Mason Chronicles" FontWeight="Bold" FontSize="18"/>
+                          VerticalAlignment="Stretch" FontFamily="./#PF Din Text Pro" FontWeight="Bold" FontSize="18"/>
                 </ScrollViewer>
             </Border>
 

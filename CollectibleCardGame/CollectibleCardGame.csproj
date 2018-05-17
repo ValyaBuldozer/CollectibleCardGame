@@ -384,6 +384,7 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <EmbeddedResource Include="Resources\CardsRepository.json" />
+    <None Include="Fonts\PF Din Text Cond Pro.ttf" />
     <Resource Include="Fonts\Chronicles_font.ttf" />
   </ItemGroup>
   <ItemGroup>
@@ -830,6 +831,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\IconsUnit\disguiestIco.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\mainBattle.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImagesUnit\Neutral\Кочевники.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
