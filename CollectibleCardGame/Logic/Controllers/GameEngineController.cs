@@ -142,10 +142,12 @@ namespace CollectibleCardGame.Logic.Controllers
 
         public void HandleObserverAction(PlayerStateChangesObserverAction action)
         {
-            if (action.PlayerUsername == _user.Username)
                 _gameViewModel.CurrentDispatcher.Invoke(() =>
                 {
-                    _gameViewModel.PlayerViewModel.PlayerMana = action.PlayerMana;
+                    if (action.PlayerUsername == _user.Username)
+                        _gameViewModel.PlayerViewModel.PlayerMana = action.PlayerMana;
+                    else
+                        _gameViewModel.EnemyViewModel.PlayerMana = action.PlayerMana;
                 });
         }
 

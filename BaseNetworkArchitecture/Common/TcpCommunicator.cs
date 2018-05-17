@@ -237,9 +237,18 @@ namespace BaseNetworkArchitecture.Common
                     int messageLength =
                         int.Parse(recivedNetworkMessage.Encoder.GetString(clientState.RcvBuffer));
                     byte[] messageBuffer = new byte[messageLength];
-                    //Logger?.Log("Recieved message from cliet " + recivedNetworkMessage.Content);
 
-                    Client.GetStream().Read(messageBuffer, 0, messageBuffer.Length);
+                    int buffCount = 0;
+                    int bufferReadChange = messageBuffer.Length;
+
+                    while (buffCount != messageLength)
+                    {
+                        int bytesRead = 
+                            Client.GetStream().Read(messageBuffer, buffCount,bufferReadChange);
+                        buffCount += bytesRead;
+                        bufferReadChange -= bytesRead;
+                    }
+
                     recivedNetworkMessage.Content = recivedNetworkMessage.Encoder.GetString(messageBuffer);
 
                     if (flagBuff[0] == 0)
