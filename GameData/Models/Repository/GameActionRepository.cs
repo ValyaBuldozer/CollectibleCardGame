@@ -191,7 +191,7 @@ namespace GameData.Models.Repository
                     {
                         if(!(sender is Unit unit)) return;
 
-                        if (Equals(target.Player, unit.Player))
+                       
                         target.State.Heal(target.State.BaseHealth-target.State.GetResultHealth);
                     })),
                 new GameAction(name:"Выдача карт(ы)",id:24,description:"Выдает карту(ы) из колоды игрока",parameterType:ActionParameterType.Empty,
@@ -285,6 +285,19 @@ namespace GameData.Models.Repository
 
 
                     })),
+                //(не параметровый)
+                new GameAction(name:"Выдача карты при атаке",id:32,description:"Выдача карты из колоды игрока при атаке юнита с такой способностью",parameterType:ActionParameterType.Empty,
+                    action: ((controller, sender, target, parameter) =>
+                    {
+
+                        if(!(sender is Unit unit)) return;
+
+                        controller.DrawCard(unit.Player,1);
+
+
+                    })),
+
+
                
                 
                 //по сути для юнитов

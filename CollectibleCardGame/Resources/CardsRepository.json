@@ -2194,6 +2194,29 @@
 			"ParameterValue": 0,
 			"ParameterType": 0
 		}
+	},
+	{
+		"$type": "GameData.Models.Cards.UnitCard, GameData",
+		"ID": 135,
+		"Name": "Гремист",
+		"Description": "[Шаман]  Помогать людям не просто моя работа, а мой долг.",
+		"Cost": 7,
+		"CanBePlayedOnEnemyTurn": false,
+		"ImagePath": "../../Images/ImagesUnit/Neutral/Гремист.jpg",
+		"Fraction": 0,
+		"BaseHP": 8,
+		"BaseAttack": 3,
+		"AttackPriority": 1,
+		"CanAttack": false,
+		"AttackActionInfo": {
+			"$type": "GameData.Models.Action.CardActionInfo, GameData",
+			"ActionId": 32,
+			"ParameterValue": 0,
+			"ParameterType": 6
+		},
+		"DamageRecievedActionInfo": null,
+		"BattleCryActionInfo": null,
+		"DeathRattleActionInfo": null
 	}
 
 
