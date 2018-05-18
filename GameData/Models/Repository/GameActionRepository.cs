@@ -159,9 +159,9 @@ namespace GameData.Models.Repository
                 new GameAction(name:"Полное усиление",id:20,description:"Повышение атаки и здоровья всем дружественным юнитам",parameterType:ActionParameterType.Buff,
                     action: ((controller, sender, target, parameter) =>
                     {
-                        if(!(sender is Unit unit)) return;
+                        Player player = sender is Player ? (Player) sender : (sender as Unit).Player;
 
-                        foreach (var iUnit in unit.Player.TableUnits)
+                        foreach (var iUnit in player.TableUnits)
                         {
                             iUnit.State.Attack += parameter;
                             iUnit.State.BaseHealth += parameter;

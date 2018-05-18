@@ -2234,8 +2234,23 @@
 		"DamageRecievedActionInfo": null,
 		"BattleCryActionInfo": null,
 		"DeathRattleActionInfo": null
+	},
+	{
+		"$type": "GameData.Models.Cards.SpellCard, GameData",
+		"ID": 136,
+		"Name": "Стена щитов",
+		"Description": "Все юниты игрока получают +1/+1",
+		"Cost": 2,
+		"CanBePlayedOnEnemyTurn": false,
+		"ImagePath": "../../Images/ImagesSpell/Стена щитов.jpg",
+		"Fraction": 0,
+		"ActionInfo": {
+			"$type": "GameData.Models.Action.CardActionInfo, GameData",
+			"ActionId": 20,
+			"ParameterValue": 1,
+			"ParameterType": 4
+		}
 	}
-
 
 
 
