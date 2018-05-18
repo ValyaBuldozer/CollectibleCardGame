@@ -394,7 +394,7 @@
 		"Name": "Огненный дождь",
 		"Description": "Наносит 6 урона герою противника",
 		"Cost": 4,
-		"CanBePlayedOnEnemyTurn": false,
+		"CanBePlayedOnEnemyTurn": true,
 		"ImagePath": "../../Images/ImagesSpell/Огненный дождь.jpg",
 		"Fraction": 0,
 		"ActionInfo": {
@@ -475,7 +475,7 @@
 		"Name": "Проклятье темной звезды",
 		"Description": "Наносит всем юнитам на столе 4 урона",
 		"Cost": 7,
-		"CanBePlayedOnEnemyTurn": true,
+		"CanBePlayedOnEnemyTurn": false,
 		"ImagePath": "../../Images/ImagesSpell/Проклятье темной звезды.jpg",
 		"Fraction": 0,
 		"ActionInfo": {
@@ -491,7 +491,7 @@
 		"Name": "Последний призыв",
 		"Description": "Уничтожает все карты на столе",
 		"Cost": 8,
-		"CanBePlayedOnEnemyTurn": true,
+		"CanBePlayedOnEnemyTurn": false,
 		"ImagePath": "../../Images/ImagesSpell/Последний призыв.jpg",
 		"Fraction": 0,
 		"ActionInfo": {
@@ -2017,7 +2017,7 @@
 		"Name": "Малое восстановление",
 		"Description": "Восстанавливает 3 здоровья выбранному юниту",
 		"Cost": 2,
-		"CanBePlayedOnEnemyTurn": true,
+		"CanBePlayedOnEnemyTurn": false,
 		"ImagePath": "../../Images/ImagesSpell/Малое восстановление.jpg",
 		"Fraction": 0,
 		"ActionInfo": {
@@ -2034,7 +2034,7 @@
 		"Name": "Восстановление",
 		"Description": "Восстанавливает 6 здоровья выбранному юниту",
 		"Cost": 3,
-		"CanBePlayedOnEnemyTurn": true,
+		"CanBePlayedOnEnemyTurn": false,
 		"ImagePath": "../../Images/ImagesSpell/Восстановление.jpg",
 		"Fraction": 0,
 		"ActionInfo": {
@@ -2051,7 +2051,7 @@
 		"Name": "Внезапное усиление",
 		"Description": "+2/+2 выбранному юниту",
 		"Cost": 3,
-		"CanBePlayedOnEnemyTurn": true,
+		"CanBePlayedOnEnemyTurn": false,
 		"ImagePath": "../../Images/ImagesSpell/Внезапное усиление.jpg",
 		"Fraction": 0,
 		"ActionInfo": {
@@ -2068,7 +2068,7 @@
 		"Name": "Заточенные клинки",
 		"Description": "Увеличивает атаку выбранного юнита на 3",
 		"Cost": 3,
-		"CanBePlayedOnEnemyTurn": true,
+		"CanBePlayedOnEnemyTurn": false,
 		"ImagePath": "../../Images/ImagesSpell/Заточенные клинки.jpg",
 		"Fraction": 0,
 		"ActionInfo": {
@@ -2085,7 +2085,7 @@
 		"Name": "Прилив сил",
 		"Description": "Здоровье выбранного юнита повышается на 4",
 		"Cost": 3,
-		"CanBePlayedOnEnemyTurn": true,
+		"CanBePlayedOnEnemyTurn": false,
 		"ImagePath": "../../Images/ImagesSpell/Прилив сил.jpg",
 		"Fraction": 0,
 		"ActionInfo": {
@@ -2102,7 +2102,7 @@
 		"Name": "Крещение огнем",
 		"Description": "Здоровье юнита понижается на 2, атака повышается на 4",
 		"Cost": 3,
-		"CanBePlayedOnEnemyTurn": true,
+		"CanBePlayedOnEnemyTurn": false,
 		"ImagePath": "../../Images/ImagesSpell/Крещение огнем.jpg",
 		"Fraction": 0,
 		"ActionInfo": {

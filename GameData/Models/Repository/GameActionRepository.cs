@@ -496,8 +496,9 @@ namespace GameData.Models.Repository
                     {
 
 
-                        target.State.BaseHealth -= 2;
+                      
                         target.State.Attack += 4;
+                        target.State.BaseHealth -= 2;
 
                     })),
                 new GameAction(name:"Живой щит",id:58,description:"Выбранный союзный юнит становится провокатором и его здоровье повышается на 2",parameterType:ActionParameterType.Buff,
