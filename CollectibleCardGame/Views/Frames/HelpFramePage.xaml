@@ -32,7 +32,7 @@
                         </InlineUIContainer>
                         <Span FontSize="20" >Провокатор:
                         <Span FontSize="16" FontWeight="Light" >
-                            противник не сможет атаковать никакие другие юниты игрока, пока не будут уничтожены все карты игрока с такой способностью.</Span>
+                            вынуждает противника атаковать юнитов со способностью «Провокатор».</Span>
                     </Span>
                 </Paragraph>
                     <Paragraph Margin="5,20,0,0" FontWeight="Bold" FontSize="16" FontFamily="/CollectibleCardGame;component/Fonts/#PF Din Text Pro">
