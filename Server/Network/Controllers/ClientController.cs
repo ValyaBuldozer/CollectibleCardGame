@@ -7,7 +7,10 @@ using BaseNetworkArchitecture.Common;
 using BaseNetworkArchitecture.Common.Messages;
 using GameData.Network;
 using GameData.Network.Messages;
+using Server.Controllers.Repository;
 using Server.Network.Models;
+using Server.Repositories;
+using Server.Unity;
 using Unity.Attributes;
 
 namespace Server.Network.Controllers
@@ -35,8 +38,12 @@ namespace Server.Network.Controllers
 
         public void OnBreakConnection(object sender, BreakConnectionEventArgs e)
         {
-            ((Client) sender).MessageRecived -= OnMessageRecieved;
-            ((Client) sender).BreakConnection -= OnBreakConnection;
+            if(!(sender is Client client)) return;
+
+            client.MessageRecived -= OnMessageRecieved;
+            client.BreakConnection -= OnBreakConnection;
+
+            UnityKernel.Get<ConnectedClientsRepositoryController>().Remove(client);
         }
 
         public void SendMessage(MessageBase message)

@@ -157,8 +157,8 @@
     <Compile Include="Network\Controllers\MessageHandlers\LogInMessageHandler.cs" />
     <Compile Include="Network\Controllers\MessageHandlers\RegistrationMessageHandler.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Services\EventArgs.cs" />
@@ -236,6 +236,9 @@
     </Compile>
     <Compile Include="Views\UserControls\CardBackUserControl.xaml.cs">
       <DependentUpon>CardBackUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\CardMiniUserControl.xaml.cs">
+      <DependentUpon>CardMiniUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\CardUserControl.xaml.cs">
       <DependentUpon>CardUserControl.xaml</DependentUpon>
@@ -339,6 +342,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\UserControls\CardMiniUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\UserControls\CardUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -384,6 +391,7 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <EmbeddedResource Include="Resources\CardsRepository.json" />
+    <None Include="Fonts\PF Din Text Cond Pro.ttf" />
     <Resource Include="Fonts\Chronicles_font.ttf" />
   </ItemGroup>
   <ItemGroup>
@@ -769,9 +777,6 @@
     <Resource Include="Images\ImagesSpell\Внезапное усиление.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\ImagesSpell\Восстановление.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\ImagesSpell\Всеобщее отступление.jpg" />
   </ItemGroup>
   <ItemGroup>
@@ -830,6 +835,21 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\IconsUnit\disguiestIco.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\mainBattle.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImagesUnit\Neutral\Кочевники.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImagesUnit\Neutral\Гремист.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImagesSpell\Стена щитов.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImagesSpell\Восстановление.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

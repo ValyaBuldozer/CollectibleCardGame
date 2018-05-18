@@ -25,12 +25,10 @@ namespace GameData.Controllers.Data
     {
         private readonly IDataRepositoryController<GameAction> _repositoryController;
         private readonly IActionTableControlller _tableController;
-        private readonly ILogger _logger;
 
         public GameActionController(IDataRepositoryController<GameAction> repositoryController,
-             IActionTableControlller tableController,ILogger logger)
+             IActionTableControlller tableController)
         {
-            _logger = logger;
             _repositoryController = repositoryController;
             _tableController = tableController;
         }
@@ -68,10 +66,10 @@ namespace GameData.Controllers.Data
                 ActionTrigerred?.Invoke(this, new GameActionTriggerObserverAction(actionInfo.Action.ID,
                     sender.EntityId, target?.EntityId));
             }
-            catch (Exception e)
+            catch (NotImplementedException e)
             {
+                //todo : включить обычный эксепшен
                 //любые исключение в экшене
-                _logger?.Log(e);
             }
         }
 
@@ -88,10 +86,9 @@ namespace GameData.Controllers.Data
                 ActionTrigerred?.Invoke(this,new GameActionTriggerObserverAction(action.Action.ID,
                     sender.EntityId,target?.EntityId));
             }
-            catch (Exception e)
+            catch (NotImplementedException e)
             {
                 //любые исключение в экшене
-                _logger?.Log(e);
             }
         }
     }

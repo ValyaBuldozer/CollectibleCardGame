@@ -14,8 +14,6 @@ namespace GameData.Network
 {
     public class MessageConverter : IMessageConverter
     {
-        private string _concotinationMessage;
-
         public MessageBase DeserializeMessage(NetworkMessage networkMessage)
         {
             if (string.IsNullOrEmpty(networkMessage?.Content))
@@ -74,7 +72,6 @@ namespace GameData.Network
                         throw new ArgumentOutOfRangeException();
                 }
 
-                _concotinationMessage = null;
                 return deserializedMessage;
             }
             catch (JsonSerializationException e)

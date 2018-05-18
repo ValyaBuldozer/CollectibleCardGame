@@ -301,6 +301,16 @@ namespace CollectibleCardGame.Properties {
         }
         
         /// <summary>
+        ///   Поиск локализованного ресурса типа System.Byte[].
+        /// </summary>
+        internal static byte[] PF_Din_Text_Cond_Pro {
+            get {
+                object obj = ResourceManager.GetObject("PF_Din_Text_Cond_Pro", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap question {
@@ -613,6 +623,16 @@ namespace CollectibleCardGame.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Гремист {
+            get {
+                object obj = ResourceManager.GetObject("Гремист", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Грифон {
             get {
                 object obj = ResourceManager.GetObject("Грифон", resourceCulture);
@@ -836,6 +856,16 @@ namespace CollectibleCardGame.Properties {
         internal static System.Drawing.Bitmap Король_Дунган {
             get {
                 object obj = ResourceManager.GetObject("Король_Дунган", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Кочевники {
+            get {
+                object obj = ResourceManager.GetObject("Кочевники", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1326,6 +1356,16 @@ namespace CollectibleCardGame.Properties {
         internal static System.Drawing.Bitmap Старый_Грот {
             get {
                 object obj = ResourceManager.GetObject("Старый_Грот", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Стена_щитов {
+            get {
+                object obj = ResourceManager.GetObject("Стена_щитов", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

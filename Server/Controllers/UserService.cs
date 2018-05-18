@@ -61,7 +61,7 @@ namespace Server.Controllers
 
         public UserInfo GetUserInfo(string username)
         {
-            return _userReposController.GetEnumerable.FirstOrDefault(u => u.Username == username).UserInfo;
+            return _userReposController.GetEnumerable.FirstOrDefault(u => u.Username == username)?.UserInfo;
         }
 
         public void SetUserInfo(string username, UserInfo userInfo)
