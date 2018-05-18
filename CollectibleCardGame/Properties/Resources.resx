@@ -484,9 +484,6 @@
   <data name="Внезапное_усиление" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\ImagesSpell\Внезапное усиление.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Восстановление" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\ImagesSpell\Восстановление.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Всеобщее_отступление" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\ImagesSpell\Всеобщее отступление.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -555,5 +552,14 @@
   </data>
   <data name="Кочевники" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\ImagesUnit\Neutral\Кочевники.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Гремист" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\ImagesUnit\Neutral\Гремист.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Стена_щитов" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\ImagesSpell\Стена щитов.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Восстановление" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\ImagesSpell\Восстановление.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

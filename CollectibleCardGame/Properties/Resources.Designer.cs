@@ -623,6 +623,16 @@ namespace CollectibleCardGame.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Гремист {
+            get {
+                object obj = ResourceManager.GetObject("Гремист", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Грифон {
             get {
                 object obj = ResourceManager.GetObject("Грифон", resourceCulture);
@@ -1346,6 +1356,16 @@ namespace CollectibleCardGame.Properties {
         internal static System.Drawing.Bitmap Старый_Грот {
             get {
                 object obj = ResourceManager.GetObject("Старый_Грот", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Стена_щитов {
+            get {
+                object obj = ResourceManager.GetObject("Стена_щитов", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

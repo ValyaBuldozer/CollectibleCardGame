@@ -118,7 +118,7 @@ namespace GameData.Models.Repository
                         if (enemyPlayer.TableUnits.Count != 0)
                         {
                             var rnd = new Random();
-                            int rndNum = rnd.Next(0, enemyPlayer.TableUnits.Count + 1);
+                            int rndNum = rnd.Next(0, enemyPlayer.TableUnits.Count);
                             enemyPlayer.TableUnits[rndNum].State.RecieveDamage(parameter);
                         }
                     })),
@@ -159,9 +159,9 @@ namespace GameData.Models.Repository
                 new GameAction(name:"Полное усиление",id:20,description:"Повышение атаки и здоровья всем дружественным юнитам",parameterType:ActionParameterType.Buff,
                     action: ((controller, sender, target, parameter) =>
                     {
-                        if(!(sender is Unit unit)) return;
+                        Player player = sender is Player ? (Player) sender : (sender as Unit).Player;
 
-                        foreach (var iUnit in unit.Player.TableUnits)
+                        foreach (var iUnit in player.TableUnits)
                         {
                             iUnit.State.Attack += parameter;
                             iUnit.State.BaseHealth += parameter;
@@ -191,7 +191,7 @@ namespace GameData.Models.Repository
                     {
                         if(!(sender is Unit unit)) return;
 
-                        if (Equals(target.Player, unit.Player))
+                       
                         target.State.Heal(target.State.BaseHealth-target.State.GetResultHealth);
                     })),
                 new GameAction(name:"Выдача карт(ы)",id:24,description:"Выдает карту(ы) из колоды игрока",parameterType:ActionParameterType.Empty,
@@ -285,6 +285,19 @@ namespace GameData.Models.Repository
 
 
                     })),
+                //(не параметровый)
+                new GameAction(name:"Выдача карты при атаке",id:32,description:"Выдача карты из колоды игрока при атаке юнита с такой способностью",parameterType:ActionParameterType.Empty,
+                    action: ((controller, sender, target, parameter) =>
+                    {
+
+                        if(!(sender is Unit unit)) return;
+
+                        controller.DrawCard(unit.Player,1);
+
+
+                    })),
+
+
                
                 
                 //по сути для юнитов
@@ -381,7 +394,7 @@ namespace GameData.Models.Repository
                         for (var i = 0; i <= parameter; i++)
                             if (enemyPlayer.TableUnits.Count != 0)
                             {
-                                var rndNum = rnd.Next(0, enemyPlayer.TableUnits.Count + 1);
+                                var rndNum = rnd.Next(0, enemyPlayer.TableUnits.Count);
                                 enemyPlayer.TableUnits[rndNum].State.RecieveDamage(1);
                             }
                     })),
@@ -465,7 +478,7 @@ namespace GameData.Models.Repository
                         Player enemyPlayer =
                             controller.GetTableCondition.Players.FirstOrDefault(p => p.Username != player.Username);
                         var rnd = new Random();
-                        int rndNum = rnd.Next(0, enemyPlayer.TableUnits.Count + 1);
+                        int rndNum = rnd.Next(0, enemyPlayer.TableUnits.Count);
                         Unit rndUnit = enemyPlayer.TableUnits[rndNum];
                        
                         foreach (var iUnit in enemyPlayer.TableUnits.ToArray())
@@ -483,8 +496,9 @@ namespace GameData.Models.Repository
                     {
 
 
-                        target.State.BaseHealth -= 2;
+                      
                         target.State.Attack += 4;
+                        target.State.BaseHealth -= 2;
 
                     })),
                 new GameAction(name:"Живой щит",id:58,description:"Выбранный союзный юнит становится провокатором и его здоровье повышается на 2",parameterType:ActionParameterType.Buff,
@@ -539,13 +553,15 @@ namespace GameData.Models.Repository
                         if (enemyPlayer.TableUnits.Count>1)
                         {
                             var rnd = new Random();
-                            int rndNum = rnd.Next(0, enemyPlayer.TableUnits.Count + 1);
+                            int rndNum = rnd.Next(0, enemyPlayer.TableUnits.Count);
+                            var unit = enemyPlayer.TableUnits[rndNum];
 
-                            for (int i = 0; i <=enemyPlayer.TableUnits.Count ; i++)
+                            foreach (var iUnit in enemyPlayer.TableUnits.ToArray())
                             {
-                                if (i!=rndNum)
-                                    controller.KillUnit(enemyPlayer.TableUnits[i]);
+                                if (!Equals(iUnit,unit)) controller.KillUnit(iUnit);
                             }
+
+                           
                            
                         }
 
@@ -572,6 +588,25 @@ namespace GameData.Models.Repository
                         foreach (var iUnit in enemyPlayer.TableUnits.ToArray())
                         {
                             iUnit.State.Attack = 1;
+                        }
+
+
+                    })),
+                new GameAction(name:"Обледенение",id:64,description:" Снижает здоровье отрядов до 1 у обоих игроков",parameterType:ActionParameterType.Empty,
+                    action: ((controller, sender, target, parameter) =>
+                    {
+                        if(!(sender is Player player)) return;
+                        foreach (var iUnit in player.TableUnits.ToArray())
+                        {
+                            iUnit.State.BaseHealth = 1;
+                        }
+
+                        Player enemyPlayer =
+                            controller.GetTableCondition.Players.FirstOrDefault(p => p.Username != player.Username);
+
+                        foreach (var iUnit in enemyPlayer.TableUnits.ToArray())
+                        {
+                            iUnit.State.BaseHealth = 1;
                         }
 
 
