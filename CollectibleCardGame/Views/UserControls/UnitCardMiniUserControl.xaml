@@ -11,15 +11,11 @@
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"></BooleanToVisibilityConverter>
     </UserControl.Resources>
     <Grid>
-        <Grid.RenderTransform>
-            <!-- ScaleX/Y = k -->
-            <ScaleTransform CenterX="0" CenterY="0" ScaleX="1" ScaleY="1"/>
-        </Grid.RenderTransform>
-
         <!--210x250-->
-        <Border BorderThickness="2" BorderBrush="Black" CornerRadius="5">
+        <Border BorderThickness="0" 
+                BorderBrush="{Binding Path=BorderBrush,PresentationTraceSources.TraceLevel=High}">
             <Border.Effect>
-                <DropShadowEffect BlurRadius="10" Direction="315" Opacity="0.8"/>
+                <DropShadowEffect BlurRadius="100" ShadowDepth="0" Opacity="1" Color="{Binding ShadowColor}"/>
             </Border.Effect>
 
             <Grid Background="{StaticResource CardBackGround}">

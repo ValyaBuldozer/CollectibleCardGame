@@ -11,9 +11,9 @@ namespace GameData.Models.PlayerTurn
 {
     public class CardDeployPlayerTurn : PlayerTurn
     {
-        public Card Card { protected set; get; }
+        public Card Card { set; get; }
 
-        public Unit ActionTarget { protected set; get; }
+        public Unit ActionTarget { set; get; }
 
         public CardDeployPlayerTurn(Player sender, Card card, Unit target = null)
         {

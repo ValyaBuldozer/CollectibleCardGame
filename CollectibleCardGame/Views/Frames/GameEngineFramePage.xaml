@@ -50,7 +50,7 @@
                 </ItemsControl>
                 <!--Enemy player-->
                 <Viewbox Grid.Column="1" Height="205" Width="250">
-                    <Button Command="{Binding PlayerTargetCommand}" CommandParameter="{Binding EnemyViewModel}">
+                    <Button Command="{Binding EnemyUnitCommand}" CommandParameter="{Binding EnemyViewModel}">
                         <uc:PlayerUserControl Height="330" Width="400" 
                                               DataContext="{Binding Path=EnemyViewModel,
                                                 UpdateSourceTrigger=PropertyChanged}"/>
@@ -72,7 +72,7 @@
                             <StackPanel>
                                 <Viewbox Stretch="Fill" Height="120" Width="96">
                                     <Button Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, 
-                                AncestorType={x:Type Page}}, Path=ViewModel.UnitTargetCommand}" 
+                                            AncestorType={x:Type Page}}, Path=ViewModel.EnemyUnitCommand}" 
                                             CommandParameter="{Binding}"
                                             BorderThickness="0" BorderBrush="{x:Null}" Background="{x:Null}">
                                         <Button.ToolTip>
@@ -108,9 +108,10 @@
                         <StackPanel>
                             <Viewbox Stretch="Fill" Height="120" Width="96" Margin="5,0">
                                 <Button Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, 
-                                AncestorType={x:Type Page}}, Path=ViewModel.UnitTargetCommand}" 
-                                        CommandParameter="{Binding}"
-                                        BorderThickness="0" BorderBrush="{x:Null}">
+                                    AncestorType={x:Type Page}}, Path=ViewModel.PlayerUnitCommand}" 
+                                        CommandParameter="{Binding}" Background="{x:Null}"
+                                        BorderThickness="0" BorderBrush="{x:Null}"
+                                        >
                                     <Button.ToolTip>
                                         <ToolTip Background="{x:Null}" BorderThickness="0"
                                                  Width="220" Height="410"
@@ -138,7 +139,7 @@
                 </Grid.ColumnDefinitions>
                 <!--Player-->
                 <Viewbox Height="205" Width="250">
-                    <Button Command="{Binding PlayerTargetCommand}" CommandParameter="{Binding PlayerViewModel}">
+                    <Button Command="{Binding PlayerUnitCommand}" CommandParameter="{Binding PlayerViewModel}">
                         <uc:PlayerUserControl Height="330" Width="400" 
                                               DataContext="{Binding Path=PlayerViewModel,
                             UpdateSourceTrigger=PropertyChanged}"/>
@@ -159,7 +160,7 @@
                                      MouseLeave="ViewBoxOnMouseLeave" Margin="0"
                                      >
                                 <Button Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, 
-                                AncestorType={x:Type Page}}, Path=ViewModel.CardDeployCommand}" 
+                                    AncestorType={x:Type Page}}, Path=ViewModel.CardDeployCommand}" 
                                     CommandParameter="{Binding}"
                                     BorderThickness="0" BorderBrush="{x:Null}">
                                     <uc:CardUserControl Width="220" Height="410"/>

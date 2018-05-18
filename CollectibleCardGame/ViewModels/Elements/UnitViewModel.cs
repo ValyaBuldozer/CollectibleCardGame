@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GameData.Models.Units;
+using System.Windows.Media;
 
 namespace CollectibleCardGame.ViewModels.Elements
 {
@@ -15,8 +16,11 @@ namespace CollectibleCardGame.ViewModels.Elements
         private string _name;
         private bool _isNotHeroUnit;
         private CardViewModel _baseCardViewModel;
+        private bool _isCanAttack;
 
         private string _abilityImagePath;
+        private System.Windows.Media.Brush _borderBrush;
+        private System.Windows.Media.Color _shadowColor;
 
         public Unit BaseUnit
         {
@@ -110,6 +114,18 @@ namespace CollectibleCardGame.ViewModels.Elements
             }
         }
 
+        public bool IsCanAttack
+        {
+            get => _isCanAttack;
+            set
+            {
+                _isCanAttack = value;
+                NotifyPropertyChanged(nameof(IsCanAttack));
+
+                ShadowColor = value ? Color.FromArgb(255, 255, 102, 0) : Color.FromArgb(0, 0, 0, 0);
+            }
+        }
+
         public bool IsNotHeroUnit
         {
             get => _isNotHeroUnit;
@@ -117,6 +133,26 @@ namespace CollectibleCardGame.ViewModels.Elements
             {
                 _isNotHeroUnit = value;
                 NotifyPropertyChanged(nameof(IsNotHeroUnit));
+            }
+        }
+
+        public System.Windows.Media.Brush BorderBrush
+        {
+            get => _borderBrush;
+            set
+            {
+                _borderBrush = value;
+                NotifyPropertyChanged(nameof(BorderBrush));
+            }
+        }
+
+        public Color ShadowColor
+        {
+            get => _shadowColor;
+            set
+            {
+                _shadowColor = value;
+                NotifyPropertyChanged(nameof(ShadowColor));
             }
         }
 
@@ -139,6 +175,8 @@ namespace CollectibleCardGame.ViewModels.Elements
                 default:
                     break;
             }
+
+
         }
 
         public UnitViewModel(Unit unit)
@@ -146,12 +184,27 @@ namespace CollectibleCardGame.ViewModels.Elements
             _isNotHeroUnit = !(unit is HeroUnit);
             _baseCardViewModel = new CardViewModel();
             BaseUnit = unit;
+            _borderBrush = null;
         }
 
         public UnitViewModel()
         {
             _baseCardViewModel = new CardViewModel();
             BaseUnit = null;
+            _borderBrush = null;
+        }
+
+        public void SetTargeting()
+        {
+            //ShadowColor = Color.FromRgb(0,198,0);
+            ShadowColor = Color.FromRgb(0,255,255);
+        }
+
+        public void ResetTargeting()
+        {
+            //ой неочевидно - в сеттере свойства ставится нужный цвет бордера переделать бы
+
+            IsCanAttack = _isCanAttack;
         }
     }
 }

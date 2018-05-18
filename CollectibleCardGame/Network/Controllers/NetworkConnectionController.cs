@@ -3,6 +3,8 @@ using System.Net;
 using System.Net.Sockets;
 using BaseNetworkArchitecture.Common;
 using BaseNetworkArchitecture.Common.Messages;
+using CollectibleCardGame.ViewModels.Frames;
+using CollectibleCardGame.ViewModels.Windows;
 using GameData.Network;
 using GameData.Network.Messages;
 using Unity.Attributes;
@@ -33,10 +35,17 @@ namespace CollectibleCardGame.Network.Controllers
         }
 
         private readonly IMessageConverter _converter;
+        private readonly MainWindowViewModel _mainViewModel;
+        private readonly ILogger _logger;
+        private readonly LogInFramePageShellViewModel _logInViewModel;
 
-        public NetworkConnectionController(IMessageConverter converter)
+        public NetworkConnectionController(IMessageConverter converter,MainWindowViewModel mainViewModel,
+            ILogger logger,LogInFramePageShellViewModel loginViewModel)
         {
+            _mainViewModel = mainViewModel;
             _converter = converter;
+            _logger = logger;
+            _logInViewModel = loginViewModel;
         }
 
         public void Connect(IPAddress ipAddress, int port)
@@ -67,7 +76,9 @@ namespace CollectibleCardGame.Network.Controllers
 
         public void OnBreakConnection(object sender, BreakConnectionEventArgs e)
         {
-            throw new NotImplementedException();
+            _logger.LogAndPrint("Соединение с сервером разорвано");
+            _mainViewModel.SetLogInFrame();
+            _logInViewModel.SetErrorPage();
         }
     }
 }
