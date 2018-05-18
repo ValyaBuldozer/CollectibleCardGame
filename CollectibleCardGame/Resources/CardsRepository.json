@@ -2186,7 +2186,7 @@
 		"Name": "Обледенение",
 		"Description": "Снижает здоровье отрядов до 1 у обоих игроков",
 		"Cost": 8,
-		"CanBePlayedOnEnemyTurn": true,
+		"CanBePlayedOnEnemyTurn": false,
 		"ImagePath": "../../Images/ImagesSpell/Обледенение.jpg",
 		"Fraction": 0,
 		"ActionInfo": {
@@ -2202,7 +2202,7 @@
 		"Name": "Метель",
 		"Description": "Снижает атаку отрядов до 1 у обоих игроков",
 		"Cost": 9,
-		"CanBePlayedOnEnemyTurn": true,
+		"CanBePlayedOnEnemyTurn": false,
 		"ImagePath": "../../Images/ImagesSpell/Метель.jpg",
 		"Fraction": 0,
 		"ActionInfo": {
