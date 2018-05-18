@@ -376,9 +376,9 @@
 		"$type": "GameData.Models.Cards.SpellCard, GameData",
 		"ID": 36,
 		"Name": "Град стрел",
-		"Description": "Наносит 3 урона всем отрядам противника",
+		"Description": "Наносит 2 урона всем отрядам противника",
 		"Cost": 5,
-		"CanBePlayedOnEnemyTurn": false,
+		"CanBePlayedOnEnemyTurn": true,
 		"ImagePath": "../../Images/ImagesSpell/Град стрел.jpg",
 		"Fraction": 0,
 		"ActionInfo": {
@@ -410,7 +410,7 @@
 		"Name": "Огненный шар",
 		"Description": "Наносит 5 урона выбранному юниту",
 		"Cost": 4,
-		"CanBePlayedOnEnemyTurn": false,
+		"CanBePlayedOnEnemyTurn": true,
 		"ImagePath": "../../Images/ImagesSpell/Огненный шар.jpg",
 		"Fraction": 0,
 		"ActionInfo": {
@@ -443,7 +443,7 @@
 		"Name": "Пробивающий разряд",
 		"Description": "Наносит 3 урона крепости противника и 1 урон всем вражеским юнитам",
 		"Cost": 6,
-		"CanBePlayedOnEnemyTurn": false,
+		"CanBePlayedOnEnemyTurn": true,
 		"ImagePath": "../../Images/ImagesSpell/Пробивающий разряд.jpg",
 		"Fraction": 0,
 		"ActionInfo": {
@@ -475,7 +475,7 @@
 		"Name": "Проклятье темной звезды",
 		"Description": "Наносит всем юнитам на столе 4 урона",
 		"Cost": 7,
-		"CanBePlayedOnEnemyTurn": false,
+		"CanBePlayedOnEnemyTurn": true,
 		"ImagePath": "../../Images/ImagesSpell/Проклятье темной звезды.jpg",
 		"Fraction": 0,
 		"ActionInfo": {
@@ -491,7 +491,7 @@
 		"Name": "Последний призыв",
 		"Description": "Уничтожает все карты на столе",
 		"Cost": 8,
-		"CanBePlayedOnEnemyTurn": false,
+		"CanBePlayedOnEnemyTurn": true,
 		"ImagePath": "../../Images/ImagesSpell/Последний призыв.jpg",
 		"Fraction": 0,
 		"ActionInfo": {
@@ -756,7 +756,7 @@
 		"$type": "GameData.Models.Cards.UnitCard, GameData",
 		"ID": 56,
 		"Name": "Мари",
-		"Description": "[Отвлекающий удар] Я словно тень...",
+		"Description": "[Превентивный удар] Я словно тень...",
 		"Cost": 3,
 		"CanBePlayedOnEnemyTurn": false,
 		"ImagePath": "../../Images/ImagesUnit/North/Мари.jpg",
@@ -769,9 +769,10 @@
 		"DamageRecievedActionInfo": null,
 		"BattleCryActionInfo": {
 			"$type": "GameData.Models.Action.CardActionInfo, GameData",
-			"ActionId": 27,
-			"ParameterValue": 0,
-			"ParameterType": 6
+			"ActionId": 25,
+			"ParameterValue": 2,
+			"ParameterType": 0,
+			"IsTargeted": true
 		},
 		"DeathRattleActionInfo": null
 	},
@@ -2000,7 +2001,7 @@
 		"Name": "Подкрепление",
 		"Description": "Возьмите 2 карты из своей колоды",
 		"Cost": 5,
-		"CanBePlayedOnEnemyTurn": false,
+		"CanBePlayedOnEnemyTurn": true,
 		"ImagePath": "../../Images/ImagesSpell/Подкрепление.jpg",
 		"Fraction": 0,
 		"ActionInfo": {
@@ -2016,7 +2017,7 @@
 		"Name": "Малое восстановление",
 		"Description": "Восстанавливает 3 здоровья выбранному юниту",
 		"Cost": 2,
-		"CanBePlayedOnEnemyTurn": false,
+		"CanBePlayedOnEnemyTurn": true,
 		"ImagePath": "../../Images/ImagesSpell/Малое восстановление.jpg",
 		"Fraction": 0,
 		"ActionInfo": {
@@ -2033,7 +2034,7 @@
 		"Name": "Восстановление",
 		"Description": "Восстанавливает 6 здоровья выбранному юниту",
 		"Cost": 3,
-		"CanBePlayedOnEnemyTurn": false,
+		"CanBePlayedOnEnemyTurn": true,
 		"ImagePath": "../../Images/ImagesSpell/Восстановление.jpg",
 		"Fraction": 0,
 		"ActionInfo": {
@@ -2050,7 +2051,7 @@
 		"Name": "Внезапное усиление",
 		"Description": "+2/+2 выбранному юниту",
 		"Cost": 3,
-		"CanBePlayedOnEnemyTurn": false,
+		"CanBePlayedOnEnemyTurn": true,
 		"ImagePath": "../../Images/ImagesSpell/Внезапное усиление.jpg",
 		"Fraction": 0,
 		"ActionInfo": {
@@ -2067,7 +2068,7 @@
 		"Name": "Заточенные клинки",
 		"Description": "Увеличивает атаку выбранного юнита на 3",
 		"Cost": 3,
-		"CanBePlayedOnEnemyTurn": false,
+		"CanBePlayedOnEnemyTurn": true,
 		"ImagePath": "../../Images/ImagesSpell/Заточенные клинки.jpg",
 		"Fraction": 0,
 		"ActionInfo": {
@@ -2084,7 +2085,7 @@
 		"Name": "Прилив сил",
 		"Description": "Здоровье выбранного юнита повышается на 4",
 		"Cost": 3,
-		"CanBePlayedOnEnemyTurn": false,
+		"CanBePlayedOnEnemyTurn": true,
 		"ImagePath": "../../Images/ImagesSpell/Прилив сил.jpg",
 		"Fraction": 0,
 		"ActionInfo": {
@@ -2099,9 +2100,9 @@
 		"$type": "GameData.Models.Cards.SpellCard, GameData",
 		"ID": 128,
 		"Name": "Крещение огнем",
-		"Description": "Здоровье союзного юнита понижается на 2, атака повышается на 4",
+		"Description": "Здоровье юнита понижается на 2, атака повышается на 4",
 		"Cost": 3,
-		"CanBePlayedOnEnemyTurn": false,
+		"CanBePlayedOnEnemyTurn": true,
 		"ImagePath": "../../Images/ImagesSpell/Крещение огнем.jpg",
 		"Fraction": 0,
 		"ActionInfo": {
@@ -2181,11 +2182,27 @@
 	},
 	{
 		"$type": "GameData.Models.Cards.SpellCard, GameData",
+		"ID": 133,
+		"Name": "Обледенение",
+		"Description": "Снижает здоровье отрядов до 1 у обоих игроков",
+		"Cost": 8,
+		"CanBePlayedOnEnemyTurn": true,
+		"ImagePath": "../../Images/ImagesSpell/Обледенение.jpg",
+		"Fraction": 0,
+		"ActionInfo": {
+			"$type": "GameData.Models.Action.CardActionInfo, GameData",
+			"ActionId": 64,
+			"ParameterValue": 0,
+			"ParameterType": 0
+		}
+	},
+	{
+		"$type": "GameData.Models.Cards.SpellCard, GameData",
 		"ID": 134,
 		"Name": "Метель",
-		"Description": " Снижает атаку отрядов до 1 у обоих игроков",
+		"Description": "Снижает атаку отрядов до 1 у обоих игроков",
 		"Cost": 9,
-		"CanBePlayedOnEnemyTurn": false,
+		"CanBePlayedOnEnemyTurn": true,
 		"ImagePath": "../../Images/ImagesSpell/Метель.jpg",
 		"Fraction": 0,
 		"ActionInfo": {
@@ -2218,6 +2235,7 @@
 		"BattleCryActionInfo": null,
 		"DeathRattleActionInfo": null
 	}
+
 
 
 

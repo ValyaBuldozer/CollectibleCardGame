@@ -9,6 +9,121 @@
       Title="HelpFramePage">
 
     <Grid Background="{DynamicResource BasicBackGround}">
-        
+        <ScrollViewer  VerticalScrollBarVisibility="Auto">
+            <RichTextBox Margin="5"   >
+            <FlowDocument>
+                    <Paragraph  Margin="5,0,0,0" FontWeight="Bold" FontSize="24" FontFamily="/CollectibleCardGame;component/Fonts/#PF Din Text Pro">
+                        <LineBreak/> Особенности юнитов:</Paragraph>
+                    <Paragraph Margin="5,20,0,0" FontWeight="Bold" FontSize="16" FontFamily="/CollectibleCardGame;component/Fonts/#PF Din Text Pro">
+                        <Span FontSize="20" > Воодушевление:
+                            <Span FontSize="16" FontWeight="Light" >
+                                +1/+1 к показателям всех союзных отрядов.</Span>
+                        </Span>
+                    </Paragraph>
+                    <Paragraph Margin="5,20,0,0" FontWeight="Bold" FontSize="16" FontFamily="/CollectibleCardGame;component/Fonts/#PF Din Text Pro">
+                        <Span FontSize="20" >Рывок:
+                        <Span FontSize="16" FontWeight="Light" >
+                            юнит может атаковать сразу после выхода на поле боя.</Span>
+                    </Span>
+                </Paragraph>
+                    <Paragraph Margin="5,20,0,0" FontWeight="Bold" FontSize="16" FontFamily="/CollectibleCardGame;component/Fonts/#PF Din Text Pro">
+                        <InlineUIContainer BaselineAlignment="TextBottom" >
+                            <Image Margin="2" Width="20" Source="/Images/IconsUnit/shieldIco.png"></Image>
+                        </InlineUIContainer>
+                        <Span FontSize="20" >Провокатор:
+                        <Span FontSize="16" FontWeight="Light" >
+                            противник не сможет атаковать никакие другие юниты игрока, пока не будут уничтожены все карты игрока с такой способностью.</Span>
+                    </Span>
+                </Paragraph>
+                    <Paragraph Margin="5,20,0,0" FontWeight="Bold" FontSize="16" FontFamily="/CollectibleCardGame;component/Fonts/#PF Din Text Pro">
+                        <Span FontSize="20" >Берсерк:
+                        <Span FontSize="16" FontWeight="Light" >
+                            каждая атака по этому юниту, увеличивает его атаку на 3.</Span>
+                    </Span>
+                </Paragraph>
+                    <Paragraph Margin="5,20,0,0" FontWeight="Bold" FontSize="16" FontFamily="/CollectibleCardGame;component/Fonts/#PF Din Text Pro">
+                        <Span FontSize="20" >Мастер клинка:
+                        <Span FontSize="16" FontWeight="Light" >
+                            каждая атака этого юнита, увеличивает его атаку на 2.</Span>
+                    </Span>
+                </Paragraph>
+                    <Paragraph Margin="5,20,0,0" FontWeight="Bold" FontSize="16" FontFamily="/CollectibleCardGame;component/Fonts/#PF Din Text Pro">
+                        <Span FontSize="20" >Мастер осады:
+                        <Span FontSize="16" FontWeight="Light" >
+                            наносит 5 урона по крепости противника при розыгрыше.</Span>
+                    </Span>
+                </Paragraph>
+                    <Paragraph Margin="5,20,0,0" FontWeight="Bold" FontSize="16" FontFamily="/CollectibleCardGame;component/Fonts/#PF Din Text Pro">
+                        <Span FontSize="20" >Лекарь:
+                        <Span FontSize="16" FontWeight="Light" >
+                            восстанавливает защиту выбранного юнита до максимума при розыгрыше.</Span>
+                    </Span>
+                </Paragraph>
+                    <Paragraph Margin="5,20,0,0" FontWeight="Bold" FontSize="16" FontFamily="/CollectibleCardGame;component/Fonts/#PF Din Text Pro">
+                        <Span FontSize="20" >Отряд подмоги:
+                        <Span FontSize="16" FontWeight="Light" >
+                            при розыгрыше возьмите одну карту из колоды.</Span>
+                    </Span>
+                </Paragraph>
+                    <Paragraph Margin="5,20,0,0" FontWeight="Bold" FontSize="16" FontFamily="/CollectibleCardGame;component/Fonts/#PF Din Text Pro">
+                        <Span FontSize="20" >Превентивный удар:
+                        <Span FontSize="16" FontWeight="Light" >
+                            нанесите 2 урона выбранному юниту.</Span>
+                    </Span>
+                </Paragraph>
+                    <Paragraph Margin="5,20,0,0" FontWeight="Bold" FontSize="16" FontFamily="/CollectibleCardGame;component/Fonts/#PF Din Text Pro">
+                    <InlineUIContainer BaselineAlignment="TextBottom" >
+                        <Image Margin="2" Width="20" Source="/Images/IconsUnit/disguiestIco.png"></Image>
+                    </InlineUIContainer>
+                        <Span FontSize="20" >Маскировка:
+                        <Span FontSize="16" FontWeight="Light" >
+                            это существо нельзя атаковать или выбрать целью, пока оно не нанесет урон.</Span>
+                    </Span>
+                </Paragraph>
+                    <Paragraph Margin="5,20,0,0" FontWeight="Bold" FontSize="16" FontFamily="/CollectibleCardGame;component/Fonts/#PF Din Text Pro">
+                        <Span FontSize="20" >Мастер магии:
+                        <Span FontSize="16" FontWeight="Light" >
+                            при розыгрыше повышает силу атакующих заклинаний в руке на 1.</Span>
+                    </Span>
+                </Paragraph>
+                    <Paragraph Margin="5,20,0,0" FontWeight="Bold" FontSize="16" FontFamily="/CollectibleCardGame;component/Fonts/#PF Din Text Pro">
+                        <Span FontSize="20" >Врачебная:
+                        <Span FontSize="16" FontWeight="Light" >
+                            при разыгрывании восстанавливает союзным юнитам 2 здоровья.</Span>
+                    </Span>
+                </Paragraph>
+                    <Paragraph Margin="5,20,0,0" FontWeight="Bold" FontSize="16" FontFamily="/CollectibleCardGame;component/Fonts/#PF Din Text Pro">
+                        <Span FontSize="20" >Призыв (юнита(ов)):
+                        <Span FontSize="16" FontWeight="Light" >
+                            призывает юнита на поле боя.</Span>
+                    </Span>
+                </Paragraph>
+                    <Paragraph Margin="5,20,0,0" FontWeight="Bold" FontSize="16" FontFamily="/CollectibleCardGame;component/Fonts/#PF Din Text Pro">
+                        <Span FontSize="20" >Врыв:
+                        <Span FontSize="16" FontWeight="Light" >
+                            +1/+1 за каждый союзный юнит на столе</Span>
+                    </Span>
+                </Paragraph>
+                    <Paragraph Margin="5,20,0,0" FontWeight="Bold" FontSize="16" FontFamily="/CollectibleCardGame;component/Fonts/#PF Din Text Pro">
+                        <Span FontSize="20" >Шаман:
+                        <Span FontSize="16" FontWeight="Light" >
+                            при каждой атаке такого юнита игроку выдается карта из колоды</Span>
+                    </Span>
+                </Paragraph>
+
+
+
+
+
+
+
+
+
+                    <Paragraph FontWeight="Bold" FontSize="22" FontFamily="/CollectibleCardGame;component/Fonts/#PF Din Text Pro">
+                        GL HF
+                    </Paragraph>
+                </FlowDocument>
+        </RichTextBox>
+        </ScrollViewer>
     </Grid>
 </Page>

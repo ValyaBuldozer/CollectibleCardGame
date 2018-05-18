@@ -591,6 +591,25 @@ namespace GameData.Models.Repository
 
 
                     })),
+                new GameAction(name:"Обледенение",id:64,description:" Снижает здоровье отрядов до 1 у обоих игроков",parameterType:ActionParameterType.Empty,
+                    action: ((controller, sender, target, parameter) =>
+                    {
+                        if(!(sender is Player player)) return;
+                        foreach (var iUnit in player.TableUnits.ToArray())
+                        {
+                            iUnit.State.BaseHealth = 1;
+                        }
+
+                        Player enemyPlayer =
+                            controller.GetTableCondition.Players.FirstOrDefault(p => p.Username != player.Username);
+
+                        foreach (var iUnit in enemyPlayer.TableUnits.ToArray())
+                        {
+                            iUnit.State.BaseHealth = 1;
+                        }
+
+
+                    })),
                
                 
                

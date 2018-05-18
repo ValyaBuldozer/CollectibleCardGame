@@ -30,14 +30,14 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"   
-                           Text="{Binding HeroName}" FontFamily="./#PF Din Text Pro"
+                           Text="{Binding HeroName}" FontFamily="/CollectibleCardGame;component/Fonts/#PF Din Text Pro"
                            FontWeight="Bold" FontSize="32"
                            Grid.ColumnSpan="3"/>
                 <local:UnitCardMiniUserControl Grid.Row="1" Grid.Column="1" 
                                                DataContext="{Binding Path = HeroUnitViewModel,
                     UpdateSourceTrigger=PropertyChanged}"/>
                 <TextBlock Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center"   
-                           Text="{Binding PlayerName}" FontFamily="./#PF Din Text Pro"
+                           Text="{Binding PlayerName}" FontFamily="/CollectibleCardGame;component/Fonts/#PF Din Text Pro"
                            FontWeight="Bold" FontSize="32"
                            Grid.ColumnSpan="3"/>
                 
@@ -57,22 +57,24 @@
                     <!--<TextBlock Margin="10,0,0,0" Grid.Row="0"  Text="Золото:" FontWeight="Bold" FontSize="24"/>-->
                     <TextBlock Grid.Column="1"  Grid.Row="0"  Text="{Binding ManaСurrent}" FontWeight="Bold" FontSize="28"
                                HorizontalAlignment="Center" VerticalAlignment="Center"
-                               Margin="0,0,30,0"/>
+                               Margin="0,0,30,0" FontFamily="/CollectibleCardGame;component/Fonts/#PF Din Text Pro"/>
                     <TextBlock Grid.Column="1"  Grid.Row="0"  Text="/" FontWeight="Bold" FontSize="28"
                                HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     <TextBlock Grid.Column="1"  Grid.Row="0"  Text="{Binding ManaMax}" FontWeight="Bold" FontSize="28"
                                HorizontalAlignment="Center" VerticalAlignment="Center"
-                               Margin="30,0,0,0"/>
+                               Margin="30,0,0,0" FontFamily="/CollectibleCardGame;component/Fonts/#PF Din Text Pro"/>
 
                     <Image Source="../../Images/Icons/handCards.png"  Margin="10,5,5,5" Grid.Row="1" ></Image>
                     <!--<TextBlock Margin="10,0,0,0" Grid.Row="1" Text="Карт в руке:" FontWeight="Bold" FontSize="24"/>-->
                     <TextBlock Grid.Column="1"  Grid.Row="1"  Text="{Binding CardsInHand}" FontWeight="Bold" FontSize="28"
-                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                               HorizontalAlignment="Center" VerticalAlignment="Center" 
+                               FontFamily="/CollectibleCardGame;component/Fonts/#PF Din Text Pro"/>
 
                     <Image Source="../../Images/Icons/deckCards.png"  Margin="10,5,5,5" Grid.Row="2"></Image>
                     <!--<TextBlock Margin="10,0,0,0" Grid.Row="2" Text="Карт в колоде:" FontWeight="Bold" FontSize="24"/>-->
                     <TextBlock Grid.Column="1"  Grid.Row="2" Text="{Binding CardsInDeck}" FontWeight="Bold" FontSize="28"
-                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                               HorizontalAlignment="Center" VerticalAlignment="Center"
+                               FontFamily="/CollectibleCardGame;component/Fonts/#PF Din Text Pro"/>
 
                 </Grid>
 
