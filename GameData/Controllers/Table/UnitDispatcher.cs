@@ -98,7 +98,7 @@ namespace GameData.Controllers.Table
             unit.State.ZeroHpEvent += OnUnitDies;
             unit.State.PropertyChanged += OnUnitStateChanges;
             unit.Player = sender;
-            _actionController.ExecuteAction(unit.BattleCryActionInfo,sender,actionTarget);
+            _actionController.ExecuteAction(unit.BattleCryActionInfo,unit,actionTarget);
             sender.TableUnits.Add(unit);
             _entityRepositoryController.AddNewItem(unit);
 

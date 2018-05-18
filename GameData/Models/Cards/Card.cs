@@ -1,4 +1,5 @@
 ﻿using GameData.Enums;
+using Newtonsoft.Json;
 
 namespace GameData.Models.Cards
 {

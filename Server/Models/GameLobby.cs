@@ -37,6 +37,8 @@ namespace Server.Models
 
         public TableCondition GeTableCondition => _gameDataContainer.Get<TableCondition>();
 
+        public event EventHandler<GameLobbyCloseEventArgs> OnClose; 
+
         public GameLobby(Client firstClient,Client secondClient)
         {
             _gameDataContainer = new Container();
@@ -89,8 +91,7 @@ namespace Server.Models
 
             _gameDataContainer.Initialize(settings);
             _gameDataContainer.Get<ObserverActionRepositoryController>().ItemAdded += OnObserverActionAdded;
-            //todo : внедрение настроек
-
+            _gameDataContainer.Get<IGameStateController>().GameEnd += OnGameEnd;
         }
 
         public void StartGame()
@@ -120,6 +121,11 @@ namespace Server.Models
 
             if(e.Item.TargetPlayer == null || SecondClient.User.Username == e.Item.TargetPlayer.Username)
                 SecondClient.ClientController.SendMessage(message);
+        }
+
+        private void OnGameEnd(object sender, GameEndEventArgs e)
+        {
+            OnClose?.Invoke(this,new GameLobbyCloseEventArgs(e.WinnerUsername));
         }
     }
 }
