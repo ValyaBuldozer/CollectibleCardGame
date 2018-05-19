@@ -427,25 +427,29 @@ namespace GameData.Models.Repository
                     })),
    
                 new GameAction(name:"Техника клонирования",id:52,
-                    description:"При выборе какого-либо юнита, его карта разыгрвается на стороне игрока (копируется)",parameterType:ActionParameterType.Empty,
+                    description:"При выборе какого-либо юнита, его копия появляется на стороне игрока (копируется)",parameterType:ActionParameterType.Empty,
                     isTargeted:true,
                     action: ((controller, sender, target, parameter) =>
                     {
-                        //todo: DrawCard для опредленного юнита
+                        
                         if(!(sender is Player player)) return;
-                        var cloneCard = target.BaseCard;
-                        controller.
+                        var cloneUnit = target.BaseCard;
+                        controller.SpawnUnit(player,cloneUnit);
+                        
                         
                         
 
                     })),
                 new GameAction(name:"Подкуп",id:53,
-                    description:"Выбранная карта уничтожается, а её копия разыгрывается на стороне игрока (переходит на сторону игрока)",parameterType:ActionParameterType.Empty,
+                    description:"Выбранный юнит исчезает, а его копия разыгрывается на стороне игрока (переходит на сторону игрока)",parameterType:ActionParameterType.Empty,
                     isTargeted:true,
                     action: ((controller, sender, target, parameter) =>
                     {
-                        //todo: DrawCard для опредленного юнита
-                        
+                        if(!(sender is Player player)) return;
+                        var unit = target;
+                        controller.SpawnUnit(player,unit.BaseCard);
+                        controller.Remove(unit);
+
 
 
                     })),
@@ -454,16 +458,27 @@ namespace GameData.Models.Repository
                     isTargeted:true,
                     action: ((controller, sender, target, parameter) =>
                     {
-                        //todo: DrawCard для опредленного юнита
-                        
+                        if(!(sender is Player player)) return;
+                        var unit = target;
+                        controller.DrawCard(unit.Player,unit.BaseCard);
+                        controller.Remove(unit);
+                        var deployCard = controller.GetCard(1007);
+                        controller.SpawnUnit(unit.Player,(UnitCard)deployCard);
+
 
 
                     })),
                 new GameAction(name:"Всеобщее отступление",id:55,description:"Все карты игрока возвращаются к нему в руку",parameterType:ActionParameterType.Empty,
                     action: ((controller, sender, target, parameter) =>
                     {
-                        //todo: DrawCard для опредленного юнита
-                        
+
+                        if(!(sender is Player player)) return;
+
+                        foreach (var iUnit in player.TableUnits.ToArray())
+                        {
+                            controller.DrawCard(player,iUnit.BaseCard);
+                            controller.Remove(iUnit);
+                        }
 
 
                     })),
@@ -605,6 +620,56 @@ namespace GameData.Models.Repository
 
 
                     })),
+
+                new GameAction(name:"Призыв Тенсельтских мечниц",id:65,description:"Призыв на поле боя Тенсельтских мечниц",parameterType:ActionParameterType.Empty,
+                    action: ((controller, sender, target, parameter) =>
+                    {
+                        if(!(sender is Unit unit)) return;
+
+
+                        var deployCard = controller.GetCard(21);
+                        controller.SpawnUnit(unit.Player,(UnitCard)deployCard);
+
+
+                    })),
+                new GameAction(name:"Призыв Рейнской Бригады",id:66,description:"Призыв на поле боя Рейнской Бригады",parameterType:ActionParameterType.Empty,
+                    action: ((controller, sender, target, parameter) =>
+                    {
+                        if(!(sender is Unit unit)) return;
+                       
+                      
+                        var deployCard = controller.GetCard(27);
+                        controller.SpawnUnit(unit.Player,(UnitCard)deployCard);
+
+
+                    })),
+                new GameAction(name:"Призыв Медведя",id:67,description:"Призыв на поле боя Боевого медведя",parameterType:ActionParameterType.Empty,
+                    action: ((controller, sender, target, parameter) =>
+                    {
+                        if(!(sender is Unit unit)) return;
+
+
+                        var deployCard = controller.GetCard(1008);
+                        controller.SpawnUnit(unit.Player,(UnitCard)deployCard);
+
+
+                    })),
+                    //параметровый
+                new GameAction(name:"Призыв Бригады Имперы",id:68,description:"Призыв на поле боя Бригады Имперы",parameterType:ActionParameterType.Empty,
+                    action: ((controller, sender, target, parameter) =>
+                    {
+                        if(!(sender is Unit unit)) return;
+
+                        while (parameter != 0)
+                        {
+                            var deployCard = controller.GetCard(31);
+                            controller.SpawnUnit(unit.Player, (UnitCard) deployCard);
+                            parameter--;
+                        }
+
+
+                    })),
+               
                
                 
                
