@@ -434,7 +434,7 @@ namespace GameData.Models.Repository
                         //todo: DrawCard для опредленного юнита
                         if(!(sender is Player player)) return;
                         var cloneCard = target.BaseCard;
-                        controller.
+                        //controller.
                         
                         
 

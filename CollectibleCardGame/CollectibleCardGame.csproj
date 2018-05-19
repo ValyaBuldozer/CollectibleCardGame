@@ -194,9 +194,6 @@
     <Compile Include="Views\FramesShell\LogInFramePageShell.xaml.cs">
       <DependentUpon>LogInFramePageShell.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Frames\CardDecksFramePage.xaml.cs">
-      <DependentUpon>CardDecksFramePage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\Frames\ConnectionErrorFramePage.xaml.cs">
       <DependentUpon>ConnectionErrorFramePage.xaml</DependentUpon>
     </Compile>
@@ -248,6 +245,9 @@
     <Compile Include="Views\UserControls\CardUserControl.xaml.cs">
       <DependentUpon>CardUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\DeckUserControl.xaml.cs">
+      <DependentUpon>DeckUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControls\FractionUserControl.xaml.cs">
       <DependentUpon>FractionUserControl.xaml</DependentUpon>
     </Compile>
@@ -284,10 +284,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\FramesShell\LogInFramePageShell.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Frames\CardDecksFramePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -356,6 +352,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\UserControls\CardUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\DeckUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

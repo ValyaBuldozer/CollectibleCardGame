@@ -219,6 +219,11 @@ namespace GameData.Controllers.Table
             if(!(sender is UnitState unitState))
                 return;
 
+            //вызов экшена при получении урона
+            if(e.PropertyName == nameof(UnitState.RecievedDamage))
+                _actionController.ExecuteAction(unitState.Unit.OnDamageRecievedActionInfo,
+                    unitState.Unit,null);
+
             OnUnitStateChange?.Invoke(this,new EntityStateChangeObserverAction(
                 unitState.Unit.EntityId,unitState.Unit));
         }

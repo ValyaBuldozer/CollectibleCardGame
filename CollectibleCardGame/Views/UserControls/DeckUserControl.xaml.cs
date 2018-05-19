@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace CollectibleCardGame.Views.Frames
+namespace CollectibleCardGame.Views.UserControls
 {
     /// <summary>
-    /// Логика взаимодействия для CardDecksFramePage.xaml
+    /// Логика взаимодействия для DeckUserControl.xaml
     /// </summary>
-    public partial class CardDecksFramePage : Page
+    public partial class DeckUserControl : UserControl
     {
-        public CardDecksFramePage()
+        public DeckUserControl()
         {
             InitializeComponent();
         }

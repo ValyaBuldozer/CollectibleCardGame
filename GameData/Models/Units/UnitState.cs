@@ -18,7 +18,6 @@ namespace GameData.Models.Units
         private int _baseHealth;
         private int _recievedDamage;
         private int _attack;
-        private bool _canAttack;
 
         [JsonIgnore]
         public Unit Unit
@@ -58,15 +57,7 @@ namespace GameData.Models.Units
             }
         }
 
-        public bool CanAttack
-        {
-            get => _canAttack;
-            set
-            {
-                _canAttack = value;
-                NotifyPropertyChanged(nameof(CanAttack));
-            }
-        }
+        public bool CanAttack { get; set; }
 
         public int BaseHealth
         {

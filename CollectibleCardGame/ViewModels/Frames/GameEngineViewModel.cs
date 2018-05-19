@@ -9,6 +9,7 @@ using CollectibleCardGame.Models;
 using CollectibleCardGame.Services;
 using CollectibleCardGame.ViewModels.Elements;
 using CollectibleCardGame.ViewModels.UserControls;
+using GameData.Enums;
 using GameData.Models;
 using GameData.Models.Cards;
 using GameData.Models.PlayerTurn;
@@ -213,6 +214,7 @@ namespace CollectibleCardGame.ViewModels.Frames
 
                    if (_isSpellTargeting)
                    {
+                        //todo : проверка героя
                        PlayerUnits.ForEach(u => u.ResetTargeting());
                        EnemyUnits.ForEach(u => u.ResetTargeting());
                        PlayerViewModel.HeroUnitViewModel.ResetTargeting();
@@ -295,7 +297,26 @@ namespace CollectibleCardGame.ViewModels.Frames
                    switch (cardViewModel.Card)
                    {
                        case SpellCard spellCard when spellCard.ActionInfo.IsTargeted:
+                           if (spellCard.ActionInfo.ParameterType == ActionParameterType.Damage ||
+                               spellCard.ActionInfo.ParameterType == ActionParameterType.Heal)
+                           {
+                               PlayerViewModel.HeroUnitViewModel.SetTargeting();
+                               EnemyViewModel.HeroUnitViewModel.SetTargeting();
+                           }
+
+                           PlayerUnits.ForEach(u => u.SetTargeting());
+                           EnemyUnits.ForEach(u => u.SetTargeting());
+                           _isSpellTargeting = true;
+                           _spellTargetingViewModel = cardViewModel;
+                           return;
                        case UnitCard unitCard when unitCard.BattleCryActionInfo?.IsTargeted == true:
+                           if (unitCard.BattleCryActionInfo.ParameterType == ActionParameterType.Damage ||
+                               unitCard.BattleCryActionInfo.ParameterType == ActionParameterType.Heal)
+                           {
+                               PlayerViewModel.HeroUnitViewModel.SetTargeting();
+                               EnemyViewModel.HeroUnitViewModel.SetTargeting();
+                           }
+
                            PlayerUnits.ForEach(u => u.SetTargeting());
                            EnemyUnits.ForEach(u => u.SetTargeting());
                            PlayerViewModel.HeroUnitViewModel.SetTargeting();

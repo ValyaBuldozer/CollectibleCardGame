@@ -20,7 +20,10 @@
             </TabControl.ItemTemplate>
             <TabControl.ContentTemplate>
                 <DataTemplate>
+                    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
 
+
+                    </Grid>
                 </DataTemplate>
             </TabControl.ContentTemplate>
         </TabControl>
