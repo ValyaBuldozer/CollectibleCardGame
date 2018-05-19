@@ -12,8 +12,36 @@
         <ScrollViewer  VerticalScrollBarVisibility="Auto">
             <RichTextBox Margin="5"   >
             <FlowDocument>
-                    <Paragraph  Margin="5,0,0,0" FontWeight="Bold" FontSize="24" FontFamily="/CollectibleCardGame;component/Fonts/#PF Din Text Pro">
-                        <LineBreak/> Особенности юнитов:</Paragraph>
+                <Paragraph  Margin="5,0,0,0" FontWeight="Bold" FontSize="24" FontFamily="/CollectibleCardGame;component/Fonts/#PF Din Text Pro">
+                    <LineBreak/> Особенности юнитов:
+                </Paragraph>
+                    <Paragraph Margin="5,20,0,0" FontWeight="Bold" FontSize="16" FontFamily="/CollectibleCardGame;component/Fonts/#PF Din Text Pro">
+                    <InlineUIContainer BaselineAlignment="TextBottom" >
+                        <Image Margin="2" Width="20" Source="/Images/IconsUnit/disguiestIco.png"></Image>
+                    </InlineUIContainer>
+                    <Span FontSize="20" >Маскировка:
+                        <Span FontSize="16" FontWeight="Light" >
+                            это существо нельзя атаковать или выбрать целью, пока оно не нанесет урон.</Span>
+                    </Span>
+                </Paragraph>
+                    <Paragraph Margin="5,20,0,0" FontWeight="Bold" FontSize="16" FontFamily="/CollectibleCardGame;component/Fonts/#PF Din Text Pro">
+                        <InlineUIContainer BaselineAlignment="TextBottom" >
+                            <Image Margin="2" Width="20" Source="/Images/IconsUnit/shieldIco.png"></Image>
+                        </InlineUIContainer>
+                        <Span FontSize="20" >Провокатор:
+                            <Span FontSize="16" FontWeight="Light" >
+                                вынуждает противника атаковать юнитов со способностью «Провокатор».</Span>
+                        </Span>
+                    </Paragraph>
+                <Paragraph Margin="5,20,0,0" FontWeight="Bold" FontSize="16" FontFamily="/CollectibleCardGame;component/Fonts/#PF Din Text Pro">
+                    <InlineUIContainer BaselineAlignment="TextBottom" >
+                        <Image Margin="2" Width="20" Source="/Images/IconsUnit/sword.png"></Image>
+                    </InlineUIContainer>
+                        <Span FontSize="20" >:
+                        <Span FontSize="16" FontWeight="Light" >
+                            Таким значком будут выделены юниты с обычным приоритетом атаки</Span>
+                    </Span>
+                </Paragraph>
                     <Paragraph Margin="5,20,0,0" FontWeight="Bold" FontSize="16" FontFamily="/CollectibleCardGame;component/Fonts/#PF Din Text Pro">
                         <Span FontSize="20" > Воодушевление:
                             <Span FontSize="16" FontWeight="Light" >
@@ -22,19 +50,10 @@
                     </Paragraph>
                     <Paragraph Margin="5,20,0,0" FontWeight="Bold" FontSize="16" FontFamily="/CollectibleCardGame;component/Fonts/#PF Din Text Pro">
                         <Span FontSize="20" >Рывок:
-                        <Span FontSize="16" FontWeight="Light" >
-                            юнит может атаковать сразу после выхода на поле боя.</Span>
-                    </Span>
-                </Paragraph>
-                    <Paragraph Margin="5,20,0,0" FontWeight="Bold" FontSize="16" FontFamily="/CollectibleCardGame;component/Fonts/#PF Din Text Pro">
-                        <InlineUIContainer BaselineAlignment="TextBottom" >
-                            <Image Margin="2" Width="20" Source="/Images/IconsUnit/shieldIco.png"></Image>
-                        </InlineUIContainer>
-                        <Span FontSize="20" >Провокатор:
-                        <Span FontSize="16" FontWeight="Light" >
-                            вынуждает противника атаковать юнитов со способностью «Провокатор».</Span>
-                    </Span>
-                </Paragraph>
+                            <Span FontSize="16" FontWeight="Light" >
+                                юнит может атаковать сразу после выхода на поле боя.</Span>
+                        </Span>
+                    </Paragraph>
                     <Paragraph Margin="5,20,0,0" FontWeight="Bold" FontSize="16" FontFamily="/CollectibleCardGame;component/Fonts/#PF Din Text Pro">
                         <Span FontSize="20" >Берсерк:
                         <Span FontSize="16" FontWeight="Light" >
@@ -67,19 +86,10 @@
                 </Paragraph>
                     <Paragraph Margin="5,20,0,0" FontWeight="Bold" FontSize="16" FontFamily="/CollectibleCardGame;component/Fonts/#PF Din Text Pro">
                         <Span FontSize="20" >Превентивный удар:
-                        <Span FontSize="16" FontWeight="Light" >
-                            нанесите 2 урона выбранному юниту.</Span>
-                    </Span>
-                </Paragraph>
-                    <Paragraph Margin="5,20,0,0" FontWeight="Bold" FontSize="16" FontFamily="/CollectibleCardGame;component/Fonts/#PF Din Text Pro">
-                    <InlineUIContainer BaselineAlignment="TextBottom" >
-                        <Image Margin="2" Width="20" Source="/Images/IconsUnit/disguiestIco.png"></Image>
-                    </InlineUIContainer>
-                        <Span FontSize="20" >Маскировка:
-                        <Span FontSize="16" FontWeight="Light" >
-                            это существо нельзя атаковать или выбрать целью, пока оно не нанесет урон.</Span>
-                    </Span>
-                </Paragraph>
+                            <Span FontSize="16" FontWeight="Light" >
+                                нанесите 2 урона выбранному юниту.</Span>
+                        </Span>
+                    </Paragraph>
                     <Paragraph Margin="5,20,0,0" FontWeight="Bold" FontSize="16" FontFamily="/CollectibleCardGame;component/Fonts/#PF Din Text Pro">
                         <Span FontSize="20" >Мастер магии:
                         <Span FontSize="16" FontWeight="Light" >

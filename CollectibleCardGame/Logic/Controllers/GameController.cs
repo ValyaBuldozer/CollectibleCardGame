@@ -53,7 +53,7 @@ namespace CollectibleCardGame.Logic.Controllers
 
             var deck = new List<int>(array);
 
-            var card = (UnitCard)_cardRepositoryController.GetById(1001);
+            var card = (UnitCard)_cardRepositoryController.GetById(1000);
             SendGameRequest(deck,card);
         }
 
