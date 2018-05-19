@@ -70,7 +70,7 @@
                     <DataTemplate>
                         <StackPanel>
                             <StackPanel>
-                                <Viewbox Stretch="Fill" Height="120" Width="96">
+                                <Viewbox Stretch="Fill" VerticalAlignment="Stretch" Width="96"  Margin="5,0">
                                     <Button Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, 
                                             AncestorType={x:Type Page}}, Path=ViewModel.EnemyUnitCommand}" 
                                             CommandParameter="{Binding}"
@@ -106,7 +106,7 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
-                            <Viewbox Stretch="Fill" Height="120" Width="96" Margin="5,0">
+                            <Viewbox Stretch="Fill" VerticalAlignment="Stretch" Width="96" Margin="5,0">
                                 <Button Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, 
                                     AncestorType={x:Type Page}}, Path=ViewModel.PlayerUnitCommand}" 
                                         CommandParameter="{Binding}" Background="{x:Null}"
