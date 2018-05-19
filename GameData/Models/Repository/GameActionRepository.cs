@@ -305,15 +305,12 @@ namespace GameData.Models.Repository
 
                     })),
                 //(не параметровый)
-                new GameAction(name:"Выдача золота",id:41,description:"Выдает дополнительнsq золотой игроку на текущий ход",parameterType:ActionParameterType.Buff,
+                new GameAction(name:"Выдача золота",id:41,description:"Выдает дополнительный золотой игроку на текущий ход",parameterType:ActionParameterType.Buff,
                     action: ((controller, sender, target, parameter) =>
                     {
-                      
                         if(!(sender is Player player)) return;
                         if(player.Mana.Current<10)
                         player.Mana.Current = player.Mana.Base+1;
-
-
                     })),
                 new GameAction(name:"Мягкая сталь",id:42,description:"Понижает атаку вражеского юнита",parameterType:ActionParameterType.Buff,
                     isTargeted:true,
@@ -405,7 +402,9 @@ namespace GameData.Models.Repository
 
 
                     })),
-                new GameAction(name:"Сфера поглощения",id:51,description:"Высасывает 1 единицу здоровья у всех юнитов противника и повышает всем союзным юнитам 1 единицу здоровья",parameterType:ActionParameterType.Damage,
+                new GameAction(name:"Сфера поглощения",id:51,
+                    description:"Высасывает 1 единицу здоровья у всех юнитов противника и повышает всем союзным юнитам 1 единицу здоровья",
+                    parameterType:ActionParameterType.Damage,
                     action: ((controller, sender, target, parameter) =>
                     {
                         if(!(sender is Player player)) return;
@@ -422,7 +421,9 @@ namespace GameData.Models.Repository
 
                     })),
    
-                new GameAction(name:"Техника клонирования",id:52,description:"При выборе какого-либо юнита, его карта разыгрвается на стороне игрока (копируется)",parameterType:ActionParameterType.Empty,
+                new GameAction(name:"Техника клонирования",id:52,
+                    description:"При выборе какого-либо юнита, его карта разыгрвается на стороне игрока (копируется)",
+                    parameterType:ActionParameterType.Empty,
                     isTargeted:true,
                     action: ((controller, sender, target, parameter) =>
                     {
@@ -431,7 +432,8 @@ namespace GameData.Models.Repository
                         
 
                     })),
-                new GameAction(name:"Подкуп",id:53,description:"Выбранная карта уничтожается, а её копия разыгрывается на стороне игрока (переходит на сторону игрока)",parameterType:ActionParameterType.Empty,
+                new GameAction(name:"Подкуп",id:53,
+                    description:"Выбранная карта уничтожается, а её копия разыгрывается на стороне игрока (переходит на сторону игрока)",parameterType:ActionParameterType.Empty,
                     isTargeted:true,
                     action: ((controller, sender, target, parameter) =>
                     {
@@ -465,17 +467,8 @@ namespace GameData.Models.Repository
                         Player enemyPlayer =
                             controller.GetTableCondition.Players.FirstOrDefault(p => p.Username != player.Username);
                         var rnd = new Random();
-                        int rndNum = rnd.Next(0, enemyPlayer.TableUnits.Count + 1);
-                        Unit rndUnit = enemyPlayer.TableUnits[rndNum];
-                       
-                        foreach (var iUnit in enemyPlayer.TableUnits.ToArray())
-                         {
-                             if (!Equals(iUnit,rndUnit))
-                             controller.KillUnit(iUnit);
-                         }
-                       
-
-
+                        var rndUnit = enemyPlayer.TableUnits[rnd.Next(0, enemyPlayer.TableUnits.Count + 1)];
+                        controller.KillUnit(rndUnit);
                     })),
                 new GameAction(name:"Крещение огнем",id:57,description:"Здоровье выбранного юнита понижается на 2, атака повышается на 4",parameterType:ActionParameterType.Buff,
                     isTargeted:true,
