@@ -105,7 +105,6 @@ namespace CollectibleCardGame.ViewModels.Frames
                 NotifyPropertyChanged(nameof(CurrentPlayerUsername));
                 NotifyPropertyChanged(nameof(TransferTurnCommand));
 
-                //todo : переделать под изменение свойства
                 if (_currentPlayerUsername == _user.Username)
                 {
                     _playerUnits.ForEach(u=>u.IsCanAttack = true);
@@ -114,6 +113,9 @@ namespace CollectibleCardGame.ViewModels.Frames
                 {
                     _playerUnits.ForEach(u=>u.IsCanAttack = false);
                 }
+
+                PlayerUnits.ToList().ForEach(u=>u.ResetTargeting());
+                EnemyUnits.ToList().ForEach(u=>u.ResetTargeting());
             }
         }
 
@@ -227,7 +229,7 @@ namespace CollectibleCardGame.ViewModels.Frames
                        return;
                    }
 
-                   if(!unitViewModel.BaseUnit.State.CanAttack)
+                   if(!unitViewModel.IsCanAttack)
                        return;
 
                    if(o is PlayerUserControlViewModel) return;
@@ -271,18 +273,27 @@ namespace CollectibleCardGame.ViewModels.Frames
                        return;
                    }
 
-                   if (_isAttackTargeting)
-                   {
-                       PlayerTurnEvent?.Invoke(this, new PlayerTurnRequestEventArgs(
-                           new UnitAttackPlayerTurn(_player,
-                               _unitTargetingViewModel.BaseUnit, unitViewModel.BaseUnit)));
-                       _unitTargetingViewModel.IsCanAttack = false;
-                       _unitTargetingViewModel = null;
-                       _isAttackTargeting = false;
-                       EnemyUnits.ForEach(u=>u.ResetTargeting());
-                       EnemyViewModel.HeroUnitViewModel.ResetTargeting();
+                   if (!_isAttackTargeting) return;
+
+                   //провкрка провокатора
+                   if (unitViewModel.BaseUnit.State.AttackPriority != 2 &&
+                       EnemyUnits.ToList().Exists(u => u.BaseUnit.State.AttackPriority == 2))
                        return;
-                   }
+
+                   //проверка маскировки
+                   if(unitViewModel.BaseUnit.State.AttackPriority == 0)
+                       return;
+
+                   PlayerTurnEvent?.Invoke(this, new PlayerTurnRequestEventArgs(
+                       new UnitAttackPlayerTurn(_player,
+                           _unitTargetingViewModel.BaseUnit, unitViewModel.BaseUnit)));
+                   _unitTargetingViewModel.IsCanAttack = false;
+                   _unitTargetingViewModel = null;
+                   _isAttackTargeting = false;
+                   EnemyUnits.ForEach(u => u.ResetTargeting());
+                   EnemyViewModel.HeroUnitViewModel.ResetTargeting();
+                   return;
+
                }));
 
         public RelayCommand CardDeployCommand => _cardDeployCommand ??

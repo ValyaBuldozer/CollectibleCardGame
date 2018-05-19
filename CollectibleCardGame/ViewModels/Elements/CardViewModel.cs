@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
+using GameData.Enums;
 using GameData.Models.Cards;
+using ArgumentOutOfRangeException = System.ArgumentOutOfRangeException;
 
 namespace CollectibleCardGame.ViewModels.Elements
 {
@@ -16,6 +19,9 @@ namespace CollectibleCardGame.ViewModels.Elements
         private int _attack;
         private int _health;
         private bool _isUnitCard;
+
+        private Brush _tapeBrush;
+        private Brush _tapeBorderBrush;
 
         private Card _card;
 
@@ -40,6 +46,28 @@ namespace CollectibleCardGame.ViewModels.Elements
                     _isUnitCard = true;
                     _attack = unitCard.BaseAttack;
                     _health = unitCard.BaseHP;
+
+                    switch(unitCard.Fraction)
+                        {
+                            case Fraction.Common:
+                                TapeBorderBrush = null;
+                                TapeBrush = null;
+                                break;
+                            case Fraction.North:
+                                TapeBorderBrush = new SolidColorBrush(Color.FromRgb(156, 162, 156));
+                                TapeBrush = new SolidColorBrush(Color.FromRgb(0, 97, 225));
+                                break;
+                            case Fraction.South:
+                                TapeBorderBrush = new SolidColorBrush(Color.FromRgb(206, 130, 57));
+                                TapeBrush = new SolidColorBrush(Color.FromRgb(57, 58, 60));
+                                break;
+                            case Fraction.Dark:
+                                TapeBorderBrush = new SolidColorBrush(Color.FromRgb(148, 182, 178));
+                                TapeBrush = new SolidColorBrush(Color.FromRgb(159, 0, 22));
+                                break;
+                            default:
+                                throw new ArgumentOutOfRangeException();
+                        }
                 }
             }
         }
@@ -111,6 +139,26 @@ namespace CollectibleCardGame.ViewModels.Elements
             {
                 _health = value;
                 NotifyPropertyChanged(nameof(Health));
+            }
+        }
+
+        public Brush TapeBrush
+        {
+            get => _tapeBrush;
+            set
+            {
+                _tapeBrush = value;
+                NotifyPropertyChanged(nameof(TapeBrush));
+            }
+        }
+
+        public Brush TapeBorderBrush
+        {
+            get => _tapeBorderBrush;
+            set
+            {
+                _tapeBorderBrush = value;
+                NotifyPropertyChanged(nameof(TapeBorderBrush));
             }
         }
 

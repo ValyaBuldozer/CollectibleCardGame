@@ -84,7 +84,7 @@ namespace Server.Controllers
 
                 return true;
             }
-            catch (NullReferenceException)
+            catch (NotImplementedException)
             {
                 //todo : допилить обработку исключений
                 return false;
