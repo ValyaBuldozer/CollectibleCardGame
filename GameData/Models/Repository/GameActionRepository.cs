@@ -225,18 +225,8 @@ namespace GameData.Models.Repository
                 new GameAction(name:"Случайное замораживание",id:27,description:"Замораживает случайного вражеского юнита на 1 ход",parameterType:ActionParameterType.Empty,
                     action: ((controller, sender, target, parameter) =>
                     {
-                        //var player = (Player) sender;
-                        //Player enemyPlayer =
-                        //    controller.GetTableCondition.Players.FirstOrDefault(p => p.Username != player.Username);
-
-                        //if (enemyPlayer.TableUnits.Count != 0)
-                        //{
-                        //    var rnd = new Random();
-                        //    int rndNum = rnd.Next(0, enemyPlayer.TableUnits.Count + 1);
-                        //    enemyPlayer.TableUnits[rndNum].CanAttack=false;
-                        //}
-
-                        //todo: сделать заморозку юнита
+                        
+                        //
 
 
                     })),
@@ -318,13 +308,13 @@ namespace GameData.Models.Repository
 
                     })),
                 //(не параметровый)
-                new GameAction(name:"Выдача золота",id:41,description:"Выдает дополнительнsq золотой игроку на текущий ход",parameterType:ActionParameterType.Buff,
+                new GameAction(name:"Выдача золота",id:41,description:"Выдает дополнительный золотой игроку на текущий ход",parameterType:ActionParameterType.Buff,
                     action: ((controller, sender, target, parameter) =>
                     {
                       
                         if(!(sender is Player player)) return;
                         if(player.Mana.Current<10)
-                        player.Mana.Current = player.Mana.Base+1;
+                        player.Mana.Current = player.Mana.Current+1;
 
 
                     })),
@@ -430,7 +420,7 @@ namespace GameData.Models.Repository
                         }
                         foreach (var iUnit in enemyPlayer.TableUnits.ToArray())
                         {
-                            iUnit.State.RecieveDamage(1);
+                            iUnit.State.RecieveDamage(parameter);
                         }
 
                     })),
@@ -440,7 +430,9 @@ namespace GameData.Models.Repository
                     action: ((controller, sender, target, parameter) =>
                     {
                         //todo: DrawCard для опредленного юнита
+                        if(!(sender is Player player)) return;
                         var cloneCard = target.BaseCard;
+                        
                         
 
                     })),
@@ -481,11 +473,8 @@ namespace GameData.Models.Repository
                         int rndNum = rnd.Next(0, enemyPlayer.TableUnits.Count);
                         Unit rndUnit = enemyPlayer.TableUnits[rndNum];
                        
-                        foreach (var iUnit in enemyPlayer.TableUnits.ToArray())
-                         {
-                             if (!Equals(iUnit,rndUnit))
-                             controller.KillUnit(iUnit);
-                         }
+                        controller.KillUnit(rndUnit);
+                        
                        
 
 
@@ -570,7 +559,7 @@ namespace GameData.Models.Repository
                     action: ((controller, sender, target, parameter) =>
                     {
 
-                        //todo: сделать заморозку юнита
+                        //
 
                     })),
                 new GameAction(name:"Метель",id:63,description:"Снижает атаку отрядов до 1 у обоих игроков",parameterType:ActionParameterType.Empty,

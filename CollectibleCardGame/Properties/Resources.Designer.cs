@@ -763,6 +763,16 @@ namespace CollectibleCardGame.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Знак_вопроса {
+            get {
+                object obj = ResourceManager.GetObject("Знак_вопроса", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Имлерих {
             get {
                 object obj = ResourceManager.GetObject("Имлерих", resourceCulture);

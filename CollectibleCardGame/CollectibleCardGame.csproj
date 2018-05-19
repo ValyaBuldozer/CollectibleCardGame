@@ -851,5 +851,8 @@
   <ItemGroup>
     <Resource Include="Images\ImagesSpell\Восстановление.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImagesUnit\Знак вопроса.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
