@@ -562,4 +562,7 @@
   <data name="Восстановление" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\ImagesSpell\Восстановление.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Знак_вопроса" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\ImagesUnit\Знак вопроса.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>
