@@ -71,7 +71,7 @@
                             </Grid.ColumnDefinitions>
 
                             <Border  Visibility="{Binding IsUnitCard,Converter={StaticResource BooleanToVisibilityConverter}}" 
-                            Grid.Column="1" BorderBrush="{Binding TapeBorderBrush}"
+                                Grid.Column="1" BorderBrush="{Binding TapeBorderBrush}"
                                  BorderThickness="5" Margin="0,40,0,22">
                                 <Rectangle  Fill="{Binding TapeBrush}" HorizontalAlignment="Stretch"
                                         VerticalAlignment="Stretch"   Opacity="0.9"  />

@@ -174,6 +174,7 @@
     <Compile Include="ViewModels\Elements\UnitViewModel.cs" />
     <Compile Include="ViewModels\Frames\CardDecksPageViewModel.cs" />
     <Compile Include="ViewModels\Frames\ConnectionErrorViewModel.cs" />
+    <Compile Include="ViewModels\Frames\DeckViewModel.cs" />
     <Compile Include="ViewModels\Frames\ErrorFramePageViewModel.cs" />
     <Compile Include="ViewModels\Frames\GameEngineViewModel.cs" />
     <Compile Include="ViewModels\Frames\GameProccesPageViewModel.cs" />
@@ -182,6 +183,7 @@
     <Compile Include="ViewModels\Frames\MenuFramePageViewModel.cs" />
     <Compile Include="ViewModels\Frames\LogInFramePageViewModel.cs" />
     <Compile Include="ViewModels\Frames\RegistrationFramePageViewModel.cs" />
+    <Compile Include="ViewModels\Frames\ServerConnectionViewModel.cs" />
     <Compile Include="ViewModels\UserControls\CardUserControlViewModel.cs" />
     <Compile Include="ViewModels\UserControls\FractionUserControlViewModel.cs" />
     <Compile Include="ViewModels\UserControls\PlayerUserControlViewModel.cs" />
@@ -191,9 +193,6 @@
     <Compile Include="Views\ForComponents\MainMenuPart.cs" />
     <Compile Include="Views\FramesShell\LogInFramePageShell.xaml.cs">
       <DependentUpon>LogInFramePageShell.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Frames\CardDecksFramePage.xaml.cs">
-      <DependentUpon>CardDecksFramePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Frames\ConnectionErrorFramePage.xaml.cs">
       <DependentUpon>ConnectionErrorFramePage.xaml</DependentUpon>
@@ -222,6 +221,9 @@
     <Compile Include="Views\Frames\ObserverGamesFramePage.xaml.cs">
       <DependentUpon>ObserverGamesFramePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Frames\ServerConnectionPage.xaml.cs">
+      <DependentUpon>ServerConnectionPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Frames\SettingsFramePage.xaml.cs">
       <DependentUpon>SettingsFramePage.xaml</DependentUpon>
     </Compile>
@@ -242,6 +244,9 @@
     </Compile>
     <Compile Include="Views\UserControls\CardUserControl.xaml.cs">
       <DependentUpon>CardUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\DeckUserControl.xaml.cs">
+      <DependentUpon>DeckUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\FractionUserControl.xaml.cs">
       <DependentUpon>FractionUserControl.xaml</DependentUpon>
@@ -282,10 +287,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Frames\CardDecksFramePage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\Frames\DecksSettingsFramePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -322,6 +323,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Frames\ServerConnectionPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Frames\SettingsFramePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -347,6 +352,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\UserControls\CardUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\DeckUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -391,7 +400,7 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <EmbeddedResource Include="Resources\CardsRepository.json" />
-    <None Include="Fonts\PF Din Text Cond Pro.ttf" />
+    <Resource Include="Fonts\PF Din Text Cond Pro.ttf" />
     <Resource Include="Fonts\Chronicles_font.ttf" />
   </ItemGroup>
   <ItemGroup>
@@ -850,6 +859,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\ImagesSpell\Восстановление.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImagesUnit\Знак вопроса.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

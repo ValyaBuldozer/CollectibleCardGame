@@ -79,11 +79,6 @@ namespace GameData.Tests.Gameplay
             container.Get<IGameStateController>().Start(firstDeck, "FirstPlayer", testCards.FirstCard,
                 secondDeck, "SecondPlayer", testCards.SecondCard);
 
-
-
-
-           
-
             var player = container.Get<IPlayerTurnDispatcher>().CurrentPlayer;
             var card1 = player.HandCards.FirstOrDefault(c => c.Name == "Лучник");
             CardDeployPlayerTurn archerDeployTurn = new CardDeployPlayerTurn(player, card1);
@@ -95,8 +90,6 @@ namespace GameData.Tests.Gameplay
             var observerRepository = container.Get<ObserverActionRepository>();
             var gameActionObserver =
                     observerRepository.Collection.FirstOrDefault(o => o.Type == ObserverActionType.GameAction);
-
-                
 
             Assert.AreNotEqual(gameActionObserver, null);
             Assert.IsTrue(gameActionObserver is GameActionTriggerObserverAction action);
@@ -145,6 +138,9 @@ namespace GameData.Tests.Gameplay
             container.Get<IPlayerTurnHandler<CardDeployPlayerTurn>>().Execute(knightDeployTurnP2);
             firstPlayer.TableUnits.FirstOrDefault(c => c.BaseCard.Name == "Мечник").State.RecieveDamage(3);
 
+            container.Get<IPlayerTurnDispatcher>().NextPlayer();
+            container.Get<IPlayerTurnDispatcher>().NextPlayer();
+
             UnitAttackPlayerTurn unitAttackPlayerTurn = new UnitAttackPlayerTurn(
                 secondPlayer, secondPlayer.TableUnits.First(), firstPlayer.TableUnits.FirstOrDefault(c => c.BaseCard.Name=="Лекарь"));
             container.Get<IPlayerTurnHandler<UnitAttackPlayerTurn>>().Execute(unitAttackPlayerTurn);
@@ -191,6 +187,9 @@ namespace GameData.Tests.Gameplay
             CardDeployPlayerTurn lagertaDeployTurn = new CardDeployPlayerTurn(secondPlayer, secondPlayerUnitCard);
             container.Get<IPlayerTurnHandler<CardDeployPlayerTurn>>().Execute(lagertaDeployTurn);
 
+            container.Get<IPlayerTurnDispatcher>().NextPlayer();
+            container.Get<IPlayerTurnDispatcher>().NextPlayer();
+
             UnitAttackPlayerTurn unitAttackPlayerTurn = new UnitAttackPlayerTurn(
                 secondPlayer, secondPlayer.TableUnits.First(), firstPlayer.TableUnits.First());
             container.Get<IPlayerTurnHandler<UnitAttackPlayerTurn>>().Execute(unitAttackPlayerTurn);
@@ -235,6 +234,9 @@ namespace GameData.Tests.Gameplay
             var secondPlayerUnitCard = secondPlayer.HandCards.FirstOrDefault(c => c.Name == "Мечник");
             CardDeployPlayerTurn knightDeployTurn = new CardDeployPlayerTurn(secondPlayer, secondPlayerUnitCard);
             container.Get<IPlayerTurnHandler<CardDeployPlayerTurn>>().Execute(knightDeployTurn);
+
+            container.Get<IPlayerTurnDispatcher>().NextPlayer();
+            container.Get<IPlayerTurnDispatcher>().NextPlayer();
 
             UnitAttackPlayerTurn unitAttackPlayerTurn = new UnitAttackPlayerTurn(
                 secondPlayer, secondPlayer.TableUnits.First(), firstPlayer.TableUnits.First());
@@ -321,6 +323,9 @@ namespace GameData.Tests.Gameplay
             CardDeployPlayerTurn playerTurn2 = new CardDeployPlayerTurn(secondPlayer, secondPlayerUnitCard);
             container.Get<IPlayerTurnHandler<CardDeployPlayerTurn>>().Execute(playerTurn2);
 
+            container.Get<IPlayerTurnDispatcher>().NextPlayer();
+            container.Get<IPlayerTurnDispatcher>().NextPlayer();
+
             UnitAttackPlayerTurn unitAttackPlayerTurn = new UnitAttackPlayerTurn(
                 secondPlayer, secondPlayer.TableUnits.First(), firstPlayer.TableUnits.First());
             container.Get<IPlayerTurnHandler<UnitAttackPlayerTurn>>().Execute(unitAttackPlayerTurn);
@@ -364,17 +369,15 @@ namespace GameData.Tests.Gameplay
             CardDeployPlayerTurn playerTurn2 = new CardDeployPlayerTurn(secondPlayer, secondPlayerUnitCard);
             container.Get<IPlayerTurnHandler<CardDeployPlayerTurn>>().Execute(playerTurn2);
 
+            container.Get<IPlayerTurnDispatcher>().NextPlayer();
+            container.Get<IPlayerTurnDispatcher>().NextPlayer();
+
             UnitAttackPlayerTurn unitAttackPlayerTurn = new UnitAttackPlayerTurn(
                 secondPlayer, secondPlayer.TableUnits.First(), firstPlayer.TableUnits.First());
             container.Get<IPlayerTurnHandler<UnitAttackPlayerTurn>>().Execute(unitAttackPlayerTurn);
 
-          
-
             Assert.AreEqual(0, firstPlayer.TableUnits.Count);
             Assert.AreEqual(0, secondPlayer.TableUnits.Count);
-
-
-
         }
 
         [TestMethod]

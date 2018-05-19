@@ -23,7 +23,23 @@ namespace GameData.Controllers.Table
         /// <returns></returns>
         bool CardPlayedSpawn(UnitCard card, Player sender, Unit actionTarget);
 
+        /// <summary>
+        /// Уничтожить выбранного юнита
+        /// </summary>
+        /// <param name="unit"></param>
         void Kill(Unit unit);
+
+        /// <summary>
+        /// Удаляет юнита со стола(без срабатывания GameAction)
+        /// </summary>
+        /// <param name="unit"></param>
+        void Remove(Unit unit);
+
+        /// <summary>
+        /// Сфоримровать юнита из карты
+        /// </summary>
+        /// <param name="card"></param>
+        /// <returns></returns>
         Unit GetUnit(UnitCard card);
 
         /// <summary>
@@ -138,12 +154,21 @@ namespace GameData.Controllers.Table
         /// <param name="unit">Юнит</param>
         public void Kill(Unit unit)
         {
-            if(unit == null) return;
+            if (unit?.DeathRattleActionInfo != null)
+                _actionController.ExecuteAction(unit.DeathRattleActionInfo,
+                    unit.Player, null);
+
+            Remove(unit);
+        }
+
+        public void Remove(Unit unit)
+        {
+            if (unit == null) return;
             if (!unit.Player.TableUnits.Contains(unit)) return;
             unit.Player.TableUnits.Remove(unit);
-            OnUnitDeath?.Invoke(this,new UnitDeathObserverAction(unit));
+            OnUnitDeath?.Invoke(this, new UnitDeathObserverAction(unit));
         }
-        
+
         /// <summary>
         /// Выполняет атаку юнита
         /// </summary>
@@ -157,6 +182,9 @@ namespace GameData.Controllers.Table
 
             if(target.State.AttackPriority !=2 && target.Player.TableUnits.Exists(u=>u.State.AttackPriority == 2))
                 //есть провокатор у противника
+                return;
+
+            if(sender.Player.Equals(target.Player))
                 return;
 
             if(!sender.State.CanAttack)
@@ -191,17 +219,13 @@ namespace GameData.Controllers.Table
             if(!(sender is UnitState unitState))
                 return;
 
+            //вызов экшена при получении урона
+            if(e.PropertyName == nameof(UnitState.RecievedDamage))
+                _actionController.ExecuteAction(unitState.Unit.OnDamageRecievedActionInfo,
+                    unitState.Unit,null);
+
             OnUnitStateChange?.Invoke(this,new EntityStateChangeObserverAction(
                 unitState.Unit.EntityId,unitState.Unit));
-        }
-
-        private void OnUnitDamaged(object sender, UnitRecievedDamageEventArgs e)
-        {
-            if(e.Unit?.OnDamageRecievedActionInfo == null) return;
-
-            //OnUnitStateChange?.Invoke(this,new UnitStateChangeObserverAction(e.Unit,e.Unit.EntityId));
-            //_actionController.ExecuteAction(e.Unit.OnDamageRecievedActionInfo,
-            //    e.Unit, null);
         }
 
         private void OnUnitDies(object sender, ZeroHpEventArgs e)

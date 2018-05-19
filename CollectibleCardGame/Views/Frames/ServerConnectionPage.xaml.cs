@@ -12,15 +12,24 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using CollectibleCardGame.ViewModels.Frames;
+using Unity.Attributes;
 
 namespace CollectibleCardGame.Views.Frames
 {
     /// <summary>
-    /// Логика взаимодействия для CardDecksFramePage.xaml
+    /// Логика взаимодействия для ServerConnectionPage.xaml
     /// </summary>
-    public partial class CardDecksFramePage : Page
+    public partial class ServerConnectionPage : Page
     {
-        public CardDecksFramePage()
+        [Dependency]
+        public ServerConnectionViewModel ViewModel
+        {
+            get => DataContext as ServerConnectionViewModel;
+            set => DataContext = value;
+        }
+
+        public ServerConnectionPage()
         {
             InitializeComponent();
         }

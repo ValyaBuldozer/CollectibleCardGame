@@ -84,11 +84,12 @@ namespace Server.Models
             _gameDataContainer.Get<IPlayerTurnHandler<EndPlayerTurn>>().Execute(playerTurn);
         }
 
-        public void InitializeGame(GameSettings settings)
+        public void InitializeGame(GameSettings settings,CardRepository cardRepository)
         {
             if(FirstClient == null && SecondClient == null)
                 throw new NullReferenceException();
 
+            _gameDataContainer.CardRepository = cardRepository;
             _gameDataContainer.Initialize(settings);
             _gameDataContainer.Get<ObserverActionRepositoryController>().ItemAdded += OnObserverActionAdded;
             _gameDataContainer.Get<IGameStateController>().GameEnd += OnGameEnd;

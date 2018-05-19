@@ -66,8 +66,8 @@ namespace GameData.Controllers.PlayerTurn
                 return null;
             }
 
-            if (_playerTurnDispatcher.CurrentPlayer.Username != sender.Username || 
-                card.CanBePlayedOnEnemyTurn)
+            if (_playerTurnDispatcher.CurrentPlayer.Username != sender.Username && 
+                !card.CanBePlayedOnEnemyTurn)
             {
                 RunValidateError(new ErrorEventArgs("Нельзя разыграть эту карту во время хода протиника",
                     false,playerTurn.Sender));

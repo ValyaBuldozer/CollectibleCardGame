@@ -59,10 +59,15 @@ namespace CollectibleCardGame.Unity
             //view and viewmodels bindings
             _container.RegisterType<LogInFramePageViewModel>(new ContainerControlledLifetimeManager());
             _container.RegisterType<LogInFramePage>(new ContainerControlledLifetimeManager());
+
             _container.RegisterType<RegistrationFramePageViewModel>(new ContainerControlledLifetimeManager());
             _container.RegisterType<ToRegisterFramePage>(new ContainerControlledLifetimeManager());
+
             _container.RegisterType<ErrorFramePageViewModel>(new ContainerControlledLifetimeManager());
             _container.RegisterType<ConnectionErrorFramePage>(new ContainerControlledLifetimeManager());
+
+            _container.RegisterType<ServerConnectionViewModel>(new ContainerControlledLifetimeManager());
+            _container.RegisterType<ServerConnectionPage>(new ContainerControlledLifetimeManager());
 
             _container.RegisterType<LogInFramePageShellViewModel>(new ContainerControlledLifetimeManager());
             _container.RegisterType<LogInFramePageShell>(new ContainerControlledLifetimeManager());

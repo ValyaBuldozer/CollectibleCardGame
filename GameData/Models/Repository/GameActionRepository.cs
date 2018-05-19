@@ -225,18 +225,8 @@ namespace GameData.Models.Repository
                 new GameAction(name:"Случайное замораживание",id:27,description:"Замораживает случайного вражеского юнита на 1 ход",parameterType:ActionParameterType.Empty,
                     action: ((controller, sender, target, parameter) =>
                     {
-                        //var player = (Player) sender;
-                        //Player enemyPlayer =
-                        //    controller.GetTableCondition.Players.FirstOrDefault(p => p.Username != player.Username);
-
-                        //if (enemyPlayer.TableUnits.Count != 0)
-                        //{
-                        //    var rnd = new Random();
-                        //    int rndNum = rnd.Next(0, enemyPlayer.TableUnits.Count + 1);
-                        //    enemyPlayer.TableUnits[rndNum].CanAttack=false;
-                        //}
-
-                        //todo: сделать заморозку юнита
+                        
+                        //
 
 
                     })),
@@ -318,13 +308,13 @@ namespace GameData.Models.Repository
 
                     })),
                 //(не параметровый)
-                new GameAction(name:"Выдача золота",id:41,description:"Выдает дополнительнsq золотой игроку на текущий ход",parameterType:ActionParameterType.Buff,
+                new GameAction(name:"Выдача золота",id:41,description:"Выдает дополнительный золотой игроку на текущий ход",parameterType:ActionParameterType.Buff,
                     action: ((controller, sender, target, parameter) =>
                     {
                       
                         if(!(sender is Player player)) return;
                         if(player.Mana.Current<10)
-                        player.Mana.Current = player.Mana.Base+1;
+                        player.Mana.Current = player.Mana.Current+1;
 
 
                     })),
@@ -418,7 +408,8 @@ namespace GameData.Models.Repository
 
 
                     })),
-                new GameAction(name:"Сфера поглощения",id:51,description:"Высасывает 1 единицу здоровья у всех юнитов противника и повышает всем союзным юнитам 1 единицу здоровья",parameterType:ActionParameterType.Damage,
+                new GameAction(name:"Сфера поглощения",id:51,
+                    description:"Высасывает 1 единицу здоровья у всех юнитов противника и повышает всем союзным юнитам 1 единицу здоровья",parameterType:ActionParameterType.Damage,
                     action: ((controller, sender, target, parameter) =>
                     {
                         if(!(sender is Player player)) return;
@@ -430,43 +421,64 @@ namespace GameData.Models.Repository
                         }
                         foreach (var iUnit in enemyPlayer.TableUnits.ToArray())
                         {
-                            iUnit.State.RecieveDamage(1);
+                            iUnit.State.RecieveDamage(parameter);
                         }
 
                     })),
    
-                new GameAction(name:"Техника клонирования",id:52,description:"При выборе какого-либо юнита, его карта разыгрвается на стороне игрока (копируется)",parameterType:ActionParameterType.Empty,
+                new GameAction(name:"Техника клонирования",id:52,
+                    description:"При выборе какого-либо юнита, его копия появляется на стороне игрока (копируется)",parameterType:ActionParameterType.Empty,
                     isTargeted:true,
                     action: ((controller, sender, target, parameter) =>
                     {
-                        //todo: DrawCard для опредленного юнита
-                        var cloneCard = target.BaseCard;
+                        
+                        if(!(sender is Player player)) return;
+                        var cloneUnit = target.BaseCard;
+                        controller.SpawnUnit(player,cloneUnit);
+                        
+                        
                         
 
                     })),
-                new GameAction(name:"Подкуп",id:53,description:"Выбранная карта уничтожается, а её копия разыгрывается на стороне игрока (переходит на сторону игрока)",parameterType:ActionParameterType.Empty,
+                new GameAction(name:"Подкуп",id:53,
+                    description:"Выбранный юнит исчезает, а его копия разыгрывается на стороне игрока (переходит на сторону игрока)",parameterType:ActionParameterType.Empty,
                     isTargeted:true,
                     action: ((controller, sender, target, parameter) =>
                     {
-                        //todo: DrawCard для опредленного юнита
-                        
+                        if(!(sender is Player player)) return;
+                        var unit = target;
+                        controller.SpawnUnit(player,unit.BaseCard);
+                        controller.Remove(unit);
+
 
 
                     })),
-                new GameAction(name:"Тактическое отступление",id:54,description:"Выбранная карта уходит в руку к игроку, на ее месте разыгрывается карта Чучела (провокатор 0/2)",parameterType:ActionParameterType.Empty,
+                new GameAction(name:"Тактическое отступление",id:54,
+                    description:"Выбранная карта уходит в руку к игроку, на ее месте разыгрывается карта Чучела (провокатор 0/2)",parameterType:ActionParameterType.Empty,
                     isTargeted:true,
                     action: ((controller, sender, target, parameter) =>
                     {
-                        //todo: DrawCard для опредленного юнита
-                        
+                        if(!(sender is Player player)) return;
+                        var unit = target;
+                        controller.DrawCard(unit.Player,unit.BaseCard);
+                        controller.Remove(unit);
+                        var deployCard = controller.GetCard(1007);
+                        controller.SpawnUnit(unit.Player,(UnitCard)deployCard);
+
 
 
                     })),
                 new GameAction(name:"Всеобщее отступление",id:55,description:"Все карты игрока возвращаются к нему в руку",parameterType:ActionParameterType.Empty,
                     action: ((controller, sender, target, parameter) =>
                     {
-                        //todo: DrawCard для опредленного юнита
-                        
+
+                        if(!(sender is Player player)) return;
+
+                        foreach (var iUnit in player.TableUnits.ToArray())
+                        {
+                            controller.DrawCard(player,iUnit.BaseCard);
+                            controller.Remove(iUnit);
+                        }
 
 
                     })),
@@ -481,11 +493,8 @@ namespace GameData.Models.Repository
                         int rndNum = rnd.Next(0, enemyPlayer.TableUnits.Count);
                         Unit rndUnit = enemyPlayer.TableUnits[rndNum];
                        
-                        foreach (var iUnit in enemyPlayer.TableUnits.ToArray())
-                         {
-                             if (!Equals(iUnit,rndUnit))
-                             controller.KillUnit(iUnit);
-                         }
+                        controller.KillUnit(rndUnit);
+                        
                        
 
 
@@ -570,7 +579,7 @@ namespace GameData.Models.Repository
                     action: ((controller, sender, target, parameter) =>
                     {
 
-                        //todo: сделать заморозку юнита
+                        //
 
                     })),
                 new GameAction(name:"Метель",id:63,description:"Снижает атаку отрядов до 1 у обоих игроков",parameterType:ActionParameterType.Empty,
@@ -611,6 +620,56 @@ namespace GameData.Models.Repository
 
 
                     })),
+
+                new GameAction(name:"Призыв Тенсельтских мечниц",id:65,description:"Призыв на поле боя Тенсельтских мечниц",parameterType:ActionParameterType.Empty,
+                    action: ((controller, sender, target, parameter) =>
+                    {
+                        if(!(sender is Unit unit)) return;
+
+
+                        var deployCard = controller.GetCard(21);
+                        controller.SpawnUnit(unit.Player,(UnitCard)deployCard);
+
+
+                    })),
+                new GameAction(name:"Призыв Рейнской Бригады",id:66,description:"Призыв на поле боя Рейнской Бригады",parameterType:ActionParameterType.Empty,
+                    action: ((controller, sender, target, parameter) =>
+                    {
+                        if(!(sender is Unit unit)) return;
+                       
+                      
+                        var deployCard = controller.GetCard(27);
+                        controller.SpawnUnit(unit.Player,(UnitCard)deployCard);
+
+
+                    })),
+                new GameAction(name:"Призыв Медведя",id:67,description:"Призыв на поле боя Боевого медведя",parameterType:ActionParameterType.Empty,
+                    action: ((controller, sender, target, parameter) =>
+                    {
+                        if(!(sender is Unit unit)) return;
+
+
+                        var deployCard = controller.GetCard(1008);
+                        controller.SpawnUnit(unit.Player,(UnitCard)deployCard);
+
+
+                    })),
+                    //параметровый
+                new GameAction(name:"Призыв Бригады Имперы",id:68,description:"Призыв на поле боя Бригады Имперы",parameterType:ActionParameterType.Empty,
+                    action: ((controller, sender, target, parameter) =>
+                    {
+                        if(!(sender is Unit unit)) return;
+
+                        while (parameter != 0)
+                        {
+                            var deployCard = controller.GetCard(31);
+                            controller.SpawnUnit(unit.Player, (UnitCard) deployCard);
+                            parameter--;
+                        }
+
+
+                    })),
+               
                
                 
                

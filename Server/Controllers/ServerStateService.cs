@@ -4,6 +4,7 @@ using System.Threading;
 using GameData.Enums;
 using GameData.Models;
 using GameData.Models.Cards;
+using GameData.Models.Repository;
 using GameData.Network.Messages;
 using Server.Controllers.Repository;
 using Server.Models;
@@ -15,13 +16,14 @@ namespace Server.Controllers
     {
         private readonly AwaitingClientsQueueController _clientsQueueController;
         private readonly UserReposController _userReposController;
-
+        private readonly CardRepository _cardRepository;
 
         public ServerStateService(AwaitingClientsQueueController clientsQueueController,
-            UserReposController userReposController)
+            UserReposController userReposController,CardRepository cardRepository)
         {
             _clientsQueueController = clientsQueueController;
             _userReposController = userReposController;
+            _cardRepository = cardRepository;
         }
 
         /// <summary>
@@ -69,20 +71,20 @@ namespace Server.Controllers
 
                 var defaultSettings = new GameSettings()
                 {
-                    PlayerTurnInterval = 60000,
+                    PlayerTurnInterval = 120000,
                     IsPlayerTurnTimerEnabled = true,
                     MaxDeckCardsCount = 30,
                     PlayerHandCardsMaxCount = 10,
                     PlayersCount = 2,
                     PlayerTableUnitsMaxCount = 10
                 };
-                client.CurrentLobby.InitializeGame(defaultSettings);
+                client.CurrentLobby.InitializeGame(defaultSettings,_cardRepository);
                 client.CurrentLobby.OnClose += OnLobbyClose;
                 client.CurrentLobby.StartGame();
 
                 return true;
             }
-            catch (NullReferenceException)
+            catch (NotImplementedException)
             {
                 //todo : допилить обработку исключений
                 return false;

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -19,6 +20,7 @@ namespace CollectibleCardGame.ViewModels.Frames
         private readonly LogInFramePage _logInFramePage;
         private readonly ToRegisterFramePage _toRegisterFramePage;
         private readonly ConnectionErrorFramePage _connectionErrorFramePage;
+        private readonly ServerConnectionPage _serverConnectionPage;
 
         private RelayCommand _switchFrameCommand;
         private RelayCommand _reconnectCommand;
@@ -45,16 +47,19 @@ namespace CollectibleCardGame.ViewModels.Frames
         public RelayCommand ReconnectCommand => _reconnectCommand ?? (
                             _reconnectCommand = new RelayCommand(o =>
                             {
-                                UnityKernel.Get<GlobalAppStateController>().TryConnect("127.0.0.1",8800);
+                                UnityKernel.Get<GlobalAppStateController>().
+                                    TryConnect(IPAddress.Parse("127.0.0.1"),8800);
                             }));
 
         public LogInFramePageShellViewModel(LogInFramePage logInFramePage,
-            ToRegisterFramePage toRegisterFramePage,ConnectionErrorFramePage connectionErrorFramePage)
+            ToRegisterFramePage toRegisterFramePage,ConnectionErrorFramePage connectionErrorFramePage,
+            ServerConnectionPage serverConnectionPage)
         {
             _logInFramePage = logInFramePage;
             _toRegisterFramePage = toRegisterFramePage;
             _connectionErrorFramePage = connectionErrorFramePage;
             CurrentFramePage = _logInFramePage;
+            _serverConnectionPage = serverConnectionPage;
             //todo : пeределывай
             _logInFramePage.ToRegisterButton.Click += ToRegisterButton_Click;
             _toRegisterFramePage.GoBackButton.Click += GoBackButton_Click;
@@ -63,8 +68,7 @@ namespace CollectibleCardGame.ViewModels.Frames
 
         private void ReconnectButton_Click(object sender, RoutedEventArgs e)
         {
-            //todo : ИЗМЕНЕНИЕ АДРЕСА
-            UnityKernel.Get<GlobalAppStateController>().OnStartup("127.0.0.1",8800);
+            //UnityKernel.Get<GlobalAppStateController>().OnStartup("127.0.0.1",8800);
         }
 
         private void GoBackButton_Click(object sender, RoutedEventArgs e)
@@ -90,6 +94,11 @@ namespace CollectibleCardGame.ViewModels.Frames
         public void SetErrorPage()
         {
             CurrentFramePage = _connectionErrorFramePage;
+        }
+
+        public void SetConnectionPage()
+        {
+            CurrentFramePage = _serverConnectionPage;
         }
     }
 }

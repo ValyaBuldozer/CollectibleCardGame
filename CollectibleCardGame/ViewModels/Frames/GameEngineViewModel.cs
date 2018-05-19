@@ -9,6 +9,7 @@ using CollectibleCardGame.Models;
 using CollectibleCardGame.Services;
 using CollectibleCardGame.ViewModels.Elements;
 using CollectibleCardGame.ViewModels.UserControls;
+using GameData.Enums;
 using GameData.Models;
 using GameData.Models.Cards;
 using GameData.Models.PlayerTurn;
@@ -104,7 +105,6 @@ namespace CollectibleCardGame.ViewModels.Frames
                 NotifyPropertyChanged(nameof(CurrentPlayerUsername));
                 NotifyPropertyChanged(nameof(TransferTurnCommand));
 
-                //todo : переделать под изменение свойства
                 if (_currentPlayerUsername == _user.Username)
                 {
                     _playerUnits.ForEach(u=>u.IsCanAttack = true);
@@ -113,6 +113,9 @@ namespace CollectibleCardGame.ViewModels.Frames
                 {
                     _playerUnits.ForEach(u=>u.IsCanAttack = false);
                 }
+
+                PlayerUnits.ToList().ForEach(u=>u.ResetTargeting());
+                EnemyUnits.ToList().ForEach(u=>u.ResetTargeting());
             }
         }
 
@@ -213,6 +216,7 @@ namespace CollectibleCardGame.ViewModels.Frames
 
                    if (_isSpellTargeting)
                    {
+                        //todo : проверка героя
                        PlayerUnits.ForEach(u => u.ResetTargeting());
                        EnemyUnits.ForEach(u => u.ResetTargeting());
                        PlayerViewModel.HeroUnitViewModel.ResetTargeting();
@@ -225,7 +229,7 @@ namespace CollectibleCardGame.ViewModels.Frames
                        return;
                    }
 
-                   if(!unitViewModel.BaseUnit.State.CanAttack)
+                   if(!unitViewModel.IsCanAttack)
                        return;
 
                    if(o is PlayerUserControlViewModel) return;
@@ -269,18 +273,27 @@ namespace CollectibleCardGame.ViewModels.Frames
                        return;
                    }
 
-                   if (_isAttackTargeting)
-                   {
-                       PlayerTurnEvent?.Invoke(this, new PlayerTurnRequestEventArgs(
-                           new UnitAttackPlayerTurn(_player,
-                               _unitTargetingViewModel.BaseUnit, unitViewModel.BaseUnit)));
-                       _unitTargetingViewModel.IsCanAttack = false;
-                       _unitTargetingViewModel = null;
-                       _isAttackTargeting = false;
-                       EnemyUnits.ForEach(u=>u.ResetTargeting());
-                       EnemyViewModel.HeroUnitViewModel.ResetTargeting();
+                   if (!_isAttackTargeting) return;
+
+                   //провкрка провокатора
+                   if (unitViewModel.BaseUnit.State.AttackPriority != 2 &&
+                       EnemyUnits.ToList().Exists(u => u.BaseUnit.State.AttackPriority == 2))
                        return;
-                   }
+
+                   //проверка маскировки
+                   if(unitViewModel.BaseUnit.State.AttackPriority == 0)
+                       return;
+
+                   PlayerTurnEvent?.Invoke(this, new PlayerTurnRequestEventArgs(
+                       new UnitAttackPlayerTurn(_player,
+                           _unitTargetingViewModel.BaseUnit, unitViewModel.BaseUnit)));
+                   _unitTargetingViewModel.IsCanAttack = false;
+                   _unitTargetingViewModel = null;
+                   _isAttackTargeting = false;
+                   EnemyUnits.ForEach(u => u.ResetTargeting());
+                   EnemyViewModel.HeroUnitViewModel.ResetTargeting();
+                   return;
+
                }));
 
         public RelayCommand CardDeployCommand => _cardDeployCommand ??
@@ -295,7 +308,26 @@ namespace CollectibleCardGame.ViewModels.Frames
                    switch (cardViewModel.Card)
                    {
                        case SpellCard spellCard when spellCard.ActionInfo.IsTargeted:
+                           if (spellCard.ActionInfo.ParameterType == ActionParameterType.Damage ||
+                               spellCard.ActionInfo.ParameterType == ActionParameterType.Heal)
+                           {
+                               PlayerViewModel.HeroUnitViewModel.SetTargeting();
+                               EnemyViewModel.HeroUnitViewModel.SetTargeting();
+                           }
+
+                           PlayerUnits.ForEach(u => u.SetTargeting());
+                           EnemyUnits.ForEach(u => u.SetTargeting());
+                           _isSpellTargeting = true;
+                           _spellTargetingViewModel = cardViewModel;
+                           return;
                        case UnitCard unitCard when unitCard.BattleCryActionInfo?.IsTargeted == true:
+                           if (unitCard.BattleCryActionInfo.ParameterType == ActionParameterType.Damage ||
+                               unitCard.BattleCryActionInfo.ParameterType == ActionParameterType.Heal)
+                           {
+                               PlayerViewModel.HeroUnitViewModel.SetTargeting();
+                               EnemyViewModel.HeroUnitViewModel.SetTargeting();
+                           }
+
                            PlayerUnits.ForEach(u => u.SetTargeting());
                            EnemyUnits.ForEach(u => u.SetTargeting());
                            PlayerViewModel.HeroUnitViewModel.SetTargeting();

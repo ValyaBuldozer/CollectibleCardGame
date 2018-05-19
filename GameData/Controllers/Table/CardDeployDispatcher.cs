@@ -51,10 +51,6 @@ namespace GameData.Controllers.Table
             if (sender.Mana.Current < card.Cost)
                 return false;
 
-            //todo : карты в ужой ход
-            if (!_playerTurnDispatcher.CurrentPlayer.Equals(sender))
-                return false;
-
             switch (card.GetType().Name)
             {
                 case nameof(UnitCard):

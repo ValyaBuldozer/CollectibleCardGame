@@ -41,7 +41,7 @@
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Viewbox Stretch="Fill" Width="110" Height="205" Margin="0,0,-40,0">
+                            <Viewbox Stretch="Fill" Width="110" VerticalAlignment="Stretch" Margin="0,0,-40,0">
                                 <uc:CardBackUserControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                                                         Width="220" Height="420"/>
                             </Viewbox>
@@ -70,7 +70,7 @@
                     <DataTemplate>
                         <StackPanel>
                             <StackPanel>
-                                <Viewbox Stretch="Fill" Height="120" Width="96">
+                                <Viewbox Stretch="Fill" VerticalAlignment="Stretch" Width="96"  Margin="5,0">
                                     <Button Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, 
                                             AncestorType={x:Type Page}}, Path=ViewModel.EnemyUnitCommand}" 
                                             CommandParameter="{Binding}"
@@ -106,7 +106,7 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
-                            <Viewbox Stretch="Fill" Height="120" Width="96" Margin="5,0">
+                            <Viewbox Stretch="Fill" VerticalAlignment="Stretch" Width="96" Margin="5,0">
                                 <Button Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, 
                                     AncestorType={x:Type Page}}, Path=ViewModel.PlayerUnitCommand}" 
                                         CommandParameter="{Binding}" Background="{x:Null}"
@@ -138,8 +138,9 @@
                     <ColumnDefinition Width="5*"/>
                 </Grid.ColumnDefinitions>
                 <!--Player-->
-                <Viewbox Height="205" Width="250">
-                    <Button Command="{Binding PlayerUnitCommand}" CommandParameter="{Binding PlayerViewModel}">
+                <Viewbox VerticalAlignment="Stretch" Width="250">
+                    <Button Command="{Binding PlayerUnitCommand}" CommandParameter="{Binding PlayerViewModel}"
+                            BorderBrush="{x:Null}" Background="{x:Null}">
                         <uc:PlayerUserControl Height="330" Width="400" 
                                               DataContext="{Binding Path=PlayerViewModel,
                             UpdateSourceTrigger=PropertyChanged}"/>
@@ -161,7 +162,7 @@
                                      >
                                 <Button Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, 
                                     AncestorType={x:Type Page}}, Path=ViewModel.CardDeployCommand}" 
-                                    CommandParameter="{Binding}"
+                                    CommandParameter="{Binding}" Background="{x:Null}" 
                                     BorderThickness="0" BorderBrush="{x:Null}">
                                     <uc:CardUserControl Width="220" Height="410"/>
                                 </Button>
