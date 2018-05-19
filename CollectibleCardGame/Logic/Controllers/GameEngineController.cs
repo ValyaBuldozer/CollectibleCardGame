@@ -52,20 +52,13 @@ namespace CollectibleCardGame.Logic.Controllers
             if (action.FirstPlayer.Username == _user.Username)
             {
                 _gameViewModel.Player = action.FirstPlayer;
-                //_gameViewModel.PlayerViewModel = new PlayerUserControlViewModel(action.FirstPlayer);
                 _gameViewModel.EnemyPlayer = action.SecondPlayer;
             }
             else
             {
                 _gameViewModel.Player = action.SecondPlayer;
-                //_gameViewModel.PlayerViewModel = new PlayerUserControlViewModel(action.SecondPlayer);
                 _gameViewModel.EnemyPlayer = action.FirstPlayer;
             }
-
-            //_gameViewModel.Player =
-            //    action.FirstPlayer.Username == _user.Username ? action.FirstPlayer : action.SecondPlayer;
-            //_gameViewModel.EnemyPlayer =
-            //    action.FirstPlayer.Username == _user.Username ? action.SecondPlayer : action.FirstPlayer;
         }
 
         public void HandleObserverAction(ErrorObserverAction action)
@@ -142,10 +135,12 @@ namespace CollectibleCardGame.Logic.Controllers
 
         public void HandleObserverAction(PlayerStateChangesObserverAction action)
         {
-            if (action.PlayerUsername == _user.Username)
                 _gameViewModel.CurrentDispatcher.Invoke(() =>
                 {
-                    _gameViewModel.PlayerViewModel.PlayerMana = action.PlayerMana;
+                    if (action.PlayerUsername == _user.Username)
+                        _gameViewModel.PlayerViewModel.PlayerMana = action.PlayerMana;
+                    else
+                        _gameViewModel.EnemyViewModel.PlayerMana = action.PlayerMana;
                 });
         }
 
@@ -170,7 +165,7 @@ namespace CollectibleCardGame.Logic.Controllers
 
             _gameViewModel.CurrentDispatcher.Invoke(() =>
             {
-                UnitViewModel unitViewModel = _gameViewModel.PlayerUnits.FirstOrDefault(
+                var unitViewModel = _gameViewModel.PlayerUnits.FirstOrDefault(
                     vm => vm.BaseUnit.EntityId == unit.EntityId);
 
                 if (unitViewModel != null)

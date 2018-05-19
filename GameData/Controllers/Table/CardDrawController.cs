@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using GameData.Controllers.Data;
 using GameData.Models;
+using GameData.Models.Cards;
 using GameData.Models.Observer;
 
 namespace GameData.Controllers.Table
@@ -13,6 +14,7 @@ namespace GameData.Controllers.Table
     {
         void DealCardsToPlayer(string username, int count);
         void DealCardsToPlayer(Player player, int count);
+        void DealCard(Player player, Card card);
         event EventHandler<CardDrawObserverAction> OnCardDraw;
     }
 
@@ -45,18 +47,21 @@ namespace GameData.Controllers.Table
 
             foreach (var iCard in cards)
             {
-                if (player.HandCards.Count < _settings.PlayerHandCardsMaxCount)
-                {
-                    player.HandCards.Add(iCard);
-                    _entityController.AddNewItem(iCard);
-                    OnCardDraw?.Invoke(this,new CardDrawObserverAction(iCard,player.Username));
-                }
-                else
-                //todo : card burn event
-                    break;
+                DealCard(player,iCard);
             }
         }
 
-
+        public void DealCard(Player player, Card card)
+        {
+            if (player.HandCards.Count < _settings.PlayerHandCardsMaxCount)
+            {
+                player.HandCards.Add(card);
+                _entityController.AddNewItem(card);
+                OnCardDraw?.Invoke(this, new CardDrawObserverAction(card, player.Username));
+            }
+            else
+                //todo : card burn event
+                return;
+        }
     }
 }

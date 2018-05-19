@@ -28,7 +28,7 @@ namespace CollectibleCardGame.Tests.Logic.Contoller
             var connectionController = UnityKernel.Get<INetworkController>();
 
             server.Start(IPAddress.Parse("127.0.0.1"), 8800);
-            globalAppStateController.OnStartup();
+            globalAppStateController.OnStartup("127.0.0.1",8800);
 
             Assert.IsTrue(connectionController.ServerCommunicator.IsConnected);
         }
@@ -41,7 +41,7 @@ namespace CollectibleCardGame.Tests.Logic.Contoller
             var framePage = UnityKernel.Get<LogInFramePageShellViewModel>();
             var connectionController = UnityKernel.Get<INetworkController>();
 
-            globalAppStateController.OnStartup();
+            globalAppStateController.OnStartup("127.0.0.1",8800);
 
             Assert.IsFalse(connectionController.ServerCommunicator.IsConnected);
             Assert.IsTrue(framePage.CurrentFramePage is ConnectionErrorFramePage);
