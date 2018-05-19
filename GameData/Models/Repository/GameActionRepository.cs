@@ -408,7 +408,8 @@ namespace GameData.Models.Repository
 
 
                     })),
-                new GameAction(name:"Сфера поглощения",id:51,description:"Высасывает 1 единицу здоровья у всех юнитов противника и повышает всем союзным юнитам 1 единицу здоровья",parameterType:ActionParameterType.Damage,
+                new GameAction(name:"Сфера поглощения",id:51,
+                    description:"Высасывает 1 единицу здоровья у всех юнитов противника и повышает всем союзным юнитам 1 единицу здоровья",parameterType:ActionParameterType.Damage,
                     action: ((controller, sender, target, parameter) =>
                     {
                         if(!(sender is Player player)) return;
@@ -425,18 +426,21 @@ namespace GameData.Models.Repository
 
                     })),
    
-                new GameAction(name:"Техника клонирования",id:52,description:"При выборе какого-либо юнита, его карта разыгрвается на стороне игрока (копируется)",parameterType:ActionParameterType.Empty,
+                new GameAction(name:"Техника клонирования",id:52,
+                    description:"При выборе какого-либо юнита, его карта разыгрвается на стороне игрока (копируется)",parameterType:ActionParameterType.Empty,
                     isTargeted:true,
                     action: ((controller, sender, target, parameter) =>
                     {
                         //todo: DrawCard для опредленного юнита
                         if(!(sender is Player player)) return;
                         var cloneCard = target.BaseCard;
+                        controller.
                         
                         
 
                     })),
-                new GameAction(name:"Подкуп",id:53,description:"Выбранная карта уничтожается, а её копия разыгрывается на стороне игрока (переходит на сторону игрока)",parameterType:ActionParameterType.Empty,
+                new GameAction(name:"Подкуп",id:53,
+                    description:"Выбранная карта уничтожается, а её копия разыгрывается на стороне игрока (переходит на сторону игрока)",parameterType:ActionParameterType.Empty,
                     isTargeted:true,
                     action: ((controller, sender, target, parameter) =>
                     {
@@ -445,7 +449,8 @@ namespace GameData.Models.Repository
 
 
                     })),
-                new GameAction(name:"Тактическое отступление",id:54,description:"Выбранная карта уходит в руку к игроку, на ее месте разыгрывается карта Чучела (провокатор 0/2)",parameterType:ActionParameterType.Empty,
+                new GameAction(name:"Тактическое отступление",id:54,
+                    description:"Выбранная карта уходит в руку к игроку, на ее месте разыгрывается карта Чучела (провокатор 0/2)",parameterType:ActionParameterType.Empty,
                     isTargeted:true,
                     action: ((controller, sender, target, parameter) =>
                     {
