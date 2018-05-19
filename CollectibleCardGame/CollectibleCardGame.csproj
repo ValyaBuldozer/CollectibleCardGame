@@ -222,6 +222,9 @@
     <Compile Include="Views\Frames\ObserverGamesFramePage.xaml.cs">
       <DependentUpon>ObserverGamesFramePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Frames\ServerConnectionPage.xaml.cs">
+      <DependentUpon>ServerConnectionPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Frames\SettingsFramePage.xaml.cs">
       <DependentUpon>SettingsFramePage.xaml</DependentUpon>
     </Compile>
@@ -319,6 +322,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Frames\ObserverGamesFramePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Frames\ServerConnectionPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
