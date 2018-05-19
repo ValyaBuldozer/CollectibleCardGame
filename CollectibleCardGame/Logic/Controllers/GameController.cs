@@ -42,7 +42,8 @@ namespace CollectibleCardGame.Logic.Controllers
         private void GameRequestEventHandler(object sender, Services.GameRequestEventArgs e)
         {
             Random rnd = new Random();
-            var array = new int[] {21,22,23,24,25,26,27,30,30,30,31,32,33,60,61,62,63,64,82,83,84,85};
+            //var array = new int[] { 21, 22, 23, 24, 25, 26, 27, 30, 30, 30, 31, 32, 33, 60, 61, 62, 63, 64, 82, 83, 84, 85 };
+            var array = new int[] { 22, 22, 2, 22, 22, 22, 22, 119, 119, 119, 119, 119, 120, 120, 120, 120, 63, 77, 77, 77, 77, 85 };
             for (int i = 0; i < array.Length; i++)
             {
                 int randomItem = rnd.Next(0, array.Length);

@@ -398,7 +398,7 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <EmbeddedResource Include="Resources\CardsRepository.json" />
-    <None Include="Fonts\PF Din Text Cond Pro.ttf" />
+    <Resource Include="Fonts\PF Din Text Cond Pro.ttf" />
     <Resource Include="Fonts\Chronicles_font.ttf" />
   </ItemGroup>
   <ItemGroup>
