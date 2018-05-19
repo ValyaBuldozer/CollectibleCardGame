@@ -225,18 +225,8 @@ namespace GameData.Models.Repository
                 new GameAction(name:"Случайное замораживание",id:27,description:"Замораживает случайного вражеского юнита на 1 ход",parameterType:ActionParameterType.Empty,
                     action: ((controller, sender, target, parameter) =>
                     {
-                        //var player = (Player) sender;
-                        //Player enemyPlayer =
-                        //    controller.GetTableCondition.Players.FirstOrDefault(p => p.Username != player.Username);
-
-                        //if (enemyPlayer.TableUnits.Count != 0)
-                        //{
-                        //    var rnd = new Random();
-                        //    int rndNum = rnd.Next(0, enemyPlayer.TableUnits.Count + 1);
-                        //    enemyPlayer.TableUnits[rndNum].CanAttack=false;
-                        //}
-
-                        //todo: сделать заморозку юнита
+                        
+                        //
 
 
                     })),
@@ -321,9 +311,12 @@ namespace GameData.Models.Repository
                 new GameAction(name:"Выдача золота",id:41,description:"Выдает дополнительный золотой игроку на текущий ход",parameterType:ActionParameterType.Buff,
                     action: ((controller, sender, target, parameter) =>
                     {
+                      
                         if(!(sender is Player player)) return;
                         if(player.Mana.Current<10)
-                        player.Mana.Current = player.Mana.Base+1;
+                        player.Mana.Current = player.Mana.Current+1;
+
+
                     })),
                 new GameAction(name:"Мягкая сталь",id:42,description:"Понижает атаку вражеского юнита",parameterType:ActionParameterType.Buff,
                     isTargeted:true,
@@ -416,8 +409,7 @@ namespace GameData.Models.Repository
 
                     })),
                 new GameAction(name:"Сфера поглощения",id:51,
-                    description:"Высасывает 1 единицу здоровья у всех юнитов противника и повышает всем союзным юнитам 1 единицу здоровья",
-                    parameterType:ActionParameterType.Damage,
+                    description:"Высасывает 1 единицу здоровья у всех юнитов противника и повышает всем союзным юнитам 1 единицу здоровья",parameterType:ActionParameterType.Damage,
                     action: ((controller, sender, target, parameter) =>
                     {
                         if(!(sender is Player player)) return;
@@ -429,19 +421,21 @@ namespace GameData.Models.Repository
                         }
                         foreach (var iUnit in enemyPlayer.TableUnits.ToArray())
                         {
-                            iUnit.State.RecieveDamage(1);
+                            iUnit.State.RecieveDamage(parameter);
                         }
 
                     })),
    
                 new GameAction(name:"Техника клонирования",id:52,
-                    description:"При выборе какого-либо юнита, его карта разыгрвается на стороне игрока (копируется)",
-                    parameterType:ActionParameterType.Empty,
+                    description:"При выборе какого-либо юнита, его карта разыгрвается на стороне игрока (копируется)",parameterType:ActionParameterType.Empty,
                     isTargeted:true,
                     action: ((controller, sender, target, parameter) =>
                     {
                         //todo: DrawCard для опредленного юнита
+                        if(!(sender is Player player)) return;
                         var cloneCard = target.BaseCard;
+                        controller.
+                        
                         
 
                     })),
@@ -455,7 +449,8 @@ namespace GameData.Models.Repository
 
 
                     })),
-                new GameAction(name:"Тактическое отступление",id:54,description:"Выбранная карта уходит в руку к игроку, на ее месте разыгрывается карта Чучела (провокатор 0/2)",parameterType:ActionParameterType.Empty,
+                new GameAction(name:"Тактическое отступление",id:54,
+                    description:"Выбранная карта уходит в руку к игроку, на ее месте разыгрывается карта Чучела (провокатор 0/2)",parameterType:ActionParameterType.Empty,
                     isTargeted:true,
                     action: ((controller, sender, target, parameter) =>
                     {
@@ -480,8 +475,14 @@ namespace GameData.Models.Repository
                         Player enemyPlayer =
                             controller.GetTableCondition.Players.FirstOrDefault(p => p.Username != player.Username);
                         var rnd = new Random();
-                        var rndUnit = enemyPlayer.TableUnits[rnd.Next(0, enemyPlayer.TableUnits.Count + 1)];
+                        int rndNum = rnd.Next(0, enemyPlayer.TableUnits.Count);
+                        Unit rndUnit = enemyPlayer.TableUnits[rndNum];
+                       
                         controller.KillUnit(rndUnit);
+                        
+                       
+
+
                     })),
                 new GameAction(name:"Крещение огнем",id:57,description:"Здоровье выбранного юнита понижается на 2, атака повышается на 4",parameterType:ActionParameterType.Buff,
                     isTargeted:true,
@@ -563,7 +564,7 @@ namespace GameData.Models.Repository
                     action: ((controller, sender, target, parameter) =>
                     {
 
-                        //todo: сделать заморозку юнита
+                        //
 
                     })),
                 new GameAction(name:"Метель",id:63,description:"Снижает атаку отрядов до 1 у обоих игроков",parameterType:ActionParameterType.Empty,
