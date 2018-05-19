@@ -71,7 +71,7 @@ namespace Server.Controllers
 
                 var defaultSettings = new GameSettings()
                 {
-                    PlayerTurnInterval = 60000,
+                    PlayerTurnInterval = 120000,
                     IsPlayerTurnTimerEnabled = true,
                     MaxDeckCardsCount = 30,
                     PlayerHandCardsMaxCount = 10,
