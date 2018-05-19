@@ -427,25 +427,29 @@ namespace GameData.Models.Repository
                     })),
    
                 new GameAction(name:"Техника клонирования",id:52,
-                    description:"При выборе какого-либо юнита, его карта разыгрвается на стороне игрока (копируется)",parameterType:ActionParameterType.Empty,
+                    description:"При выборе какого-либо юнита, его копия появляется на стороне игрока (копируется)",parameterType:ActionParameterType.Empty,
                     isTargeted:true,
                     action: ((controller, sender, target, parameter) =>
                     {
-                        //todo: DrawCard для опредленного юнита
+                        
                         if(!(sender is Player player)) return;
-                        var cloneCard = target.BaseCard;
-                        controller.
+                        var cloneUnit = target.BaseCard;
+                        controller.SpawnUnit(player,cloneUnit);
+                        
                         
                         
 
                     })),
                 new GameAction(name:"Подкуп",id:53,
-                    description:"Выбранная карта уничтожается, а её копия разыгрывается на стороне игрока (переходит на сторону игрока)",parameterType:ActionParameterType.Empty,
+                    description:"Выбранный юнит уничтожается, а его копия разыгрывается на стороне игрока (переходит на сторону игрока)",parameterType:ActionParameterType.Empty,
                     isTargeted:true,
                     action: ((controller, sender, target, parameter) =>
                     {
-                        //todo: DrawCard для опредленного юнита
-                        
+                        if(!(sender is Player player)) return;
+                        var unit = target;
+                        controller.SpawnUnit(player,unit.BaseCard);
+                        controller.KillUnit(unit);
+
 
 
                     })),
@@ -454,16 +458,27 @@ namespace GameData.Models.Repository
                     isTargeted:true,
                     action: ((controller, sender, target, parameter) =>
                     {
-                        //todo: DrawCard для опредленного юнита
-                        
+                        if(!(sender is Player player)) return;
+                        var unit = target;
+                        controller.DrawCard(player,unit.BaseCard);
+                        controller.KillUnit(unit);
+                        //var scarecrow = 
+                        //controller.SpawnUnit(player);
+
 
 
                     })),
                 new GameAction(name:"Всеобщее отступление",id:55,description:"Все карты игрока возвращаются к нему в руку",parameterType:ActionParameterType.Empty,
                     action: ((controller, sender, target, parameter) =>
                     {
-                        //todo: DrawCard для опредленного юнита
-                        
+
+                        if(!(sender is Player player)) return;
+
+                        foreach (var iUnit in player.TableUnits.ToArray())
+                        {
+                            controller.DrawCard(player,iUnit.BaseCard);
+                            controller.KillUnit(iUnit);
+                        }
 
 
                     })),
