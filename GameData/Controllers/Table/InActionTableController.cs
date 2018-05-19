@@ -14,7 +14,10 @@ namespace GameData.Controllers.Table
         TableCondition GetTableCondition { get; }
         void DrawCard(Player player);
         void DrawCard(Player player, int count);
+        void DrawCard(Player player, Card card);
         void KillUnit(Unit unit);
+        void SpawnUnit(Player sender,UnitCard card);
+        void Remove(Unit unit);
     }
 
     /// <summary>
