@@ -23,6 +23,7 @@ namespace Server.Controllers
         {
             _clientsQueueController = clientsQueueController;
             _userReposController = userReposController;
+            _cardRepository = cardRepository;
         }
 
         /// <summary>

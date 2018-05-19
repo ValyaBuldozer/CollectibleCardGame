@@ -32,45 +32,9 @@ namespace CollectibleCardGame
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            //MainWindow window = new MainWindow();
-            //GameEngineFramePage framePage = new GameEngineFramePage();
-            //GameEngineViewModel viewModel = new GameEngineViewModel();
-            //viewModel.PlayerCards.Add(new CardViewModel(new UnitCard()
-            //{
-            //    Cost = 5,
-            //    Name = "test",
-            //    Description = "test",
-            //    BaseAttack = 1,
-            //    BaseHP = 1
-            //}));
-            //viewModel.PlayerCards.Add(new CardViewModel(new UnitCard()
-            //{
-            //    Cost = 5,
-            //    Name = "test",
-            //    Description = "test",
-            //    BaseAttack = 1,
-            //    BaseHP = 1
-            //}));
-            //viewModel.PlayerCards.Add(new CardViewModel(new UnitCard()
-            //{
-            //    Cost = 5,
-            //    Name = "test",
-            //    Description = "test",
-            //    BaseAttack = 1,
-            //    BaseHP = 1
-            //}));
-            //viewModel.PlayerCards.Add(new CardViewModel(new SpellCard()
-            //{
-            //    Cost = 5,
-            //    Name = "test",
-            //    Description = "test"
-            //}));
-            //framePage.ViewModel = viewModel;
-            //window.MainFrame.Content = framePage;
-            //window.Show();
             UnityKernel.InitializeKernel();
             UnityKernel.Get<MainWindow>().Show();
-            UnityKernel.Get<IGlobalController>().OnStartup("178.57.32.250", 8800);
+            UnityKernel.Get<IGlobalController>().OnStartup();
 
 
         }
