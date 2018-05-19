@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using CollectibleCardGame.ViewModels.Frames;
+using Unity.Attributes;
 
 namespace CollectibleCardGame.Views.Frames
 {
@@ -20,6 +22,13 @@ namespace CollectibleCardGame.Views.Frames
     /// </summary>
     public partial class ServerConnectionPage : Page
     {
+        [Dependency]
+        public ServerConnectionViewModel ViewModel
+        {
+            get => DataContext as ServerConnectionViewModel;
+            set => DataContext = value;
+        }
+
         public ServerConnectionPage()
         {
             InitializeComponent();

@@ -38,6 +38,7 @@ namespace CollectibleCardGame.ViewModels.Elements
                 Attack = value.State.Attack;
                 Health = value.State.GetResultHealth;
                 Name = value.BaseCard.Name;
+                IsCanAttack = value.State.CanAttack;
                 _baseUnit.State.PropertyChanged += State_PropertyChanged;
                 NotifyPropertyChanged(nameof(ImagePath));
 
@@ -185,6 +186,7 @@ namespace CollectibleCardGame.ViewModels.Elements
             _baseCardViewModel = new CardViewModel();
             BaseUnit = unit;
             _borderBrush = null;
+            IsCanAttack = unit.State.CanAttack;
         }
 
         public UnitViewModel()

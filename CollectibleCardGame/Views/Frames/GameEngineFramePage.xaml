@@ -138,8 +138,9 @@
                     <ColumnDefinition Width="5*"/>
                 </Grid.ColumnDefinitions>
                 <!--Player-->
-                <Viewbox Height="205" Width="250">
-                    <Button Command="{Binding PlayerUnitCommand}" CommandParameter="{Binding PlayerViewModel}">
+                <Viewbox VerticalAlignment="Stretch" Width="250">
+                    <Button Command="{Binding PlayerUnitCommand}" CommandParameter="{Binding PlayerViewModel}"
+                            BorderBrush="{x:Null}" Background="{x:Null}">
                         <uc:PlayerUserControl Height="330" Width="400" 
                                               DataContext="{Binding Path=PlayerViewModel,
                             UpdateSourceTrigger=PropertyChanged}"/>
@@ -161,7 +162,7 @@
                                      >
                                 <Button Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, 
                                     AncestorType={x:Type Page}}, Path=ViewModel.CardDeployCommand}" 
-                                    CommandParameter="{Binding}"
+                                    CommandParameter="{Binding}" Background="{x:Null}" 
                                     BorderThickness="0" BorderBrush="{x:Null}">
                                     <uc:CardUserControl Width="220" Height="410"/>
                                 </Button>

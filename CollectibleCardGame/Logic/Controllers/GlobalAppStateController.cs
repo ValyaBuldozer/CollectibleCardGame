@@ -30,19 +30,18 @@ namespace CollectibleCardGame.Logic.Controllers
             _logger = logger;
         }
 
-        public void OnStartup(string adress,int port)
+        public void OnStartup()
         {
-            _mainWindowViewModel.StartBusyIndicator("Подключение к серверу");
-            if (!TryConnect(adress, port))
-            {
-                _mainWindowViewModel.StopBusyIndicator();
-                _framePageShellViewModel.SetErrorPage();
-                return;
-            }
+            //_mainWindowViewModel.StartBusyIndicator("Подключение к серверу");
+            //if (!TryConnect(adress, port))
+            //{
+            //    _mainWindowViewModel.StopBusyIndicator();
+            //    _framePageShellViewModel.SetErrorPage();
+            //    return;
+            //}
 
-            _mainWindowViewModel.StopBusyIndicator();
             _mainWindowViewModel.SetLogInFrame();
-            _framePageShellViewModel.SetLogInPage();
+            _framePageShellViewModel.SetConnectionPage();
         }
 
         public void OnConnectionLost()
@@ -55,17 +54,20 @@ namespace CollectibleCardGame.Logic.Controllers
             throw new NotImplementedException();
         }
 
-        public bool TryConnect(string address,int port)
+        public bool TryConnect(IPAddress address,int port)
         {
             try
             {
-                //todo : изменение ip и порта
-                _connectionController.Connect(IPAddress.Parse(address), port);
+                _mainWindowViewModel.StartBusyIndicator("Подключение к серверу");
+                _connectionController.Connect(address, port);
+                _mainWindowViewModel.StopBusyIndicator();
+                _framePageShellViewModel.SetLogInPage();
                 return true;
             }
             catch (SocketException)
             {
                _logger.LogAndPrint("Ошибка при попытке подключения");
+                _mainWindowViewModel.StopBusyIndicator();
                 return false;
             }
         }

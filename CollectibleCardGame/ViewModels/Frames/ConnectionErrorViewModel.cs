@@ -11,6 +11,7 @@ using CollectibleCardGame.Unity;
 
 namespace CollectibleCardGame.ViewModels.Frames
 {
+    //todo : obsolete
     public class ConnectionErrorViewModel : BaseViewModel
     {
         private RelayCommand _reconnectRelayCommand;
@@ -23,7 +24,7 @@ namespace CollectibleCardGame.ViewModels.Frames
                        {
                            BusyMessage = "Подключаемся...";
                            IsBusy = true;
-                           if (UnityKernel.Get<GlobalAppStateController>().TryConnect("127.0.0.1",8800))
+                           if (UnityKernel.Get<IGlobalController>().TryConnect(null,8800))
                                //todo : Обращение от VM к VM
                            {
                                IsBusy = false;

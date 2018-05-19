@@ -9,106 +9,20 @@
       d:DesignHeight="550" d:DesignWidth="900"
       Title="DecksSettingsFramePage">
 
-    <Grid  Background="White">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="10"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="10*"/>
-            </Grid.RowDefinitions>
-            <TextBlock Name="NameOfFtaction" Grid.Row="1"  HorizontalAlignment="Center" VerticalAlignment="Center" Text="КАЛЬВАРИЯ" FontWeight="Bold" FontSize="44" />
-            <Grid Grid.Row="2">
-                <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="2*"/>
-            </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Text="КОЛЛЕКЦИЯ КАРТ" FontWeight="Bold" FontSize="18"/>
-                <TextBlock Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Text="КАРТЫ КОЛОДЫ" FontSize="18" FontWeight="Bold"/>
-            </Grid>
-            
-            <Grid Row="3">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="2*"/>
-                </Grid.ColumnDefinitions>
-                <Border Grid.Column="0" BorderThickness="1" BorderBrush="LightGray" Margin="5" Background="{StaticResource BasicBackGround}">
-                    <Grid Margin="5" Height="Auto" >
-                        <ScrollViewer  VerticalScrollBarVisibility="Auto">
-                            <ItemsControl Name="CollectionCardItemControl" Margin="5,0,5,0" AllowDrop="True"  >
-                                <ItemsControl.ItemsPanel>
-                                    <ItemsPanelTemplate>
-                                        <WrapPanel   Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="1" Height="Auto" />
-                                    </ItemsPanelTemplate>
-                                </ItemsControl.ItemsPanel >
+    <Grid  Background="Wheat">
+        <TabControl ItemContainerStyle="{DynamicResource CustomTabItem}" VerticalAlignment="Stretch"
+                    HorizontalAlignment="Stretch" BorderBrush="#EDEDED" 
+                    ItemsSource="{Binding DeckTabs}" SelectedItem="{Binding SelectedDeck}">
+            <TabControl.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Title}"/>
+                </DataTemplate>
+            </TabControl.ItemTemplate>
+            <TabControl.ContentTemplate>
+                <DataTemplate>
 
-                                
-                                <cntrls:UnitCardUserControl x:Name="u1" Grid.Column="0" Margin="10" Height="410" Width="220"></cntrls:UnitCardUserControl>
-                                <cntrls:SpellCardUserControl x:Name="s1" Grid.Column="2" Margin="10" Height="410" Width="220"></cntrls:SpellCardUserControl>
-                                <cntrls:SpellCardUserControl x:Name="s2" Grid.Column="2" Margin="10" Height="410" Width="220"></cntrls:SpellCardUserControl>
-
-
-
-
-
-                            </ItemsControl>
-                        </ScrollViewer>
-
-                    </Grid>
-                </Border>
-
-                <Border Grid.Column="2" BorderThickness="1" BorderBrush="LightGray" Margin="5" Background="{StaticResource BasicBackGround}" >
-                    <Grid Margin="5" Height="Auto" >
-                        <ScrollViewer  VerticalScrollBarVisibility="Auto">
-                            <ItemsControl Name="CardInDeckItemControl" Margin="5,0,5,0"  AllowDrop="True" >
-                                <ItemsControl.ItemsPanel>
-                                    <ItemsPanelTemplate>
-                                        <WrapPanel   Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="1" Height="Auto" />
-                                    </ItemsPanelTemplate>
-                                </ItemsControl.ItemsPanel>
-
-
-                               
-
-
-
-
-
-                            </ItemsControl>
-                        </ScrollViewer>
-
-                    </Grid>
-                </Border>
-
-                <Grid  Grid.Column="1">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="10*"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <Grid Grid.Row="1">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="3*"/>
-                            <RowDefinition Height="10"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>      
-                        <TextBlock Grid.Row="2" Text="Карты в колоде" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                        <TextBlock Grid.Row="2" Text="x" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        <TextBlock Grid.Row="3" Text="Карты отрядов" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                        <TextBlock Grid.Row="3" Text="x" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        <TextBlock Grid.Row="4" Text="Специальные карты" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                        <TextBlock Grid.Row="4" Text="x" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        <TextBlock Grid.Row="5" Text="Общая стоимость отрядов" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                        <TextBlock Grid.Row="5" Text="x" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </Grid>
-            </Grid>
-            </Grid>
-            
-        </Grid>
+                </DataTemplate>
+            </TabControl.ContentTemplate>
+        </TabControl>
     </Grid>
 </Page>

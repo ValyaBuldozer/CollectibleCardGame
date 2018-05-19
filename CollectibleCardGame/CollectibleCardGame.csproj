@@ -174,6 +174,7 @@
     <Compile Include="ViewModels\Elements\UnitViewModel.cs" />
     <Compile Include="ViewModels\Frames\CardDecksPageViewModel.cs" />
     <Compile Include="ViewModels\Frames\ConnectionErrorViewModel.cs" />
+    <Compile Include="ViewModels\Frames\DeckViewModel.cs" />
     <Compile Include="ViewModels\Frames\ErrorFramePageViewModel.cs" />
     <Compile Include="ViewModels\Frames\GameEngineViewModel.cs" />
     <Compile Include="ViewModels\Frames\GameProccesPageViewModel.cs" />
@@ -182,6 +183,7 @@
     <Compile Include="ViewModels\Frames\MenuFramePageViewModel.cs" />
     <Compile Include="ViewModels\Frames\LogInFramePageViewModel.cs" />
     <Compile Include="ViewModels\Frames\RegistrationFramePageViewModel.cs" />
+    <Compile Include="ViewModels\Frames\ServerConnectionViewModel.cs" />
     <Compile Include="ViewModels\UserControls\CardUserControlViewModel.cs" />
     <Compile Include="ViewModels\UserControls\FractionUserControlViewModel.cs" />
     <Compile Include="ViewModels\UserControls\PlayerUserControlViewModel.cs" />
