@@ -16,6 +16,7 @@ namespace GameData.Controllers.Table
         void DrawCard(Player player);
         void DrawCard(Player player, int count);
         void KillUnit(Unit unit);
+        Card GetCard(int id);
     }
 
     /// <summary>
