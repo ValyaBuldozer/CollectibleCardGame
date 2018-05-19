@@ -47,7 +47,7 @@
                         </Grid.ColumnDefinitions>
 
                         <TextBlock x:Name="CardName" Text="{Binding Name}" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"
-                                FontSize="17" Margin="0,12,0,0" FontFamily="./#PF Din Text Pro" Height="20" />
+                                FontSize="17" Margin="0,12,0,0" FontFamily="/CollectibleCardGame;component/Fonts/#PF Din Text Pro" Height="20" />
                         <!--было фонтсайз 16-->
                     </Grid>
 
@@ -106,15 +106,15 @@
                             BorderBrush="Black"
                             BorderThickness="3"
                             Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                            <TextBlock  x:Name="Cost" HorizontalAlignment="Center" VerticalAlignment="Center" Margin=" 0,0,1,5"
-                                   Text="{Binding Cost}" FontWeight="Bold" FontSize="42" />
+                            <TextBlock  x:Name="Cost" HorizontalAlignment="Center" VerticalAlignment="Center" Margin=" 0,0,0,0"
+                                   Text="{Binding Cost}" FontWeight="Bold" FontSize="52" FontFamily="/CollectibleCardGame;component/Fonts/#PF Din Text Pro" />
                         </Border>
 
                     </Grid>
 
                     <Grid Grid.Row="2" Background="Transparent">
                         <TextBlock x:Name="Story" Grid.Row="2" Text="{Binding Description}" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center"
-                                   FontFamily="./#PF Din Text Pro" LineHeight="14" 
+                                   FontFamily="/CollectibleCardGame;component/Fonts/#PF Din Text Pro" LineHeight="14" 
                                    LineStackingStrategy="BlockLineHeight" FontSize="16" Margin="4,5,4,0" />
                         <!--было фонтсайз 12-->
                     </Grid>
@@ -136,8 +136,9 @@
                             BorderThickness="3"
                             Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                             <TextBlock  x:Name="UnitAttck" HorizontalAlignment="Center" 
-                                    VerticalAlignment="Center" Margin=" 0,0,1,5"
-                                   Text="{Binding Path=Attack}" FontWeight="Bold" FontSize="42" />
+                                    VerticalAlignment="Center" Margin=" 0,0,0,0"
+                                   Text="{Binding Path=Attack}" FontWeight="Bold" FontSize="52" 
+                                        FontFamily="/CollectibleCardGame;component/Fonts/#PF Din Text Pro"/>
                         </Border>
                         <Border CornerRadius="50"   Visibility="{Binding IsUnitCard,
                         Converter={StaticResource BooleanToVisibilityConverter}}" 
@@ -146,8 +147,9 @@
                             BorderBrush="Black"
                             BorderThickness="3"
                             Grid.Column="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                            <TextBlock  x:Name="UnitHealth" HorizontalAlignment="Center" VerticalAlignment="Center" Margin=" 0,0,1,5"
-                                   Text="{Binding Path=Health}" FontWeight="Bold" FontSize="42" />
+                            <TextBlock  x:Name="UnitHealth" HorizontalAlignment="Center" VerticalAlignment="Center" Margin=" 0,0,0,0"
+                                   Text="{Binding Path=Health}" FontWeight="Bold" FontSize="52"
+                                        FontFamily="/CollectibleCardGame;component/Fonts/#PF Din Text Pro"/>
                         </Border>
 
                     </Grid>

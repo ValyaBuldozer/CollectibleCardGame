@@ -1,0 +1,80 @@
+﻿<UserControl x:Class="CollectibleCardGame.Views.UserControls.CardMiniUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CollectibleCardGame.Views.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="44" d:DesignWidth="260">
+    <Grid>
+        <Border BorderThickness="1" BorderBrush="Black" CornerRadius="2">
+            <Grid>
+                <Image Grid.ColumnSpan="3" Grid.RowSpan="3" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center"
+                       Source="{Binding ImagePath}" >
+                    <Image.Effect>
+                        <BlurEffect Radius="4"/>
+
+                    </Image.Effect>
+                </Image>
+
+                <Grid Grid.Row="1">
+
+
+                    <Border CornerRadius="50"
+                            Margin="0,0,0,0"
+                            Background="Gold"
+                            BorderBrush="Black"
+                            BorderThickness="3"
+                            Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <TextBlock HorizontalAlignment="Center"  Text="{Binding Cost}" VerticalAlignment="Center"
+                                   FontFamily="/CollectibleCardGame;component/Fonts/#PF Din Text Pro" FontSize="34" FontWeight="Bold" />
+                    </Border>
+
+                    <Grid Grid.Column="2">
+                        <Label Background="AliceBlue" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+                               Margin="5">
+                            <Label.Effect>
+                                <BlurEffect Radius="15"/>
+                            </Label.Effect>
+
+                        </Label>
+                        <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding Name}" VerticalAlignment="Center"
+                                   FontFamily="/CollectibleCardGame;component/Fonts/#PF Din Text Pro" FontSize="16"
+                                   Margin="5,0,5,0" FontWeight="Bold"  />
+                    </Grid>
+
+                    <Border CornerRadius="2"
+                            Margin="0,0,0,0"
+                            Background="DimGray"
+                            BorderBrush="#292828"
+                            BorderThickness="3"
+                            Grid.Column="3" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <TextBlock HorizontalAlignment="Center"  Text="{Binding Amount}" VerticalAlignment="Center" Foreground="Gold"
+                                   FontFamily="/CollectibleCardGame;component/Fonts/#PF Din Text Pro" FontSize="34"
+                                   Margin="0,0,0,0" FontWeight="Bold"/>
+                    </Border>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2"/>
+                        <ColumnDefinition Width="40"/>
+                        <ColumnDefinition Width="5*"/>
+                        <ColumnDefinition Width="40"/>
+                        <ColumnDefinition Width="2"/>
+                    </Grid.ColumnDefinitions>
+
+
+
+                </Grid>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="2"/>
+                </Grid.RowDefinitions>
+
+                
+            </Grid>
+            
+        </Border>
+
+    </Grid>
+</UserControl>

@@ -237,6 +237,9 @@
     <Compile Include="Views\UserControls\CardBackUserControl.xaml.cs">
       <DependentUpon>CardBackUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\CardMiniUserControl.xaml.cs">
+      <DependentUpon>CardMiniUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControls\CardUserControl.xaml.cs">
       <DependentUpon>CardUserControl.xaml</DependentUpon>
     </Compile>
@@ -336,6 +339,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\UserControls\CardBackUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\CardMiniUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -770,9 +777,6 @@
     <Resource Include="Images\ImagesSpell\Внезапное усиление.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\ImagesSpell\Восстановление.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\ImagesSpell\Всеобщее отступление.jpg" />
   </ItemGroup>
   <ItemGroup>
@@ -837,6 +841,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\ImagesUnit\Neutral\Кочевники.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImagesUnit\Neutral\Гремист.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImagesSpell\Стена щитов.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImagesSpell\Восстановление.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

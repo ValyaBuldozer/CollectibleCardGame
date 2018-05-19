@@ -97,16 +97,18 @@
                                 Visibility="{Binding Path=IsNotHeroUnit,
                                 Converter={StaticResource BooleanToVisibilityConverter}}">
                             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" 
-                                       Margin=" 0,0,1,5"
-                                       Text="{Binding Path=Attack}" FontWeight="Bold" FontSize="42" />
+                                       Margin=" 0,0,0,0"
+                                       Text="{Binding Path=Attack}" FontWeight="Bold" FontSize="52"
+                                       FontFamily="/CollectibleCardGame;component/Fonts/#PF Din Text Pro"/>
                         </Border>
                         <Border CornerRadius="50"
                             Background="#66BE61"
                             BorderBrush="Black"
                             BorderThickness="3"
                             Grid.Column="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Margin=" 0,0,1,5"
-                                   Text="{Binding Path=Health}" FontWeight="Bold" FontSize="42" />
+                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Margin=" 0,0,0,0"
+                                   Text="{Binding Path=Health}" FontWeight="Bold" FontSize="52"
+                                       FontFamily="/CollectibleCardGame;component/Fonts/#PF Din Text Pro"/>
                         </Border>
                     </Grid>
                 </Grid>
