@@ -120,7 +120,7 @@ namespace CollectibleCardGame.Logic.Controllers
                 else
                 {
                     action.Unit.Player = _gameViewModel.EnemyPlayer;
-                    _gameViewModel.EnemyUnits.Add(new UnitViewModel(action.Unit));
+                    _gameViewModel.EnemyUnits.Add(new UnitViewModel(action.Unit){IsCanAttack = false});
                 }
             });
         }
