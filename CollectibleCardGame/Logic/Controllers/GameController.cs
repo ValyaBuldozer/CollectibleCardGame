@@ -18,15 +18,18 @@ namespace CollectibleCardGame.Logic.Controllers
     {
         private readonly INetworkController _networkController;
         private readonly IDataRepositoryController<Card> _cardRepositoryController;
+        private readonly MainWindowViewModel _mainViewModel;
 
         public GameController(INetworkController networkController,
             GoGameFramePageViewModel goGameFramePageViewModel,GameEngineViewModel gameEngineViewModel,
-            IDataRepositoryController<Card> cardRepositoryController)
+            IDataRepositoryController<Card> cardRepositoryController,
+            MainWindowViewModel mainViewModel)
         {
             _networkController = networkController;
             goGameFramePageViewModel.GameRequest += GameRequestEventHandler;
             gameEngineViewModel.PlayerTurnEvent += ViewModelPlayerTurnEventHandler;
             _cardRepositoryController = cardRepositoryController;
+            _mainViewModel = mainViewModel;
         }
 
         private void ViewModelPlayerTurnEventHandler(object sender, Services.PlayerTurnRequestEventArgs e)
@@ -42,7 +45,7 @@ namespace CollectibleCardGame.Logic.Controllers
         private void GameRequestEventHandler(object sender, Services.GameRequestEventArgs e)
         {
             Random rnd = new Random();
-            var array = new int[] {120,120,120,120,120,26,27,30,30,30,31,32,33,61,62,82,83,84,85};
+            var array = new int[] {48,48,48,48,48,48,26,26,26,26,27,37,37,37,37,37,61,62,82,83,84,85};
             array.ForEach(c =>
             {
                 if (_cardRepositoryController.GetById(c) == null)
@@ -79,6 +82,11 @@ namespace CollectibleCardGame.Logic.Controllers
         public void PrepareToGame()
         {
 
+        }
+
+        public void EndGame()
+        {
+            _mainViewModel.SetMainMenuFrame();
         }
     }
 }

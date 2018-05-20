@@ -21,8 +21,7 @@
             <TabControl.ContentTemplate>
                 <DataTemplate>
                     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-
-
+                        <cntrls:DeckUserControl DataContext="{Binding ViewModel}"/>
                     </Grid>
                 </DataTemplate>
             </TabControl.ContentTemplate>
