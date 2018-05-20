@@ -53,5 +53,15 @@ namespace GameData.Models.Cards
         {
             return Name;
         }
+
+        public virtual Card ShallowCopy()
+        {
+            return (Card) this.MemberwiseClone();
+        }
+
+        public virtual Card DeepCopy()
+        {
+            return (Card)this.MemberwiseClone();
+        }
     }
 }

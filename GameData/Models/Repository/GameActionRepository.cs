@@ -176,10 +176,10 @@ namespace GameData.Models.Repository
                     })),
                 new GameAction(name:"Нанесение урона герою",id:22,description:"Наносит урон герою противника",parameterType:ActionParameterType.Damage,
                     action: ((controller, sender, target, parameter) =>
-                    
-                        {Player player = sender is Player ? (Player) sender : (sender as Unit).Player;
+                    {
+                        Player player = sender is Player ? (Player) sender : (sender as Unit).Player;
 
-                        
+
                         Player enemyPlayer =
                             controller.GetTableCondition.Players.FirstOrDefault(p => p.Username != player.Username);
                         enemyPlayer.HeroUnit.State.RecieveDamage(parameter);
@@ -214,12 +214,10 @@ namespace GameData.Models.Repository
                         if(!(sender is Unit unit)) return;
                         foreach (var iCard in unit.Player.HandCards.ToArray())
                         {
-                            var cCard = iCard as SpellCard;
+                            if(!(iCard is SpellCard cCard)) continue;
                             if (cCard?.ActionInfo.ParameterType == ActionParameterType.Damage)
-                                cCard.ActionInfo.ParameterValue+=parameter;
+                                cCard.ActionInfo.ParameterValue += parameter;
                         }
-
-
                     })),
                     //(не параметровый)
                 new GameAction(name:"Случайное замораживание",id:27,description:"Замораживает случайного вражеского юнита на 1 ход",parameterType:ActionParameterType.Empty,

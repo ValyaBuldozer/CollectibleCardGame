@@ -20,22 +20,14 @@ namespace GameData.Controllers.Data
 
         public Card GetById(int id)
         {
-            return _repository.Collection.FirstOrDefault(c => c.ID == id);
+            var item = _repository.Collection.FirstOrDefault(c => c.ID == id);
+
+            return item?.DeepCopy();
         }
 
         public IEnumerable<Card> GetById(IEnumerable<int> idCollection)
         {
-            if (idCollection == null)
-                return null;
-
-            List<Card> retList = new List<Card>();
-
-            foreach (var id in idCollection)
-            {
-                retList.Add(GetById(id));
-            }
-
-            return retList;
+            return idCollection?.Select(GetById).ToList();
         }
 
         public void Add(Card item)

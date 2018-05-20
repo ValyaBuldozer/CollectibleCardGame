@@ -174,7 +174,8 @@
     <Compile Include="ViewModels\Elements\UnitViewModel.cs" />
     <Compile Include="ViewModels\Frames\CardDecksPageViewModel.cs" />
     <Compile Include="ViewModels\Frames\ConnectionErrorViewModel.cs" />
-    <Compile Include="ViewModels\Frames\DeckViewModel.cs" />
+    <Compile Include="ViewModels\Frames\DeckSettingsViewModel.cs" />
+    <Compile Include="ViewModels\UserControls\DeckViewModel.cs" />
     <Compile Include="ViewModels\Frames\ErrorFramePageViewModel.cs" />
     <Compile Include="ViewModels\Frames\GameEngineViewModel.cs" />
     <Compile Include="ViewModels\Frames\GameProccesPageViewModel.cs" />

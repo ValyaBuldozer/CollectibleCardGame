@@ -20,5 +20,22 @@ namespace GameData.Models.Cards
         public CardActionInfo BattleCryActionInfo { set; get; }
 
         public CardActionInfo DeathRattleActionInfo { set; get; }
+
+        public override Card ShallowCopy()
+        {
+            return (Card)this.MemberwiseClone();
+        }
+
+        public override Card DeepCopy()
+        {
+            var other = (UnitCard) this.MemberwiseClone();
+
+            other.AttackActionInfo = AttackActionInfo?.ShallowCopy();
+            other.DamageRecievedActionInfo = DamageRecievedActionInfo?.ShallowCopy();
+            other.BattleCryActionInfo = BattleCryActionInfo?.ShallowCopy();
+            other.DeathRattleActionInfo = DeathRattleActionInfo?.ShallowCopy();
+
+            return other;
+        }
     }
 }

@@ -19,5 +19,7 @@ namespace GameData.Models
         public int PlayerTableUnitsMaxCount { set; get; }
 
         public int MaxDeckCardsCount { set; get; }
+
+        public int MaxPlayerMana { set; get; }
     }
 }
