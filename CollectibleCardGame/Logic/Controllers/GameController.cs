@@ -18,15 +18,18 @@ namespace CollectibleCardGame.Logic.Controllers
     {
         private readonly INetworkController _networkController;
         private readonly IDataRepositoryController<Card> _cardRepositoryController;
+        private readonly MainWindowViewModel _mainViewModel;
 
         public GameController(INetworkController networkController,
             GoGameFramePageViewModel goGameFramePageViewModel,GameEngineViewModel gameEngineViewModel,
-            IDataRepositoryController<Card> cardRepositoryController)
+            IDataRepositoryController<Card> cardRepositoryController,
+            MainWindowViewModel mainViewModel)
         {
             _networkController = networkController;
             goGameFramePageViewModel.GameRequest += GameRequestEventHandler;
             gameEngineViewModel.PlayerTurnEvent += ViewModelPlayerTurnEventHandler;
             _cardRepositoryController = cardRepositoryController;
+            _mainViewModel = mainViewModel;
         }
 
         private void ViewModelPlayerTurnEventHandler(object sender, Services.PlayerTurnRequestEventArgs e)
@@ -79,6 +82,11 @@ namespace CollectibleCardGame.Logic.Controllers
         public void PrepareToGame()
         {
 
+        }
+
+        public void EndGame()
+        {
+            _mainViewModel.SetMainMenuFrame();
         }
     }
 }

@@ -52,5 +52,10 @@ namespace GameData.Controllers.Data
         /// <param name="elemnt">Элемент</param>
         /// <param name="id">Индекс</param>
         void Edit(T elemnt, int id);
+
+        /// <summary>
+        /// Полностью очищает репозиторий
+        /// </summary>
+        void ClearRepository();
     }
 }

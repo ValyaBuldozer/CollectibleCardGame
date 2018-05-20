@@ -379,5 +379,16 @@ namespace CollectibleCardGame.ViewModels.Frames
                                c=>_currentPlayerUsername == _user?.Username));
 
         public bool IsPlayerTurn => _user.Username == CurrentPlayerUsername;
+
+        public void Clear()
+        {
+            PlayerViewModel = new PlayerUserControlViewModel();
+            EnemyViewModel = new PlayerUserControlViewModel();
+            PlayerUnits.Clear();
+            EnemyUnits.Clear();
+            PlayerCards.Clear();
+            EnemyCards.Clear();
+            CurrentPlayerUsername = "";
+        }
     }
 }

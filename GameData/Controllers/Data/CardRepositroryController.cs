@@ -67,5 +67,10 @@ namespace GameData.Controllers.Data
             item.ID = id;
             Add(item);
         }
+
+        public void ClearRepository()
+        {
+            _repository.Collection.Clear();
+        }
     }
 }
