@@ -297,7 +297,7 @@ namespace GameData.Models.Repository
                 new GameAction(name:"Урон всем вражеским отрядам",id:40,description:"Наносит урон всем вражеским отрядам",parameterType:ActionParameterType.Damage,
                     action: ((controller, sender, target, parameter) =>
                     {
-                        if(!(sender is Player player)) return;
+                        Player player = sender is Player ? (Player) sender : (sender as Unit).Player;
                         Player enemyPlayer =
                             controller.GetTableCondition.Players.FirstOrDefault(p => p.Username != player.Username);
                         foreach (var iUnit in enemyPlayer.TableUnits.ToArray())
