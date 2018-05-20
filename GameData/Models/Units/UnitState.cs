@@ -66,7 +66,11 @@ namespace GameData.Models.Units
             {
                 if(_baseHealth == value) return;
 
-                _baseHealth = value;
+                _baseHealth = value < 1 ? 1 : value;
+
+                if (GetResultHealth < 1)
+                    RecievedDamage = 0;
+
                 NotifyPropertyChanged(nameof(BaseHealth));
             }
         }
@@ -93,7 +97,7 @@ namespace GameData.Models.Units
             {
                 if(_attack == value) return;
 
-                _attack = value;
+                _attack = value < 0 ? 0 : value;
                 NotifyPropertyChanged(nameof(Attack));
             }
         }
