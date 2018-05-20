@@ -295,18 +295,18 @@ namespace GameData.Models.Repository
                 new GameAction(name:"Урон всем вражеским отрядам",id:40,description:"Наносит урон всем вражеским отрядам",parameterType:ActionParameterType.Damage,
                     action: ((controller, sender, target, parameter) =>
                     {
-                        Player player = sender is Player ? (Player) sender : (sender as Unit).Player;
+                        if(!(sender is Player player)) return;
                         Player enemyPlayer =
                             controller.GetTableCondition.Players.FirstOrDefault(p => p.Username != player.Username);
                         foreach (var iUnit in enemyPlayer.TableUnits.ToArray())
                         {
                             iUnit.State.RecieveDamage(parameter);
                         }
-
+                        
 
                     })),
                 //(не параметровый)
-                new GameAction(name:"Выдача золота",id:41,description:"Выдает дополнительный золотой игроку на текущий ход",parameterType:ActionParameterType.Buff,
+                new GameAction(name:"Выдача золота",id:41,description:"Выдает дополнительный золотой игроку на текущий ход",parameterType:ActionParameterType.Empty,
                     action: ((controller, sender, target, parameter) =>
                     {
                       
@@ -325,7 +325,7 @@ namespace GameData.Models.Repository
 
 
                     })),
-                new GameAction(name:"Внезапное усиление",id:43,description:"Повышение атаки и здоровья выбранному юниту",parameterType:ActionParameterType.BuffRandomRange,
+                new GameAction(name:"Внезапное усиление",id:43,description:"Повышение атаки и здоровья выбранному юниту",parameterType:ActionParameterType.Buff,
                     isTargeted:true,
                     action: ((controller, sender, target, parameter) =>
                     {
@@ -355,7 +355,7 @@ namespace GameData.Models.Repository
                 new GameAction(name:"Урон всем",id:46,description:"Наносит урон всем юнитам на столе",parameterType:ActionParameterType.Damage,
                     action: ((controller, sender, target, parameter) =>
                     {
-                        if(!(sender is Player player)) return;
+                        Player player = sender is Player ? (Player) sender : (sender as Unit).Player;
                         foreach (var iUnit in player.TableUnits.ToArray())
                         {
                             iUnit.State.RecieveDamage(parameter);
@@ -667,7 +667,32 @@ namespace GameData.Models.Repository
 
 
                     })),
-               
+                
+                new GameAction(name:"Выгодное вложение",id:69,description:"Игрок получает +1 к максимальному количеству золота до конца игры",parameterType:ActionParameterType.Empty,
+                    action: ((controller, sender, target, parameter) =>
+                    {
+
+                        if(!(sender is Player player)) return;
+                        if(player.Mana.Base<10)
+                            player.Mana.Base = player.Mana.Base+1;
+
+
+                    })),
+                //параметровый
+                new GameAction(name:"Призыв Отряда Викингов",id:70,description:"Призыв на поле боя Отряда Викингов",parameterType:ActionParameterType.Empty,
+                    action: ((controller, sender, target, parameter) =>
+                    {
+                        if(!(sender is Unit unit)) return;
+
+                        while (parameter != 0)
+                        {
+                            var deployCard = controller.GetCard(137);
+                            controller.SpawnUnit(unit.Player, (UnitCard) deployCard);
+                            parameter--;
+                        }
+
+
+                    })),
                
                 
                
