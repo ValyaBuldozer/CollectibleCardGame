@@ -16,7 +16,8 @@ namespace GameData.Tests.TestData
             PlayerHandCardsMaxCount = 10,
             PlayerTurnInterval = 10000,
             PlayersCount = 2,
-            PlayerTableUnitsMaxCount = 10
+            PlayerTableUnitsMaxCount = 10,
+            MaxPlayerMana = 10
         };
     }
 }

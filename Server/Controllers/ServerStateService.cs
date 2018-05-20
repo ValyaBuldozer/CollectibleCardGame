@@ -76,7 +76,8 @@ namespace Server.Controllers
                     MaxDeckCardsCount = 30,
                     PlayerHandCardsMaxCount = 10,
                     PlayersCount = 2,
-                    PlayerTableUnitsMaxCount = 10
+                    PlayerTableUnitsMaxCount = 10,
+                    MaxPlayerMana = 10
                 };
                 client.CurrentLobby.InitializeGame(defaultSettings,_cardRepository);
                 client.CurrentLobby.OnClose += OnLobbyClose;

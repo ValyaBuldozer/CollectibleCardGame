@@ -114,7 +114,7 @@ namespace GameData.Models.Units
                 return;
 
             if (_recievedDamage <= value)
-                RecievedDamage = BaseHealth;
+                RecievedDamage = 0;
             else
                 RecievedDamage -= value;
         }
