@@ -571,9 +571,6 @@
   <data name="Датский_ярл" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\ImagesUnit\Neutral\Датский ярл.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Набег" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\ImagesUnit\Neutral\Набег.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Тит_Брэгс" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\ImagesUnit\South\Тит Брэгс.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -582,5 +579,8 @@
   </data>
   <data name="Затерянная_казна" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\ImagesSpell\Затерянная казна.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Датский_авангард" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\ImagesUnit\Neutral\Датский авангард.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

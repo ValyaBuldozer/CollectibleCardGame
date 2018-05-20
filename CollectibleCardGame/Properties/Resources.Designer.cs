@@ -653,6 +653,16 @@ namespace CollectibleCardGame.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Датский_авангард {
+            get {
+                object obj = ResourceManager.GetObject("Датский_авангард", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Датский_ярл {
             get {
                 object obj = ResourceManager.GetObject("Датский_ярл", resourceCulture);
@@ -1056,16 +1066,6 @@ namespace CollectibleCardGame.Properties {
         internal static System.Drawing.Bitmap Мягкая_сталь {
             get {
                 object obj = ResourceManager.GetObject("Мягкая_сталь", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Набег {
-            get {
-                object obj = ResourceManager.GetObject("Набег", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
