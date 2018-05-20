@@ -230,10 +230,6 @@ namespace GameData.Controllers.Table
 
         private void OnUnitDies(object sender, ZeroHpEventArgs e)
         {
-            if (e.Unit?.DeathRattleActionInfo != null)
-                _actionController.ExecuteAction(e.Unit.DeathRattleActionInfo,
-                    e.Unit.Player, null);
-
             Kill(e.Unit);
         }
     }

@@ -12,14 +12,6 @@ namespace GameData.Models.Units
     {
         public UnitCard BaseCard { set; get; }
 
-        //public int Attack { set; get; }
-
-        //public virtual HealthPoint State { set; get; }
-
-        //public byte AttackPriority { set; get; }
-
-        //public bool CanAttack { set; get; }
-
         public virtual UnitState State { set; get; }
 
         [JsonIgnore]
