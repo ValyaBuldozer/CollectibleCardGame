@@ -75,6 +75,9 @@ namespace CollectibleCardGame.Unity
             _container.RegisterType<GoGameFramePageViewModel>(new ContainerControlledLifetimeManager());
             _container.RegisterType<GoGameFramePage>(new ContainerControlledLifetimeManager());
 
+            _container.RegisterType<DeckSettingsViewModel>(new ContainerControlledLifetimeManager());
+            _container.RegisterType<DecksSettingsFramePage>(new ContainerControlledLifetimeManager());
+
             _container.RegisterType<MenuFramePageViewModel>(new ContainerControlledLifetimeManager());
             _container.RegisterType<MainMenuFramePage>(new ContainerControlledLifetimeManager());
 

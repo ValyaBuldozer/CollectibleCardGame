@@ -29,19 +29,26 @@ namespace CollectibleCardGame.ViewModels.UserControls
 
         public ObservableCollection<CardViewModel> DeckCards { set; get; }
 
-        public RelayCommand TransferTurnCommand => _dropToDeckCommand ??
-                                                   (_dropToDeckCommand = new RelayCommand(o =>
-       {
-           if (!(o is CardViewModel viewModel)) return;
+        public RelayCommand DropToDeckCommand => _dropToDeckCommand ?? 
+                                                 (_dropToDeckCommand = new RelayCommand(o =>
+        {
+            if(!(o is CardViewModel viewModel)) return;
 
-           if (DeckCards.Count(c => c.Card.ID == viewModel.Card.ID) > 2)
-           {
-               MessageBox.Show("Максмальное число одинковых карт 2");
-               return;
-           }
+            if (DeckCards.Count(c => c.Card.ID == viewModel.Card.ID) >= 2)
+            {
+                MessageBox.Show("Нельзя добавить больше двух одинковых карт в колоду");
+                return;
+            }
 
-           DeckCards.Add(viewModel);
-       }));
+            DeckCards.Add(viewModel);
+        }));
+
+        public List<Card> GetDeck()
+        {
+            var retList = new List<Card>();
+            DeckCards.ForEach(vm => retList.Add(vm.Card));
+            return retList;
+        }
 
         public DeckViewModel(IEnumerable<Card> cards)
         {
@@ -51,11 +58,5 @@ namespace CollectibleCardGame.ViewModels.UserControls
             DeckCards = new ObservableCollection<CardViewModel>();
         }
 
-        public List<Card> GetDeck()
-        {
-            var retList = new List<Card>();
-            DeckCards.ForEach(vm => retList.Add(vm.Card));
-            return retList;
-        }
     }
 }

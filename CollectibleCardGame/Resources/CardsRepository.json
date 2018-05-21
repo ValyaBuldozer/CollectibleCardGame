@@ -1,60 +1,6 @@
 ﻿[
 	{
 		"$type": "GameData.Models.Cards.UnitCard, GameData",
-		"ID": 1,
-		"Name": "jsontest",
-		"Description": "jsonTest",
-		"Cost": 1,
-		"CanBePlayedOnEnemyTurn": false,
-		"ImagePath": null,
-		"Fraction": 0,
-		"BaseHP": 1,
-		"BaseAttack": 1,
-		"AttackPriority": 1,
-		"AttackActionInfo": {
-			"$type": "GameData.Models.Action.CardActionInfo, GameData",
-			"ActionId": 1,
-			"ParameterValue": 1,
-			"ParameterType": 4
-		},
-		"DamageRecievedActionInfo": null,
-		"BattleCryActionInfo": null,
-		"DeathRattleActionInfo": null
-	},
-	{
-		"$type": "GameData.Models.Cards.SpellCard, GameData",
-		"ID": 2,
-		"Name": "jsontest",
-		"Description": "jsonTest",
-		"Cost": 1,
-		"CanBePlayedOnEnemyTurn": false,
-		"ImagePath": null,
-		"Fraction": 0,
-		"ActionInfo": {
-			"$type": "GameData.Models.Action.CardActionInfo, GameData",
-			"ActionId": 1,
-			"ParameterValue": 1,
-			"ParameterType": 4
-		}
-	},
-	{
-		"$type": "GameData.Models.Cards.SpellCard, GameData",
-		"ID": 3,
-		"Name": "Град стрел test",
-		"Description": "Наносит 3 урона всем отрядам противника",
-		"Cost": 0,
-		"CanBePlayedOnEnemyTurn": false,
-		"ImagePath": "null",
-		"Fraction": 0,
-		"ActionInfo": {
-			"$type": "GameData.Models.Action.CardActionInfo, GameData",
-			"ActionId": 40,
-			"ParameterValue": 5,
-			"ParameterType": 0
-		}
-	},
-	{
-		"$type": "GameData.Models.Cards.UnitCard, GameData",
 		"ID": 20,
 		"Name": "Легкая кавалерия",
 		"Description": "[Рывок] Эх, что не день, то очередной прорыв",

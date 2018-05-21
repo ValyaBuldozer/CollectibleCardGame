@@ -25,7 +25,7 @@ namespace CollectibleCardGame.ViewModels.Frames
             get => _currentPage;
         }
 
-        public MenuFramePageViewModel(GoGameFramePage goGameFramePage)
+        public MenuFramePageViewModel(GoGameFramePage goGameFramePage,DecksSettingsFramePage decksFramePage)
         {
             Menus = new ObservableCollection<MainMenuPart>
             {
@@ -39,7 +39,7 @@ namespace CollectibleCardGame.ViewModels.Frames
                 {
                     ImagePath = "/Images/Icons/cards.png",
                     Title = "Колоды",
-                    FramePage = new DecksSettingsFramePage()
+                    FramePage = decksFramePage
                 },
                 new MainMenuPart
                 {

@@ -12,7 +12,7 @@
     <Grid  Background="Wheat">
         <TabControl ItemContainerStyle="{DynamicResource CustomTabItem}" VerticalAlignment="Stretch"
                     HorizontalAlignment="Stretch" BorderBrush="#EDEDED" 
-                    ItemsSource="{Binding DeckTabs}" SelectedItem="{Binding SelectedDeck}">
+                    ItemsSource="{Binding TabItems}" SelectedItem="{Binding SelectedDeck}">
             <TabControl.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Title}"/>
