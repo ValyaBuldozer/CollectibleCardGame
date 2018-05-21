@@ -208,6 +208,8 @@ namespace CollectibleCardGame.ViewModels.Frames
         public RelayCommand PlayerUnitCommand => _plyaerUnitCommand ??
                (_plyaerUnitCommand = new RelayCommand(o =>
                {
+                   if(!IsPlayerTurn) return;
+
                    UnitViewModel unitViewModel;
                    if (o is UnitViewModel model)
                        unitViewModel = model;
@@ -248,7 +250,7 @@ namespace CollectibleCardGame.ViewModels.Frames
                        EnemyViewModel.HeroUnitViewModel.SetTargeting();
                    }
 
-               },e => IsPlayerTurn));
+               }));
 
         public RelayCommand EnemyUnitCommand => _enemyUnitCommand ??
                (_enemyUnitCommand = new RelayCommand(o =>

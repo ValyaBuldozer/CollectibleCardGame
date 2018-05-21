@@ -156,7 +156,7 @@ namespace GameData.Controllers.Table
         {
             if (unit?.DeathRattleActionInfo != null)
                 _actionController.ExecuteAction(unit.DeathRattleActionInfo,
-                    unit.Player, null);
+                    unit, null);
 
             Remove(unit);
         }

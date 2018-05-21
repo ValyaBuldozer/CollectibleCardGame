@@ -32,7 +32,7 @@ namespace Server.Controllers
                 !=null)
                 throw new UserServiceException("User is already exists");
 
-            var user = new User() { Username = username, Password = password };
+            var user = new User() { Username = username, Password = password, UserInfo = new UserInfo()};
             _userReposController.Add(user);
 
             return user.Username;

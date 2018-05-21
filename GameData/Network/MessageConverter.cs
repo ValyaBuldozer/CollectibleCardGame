@@ -193,7 +193,7 @@ namespace GameData.Network
         //[Dependency]
         public MessageHandlerBase<PlayerTurnStartMessage> PlayerTurnStartMessageHandlerBase { set; get; }
 
-        //[Dependency]
+        [Dependency]
         public MessageHandlerBase<SetDeckMessage> SetDeckMessageHandlerBase { set; get; }
 
         //[Dependency]

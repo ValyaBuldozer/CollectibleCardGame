@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using BaseNetworkArchitecture.Common;
 using BaseNetworkArchitecture.Server;
 using GameData.Controllers.Data;
+using GameData.Models;
 using GameData.Models.Cards;
 using GameData.Models.Repository;
 using GameData.Network;
@@ -52,17 +53,24 @@ namespace Server.Unity
         {
             _container = new UnityContainer();
 
+            var defaultSettings = new GameSettings()
+            {
+                PlayerTurnInterval = 120000,
+                IsPlayerTurnTimerEnabled = true,
+                MaxDeckCardsCount = 30,
+                PlayerHandCardsMaxCount = 10,
+                PlayersCount = 2,
+                PlayerTableUnitsMaxCount = 10,
+                MaxPlayerMana = 10
+            };
+
+            _container.RegisterInstance(defaultSettings, new ContainerControlledLifetimeManager());
+
             _container.RegisterType<ILogger, ConsoleLogger>(new ContainerControlledLifetimeManager());
             _container.RegisterType<IServer, TcpServer>(new ContainerControlledLifetimeManager());
 
             //context binding
             _container.RegisterType<IContext, AppDbContext>();
-
-            //messagehandler binding
-            _container.RegisterType<MessageHandlerBase<LogInMessage>, LogInMessageHandler>();
-            _container.RegisterType<MessageHandlerBase<RegistrationMessage>, RegistrationMessageHandler>();
-            _container.RegisterType<MessageHandlerBase<GameStartMessage>, GameStartMessageHandler>();
-            _container.RegisterType<MessageHandlerBase<GameRequestMessage>, GameRequestMessageHandler>();
 
             //repository binding
             _container.RegisterType<UserRepository>(new ContainerControlledLifetimeManager());
@@ -73,12 +81,20 @@ namespace Server.Unity
             _container.RegisterType<ConnectedClientsRepository>(new ContainerControlledLifetimeManager());
 
             //controller binding
-            _container.RegisterType<UserReposController>();
+            _container.RegisterType<UserReposController>(new ContainerControlledLifetimeManager());
             _container.RegisterType<UserInfoReposController>();
             _container.RegisterType<IDataRepositoryController<Card>,CardRepositroryController>(
                 new ContainerControlledLifetimeManager());
             _container.RegisterType<AwaitingClientsQueueController>(new ContainerControlledLifetimeManager());
             _container.RegisterType<ConnectedClientsRepositoryController>(new ContainerControlledLifetimeManager());
+
+            //messagehandler binding
+            _container.RegisterType<MessageHandlerBase<LogInMessage>, LogInMessageHandler>();
+            _container.RegisterType<MessageHandlerBase<RegistrationMessage>, RegistrationMessageHandler>();
+            _container.RegisterType<MessageHandlerBase<GameStartMessage>, GameStartMessageHandler>();
+            _container.RegisterType<MessageHandlerBase<GameRequestMessage>, GameRequestMessageHandler>();
+            _container.RegisterType<MessageHandlerBase<SetDeckMessage>, SetDeckMessageHandler>(
+                new ContainerControlledLifetimeManager());
 
             _container.RegisterType<IMessageConverter,MessageConverter>(
                 new ContainerControlledLifetimeManager());

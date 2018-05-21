@@ -148,6 +148,7 @@
     <Compile Include="Network\Controllers\INetworkController.cs" />
     <Compile Include="Network\Controllers\MessageHandlers\ErrorMessageHandler.cs" />
     <Compile Include="Network\Controllers\MessageHandlers\ObserverActionMessageHandler.cs" />
+    <Compile Include="Network\Controllers\MessageHandlers\SetDeckMessageHandler.cs" />
     <Compile Include="Network\Controllers\NetworkConnectionController.cs" />
     <Compile Include="Logic\Controllers\UserController.cs" />
     <Compile Include="MessageBoxLogger.cs" />

@@ -6,16 +6,14 @@ using System.Threading.Tasks;
 using GameData.Enums;
 using GameData.Models.Cards;
 
-namespace GameData.Network.Messages
+namespace Server.Models
 {
-    public class SetDeckMessage : IContent
+    public class DeckInfo
     {
         public Fraction Fraction { set; get; }
 
-        public int[] DeckIDs { set; get; }
+        public int[] DeckIds { set; get; }
 
-        public int HeroCardId { set; get; }
-
-        public object AnswerData { set; get; }
+        public UnitCard HeroCard { set; get; }
     }
 }

@@ -35,11 +35,7 @@ namespace CollectibleCardGame.Tests.ServerTests.ServiceTests
             var gameRequestNetworkMessage = UnityKernel.Get<NetworkMessageConverter>().SerializeMessage(
                 new MessageBase(MessageBaseType.GameRequestMessage, new GameRequestMessage()
                 {
-                    CardDeckIdList = new List<int>() { 1,1,1,1,1,1,1,1},
-                    HeroUnitCard = new UnitCard()
-                    {
-                        Name = "test"
-                    }
+                    Fraction = Fraction.North
                 }, null));
 
 
