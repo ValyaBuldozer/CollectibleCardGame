@@ -45,7 +45,22 @@ namespace CollectibleCardGame.Logic.Controllers
         private void GameRequestEventHandler(object sender, Services.GameRequestEventArgs e)
         {
             Random rnd = new Random();
-            var array = new int[] {41,125,127,136,41,125,127,136,128,26,26,26,26,27,37,37,37,37,37,61,62,82,83,84,85};
+
+            //var array = new int[] {120,120,120,120,120,26,27,30,30,30,31,32,33,61,62,82,83,84,85};
+
+            var array = new int[] {96,96,96,26,62, 26, 62, 26, 62, 26, 62, 26, 62, 26, 62, 26, 62,36,37,116,38,39,40,41,42,43,117,118,119,120,121,122,123,124,
+                125,
+                126,
+                127,
+                128,
+                129,
+                130,
+                131,
+                132,
+                133,
+                134,
+                136 };
+
             array.ForEach(c =>
             {
                 if (_cardRepositoryController.GetById(c) == null)
