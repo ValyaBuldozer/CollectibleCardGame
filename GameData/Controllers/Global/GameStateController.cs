@@ -105,8 +105,10 @@ namespace GameData.Controllers.Global
 
         private void OnUnitDies(object sender, HeroUnitDiedEventArgs e)
         {
+            var winner = _tableCondition.Players.FirstOrDefault(p => p.Username != e.Player.Username);
+
             GameEnd?.Invoke(this,new GameEndEventArgs(GameEndReason.HeroUnitKill,
-                e.Player.Username));
+                winner?.Username));
         }
     }
 }

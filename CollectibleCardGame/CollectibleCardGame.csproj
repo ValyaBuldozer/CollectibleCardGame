@@ -185,7 +185,6 @@
     <Compile Include="ViewModels\Frames\LogInFramePageViewModel.cs" />
     <Compile Include="ViewModels\Frames\RegistrationFramePageViewModel.cs" />
     <Compile Include="ViewModels\Frames\ServerConnectionViewModel.cs" />
-    <Compile Include="ViewModels\UserControls\CardUserControlViewModel.cs" />
     <Compile Include="ViewModels\UserControls\FractionUserControlViewModel.cs" />
     <Compile Include="ViewModels\UserControls\PlayerUserControlViewModel.cs" />
     <Compile Include="ViewModels\UserControls\SpellCardUserControlViewModel.cs" />

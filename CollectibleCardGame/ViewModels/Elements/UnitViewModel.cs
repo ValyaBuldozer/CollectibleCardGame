@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using GameData.Models.Units;
 using System.Windows.Media;
+using System.Windows.Threading;
 
 namespace CollectibleCardGame.ViewModels.Elements
 {
@@ -19,8 +20,13 @@ namespace CollectibleCardGame.ViewModels.Elements
         private bool _isCanAttack;
 
         private string _abilityImagePath;
-        private System.Windows.Media.Brush _borderBrush;
-        private System.Windows.Media.Color _shadowColor;
+        private Brush _borderBrush;
+        private Color _shadowColor;
+        private Brush _healthForeground;
+        private Color _healthShdowColor;
+        private Color _attackShadowColor;
+
+        private readonly Dispatcher _curretnDispatcher;
 
         public Unit BaseUnit
         {
@@ -41,6 +47,8 @@ namespace CollectibleCardGame.ViewModels.Elements
                 IsCanAttack = value.State.CanAttack;
                 _baseUnit.State.PropertyChanged += State_PropertyChanged;
                 NotifyPropertyChanged(nameof(ImagePath));
+
+                if(_baseUnit is HeroUnit) return;
 
                 switch (value.State.AttackPriority)
                 {
@@ -90,8 +98,21 @@ namespace CollectibleCardGame.ViewModels.Elements
             get => _attack;
             set
             {
+                if(_attack == value) return;
+
                 _attack = value;
                 NotifyPropertyChanged(nameof(Attack));
+
+                //обновление DependencySource в dispatcher потоке
+                _curretnDispatcher.Invoke(() =>
+                {
+                    if (BaseUnit.State.Attack < BaseUnit.BaseCard.BaseAttack)
+                        AttackShadowColor = Color.FromRgb(255, 51, 0);
+                    else if (BaseUnit.State.Attack > BaseUnit.BaseCard.BaseAttack)
+                        AttackShadowColor = Color.FromRgb(0, 255, 0);
+                    else
+                        AttackShadowColor = Color.FromArgb(0, 0, 0, 0);
+                });
             }
         }
 
@@ -100,8 +121,21 @@ namespace CollectibleCardGame.ViewModels.Elements
             get => _health;
             set
             {
+                if(_health == value) return;
+
                 _health = value;
                 NotifyPropertyChanged(nameof(Health));
+
+                //обновление DependencySource в dispatcher потоке
+                _curretnDispatcher.Invoke(() =>
+                {
+                    if (BaseUnit.State.RecievedDamage != 0)
+                        HealthShadowColor = Color.FromRgb(255, 51, 0);
+                    else if (BaseUnit.State.BaseHealth > BaseUnit.BaseCard.BaseHP)
+                        HealthShadowColor = Color.FromRgb(0, 255, 0);
+                    else
+                        HealthShadowColor = Color.FromArgb(0,0,0,0);
+                });
             }
         }
 
@@ -137,7 +171,7 @@ namespace CollectibleCardGame.ViewModels.Elements
             }
         }
 
-        public System.Windows.Media.Brush BorderBrush
+        public Brush BorderBrush
         {
             get => _borderBrush;
             set
@@ -157,10 +191,42 @@ namespace CollectibleCardGame.ViewModels.Elements
             }
         }
 
+        public Color HealthShadowColor
+        {
+            get => _healthShdowColor;
+            set
+            {
+                _healthShdowColor = value;
+                NotifyPropertyChanged(nameof(HealthShadowColor));
+            }
+        }
+
+        public Color AttackShadowColor
+        {
+            get => _attackShadowColor;
+            set
+            {
+                _attackShadowColor = value;
+                NotifyPropertyChanged(nameof(AttackShadowColor));
+            }
+        }
+
+        public Brush HealthForeground
+        {
+            get => _healthForeground;
+            set
+            {
+                _healthForeground = value;
+                NotifyPropertyChanged(nameof(HealthForeground));
+            }
+        }
+
         private void State_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             Attack = _baseUnit.State.Attack;
             Health = _baseUnit.State.GetResultHealth;
+
+            if(_baseUnit is HeroUnit) return;
 
             switch (_baseUnit.State.AttackPriority)
             {
@@ -182,18 +248,23 @@ namespace CollectibleCardGame.ViewModels.Elements
 
         public UnitViewModel(Unit unit)
         {
+            _curretnDispatcher = Dispatcher.CurrentDispatcher;
             _isNotHeroUnit = !(unit is HeroUnit);
             _baseCardViewModel = new CardViewModel();
             BaseUnit = unit;
             _borderBrush = null;
             IsCanAttack = unit.State.CanAttack;
+            _healthShdowColor = Color.FromArgb(0,0, 0, 0);
+
         }
 
         public UnitViewModel()
         {
+            _curretnDispatcher = Dispatcher.CurrentDispatcher;
             _baseCardViewModel = new CardViewModel();
             BaseUnit = null;
             _borderBrush = null;
+            _healthShdowColor = Color.FromArgb(0, 0, 0, 0);
         }
 
         public void SetTargeting()

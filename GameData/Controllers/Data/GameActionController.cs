@@ -44,8 +44,8 @@ namespace GameData.Controllers.Data
             if (action == null)
                 return null;
 
-            if(action.ParameterType != cardInfo.ParameterType)
-                throw new InvalidOperationException();
+            //if(action.ParameterType != cardInfo.ParameterType)
+            //    throw new InvalidOperationException();
 
             return new GameActionInfo()
             {
