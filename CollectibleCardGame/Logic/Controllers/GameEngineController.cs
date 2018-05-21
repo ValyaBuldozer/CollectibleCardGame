@@ -26,19 +26,22 @@ namespace CollectibleCardGame.Logic.Controllers
         private readonly CurrentUser _user;
         private readonly IDataRepositoryController<Entity> _entityRepositoryController;
         private readonly IDataRepositoryController<Card> _cardRepositoryController;
+        private readonly Lazy<GameController> _gameControllerLazy;
         private readonly ILogger _logger;
 
         [InjectionConstructor]
         public GameEngineController(GameEngineViewModel gameViewModel, MainWindowViewModel mainViewModel,
             CurrentUser user, ILogger logger,
             IDataRepositoryController<Entity> entityRepositoryController,
-            IDataRepositoryController<Card> cardRepositoryController)
+            IDataRepositoryController<Card> cardRepositoryController,
+            Lazy<GameController> gameControllerLazy)
         {
             _gameViewModel = gameViewModel;
             _mainWindowViewModel = mainViewModel;
             _user = user;
             _entityRepositoryController = entityRepositoryController;
             _cardRepositoryController = cardRepositoryController;
+            _gameControllerLazy = gameControllerLazy;
             _logger = logger;
         }
 
@@ -186,8 +189,12 @@ namespace CollectibleCardGame.Logic.Controllers
         {
             _gameViewModel.CurrentDispatcher.Invoke(() =>
             {
-                MessageBox.Show(action.WinnerUsername == 
+                _logger.LogAndPrint(action.WinnerUsername == 
                                 _user.Username ? "ВЫ ПОБЕДИЛИ!!!" : "ВЫ ПРОИГРАЛИ!!!");
+
+                _gameViewModel.Clear();
+                _entityRepositoryController.ClearRepository();
+                _gameControllerLazy.Value.EndGame();
             });
         }
     }
