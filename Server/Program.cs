@@ -20,7 +20,9 @@ namespace Server
         {            
             Console.WriteLine("Initializing Kernel...");
             UnityKernel.InitializeKernel();
-            UnityKernel.Get<UserRepository>().Collection.Count();
+
+            //пробуем подключится к бд
+            UnityKernel.Get<UserRepository>();
 
             bool conFlag = true;
             while (conFlag)

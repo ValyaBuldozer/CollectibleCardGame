@@ -82,7 +82,6 @@ namespace Server.Unity
 
             //controller binding
             _container.RegisterType<UserReposController>(new ContainerControlledLifetimeManager());
-            _container.RegisterType<UserInfoReposController>();
             _container.RegisterType<IDataRepositoryController<Card>,CardRepositroryController>(
                 new ContainerControlledLifetimeManager());
             _container.RegisterType<AwaitingClientsQueueController>(new ContainerControlledLifetimeManager());

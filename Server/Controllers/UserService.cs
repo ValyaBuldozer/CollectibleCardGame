@@ -12,15 +12,12 @@ namespace Server.Controllers
     public class UserService
     {
         private readonly UserReposController _userReposController;
-        private readonly UserInfoReposController _userInfoReposController;
         private readonly ICollection<IClientConnection> _clients;
 
-        public UserService(UserReposController userReposController,IServer server,
-            UserInfoReposController userInfoReposController)
+        public UserService(UserReposController userReposController,IServer server)
         {
             _userReposController = userReposController;
             _clients = server.Clients;
-            _userInfoReposController = userInfoReposController;
         }
 
         public string RegisterUser(string username, string password)

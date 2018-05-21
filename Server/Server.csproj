@@ -121,7 +121,6 @@
     <Compile Include="Controllers\Repository\UserInfoReposController.cs" />
     <Compile Include="Controllers\Repository\UserReposController.cs" />
     <Compile Include="Database\AppDbContext.cs" />
-    <Compile Include="Database\AppDbContextInitializer.cs" />
     <Compile Include="Database\IContext.cs" />
     <Compile Include="EventArgs.cs" />
     <Compile Include="Exceptions\SqlServerConnectionError.cs" />
@@ -179,9 +178,7 @@
       <Name>GameData</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="GameData\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201803311641315_Initialize.resx">
       <DependentUpon>201803311641315_Initialize.cs</DependentUpon>
