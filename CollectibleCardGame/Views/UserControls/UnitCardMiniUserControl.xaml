@@ -92,23 +92,30 @@
                         <Border CornerRadius="50"
                             Background="#EF3F37"
                             BorderBrush="Black"
-                            BorderThickness="3"
+                            BorderThickness="0"
                             Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                                 Visibility="{Binding Path=IsNotHeroUnit,
                                 Converter={StaticResource BooleanToVisibilityConverter}}">
                             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" 
-                                       Margin=" 0,0,0,0"
                                        Text="{Binding Path=Attack}" FontWeight="Bold" FontSize="52"
                                        FontFamily="/CollectibleCardGame;component/Fonts/#PF Din Text Pro"/>
+                            <Border.Effect>
+                                <DropShadowEffect Opacity="1" ShadowDepth="0" BlurRadius="100"
+                                                  Color="{Binding AttackShadowColor}"/>
+                            </Border.Effect>
                         </Border>
                         <Border CornerRadius="50"
                             Background="#66BE61"
                             BorderBrush="Black"
-                            BorderThickness="3"
+                            BorderThickness="0"
                             Grid.Column="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Margin=" 0,0,0,0"
+                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
                                    Text="{Binding Path=Health}" FontWeight="Bold" FontSize="52"
                                        FontFamily="/CollectibleCardGame;component/Fonts/#PF Din Text Pro"/>
+                            <Border.Effect>
+                                <DropShadowEffect Opacity="1" ShadowDepth="0" BlurRadius="100"
+                                                  Color="{Binding HealthShadowColor}"/>
+                            </Border.Effect>
                         </Border>
                     </Grid>
                 </Grid>
