@@ -96,7 +96,8 @@ namespace CollectibleCardGame.Logic.Controllers
                 if (action.ToPlayerUsername == _userService.Username)
                     _gameViewModel.PlayerCards.Add(new CardViewModel(card));
                 else
-                    _gameViewModel.EnemyCards.Add(new CardViewModel(card));
+                    _gameViewModel.EnemyCards.Add(new CardViewModel(card,
+                        _gameViewModel.EnemyPlayer.HeroUnit.BaseCard.Fraction));
             });
         }
 

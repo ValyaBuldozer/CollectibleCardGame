@@ -16,6 +16,7 @@ namespace CollectibleCardGame.ViewModels.Elements
         private string _name;
         private string _description;
         private string _imagePath;
+        private string _backgroundImagePath;
         private int _attack;
         private int _health;
         private bool _isUnitCard;
@@ -122,6 +123,16 @@ namespace CollectibleCardGame.ViewModels.Elements
             }
         }
 
+        public string BackGroundImagePath
+        {
+            get => _backgroundImagePath;
+            set
+            {
+                _backgroundImagePath = value;
+                NotifyPropertyChanged(nameof(BackGroundImagePath));
+            }
+        }
+
         public int Attack
         {
             get => _attack;
@@ -162,7 +173,7 @@ namespace CollectibleCardGame.ViewModels.Elements
             }
         }
 
-        public CardViewModel(Card card)
+        public CardViewModel(Card card,Fraction fraction = Fraction.South)
         {
             Card = card;
             _cost = card.Cost;
@@ -175,6 +186,24 @@ namespace CollectibleCardGame.ViewModels.Elements
                 _isUnitCard = true;
                 _attack = unitCard.BaseAttack;
                 _health = unitCard.BaseHP;
+            }
+
+            switch (fraction)
+            {
+                case Fraction.Common:
+                    _backgroundImagePath = "../../Images/CardsBacks/cardbackSouth220x410.jpg";
+                    break;
+                case Fraction.North:
+                    _backgroundImagePath = "../../Images/CardsBacks/cardbackNorth220х410.jpg";
+                    break;
+                case Fraction.South:
+                    _backgroundImagePath = "../../Images/CardsBacks/cardbackSouth220x410.jpg";
+                    break;
+                case Fraction.Dark:
+                    _backgroundImagePath = "../../Images/CardsBacks/cardbackDarkside220х410.jpg";
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(fraction), fraction, null);
             }
         }
 
