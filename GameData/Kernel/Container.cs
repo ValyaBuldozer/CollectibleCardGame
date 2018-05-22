@@ -9,6 +9,7 @@ using GameData.Controllers.PlayerTurn;
 using GameData.Controllers.Table;
 using GameData.Models;
 using GameData.Models.Action;
+using GameData.Models.Cards;
 using GameData.Models.Observer;
 using GameData.Models.PlayerTurn;
 using GameData.Models.Repository;
@@ -31,6 +32,8 @@ namespace GameData.Kernel
         {
             _container.RegisterInstance(settings, new ContainerControlledLifetimeManager());
 
+            _container.RegisterInstance(CardRepository ?? new CardRepository(), new ContainerControlledLifetimeManager());
+
             RegisterBindings();
 
             //ititializing observer for events bindings
@@ -49,6 +52,8 @@ namespace GameData.Kernel
             _container.RegisterType<ObserverActionRepository>(new ContainerControlledLifetimeManager());
 
             //repository controllers
+            _container.RegisterType<IDataRepositoryController<Card>, CardRepositroryController>(
+                new ContainerControlledLifetimeManager());
             _container.RegisterType<IDeckController, DeckController>(new ContainerControlledLifetimeManager());
             _container.RegisterType<IDataRepositoryController<Entity>, EntityRepositoryController>(
                 new ContainerControlledLifetimeManager());
@@ -83,6 +88,8 @@ namespace GameData.Kernel
             _container.RegisterType<IPlayerTurnHandler<EndPlayerTurn>,
                 EndPlayerTurnHandler>();
         }
+
+        public CardRepository CardRepository { set; get; }
 
         public T Get<T>()
         {

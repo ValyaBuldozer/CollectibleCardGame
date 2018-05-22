@@ -80,7 +80,13 @@ namespace GameData.Network
             }
             catch (JsonReaderException e)
             {
+                //if (_concotinationMessage != null)
+                //{
+                //    _concotinationMessage += networkMessage.Content;
+                //    return DeserializeMessage(new NetworkMessage(_concotinationMessage));
+                //}
 
+                //_concotinationMessage = networkMessage.Content;
             }
             catch (NullReferenceException e)
             {
@@ -187,7 +193,7 @@ namespace GameData.Network
         //[Dependency]
         public MessageHandlerBase<PlayerTurnStartMessage> PlayerTurnStartMessageHandlerBase { set; get; }
 
-        //[Dependency]
+        [Dependency]
         public MessageHandlerBase<SetDeckMessage> SetDeckMessageHandlerBase { set; get; }
 
         //[Dependency]

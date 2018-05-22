@@ -16,7 +16,6 @@
             <RowDefinition Height="1.5*"></RowDefinition>
             <RowDefinition Height="1.5*"></RowDefinition>
             <RowDefinition Height="1.5*"></RowDefinition>
-            <RowDefinition Height="1.5*"></RowDefinition>
         </Grid.RowDefinitions>
         <Label Content="Регистрация" HorizontalAlignment="Center"  VerticalAlignment="Center" Grid.Row="0" FontSize="20" FontWeight="Bold" Margin="0,0,0,-2" />
 

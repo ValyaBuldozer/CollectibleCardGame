@@ -11,15 +11,11 @@
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"></BooleanToVisibilityConverter>
     </UserControl.Resources>
     <Grid>
-        <Grid.RenderTransform>
-            <!-- ScaleX/Y = k -->
-            <ScaleTransform CenterX="0" CenterY="0" ScaleX="1" ScaleY="1"/>
-        </Grid.RenderTransform>
-
         <!--210x250-->
-        <Border BorderThickness="2" BorderBrush="Black" CornerRadius="5">
+        <Border BorderThickness="0" 
+                BorderBrush="{Binding Path=BorderBrush,PresentationTraceSources.TraceLevel=High}">
             <Border.Effect>
-                <DropShadowEffect BlurRadius="10" Direction="315" Opacity="0.8"/>
+                <DropShadowEffect BlurRadius="100" ShadowDepth="0" Opacity="1" Color="{Binding ShadowColor}"/>
             </Border.Effect>
 
             <Grid Background="{StaticResource CardBackGround}">
@@ -73,9 +69,10 @@
                                 <Rectangle Grid.Row="0" Stroke="Gold" RadiusX="5" RadiusY="5" 
                                            StrokeThickness="1" HorizontalAlignment="Stretch"
                                            VerticalAlignment="Stretch"  Width="55" Height="55"
-                                           Visibility="Hidden">
+                                           Visibility="{Binding Path=IsNotHeroUnit,
+                                            Converter={StaticResource BooleanToVisibilityConverter}}">
                                     <Rectangle.Fill>
-                                        <ImageBrush ImageSource="../../Images/IconsUnit/sword.png"/>
+                                        <ImageBrush ImageSource="{Binding AbilityImagePath}"/>
                                     </Rectangle.Fill>
                                     <Rectangle.Effect>
                                         <DropShadowEffect   RenderingBias="Quality" Direction="315"  BlurRadius="10" ShadowDepth="8"/>
@@ -96,21 +93,30 @@
                         <Border CornerRadius="50"
                             Background="#EF3F37"
                             BorderBrush="Black"
-                            BorderThickness="3"
+                            BorderThickness="0"
                             Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                                 Visibility="{Binding Path=IsNotHeroUnit,
                                 Converter={StaticResource BooleanToVisibilityConverter}}">
                             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" 
-                                       Margin=" 0,0,1,5"
-                                       Text="{Binding Path=Attack}" FontWeight="Bold" FontSize="42" />
+                                       Text="{Binding Path=Attack}" FontWeight="Bold" FontSize="52"
+                                       FontFamily="/CollectibleCardGame;component/Fonts/#PF Din Text Pro"/>
+                            <Border.Effect>
+                                <DropShadowEffect Opacity="1" ShadowDepth="0" BlurRadius="100"
+                                                  Color="{Binding AttackShadowColor}"/>
+                            </Border.Effect>
                         </Border>
                         <Border CornerRadius="50"
                             Background="#66BE61"
                             BorderBrush="Black"
-                            BorderThickness="3"
+                            BorderThickness="0"
                             Grid.Column="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Margin=" 0,0,1,5"
-                                   Text="{Binding Path=Health}" FontWeight="Bold" FontSize="42" />
+                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+                                   Text="{Binding Path=Health}" FontWeight="Bold" FontSize="52"
+                                       FontFamily="/CollectibleCardGame;component/Fonts/#PF Din Text Pro"/>
+                            <Border.Effect>
+                                <DropShadowEffect Opacity="1" ShadowDepth="0" BlurRadius="100"
+                                                  Color="{Binding HealthShadowColor}"/>
+                            </Border.Effect>
                         </Border>
                     </Grid>
                 </Grid>

@@ -66,8 +66,8 @@ namespace GameData.Controllers.PlayerTurn
                 return null;
             }
 
-            if (_playerTurnDispatcher.CurrentPlayer.Username != sender.Username || 
-                card.CanBePlayedOnEnemyTurn)
+            if (_playerTurnDispatcher.CurrentPlayer.Username != sender.Username && 
+                !card.CanBePlayedOnEnemyTurn)
             {
                 RunValidateError(new ErrorEventArgs("Нельзя разыграть эту карту во время хода протиника",
                     false,playerTurn.Sender));
@@ -103,6 +103,36 @@ namespace GameData.Controllers.PlayerTurn
             {
                 RunValidateError(new ErrorEventArgs("Нельзя атаковать во время хода протиника",
                     false,playerTurn.Sender));
+                return null;
+            }
+
+            if (!senderUnit.State.CanAttack)
+            {
+                RunValidateError(new ErrorEventArgs("Этот юнит сейчас не может атаковать",
+                    false, playerTurn.Sender));
+                return null;
+            }
+
+            if (target.State.AttackPriority == 0)
+            //атака маскировки
+            {
+                RunValidateError(new ErrorEventArgs("Нельзя атаковать существо с маскировкой",
+                    false, playerTurn.Sender));
+                return null;
+            }
+
+            if (target.State.AttackPriority != 2 && target.Player.TableUnits.Exists(u => u.State.AttackPriority == 2))
+                //есть провокатор у противника
+            {
+                RunValidateError(new ErrorEventArgs("Нужно атаковать провокатора",
+                    false, playerTurn.Sender));
+                return null;
+            }
+
+            if (target.Player.Username == senderUnit.Player.Username)
+            {
+                RunValidateError(new ErrorEventArgs("Self attack",
+                    true, playerTurn.Sender));
                 return null;
             }
 

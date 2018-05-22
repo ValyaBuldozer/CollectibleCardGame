@@ -22,5 +22,10 @@ namespace Server.Database
         {
             SaveChanges();
         }
+
+        public bool IsDatabaseExists()
+        {
+            return Database.Exists();
+        }
     }
 }

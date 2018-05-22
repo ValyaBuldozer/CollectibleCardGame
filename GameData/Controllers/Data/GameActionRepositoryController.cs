@@ -75,5 +75,15 @@ namespace GameData.Controllers.Data
             _repository.Collection.Remove(_repository.Collection.FirstOrDefault(a => a.ID == id));
             _repository.Collection.Add(element);
         }
+
+        public void ClearRepository()
+        {
+            _repository.Collection.Clear();
+        }
+
+        public IEnumerable<GameAction> GetCollection()
+        {
+            return _repository.Collection.ToList();
+        }
     }
 }

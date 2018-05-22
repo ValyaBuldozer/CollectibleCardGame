@@ -10,8 +10,8 @@
       Title="ConnectionErrorFramePage">
 
     <Grid>
-        <Button Content="Переподключится" HorizontalAlignment="Center" Margin="0" Name="ReconnectButton"
-                VerticalAlignment="Center" Width="150" Height="25"
+        <Button Content="Переподключиться" HorizontalAlignment="Center" Margin="0" Name="ReconnectButton"
+                VerticalAlignment="Center" Width="150" Height="25" Style="{DynamicResource ButtonNeutralStyle}"
                 Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, 
                                 AncestorType={x:Type framesShell:LogInFramePageShell}},
             Path=ViewModel.ReconnectCommand}"/>

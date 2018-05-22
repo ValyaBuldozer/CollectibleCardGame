@@ -18,7 +18,9 @@ namespace Server.Repositories
         public UserInfoRepository(IContext context)
         {
             _context = context;
-            Collection = context.UsersInfo;
+
+            if(_context.IsDatabaseExists())
+                Collection = context.UsersInfo;
         }
 
         public void Update()

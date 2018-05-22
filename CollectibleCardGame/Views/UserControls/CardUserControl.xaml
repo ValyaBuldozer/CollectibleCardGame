@@ -12,120 +12,122 @@
     </UserControl.Resources>
     <Grid>
         <!--410x220-->
-    <Border BorderThickness="2" BorderBrush="Black" CornerRadius="5">
-        <Border.Effect>
-            <DropShadowEffect BlurRadius="10" Direction="315" Opacity="0.8"/>
-        </Border.Effect>
-
-        <Grid>
-            <Grid.Background>
-                <ImageBrush ImageSource="/Images/backgroundCard.jpg" Stretch="UniformToFill"/>
-            </Grid.Background>
+        <Border BorderThickness="2" BorderBrush="Black" CornerRadius="5">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="10" Direction="315" Opacity="0.8"/>
+            </Border.Effect>
 
             <Grid>
-                <Grid.RowDefinitions>
-                   
-                    <RowDefinition Height="8*"/>
-                    <RowDefinition Height="0.8*"/>
-                    <RowDefinition Height="2*"/>
-                    <RowDefinition Height="1.85*"/>
-                    
-                 </Grid.RowDefinitions>
+                <Grid.Background>
+                    <ImageBrush ImageSource="/Images/backgroundCard.jpg" Stretch="UniformToFill"/>
+                </Grid.Background>
 
-                <!--картинка юнита 210x250-->
-                <Image x:Name="Image" Source="{Binding ImagePath}"  Margin="0,0,0,0">
-                    <Image.Effect>
-                        <DropShadowEffect   RenderingBias="Quality" Direction="270" 
-                                            BlurRadius="20" ShadowDepth="10" Opacity="0.9"/>
-                    </Image.Effect>
-                </Image>
-
-                <Grid Grid.Row="1" Background="Transparent">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <!--<ColumnDefinition Width="3.5*"/>-->
-                    </Grid.ColumnDefinitions>
-
-                        <TextBlock x:Name="CardName" Grid.Column="1" Text="{Binding Name}" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"
-                               FontFamily="/CollectibleCardGame;component/Fonts/#Mason Chronicles" FontSize="18" Margin="0,13,0,0" /> <!--было фонтсайз 16-->
-                </Grid>
-
-                <Grid Grid.Row="0" Grid.RowSpan="2">
+                <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="0.26*"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.2*"/>
-                        <ColumnDefinition Width="5*"/>
-                        <ColumnDefinition Width="10*"/>
-                        <ColumnDefinition Width="4*"/>
-                    </Grid.ColumnDefinitions>
 
-                    <Grid Grid.Column="1" Grid.RowSpan="2">
+                        <RowDefinition Height="8*"/>
+                        <RowDefinition Height="0.8*"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="1.85*"/>
+
+                    </Grid.RowDefinitions>
+
+                    <!--картинка юнита 210x250-->
+                    <Image x:Name="Image" Source="{Binding ImagePath}"  Margin="0,0,0,0">
+                        <Image.Effect>
+                            <DropShadowEffect   RenderingBias="Quality" Direction="270" 
+                                            BlurRadius="20" ShadowDepth="10" Opacity="0.9"/>
+                        </Image.Effect>
+                    </Image>
+
+                    <Grid Grid.Row="1" Background="Transparent">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="3.5*"/>
-                            <ColumnDefinition  Width="*"/>
+                            <!--<ColumnDefinition Width="3.5*"/>-->
                         </Grid.ColumnDefinitions>
 
-                        <Border  Visibility="{Binding IsUnitCard,Converter={StaticResource BooleanToVisibilityConverter}}" 
-                            Grid.Column="1" BorderBrush="{Binding TapeBorderBrush}"
-                                 BorderThickness="5" Margin="0,40,0,22">
-                            <Rectangle  Fill="{Binding TapeBrush}" HorizontalAlignment="Stretch"
-                                        VerticalAlignment="Stretch"   Opacity="0.9"  />
-                            <Border.Effect>
-                                <DropShadowEffect BlurRadius="10" Direction="270" Opacity="0.8"/>
-                            </Border.Effect>
-                        </Border>
-
+                        <TextBlock x:Name="CardName" Text="{Binding Name}" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"
+                                FontSize="17" Margin="0,12,0,0" FontFamily="/CollectibleCardGame;component/Fonts/#PF Din Text Pro" Height="20" />
+                        <!--было фонтсайз 16-->
                     </Grid>
-                    <Grid Grid.Column="1" Grid.Row="1"  Visibility="{Binding IsUnitCard,
-                        Converter={StaticResource BooleanToVisibilityConverter}}"  >
+
+                    <Grid Grid.Row="0" Grid.RowSpan="2">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="0.26*"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        <ItemsControl x:Name="AbilityStack" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center" Grid.ColumnSpan="3" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.2*"/>
+                            <ColumnDefinition Width="5*"/>
+                            <ColumnDefinition Width="10*"/>
+                            <ColumnDefinition Width="4*"/>
+                        </Grid.ColumnDefinitions>
 
-                            <ItemsControl.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <WrapPanel   Orientation="Vertical" />
-                                </ItemsPanelTemplate>
-                            </ItemsControl.ItemsPanel>
+                        <Grid Grid.Column="1" Grid.RowSpan="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="3.5*"/>
+                                <ColumnDefinition  Width="*"/>
+                            </Grid.ColumnDefinitions>
 
-                            <!--здесь иконки-->
+                            <Border  Visibility="{Binding IsUnitCard,Converter={StaticResource BooleanToVisibilityConverter}}" 
+                                Grid.Column="1" BorderBrush="{Binding TapeBorderBrush}"
+                                 BorderThickness="5" Margin="0,40,0,22">
+                                <Rectangle  Fill="{Binding TapeBrush}" HorizontalAlignment="Stretch"
+                                        VerticalAlignment="Stretch"   Opacity="0.9"  />
+                                <Border.Effect>
+                                    <DropShadowEffect BlurRadius="10" Direction="270" Opacity="0.8"/>
+                                </Border.Effect>
+                            </Border>
 
-                        </ItemsControl>
-                    </Grid>
+                        </Grid>
+                        <Grid Grid.Column="1" Grid.Row="1"  Visibility="{Binding IsUnitCard,
+                        Converter={StaticResource BooleanToVisibilityConverter}}"  >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <ItemsControl x:Name="AbilityStack" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center" Grid.ColumnSpan="3" >
 
-                    <Border CornerRadius="50"
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel   Orientation="Vertical" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+
+                                <!--здесь иконки-->
+
+                            </ItemsControl>
+                        </Grid>
+
+                        <Border CornerRadius="50"
                             Margin="0,2,0,0"
                             Background="Gold"
                             BorderBrush="Black"
                             BorderThickness="3"
                             Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                        <TextBlock  x:Name="Cost" HorizontalAlignment="Center" VerticalAlignment="Center" Margin=" 0,0,1,5"
-                                   Text="{Binding Cost}" FontWeight="Bold" FontSize="42" />
-                    </Border>
+                            <TextBlock  x:Name="Cost" HorizontalAlignment="Center" VerticalAlignment="Center" Margin=" 0,0,0,0"
+                                   Text="{Binding Cost}" FontWeight="Bold" FontSize="52" FontFamily="/CollectibleCardGame;component/Fonts/#PF Din Text Pro" />
+                        </Border>
 
-                </Grid>
+                    </Grid>
 
-                <Grid Grid.Row="2" Background="Transparent">
+                    <Grid Grid.Row="2" Background="Transparent">
                         <TextBlock x:Name="Story" Grid.Row="2" Text="{Binding Description}" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center"
-                               FontFamily="/CollectibleCardGame;component/Fonts/#Mason Chronicles" LineHeight="14" 
-                                   LineStackingStrategy="BlockLineHeight" FontSize="16" Margin="5,0,5,0" FontWeight="Normal"/> <!--было фонтсайз 12-->
-                </Grid>
+                                   FontFamily="/CollectibleCardGame;component/Fonts/#PF Din Text Pro" LineHeight="14" 
+                                   LineStackingStrategy="BlockLineHeight" FontSize="16" Margin="4,5,4,0" />
+                        <!--было фонтсайз 12-->
+                    </Grid>
 
 
-                <Grid Grid.Row="3" Background="Transparent">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.25*"/>
-                        <ColumnDefinition Width="6*"/>
-                        <ColumnDefinition Width="10*"/>
-                        <ColumnDefinition Width="6*"/>
-                        <ColumnDefinition Width="0.25*"/>
-                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Row="3" Background="Transparent">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.25*"/>
+                            <ColumnDefinition Width="6*"/>
+                            <ColumnDefinition Width="10*"/>
+                            <ColumnDefinition Width="6*"/>
+                            <ColumnDefinition Width="0.25*"/>
+                        </Grid.ColumnDefinitions>
                         <Border CornerRadius="50"   Visibility="{Binding IsUnitCard,
                         Converter={StaticResource BooleanToVisibilityConverter}}"
                             Margin="0,0,0,2"
@@ -133,27 +135,29 @@
                             BorderBrush="Black"
                             BorderThickness="3"
                             Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                        <TextBlock  x:Name="UnitAttck" HorizontalAlignment="Center" 
-                                    VerticalAlignment="Center" Margin=" 0,0,1,5"
-                                   Text="{Binding Path=Attack}" FontWeight="Bold" FontSize="42" />
-                    </Border>
-                    <Border CornerRadius="50"   Visibility="{Binding IsUnitCard,
+                            <TextBlock  x:Name="UnitAttck" HorizontalAlignment="Center" 
+                                    VerticalAlignment="Center" Margin=" 0,0,0,0"
+                                   Text="{Binding Path=Attack}" FontWeight="Bold" FontSize="52" 
+                                        FontFamily="/CollectibleCardGame;component/Fonts/#PF Din Text Pro"/>
+                        </Border>
+                        <Border CornerRadius="50"   Visibility="{Binding IsUnitCard,
                         Converter={StaticResource BooleanToVisibilityConverter}}" 
                             Margin="0,0,0,2"
                             Background="#66BE61"
                             BorderBrush="Black"
                             BorderThickness="3"
                             Grid.Column="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                        <TextBlock  x:Name="UnitHealth" HorizontalAlignment="Center" VerticalAlignment="Center" Margin=" 0,0,1,5"
-                                   Text="{Binding Path=Health}" FontWeight="Bold" FontSize="42" />
-                    </Border>
-                  
+                            <TextBlock  x:Name="UnitHealth" HorizontalAlignment="Center" VerticalAlignment="Center" Margin=" 0,0,0,0"
+                                   Text="{Binding Path=Health}" FontWeight="Bold" FontSize="52"
+                                        FontFamily="/CollectibleCardGame;component/Fonts/#PF Din Text Pro"/>
+                        </Border>
+
+                    </Grid>
                 </Grid>
+
+
             </Grid>
-
-
-        </Grid>
-    </Border>
+        </Border>
     </Grid>
 </UserControl>
 

@@ -20,7 +20,9 @@ namespace Server
         {            
             Console.WriteLine("Initializing Kernel...");
             UnityKernel.InitializeKernel();
-            UnityKernel.Get<UserRepository>().Collection.Count();
+
+            //пробуем подключится к бд
+            UnityKernel.Get<UserRepository>();
 
             bool conFlag = true;
             while (conFlag)
@@ -33,7 +35,7 @@ namespace Server
                     {
                         case "start":
                             //Console.WriteLine("Server starts...");
-                            UnityKernel.Get<ServerController>().Start(IPAddress.Parse("127.0.0.1"),8800);
+                            UnityKernel.Get<ServerController>().Start(IPAddress.Any,8800);
                             //Console.WriteLine("Succes");
                             break;
                         case "stop":

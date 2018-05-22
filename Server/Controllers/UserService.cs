@@ -12,15 +12,12 @@ namespace Server.Controllers
     public class UserService
     {
         private readonly UserReposController _userReposController;
-        private readonly UserInfoReposController _userInfoReposController;
         private readonly ICollection<IClientConnection> _clients;
 
-        public UserService(UserReposController userReposController,IServer server,
-            UserInfoReposController userInfoReposController)
+        public UserService(UserReposController userReposController,IServer server)
         {
             _userReposController = userReposController;
             _clients = server.Clients;
-            _userInfoReposController = userInfoReposController;
         }
 
         public string RegisterUser(string username, string password)
@@ -32,7 +29,7 @@ namespace Server.Controllers
                 !=null)
                 throw new UserServiceException("User is already exists");
 
-            var user = new User() { Username = username, Password = password };
+            var user = new User() { Username = username, Password = password, UserInfo = new UserInfo()};
             _userReposController.Add(user);
 
             return user.Username;
@@ -61,7 +58,7 @@ namespace Server.Controllers
 
         public UserInfo GetUserInfo(string username)
         {
-            return _userReposController.GetEnumerable.FirstOrDefault(u => u.Username == username).UserInfo;
+            return _userReposController.GetEnumerable.FirstOrDefault(u => u.Username == username)?.UserInfo;
         }
 
         public void SetUserInfo(string username, UserInfo userInfo)

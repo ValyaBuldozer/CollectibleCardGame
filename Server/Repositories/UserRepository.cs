@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BaseNetworkArchitecture.Common;
 using Server.Database;
 using Server.Models;
 
@@ -13,17 +14,32 @@ namespace Server.Repositories
     {
         private readonly IContext _context;
 
-        public DbSet<User> Collection { set; get; }
+        public DbSet<User> DatabaseCollection { get; }
 
-        public UserRepository(IContext context)
+        public List<User> Collection { get; }
+
+        public bool IsDatabaseConnected { get; }
+
+        public UserRepository(IContext context,ILogger logger)
         {
             _context = context;
-            Collection = context.Users;
+            IsDatabaseConnected = _context.IsDatabaseExists();
+
+            if(IsDatabaseConnected)
+                DatabaseCollection = context.Users;
+            else
+            {
+                logger.LogAndPrint(
+                    "Error : Database was not found. The server continue " +
+                    "its work without saving the user state.");
+                Collection = new List<User>();
+            }
         }
 
         public void Update()
         {
-            _context.Save();
+            if (_context.IsDatabaseExists())
+                _context.Save();
         }
     }
 }

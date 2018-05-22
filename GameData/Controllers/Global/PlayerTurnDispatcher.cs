@@ -14,9 +14,24 @@ namespace GameData.Controllers.Global
 {
     public interface IPlayerTurnDispatcher
     {
+        /// <summary>
+        /// Текущий игрок
+        /// </summary>
         Player CurrentPlayer { get; }
+
+        /// <summary>
+        /// Передать ход следущему игроку
+        /// </summary>
         void NextPlayer();
+
+        /// <summary>
+        /// Начать передачу ходов по таймеру
+        /// </summary>
         void Start();
+
+        /// <summary>
+        /// Остановать передачу ходов по таймеру
+        /// </summary>
         void Stop();
         event EventHandler<TurnStartObserverAction> TurnStart;
     }
@@ -57,9 +72,12 @@ namespace GameData.Controllers.Global
         public void NextPlayer()
         {
             CurrentPlayer = _playersCyclicQueue.Dequeue();
-            //todo : настройки
-            CurrentPlayer.Mana.Base++;
+
+            if(CurrentPlayer.Mana.Base < _settings.MaxPlayerMana)
+                CurrentPlayer.Mana.Base++;
+
             CurrentPlayer.Mana.Restore();
+            CurrentPlayer.TableUnits.ForEach(u=>u.State.CanAttack = true);
 
             _cardsDispatcher.DealCardsToPlayer(CurrentPlayer,1);
 

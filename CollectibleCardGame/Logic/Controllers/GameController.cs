@@ -18,15 +18,18 @@ namespace CollectibleCardGame.Logic.Controllers
     {
         private readonly INetworkController _networkController;
         private readonly IDataRepositoryController<Card> _cardRepositoryController;
+        private readonly MainWindowViewModel _mainViewModel;
 
         public GameController(INetworkController networkController,
             GoGameFramePageViewModel goGameFramePageViewModel,GameEngineViewModel gameEngineViewModel,
-            IDataRepositoryController<Card> cardRepositoryController)
+            IDataRepositoryController<Card> cardRepositoryController,
+            MainWindowViewModel mainViewModel)
         {
             _networkController = networkController;
             goGameFramePageViewModel.GameRequest += GameRequestEventHandler;
             gameEngineViewModel.PlayerTurnEvent += ViewModelPlayerTurnEventHandler;
             _cardRepositoryController = cardRepositoryController;
+            _mainViewModel = mainViewModel;
         }
 
         private void ViewModelPlayerTurnEventHandler(object sender, Services.PlayerTurnRequestEventArgs e)
@@ -41,32 +44,10 @@ namespace CollectibleCardGame.Logic.Controllers
 
         private void GameRequestEventHandler(object sender, Services.GameRequestEventArgs e)
         {
-            Random rnd = new Random();
-            var array = new int[] {20,20,3,21,21,3,22,22,3,23,23,3,24,24,3,25,25,3,26,26,3,27,27,3};
-            for (int i = 0; i < 24; i++)
-            {
-                int randomItem = rnd.Next(0, 24);
-                int item = array[randomItem];
-                array[randomItem] = array[i];
-                array[i] = item;
-            }
-
-            var deck = new List<int>(array);
-
-            var card = (UnitCard)_cardRepositoryController.GetById(44);
-            SendGameRequest(deck,card);
-        }
-
-        public void SendGameRequest(List<int> deck, UnitCard card)
-        {
-            if(deck == null || card == null)
-                throw new NullReferenceException();
-
             MessageBase message = new MessageBase(MessageBaseType.GameRequestMessage,
                 new GameRequestMessage()
                 {
-                    CardDeckIdList = deck,
-                    HeroUnitCard = card
+                    Fraction = e.Fraction
                 });
             _networkController.SendMessage(message);
         }
@@ -74,6 +55,11 @@ namespace CollectibleCardGame.Logic.Controllers
         public void PrepareToGame()
         {
 
+        }
+
+        public void EndGame()
+        {
+            _mainViewModel.SetMainMenuFrame();
         }
     }
 }

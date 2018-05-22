@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -47,9 +48,13 @@ namespace GameData.Tests.Controllers.UnitTests.Logic
             var cardDrawMock = new Mock<ICardDrawController>();
             cardDrawMock.Setup(mock => mock.DealCardsToPlayer(It.IsAny<Player>(), 0));
 
+            var unitDispatcherMock = new Mock<IUnitDispatcher>();
+            unitDispatcherMock.Setup(mock => mock.OnUnitStateChanges(It.IsAny<object>(),
+                It.IsAny<PropertyChangedEventArgs>()));
+
             var gameStateController =
                 new GameStateController(tableCondition,playerTurnDispatcherMock.Object,
-                    deckControllerMock.Object,null,cardDrawMock.Object);
+                    deckControllerMock.Object,null,cardDrawMock.Object,unitDispatcherMock.Object);
 
             gameStateController.Start(firstPLayerDeck,"firstPlayer",testCards.FirstCard
                 ,secondPlayerDeck,"secondPlayer",testCards.SecondCard);

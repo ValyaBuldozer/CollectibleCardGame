@@ -1,27 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
+using GameData.Controllers.Data;
 using GameData.Enums;
 using GameData.Models;
 using GameData.Models.Cards;
+using GameData.Models.Repository;
 using GameData.Network.Messages;
+using Newtonsoft.Json;
 using Server.Controllers.Repository;
 using Server.Models;
 using Server.Network.Models;
+using ArgumentOutOfRangeException = System.ArgumentOutOfRangeException;
 
 namespace Server.Controllers
 {
     public class ServerStateService
     {
+        private readonly GameSettings _gameSettings;
         private readonly AwaitingClientsQueueController _clientsQueueController;
-        private readonly UserReposController _userReposController;
-
+        private readonly CardRepository _cardRepository;
+        private readonly IDataRepositoryController<Card> _cardRepositoryController;
 
         public ServerStateService(AwaitingClientsQueueController clientsQueueController,
-            UserReposController userReposController)
+            CardRepository cardRepository, GameSettings gameSettings,
+            IDataRepositoryController<Card> cardRepositoryController)
         {
             _clientsQueueController = clientsQueueController;
-            _userReposController = userReposController;
+            _cardRepository = cardRepository;
+            _cardRepositoryController = cardRepositoryController;
+            _gameSettings = gameSettings;
         }
 
         /// <summary>
@@ -29,8 +37,11 @@ namespace Server.Controllers
         /// </summary>
         /// <param name="client"></param>
         /// <returns>true - лобби создано, false - игрок добавлен в очередь</returns>
-        public bool FindLobby(Client client,Stack<Card> deck, UnitCard heroUnit)
+        public bool FindLobby(Client client,Fraction fraction)
         {
+            var deck = GetDeck(client, fraction);
+            var heroUnit = GetHeroCard(client, fraction);
+
             if (_clientsQueueController.GetClientsQueue().Count == 0)
             {
                 client.CurrentLobby = new GameLobby()
@@ -50,14 +61,6 @@ namespace Server.Controllers
             try
             {
                 //todo : говнокод что делать то
-                //отправляем сообщения о начале игры обоим клиентам
-                //var message = new MessageBase(MessageBaseType.GameStartMessage, new GameStartMessage()
-                //{
-                //    EnemyUsername = firstPlayerClient.User.Username
-                //}, null);
-                //client.ClientController.SendMessage(message);
-                //((GameStartMessage)message.Content).EnemyUsername = client.User.Username;
-                //firstPlayerClient.ClientController.SendMessage(message);
 
                 client.CurrentLobby = firstPlayerClient.CurrentLobby;
                 firstPlayerClient.CurrentLobby.SecondClient = client;
@@ -68,28 +71,19 @@ namespace Server.Controllers
                 var msg = new MessageBase(MessageBaseType.GameRequestMessage
                     , new GameRequestMessage()
                     {
-                        HeroUnitCard = heroUnit,
-                        CardDeckIdList = new List<int>(),
+                        Fraction = fraction,
                         AnswerData = true
                     });
                 firstPlayerClient.ClientController.SendMessage(msg);
                 client.ClientController.SendMessage(msg);
 
-                var defaultSettings = new GameSettings()
-                {
-                    PlayerTurnInterval = 60000,
-                    IsPlayerTurnTimerEnabled = true,
-                    MaxDeckCardsCount = 30,
-                    PlayerHandCardsMaxCount = 10,
-                    PlayersCount = 2,
-                    PlayerTableUnitsMaxCount = 10
-                };
-                client.CurrentLobby.InitializeGame(defaultSettings);
+                client.CurrentLobby.InitializeGame(_gameSettings,_cardRepository);
+                client.CurrentLobby.OnClose += OnLobbyClose;
                 client.CurrentLobby.StartGame();
 
                 return true;
             }
-            catch (NullReferenceException)
+            catch (Exception e)
             {
                 //todo : допилить обработку исключений
                 return false;
@@ -98,14 +92,10 @@ namespace Server.Controllers
 
         public GameLobby CreateLobby(Client firstClient, Client secondClient)
         {
-            //todo : МНОГОПОТОЧНОСТЬ
-            //todo : ЗАПРЕТИТЬ ИГРАТЬ С САМИМ СОБОЙ - ПРОВЕРКИ
             if(firstClient == null || secondClient == null)
                 throw new NullReferenceException();
 
             var gameLobby = new GameLobby(firstClient, secondClient);
-            //gameLobby.InitializeGame();
-
 
             var message = new MessageBase(MessageBaseType.GameStartMessage, new GameStartMessage()
             {
@@ -121,6 +111,45 @@ namespace Server.Controllers
             secondClient.CurrentLobby = gameLobby;
 
             return gameLobby;
+        }
+
+        private void OnLobbyClose(object sender, GameLobbyCloseEventArgs e)
+        {
+            if(!(sender is GameLobby lobby)) return;
+
+            lobby.FirstClient.CurrentLobby = null;
+            lobby.SecondClient.CurrentLobby = null;
+            //todo : запись в статистику
+
+            lobby.OnClose -= OnLobbyClose;
+        }
+
+        private Stack<Card> GetDeck(Client client, Fraction fraction)
+        {
+            int[] array;
+            switch (fraction)
+            {
+                case Fraction.North:
+                    array = JsonConvert.DeserializeObject<DeckInfo>(client.User.UserInfo.NorthDeck).DeckIds;
+                    break;
+                case Fraction.South:
+                    array = JsonConvert.DeserializeObject<DeckInfo>(client.User.UserInfo.SouthDeck).DeckIds;
+                    break;
+                case Fraction.Dark:
+                    array = JsonConvert.DeserializeObject<DeckInfo>(client.User.UserInfo.DarkDeck).DeckIds;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(fraction), fraction, null);
+            }
+
+            return new Stack<Card>(_cardRepositoryController.GetById(array));
+        }
+
+        private UnitCard GetHeroCard(Client client, Fraction fraction)
+        {
+            var deckInfo = JsonConvert.DeserializeObject<DeckInfo>(client.User.UserInfo.GetDeck(fraction));
+
+            return deckInfo.HeroCard;
         }
     }
 }

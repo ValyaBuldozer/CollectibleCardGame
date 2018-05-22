@@ -8,6 +8,8 @@ namespace BaseNetworkArchitecture.Common
 {
     public class TcpCommunicator : INetworkCommunicator
     {
+        private string _previousMessage;
+
         public ILogger Logger { set; get; }
 
         public bool IsConnected => Client.Connected;
@@ -15,6 +17,7 @@ namespace BaseNetworkArchitecture.Common
         public TcpCommunicator(TcpClient client)
         {
             Client = client;
+            _previousMessage = "";
         }
 
         public TcpClient Client { set; get; }
@@ -24,20 +27,45 @@ namespace BaseNetworkArchitecture.Common
             if (string.IsNullOrEmpty(networkMessage.Content))
                 throw new NullReferenceException("Message string was empty");
 
+            if (networkMessage.Content.Length > 32000)
+                throw new Exception("Big message");
+
             try
             {
-                var msgBytes = networkMessage.Encoder.GetBytes(networkMessage.Content);
-                var lengthBytes = new byte[6];
-                var size = networkMessage.Encoder.GetBytes(msgBytes.Length.ToString());
-                var length = networkMessage.Encoder.GetString(size);
-                size.CopyTo(lengthBytes, 0);
+                do
+                {
+                    string message;
+                    if (networkMessage.Content.Length > 2000)
+                    {
+                        message = networkMessage.Content.Substring(0, 2000);
+                        networkMessage.Content = networkMessage.Content.Remove(0,2000);
+                    }
+                    else
+                    {
+                        message = networkMessage.Content;
+                        networkMessage.Content = "";
+                    }
 
-                if (lengthBytes.Length > 6)
-                    throw new Exception("Error: message length must be lower than 6");
+                    var msgBytes = networkMessage.Encoder.GetBytes(message);
+                    var lengthBytes = new byte[6];
+                    var size = networkMessage.Encoder.GetBytes(msgBytes.Length.ToString());
+                    var length = networkMessage.Encoder.GetString(size);
+                    size.CopyTo(lengthBytes, 0);
 
-                //пишем длинну
-                Client.GetStream().Write(lengthBytes, 0, lengthBytes.Length);
-                Client.GetStream().Write(msgBytes, 0, msgBytes.Length);
+                    //флаг отвечает за конкотинацию нескольких сообщений
+                    byte[] flagBuffer = new byte[1];
+
+                    if (message.Length < 2000)
+                        flagBuffer[0] = 0;
+                    else
+                        flagBuffer[0] = 1;
+
+                    //пишем длинну
+                    Client.GetStream().Write(lengthBytes, 0, lengthBytes.Length);
+                    Client.GetStream().Write(flagBuffer,0,flagBuffer.Length);
+                    Client.GetStream().Write(msgBytes, 0, msgBytes.Length);
+                } while (networkMessage.Content.Length > 0);
+
                 return true;
             }
             catch (SocketException e)
@@ -60,16 +88,29 @@ namespace BaseNetworkArchitecture.Common
                 var retNetworkMessage = new NetworkMessage();
 
                 var lengthBytes = new byte[6];
-
                 var bytesRead = Client.GetStream().Read(lengthBytes, 0, lengthBytes.Length);
 
                 if (int.TryParse(retNetworkMessage.Encoder.GetString(lengthBytes), out var length))
                 {
+                    byte[] flagBuff = new byte[1];
+                    Client.GetStream().Read(flagBuff, 0, flagBuff.Length);
+
+
                     var dataBuffer = new byte[length];
                     Client.GetStream().Read(dataBuffer, 0, dataBuffer.Length);
                     retNetworkMessage.Content = retNetworkMessage.Encoder.GetString(dataBuffer);
 
-                    return retNetworkMessage;
+                    if (flagBuff[0] == 0)
+                    {
+                        retNetworkMessage.Content = _previousMessage + retNetworkMessage.Content;
+                        _previousMessage = "";
+                        return retNetworkMessage;
+                    }
+                    else
+                        _previousMessage += retNetworkMessage.Content;
+
+                    //return retNetworkMessage;
+                    return ReadMessage();
                 }
 
                 throw new FormatException("Wrong length format");
@@ -190,22 +231,38 @@ namespace BaseNetworkArchitecture.Common
 
                 if (msgSize > 0)
                 {
+                    byte[] flagBuff = new byte[1];
+                    Client.GetStream().Read(flagBuff, 0, flagBuff.Length);
+
                     int messageLength =
                         int.Parse(recivedNetworkMessage.Encoder.GetString(clientState.RcvBuffer));
                     byte[] messageBuffer = new byte[messageLength];
-                    //Logger?.Log("Recieved message from cliet " + recivedNetworkMessage.Content);
 
-                    Client.GetStream().Read(messageBuffer, 0, messageBuffer.Length);
+                    int buffCount = 0;
+                    int bufferReadChange = messageBuffer.Length;
+
+                    while (buffCount != messageLength)
+                    {
+                        int bytesRead = 
+                            Client.GetStream().Read(messageBuffer, buffCount,bufferReadChange);
+                        buffCount += bytesRead;
+                        bufferReadChange -= bytesRead;
+                    }
+
                     recivedNetworkMessage.Content = recivedNetworkMessage.Encoder.GetString(messageBuffer);
 
-                    RunMessageRecievedEvent(new MessageEventArgs
+                    if (flagBuff[0] == 0)
                     {
-                        NetworkMessage = recivedNetworkMessage
-                    });
+                        recivedNetworkMessage.Content = _previousMessage + recivedNetworkMessage.Content;
+                        RunMessageRecievedEvent(new MessageEventArgs
+                        {
+                            NetworkMessage = recivedNetworkMessage
+                        });
+                        _previousMessage = "";
+                    }
+                    else
+                        _previousMessage += recivedNetworkMessage.Content;
 
-                    //var lengthBytes = new byte[6];
-
-                    //var msgLength = int.Parse(recivedNetworkMessage.Encoder.GetString(lengthBytes));
                     clientState = new ClientState(Client, 6);
 
                     var result = Client.GetStream().BeginRead(clientState.RcvBuffer, 0, clientState.RcvBuffer.Length,

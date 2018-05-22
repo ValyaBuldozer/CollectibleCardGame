@@ -112,6 +112,45 @@
         </Style.Triggers>
     </Style>
 
+    <Style TargetType="Button" x:Key="BigButtonGreenStyle">
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="Background" Value="#FF56A433" />
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="TextBlock.FontWeight" Value="Bold"/>
+
+        <Setter Property="Cursor" Value="Hand" />
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border  BorderThickness="1" CornerRadius="2" BorderBrush="#FF4A9029" >
+                        <Grid Background="{TemplateBinding Background}" >
+
+                            <ContentPresenter x:Name="MyContentPresenter" 
+                                              Content="{TemplateBinding Content}"
+                                              HorizontalAlignment="Center" 
+                                              VerticalAlignment="Center"
+                                              Margin="10,10,10,10"/>
+
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Style.Triggers>
+
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter  Property="Background"  Value="#FF67B849"></Setter>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Background" Value="#ECEDE8"/>
+                <Setter Property="Foreground" Value="#8D9298"/>
+                <Setter Property="BorderBrush" Value="Transparent"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
 
     <ControlTemplate  x:Key="ButtonOK" TargetType="Button">
         <Border BorderBrush="#FF4A9029" BorderThickness="1" CornerRadius="2" Name="border"

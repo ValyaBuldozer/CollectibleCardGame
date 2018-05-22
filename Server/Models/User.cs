@@ -11,7 +11,7 @@ namespace Server.Models
         public int Id { set; get; }
         public string Username { set; get; }
         public string Password { set; get; }
-        public UserInfo UserInfo { set; get; }
+        public virtual UserInfo UserInfo { set; get; }
 
         protected bool Equals(User other)
         {

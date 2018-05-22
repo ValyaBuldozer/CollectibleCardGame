@@ -1,4 +1,5 @@
 ﻿using GameData.Enums;
+using Newtonsoft.Json;
 
 namespace GameData.Models.Cards
 {
@@ -51,6 +52,16 @@ namespace GameData.Models.Cards
         public override string ToString()
         {
             return Name;
+        }
+
+        public virtual Card ShallowCopy()
+        {
+            return (Card) this.MemberwiseClone();
+        }
+
+        public virtual Card DeepCopy()
+        {
+            return (Card)this.MemberwiseClone();
         }
     }
 }

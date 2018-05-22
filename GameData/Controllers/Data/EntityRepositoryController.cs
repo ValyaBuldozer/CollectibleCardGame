@@ -79,5 +79,15 @@ namespace GameData.Controllers.Data
             item.EntityId = id;
             _repository.Collection.Add(item);
         }
+
+        public void ClearRepository()
+        {
+            _repository.Collection.Clear();
+        }
+
+        public IEnumerable<Entity> GetCollection()
+        {
+            return _repository.Collection.ToList();
+        }
     }
 }

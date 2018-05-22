@@ -19,7 +19,6 @@ namespace GameData.Models.Units
         private int _recievedDamage;
         private int _attack;
 
-
         [JsonIgnore]
         public Unit Unit
         {
@@ -58,7 +57,7 @@ namespace GameData.Models.Units
             }
         }
 
-        public bool CanAttack { set; get; }
+        public bool CanAttack { get; set; }
 
         public int BaseHealth
         {
@@ -67,7 +66,11 @@ namespace GameData.Models.Units
             {
                 if(_baseHealth == value) return;
 
-                _baseHealth = value;
+                _baseHealth = value < 1 ? 1 : value;
+
+                if (GetResultHealth < 1)
+                    RecievedDamage = 0;
+
                 NotifyPropertyChanged(nameof(BaseHealth));
             }
         }
@@ -94,12 +97,10 @@ namespace GameData.Models.Units
             {
                 if(_attack == value) return;
 
-                _attack = value;
+                _attack = value < 0 ? 0 : value;
                 NotifyPropertyChanged(nameof(Attack));
             }
         }
-
-        
 
         public void RecieveDamage(int value)
         {
@@ -117,7 +118,7 @@ namespace GameData.Models.Units
                 return;
 
             if (_recievedDamage <= value)
-                RecievedDamage = BaseHealth;
+                RecievedDamage = 0;
             else
                 RecievedDamage -= value;
         }
