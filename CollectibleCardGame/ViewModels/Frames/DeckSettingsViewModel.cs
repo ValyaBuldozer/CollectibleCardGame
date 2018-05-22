@@ -73,17 +73,17 @@ namespace CollectibleCardGame.ViewModels.Frames
 
             MenuItems = new System.Collections.ObjectModel.ObservableCollection<DeckTabItem>()
             {
-                new DeckTabItem("Север",new DeckFramePage()
+                new DeckTabItem("Кальвария",new DeckFramePage()
                 {
                     ViewModel = new DeckViewModel(northCards.Concat(commonCards),Fraction.North,_userService.GetDeckByFraction(
                         Fraction.North),_userService.GetHeroByFraction(Fraction.North))
                 }),
-                new DeckTabItem("Юг",new DeckFramePage()
+                new DeckTabItem("Магдербург",new DeckFramePage()
                 {
                     ViewModel = new DeckViewModel(southCards.Concat(commonCards),Fraction.South,_userService.GetDeckByFraction(
                         Fraction.South),_userService.GetHeroByFraction(Fraction.South))
                 }),
-                new DeckTabItem("Монстры",new DeckFramePage()
+                new DeckTabItem("Чудовища",new DeckFramePage()
                 {
                     ViewModel = new DeckViewModel(darkCards.Concat(commonCards),Fraction.Dark,_userService.GetDeckByFraction(
                         Fraction.Dark),_userService.GetHeroByFraction(Fraction.Dark))
@@ -92,9 +92,9 @@ namespace CollectibleCardGame.ViewModels.Frames
 
             //MenuItems = new ObservableCollection<DeckTabItem>()
             //{
-            //    new DeckTabItem("Север",new DeckViewModel(northCards.Concat(commonCards),Fraction.North)),
-            //    new DeckTabItem("Юг",new DeckViewModel(southCards.Concat(commonCards),Fraction.South)),
-            //    new DeckTabItem("Монстры",new DeckViewModel(darkCards.Concat(commonCards),Fraction.Dark))
+            //    new DeckTabItem("Кальвария",new DeckViewModel(northCards.Concat(commonCards),Fraction.North)),
+            //    new DeckTabItem("Магдербург",new DeckViewModel(southCards.Concat(commonCards),Fraction.South)),
+            //    new DeckTabItem("Чудовища",new DeckViewModel(darkCards.Concat(commonCards),Fraction.Dark))
             //};
         }
 
@@ -116,19 +116,19 @@ namespace CollectibleCardGame.ViewModels.Frames
             _dispatcher.Invoke(() =>
             {
                 MenuItems.Clear();
-                MenuItems.Add(new DeckTabItem("Север", new DeckFramePage()
+                MenuItems.Add(new DeckTabItem("Кальвария", new DeckFramePage()
                 {
                     ViewModel = new DeckViewModel(northCards.Concat(commonCards), Fraction.North,
                         _userService.GetDeckByFraction(
                             Fraction.North), _userService.GetHeroByFraction(Fraction.North))
                 }));
-                MenuItems.Add(new DeckTabItem("Юг", new DeckFramePage()
+                MenuItems.Add(new DeckTabItem("Магдербург", new DeckFramePage()
                 {
                     ViewModel = new DeckViewModel(southCards.Concat(commonCards), Fraction.South,
                         _userService.GetDeckByFraction(
                             Fraction.South), _userService.GetHeroByFraction(Fraction.South))
                 }));
-                MenuItems.Add(new DeckTabItem("Монстры", new DeckFramePage()
+                MenuItems.Add(new DeckTabItem("Чудовища", new DeckFramePage()
                 {
                     ViewModel = new DeckViewModel(darkCards.Concat(commonCards), Fraction.Dark,
                         _userService.GetDeckByFraction(

@@ -399,6 +399,16 @@ namespace CollectibleCardGame.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap treeTexture {
+            get {
+                object obj = ResourceManager.GetObject("treeTexture", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Агнетта_де_Сандре {
             get {
                 object obj = ResourceManager.GetObject("Агнетта_де_Сандре", resourceCulture);

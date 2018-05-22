@@ -65,6 +65,17 @@ namespace GameData.Tests.TestData
             },
             new UnitCard()
             {
+                ID = 12,
+                Name = "Ученый",
+                BaseHP = 5,
+                AttackPriority = 1,
+                BaseAttack = 5,
+                Cost = 0,
+                Description = "Test",
+                BattleCryActionInfo = new CardActionInfo() {ActionId = 24,ParameterType = ActionParameterType.Empty,ParameterValue = 1}
+            },
+            new UnitCard()
+            {
                 ID = 4,
                 Name = "Лучник",
                 BaseHP = 3,
