@@ -100,13 +100,15 @@ namespace CollectibleCardGame.ViewModels.UserControls
             return retList;
         }
 
-        public DeckViewModel(IEnumerable<Card> cards,Fraction fraction)
+        public DeckViewModel(IEnumerable<Card> cards,Fraction fraction,IEnumerable<Card> deckCards,
+            UnitCard heroCard)
         {
             _fraction = fraction;
 
             cards = cards.OrderBy(c => c.Cost);
 
-            HeroUnit = null;
+            HeroUnit = heroCard != null ? new UnitViewModel(new HeroUnit(null,heroCard)) : null;
+
             Cards = new ObservableCollection<CardViewModel>();
             HeroCards = new ObservableCollection<CardViewModel>();
             cards.ForEach(c=>
@@ -119,6 +121,8 @@ namespace CollectibleCardGame.ViewModels.UserControls
             });
 
             DeckCards = new ObservableCollection<CardViewModel>();
+            deckCards?.ForEach(c=>DeckCards.Add(new CardViewModel(c)));
+
             DeckCards.CollectionChanged += (sender, args) => NotifyPropertyChanged(nameof(DeckCount));
         }
 

@@ -192,14 +192,17 @@ namespace GameData.Controllers.Table
 
             _actionController.ExecuteAction(sender.OnAttackActionInfo,sender,target);
             target.State.RecieveDamage(sender.State.Attack);
-            sender.State.RecieveDamage(target.State.Attack);
+
+            if(target.Player.TableUnits.Contains(target))
+                sender.State.RecieveDamage(target.State.Attack);
+
             sender.State.CanAttack = false;
         }
 
         public Unit GetUnit(UnitCard card)
         {
             if(card == null)
-                throw new NullReferenceException();
+                return null;
 
             return new Unit(card)
             {

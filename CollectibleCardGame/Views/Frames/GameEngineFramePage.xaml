@@ -49,7 +49,7 @@
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
                 <!--Enemy player-->
-                <Viewbox Grid.Column="1" Height="205" Width="250">
+                <Viewbox Grid.Column="1" Height="205" Width="250" VerticalAlignment="Stretch">
                     <Button Command="{Binding EnemyUnitCommand}" CommandParameter="{Binding EnemyViewModel}">
                         <uc:PlayerUserControl Height="330" Width="400" 
                                               DataContext="{Binding Path=EnemyViewModel,

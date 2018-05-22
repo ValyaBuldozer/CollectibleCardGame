@@ -9,22 +9,34 @@
       d:DesignHeight="550" d:DesignWidth="900"
       Title="DecksSettingsFramePage">
 
-    <Grid  Background="Wheat">
-        <TabControl ItemContainerStyle="{DynamicResource CustomTabItem}" VerticalAlignment="Stretch"
-                    HorizontalAlignment="Stretch" BorderBrush="#EDEDED" 
-                    ItemsSource="{Binding TabItems}" SelectedItem="{Binding SelectedDeck}">
-            <TabControl.ItemTemplate>
+    <Grid  Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+            <RowDefinition Height="120"/>
+        </Grid.RowDefinitions>
+        <ListBox Background="#343B49" x:Name="menuList" Grid.Row="0 " Margin="0,0,0,0" 
+                 BorderBrush="#343B49"  ItemContainerStyle="{DynamicResource ListBoxItemMain}"
+                 ItemsSource="{Binding Path=MenuItems}" HorizontalAlignment="Stretch"
+                 SelectedItem="{Binding Path=SelectedMenuItem, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+            <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Title}"/>
+                    <TextBlock Text="{Binding Title}" Width="250"
+                               FontFamily="/CollectibleCardGame;component/Fonts/#Mason Chronicles" FontSize="18"/>
                 </DataTemplate>
-            </TabControl.ItemTemplate>
-            <TabControl.ContentTemplate>
-                <DataTemplate>
-                    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                        <cntrls:DeckUserControl DataContext="{Binding ViewModel}"/>
-                    </Grid>
-                </DataTemplate>
-            </TabControl.ContentTemplate>
-        </TabControl>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Frame Name="CurrentFrame" NavigationUIVisibility="Hidden" Grid.Row="1"
+               HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" Grid.RowSpan="2"
+               Content="{Binding Path=CurrentFramePage}"/>
+        <Button Grid.Row="2" Style="{DynamicResource ButtonGreenStyle}" 
+                VerticalAlignment="Center" HorizontalAlignment="Center"
+                Width="250" Height="30" Content="Сохранить" Command="{Binding ConfirmDeckCommand}"
+                FontFamily="/CollectibleCardGame;component/Fonts/#PF Din Text Pro" FontSize="20"/>
     </Grid>
 </Page>

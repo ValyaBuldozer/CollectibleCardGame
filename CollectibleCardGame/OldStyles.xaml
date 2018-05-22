@@ -735,6 +735,8 @@
                                     Value="#29303C" />
                             <Setter Property="Foreground"
                                     Value="#9BA5B1"/>
+                            <Setter Property="Cursor"
+                                    Value="Hand"/>
                         </MultiTrigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>

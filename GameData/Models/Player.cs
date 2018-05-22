@@ -16,13 +16,11 @@ namespace GameData.Models
 
         public HeroUnit HeroUnit { get; set; }
 
-        public int DeckCardsCount { set; get; }
-
         public List<Card> HandCards { set; get; }
 
         public List<Unit> TableUnits { set; get; }
 
-        public PlayerMana Mana { set; get; }
+        public PlayerState State { set; get; }
 
         public Player(UnitCard hero)
         {
@@ -30,13 +28,13 @@ namespace GameData.Models
             HeroUnit = new HeroUnit(this,hero);
             HandCards = new List<Card>();
             TableUnits = new List<Unit>();
-            Mana = new PlayerMana(){Player = this};
+            State = new PlayerState(){Player = this};
         }
 
         protected bool Equals(Player other)
         {
             return string.Equals(Username, other.Username) && Equals(HeroUnit, other.HeroUnit) &&
-                   DeckCardsCount == other.DeckCardsCount && Equals(HandCards, other.HandCards) &&
+                   Equals(HandCards, other.HandCards) &&
                    Equals(TableUnits, other.TableUnits);
         }
 
@@ -46,7 +44,6 @@ namespace GameData.Models
             {
                 var hashCode = (Username != null ? Username.GetHashCode() : 0);
                 hashCode = (hashCode * 397) ^ (HeroUnit != null ? HeroUnit.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ DeckCardsCount;
                 hashCode = (hashCode * 397) ^ (HandCards != null ? HandCards.GetHashCode() : 0);
                 hashCode = (hashCode * 397) ^ (TableUnits != null ? TableUnits.GetHashCode() : 0);
                 return hashCode;

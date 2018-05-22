@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BaseNetworkArchitecture.Common;
 using BaseNetworkArchitecture.Common.Messages;
+using BaseNetworkArchitecture.Server;
 using GameData.Network;
 using GameData.Network.Messages;
 using Server.Controllers.Repository;
@@ -18,10 +19,21 @@ namespace Server.Network.Controllers
     public class ClientController
     {
         private readonly IMessageConverter _messageConverter;
+        private readonly ConnectedClientsRepositoryController _clientsRepositoryController;
+        private readonly AwaitingClientsQueueController _awaitingClientsController;
+        private readonly ICollection<IClientConnection> _clientConnected;
+        private readonly ILogger _logger;
 
-        public ClientController(IMessageConverter converter)
+        public ClientController(IMessageConverter converter,
+            ConnectedClientsRepositoryController clientsRepositoryController,
+            AwaitingClientsQueueController awaitingClientsController,
+            IServer server,ILogger logger)
         {
             _messageConverter = converter;
+            _clientsRepositoryController = clientsRepositoryController;
+            _awaitingClientsController = awaitingClientsController;
+            _clientConnected = server.Clients;
+            _logger = logger;
         }
 
         public Client Client { set; get; }
@@ -43,7 +55,12 @@ namespace Server.Network.Controllers
             client.MessageRecived -= OnMessageRecieved;
             client.BreakConnection -= OnBreakConnection;
 
-            UnityKernel.Get<ConnectedClientsRepositoryController>().Remove(client);
+            _logger.LogAndPrint("Client disconnected");
+
+            client.CurrentLobby?.OnClientDisconnect(client);
+            _clientsRepositoryController.Remove(client);
+            _awaitingClientsController.Remove(client);
+            _clientConnected.Remove(client.ClientConnection);
         }
 
         public void SendMessage(MessageBase message)

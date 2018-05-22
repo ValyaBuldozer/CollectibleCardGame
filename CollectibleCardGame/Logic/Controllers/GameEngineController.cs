@@ -23,7 +23,7 @@ namespace CollectibleCardGame.Logic.Controllers
     {
         private readonly GameEngineViewModel _gameViewModel;
         private readonly MainWindowViewModel _mainWindowViewModel;
-        private readonly CurrentUser _user;
+        private readonly CurrentUserService _userService;
         private readonly IDataRepositoryController<Entity> _entityRepositoryController;
         private readonly IDataRepositoryController<Card> _cardRepositoryController;
         private readonly Lazy<GameController> _gameControllerLazy;
@@ -31,14 +31,14 @@ namespace CollectibleCardGame.Logic.Controllers
 
         [InjectionConstructor]
         public GameEngineController(GameEngineViewModel gameViewModel, MainWindowViewModel mainViewModel,
-            CurrentUser user, ILogger logger,
+            CurrentUserService userService, ILogger logger,
             IDataRepositoryController<Entity> entityRepositoryController,
             IDataRepositoryController<Card> cardRepositoryController,
             Lazy<GameController> gameControllerLazy)
         {
             _gameViewModel = gameViewModel;
             _mainWindowViewModel = mainViewModel;
-            _user = user;
+            _userService = userService;
             _entityRepositoryController = entityRepositoryController;
             _cardRepositoryController = cardRepositoryController;
             _gameControllerLazy = gameControllerLazy;
@@ -52,16 +52,29 @@ namespace CollectibleCardGame.Logic.Controllers
             _entityRepositoryController.Add(action.FirstPlayer.HeroUnit);
             _entityRepositoryController.Add(action.SecondPlayer.HeroUnit);
 
-            if (action.FirstPlayer.Username == _user.Username)
+            action.FirstPlayer.TableUnits.ForEach(u=>_entityRepositoryController.Add(u));
+            action.SecondPlayer.TableUnits.ForEach(u => _entityRepositoryController.Add(u));
+            action.FirstPlayer.HandCards.ForEach(c => _entityRepositoryController.Add(c));
+            action.SecondPlayer.HandCards.ForEach(c => _entityRepositoryController.Add(c));
+
+            _gameViewModel.CurrentDispatcher.Invoke(() =>
             {
-                _gameViewModel.Player = action.FirstPlayer;
-                _gameViewModel.EnemyPlayer = action.SecondPlayer;
-            }
-            else
-            {
-                _gameViewModel.Player = action.SecondPlayer;
-                _gameViewModel.EnemyPlayer = action.FirstPlayer;
-            }
+                //здесь проблема - экшен приходит ПЕРЕД логином - костыль
+                if (action.FirstPlayer.Username == _userService.Username ||
+                    string.IsNullOrEmpty(_userService.Username))
+                {
+                    _gameViewModel.Player = action.FirstPlayer;
+                    _gameViewModel.EnemyPlayer = action.SecondPlayer;
+                }
+                else
+                {
+                    _gameViewModel.Player = action.SecondPlayer;
+                    _gameViewModel.EnemyPlayer = action.FirstPlayer;
+                }
+
+                if (!string.IsNullOrEmpty(action.CurrentPlayerUsername))
+                    _gameViewModel.CurrentPlayerUsername = action.CurrentPlayerUsername;
+            });
         }
 
         public void HandleObserverAction(ErrorObserverAction action)
@@ -80,10 +93,11 @@ namespace CollectibleCardGame.Logic.Controllers
 
             _gameViewModel.CurrentDispatcher.Invoke(() =>
             {
-                if (action.ToPlayerUsername == _user.Username)
+                if (action.ToPlayerUsername == _userService.Username)
                     _gameViewModel.PlayerCards.Add(new CardViewModel(card));
                 else
-                    _gameViewModel.EnemyCards.Add(new CardViewModel(card));
+                    _gameViewModel.EnemyCards.Add(new CardViewModel(card,
+                        _gameViewModel.EnemyPlayer.HeroUnit.BaseCard.Fraction));
             });
         }
 
@@ -115,7 +129,7 @@ namespace CollectibleCardGame.Logic.Controllers
 
             _gameViewModel.CurrentDispatcher.Invoke(() =>
             {
-                if (action.PlayerUsername == _user.Username)
+                if (action.PlayerUsername == _userService.Username)
                 {
                     action.Unit.Player = _gameViewModel.Player;
                     _gameViewModel.PlayerUnits.Add(new UnitViewModel(action.Unit));
@@ -140,10 +154,10 @@ namespace CollectibleCardGame.Logic.Controllers
         {
                 _gameViewModel.CurrentDispatcher.Invoke(() =>
                 {
-                    if (action.PlayerUsername == _user.Username)
-                        _gameViewModel.PlayerViewModel.PlayerMana = action.PlayerMana;
+                    if (action.PlayerUsername == _userService.Username)
+                        _gameViewModel.PlayerViewModel.PlayerState = action.PlayerState;
                     else
-                        _gameViewModel.EnemyViewModel.PlayerMana = action.PlayerMana;
+                        _gameViewModel.EnemyViewModel.PlayerState = action.PlayerState;
                 });
         }
 
@@ -190,7 +204,7 @@ namespace CollectibleCardGame.Logic.Controllers
             _gameViewModel.CurrentDispatcher.Invoke(() =>
             {
                 _logger.LogAndPrint(action.WinnerUsername == 
-                                _user.Username ? "ВЫ ПОБЕДИЛИ!!!" : "ВЫ ПРОИГРАЛИ!!!");
+                                _userService.Username ? "ВЫ ПОБЕДИЛИ!!!" : "ВЫ ПРОИГРАЛИ!!!");
 
                 _gameViewModel.Clear();
                 _entityRepositoryController.ClearRepository();

@@ -44,8 +44,8 @@ namespace GameData.Tests.Gameplay
 
             Assert.AreNotEqual(null, firstPlayer);
             Assert.AreNotEqual(null, secondPlayer);
-            Assert.AreEqual(1,firstPlayer.Mana.Current);
-            Assert.AreEqual(1, secondPlayer.Mana.Current);
+            Assert.AreEqual(1,firstPlayer.State.Current);
+            Assert.AreEqual(1, secondPlayer.State.Current);
             Assert.AreEqual(4,firstDeck.Count);
             Assert.AreEqual(4, secondDeck.Count);
             Assert.AreEqual(5,firstPlayer.HandCards.Count);

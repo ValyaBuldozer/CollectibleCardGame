@@ -152,7 +152,7 @@
     <Compile Include="Network\Controllers\NetworkConnectionController.cs" />
     <Compile Include="Logic\Controllers\UserController.cs" />
     <Compile Include="MessageBoxLogger.cs" />
-    <Compile Include="Models\CurrentUser.cs" />
+    <Compile Include="Models\CurrentUserService.cs" />
     <Compile Include="Logic\Controllers\GlobalAppStateController.cs" />
     <Compile Include="Network\Controllers\MessageHandlers\GameRequestMessageHandler.cs" />
     <Compile Include="Network\Controllers\MessageHandlers\LogInMessageHandler.cs" />
@@ -197,6 +197,9 @@
     </Compile>
     <Compile Include="Views\Frames\ConnectionErrorFramePage.xaml.cs">
       <DependentUpon>ConnectionErrorFramePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Frames\DeckFramePage.xaml.cs">
+      <DependentUpon>DeckFramePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Frames\DecksSettingsFramePage.xaml.cs">
       <DependentUpon>DecksSettingsFramePage.xaml</DependentUpon>
@@ -285,6 +288,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\FramesShell\LogInFramePageShell.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Frames\DeckFramePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -887,6 +894,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\ImagesUnit\Neutral\Яра.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImagesUnit\Neutral\Фемистокл.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\treeTexture.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

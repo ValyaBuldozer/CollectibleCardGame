@@ -14,7 +14,8 @@ namespace Server.Controllers
         private readonly UserReposController _userReposController;
         private readonly ICollection<IClientConnection> _clients;
 
-        public UserService(UserReposController userReposController,IServer server)
+        public UserService(UserReposController userReposController,IServer server,
+            ConnectedClientsRepositoryController clientsRepositoryController)
         {
             _userReposController = userReposController;
             _clients = server.Clients;

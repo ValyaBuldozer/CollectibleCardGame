@@ -73,7 +73,6 @@ namespace GameData.Network
             {
                 var deserializedObj = JsonConvert.DeserializeObject<MessageBase>(networkMessage.Content);
 
-                //todo : ужасный код - переделать хоть как то
                 switch (deserializedObj.Type)
                 {
                     case MessageBaseType.LogInMessage:
