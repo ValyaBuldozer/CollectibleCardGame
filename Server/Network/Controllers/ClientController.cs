@@ -57,7 +57,7 @@ namespace Server.Network.Controllers
 
             _logger.LogAndPrint("Client disconnected");
 
-            client.CurrentLobby.OnClientDisconnect(client);
+            client.CurrentLobby?.OnClientDisconnect(client);
             _clientsRepositoryController.Remove(client);
             _awaitingClientsController.Remove(client);
             _clientConnected.Remove(client.ClientConnection);

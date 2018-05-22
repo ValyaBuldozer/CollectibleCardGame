@@ -209,7 +209,12 @@ namespace CollectibleCardGame.ViewModels.Frames
             CurrentDispatcher = Dispatcher.CurrentDispatcher;
 
             _playerCards = new ObservableCollection<CardViewModel>();
+            _playerCards.CollectionChanged +=
+                (sender, args) => PlayerViewModel.CardsInHand = _playerCards.Count;
             _enemyCards = new ObservableCollection<CardViewModel>();
+            _enemyCards.CollectionChanged += 
+                (sender, args) => EnemyViewModel.CardsInHand = _enemyCards.Count;
+
             _playerUnits = new ObservableCollection<UnitViewModel>();
             _enemyUnits  = new ObservableCollection<UnitViewModel>();
 
