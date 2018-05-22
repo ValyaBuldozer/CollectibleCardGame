@@ -48,18 +48,11 @@ namespace CollectibleCardGame.Logic.Controllers
 
             //var array = new int[] {120,120,120,120,120,26,27,30,30,30,31,32,33,61,62,82,83,84,85};
 
-            var array = new int[] {96,96,96,26,62, 26, 62, 26, 62, 26, 62, 26, 62, 26, 62, 26, 62,36,37,116,38,39,40,41,42,43,117,118,119,120,121,122,123,124,
-                125,
-                126,
-                127,
-                128,
-                129,
-                130,
-                131,
-                132,
-                133,
-                134,
-                136 };
+            var array = new[]
+            {
+                142, 142, 142, 143, 143, 142, 142, 143, 143, 142, 142, 143, 143, 142, 142, 143, 143, 142, 143, 142, 143,
+                142, 142, 36,37,116,38,39,40,41,42,43,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,136,141
+            };
 
             array.ForEach(c =>
             {
@@ -76,7 +69,7 @@ namespace CollectibleCardGame.Logic.Controllers
 
             var deck = new List<int>(array);
 
-            var card = (UnitCard)_cardRepositoryController.GetById(1000);
+            var card = (UnitCard)_cardRepositoryController.GetById(3000);
             SendGameRequest(deck,card);
         }
 

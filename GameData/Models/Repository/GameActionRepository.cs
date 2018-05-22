@@ -668,13 +668,18 @@ namespace GameData.Models.Repository
 
                     })),
                 
-                new GameAction(name:"Выгодное вложение",id:69,description:"Игрок получает +1 к максимальному количеству золота до конца игры",parameterType:ActionParameterType.Empty,
+                new GameAction(name:"Выгодное вложение",id:69,
+                    description:"Игрок получает +1 к максимальному количеству золота до конца игры, при максимальном кол-ве дает одну карту",parameterType:ActionParameterType.Empty,
                     action: ((controller, sender, target, parameter) =>
                     {
 
                         if(!(sender is Player player)) return;
                         if(player.Mana.Base<10)
                             player.Mana.Base = player.Mana.Base+1;
+                        else
+                        {
+                            controller.DrawCard(player,1);
+                        }
 
 
                     })),
