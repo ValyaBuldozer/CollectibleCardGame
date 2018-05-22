@@ -77,7 +77,7 @@
                                             BorderThickness="0" BorderBrush="{x:Null}" Background="{x:Null}">
                                         <Button.ToolTip>
                                             <ToolTip Background="{x:Null}" BorderThickness="0"
-                                                     Width="220" Height="410"
+                                                     Width="235" Height="425"
                                                      HasDropShadow="True">
                                                 <Viewbox  Stretch="Fill" Width="220" Height="410">
                                                     <uc:CardUserControl Width="220" Height="410"
@@ -114,7 +114,7 @@
                                         >
                                     <Button.ToolTip>
                                         <ToolTip Background="{x:Null}" BorderThickness="0"
-                                                 Width="220" Height="410"
+                                                 Width="235" Height="425"
                                                  HasDropShadow="True">
                                             <Viewbox  Stretch="Fill" Width="220" Height="410">
                                                 <uc:CardUserControl Width="220" Height="410"
