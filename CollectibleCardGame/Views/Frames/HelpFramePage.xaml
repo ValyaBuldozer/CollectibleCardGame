@@ -111,15 +111,22 @@
                     <Paragraph Margin="5,20,0,0" FontWeight="Bold" FontSize="16" FontFamily="/CollectibleCardGame;component/Fonts/#PF Din Text Pro">
                         <Span FontSize="20" >Врыв:
                         <Span FontSize="16" FontWeight="Light" >
-                            +1/+1 за каждый союзный юнит на столе</Span>
+                            +1/+1 за каждый союзный юнит на столе.</Span>
                     </Span>
                 </Paragraph>
                     <Paragraph Margin="5,20,0,0" FontWeight="Bold" FontSize="16" FontFamily="/CollectibleCardGame;component/Fonts/#PF Din Text Pro">
                         <Span FontSize="20" >Шаман:
                         <Span FontSize="16" FontWeight="Light" >
-                            при каждой атаке такого юнита игроку выдается карта из колоды</Span>
+                            при каждой атаке такого юнита игроку выдается карта из колоды.</Span>
                     </Span>
                 </Paragraph>
+                <Paragraph Margin="5,20,0,0" FontWeight="Bold" FontSize="16" FontFamily="/CollectibleCardGame;component/Fonts/#PF Din Text Pro">
+                        <Span FontSize="20" >Архивариус:
+                        <Span FontSize="16" FontWeight="Light" >
+                            при разыгрывании дает игроку карту из колоды.</Span>
+                    </Span>
+                </Paragraph>
+
 
 
 

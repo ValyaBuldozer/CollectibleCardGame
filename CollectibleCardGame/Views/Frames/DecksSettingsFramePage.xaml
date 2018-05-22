@@ -11,11 +11,11 @@
 
     <Grid  Background="White">
         <Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="50"/>
             <RowDefinition/>
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="120"/>
         </Grid.RowDefinitions>
-        <ListBox Background="#343B49" x:Name="menuList" Grid.Row="0 " Margin="0,-2,0,0" 
+        <ListBox Background="#343B49" x:Name="menuList" Grid.Row="0 " Margin="0,0,0,0" 
                  BorderBrush="#343B49"  ItemContainerStyle="{DynamicResource ListBoxItemMain}"
                  ItemsSource="{Binding Path=MenuItems}" HorizontalAlignment="Stretch"
                  SelectedItem="{Binding Path=SelectedMenuItem, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
@@ -27,15 +27,16 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Title}" Width="250"
-                               FontFamily="/CollectibleCardGame;component/Fonts/#Mason Chronicles"/>
+                               FontFamily="/CollectibleCardGame;component/Fonts/#Mason Chronicles" FontSize="18"/>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
         <Frame Name="CurrentFrame" NavigationUIVisibility="Hidden" Grid.Row="1"
-               HorizontalAlignment="Stretch"  VerticalAlignment="Stretch"
+               HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" Grid.RowSpan="2"
                Content="{Binding Path=CurrentFramePage}"/>
         <Button Grid.Row="2" Style="{DynamicResource ButtonGreenStyle}" 
                 VerticalAlignment="Center" HorizontalAlignment="Center"
-                Width="250" Height="23" Content="Сохранить" Command="{Binding ConfirmDeckCommand}"/>
+                Width="250" Height="30" Content="Сохранить" Command="{Binding ConfirmDeckCommand}"
+                FontFamily="/CollectibleCardGame;component/Fonts/#PF Din Text Pro" FontSize="20"/>
     </Grid>
 </Page>

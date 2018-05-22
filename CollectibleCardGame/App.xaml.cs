@@ -38,6 +38,7 @@ namespace CollectibleCardGame
             UnityKernel.Get<IGlobalController>().OnStartup();
 
 
+
         }
 
         private void App_OnExit(object sender, ExitEventArgs e)

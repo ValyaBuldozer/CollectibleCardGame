@@ -17,6 +17,7 @@
             <ColumnDefinition Width="3*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
+        <Grid Grid.Column="2" Background="{DynamicResource CardBackGround}"></Grid>
 
         <Grid Grid.Column="0">
             <Grid.RowDefinitions>
@@ -27,6 +28,12 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
+            <Grid Grid.Column="1" Grid.Row="0" Grid.RowSpan="2">
+                <Grid.Background>
+                    <ImageBrush ImageSource="../../Images/treeTexture.jpg" Stretch="UniformToFill"/>
+                </Grid.Background>
+            </Grid>
+            <Grid Background="{DynamicResource CardBackGround}" Grid.RowSpan="2"></Grid>
             <ScrollViewer CanContentScroll="True" HorizontalScrollBarVisibility="Hidden" 
                       Grid.Row="1" Grid.Column="0"
                       VerticalScrollBarVisibility="Hidden" Margin="10">
@@ -43,7 +50,7 @@
                                 <Button Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, 
                                     AncestorType={x:Type view:DeckFramePage}}, Path=ViewModel.HeroSelectionCommand}" 
                                     CommandParameter="{Binding}" Background="{x:Null}" 
-                                    BorderThickness="0" BorderBrush="{x:Null}">
+                                    BorderThickness="0" BorderBrush="{x:Null}" Cursor="Hand">
                                     <local:CardUserControl Width="220" Height="410"/>
                                 </Button>
                             </Viewbox>
@@ -68,10 +75,10 @@
                                 <Button Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, 
                                     AncestorType={x:Type view:DeckFramePage}}, Path=ViewModel.DropToDeckCommand}" 
                                     CommandParameter="{Binding}" Background="{x:Null}" 
-                                    BorderThickness="0" BorderBrush="{x:Null}">
+                                    BorderThickness="0" BorderBrush="{x:Null}" Cursor="Hand">
                                     <Button.ToolTip>
                                         <ToolTip Background="{x:Null}" BorderThickness="0"
-                                                 Width="220" Height="410"
+                                                 Width="235" Height="425"
                                                  HasDropShadow="True">
                                             <Viewbox  Stretch="Fill" Width="220" Height="410">
                                                 <local:CardUserControl Width="220" Height="410"
@@ -99,7 +106,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"
-                           FontSize="20" Text="{Binding DeckCount}"/>
+                           FontSize="32" Text="{Binding DeckCount}" FontFamily="/CollectibleCardGame;component/Fonts/#PF Din Text Pro" FontWeight="Bold"/>
                 <Viewbox Margin="10" Grid.Column="1" Visibility="{Binding HeroUnitVisibility,
                                                    Converter={StaticResource BooleanToVisibilityConverter}}">
                     <local:UnitCardMiniUserControl Height="250" Width="210" 
@@ -119,7 +126,7 @@
                             <Button Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, 
                                     AncestorType={x:Type view:DeckFramePage}}, Path=ViewModel.RemoveCardCommand}" 
                                     CommandParameter="{Binding}" Background="{x:Null}" 
-                                    BorderThickness="0" BorderBrush="{x:Null}">
+                                    BorderThickness="0" BorderBrush="{x:Null}" Cursor="Hand">
                                 <local:CardMiniUserControl Height="44" Margin="3,3" />
                             </Button>
                         </DataTemplate>
