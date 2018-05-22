@@ -55,9 +55,8 @@ namespace CollectibleCardGame.ViewModels.Frames
                 }
 
             };
-            //BusyMessage = "Подождите...";
-            //IsBusy = false;
-           
+
+            CurrentPage = goGameFramePage;
         }
 
         public ObservableCollection<MainMenuPart> Menus
