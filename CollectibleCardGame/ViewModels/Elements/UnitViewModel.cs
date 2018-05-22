@@ -107,7 +107,7 @@ namespace CollectibleCardGame.ViewModels.Elements
                 _curretnDispatcher.Invoke(() =>
                 {
                     if (BaseUnit.State.Attack < BaseUnit.BaseCard.BaseAttack)
-                        AttackShadowColor = Color.FromRgb(255, 51, 0);
+                        AttackShadowColor = Color.FromRgb(255, 0, 0);
                     else if (BaseUnit.State.Attack > BaseUnit.BaseCard.BaseAttack)
                         AttackShadowColor = Color.FromRgb(0, 255, 0);
                     else

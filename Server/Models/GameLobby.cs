@@ -106,6 +106,13 @@ namespace Server.Models
             if(FirstPlayerHeroUnit == null || SecondPlayerHeroUnit == null)
                 throw new NullReferenceException("HeroUnits are null");
 
+            //перемешиваем колоды
+            var shuffleDeck = FirstPlayerDeck.OrderBy(c => Guid.NewGuid()).ToList();
+            FirstPlayerDeck = new System.Collections.Generic.Stack<Card>(shuffleDeck);
+
+            shuffleDeck = SecondPlayerDeck.OrderBy(c => Guid.NewGuid()).ToList();
+            SecondPlayerDeck = new System.Collections.Generic.Stack<Card>(shuffleDeck);
+
             _gameDataContainer.Get<IGameStateController>().Start(FirstPlayerDeck,FirstClient.User.Username,
                 FirstPlayerHeroUnit,SecondPlayerDeck,SecondClient.User.Username,SecondPlayerHeroUnit);
         }

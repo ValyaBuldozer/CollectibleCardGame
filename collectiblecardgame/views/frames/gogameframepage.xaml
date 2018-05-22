@@ -39,12 +39,18 @@
                             <WrapPanel   Orientation="Horizontal" VerticalAlignment="Center" />
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
-                    <RadioButton Style="{DynamicResource RadioButtonForGame}" Grid.Column="0" Content="Кальвария" FontWeight="Bold" FontSize="18" Margin="5"  
-                                 FontFamily="/CollectibleCardGame;component/Fonts/#PF Din Text Pro"/>
-                    <RadioButton Style="{DynamicResource RadioButtonForGame}" Grid.Column="1" Content="Магдебург" FontWeight="Bold"  FontSize="18" Margin="5"   
-                                 FontFamily="/CollectibleCardGame;component/Fonts/#PF Din Text Pro"/>
-                    <RadioButton Style="{DynamicResource RadioButtonForGame}" Grid.Column="1" Content="Чудовища" FontWeight="Bold"  FontSize="18" Margin="5"  
-                                 FontFamily="/CollectibleCardGame;component/Fonts/#PF Din Text Pro"/>
+                    <RadioButton Style="{DynamicResource RadioButtonForGame}" Grid.Column="0" 
+                                 Content="Кальвария" FontWeight="Bold" FontSize="18" Margin="5"  
+                                 FontFamily="/CollectibleCardGame;component/Fonts/#PF Din Text Pro"
+                                 IsChecked="{Binding IsNorthChecked}"/>
+                    <RadioButton Style="{DynamicResource RadioButtonForGame}" Grid.Column="1" 
+                                 Content="Магдебург" FontWeight="Bold"  FontSize="18" Margin="5"   
+                                 FontFamily="/CollectibleCardGame;component/Fonts/#PF Din Text Pro"
+                                 IsChecked="{Binding IsSouthChecked}"/>
+                    <RadioButton Style="{DynamicResource RadioButtonForGame}" Grid.Column="1" 
+                                 Content="Чудовища" FontWeight="Bold"  FontSize="18" Margin="5"  
+                                 FontFamily="/CollectibleCardGame;component/Fonts/#PF Din Text Pro"
+                                 IsChecked="{Binding IsDarkChecked}"/>
                 </ItemsControl>
 
 

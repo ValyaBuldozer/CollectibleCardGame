@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GameData.Enums;
 
 namespace Server.Models
 {
@@ -14,6 +15,23 @@ namespace Server.Models
         public string NorthDeck { set; get; }
         public string SouthDeck { set; get; }
         public string DarkDeck { set; get; }
+
+        public string GetDeck(Fraction fraction)
+        {
+            switch (fraction)
+            {
+                case Fraction.Common:
+                    return null;
+                case Fraction.North:
+                    return NorthDeck;
+                case Fraction.South:
+                    return SouthDeck;
+                case Fraction.Dark:
+                    return DarkDeck;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(fraction), fraction, null);
+            }
+        }
 
         protected bool Equals(UserInfo other)
         {

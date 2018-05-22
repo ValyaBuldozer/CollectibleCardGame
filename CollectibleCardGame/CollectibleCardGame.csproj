@@ -148,6 +148,7 @@
     <Compile Include="Network\Controllers\INetworkController.cs" />
     <Compile Include="Network\Controllers\MessageHandlers\ErrorMessageHandler.cs" />
     <Compile Include="Network\Controllers\MessageHandlers\ObserverActionMessageHandler.cs" />
+    <Compile Include="Network\Controllers\MessageHandlers\SetDeckMessageHandler.cs" />
     <Compile Include="Network\Controllers\NetworkConnectionController.cs" />
     <Compile Include="Logic\Controllers\UserController.cs" />
     <Compile Include="MessageBoxLogger.cs" />
@@ -157,8 +158,8 @@
     <Compile Include="Network\Controllers\MessageHandlers\LogInMessageHandler.cs" />
     <Compile Include="Network\Controllers\MessageHandlers\RegistrationMessageHandler.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
-      <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Services\EventArgs.cs" />
@@ -862,6 +863,30 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\ImagesUnit\Знак вопроса.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImagesSpell\Выгодное вложение.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImagesUnit\Neutral\Датский ярл.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImagesUnit\South\Тит Брэгс.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImagesUnit\Neutral\Отряд викингов.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImagesSpell\Затерянная казна.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImagesUnit\Neutral\Датский авангард.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImagesUnit\Neutral\Золотые мечи.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImagesUnit\Neutral\Яра.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -75,6 +75,9 @@ namespace CollectibleCardGame.Unity
             _container.RegisterType<GoGameFramePageViewModel>(new ContainerControlledLifetimeManager());
             _container.RegisterType<GoGameFramePage>(new ContainerControlledLifetimeManager());
 
+            _container.RegisterType<DeckSettingsViewModel>(new ContainerControlledLifetimeManager());
+            _container.RegisterType<DecksSettingsFramePage>(new ContainerControlledLifetimeManager());
+
             _container.RegisterType<MenuFramePageViewModel>(new ContainerControlledLifetimeManager());
             _container.RegisterType<MainMenuFramePage>(new ContainerControlledLifetimeManager());
 
@@ -125,6 +128,8 @@ namespace CollectibleCardGame.Unity
             _container.RegisterType<MessageHandlerBase<ObserverActionMessage>, ObserverActionMessageHandler>(
                 new ContainerControlledLifetimeManager());
             _container.RegisterType<MessageHandlerBase<ErrorMessage>, ErrorMessageHandler>(
+                new ContainerControlledLifetimeManager());
+            _container.RegisterType<MessageHandlerBase<SetDeckMessage>, SetDeckMessageHandler>(
                 new ContainerControlledLifetimeManager());
 
             _container.Resolve<CardRepository>();

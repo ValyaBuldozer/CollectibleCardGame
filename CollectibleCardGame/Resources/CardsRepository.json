@@ -1,60 +1,6 @@
 ﻿[
 	{
 		"$type": "GameData.Models.Cards.UnitCard, GameData",
-		"ID": 1,
-		"Name": "jsontest",
-		"Description": "jsonTest",
-		"Cost": 1,
-		"CanBePlayedOnEnemyTurn": false,
-		"ImagePath": null,
-		"Fraction": 0,
-		"BaseHP": 1,
-		"BaseAttack": 1,
-		"AttackPriority": 1,
-		"AttackActionInfo": {
-			"$type": "GameData.Models.Action.CardActionInfo, GameData",
-			"ActionId": 1,
-			"ParameterValue": 1,
-			"ParameterType": 4
-		},
-		"DamageRecievedActionInfo": null,
-		"BattleCryActionInfo": null,
-		"DeathRattleActionInfo": null
-	},
-	{
-		"$type": "GameData.Models.Cards.SpellCard, GameData",
-		"ID": 2,
-		"Name": "jsontest",
-		"Description": "jsonTest",
-		"Cost": 1,
-		"CanBePlayedOnEnemyTurn": false,
-		"ImagePath": null,
-		"Fraction": 0,
-		"ActionInfo": {
-			"$type": "GameData.Models.Action.CardActionInfo, GameData",
-			"ActionId": 1,
-			"ParameterValue": 1,
-			"ParameterType": 4
-		}
-	},
-	{
-		"$type": "GameData.Models.Cards.SpellCard, GameData",
-		"ID": 3,
-		"Name": "Град стрел test",
-		"Description": "Наносит 3 урона всем отрядам противника",
-		"Cost": 0,
-		"CanBePlayedOnEnemyTurn": false,
-		"ImagePath": "null",
-		"Fraction": 0,
-		"ActionInfo": {
-			"$type": "GameData.Models.Action.CardActionInfo, GameData",
-			"ActionId": 40,
-			"ParameterValue": 5,
-			"ParameterType": 0
-		}
-	},
-	{
-		"$type": "GameData.Models.Cards.UnitCard, GameData",
 		"ID": 20,
 		"Name": "Легкая кавалерия",
 		"Description": "[Рывок] Эх, что не день, то очередной прорыв",
@@ -335,7 +281,7 @@
 		"$type": "GameData.Models.Cards.UnitCard, GameData",
 		"ID": 34,
 		"Name": "Джулия Гевейн",
-		"Description": "В книгах - знания, а в знаниях - сила!",
+		"Description": "[Мастер магии] В книгах - знания, а в знаниях - сила!",
 		"Cost": 5,
 		"CanBePlayedOnEnemyTurn": false,
 		"ImagePath": "../../Images/ImagesUnit/South/Джулия Гевейн.jpg",
@@ -510,7 +456,7 @@
 		"CanBePlayedOnEnemyTurn": false,
 		"ImagePath": "../../Images/ImagesUnit/North/Лагерта.jpg",
 		"Fraction": 1,
-		"BaseHP": 8,
+		"BaseHP": 6,
 		"BaseAttack": 8,
 		"AttackPriority": 1,
 		"CanAttack": false,
@@ -755,12 +701,12 @@
 		"CanAttack": false,
 		"AttackActionInfo": null,
 		"DamageRecievedActionInfo": null,
-			"BattleCryActionInfo": {
-				"$type": "GameData.Models.Action.CardActionInfo, GameData",
-				"ActionId": 66,
-				"ParameterValue": 0,
-				"ParameterType": 6
-			},
+		"BattleCryActionInfo": {
+			"$type": "GameData.Models.Action.CardActionInfo, GameData",
+			"ActionId": 66,
+			"ParameterValue": 0,
+			"ParameterType": 6
+		},
 		"DeathRattleActionInfo": null
 	},
 	{
@@ -772,7 +718,7 @@
 		"CanBePlayedOnEnemyTurn": false,
 		"ImagePath": "../../Images/ImagesUnit/North/Кальварский барабанщик.jpg",
 		"Fraction": 1,
-		"BaseHP": 3,
+		"BaseHP": 2,
 		"BaseAttack": 0,
 		"AttackPriority": 1,
 		"CanAttack": false,
@@ -801,12 +747,12 @@
 		"CanAttack": false,
 		"AttackActionInfo": null,
 		"DamageRecievedActionInfo": null,
-			"BattleCryActionInfo": {
-				"$type": "GameData.Models.Action.CardActionInfo, GameData",
-				"ActionId": 67,
-				"ParameterValue": 0,
-				"ParameterType": 6
-			},
+		"BattleCryActionInfo": {
+			"$type": "GameData.Models.Action.CardActionInfo, GameData",
+			"ActionId": 67,
+			"ParameterValue": 0,
+			"ParameterType": 6
+		},
 		"DeathRattleActionInfo": null
 	},
 	{
@@ -912,12 +858,12 @@
 		"AttackActionInfo": null,
 		"DamageRecievedActionInfo": null,
 		"BattleCryActionInfo": null,
-			"DeathRattleActionInfo": {
-				"$type": "GameData.Models.Action.CardActionInfo, GameData",
-				"ActionId": 68,
-				"ParameterValue": 2,
-				"ParameterType": 6
-			}
+		"DeathRattleActionInfo": {
+			"$type": "GameData.Models.Action.CardActionInfo, GameData",
+			"ActionId": 68,
+			"ParameterValue": 2,
+			"ParameterType": 6
+		}
 	},
 	{
 		"$type": "GameData.Models.Cards.UnitCard, GameData",
@@ -941,7 +887,7 @@
 		"$type": "GameData.Models.Cards.UnitCard, GameData",
 		"ID": 69,
 		"Name": "Лучник Хоругви",
-		"Description": "Я всегда бью по коленям.",
+		"Description": "[Превентивный удар] Я всегда бью по коленям.",
 		"Cost": 3,
 		"CanBePlayedOnEnemyTurn": false,
 		"ImagePath": "../../Images/ImagesUnit/South/Лучник Хоругви.jpg",
@@ -1057,7 +1003,7 @@
 			"$type": "GameData.Models.Action.CardActionInfo, GameData",
 			"ActionId": 20,
 			"ParameterValue": 1,
-			"ParameterType": 0
+			"ParameterType": 4
 		},
 		"DeathRattleActionInfo": null
 	},
@@ -1117,12 +1063,12 @@
 		"CanAttack": false,
 		"AttackActionInfo": null,
 		"DamageRecievedActionInfo": null,
-			"BattleCryActionInfo": {
-				"$type": "GameData.Models.Action.CardActionInfo, GameData",
-				"ActionId": 68,
-				"ParameterValue": 1,
-				"ParameterType": 6
-			},
+		"BattleCryActionInfo": {
+			"$type": "GameData.Models.Action.CardActionInfo, GameData",
+			"ActionId": 68,
+			"ParameterValue": 1,
+			"ParameterType": 6
+		},
 		"DeathRattleActionInfo": null
 	},
 	{
@@ -1361,7 +1307,7 @@
 		"BaseHP": 1,
 		"BaseAttack": 3,
 		"AttackPriority": 1,
-		"CanAttack": false,
+		"CanAttack": true,
 		"AttackActionInfo": null,
 		"DamageRecievedActionInfo": null,
 		"BattleCryActionInfo": null,
@@ -1443,23 +1389,22 @@
 		"$type": "GameData.Models.Cards.UnitCard, GameData",
 		"ID": 96,
 		"Name": "Таргарион",
-		"Description": "[Превентивный удар] Что это?...Но..Драконы же вымерли?",
+		"Description": "[Наносит 2 урона всем юнитам] Что это?...Но..Драконы же вымерли?",
 		"Cost": 10,
 		"CanBePlayedOnEnemyTurn": false,
 		"ImagePath": "../../Images/ImagesUnit/Darkside/Таргарион.jpg",
 		"Fraction": 3,
 		"BaseHP": 12,
-		"BaseAttack": 10,
+		"BaseAttack": 12,
 		"AttackPriority": 1,
 		"CanAttack": false,
 		"AttackActionInfo": null,
 		"DamageRecievedActionInfo": null,
 		"BattleCryActionInfo": {
 			"$type": "GameData.Models.Action.CardActionInfo, GameData",
-			"ActionId": 25,
+			"ActionId": 46,
 			"ParameterValue": 2,
-			"ParameterType": 0,
-			"IsTargeted": true
+			"ParameterType": 0
 		},
 		"DeathRattleActionInfo": null
 	},
@@ -1834,7 +1779,7 @@
 			"$type": "GameData.Models.Action.CardActionInfo, GameData",
 			"ActionId": 41,
 			"ParameterValue": 0,
-			"ParameterType": 4
+			"ParameterType": 6
 		}
 	},
 	{
@@ -1863,13 +1808,13 @@
 		"CanBePlayedOnEnemyTurn": false,
 		"ImagePath": "../../Images/ImagesSpell/Подкуп.jpg",
 		"Fraction": 0,
-			"ActionInfo": {
-				"$type": "GameData.Models.Action.CardActionInfo, GameData",
-				"ActionId": 53,
-				"ParameterValue": 0,
-				"ParameterType": 6,
-				"IsTargeted": true
-			}
+		"ActionInfo": {
+			"$type": "GameData.Models.Action.CardActionInfo, GameData",
+			"ActionId": 53,
+			"ParameterValue": 0,
+			"ParameterType": 6,
+			"IsTargeted": true
+		}
 	},
 	{
 		"$type": "GameData.Models.Cards.SpellCard, GameData",
@@ -1880,13 +1825,13 @@
 		"CanBePlayedOnEnemyTurn": false,
 		"ImagePath": "../../Images/ImagesSpell/Тактическое отступление.jpg",
 		"Fraction": 0,
-			"ActionInfo": {
-				"$type": "GameData.Models.Action.CardActionInfo, GameData",
-				"ActionId": 54,
-				"ParameterValue": 0,
-				"ParameterType": 6,
-				"IsTargeted": true
-			}
+		"ActionInfo": {
+			"$type": "GameData.Models.Action.CardActionInfo, GameData",
+			"ActionId": 54,
+			"ParameterValue": 0,
+			"ParameterType": 6,
+			"IsTargeted": true
+		}
 	},
 	{
 		"$type": "GameData.Models.Cards.SpellCard, GameData",
@@ -1924,7 +1869,7 @@
 		"$type": "GameData.Models.Cards.SpellCard, GameData",
 		"ID": 122,
 		"Name": "Подкрепление",
-		"Description": "Возьмите 2 карты из своей колоды",
+		"Description": "Возьмите 3 карты из своей колоды",
 		"Cost": 5,
 		"CanBePlayedOnEnemyTurn": true,
 		"ImagePath": "../../Images/ImagesSpell/Подкрепление.jpg",
@@ -1932,7 +1877,7 @@
 		"ActionInfo": {
 			"$type": "GameData.Models.Action.CardActionInfo, GameData",
 			"ActionId": 24,
-			"ParameterValue": 2,
+			"ParameterValue": 3,
 			"ParameterType": 6
 		}
 	},
@@ -2025,7 +1970,7 @@
 		"$type": "GameData.Models.Cards.SpellCard, GameData",
 		"ID": 128,
 		"Name": "Крещение огнем",
-		"Description": "Здоровье юнита понижается на 2, атака повышается на 4",
+		"Description": "Здоровье юнита понижается на 2, атака повышается на 4 (не может убить)",
 		"Cost": 3,
 		"CanBePlayedOnEnemyTurn": false,
 		"ImagePath": "../../Images/ImagesSpell/Крещение огнем.jpg",
@@ -2134,7 +2079,7 @@
 			"$type": "GameData.Models.Action.CardActionInfo, GameData",
 			"ActionId": 63,
 			"ParameterValue": 0,
-			"ParameterType": 0
+			"ParameterType": 6
 		}
 	},
 	{
@@ -2178,133 +2123,147 @@
 	},
 	{
 		"$type": "GameData.Models.Cards.UnitCard, GameData",
+		"ID": 137,
+		"Name": "Отряд викингов",
+		"Description": "[Рывок] Твой драккар на дне лежит,сердце пламенем горит...",
+		"Cost": 2,
+		"CanBePlayedOnEnemyTurn": false,
+		"ImagePath": "../../Images/ImagesUnit/Neutral/Отряд викингов.jpg",
+		"Fraction": 0,
+		"BaseHP": 2,
+		"BaseAttack": 2,
+		"AttackPriority": 1,
+		"CanAttack": true,
+		"AttackActionInfo": null,
+		"DamageRecievedActionInfo": null,
+		"BattleCryActionInfo": null,
+		"DeathRattleActionInfo": null
+	},
+	{
+		"$type": "GameData.Models.Cards.UnitCard, GameData",
+		"ID": 138,
+		"Name": "Датский ярл",
+		"Description": "[при уничтожении Призыв трех Отрядов викингов] Как захрюкали бы мои родные поросята, узнав, каково сейчас мне!",
+		"Cost": 7,
+		"CanBePlayedOnEnemyTurn": false,
+		"ImagePath": "../../Images/ImagesUnit/Neutral/Датский ярл.jpg",
+		"Fraction": 0,
+		"BaseHP": 3,
+		"BaseAttack": 4,
+		"AttackPriority": 1,
+		"CanAttack": false,
+		"AttackActionInfo": null,
+		"DamageRecievedActionInfo": null,
+		"BattleCryActionInfo": null,
+		"DeathRattleActionInfo": {
+			"$type": "GameData.Models.Action.CardActionInfo, GameData",
+			"ActionId": 70,
+			"ParameterValue": 3,
+			"ParameterType": 6
+		}
+	},
+	{
+		"$type": "GameData.Models.Cards.UnitCard, GameData",
+		"ID": 139,
+		"Name": "Датский авангард",
+		"Description": "[Призыв двух Отрядов викингов] Очередная беззащитная деревушка...",
+		"Cost": 6,
+		"CanBePlayedOnEnemyTurn": false,
+		"ImagePath": "../../Images/ImagesUnit/Neutral/Датский авангард.jpg",
+		"Fraction": 0,
+		"BaseHP": 2,
+		"BaseAttack": 2,
+		"AttackPriority": 1,
+		"CanAttack": false,
+		"AttackActionInfo": null,
+		"DamageRecievedActionInfo": null,
+		"BattleCryActionInfo": {
+			"$type": "GameData.Models.Action.CardActionInfo, GameData",
+			"ActionId": 70,
+			"ParameterValue": 2,
+			"ParameterType": 6
+		},
+		"DeathRattleActionInfo": null
+	},
+	{
+		"$type": "GameData.Models.Cards.UnitCard, GameData",
+		"ID": 140,
+		"Name": "Тит Брэгс",
+		"Description": "Тот не стоит свободы, кого можно сделать рабом.",
+		"Cost": 6,
+		"CanBePlayedOnEnemyTurn": false,
+		"ImagePath": "../../Images/ImagesUnit/South/Тит Брэгс.jpg",
+		"Fraction": 2,
+		"BaseHP": 7,
+		"BaseAttack": 7,
+		"AttackPriority": 1,
+		"CanAttack": false,
+		"AttackActionInfo": null,
+		"DamageRecievedActionInfo": null,
+		"BattleCryActionInfo": null,
+		"DeathRattleActionInfo": null
+	},
+	{
+		"$type": "GameData.Models.Cards.SpellCard, GameData",
+		"ID": 141,
+		"Name": "Выгодное вложение",
+		"Description": "Игрок получает +1 к максимальному количеству золота до конца игры",
+		"Cost": 2,
+		"CanBePlayedOnEnemyTurn": false,
+		"ImagePath": "../../Images/ImagesSpell/Выгодное вложение.jpg",
+		"Fraction": 0,
+		"ActionInfo": {
+			"$type": "GameData.Models.Action.CardActionInfo, GameData",
+			"ActionId": 69,
+			"ParameterValue": 0,
+			"ParameterType": 6
+		}
+	},
+	{
+		"$type": "GameData.Models.Cards.UnitCard, GameData",
+		"ID": 142,
+		"Name": "Золотые мечи",
+		"Description": "[Провокатор] Обычно они отстаивали интересы чужих правителей, но не бесплатно конечно же...",
+		"Cost": 5,
+		"CanBePlayedOnEnemyTurn": false,
+		"ImagePath": "../../Images/ImagesUnit/Neutral/Золотые мечи.jpg",
+		"Fraction": 0,
+		"BaseHP": 7,
+		"BaseAttack": 4,
+		"AttackPriority": 2,
+		"CanAttack": false,
+		"AttackActionInfo": null,
+		"DamageRecievedActionInfo": null,
+		"BattleCryActionInfo": null,
+		"DeathRattleActionInfo": null
+	},
+	{
+		"$type": "GameData.Models.Cards.UnitCard, GameData",
+		"ID": 143,
+		"Name": "Яра",
+		"Description": "[Превентивный удар] То что мертво, умереть не может!",
+		"Cost": 4,
+		"CanBePlayedOnEnemyTurn": false,
+		"ImagePath": "../../Images/ImagesUnit/Neutral/Яра.jpg",
+		"Fraction": 0,
+		"BaseHP": 3,
+		"BaseAttack": 3,
+		"AttackPriority": 1,
+		"CanAttack": false,
+		"AttackActionInfo": null,
+		"DamageRecievedActionInfo": null,
+			"BattleCryActionInfo": {
+				"$type": "GameData.Models.Action.CardActionInfo, GameData",
+				"ActionId": 25,
+				"ParameterValue": 2,
+				"ParameterType": 0,
+				"IsTargeted": true
+			},
+		"DeathRattleActionInfo": null
+	},
+	{
+		"$type": "GameData.Models.Cards.UnitCard, GameData",
 		"ID": 1000,
-		"Name": "Тайвин вар Эрмрейс",
-		"Description": "Золото полезный металл, но войны выигрываются железом.",
-		"Cost": 0,
-		"CanBePlayedOnEnemyTurn": false,
-		"ImagePath": "../../Images/ImagesUnit/South/Heroes/Тайвин вар Эрмрейс.jpg",
-		"Fraction": 2,
-		"BaseHP": 30,
-		"BaseAttack": 0,
-		"AttackPriority": 1,
-		"CanAttack": false,
-		"AttackActionInfo": null,
-		"DamageRecievedActionInfo": null,
-		"BattleCryActionInfo": null,
-		"DeathRattleActionInfo": null
-	},
-	{
-		"$type": "GameData.Models.Cards.UnitCard, GameData",
-		"ID": 1001,
-		"Name": "Король Виктим Суровый",
-		"Description": "Я доверяю только своему оружию.",
-		"Cost": 0,
-		"CanBePlayedOnEnemyTurn": false,
-		"ImagePath": "../../Images/ImagesUnit/North/Heroes/Король Виктим Суровый.jpg",
-		"Fraction": 1,
-		"BaseHP": 30,
-		"BaseAttack": 0,
-		"AttackPriority": 1,
-		"CanAttack": false,
-		"AttackActionInfo": null,
-		"DamageRecievedActionInfo": null,
-		"BattleCryActionInfo": null,
-		"DeathRattleActionInfo": null
-	},
-	{
-		"$type": "GameData.Models.Cards.UnitCard, GameData",
-		"ID": 1002,
-		"Name": "Король Дунган",
-		"Description": "Суровый, но все сомнений справедливый правитель.",
-		"Cost": 0,
-		"CanBePlayedOnEnemyTurn": false,
-		"ImagePath": "../../Images/ImagesUnit/North/Heroes/Король Дунган.jpg",
-		"Fraction": 1,
-		"BaseHP": 30,
-		"BaseAttack": 0,
-		"AttackPriority": 1,
-		"CanAttack": false,
-		"AttackActionInfo": null,
-		"DamageRecievedActionInfo": null,
-		"BattleCryActionInfo": null,
-		"DeathRattleActionInfo": null
-	},
-	{
-		"$type": "GameData.Models.Cards.UnitCard, GameData",
-		"ID": 1003,
-		"Name": "Принц Эгберт",
-		"Description": "Порой стоит пожертвовать пешками, чтобы достигнуть цели...",
-		"Cost": 0,
-		"CanBePlayedOnEnemyTurn": false,
-		"ImagePath": "../../Images/ImagesUnit/North/Heroes/Принц Эгберт.jpg",
-		"Fraction": 1,
-		"BaseHP": 30,
-		"BaseAttack": 0,
-		"AttackPriority": 1,
-		"CanAttack": false,
-		"AttackActionInfo": null,
-		"DamageRecievedActionInfo": null,
-		"BattleCryActionInfo": null,
-		"DeathRattleActionInfo": null
-	},
-	{
-		"$type": "GameData.Models.Cards.UnitCard, GameData",
-		"ID": 1004,
-		"Name": "Принц Тристан",
-		"Description": "Не смотря на его возраст, за его плечами было множество побед.",
-		"Cost": 0,
-		"CanBePlayedOnEnemyTurn": false,
-		"ImagePath": "../../Images/ImagesUnit/South/Heroes/Принц Тристан.jpg",
-		"Fraction": 2,
-		"BaseHP": 30,
-		"BaseAttack": 0,
-		"AttackPriority": 1,
-		"CanAttack": false,
-		"AttackActionInfo": null,
-		"DamageRecievedActionInfo": null,
-		"BattleCryActionInfo": null,
-		"DeathRattleActionInfo": null
-	},
-	{
-		"$type": "GameData.Models.Cards.UnitCard, GameData",
-		"ID": 1005,
-		"Name": "Принцесса Элеонора",
-		"Description": "Я, Элеонора де Реанон, княжка Девоны и Ланды, наследница Норc Скеллиг, приказываю вам сдать оружие!",
-		"Cost": 0,
-		"CanBePlayedOnEnemyTurn": false,
-		"ImagePath": "../../Images/ImagesUnit/South/Heroes/Принцесса Элеонора.jpg",
-		"Fraction": 2,
-		"BaseHP": 30,
-		"BaseAttack": 0,
-		"AttackPriority": 1,
-		"CanAttack": false,
-		"AttackActionInfo": null,
-		"DamageRecievedActionInfo": null,
-		"BattleCryActionInfo": null,
-		"DeathRattleActionInfo": null
-	},
-	{
-		"$type": "GameData.Models.Cards.UnitCard, GameData",
-		"ID": 1006,
-		"Name": "Карантир",
-		"Description": "Он должен был бороться со злом, а не примкнуть к нему.",
-		"Cost": 0,
-		"CanBePlayedOnEnemyTurn": false,
-		"ImagePath": "../../Images/ImagesUnit/Darkside/Heroes/Карантир.jpg",
-		"Fraction": 3,
-		"BaseHP": 30,
-		"BaseAttack": 0,
-		"AttackPriority": 1,
-		"CanAttack": false,
-		"AttackActionInfo": null,
-		"DamageRecievedActionInfo": null,
-		"BattleCryActionInfo": null,
-		"DeathRattleActionInfo": null
-	},
-	{
-		"$type": "GameData.Models.Cards.UnitCard, GameData",
-		"ID": 1007,
 		"Name": "Чучело",
 		"Description": "[Провокатор] Это их точно отвлечет, так ведь?",
 		"Cost": 1,
@@ -2322,7 +2281,7 @@
 	},
 	{
 		"$type": "GameData.Models.Cards.UnitCard, GameData",
-		"ID": 1008,
+		"ID": 1001,
 		"Name": "Боевой медведь",
 		"Description": "Агрр-грррррр...",
 		"Cost": 2,
@@ -2331,6 +2290,133 @@
 		"Fraction": 1,
 		"BaseHP": 2,
 		"BaseAttack": 3,
+		"AttackPriority": 1,
+		"CanAttack": false,
+		"AttackActionInfo": null,
+		"DamageRecievedActionInfo": null,
+		"BattleCryActionInfo": null,
+		"DeathRattleActionInfo": null
+	},
+
+	{
+		"$type": "GameData.Models.Cards.UnitCard, GameData",
+		"ID": 3000,
+		"Name": "Тайвин вар Эрмрейс",
+		"Description": "Золото полезный металл, но войны выигрываются железом.",
+		"Cost": 0,
+		"CanBePlayedOnEnemyTurn": false,
+		"ImagePath": "../../Images/ImagesUnit/South/Heroes/Тайвин вар Эрмрейс.jpg",
+		"Fraction": 2,
+		"BaseHP": 30,
+		"BaseAttack": 0,
+		"AttackPriority": 1,
+		"CanAttack": false,
+		"AttackActionInfo": null,
+		"DamageRecievedActionInfo": null,
+		"BattleCryActionInfo": null,
+		"DeathRattleActionInfo": null
+	},
+	{
+		"$type": "GameData.Models.Cards.UnitCard, GameData",
+		"ID": 3001,
+		"Name": "Король Виктим Суровый",
+		"Description": "Я доверяю только своему оружию.",
+		"Cost": 0,
+		"CanBePlayedOnEnemyTurn": false,
+		"ImagePath": "../../Images/ImagesUnit/North/Heroes/Король Виктим Суровый.jpg",
+		"Fraction": 1,
+		"BaseHP": 30,
+		"BaseAttack": 0,
+		"AttackPriority": 1,
+		"CanAttack": false,
+		"AttackActionInfo": null,
+		"DamageRecievedActionInfo": null,
+		"BattleCryActionInfo": null,
+		"DeathRattleActionInfo": null
+	},
+	{
+		"$type": "GameData.Models.Cards.UnitCard, GameData",
+		"ID": 3002,
+		"Name": "Король Дунган",
+		"Description": "Суровый, но все сомнений справедливый правитель.",
+		"Cost": 0,
+		"CanBePlayedOnEnemyTurn": false,
+		"ImagePath": "../../Images/ImagesUnit/North/Heroes/Король Дунган.jpg",
+		"Fraction": 1,
+		"BaseHP": 30,
+		"BaseAttack": 0,
+		"AttackPriority": 1,
+		"CanAttack": false,
+		"AttackActionInfo": null,
+		"DamageRecievedActionInfo": null,
+		"BattleCryActionInfo": null,
+		"DeathRattleActionInfo": null
+	},
+	{
+		"$type": "GameData.Models.Cards.UnitCard, GameData",
+		"ID": 3003,
+		"Name": "Принц Эгберт",
+		"Description": "Порой стоит пожертвовать пешками, чтобы достигнуть цели...",
+		"Cost": 0,
+		"CanBePlayedOnEnemyTurn": false,
+		"ImagePath": "../../Images/ImagesUnit/North/Heroes/Принц Эгберт.jpg",
+		"Fraction": 1,
+		"BaseHP": 30,
+		"BaseAttack": 0,
+		"AttackPriority": 1,
+		"CanAttack": false,
+		"AttackActionInfo": null,
+		"DamageRecievedActionInfo": null,
+		"BattleCryActionInfo": null,
+		"DeathRattleActionInfo": null
+	},
+	{
+		"$type": "GameData.Models.Cards.UnitCard, GameData",
+		"ID": 3004,
+		"Name": "Принц Тристан",
+		"Description": "Не смотря на его возраст, за его плечами было множество побед.",
+		"Cost": 0,
+		"CanBePlayedOnEnemyTurn": false,
+		"ImagePath": "../../Images/ImagesUnit/South/Heroes/Принц Тристан.jpg",
+		"Fraction": 2,
+		"BaseHP": 30,
+		"BaseAttack": 0,
+		"AttackPriority": 1,
+		"CanAttack": false,
+		"AttackActionInfo": null,
+		"DamageRecievedActionInfo": null,
+		"BattleCryActionInfo": null,
+		"DeathRattleActionInfo": null
+	},
+	{
+		"$type": "GameData.Models.Cards.UnitCard, GameData",
+		"ID": 3005,
+		"Name": "Принцесса Элеонора",
+		"Description": "Я, Элеонора де Реанон, княжка Девоны и Ланды, наследница Норc Скеллиг, приказываю вам сдать оружие!",
+		"Cost": 0,
+		"CanBePlayedOnEnemyTurn": false,
+		"ImagePath": "../../Images/ImagesUnit/South/Heroes/Принцесса Элеонора.jpg",
+		"Fraction": 2,
+		"BaseHP": 30,
+		"BaseAttack": 0,
+		"AttackPriority": 1,
+		"CanAttack": false,
+		"AttackActionInfo": null,
+		"DamageRecievedActionInfo": null,
+		"BattleCryActionInfo": null,
+		"DeathRattleActionInfo": null
+	},
+	{
+		"$type": "GameData.Models.Cards.UnitCard, GameData",
+		"ID": 3006,
+		"Name": "Карантир",
+		"Description": "Он должен был бороться со злом, а не примкнуть к нему.",
+		"Cost": 0,
+		"CanBePlayedOnEnemyTurn": false,
+		"ImagePath": "../../Images/ImagesUnit/Darkside/Heroes/Карантир.jpg",
+		"Fraction": 3,
+		"BaseHP": 30,
+		"BaseAttack": 0,
 		"AttackPriority": 1,
 		"CanAttack": false,
 		"AttackActionInfo": null,
