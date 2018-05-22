@@ -11,11 +11,11 @@ namespace GameData.Models.Observer
     {
         public string PlayerUsername { set; get; }
 
-        public PlayerMana PlayerMana { set; get; }
+        public PlayerState PlayerState { set; get; }
 
-        public PlayerStateChangesObserverAction(string username, PlayerMana mana)
+        public PlayerStateChangesObserverAction(string username, PlayerState state)
         {
-            PlayerMana = mana;
+            PlayerState = state;
             PlayerUsername = username;
             Type = ObserverActionType.PlayerStateChange;
         }

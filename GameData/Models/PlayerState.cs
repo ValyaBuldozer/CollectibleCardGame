@@ -7,10 +7,23 @@ using Newtonsoft.Json;
 
 namespace GameData.Models
 {
-    public class PlayerMana
+    public class PlayerState
     {
         private int _base;
         private int _current;
+        private int _deckCardsCount;
+
+        public int DeckCardsCount
+        {
+            get => _deckCardsCount;
+            set
+            {
+                if(_deckCardsCount == value) return;
+
+                _deckCardsCount = value;
+                Changed?.Invoke(Player,new PlayerManaChangeEventArgs(this));
+            }
+        }
 
         public int Base
         {

@@ -57,11 +57,13 @@ namespace GameData.Controllers.Table
             {
                 player.HandCards.Add(card);
                 _entityController.AddNewItem(card);
+                player.State.DeckCardsCount--;
                 OnCardDraw?.Invoke(this, new CardDrawObserverAction(card, player.Username));
             }
             else
                 //todo : card burn event
-                return;
+                player.State.DeckCardsCount--;
+            return;
         }
     }
 }

@@ -18,12 +18,12 @@ namespace GameData.Tests.TestData
                 new Player(_testCards.FirstCard)
                 {
                     Username = "FirstTestUser",
-                    Mana = new PlayerMana(){Base = 3,Current = 3}
+                    State = new PlayerState(){Base = 3,Current = 3}
                 },
                 new Player(_testCards.SecondCard)
                 {
                     Username = "SecondTestUser",
-                    Mana = new PlayerMana(){Base = 3,Current = 3}
+                    State = new PlayerState(){Base = 3,Current = 3}
                 }
             }
         };

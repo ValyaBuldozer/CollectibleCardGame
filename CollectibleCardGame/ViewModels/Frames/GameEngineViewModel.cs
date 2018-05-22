@@ -25,7 +25,7 @@ namespace CollectibleCardGame.ViewModels.Frames
         private Player _player;
         private Player _enemyPlayer;
         private string _currentPlayerUsername;
-        private PlayerMana _playerMana;
+        private PlayerState _playerState;
         private HeroUnit _playerHeroUnit;
         private HeroUnit _enemyHeroUnit;
 
@@ -134,13 +134,13 @@ namespace CollectibleCardGame.ViewModels.Frames
             }
         }
 
-        public PlayerMana PlayerMana
+        public PlayerState PlayerState
         {
-            get => _playerMana;
+            get => _playerState;
             set
             {
-                _playerMana = value;
-                NotifyPropertyChanged(nameof(PlayerMana));
+                _playerState = value;
+                NotifyPropertyChanged(nameof(PlayerState));
             }
         }
 
@@ -209,7 +209,12 @@ namespace CollectibleCardGame.ViewModels.Frames
             CurrentDispatcher = Dispatcher.CurrentDispatcher;
 
             _playerCards = new ObservableCollection<CardViewModel>();
+            _playerCards.CollectionChanged +=
+                (sender, args) => PlayerViewModel.CardsInHand = _playerCards.Count;
             _enemyCards = new ObservableCollection<CardViewModel>();
+            _enemyCards.CollectionChanged += 
+                (sender, args) => EnemyViewModel.CardsInHand = _enemyCards.Count;
+
             _playerUnits = new ObservableCollection<UnitViewModel>();
             _enemyUnits  = new ObservableCollection<UnitViewModel>();
 

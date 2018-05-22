@@ -19,7 +19,7 @@
 
             <Grid>
                 <Grid.Background>
-                    <ImageBrush ImageSource="/Images/CardsBacks/cardbackSouth220x410.jpg" Stretch="UniformToFill"/>
+                    <ImageBrush ImageSource="{Binding BackGroundImagePath}" Stretch="UniformToFill"/>
                 </Grid.Background>
 
                 <Grid>

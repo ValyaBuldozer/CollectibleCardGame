@@ -48,7 +48,7 @@ namespace GameData.Controllers.Table
             if (!sender.HandCards.Contains(card))
                 return false;
 
-            if (sender.Mana.Current < card.Cost)
+            if (sender.State.Current < card.Cost)
                 return false;
 
             switch (card.GetType().Name)
@@ -70,14 +70,14 @@ namespace GameData.Controllers.Table
             if(!_unitDispatcher.CardPlayedSpawn(card,sender,actionTarget))
                 return;
 
-            sender.Mana.Current -= card.Cost;
+            sender.State.Current -= card.Cost;
             sender.HandCards.Remove(card);
         }
 
         public void DeployCard(SpellCard card,Player sender,Unit actionTarget)
         {
             _gameActionController.ExecuteAction(card.ActionInfo,sender,actionTarget);
-            sender.Mana.Current -= card.Cost;
+            sender.State.Current -= card.Cost;
             sender.HandCards.Remove(card);
         }
     }

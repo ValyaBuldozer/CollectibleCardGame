@@ -96,7 +96,8 @@ namespace CollectibleCardGame.Logic.Controllers
                 if (action.ToPlayerUsername == _userService.Username)
                     _gameViewModel.PlayerCards.Add(new CardViewModel(card));
                 else
-                    _gameViewModel.EnemyCards.Add(new CardViewModel(card));
+                    _gameViewModel.EnemyCards.Add(new CardViewModel(card,
+                        _gameViewModel.EnemyPlayer.HeroUnit.BaseCard.Fraction));
             });
         }
 
@@ -154,9 +155,9 @@ namespace CollectibleCardGame.Logic.Controllers
                 _gameViewModel.CurrentDispatcher.Invoke(() =>
                 {
                     if (action.PlayerUsername == _userService.Username)
-                        _gameViewModel.PlayerViewModel.PlayerMana = action.PlayerMana;
+                        _gameViewModel.PlayerViewModel.PlayerState = action.PlayerState;
                     else
-                        _gameViewModel.EnemyViewModel.PlayerMana = action.PlayerMana;
+                        _gameViewModel.EnemyViewModel.PlayerState = action.PlayerState;
                 });
         }
 
