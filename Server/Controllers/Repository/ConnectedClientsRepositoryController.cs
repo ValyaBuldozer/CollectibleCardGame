@@ -1,4 +1,6 @@
-﻿using Server.Network.Models;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Server.Network.Models;
 using Server.Repositories;
 
 namespace Server.Controllers.Repository
@@ -22,5 +24,7 @@ namespace Server.Controllers.Repository
             if(_repository.Collection.Contains(client))
                 _repository.Collection.Remove(client);
         }
+
+        public List<Client> GetCollection => _repository?.Collection.ToList();
     }
 }

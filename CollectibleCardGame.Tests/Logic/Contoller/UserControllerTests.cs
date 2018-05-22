@@ -56,7 +56,7 @@ namespace CollectibleCardGame.Tests.Logic.Contoller
 
             controller.SetUser("test");
 
-            Assert.IsTrue(controller?.CurrentUser.Username == "test");
+            Assert.IsTrue(controller?.CurrentUserService.Username == "test");
         }
 
         [TestMethod]
@@ -68,7 +68,7 @@ namespace CollectibleCardGame.Tests.Logic.Contoller
 
             controller.ResetUser();
 
-            Assert.IsTrue(controller?.CurrentUser == null);
+            Assert.IsTrue(controller?.CurrentUserService == null);
         }
     }
 

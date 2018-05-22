@@ -20,7 +20,7 @@ namespace CollectibleCardGame.ViewModels.Frames
 {
     public class GameEngineViewModel : BaseViewModel
     {
-        private readonly CurrentUser _user;
+        private readonly CurrentUserService _userService;
 
         private Player _player;
         private Player _enemyPlayer;
@@ -60,7 +60,14 @@ namespace CollectibleCardGame.ViewModels.Frames
                 PlayerHeroUnit = value?.HeroUnit;
                 NotifyPropertyChanged(nameof(Player));
                 PlayerViewModel.Player = value;
-                //PlayerViewModel = new PlayerUserControlViewModel(_player);
+
+                if(value == null) return;
+
+                PlayerCards.Clear();
+                _player.HandCards.ForEach(c=>PlayerCards.Add(new CardViewModel(c)));
+
+                PlayerUnits.Clear();
+                _player.TableUnits.ForEach(u=>PlayerUnits.Add(new UnitViewModel(u)));
             }
         }
 
@@ -73,6 +80,14 @@ namespace CollectibleCardGame.ViewModels.Frames
                 EnemyHeroUnit = value?.HeroUnit;
                 NotifyPropertyChanged(nameof(EnemyPlayer));
                 EnemyViewModel.Player = value;
+
+                if(value == null) return;
+
+                EnemyCards.Clear();
+                _enemyPlayer.HandCards.ForEach(c => EnemyCards.Add(new CardViewModel(c)));
+
+                EnemyUnits.Clear();
+                _enemyPlayer.TableUnits.ForEach(u => EnemyUnits.Add(new UnitViewModel(u)));
             }
         }
 
@@ -105,7 +120,7 @@ namespace CollectibleCardGame.ViewModels.Frames
                 NotifyPropertyChanged(nameof(CurrentPlayerUsername));
                 NotifyPropertyChanged(nameof(TransferTurnCommand));
 
-                if (_currentPlayerUsername == _user.Username)
+                if (_currentPlayerUsername == _userService.Username)
                 {
                     _playerUnits.ForEach(u=>u.IsCanAttack = true);
                 }
@@ -189,7 +204,7 @@ namespace CollectibleCardGame.ViewModels.Frames
             }
         }
 
-        public GameEngineViewModel(CurrentUser user)
+        public GameEngineViewModel(CurrentUserService userService)
         {
             CurrentDispatcher = Dispatcher.CurrentDispatcher;
 
@@ -200,7 +215,7 @@ namespace CollectibleCardGame.ViewModels.Frames
 
             _playerViewModel = new PlayerUserControlViewModel();
             _enemyViewModel = new PlayerUserControlViewModel();
-            _user = user;
+            _userService = userService;
         }
 
         public event EventHandler<PlayerTurnRequestEventArgs> PlayerTurnEvent;
@@ -377,10 +392,9 @@ namespace CollectibleCardGame.ViewModels.Frames
                            {
                                 var playerTurn = new EndPlayerTurn(null);
                                PlayerTurnEvent?.Invoke(this,new PlayerTurnRequestEventArgs(playerTurn));
-                           },
-                               c=>_currentPlayerUsername == _user?.Username));
+                           }));
 
-        public bool IsPlayerTurn => _user.Username == CurrentPlayerUsername;
+        public bool IsPlayerTurn => _userService.Username == CurrentPlayerUsername;
 
         public void Clear()
         {

@@ -23,6 +23,8 @@ namespace Server.Models
     {
         private readonly Container _gameDataContainer;
 
+        public string AwaitingClintUsername { private set; get; }
+
         public Client FirstClient { set; get; }
 
         public Stack<Card> FirstPlayerDeck { set; get; }
@@ -117,6 +119,47 @@ namespace Server.Models
                 FirstPlayerHeroUnit,SecondPlayerDeck,SecondClient.User.Username,SecondPlayerHeroUnit);
         }
 
+        public void OnClientDisconnect(Client client)
+        {
+            if (FirstClient == client)
+            {
+                AwaitingClintUsername = client.User.Username;
+                FirstClient = null;
+            }
+
+            if (SecondClient == client)
+            {
+                AwaitingClintUsername = client.User.Username;
+                SecondClient = null;
+            }
+
+            if(FirstClient == null && SecondClient == null)
+                OnGameEnd(this,new GameEndEventArgs(GameEndReason.PlayerDisconnected,client.User.Username));
+        }
+
+        public void OnClientReconnect(Client client)
+        {
+            if(client.User.Username != AwaitingClintUsername) return;
+
+            if (FirstClient == null)
+            {
+                AwaitingClintUsername = null;
+                FirstClient = client;
+                _gameDataContainer.Get<IGameStateController>().
+                    SendTableConditionRequest(client.User.Username);
+                return;
+            }
+
+            if (SecondClient == null)
+            {
+                AwaitingClintUsername = null;
+                SecondClient = client;
+                _gameDataContainer.Get<IGameStateController>().
+                    SendTableConditionRequest(client.User.Username);
+                return;
+            }
+        }
+
         private void OnObserverActionAdded(object sender, ObserverActionAddedEventArgs e)
         {
             var message = new MessageBase(MessageBaseType.ObserverActionMessage, new ObserverActionMessage()
@@ -124,11 +167,11 @@ namespace Server.Models
                 ObserverAction = e.Item
             });
 
-            if(e.Item.TargetPlayer == null || FirstClient.User.Username == e.Item.TargetPlayer.Username)
-                FirstClient.ClientController.SendMessage(message);
+            if(e.Item.TargetPlayer == null || FirstClient?.User.Username == e.Item.TargetPlayer.Username)
+                FirstClient?.ClientController.SendMessage(message);
 
-            if(e.Item.TargetPlayer == null || SecondClient.User.Username == e.Item.TargetPlayer.Username)
-                SecondClient.ClientController.SendMessage(message);
+            if(e.Item.TargetPlayer == null || SecondClient?.User.Username == e.Item.TargetPlayer.Username)
+                SecondClient?.ClientController.SendMessage(message);
         }
 
         private void OnGameEnd(object sender, GameEndEventArgs e)

@@ -4,14 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CollectibleCardGame.Models
+namespace GameData.Network
 {
-    public class CurrentUser
+    public class UserInfo
     {
-        //todo : переделать
         public string Username { set; get; }
-        public int GameLoseCount { set; get; }
-        public int GameWinCount { set; get; }
         public string NorthDeck { set; get; }
         public string SouthDeck { set; get; }
         public string DarkDeck { set; get; }
