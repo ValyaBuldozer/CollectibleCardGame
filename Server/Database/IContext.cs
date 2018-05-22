@@ -13,5 +13,6 @@ namespace Server.Database
         DbSet<User> Users { get; set; }
         DbSet<UserInfo> UsersInfo { get; set; }
         void Save();
+        bool IsDatabaseExists();
     }
 }

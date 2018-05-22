@@ -35,14 +35,14 @@ namespace CollectibleCardGame.Tests.ServerTests.ServiceTests
             UnityKernel.Get<UserService>().RegisterUser("testUser8", "test");
             //UnityKernel.Get<UserService>().RegisterUser("testUser5", "test");
 
-            Assert.IsTrue(repos.Collection.
+            Assert.IsTrue(repos.DatabaseCollection.
                 FirstOrDefault(u=>u.Username == "testUser8") != null);
         }
 
         [TestMethod]
         public void LogIn()
         {
-            var userCollection = UnityKernel.Get<UserRepository>().Collection;
+            var userCollection = UnityKernel.Get<UserRepository>().DatabaseCollection;
             var service = UnityKernel.Get<UserService>();
 
             if (userCollection.FirstOrDefault(u => u.Username == "test") == null)

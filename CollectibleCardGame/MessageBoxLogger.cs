@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
 using BaseNetworkArchitecture.Common;
+using CollectibleCardGame.Unity;
+using MessageBox = Xceed.Wpf.Toolkit.MessageBox;
 
 namespace CollectibleCardGame
 {
@@ -20,7 +22,6 @@ namespace CollectibleCardGame
 
         public void Print(string message)
         {
-            MessageBox.Show(message);
         }
 
         public void Log(string message)
@@ -34,7 +35,8 @@ namespace CollectibleCardGame
             {
                 _uiDispatcher.Invoke(() =>
                 {
-                    Xceed.Wpf.Toolkit.MessageBox.Show(message);
+                    MessageBox.Show(UnityKernel.Get<MainWindow>(),message,"Warning",
+                        MessageBoxButton.OK,MessageBoxImage.Asterisk);
                 });
 
             }

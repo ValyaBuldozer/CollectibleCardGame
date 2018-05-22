@@ -29,7 +29,7 @@ namespace CollectibleCardGame.Tests.ServerTests
             var registrationClient = new TcpCommunicator(tcpClient);
             Random rnd = new Random();
             string username = "testuser" + rnd.Next(0, 1000);
-            var collection = UnityKernel.Get<UserRepository>().Collection;
+            var collection = UnityKernel.Get<UserRepository>().DatabaseCollection;
 
             RegistrationMessage message = new RegistrationMessage()
             {

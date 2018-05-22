@@ -72,5 +72,10 @@ namespace GameData.Controllers.Data
         {
             _repository.Collection.Clear();
         }
+
+        public IEnumerable<Card> GetCollection()
+        {
+            return _repository.Collection.ToList();
+        }
     }
 }

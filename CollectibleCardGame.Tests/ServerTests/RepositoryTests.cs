@@ -30,7 +30,7 @@ namespace CollectibleCardGame.Tests.ServerTests
             var deletingUser = controller.GetEnumerable.FirstOrDefault(u => u.Username == "repostest");
             controller.Remove(deletingUser);
 
-            Assert.IsTrue(UnityKernel.Get<UserRepository>().Collection.FirstOrDefault(u=>u.Username == "repostest") ==null);
+            Assert.IsTrue(UnityKernel.Get<UserRepository>().DatabaseCollection.FirstOrDefault(u=>u.Username == "repostest") ==null);
         }
 
         //[TestMethod]
@@ -38,7 +38,7 @@ namespace CollectibleCardGame.Tests.ServerTests
         {
             UnityKernel.InitializeKernel();
             int i=0;
-            foreach (var iUser in UnityKernel.Get<UserRepository>().Collection)
+            foreach (var iUser in UnityKernel.Get<UserRepository>().DatabaseCollection)
             {
                 i++;
             }

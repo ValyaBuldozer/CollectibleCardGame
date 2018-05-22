@@ -10,7 +10,8 @@ namespace Server.Controllers.Repository
     {
         private readonly UserRepository _repository;
 
-        public IEnumerable<User> GetEnumerable => _repository.Collection;
+        public IEnumerable<User> GetEnumerable => _repository.IsDatabaseConnected ?
+            _repository.DatabaseCollection.ToList() : _repository.Collection.ToList();
 
         public UserReposController(UserRepository repository)
         {
@@ -19,8 +20,13 @@ namespace Server.Controllers.Repository
 
         public void Add(User value)
         {
-            _repository.Collection.Add(value);
-            _repository.Update();
+            if (_repository.IsDatabaseConnected)
+            {
+                _repository.DatabaseCollection.Add(value);
+                _repository.Update();
+            }
+            else
+                _repository.Collection.Add(value);
         }
 
         /// <summary>
@@ -29,25 +35,42 @@ namespace Server.Controllers.Repository
         /// <param name="value"></param>
         public void Remove(User value)
         {
-            _repository.Collection.Attach(value);
-            _repository.Collection.Remove(value);
-            _repository.Update();
+            if (_repository.IsDatabaseConnected)
+            {
+                _repository.DatabaseCollection.Attach(value);
+                _repository.DatabaseCollection.Remove(value);
+                _repository.Update();
+            }
+            else
+                _repository.Collection.Remove(value);
         }
 
         public void Edit(User value)
         {
-            var dbValue = _repository.Collection.FirstOrDefault(v => v.Id == value.Id);
+            if (_repository.IsDatabaseConnected)
+            {
+                var newDbValue = _repository.DatabaseCollection.FirstOrDefault(v => v.Id == value.Id);
 
-            if(dbValue == null)
-                throw new NullReferenceException("No value found");
+                if (newDbValue == null)
+                    return;
 
-            //_repository.Collection.Remove(dbValue);
-            //_repository.Collection.Add(value);
-            dbValue.Username = value.Username;
-            dbValue.Password = value.Password;
-            dbValue.UserInfo = value.UserInfo;
+                newDbValue.Username = value.Username;
+                newDbValue.Password = value.Password;
+                newDbValue.UserInfo = value.UserInfo;
 
-            _repository.Update();
+                _repository.Update();
+            }
+            else
+            {
+                var newValue = _repository.Collection.FirstOrDefault(v => v.Id == value.Id);
+
+                if(newValue == null)
+                    return;
+
+                newValue.Username = value.Username;
+                newValue.Password = value.Password;
+                newValue.UserInfo = value.UserInfo;
+            }
         }
 
     }

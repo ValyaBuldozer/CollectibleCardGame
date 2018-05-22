@@ -48,7 +48,7 @@ namespace CollectibleCardGame.Tests.ServerTests.ServerClientTests
                     )
             } );
 
-            Assert.IsTrue(UnityKernel.Get<UserRepository>().Collection.FirstOrDefault(u=>u.Username == "ClientControlerTest1")!=null);
+            Assert.IsTrue(UnityKernel.Get<UserRepository>().DatabaseCollection.FirstOrDefault(u=>u.Username == "ClientControlerTest1")!=null);
         }
 
         private void Communicator_MessageRecievedEvent(object sender, MessageEventArgs e)

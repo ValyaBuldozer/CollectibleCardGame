@@ -69,7 +69,8 @@
                                 <Rectangle Grid.Row="0" Stroke="Gold" RadiusX="5" RadiusY="5" 
                                            StrokeThickness="1" HorizontalAlignment="Stretch"
                                            VerticalAlignment="Stretch"  Width="55" Height="55"
-                                           Visibility="Visible">
+                                           Visibility="{Binding Path=IsNotHeroUnit,
+                                            Converter={StaticResource BooleanToVisibilityConverter}}">
                                     <Rectangle.Fill>
                                         <ImageBrush ImageSource="{Binding AbilityImagePath}"/>
                                     </Rectangle.Fill>

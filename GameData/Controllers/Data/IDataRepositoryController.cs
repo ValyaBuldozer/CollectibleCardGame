@@ -57,5 +57,11 @@ namespace GameData.Controllers.Data
         /// Полностью очищает репозиторий
         /// </summary>
         void ClearRepository();
+
+        /// <summary>
+        /// Получить коллекцию элементов
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<T> GetCollection();
     }
 }

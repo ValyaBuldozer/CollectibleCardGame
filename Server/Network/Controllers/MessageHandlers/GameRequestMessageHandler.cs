@@ -35,10 +35,13 @@ namespace Server.Network.Controllers.MessageHandlers
             if(client.CurrentLobby != null)
                 return new ErrorMessage();
 
-            Stack<Card> deck = new Stack<Card>(_cardReposController.GetById(message.CardDeckIdList));
+            if(string.IsNullOrEmpty(client.User.UserInfo.GetDeck(message.Fraction)))
+                return new ErrorMessage() {ErrorInfo = "No deck found with this fraction"};
+
+            //Stack<Card> deck = new Stack<Card>(_cardReposController.GetById(message.CardDeckIdList));
 
             message.AnswerData = UnityKernel.Get<ServerStateService>().FindLobby(
-                client,deck,message.HeroUnitCard);
+                client,message.Fraction);
 
             return message;
         }
