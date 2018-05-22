@@ -813,6 +813,16 @@ namespace CollectibleCardGame.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Золотые_мечи {
+            get {
+                object obj = ResourceManager.GetObject("Золотые_мечи", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Имлерих {
             get {
                 object obj = ResourceManager.GetObject("Имлерих", resourceCulture);
@@ -1626,6 +1636,16 @@ namespace CollectibleCardGame.Properties {
         internal static System.Drawing.Bitmap Энергетический_выброс {
             get {
                 object obj = ResourceManager.GetObject("Энергетический_выброс", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Яра {
+            get {
+                object obj = ResourceManager.GetObject("Яра", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
