@@ -1,22 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GameData.Enums;
-using GameData.Models.Cards;
+﻿using GameData.Enums;
 
 namespace GameData.Models.Observer
 {
     public class GameStartObserverAction : ObserverAction
     {
-        public Player FirstPlayer { set; get; }
-
-        public Player SecondPlayer { set; get; }
-
-        public string CurrentPlayerUsername { set; get; }
-
-        public GameStartObserverAction(Player firstPlayer,Player secondPlayer)
+        public GameStartObserverAction(Player firstPlayer, Player secondPlayer)
         {
             FirstPlayer = firstPlayer;
             SecondPlayer = secondPlayer;
@@ -27,5 +15,11 @@ namespace GameData.Models.Observer
         {
             Type = ObserverActionType.GameStart;
         }
+
+        public Player FirstPlayer { set; get; }
+
+        public Player SecondPlayer { set; get; }
+
+        public string CurrentPlayerUsername { set; get; }
     }
 }

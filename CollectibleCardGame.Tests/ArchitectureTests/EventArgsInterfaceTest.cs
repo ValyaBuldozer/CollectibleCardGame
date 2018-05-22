@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace CollectibleCardGame.Tests.ArchitectureTests
@@ -39,36 +35,35 @@ namespace CollectibleCardGame.Tests.ArchitectureTests
         [TestMethod]
         public void InterfaceTest()
         {
-            var first = new FirstEventArgs(){FirstProp = "test"};
-            var second = new SecondEventArgs() {SecondProp = 1};
+            var first = new FirstEventArgs {FirstProp = "test"};
+            var second = new SecondEventArgs {SecondProp = 1};
 
             //TestEvent += OnTestEvent;
             FirstEvent += OnTestEvent;
             SecondEvent += OnTestEvent;
 
-            FirstEvent?.Invoke(this,first);
-            SecondEvent?.Invoke(this,second);
+            FirstEvent?.Invoke(this, first);
+            SecondEvent?.Invoke(this, second);
 
             Assert.IsTrue(_first == "test" && _second == 1);
         }
     }
 
-    
 
-    public interface IEventArgs 
+    public interface IEventArgs
     {
         object SomeData { set; get; }
     }
 
     public class FirstEventArgs : IEventArgs
     {
-        public object SomeData { set; get; }
         public string FirstProp { set; get; }
+        public object SomeData { set; get; }
     }
 
-   public class SecondEventArgs : IEventArgs
+    public class SecondEventArgs : IEventArgs
     {
-        public object SomeData { set; get; }
         public int SecondProp { set; get; }
+        public object SomeData { set; get; }
     }
 }

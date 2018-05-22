@@ -1,5 +1,4 @@
-﻿using GameData.Enums;
-using GameData.Models.Action;
+﻿using GameData.Models.Action;
 
 namespace GameData.Models.Cards
 {
@@ -9,7 +8,7 @@ namespace GameData.Models.Cards
 
         public override Card DeepCopy()
         {
-            var other = (SpellCard) this.MemberwiseClone();
+            var other = (SpellCard) MemberwiseClone();
             other.ActionInfo = ActionInfo?.ShallowCopy();
             return other;
         }

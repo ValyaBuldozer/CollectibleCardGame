@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Newtonsoft.Json;
 
 namespace GameData.Models
@@ -18,10 +14,10 @@ namespace GameData.Models
             get => _deckCardsCount;
             set
             {
-                if(_deckCardsCount == value) return;
+                if (_deckCardsCount == value) return;
 
                 _deckCardsCount = value;
-                Changed?.Invoke(Player,new PlayerManaChangeEventArgs(this));
+                Changed?.Invoke(Player, new PlayerManaChangeEventArgs(this));
             }
         }
 
@@ -30,10 +26,10 @@ namespace GameData.Models
             get => _base;
             set
             {
-                if(_base == value) return;
+                if (_base == value) return;
 
                 _base = value;
-                Changed?.Invoke(Player,new PlayerManaChangeEventArgs(this));
+                Changed?.Invoke(Player, new PlayerManaChangeEventArgs(this));
             }
         }
 
@@ -42,10 +38,10 @@ namespace GameData.Models
             get => _current;
             set
             {
-                if(_current == value) return;
+                if (_current == value) return;
 
                 _current = value;
-                Changed?.Invoke(Player,new PlayerManaChangeEventArgs(this));
+                Changed?.Invoke(Player, new PlayerManaChangeEventArgs(this));
             }
         }
 

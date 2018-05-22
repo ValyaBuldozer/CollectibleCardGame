@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using GameData.Controllers.Data;
 using GameData.Enums;
 using GameData.Models.Cards;
@@ -10,7 +7,6 @@ using GameData.Network;
 using GameData.Network.Messages;
 using Newtonsoft.Json;
 using Server.Controllers.Repository;
-using Server.Models;
 using Server.Network.Models;
 
 namespace Server.Network.Controllers.MessageHandlers
@@ -38,13 +34,13 @@ namespace Server.Network.Controllers.MessageHandlers
             var deck = _cardRepositoryController.GetById(message.DeckIDs);
             var heroUnit = _cardRepositoryController.GetById(message.HeroCardId);
 
-            if (deck.ToList().Exists(c => c == null)) 
-                return new ErrorMessage(){ErrorInfo = "Invalid card deck id"};
+            if (deck.ToList().Exists(c => c == null))
+                return new ErrorMessage {ErrorInfo = "Invalid card deck id"};
 
             if (heroUnit == null || heroUnit.ID < 3000 || !(heroUnit is UnitCard heroUnitCard))
-                return new ErrorMessage() {ErrorInfo = "Invalid hero unit card"};
+                return new ErrorMessage {ErrorInfo = "Invalid hero unit card"};
 
-            var deckInfo = new DeckInfo()
+            var deckInfo = new DeckInfo
             {
                 DeckIds = message.DeckIDs,
                 Fraction = message.Fraction,
@@ -57,7 +53,7 @@ namespace Server.Network.Controllers.MessageHandlers
             switch (message.Fraction)
             {
                 case Fraction.Common:
-                    return new ErrorMessage(){ErrorInfo = "Error common fraciton"};
+                    return new ErrorMessage {ErrorInfo = "Error common fraciton"};
                 case Fraction.North:
                     user.UserInfo.NorthDeck = JsonConvert.SerializeObject(deckInfo);
                     break;
@@ -70,10 +66,10 @@ namespace Server.Network.Controllers.MessageHandlers
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+
             _userReposController.Edit(user);
 
             return message;
         }
-
     }
 }

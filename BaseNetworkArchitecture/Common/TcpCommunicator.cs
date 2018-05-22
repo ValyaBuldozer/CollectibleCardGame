@@ -10,17 +10,17 @@ namespace BaseNetworkArchitecture.Common
     {
         private string _previousMessage;
 
-        public ILogger Logger { set; get; }
-
-        public bool IsConnected => Client.Connected;
-
         public TcpCommunicator(TcpClient client)
         {
             Client = client;
             _previousMessage = "";
         }
 
+        public ILogger Logger { set; get; }
+
         public TcpClient Client { set; get; }
+
+        public bool IsConnected => Client.Connected;
 
         public bool SendMessage(NetworkMessage networkMessage)
         {
@@ -38,7 +38,7 @@ namespace BaseNetworkArchitecture.Common
                     if (networkMessage.Content.Length > 2000)
                     {
                         message = networkMessage.Content.Substring(0, 2000);
-                        networkMessage.Content = networkMessage.Content.Remove(0,2000);
+                        networkMessage.Content = networkMessage.Content.Remove(0, 2000);
                     }
                     else
                     {
@@ -53,7 +53,7 @@ namespace BaseNetworkArchitecture.Common
                     size.CopyTo(lengthBytes, 0);
 
                     //флаг отвечает за конкотинацию нескольких сообщений
-                    byte[] flagBuffer = new byte[1];
+                    var flagBuffer = new byte[1];
 
                     if (message.Length < 2000)
                         flagBuffer[0] = 0;
@@ -62,7 +62,7 @@ namespace BaseNetworkArchitecture.Common
 
                     //пишем длинну
                     Client.GetStream().Write(lengthBytes, 0, lengthBytes.Length);
-                    Client.GetStream().Write(flagBuffer,0,flagBuffer.Length);
+                    Client.GetStream().Write(flagBuffer, 0, flagBuffer.Length);
                     Client.GetStream().Write(msgBytes, 0, msgBytes.Length);
                 } while (networkMessage.Content.Length > 0);
 
@@ -92,7 +92,7 @@ namespace BaseNetworkArchitecture.Common
 
                 if (int.TryParse(retNetworkMessage.Encoder.GetString(lengthBytes), out var length))
                 {
-                    byte[] flagBuff = new byte[1];
+                    var flagBuff = new byte[1];
                     Client.GetStream().Read(flagBuff, 0, flagBuff.Length);
 
 
@@ -106,8 +106,8 @@ namespace BaseNetworkArchitecture.Common
                         _previousMessage = "";
                         return retNetworkMessage;
                     }
-                    else
-                        _previousMessage += retNetworkMessage.Content;
+
+                    _previousMessage += retNetworkMessage.Content;
 
                     //return retNetworkMessage;
                     return ReadMessage();
@@ -144,12 +144,12 @@ namespace BaseNetworkArchitecture.Common
 
         public bool Connect(IPAddress ipAddress, int port)
         {
-            if(Client.Connected)
+            if (Client.Connected)
                 throw new InvalidOperationException("Connection is already exist");
             try
             {
-                if(Client == null)
-                    Client=new TcpClient();
+                if (Client == null)
+                    Client = new TcpClient();
 
                 Client.Connect(ipAddress, port);
                 return true;
@@ -181,17 +181,7 @@ namespace BaseNetworkArchitecture.Common
 
         public event EventHandler<MessageEventArgs> MessageRecievedEvent;
 
-        private void RunMessageRecievedEvent(MessageEventArgs e)
-        {
-            MessageRecievedEvent?.Invoke(this, e);
-        }
-
         public event EventHandler<BreakConnectionEventArgs> BreakConnectionEvent;
-
-        private void RunBreakConnection(BreakConnectionEventArgs e)
-        {
-            BreakConnectionEvent?.Invoke(this,e);
-        }
 
         public void StartReadMessages()
         {
@@ -213,7 +203,7 @@ namespace BaseNetworkArchitecture.Common
             catch (SocketException ex)
             {
                 Logger?.Log(ex);
-                RunBreakConnection(new BreakConnectionEventArgs()
+                RunBreakConnection(new BreakConnectionEventArgs
                 {
                     DisconnectReason = ex.ErrorCode.ToString()
                 });
@@ -222,6 +212,16 @@ namespace BaseNetworkArchitecture.Common
             {
                 Logger?.Log(ex.Message);
             }
+        }
+
+        private void RunMessageRecievedEvent(MessageEventArgs e)
+        {
+            MessageRecievedEvent?.Invoke(this, e);
+        }
+
+        private void RunBreakConnection(BreakConnectionEventArgs e)
+        {
+            BreakConnectionEvent?.Invoke(this, e);
         }
 
         private void ReadCallback(IAsyncResult asyncResult)
@@ -235,19 +235,19 @@ namespace BaseNetworkArchitecture.Common
 
                 if (msgSize > 0)
                 {
-                    byte[] flagBuff = new byte[1];
+                    var flagBuff = new byte[1];
                     Client.GetStream().Read(flagBuff, 0, flagBuff.Length);
 
-                    int messageLength =
+                    var messageLength =
                         int.Parse(recivedNetworkMessage.Encoder.GetString(clientState.RcvBuffer));
-                    byte[] messageBuffer = new byte[messageLength];
+                    var messageBuffer = new byte[messageLength];
 
-                    int buffCount = 0;
-                    int bufferReadChange = messageBuffer.Length;
+                    var buffCount = 0;
+                    var bufferReadChange = messageBuffer.Length;
 
                     while (buffCount != messageLength)
                     {
-                        int bytesRead =
+                        var bytesRead =
                             Client.GetStream().Read(messageBuffer, buffCount, bufferReadChange);
                         buffCount += bytesRead;
                         bufferReadChange -= bytesRead;
@@ -265,7 +265,9 @@ namespace BaseNetworkArchitecture.Common
                         _previousMessage = "";
                     }
                     else
+                    {
                         _previousMessage += recivedNetworkMessage.Content;
+                    }
 
                     clientState = new ClientState(Client, 6);
 

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using GameData.Network;
 using GameData.Network.Messages;
 using Server.Controllers;
@@ -13,9 +9,9 @@ namespace Server.Network.Controllers.MessageHandlers
 {
     public class RegistrationMessageHandler : MessageHandlerBase<RegistrationMessage>
     {
-        public override IContent Execute(IContent content,object sender = null)
+        public override IContent Execute(IContent content, object sender = null)
         {
-            if(!(content is RegistrationMessage))
+            if (!(content is RegistrationMessage))
                 throw new InvalidOperationException();
 
             var message = (RegistrationMessage) content;
@@ -28,7 +24,7 @@ namespace Server.Network.Controllers.MessageHandlers
             }
             catch (UserServiceException e)
             {
-                return new ErrorMessage(){ErrorInfo = e.Message};
+                return new ErrorMessage {ErrorInfo = e.Message};
             }
         }
     }

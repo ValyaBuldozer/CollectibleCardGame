@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using GameData.Controllers.Global;
 using GameData.Controllers.PlayerTurn;
 using GameData.Enums;
@@ -25,7 +21,7 @@ namespace GameData.Tests.Gameplay
             var firstDeck = testCards.FirstRandomDeck;
             var secondDeck = testCards.FirstRandomDeck;
 
-            Container container = new Container();
+            var container = new Container();
             container.Initialize(TestGameSettings.Get);
             var observerRepository = container.Get<ObserverActionRepository>();
             var turnDispatcher = container.Get<IPlayerTurnDispatcher>();
@@ -48,7 +44,7 @@ namespace GameData.Tests.Gameplay
                 o => o.Type == ObserverActionType.TurnStart);
 
             Assert.IsNotNull(secondTurnObserver);
-            Assert.AreNotEqual(currentPlayer,turnDispatcher.CurrentPlayer);
+            Assert.AreNotEqual(currentPlayer, turnDispatcher.CurrentPlayer);
         }
 
         [TestMethod]
@@ -58,7 +54,7 @@ namespace GameData.Tests.Gameplay
             var firstDeck = testCards.FirstRandomDeck;
             var secondDeck = testCards.FirstRandomDeck;
 
-            Container container = new Container();
+            var container = new Container();
             container.Initialize(TestGameSettings.Get);
             var observerRepository = container.Get<ObserverActionRepository>();
             var turnDispatcher = container.Get<IPlayerTurnDispatcher>();

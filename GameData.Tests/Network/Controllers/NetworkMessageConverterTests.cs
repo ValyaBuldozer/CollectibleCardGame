@@ -1,15 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using BaseNetworkArchitecture.Common.Messages;
 using GameData.Enums;
-using GameData.Models;
 using GameData.Models.Cards;
 using GameData.Models.Observer;
 using GameData.Models.PlayerTurn;
-using GameData.Models.Units;
 using GameData.Network;
 using GameData.Network.Messages;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -22,9 +16,9 @@ namespace GameData.Tests.Network.Controllers
         [TestMethod]
         public void SerializeTest()
         {
-            NetworkMessageConverter converter = new NetworkMessageConverter();
+            var converter = new NetworkMessageConverter();
             //var networkMessage = new NetworkMessage();
-            MessageBase messageBase = new MessageBase(MessageBaseType.LogInMessage,new LogInMessage()
+            var messageBase = new MessageBase(MessageBaseType.LogInMessage, new LogInMessage
             {
                 Username = "test",
                 Password = "test"
@@ -38,10 +32,10 @@ namespace GameData.Tests.Network.Controllers
         [TestMethod]
         public void Deserialize()
         {
-            NetworkMessageConverter converter = new NetworkMessageConverter();
+            var converter = new NetworkMessageConverter();
             var networkMessage = new NetworkMessage(
                 "{\"Type\":0,\"Content\":{\"Username\":\"test\",\"Password\":\"test\",\"AnswerData\":null}}");
-            MessageBase result = new MessageBase(MessageBaseType.LogInMessage, new LogInMessage()
+            var result = new MessageBase(MessageBaseType.LogInMessage, new LogInMessage
             {
                 Username = "test",
                 Password = "test"
@@ -55,24 +49,24 @@ namespace GameData.Tests.Network.Controllers
         [TestMethod]
         public void DeserializeHandlerTest()
         {
-            NetworkMessageConverter converter =
+            var converter =
                 new NetworkMessageConverter {LogInMessageHandlerBase = new TestLogInMessageHandler()};
             var networkMessage = new NetworkMessage(
                 "{\"Type\":0,\"Content\":{\"Username\":\"test\",\"Password\":\"test\",\"AnswerData\":null}}");
             var deserializedMessage = converter.DeserializeMessage(networkMessage);
 
-            IContent handlerResult = deserializedMessage.HandleMessage(null);
+            var handlerResult = deserializedMessage.HandleMessage(null);
 
-            Assert.IsTrue((handlerResult is LogInMessage message) && (message.Username == "test"));
+            Assert.IsTrue(handlerResult is LogInMessage message && message.Username == "test");
         }
 
 
         [TestMethod]
         public void PlayerTurnDeserializeTest()
         {
-            NetworkMessageConverter converter = new NetworkMessageConverter();
-            MessageBase message = new MessageBase(MessageBaseType.PlayerTurnMessage,
-                new PlayerTurnMessage()
+            var converter = new NetworkMessageConverter();
+            var message = new MessageBase(MessageBaseType.PlayerTurnMessage,
+                new PlayerTurnMessage
                 {
                     PlayerTurn = new CardDeployPlayerTurn(null, new UnitCard())
                 });
@@ -81,15 +75,15 @@ namespace GameData.Tests.Network.Controllers
 
             var deserialized = converter.DeserializeMessage(json);
 
-            Assert.AreEqual(message.Content as PlayerTurnMessage,deserialized.Content as PlayerTurnMessage);
+            Assert.AreEqual(message.Content as PlayerTurnMessage, deserialized.Content as PlayerTurnMessage);
         }
 
         [TestMethod]
         public void ObserverActionDeserializeTest()
         {
-            NetworkMessageConverter converter = new NetworkMessageConverter();
-            MessageBase message = new MessageBase(MessageBaseType.ObserverActionMessage,
-                new ObserverActionMessage()
+            var converter = new NetworkMessageConverter();
+            var message = new MessageBase(MessageBaseType.ObserverActionMessage,
+                new ObserverActionMessage
                 {
                     ObserverAction = new CardDeployObserverAction(new UnitCard(), null)
                 });
@@ -112,6 +106,4 @@ namespace GameData.Tests.Network.Controllers
             return (LogInMessage) content;
         }
     }
-
-
 }

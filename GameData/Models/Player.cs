@@ -1,17 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using GameData.Enums;
 using GameData.Models.Cards;
 using GameData.Models.Units;
-using Newtonsoft.Json;
 
 namespace GameData.Models
 {
     public class Player : Entity
     {
+        public Player(UnitCard hero)
+        {
+            EntityType = EntityType.Player;
+            HeroUnit = new HeroUnit(this, hero);
+            HandCards = new List<Card>();
+            TableUnits = new List<Unit>();
+            State = new PlayerState {Player = this};
+        }
+
         public string Username { set; get; }
 
         public HeroUnit HeroUnit { get; set; }
@@ -21,15 +25,6 @@ namespace GameData.Models
         public List<Unit> TableUnits { set; get; }
 
         public PlayerState State { set; get; }
-
-        public Player(UnitCard hero)
-        {
-            EntityType = EntityType.Player;
-            HeroUnit = new HeroUnit(this,hero);
-            HandCards = new List<Card>();
-            TableUnits = new List<Unit>();
-            State = new PlayerState(){Player = this};
-        }
 
         protected bool Equals(Player other)
         {
@@ -42,7 +37,7 @@ namespace GameData.Models
         {
             unchecked
             {
-                var hashCode = (Username != null ? Username.GetHashCode() : 0);
+                var hashCode = Username != null ? Username.GetHashCode() : 0;
                 hashCode = (hashCode * 397) ^ (HeroUnit != null ? HeroUnit.GetHashCode() : 0);
                 hashCode = (hashCode * 397) ^ (HandCards != null ? HandCards.GetHashCode() : 0);
                 hashCode = (hashCode * 397) ^ (TableUnits != null ? TableUnits.GetHashCode() : 0);
@@ -54,7 +49,7 @@ namespace GameData.Models
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
+            if (obj.GetType() != GetType()) return false;
             return Equals((Player) obj);
         }
 

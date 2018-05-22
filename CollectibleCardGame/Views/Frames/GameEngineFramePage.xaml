@@ -1,49 +1,49 @@
 ﻿<Page x:Class="CollectibleCardGame.Views.Frames.GameEngineFramePage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:CollectibleCardGame.Views.Frames"
       xmlns:uc="clr-namespace:CollectibleCardGame.Views.UserControls"
-      mc:Ignorable="d" 
+      mc:Ignorable="d"
       d:DesignHeight="450" d:DesignWidth="900"
       Title="GameEngineFramePage"
       Background="White">
 
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="/Images/cemeteryBackground.jpg" Stretch="UniformToFill" Opacity="0.9"/>
+            <ImageBrush ImageSource="/Images/cemeteryBackground.jpg" Stretch="UniformToFill" Opacity="0.9" />
         </Grid.Background>
-        <Button Content="{Binding CurrentPlayerUsername}" VerticalAlignment="Center" 
+        <Button Content="{Binding CurrentPlayerUsername}" VerticalAlignment="Center"
                 HorizontalAlignment="Right"
                 Height="25" Width="150"
                 Command="{Binding TransferTurnCommand}"
-                Style="{DynamicResource ButtonNeutralStyle}"/>
-        
+                Style="{DynamicResource ButtonNeutralStyle}" />
+
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="1.5*"/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition Height="1.5*"/>
+                <RowDefinition Height="1.5*" />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition Height="1.5*" />
             </Grid.RowDefinitions>
-             <!--Enemy cards-->
+            <!--Enemy cards-->
             <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="5*"/>
-                    <ColumnDefinition Width="250"/>
+                    <ColumnDefinition Width="5*" />
+                    <ColumnDefinition Width="250" />
                 </Grid.ColumnDefinitions>
                 <ItemsControl Grid.Column="0" ItemsSource="{Binding Path=EnemyCards,Mode=TwoWay}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <StackPanel HorizontalAlignment="Stretch" Orientation="Horizontal"/>
+                            <StackPanel HorizontalAlignment="Stretch" Orientation="Horizontal" />
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Viewbox Stretch="Fill" Width="110" VerticalAlignment="Stretch" Margin="0,0,-40,0">
                                 <uc:CardBackUserControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                                                        Width="220" Height="420"/>
+                                                        Width="220" Height="420" />
                             </Viewbox>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
@@ -51,43 +51,44 @@
                 <!--Enemy player-->
                 <Viewbox Grid.Column="1" Height="205" Width="250" VerticalAlignment="Stretch">
                     <Button Command="{Binding EnemyUnitCommand}" CommandParameter="{Binding EnemyViewModel}">
-                        <uc:PlayerUserControl Height="330" Width="400" 
+                        <uc:PlayerUserControl Height="330" Width="400"
                                               DataContext="{Binding Path=EnemyViewModel,
-                                                UpdateSourceTrigger=PropertyChanged}"/>
+                                                UpdateSourceTrigger=PropertyChanged}" />
                     </Button>
                 </Viewbox>
             </Grid>
-            
+
             <!--Enemy units-->
-            <ItemsControl Grid.Row="1" ItemsSource="{Binding Path=EnemyUnits,Mode=TwoWay}" >
+            <ItemsControl Grid.Row="1" ItemsSource="{Binding Path=EnemyUnits,Mode=TwoWay}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal"
-                                    VerticalAlignment="Stretch"/>
+                                    VerticalAlignment="Stretch" />
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
                             <StackPanel>
-                                <Viewbox Stretch="Fill" VerticalAlignment="Stretch" Width="96"  Margin="5,0">
-                                    <Button Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, 
-                                            AncestorType={x:Type Page}}, Path=ViewModel.EnemyUnitCommand}" 
-                                            CommandParameter="{Binding}"
-                                            BorderThickness="0" BorderBrush="{x:Null}" Background="{x:Null}">
+                                <Viewbox Stretch="Fill" VerticalAlignment="Stretch" Width="96" Margin="5,0">
+                                    <Button
+                                        Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, 
+                                            AncestorType={x:Type Page}}, Path=ViewModel.EnemyUnitCommand}"
+                                        CommandParameter="{Binding}"
+                                        BorderThickness="0" BorderBrush="{x:Null}" Background="{x:Null}">
                                         <Button.ToolTip>
                                             <ToolTip Background="{x:Null}" BorderThickness="0"
                                                      Width="235" Height="425"
                                                      HasDropShadow="True">
-                                                <Viewbox  Stretch="Fill" Width="220" Height="410">
+                                                <Viewbox Stretch="Fill" Width="220" Height="410">
                                                     <uc:CardUserControl Width="220" Height="410"
-                                                                        DataContext="{Binding Path=BaseCardViewModel}"/>
+                                                                        DataContext="{Binding Path=BaseCardViewModel}" />
                                                 </Viewbox>
                                             </ToolTip>
                                         </Button.ToolTip>
                                         <uc:UnitCardMiniUserControl Width="210" Height="250"
-                                                                    HorizontalAlignment="Stretch" 
-                                                                    VerticalAlignment="Stretch"/>
+                                                                    HorizontalAlignment="Stretch"
+                                                                    VerticalAlignment="Stretch" />
                                     </Button>
                                 </Viewbox>
                             </StackPanel>
@@ -97,34 +98,34 @@
             </ItemsControl>
 
             <!--Player units-->
-            <ItemsControl Grid.Row="2" ItemsSource="{Binding Path=PlayerUnits,Mode=TwoWay}" >
+            <ItemsControl Grid.Row="2" ItemsSource="{Binding Path=PlayerUnits,Mode=TwoWay}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal"/>
+                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" />
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
                             <Viewbox Stretch="Fill" VerticalAlignment="Stretch" Width="96" Margin="5,0">
-                                <Button Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, 
-                                    AncestorType={x:Type Page}}, Path=ViewModel.PlayerUnitCommand}" 
-                                        CommandParameter="{Binding}" Background="{x:Null}"
-                                        BorderThickness="0" BorderBrush="{x:Null}"
-                                        >
+                                <Button
+                                    Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, 
+                                    AncestorType={x:Type Page}}, Path=ViewModel.PlayerUnitCommand}"
+                                    CommandParameter="{Binding}" Background="{x:Null}"
+                                    BorderThickness="0" BorderBrush="{x:Null}">
                                     <Button.ToolTip>
                                         <ToolTip Background="{x:Null}" BorderThickness="0"
                                                  Width="235" Height="425"
                                                  HasDropShadow="True">
-                                            <Viewbox  Stretch="Fill" Width="220" Height="410">
+                                            <Viewbox Stretch="Fill" Width="220" Height="410">
                                                 <uc:CardUserControl Width="220" Height="410"
-                                                                    DataContext="{Binding Path=BaseCardViewModel}"/>
+                                                                    DataContext="{Binding Path=BaseCardViewModel}" />
                                             </Viewbox>
                                         </ToolTip>
                                     </Button.ToolTip>
                                     <uc:UnitCardMiniUserControl Height="250" Width="210"
-                                                            HorizontalAlignment="Stretch" 
-                                                                VerticalAlignment="Stretch"/>
+                                                                HorizontalAlignment="Stretch"
+                                                                VerticalAlignment="Stretch" />
                                 </Button>
                             </Viewbox>
                         </StackPanel>
@@ -134,37 +135,36 @@
 
             <Grid Grid.Row="3">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="250"/>
-                    <ColumnDefinition Width="5*"/>
+                    <ColumnDefinition Width="250" />
+                    <ColumnDefinition Width="5*" />
                 </Grid.ColumnDefinitions>
                 <!--Player-->
                 <Viewbox VerticalAlignment="Stretch" Width="250">
                     <Button Command="{Binding PlayerUnitCommand}" CommandParameter="{Binding PlayerViewModel}"
                             BorderBrush="{x:Null}" Background="{x:Null}">
-                        <uc:PlayerUserControl Height="330" Width="400" 
+                        <uc:PlayerUserControl Height="330" Width="400"
                                               DataContext="{Binding Path=PlayerViewModel,
-                            UpdateSourceTrigger=PropertyChanged}"/>
+                            UpdateSourceTrigger=PropertyChanged}" />
                     </Button>
                 </Viewbox>
                 <!-- Player cards-->
                 <ItemsControl Grid.Column="1" ItemsSource="{Binding Path=PlayerCards,Mode=TwoWay}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <StackPanel HorizontalAlignment="Stretch" Orientation="Horizontal"
-                                    />
+                            <StackPanel HorizontalAlignment="Stretch" Orientation="Horizontal" />
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Viewbox Stretch="Fill" Width="110" Height="205" 
+                            <Viewbox Stretch="Fill" Width="110" Height="205"
                                      MouseEnter="ViewBoxOnMouseEnter"
-                                     MouseLeave="ViewBoxOnMouseLeave" Margin="0"
-                                     >
-                                <Button Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, 
-                                    AncestorType={x:Type Page}}, Path=ViewModel.CardDeployCommand}" 
-                                    CommandParameter="{Binding}" Background="{x:Null}" 
+                                     MouseLeave="ViewBoxOnMouseLeave" Margin="0">
+                                <Button
+                                    Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, 
+                                    AncestorType={x:Type Page}}, Path=ViewModel.CardDeployCommand}"
+                                    CommandParameter="{Binding}" Background="{x:Null}"
                                     BorderThickness="0" BorderBrush="{x:Null}">
-                                    <uc:CardUserControl Width="220" Height="410"/>
+                                    <uc:CardUserControl Width="220" Height="410" />
                                 </Button>
                             </Viewbox>
                         </DataTemplate>
@@ -174,4 +174,3 @@
         </Grid>
     </Grid>
 </Page>
-

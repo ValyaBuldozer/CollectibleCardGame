@@ -1,11 +1,11 @@
 ﻿<Page x:Class="CollectibleCardGame.Views.Frames.ConnectionErrorFramePage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:CollectibleCardGame.Views.Frames"
       xmlns:framesShell="clr-namespace:CollectibleCardGame.Views.FramesShell"
-      mc:Ignorable="d" 
+      mc:Ignorable="d"
       d:DesignHeight="300" d:DesignWidth="300"
       Title="ConnectionErrorFramePage">
 
@@ -14,6 +14,6 @@
                 VerticalAlignment="Center" Width="150" Height="25" Style="{DynamicResource ButtonNeutralStyle}"
                 Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, 
                                 AncestorType={x:Type framesShell:LogInFramePageShell}},
-            Path=ViewModel.ReconnectCommand}"/>
+            Path=ViewModel.ReconnectCommand}" />
     </Grid>
 </Page>

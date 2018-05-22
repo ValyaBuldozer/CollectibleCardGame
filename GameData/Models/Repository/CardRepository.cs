@@ -1,10 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GameData.Enums;
-using GameData.Models.Action;
 using GameData.Models.Cards;
 using Newtonsoft.Json;
 using Unity.Attributes;
@@ -13,8 +8,6 @@ namespace GameData.Models.Repository
 {
     public class CardRepository
     {
-        public List<Card> Collection { private set; get; }
-
         public CardRepository()
         {
             Collection = new List<Card>();
@@ -23,7 +16,7 @@ namespace GameData.Models.Repository
         [InjectionConstructor]
         public CardRepository(string json)
         {
-            JsonSerializerSettings settings = new JsonSerializerSettings()
+            var settings = new JsonSerializerSettings
             {
                 TypeNameHandling = TypeNameHandling.Objects
             };
@@ -34,6 +27,8 @@ namespace GameData.Models.Repository
         {
             Collection = new List<Card>(collection);
         }
+
+        public List<Card> Collection { get; }
 
         public void Update()
         {

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using GameData.Controllers.Data;
 using GameData.Models.Cards;
 using GameData.Models.Repository;
@@ -17,20 +13,20 @@ namespace GameData.Tests.Controllers.Integration.Data
         [TestMethod]
         public void ShuffleTest()
         {
-            TestCards testCards = new TestCards();
-            DeckController controller = new DeckController(new DeckRepository());
+            var testCards = new TestCards();
+            var controller = new DeckController(new DeckRepository());
 
-            Stack<Card> deck = new Stack<Card>();
+            var deck = new Stack<Card>();
             deck.Push(testCards.FirstCard);
             deck.Push(testCards.SecondCard);
             deck.Push(testCards.FirstCard);
             deck.Push(testCards.SecondCard);
             deck.Push(testCards.SecondCard);
 
-            controller.AddDeck("test",deck);
+            controller.AddDeck("test", deck);
             controller.ShuffleDeck("test");
 
-            Assert.AreNotEqual(deck,controller.GetDeck("test"));
+            Assert.AreNotEqual(deck, controller.GetDeck("test"));
         }
     }
 }

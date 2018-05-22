@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-using CollectibleCardGame.Network.Controllers;
+﻿using System.Net;
 
 namespace CollectibleCardGame.Logic.Controllers
 {
@@ -13,6 +7,6 @@ namespace CollectibleCardGame.Logic.Controllers
         void OnStartup();
         void OnConnectionLost();
         void OnClose();
-        bool TryConnect(IPAddress adress,int port);
+        bool TryConnect(IPAddress adress, int port);
     }
 }

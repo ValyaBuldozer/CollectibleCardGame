@@ -12,7 +12,7 @@ namespace GameData.Models.Action
 
         protected bool Equals(GameActionInfo other)
         {
-            return Parameter == other.Parameter && Action.ID == other.Action.ID 
+            return Parameter == other.Parameter && Action.ID == other.Action.ID
                                                 && ParameterType == other.ParameterType;
         }
 
@@ -20,7 +20,7 @@ namespace GameData.Models.Action
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
+            if (obj.GetType() != GetType()) return false;
             return Equals((GameActionInfo) obj);
         }
 
@@ -34,6 +34,5 @@ namespace GameData.Models.Action
                 return hashCode;
             }
         }
-
     }
 }

@@ -1,134 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using GameData.Models.Cards;
 
 namespace GameData.Tests.TestData
 {
     public class TestCards
     {
-        public UnitCard FirstCard { set; get; }
-
-        public UnitCard SecondCard { set; get; }
-
-        public UnitCard AttackCard { set; get; }
-        public UnitCard DefendCard { set; get; }
-
-        public Stack<Card> FirstRandomDeck => new Stack<Card>(new List<Card>()
-        {
-            new UnitCard()
-            {
-            ID = 1,
-            Name = "test1",
-            BaseHP = 30,
-            AttackPriority = 1,
-            BaseAttack = 0,
-            Cost = 0,
-            Description = "Test"
-            },
-            new UnitCard()
-            {
-            ID = 1,
-            Name = "test1",
-            BaseHP = 30,
-            AttackPriority = 1,
-            BaseAttack = 0,
-            Cost = 0,
-            Description = "Test"
-            },
-            new UnitCard()
-            {
-                ID = 1,
-                Name = "test1",
-                BaseHP = 30,
-                AttackPriority = 1,
-                BaseAttack = 0,
-                Cost = 0,
-                Description = "Test"
-            },
-            new SpellCard()
-            {
-                ID = 3,
-                Name = "SpellTest1",
-                Description = "test"
-            },
-            new SpellCard()
-            {
-                ID = 3,
-                Name = "SpellTest1",
-                Description = "test"
-            },
-            new SpellCard()
-            {
-                ID = 3,
-                Name = "SpellTest1",
-                Description = "test"
-            },
-            new SpellCard()
-            {
-                ID = 3,
-                Name = "SpellTest1",
-                Description = "test"
-            },
-            new SpellCard()
-            {
-                ID = 3,
-                Name = "SpellTest1",
-                Description = "test"
-            },
-            new SpellCard()
-            {
-                ID = 3,
-                Name = "SpellTest1",
-                Description = "test"
-            },
-            new UnitCard()
-            {
-                ID = 2,
-                Name = "test2",
-                BaseHP = 40,
-                AttackPriority = 1,
-                BaseAttack = 0,
-                Cost = 0,
-                Description = "Test"
-            },
-            new UnitCard()
-            {
-                ID = 2,
-                Name = "test2",
-                BaseHP = 40,
-                AttackPriority = 1,
-                BaseAttack = 0,
-                Cost = 0,
-                Description = "Test"
-            },
-            new UnitCard()
-            {
-                ID = 2,
-                Name = "test2",
-                BaseHP = 40,
-                AttackPriority = 1,
-                BaseAttack = 0,
-                Cost = 0,
-                Description = "Test"
-            },
-            new UnitCard()
-            {
-                ID = 2,
-                Name = "test2",
-                BaseHP = 40,
-                AttackPriority = 1,
-                BaseAttack = 0,
-                Cost = 0,
-                Description = "Test"
-            }
-        });
-
         public TestCards()
         {
-            FirstCard = new UnitCard()
+            FirstCard = new UnitCard
             {
                 ID = 1,
                 Name = "test1",
@@ -138,7 +17,7 @@ namespace GameData.Tests.TestData
                 Cost = 0,
                 Description = "Test"
             };
-            SecondCard = new UnitCard()
+            SecondCard = new UnitCard
             {
                 ID = 2,
                 Name = "test2",
@@ -150,17 +29,17 @@ namespace GameData.Tests.TestData
             };
 
 
-            AttackCard = new UnitCard()
+            AttackCard = new UnitCard
             {
                 ID = 3,
                 Name = "test3",
                 BaseHP = 10,
                 AttackPriority = 1,
-                BaseAttack =10,
+                BaseAttack = 10,
                 Cost = 0,
                 Description = "Test"
             };
-            DefendCard = new UnitCard()
+            DefendCard = new UnitCard
             {
                 ID = 4,
                 Name = "test4",
@@ -171,5 +50,122 @@ namespace GameData.Tests.TestData
                 Description = "Test"
             };
         }
+
+        public UnitCard FirstCard { set; get; }
+
+        public UnitCard SecondCard { set; get; }
+
+        public UnitCard AttackCard { set; get; }
+        public UnitCard DefendCard { set; get; }
+
+        public Stack<Card> FirstRandomDeck => new Stack<Card>(new List<Card>
+        {
+            new UnitCard
+            {
+                ID = 1,
+                Name = "test1",
+                BaseHP = 30,
+                AttackPriority = 1,
+                BaseAttack = 0,
+                Cost = 0,
+                Description = "Test"
+            },
+            new UnitCard
+            {
+                ID = 1,
+                Name = "test1",
+                BaseHP = 30,
+                AttackPriority = 1,
+                BaseAttack = 0,
+                Cost = 0,
+                Description = "Test"
+            },
+            new UnitCard
+            {
+                ID = 1,
+                Name = "test1",
+                BaseHP = 30,
+                AttackPriority = 1,
+                BaseAttack = 0,
+                Cost = 0,
+                Description = "Test"
+            },
+            new SpellCard
+            {
+                ID = 3,
+                Name = "SpellTest1",
+                Description = "test"
+            },
+            new SpellCard
+            {
+                ID = 3,
+                Name = "SpellTest1",
+                Description = "test"
+            },
+            new SpellCard
+            {
+                ID = 3,
+                Name = "SpellTest1",
+                Description = "test"
+            },
+            new SpellCard
+            {
+                ID = 3,
+                Name = "SpellTest1",
+                Description = "test"
+            },
+            new SpellCard
+            {
+                ID = 3,
+                Name = "SpellTest1",
+                Description = "test"
+            },
+            new SpellCard
+            {
+                ID = 3,
+                Name = "SpellTest1",
+                Description = "test"
+            },
+            new UnitCard
+            {
+                ID = 2,
+                Name = "test2",
+                BaseHP = 40,
+                AttackPriority = 1,
+                BaseAttack = 0,
+                Cost = 0,
+                Description = "Test"
+            },
+            new UnitCard
+            {
+                ID = 2,
+                Name = "test2",
+                BaseHP = 40,
+                AttackPriority = 1,
+                BaseAttack = 0,
+                Cost = 0,
+                Description = "Test"
+            },
+            new UnitCard
+            {
+                ID = 2,
+                Name = "test2",
+                BaseHP = 40,
+                AttackPriority = 1,
+                BaseAttack = 0,
+                Cost = 0,
+                Description = "Test"
+            },
+            new UnitCard
+            {
+                ID = 2,
+                Name = "test2",
+                BaseHP = 40,
+                AttackPriority = 1,
+                BaseAttack = 0,
+                Cost = 0,
+                Description = "Test"
+            }
+        });
     }
 }

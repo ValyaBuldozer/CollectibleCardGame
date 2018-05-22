@@ -1,24 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 using CollectibleCardGame.Views.Frames;
 using CollectibleCardGame.Views.FramesShell;
-using Unity.Attributes;
 
 namespace CollectibleCardGame.ViewModels.Windows
 {
     public class MainWindowViewModel : BaseViewModel
     {
-        private Page _framePage;
-        private bool _isBusy;
-        private string _busyMessage;
-        private string _title;
+        private readonly GameEngineFramePage _gameEngineFramePage;
         private readonly LogInFramePageShell _logInFramePageShell;
         private readonly MainMenuFramePage _mainMenuFramePage;
-        private readonly GameEngineFramePage _gameEngineFramePage;
+        private string _busyMessage;
+        private Page _framePage;
+        private bool _isBusy;
+        private string _title;
+
+        public MainWindowViewModel(LogInFramePageShell logInFramePageShell,
+            MainMenuFramePage mainMenuFramePage, GameEngineFramePage gameEngineFramePage)
+        {
+            _logInFramePageShell = logInFramePageShell;
+            _mainMenuFramePage = mainMenuFramePage;
+            _gameEngineFramePage = gameEngineFramePage;
+            _framePage = _logInFramePageShell;
+
+            _title = "Collectible card game";
+        }
 
         public Page FramePage
         {
@@ -58,17 +63,6 @@ namespace CollectibleCardGame.ViewModels.Windows
                 _busyMessage = value;
                 NotifyPropertyChanged(nameof(BusyMessage));
             }
-        }
-
-        public MainWindowViewModel(LogInFramePageShell logInFramePageShell,
-            MainMenuFramePage mainMenuFramePage,GameEngineFramePage gameEngineFramePage)
-        {
-            _logInFramePageShell = logInFramePageShell;
-            _mainMenuFramePage = mainMenuFramePage;
-            _gameEngineFramePage = gameEngineFramePage;
-            _framePage = _logInFramePageShell;
-
-            _title = "Collectible card game";
         }
 
         public void SetLogInFrame()

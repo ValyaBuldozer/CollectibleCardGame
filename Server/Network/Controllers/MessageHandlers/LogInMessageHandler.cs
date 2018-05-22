@@ -1,19 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using GameData.Enums;
 using GameData.Network;
 using GameData.Network.Messages;
 using Server.Controllers;
 using Server.Controllers.Repository;
-using Server.Database;
 using Server.Exceptions;
-using Server.Models;
 using Server.Network.Models;
 using Server.Unity;
-using UserInfo = GameData.Network.UserInfo;
 
 namespace Server.Network.Controllers.MessageHandlers
 {
@@ -26,9 +20,9 @@ namespace Server.Network.Controllers.MessageHandlers
             _clientsRepositoryController = clientsRepositoryController;
         }
 
-        public override IContent Execute(IContent content,object sender)
+        public override IContent Execute(IContent content, object sender)
         {
-            if(!(content is LogInMessage))
+            if (!(content is LogInMessage))
                 throw new InvalidOperationException();
 
             var message = (LogInMessage) content;
@@ -38,16 +32,16 @@ namespace Server.Network.Controllers.MessageHandlers
             {
                 var user = UnityKernel.Get<UserService>().LogIn(message.Username, message.Password);
                 if (user == null) return null;
-                
-                    var userInfo = new UserInfo()
-                    {
-                        Username = user.Username,
-                        DarkDeck = user.UserInfo.DarkDeck,
-                        NorthDeck = user.UserInfo.NorthDeck,
-                        SouthDeck = user.UserInfo.SouthDeck
-                    };
-                    message.AnswerData = userInfo;
-                    client.User = user;
+
+                var userInfo = new UserInfo
+                {
+                    Username = user.Username,
+                    DarkDeck = user.UserInfo.DarkDeck,
+                    NorthDeck = user.UserInfo.NorthDeck,
+                    SouthDeck = user.UserInfo.SouthDeck
+                };
+                message.AnswerData = userInfo;
+                client.User = user;
                 client.ClientConnection.IdentificatorTocken = user.Username;
 
                 var awaitingLobby = _clientsRepositoryController.GetCollection.FirstOrDefault(c =>
@@ -58,14 +52,14 @@ namespace Server.Network.Controllers.MessageHandlers
                 {
                     client.CurrentLobby = awaitingLobby;
                     awaitingLobby.OnClientReconnect(client);
-                    return new GameRequestMessage() {Fraction = Fraction.Common,AnswerData = message};
+                    return new GameRequestMessage {Fraction = Fraction.Common, AnswerData = message};
                 }
 
                 return message;
             }
             catch (UserServiceException e)
             {
-                return new ErrorMessage() {ErrorInfo = e.Message};
+                return new ErrorMessage {ErrorInfo = e.Message};
             }
         }
     }

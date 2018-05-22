@@ -7,7 +7,7 @@ namespace BaseNetworkArchitecture.Server
     public interface IServer
     {
         ICollection<IClientConnection> Clients { set; get; }
-        void Start(IPAddress ipAddress,int port);
+        void Start(IPAddress ipAddress, int port);
         void Stop();
         event EventHandler<ClientConnectedEventArgs> ClientConnected;
     }

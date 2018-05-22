@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlTypes;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using GameData.Exceptions;
 using GameData.Models.Action;
 using GameData.Models.Repository;
@@ -29,19 +26,16 @@ namespace GameData.Controllers.Data
             if (idCollection == null)
                 return null;
 
-            List<GameAction> retList = new List<GameAction>();
+            var retList = new List<GameAction>();
 
-            foreach (var id in idCollection)
-            {
-                retList.Add(GetById(id));
-            }
+            foreach (var id in idCollection) retList.Add(GetById(id));
 
             return retList;
         }
 
         public void Add(GameAction item)
         {
-            if(_repository.Collection.Find(a=>a.ID == item.ID) != null)
+            if (_repository.Collection.Find(a => a.ID == item.ID) != null)
                 throw new RepositoryItemAlreadyExistsExcepction();
 
             _repository.Collection.Add(item);
@@ -69,7 +63,7 @@ namespace GameData.Controllers.Data
 
         public void Edit(GameAction element, int id)
         {
-            if(element.ID != id)
+            if (element.ID != id)
                 throw new InvalidOperationException();
 
             _repository.Collection.Remove(_repository.Collection.FirstOrDefault(a => a.ID == id));

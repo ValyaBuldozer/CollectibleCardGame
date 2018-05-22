@@ -1,18 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GameData.Enums;
+﻿using GameData.Enums;
 
 namespace GameData.Models.Observer
 {
     public class PlayerStateChangesObserverAction : ObserverAction
     {
-        public string PlayerUsername { set; get; }
-
-        public PlayerState PlayerState { set; get; }
-
         public PlayerStateChangesObserverAction(string username, PlayerState state)
         {
             PlayerState = state;
@@ -24,5 +15,9 @@ namespace GameData.Models.Observer
         {
             Type = ObserverActionType.PlayerStateChange;
         }
+
+        public string PlayerUsername { set; get; }
+
+        public PlayerState PlayerState { set; get; }
     }
 }

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
 using BaseNetworkArchitecture.Common;
@@ -35,14 +31,12 @@ namespace CollectibleCardGame
             {
                 _uiDispatcher.Invoke(() =>
                 {
-                    MessageBox.Show(UnityKernel.Get<MainWindow>(),message,"Warning",
-                        MessageBoxButton.OK,MessageBoxImage.Asterisk);
+                    MessageBox.Show(UnityKernel.Get<MainWindow>(), message, "Warning",
+                        MessageBoxButton.OK, MessageBoxImage.Asterisk);
                 });
-
             }
             catch (InvalidOperationException e)
             {
-                
             }
         }
 

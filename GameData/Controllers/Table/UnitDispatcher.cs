@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using GameData.Controllers.Data;
 using GameData.Models;
 using GameData.Models.Cards;
@@ -13,9 +9,9 @@ using GameData.Models.Units;
 namespace GameData.Controllers.Table
 {
     public interface IUnitDispatcher
-    { 
+    {
         /// <summary>
-        /// Спавн юнита при розыгрше карты (с боевым кличем)
+        ///     Спавн юнита при розыгрше карты (с боевым кличем)
         /// </summary>
         /// <param name="card">Карта</param>
         /// <param name="sender">Игрок, разыгравший карту</param>
@@ -24,26 +20,26 @@ namespace GameData.Controllers.Table
         bool CardPlayedSpawn(UnitCard card, Player sender, Unit actionTarget);
 
         /// <summary>
-        /// Уничтожить выбранного юнита
+        ///     Уничтожить выбранного юнита
         /// </summary>
         /// <param name="unit"></param>
         void Kill(Unit unit);
 
         /// <summary>
-        /// Удаляет юнита со стола(без срабатывания GameAction)
+        ///     Удаляет юнита со стола(без срабатывания GameAction)
         /// </summary>
         /// <param name="unit"></param>
         void Remove(Unit unit);
 
         /// <summary>
-        /// Сфоримровать юнита из карты
+        ///     Сфоримровать юнита из карты
         /// </summary>
         /// <param name="card"></param>
         /// <returns></returns>
         Unit GetUnit(UnitCard card);
 
         /// <summary>
-        /// Спавн юнита без боевого клича
+        ///     Спавн юнита без боевого клича
         /// </summary>
         /// <param name="card">Карта юнита</param>
         /// <param name="sender">Игрок</param>
@@ -51,24 +47,24 @@ namespace GameData.Controllers.Table
         bool Spawn(UnitCard card, Player sender);
 
         /// <summary>
-        /// Выполняет атаку юнита
+        ///     Выполняет атаку юнита
         /// </summary>
         /// <param name="sender">Атакующий юнит</param>
         /// <param name="target">Цель атаки</param>
         void HandleAttack(Unit sender, Unit target);
 
         /// <summary>
-        /// Событие спавна юнита
+        ///     Событие спавна юнита
         /// </summary>
         event EventHandler<UnitSpawnObserverAction> OnUnitSpawn;
 
         /// <summary>
-        /// Событие смерти юнита
+        ///     Событие смерти юнита
         /// </summary>
         event EventHandler<UnitDeathObserverAction> OnUnitDeath;
 
         /// <summary>
-        /// Событие изменения состояия юнита - урон, хил, бафф
+        ///     Событие изменения состояия юнита - урон, хил, бафф
         /// </summary>
         event EventHandler<EntityStateChangeObserverAction> OnUnitStateChange;
 
@@ -81,7 +77,7 @@ namespace GameData.Controllers.Table
         private readonly IDataRepositoryController<Entity> _entityRepositoryController;
         private readonly GameSettings _settings;
 
-        public UnitDispatcher(IGameActionController actionController, 
+        public UnitDispatcher(IGameActionController actionController,
             IDataRepositoryController<Entity> entityRepositoryController,
             GameSettings settings)
         {
@@ -95,7 +91,7 @@ namespace GameData.Controllers.Table
         public event EventHandler<EntityStateChangeObserverAction> OnUnitStateChange;
 
         /// <summary>
-        /// Спавн юнита при розыгрше карты (с боевым кличем)
+        ///     Спавн юнита при розыгрше карты (с боевым кличем)
         /// </summary>
         /// <param name="card">Карта</param>
         /// <param name="sender">Игрок, разыгравший карту</param>
@@ -114,16 +110,16 @@ namespace GameData.Controllers.Table
             unit.State.ZeroHpEvent += OnUnitDies;
             unit.State.PropertyChanged += OnUnitStateChanges;
             unit.Player = sender;
-            _actionController.ExecuteAction(unit.BattleCryActionInfo,unit,actionTarget);
+            _actionController.ExecuteAction(unit.BattleCryActionInfo, unit, actionTarget);
             sender.TableUnits.Add(unit);
             _entityRepositoryController.AddNewItem(unit);
 
-            OnUnitSpawn?.Invoke(this,new UnitSpawnObserverAction(unit,unit.Player.Username));
+            OnUnitSpawn?.Invoke(this, new UnitSpawnObserverAction(unit, unit.Player.Username));
             return true;
         }
 
         /// <summary>
-        /// Спавн юнита без боевого клича
+        ///     Спавн юнита без боевого клича
         /// </summary>
         /// <param name="card">Карта юнита</param>
         /// <param name="sender">Игрок</param>
@@ -144,12 +140,12 @@ namespace GameData.Controllers.Table
             sender.TableUnits.Add(unit);
             _entityRepositoryController.AddNewItem(unit);
 
-            OnUnitSpawn?.Invoke(this,new UnitSpawnObserverAction(unit,unit.Player.Username));
+            OnUnitSpawn?.Invoke(this, new UnitSpawnObserverAction(unit, unit.Player.Username));
             return true;
         }
 
         /// <summary>
-        /// Уничтожает юнита
+        ///     Уничтожает юнита
         /// </summary>
         /// <param name="unit">Юнит</param>
         public void Kill(Unit unit)
@@ -170,27 +166,27 @@ namespace GameData.Controllers.Table
         }
 
         /// <summary>
-        /// Выполняет атаку юнита
+        ///     Выполняет атаку юнита
         /// </summary>
         /// <param name="sender">Атакующий юнит</param>
         /// <param name="target">Цель атаки</param>
         public void HandleAttack(Unit sender, Unit target)
         {
-            if(target.State.AttackPriority == 0)
+            if (target.State.AttackPriority == 0)
                 //атака маскировки
                 return;
 
-            if(target.State.AttackPriority !=2 && target.Player.TableUnits.Exists(u=>u.State.AttackPriority == 2))
+            if (target.State.AttackPriority != 2 && target.Player.TableUnits.Exists(u => u.State.AttackPriority == 2))
                 //есть провокатор у противника
                 return;
 
-            if(sender.Player.Equals(target.Player))
+            if (sender.Player.Equals(target.Player))
                 return;
 
-            if(!sender.State.CanAttack)
+            if (!sender.State.CanAttack)
                 return;
 
-            _actionController.ExecuteAction(sender.OnAttackActionInfo,sender,target);
+            _actionController.ExecuteAction(sender.OnAttackActionInfo, sender, target);
             target.State.RecieveDamage(sender.State.Attack);
 
             sender.State.RecieveDamage(target.State.Attack);
@@ -200,7 +196,7 @@ namespace GameData.Controllers.Table
 
         public Unit GetUnit(UnitCard card)
         {
-            if(card == null)
+            if (card == null)
                 return null;
 
             return new Unit(card)
@@ -209,25 +205,25 @@ namespace GameData.Controllers.Table
                     _actionController.GetGameActionInfo(card.BattleCryActionInfo),
                 DeathRattleActionInfo =
                     _actionController.GetGameActionInfo(card.DeathRattleActionInfo),
-                OnAttackActionInfo = 
+                OnAttackActionInfo =
                     _actionController.GetGameActionInfo(card.AttackActionInfo),
-                OnDamageRecievedActionInfo = 
+                OnDamageRecievedActionInfo =
                     _actionController.GetGameActionInfo(card.DamageRecievedActionInfo)
             };
         }
 
         public void OnUnitStateChanges(object sender, PropertyChangedEventArgs e)
         {
-            if(!(sender is UnitState unitState))
+            if (!(sender is UnitState unitState))
                 return;
 
             //вызов экшена при получении урона
-            if(e.PropertyName == nameof(UnitState.RecievedDamage))
+            if (e.PropertyName == nameof(UnitState.RecievedDamage))
                 _actionController.ExecuteAction(unitState.Unit.OnDamageRecievedActionInfo,
-                    unitState.Unit,null);
+                    unitState.Unit, null);
 
-            OnUnitStateChange?.Invoke(this,new EntityStateChangeObserverAction(
-                unitState.Unit.EntityId,unitState.Unit));
+            OnUnitStateChange?.Invoke(this, new EntityStateChangeObserverAction(
+                unitState.Unit.EntityId, unitState.Unit));
         }
 
         private void OnUnitDies(object sender, ZeroHpEventArgs e)

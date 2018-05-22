@@ -2,6 +2,10 @@
 {
     public class LogInMessage : IContent
     {
+        public string Username { set; get; }
+        public string Password { set; get; }
+        public object AnswerData { set; get; }
+
         protected bool Equals(LogInMessage other)
         {
             return string.Equals(Username, other.Username) && string.Equals(Password, other.Password) &&
@@ -12,7 +16,7 @@
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
+            if (obj.GetType() != GetType()) return false;
             return Equals((LogInMessage) obj);
         }
 
@@ -20,17 +24,11 @@
         {
             unchecked
             {
-                var hashCode = (Username != null ? Username.GetHashCode() : 0);
+                var hashCode = Username != null ? Username.GetHashCode() : 0;
                 hashCode = (hashCode * 397) ^ (Password != null ? Password.GetHashCode() : 0);
                 hashCode = (hashCode * 397) ^ (AnswerData != null ? AnswerData.GetHashCode() : 0);
                 return hashCode;
             }
         }
-
-        public string Username { set; get; }
-        public string Password { set; get; }
-        public object AnswerData { set; get; }
-
-
     }
 }

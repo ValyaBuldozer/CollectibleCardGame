@@ -1,24 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using GameData.Controllers.Data;
 using GameData.Enums;
 using GameData.Models.Cards;
 using GameData.Network;
 using Newtonsoft.Json;
-using Exception = System.Exception;
 
 namespace CollectibleCardGame.Models
 {
     public class CurrentUserService
     {
         private readonly IDataRepositoryController<Card> _cardRepositoryController;
+        private DeckInfo _darkDeck;
+        private DeckInfo _northDeck;
 
         private DeckInfo _southDeck;
-        private DeckInfo _northDeck;
-        private DeckInfo _darkDeck;
+
+        public CurrentUserService(IDataRepositoryController<Card> cardRepositoryController)
+        {
+            _cardRepositoryController = cardRepositoryController;
+        }
 
         public string Username { set; get; }
 
@@ -37,14 +38,9 @@ namespace CollectibleCardGame.Models
         public int GameLoseCount { set; get; }
         public int GameWinCount { set; get; }
 
-        public CurrentUserService(IDataRepositoryController<Card> cardRepositoryController)
-        {
-            _cardRepositoryController = cardRepositoryController;
-        }
-
         public void SetData(UserInfo userInfo)
         {
-            if(userInfo == null) return;
+            if (userInfo == null) return;
 
             Username = userInfo.Username;
 

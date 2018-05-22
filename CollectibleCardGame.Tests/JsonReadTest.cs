@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using GameData.Enums;
 using GameData.Models.Action;
 using GameData.Models.Cards;
@@ -18,14 +14,16 @@ namespace CollectibleCardGame.Tests
         [TestMethod]
         public void Test()
         {
-            StreamReader streamReader = new StreamReader("C:\\Users\\1\\Source\\Repos\\CollectibleCardGame\\CollectibleCardGame\\Resources\\CardsRepository.json");
+            var streamReader =
+                new StreamReader(
+                    "C:\\Users\\1\\Source\\Repos\\CollectibleCardGame\\CollectibleCardGame\\Resources\\CardsRepository.json");
 
             var resultString = streamReader.ReadToEnd();
-            JsonSerializerSettings settings = new JsonSerializerSettings()
+            var settings = new JsonSerializerSettings
             {
                 TypeNameHandling = TypeNameHandling.Objects
             };
-            IList<Card> cards = JsonConvert.DeserializeObject<IList<Card>>(resultString,settings);
+            var cards = JsonConvert.DeserializeObject<IList<Card>>(resultString, settings);
 
             Assert.IsNotNull(cards);
 
@@ -35,31 +33,31 @@ namespace CollectibleCardGame.Tests
         [TestMethod]
         public void SerializeNamed()
         {
-            JsonSerializerSettings settings = new JsonSerializerSettings()
+            var settings = new JsonSerializerSettings
             {
                 TypeNameHandling = TypeNameHandling.Objects
             };
-            List<Card> cards = new List<Card>()
+            var cards = new List<Card>
             {
-                new UnitCard()
+                new UnitCard
                 {
                     Name = "test",
                     Cost = 5,
                     AttackPriority = 2,
                     BaseAttack = 1,
                     BaseHP = 1,
-                    DeathRattleActionInfo = new CardActionInfo()
+                    DeathRattleActionInfo = new CardActionInfo
                     {
                         ActionId = 1,
                         ParameterType = ActionParameterType.Buff,
                         ParameterValue = 1
                     }
                 },
-                new SpellCard()
+                new SpellCard
                 {
                     Name = "test",
                     Cost = 5,
-                    ActionInfo = new CardActionInfo()
+                    ActionInfo = new CardActionInfo
                     {
                         ActionId = 1,
                         ParameterType = ActionParameterType.Buff,
@@ -68,10 +66,10 @@ namespace CollectibleCardGame.Tests
                 }
             };
 
-            string json = JsonConvert.SerializeObject(cards, settings);
-            var deserialized = JsonConvert.DeserializeObject<List<Card>>(json,settings);
+            var json = JsonConvert.SerializeObject(cards, settings);
+            var deserialized = JsonConvert.DeserializeObject<List<Card>>(json, settings);
             Assert.IsNotNull(json);
-            Assert.AreEqual(cards,deserialized);
+            Assert.AreEqual(cards, deserialized);
         }
     }
 }

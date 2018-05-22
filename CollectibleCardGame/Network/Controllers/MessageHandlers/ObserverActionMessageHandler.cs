@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using CollectibleCardGame.Logic.Controllers;
 using GameData.Enums;
 using GameData.Models.Observer;
@@ -22,34 +18,34 @@ namespace CollectibleCardGame.Network.Controllers.MessageHandlers
 
         public override IContent Execute(IContent content, object sender)
         {
-            if(!(content is ObserverActionMessage message))
+            if (!(content is ObserverActionMessage message))
                 throw new InvalidOperationException();
 
             switch (message.ObserverAction.Type)
             {
                 case ObserverActionType.GameStart:
                     _gameEngineController.HandleObserverAction(
-                        (GameStartObserverAction)message.ObserverAction);
+                        (GameStartObserverAction) message.ObserverAction);
                     break;
                 case ObserverActionType.CardDeploy:
                     _gameEngineController.HandleObserverAction(
-                        (CardDeployObserverAction)message.ObserverAction);
+                        (CardDeployObserverAction) message.ObserverAction);
                     break;
                 case ObserverActionType.CardDraw:
                     _gameEngineController.HandleObserverAction(
-                        (CardDrawObserverAction)message.ObserverAction);
+                        (CardDrawObserverAction) message.ObserverAction);
                     break;
                 case ObserverActionType.UnitSpawn:
                     _gameEngineController.HandleObserverAction(
-                        (UnitSpawnObserverAction)message.ObserverAction);
+                        (UnitSpawnObserverAction) message.ObserverAction);
                     break;
                 case ObserverActionType.PlayerStateChange:
                     _gameEngineController.HandleObserverAction(
-                        (PlayerStateChangesObserverAction)message.ObserverAction);
+                        (PlayerStateChangesObserverAction) message.ObserverAction);
                     break;
                 case ObserverActionType.UnitDeath:
                     _gameEngineController.HandleObserverAction(
-                        (UnitDeathObserverAction)message.ObserverAction);
+                        (UnitDeathObserverAction) message.ObserverAction);
                     break;
                 case ObserverActionType.UnitStateChange:
                     break;
@@ -57,21 +53,21 @@ namespace CollectibleCardGame.Network.Controllers.MessageHandlers
                     break;
                 case ObserverActionType.TurnStart:
                     _gameEngineController.HandleObserverAction(
-                        (TurnStartObserverAction)message.ObserverAction);
+                        (TurnStartObserverAction) message.ObserverAction);
                     break;
                 case ObserverActionType.TurnEnd:
                     break;
                 case ObserverActionType.Error:
                     _gameEngineController.HandleObserverAction(
-                        (ErrorObserverAction)message.ObserverAction);
+                        (ErrorObserverAction) message.ObserverAction);
                     break;
                 case ObserverActionType.EntityStateChange:
                     _gameEngineController.HandleObserverAction(
-                        (EntityStateChangeObserverAction)message.ObserverAction);
+                        (EntityStateChangeObserverAction) message.ObserverAction);
                     break;
-                case ObserverActionType.GameEnd: 
+                case ObserverActionType.GameEnd:
                     _gameEngineController.HandleObserverAction(
-                        (GameEndObserverAction)message.ObserverAction);
+                        (GameEndObserverAction) message.ObserverAction);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

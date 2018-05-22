@@ -7,6 +7,21 @@ namespace GameData.Models.Action
 {
     public class GameAction
     {
+        public GameAction(string name, int id, string description, ActionParameterType parameterType,
+            Action<IActionTableControlller, Entity, Unit, int> action, bool isTargeted = false)
+        {
+            Name = name;
+            ID = id;
+            ParameterType = parameterType;
+            Action = action;
+            Description = description;
+            IsTargeted = isTargeted;
+        }
+
+        public GameAction()
+        {
+        }
+
         public int ID { set; get; }
 
         public string Name { set; get; }
@@ -18,21 +33,8 @@ namespace GameData.Models.Action
         public bool IsTargeted { set; get; }
 
         /// <summary>
-        /// Action - контроллер стола, sender, Цель, параметр
+        ///     Action - контроллер стола, sender, Цель, параметр
         /// </summary>
-        public Action<IActionTableControlller,Entity,Unit,int> Action { set; get; }
-
-        public GameAction(string name, int id,string description, ActionParameterType parameterType,
-            Action<IActionTableControlller, Entity, Unit, int> action,bool isTargeted=false)
-        {
-            Name = name;
-            ID = id;
-            ParameterType = parameterType;
-            Action = action;
-            Description = description;
-            IsTargeted = isTargeted;
-        }
-
-        public GameAction() { }
+        public Action<IActionTableControlller, Entity, Unit, int> Action { set; get; }
     }
 }

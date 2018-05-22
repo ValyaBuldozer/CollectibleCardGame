@@ -3,45 +3,44 @@ using System.Collections.Generic;
 using System.Linq;
 using GameData.Models.Cards;
 using GameData.Models.Repository;
-using Unity.Attributes;
 
 namespace GameData.Controllers.Data
 {
     public interface IDeckController
     {
         /// <summary>
-        /// Установить колоды в репозиторий
+        ///     Установить колоды в репозиторий
         /// </summary>
         /// <param name="decksDictionary"></param>
         void SetDecks(Dictionary<string, Stack<Card>> decksDictionary);
 
         /// <summary>
-        /// Добавить колоду в репозиторий
+        ///     Добавить колоду в репозиторий
         /// </summary>
         /// <param name="username">Имя игрока</param>
         /// <param name="deck">Кололда</param>
         void AddDeck(string username, Stack<Card> deck);
 
         /// <summary>
-        /// Перемешать колоду
+        ///     Перемешать колоду
         /// </summary>
         /// <param name="username">Имя игрока</param>
         void ShuffleDeck(string username);
 
         /// <summary>
-        /// Перемешать все колоды
+        ///     Перемешать все колоды
         /// </summary>
         void ShuffleDeck();
 
         /// <summary>
-        /// Извлечь верхнюю карту из колоды игрока
+        ///     Извлечь верхнюю карту из колоды игрока
         /// </summary>
         /// <param name="username">Ник игрока</param>
         /// <returns>Карта</returns>
         Card PopCard(string username);
 
         /// <summary>
-        /// Извлечь несколько карт из колоды игрока
+        ///     Извлечь несколько карт из колоды игрока
         /// </summary>
         /// <param name="username">Имя игрока</param>
         /// <param name="count">Количество карт</param>
@@ -49,21 +48,21 @@ namespace GameData.Controllers.Data
         List<Card> PopCards(string username, int count);
 
         /// <summary>
-        /// Посмотреть верхнюю карту колоды
+        ///     Посмотреть верхнюю карту колоды
         /// </summary>
         /// <param name="username">Имя игрока</param>
         /// <returns>Карта</returns>
         Card PeekCard(string username);
 
         /// <summary>
-        /// Поместить карту на верх колоды
+        ///     Поместить карту на верх колоды
         /// </summary>
         /// <param name="username">Имя игрока</param>
         /// <param name="card">Карта</param>
         void PushCard(string username, Card card);
 
         /// <summary>
-        /// Получить колоду игрока
+        ///     Получить колоду игрока
         /// </summary>
         /// <param name="username">Имя игрока</param>
         /// <returns>Колода</returns>
@@ -84,18 +83,18 @@ namespace GameData.Controllers.Data
             _repository.Dictionary = decksDictionary;
         }
 
-        public void AddDeck(string username,Stack<Card> deck)
+        public void AddDeck(string username, Stack<Card> deck)
         {
-            _repository.Dictionary.Add(username,deck);
+            _repository.Dictionary.Add(username, deck);
         }
 
         public void ShuffleDeck(string username)
         {
             var stack = GetDeck(username);
-            Random rnd = new Random();
+            var rnd = new Random();
             stack = new Stack<Card>(stack.OrderBy(x => rnd.Next()));
             _repository.Dictionary.Remove(username);
-            _repository.Dictionary.Add(username,stack);
+            _repository.Dictionary.Add(username, stack);
         }
 
         public void ShuffleDeck()
@@ -116,13 +115,11 @@ namespace GameData.Controllers.Data
             var deck = GetDeck(username);
             var retlist = new List<Card>();
 
-            for (int i = 0; i < count; i++)
-            {
-                if(deck.Count != 0)
+            for (var i = 0; i < count; i++)
+                if (deck.Count != 0)
                     retlist.Add(deck.Pop());
                 else
                     break;
-            }
 
             return retlist;
         }
@@ -138,11 +135,10 @@ namespace GameData.Controllers.Data
         }
 
         public Stack<Card> GetDeck(string username)
-        { 
+        {
             if (_repository.Dictionary.TryGetValue(username, out var stack))
                 return stack;
-            else
-                throw new InvalidOperationException();
+            throw new InvalidOperationException();
         }
     }
 }

@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using GameData.Exceptions;
 using GameData.Models;
 using GameData.Models.Repository;
@@ -28,12 +25,9 @@ namespace GameData.Controllers.Data
             if (idCollection == null)
                 return null;
 
-            List<Entity> retList = new List<Entity>();
+            var retList = new List<Entity>();
 
-            foreach (var id in idCollection)
-            {
-                retList.Add(GetById(id));
-            }
+            foreach (var id in idCollection) retList.Add(GetById(id));
 
             return retList;
         }
@@ -42,7 +36,7 @@ namespace GameData.Controllers.Data
         {
             var declaredItem = _repository.Collection.FirstOrDefault(e => e.EntityId == item.EntityId);
             if (declaredItem != null)
-                if(declaredItem.Equals(item))
+                if (declaredItem.Equals(item))
                     return;
                 else
                     throw new RepositoryItemAlreadyExistsExcepction("Item with this id is already declared");

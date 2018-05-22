@@ -12,15 +12,15 @@ namespace BaseNetworkArchitecture.Server
     {
         private const string LOCALHOST_IP = "127.0.0.1";
 
-        [Dependency]
-        public ILogger Logger { set; get; }
-
         public TcpServer()
         {
             //PORT = 8800;
             //TcpListener = new TcpListener();
             Clients = new List<IClientConnection>();
         }
+
+        [Dependency]
+        public ILogger Logger { set; get; }
 
         //public TcpServer(int port)
         //{
@@ -42,10 +42,10 @@ namespace BaseNetworkArchitecture.Server
 
         public ICollection<IClientConnection> Clients { set; get; }
 
-        public void Start(IPAddress ipAddress,int port)
+        public void Start(IPAddress ipAddress, int port)
         {
             TcpListener?.Stop();
-            TcpListener = new TcpListener(ipAddress,port);
+            TcpListener = new TcpListener(ipAddress, port);
             GetListenerThread = new Thread(AcceptClients);
             GetListenerThread.Start(this);
         }
@@ -104,13 +104,12 @@ namespace BaseNetworkArchitecture.Server
 
             var tcpClient = listener.EndAcceptTcpClient(ar);
 
-            var client = new TcpClientConnection(tcpClient,Logger);
+            var client = new TcpClientConnection(tcpClient, Logger);
             Clients.Add(client);
             Logger?.LogAndPrint("Client connected");
-            
+
             RunClientConnectedEvent(this, new ClientConnectedEventArgs {ClientConnection = client});
             ((TcpCommunicator) client.Communicator).StartReadMessages();
-
         }
     }
 

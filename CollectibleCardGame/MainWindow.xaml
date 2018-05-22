@@ -6,13 +6,13 @@
         xmlns:local="clr-namespace:CollectibleCardGame"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
-        Title="{Binding Title}"  Width="1200" MinHeight="375" MinWidth="550"
+        Title="{Binding Title}" Width="1200" MinHeight="375" MinWidth="550"
         Closing="MainWindow_OnClosing">
     <Grid>
         <xctk:BusyIndicator IsBusy="{Binding IsBusy}" BusyContent="{Binding BusyMessage}">
             <Frame Name="MainFrame" NavigationUIVisibility="Hidden" Content="{Binding FramePage}"
-                   HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                   HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
         </xctk:BusyIndicator>
-       
+
     </Grid>
 </Window>

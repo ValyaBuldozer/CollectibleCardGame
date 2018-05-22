@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using BaseNetworkArchitecture.Common;
 using CollectibleCardGame.Models;
 using CollectibleCardGame.Network.Controllers;
+using CollectibleCardGame.Services;
 using CollectibleCardGame.ViewModels.Frames;
 using GameData.Enums;
 using GameData.Network.Messages;
@@ -15,16 +12,14 @@ namespace CollectibleCardGame.Logic.Controllers
 {
     public class UserController
     {
-        [Dependency]
-        public CurrentUserService CurrentUserService { set; get; }
-
-        private readonly INetworkController _networkController;
         private readonly ILogger _logger;
         private readonly LogInFramePageViewModel _logInViewModel;
+
+        private readonly INetworkController _networkController;
         private readonly RegistrationFramePageViewModel _registrationViewModel;
 
-        public UserController(ILogger logger,INetworkController networkController,
-            LogInFramePageViewModel logInViewModel,RegistrationFramePageViewModel registrationViewModel)
+        public UserController(ILogger logger, INetworkController networkController,
+            LogInFramePageViewModel logInViewModel, RegistrationFramePageViewModel registrationViewModel)
         {
             _logger = logger;
             _networkController = networkController;
@@ -35,22 +30,25 @@ namespace CollectibleCardGame.Logic.Controllers
             _registrationViewModel.RegisterRequest += OnRegisterRequest;
         }
 
-        private void OnRegisterRequest(object sender, Services.LogInRegisterRequestEventArgs e)
+        [Dependency]
+        public CurrentUserService CurrentUserService { set; get; }
+
+        private void OnRegisterRequest(object sender, LogInRegisterRequestEventArgs e)
         {
-            RegistrationRequest(e.Username,e.Password);
+            RegistrationRequest(e.Username, e.Password);
         }
 
-        private void OnLogInRequest(object sender, Services.LogInRegisterRequestEventArgs e)
+        private void OnLogInRequest(object sender, LogInRegisterRequestEventArgs e)
         {
-            LogInRequest(e.Username,e.Password);
+            LogInRequest(e.Username, e.Password);
         }
 
         public void LogInRequest(string username, string password)
         {
-            if(string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
                 throw new NullReferenceException("Username and password can not be null");
 
-            var message = new MessageBase(MessageBaseType.LogInMessage,new LogInMessage()
+            var message = new MessageBase(MessageBaseType.LogInMessage, new LogInMessage
             {
                 Username = username,
                 Password = password
@@ -64,7 +62,7 @@ namespace CollectibleCardGame.Logic.Controllers
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
                 throw new NullReferenceException("Username and password can not be null");
 
-            var message = new MessageBase(MessageBaseType.RegistrationMessage, new RegistrationMessage()
+            var message = new MessageBase(MessageBaseType.RegistrationMessage, new RegistrationMessage
             {
                 Username = username,
                 Password = password
@@ -81,7 +79,7 @@ namespace CollectibleCardGame.Logic.Controllers
 
         public void SetUser(string username)
         {
-            if(CurrentUserService != null)
+            if (CurrentUserService != null)
                 ResetUser();
 
             CurrentUserService.Username = username;

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using GameData.Controllers.Data;
 using GameData.Models;
 using GameData.Models.Cards;
@@ -18,44 +14,43 @@ namespace GameData.Controllers.Table
         void DrawCard(Player player, Card card);
         void KillUnit(Unit unit);
         Card GetCard(int id);
-        void SpawnUnit(Player sender,UnitCard card);
+        void SpawnUnit(Player sender, UnitCard card);
         void Remove(Unit unit);
     }
 
     /// <summary>
-    /// Класс контроллер, отвечающий за взаимодействие с полем внутри Action
+    ///     Класс контроллер, отвечающий за взаимодействие с полем внутри Action
     /// </summary>
     public class InActionTableController : IActionTableControlller
     {
         private readonly ICardDrawController _cardDrawController;
-        private readonly TableCondition _tableCondition;
-        private readonly Lazy<IUnitDispatcher> _unitDispatcher;
         private readonly IDataRepositoryController<Card> _cardRepositoryController;
-
-        public TableCondition GetTableCondition => _tableCondition;
+        private readonly Lazy<IUnitDispatcher> _unitDispatcher;
 
         public InActionTableController(TableCondition tableCondition, ICardDrawController cardDrawController,
-            Lazy<IUnitDispatcher> unitDispatcher,IDataRepositoryController<Card> cardRepositoryController)
+            Lazy<IUnitDispatcher> unitDispatcher, IDataRepositoryController<Card> cardRepositoryController)
         {
-            _tableCondition = tableCondition;
+            GetTableCondition = tableCondition;
             _cardDrawController = cardDrawController;
             _unitDispatcher = unitDispatcher;
             _cardRepositoryController = cardRepositoryController;
         }
 
+        public TableCondition GetTableCondition { get; }
+
         public void DrawCard(Player player)
         {
-            _cardDrawController.DealCardsToPlayer(player,1);
+            _cardDrawController.DealCardsToPlayer(player, 1);
         }
 
         public void DrawCard(Player player, int count)
         {
-            _cardDrawController.DealCardsToPlayer(player,count);
+            _cardDrawController.DealCardsToPlayer(player, count);
         }
 
         public void DrawCard(Player player, Card card)
         {
-            _cardDrawController.DealCard(player,card);
+            _cardDrawController.DealCard(player, card);
         }
 
         public Card GetCard(int id)
@@ -73,7 +68,7 @@ namespace GameData.Controllers.Table
             _unitDispatcher.Value.Remove(unit);
         }
 
-        public void SpawnUnit(Player sender,UnitCard card)
+        public void SpawnUnit(Player sender, UnitCard card)
         {
             _unitDispatcher.Value.Spawn(card, sender);
         }

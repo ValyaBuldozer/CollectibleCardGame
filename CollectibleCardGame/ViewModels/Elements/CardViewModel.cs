@@ -1,30 +1,64 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Media;
 using GameData.Enums;
 using GameData.Models.Cards;
-using ArgumentOutOfRangeException = System.ArgumentOutOfRangeException;
 
 namespace CollectibleCardGame.ViewModels.Elements
 {
     public class CardViewModel : BaseViewModel
     {
-        private int _cost;
-        private string _name;
-        private string _description;
-        private string _imagePath;
-        private string _backgroundImagePath;
         private int _attack;
-        private int _health;
-        private bool _isUnitCard;
-
-        private Brush _tapeBrush;
-        private Brush _tapeBorderBrush;
+        private string _backgroundImagePath;
 
         private Card _card;
+        private int _cost;
+        private string _description;
+        private int _health;
+        private string _imagePath;
+        private bool _isUnitCard;
+        private string _name;
+        private Brush _tapeBorderBrush;
+
+        private Brush _tapeBrush;
+
+        public CardViewModel(Card card, Fraction fraction = Fraction.South)
+        {
+            Card = card;
+            _cost = card.Cost;
+            _description = card.Description;
+            _name = card.Name;
+            _imagePath = card.ImagePath;
+
+            if (card is UnitCard unitCard)
+            {
+                _isUnitCard = true;
+                _attack = unitCard.BaseAttack;
+                _health = unitCard.BaseHP;
+            }
+
+            switch (fraction)
+            {
+                case Fraction.Common:
+                    _backgroundImagePath = "../../Images/CardsBacks/cardbackSouth220x410.jpg";
+                    break;
+                case Fraction.North:
+                    _backgroundImagePath = "../../Images/CardsBacks/cardbackNorth220х410.jpg";
+                    break;
+                case Fraction.South:
+                    _backgroundImagePath = "../../Images/CardsBacks/cardbackSouth220x410.jpg";
+                    break;
+                case Fraction.Dark:
+                    _backgroundImagePath = "../../Images/CardsBacks/cardbackDarkside220х410.jpg";
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(fraction), fraction, null);
+            }
+        }
+
+        public CardViewModel()
+        {
+            Card = new SpellCard();
+        }
 
         public Card Card
         {
@@ -34,7 +68,7 @@ namespace CollectibleCardGame.ViewModels.Elements
                 _card = value;
                 NotifyPropertyChanged(nameof(Card));
 
-                if(value == null) return;
+                if (value == null) return;
 
                 Description = _card.Description;
                 Name = _card.Name;
@@ -48,27 +82,27 @@ namespace CollectibleCardGame.ViewModels.Elements
                     _attack = unitCard.BaseAttack;
                     _health = unitCard.BaseHP;
 
-                    switch(unitCard.Fraction)
-                        {
-                            case Fraction.Common:
-                                TapeBorderBrush = null;
-                                TapeBrush = null;
-                                break;
-                            case Fraction.North:
-                                TapeBorderBrush = new SolidColorBrush(Color.FromRgb(156, 162, 156));
-                                TapeBrush = new SolidColorBrush(Color.FromRgb(0, 97, 225));
-                                break;
-                            case Fraction.South:
-                                TapeBorderBrush = new SolidColorBrush(Color.FromRgb(206, 130, 57));
-                                TapeBrush = new SolidColorBrush(Color.FromRgb(57, 58, 60));
-                                break;
-                            case Fraction.Dark:
-                                TapeBorderBrush = new SolidColorBrush(Color.FromRgb(148, 182, 178));
-                                TapeBrush = new SolidColorBrush(Color.FromRgb(159, 0, 22));
-                                break;
-                            default:
-                                throw new ArgumentOutOfRangeException();
-                        }
+                    switch (unitCard.Fraction)
+                    {
+                        case Fraction.Common:
+                            TapeBorderBrush = null;
+                            TapeBrush = null;
+                            break;
+                        case Fraction.North:
+                            TapeBorderBrush = new SolidColorBrush(Color.FromRgb(156, 162, 156));
+                            TapeBrush = new SolidColorBrush(Color.FromRgb(0, 97, 225));
+                            break;
+                        case Fraction.South:
+                            TapeBorderBrush = new SolidColorBrush(Color.FromRgb(206, 130, 57));
+                            TapeBrush = new SolidColorBrush(Color.FromRgb(57, 58, 60));
+                            break;
+                        case Fraction.Dark:
+                            TapeBorderBrush = new SolidColorBrush(Color.FromRgb(148, 182, 178));
+                            TapeBrush = new SolidColorBrush(Color.FromRgb(159, 0, 22));
+                            break;
+                        default:
+                            throw new ArgumentOutOfRangeException();
+                    }
                 }
             }
         }
@@ -171,45 +205,6 @@ namespace CollectibleCardGame.ViewModels.Elements
                 _tapeBorderBrush = value;
                 NotifyPropertyChanged(nameof(TapeBorderBrush));
             }
-        }
-
-        public CardViewModel(Card card,Fraction fraction = Fraction.South)
-        {
-            Card = card;
-            _cost = card.Cost;
-            _description = card.Description;
-            _name = card.Name;
-            _imagePath = card.ImagePath;
-
-            if (card is UnitCard unitCard)
-            {
-                _isUnitCard = true;
-                _attack = unitCard.BaseAttack;
-                _health = unitCard.BaseHP;
-            }
-
-            switch (fraction)
-            {
-                case Fraction.Common:
-                    _backgroundImagePath = "../../Images/CardsBacks/cardbackSouth220x410.jpg";
-                    break;
-                case Fraction.North:
-                    _backgroundImagePath = "../../Images/CardsBacks/cardbackNorth220х410.jpg";
-                    break;
-                case Fraction.South:
-                    _backgroundImagePath = "../../Images/CardsBacks/cardbackSouth220x410.jpg";
-                    break;
-                case Fraction.Dark:
-                    _backgroundImagePath = "../../Images/CardsBacks/cardbackDarkside220х410.jpg";
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(fraction), fraction, null);
-            }
-        }
-
-        public CardViewModel()
-        {
-            Card = new SpellCard();
         }
     }
 }

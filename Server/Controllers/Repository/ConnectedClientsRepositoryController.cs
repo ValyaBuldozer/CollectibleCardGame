@@ -14,6 +14,8 @@ namespace Server.Controllers.Repository
             _repository = repository;
         }
 
+        public List<Client> GetCollection => _repository?.Collection.ToList();
+
         public void Add(Client client)
         {
             _repository.Collection.Add(client);
@@ -21,10 +23,8 @@ namespace Server.Controllers.Repository
 
         public void Remove(Client client)
         {
-            if(_repository.Collection.Contains(client))
+            if (_repository.Collection.Contains(client))
                 _repository.Collection.Remove(client);
         }
-
-        public List<Client> GetCollection => _repository?.Collection.ToList();
     }
 }

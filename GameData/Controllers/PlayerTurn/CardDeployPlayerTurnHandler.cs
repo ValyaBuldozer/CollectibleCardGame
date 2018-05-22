@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GameData.Controllers.Table;
-using GameData.Models;
+﻿using GameData.Controllers.Table;
 using GameData.Models.PlayerTurn;
 
 namespace GameData.Controllers.PlayerTurn

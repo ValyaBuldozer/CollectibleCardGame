@@ -1,81 +1,84 @@
 ﻿<UserControl x:Class="CollectibleCardGame.Views.UserControls.UnitCardMiniUserControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:CollectibleCardGame.Views.UserControls"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
              AllowDrop="True"
-             d:DesignHeight="250" d:DesignWidth="210" >
+             d:DesignHeight="250" d:DesignWidth="210">
     <UserControl.Resources>
-        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"></BooleanToVisibilityConverter>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     </UserControl.Resources>
     <Grid>
         <!--210x250-->
-        <Border BorderThickness="0" 
+        <Border BorderThickness="0"
                 BorderBrush="{Binding Path=BorderBrush,PresentationTraceSources.TraceLevel=High}">
             <Border.Effect>
-                <DropShadowEffect BlurRadius="100" ShadowDepth="0" Opacity="1" Color="{Binding ShadowColor}"/>
+                <DropShadowEffect BlurRadius="100" ShadowDepth="0" Opacity="1" Color="{Binding ShadowColor}" />
             </Border.Effect>
 
             <Grid Background="{StaticResource CardBackGround}">
 
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="8*"/>
-                        <RowDefinition Height="2.6*"/>
-                        <RowDefinition Height="0.75"/>
+                        <RowDefinition Height="8*" />
+                        <RowDefinition Height="2.6*" />
+                        <RowDefinition Height="0.75" />
                     </Grid.RowDefinitions>
 
 
                     <!--картинка юнита 210x250-->
                     <Image x:Name="UnitImage" Source="{Binding Path=ImagePath}" Grid.RowSpan="2">
                         <Image.Effect>
-                            <DropShadowEffect   RenderingBias="Quality"/>
+                            <DropShadowEffect RenderingBias="Quality" />
                         </Image.Effect>
                     </Image>
 
                     <Grid Grid.Row="0" Grid.RowSpan="2">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="0.32*"/>
-                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="0.32*" />
+                            <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.2*"/>
-                            <ColumnDefinition Width="5.5*"/>
-                            <ColumnDefinition Width="10*"/>
-                            <ColumnDefinition Width="4*"/>
+                            <ColumnDefinition Width="0.2*" />
+                            <ColumnDefinition Width="5.5*" />
+                            <ColumnDefinition Width="10*" />
+                            <ColumnDefinition Width="4*" />
                         </Grid.ColumnDefinitions>
 
                         <Grid Grid.Column="1" Grid.RowSpan="2">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="3.5*"/>
-                                <ColumnDefinition  Width="*"/>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="3.5*" />
+                                <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
                         </Grid>
 
-                        <Grid Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Top" HorizontalAlignment="Center">
+                        <Grid Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Top"
+                              HorizontalAlignment="Center">
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="2"/>
-                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2" />
+                                <RowDefinition Height="*" />
                             </Grid.RowDefinitions>
-                            <ItemsControl x:Name="AbilityStack" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center" Grid.ColumnSpan="3" >
+                            <ItemsControl x:Name="AbilityStack" Grid.Row="1" VerticalAlignment="Top"
+                                          HorizontalAlignment="Center" Grid.ColumnSpan="3">
                                 <ItemsControl.ItemsPanel>
                                     <ItemsPanelTemplate>
-                                        <WrapPanel   Orientation="Vertical" />
+                                        <WrapPanel Orientation="Vertical" />
                                     </ItemsPanelTemplate>
                                 </ItemsControl.ItemsPanel>
-                                <Rectangle Grid.Row="0" Stroke="Gold" RadiusX="5" RadiusY="5" 
+                                <Rectangle Grid.Row="0" Stroke="Gold" RadiusX="5" RadiusY="5"
                                            StrokeThickness="1" HorizontalAlignment="Stretch"
-                                           VerticalAlignment="Stretch"  Width="55" Height="55"
+                                           VerticalAlignment="Stretch" Width="55" Height="55"
                                            Visibility="{Binding Path=IsNotHeroUnit,
                                             Converter={StaticResource BooleanToVisibilityConverter}}">
                                     <Rectangle.Fill>
-                                        <ImageBrush ImageSource="{Binding AbilityImagePath}"/>
+                                        <ImageBrush ImageSource="{Binding AbilityImagePath}" />
                                     </Rectangle.Fill>
                                     <Rectangle.Effect>
-                                        <DropShadowEffect   RenderingBias="Quality" Direction="315"  BlurRadius="10" ShadowDepth="8"/>
+                                        <DropShadowEffect RenderingBias="Quality" Direction="315" BlurRadius="10"
+                                                          ShadowDepth="8" />
                                     </Rectangle.Effect>
                                 </Rectangle>
                             </ItemsControl>
@@ -84,38 +87,38 @@
 
                     <Grid Grid.Row="1">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.75"/>
-                            <ColumnDefinition Width="1.6*"/>
-                            <ColumnDefinition Width="2.5*"/>
-                            <ColumnDefinition Width="1.6*"/>
-                            <ColumnDefinition Width="0.75"/>
+                            <ColumnDefinition Width="0.75" />
+                            <ColumnDefinition Width="1.6*" />
+                            <ColumnDefinition Width="2.5*" />
+                            <ColumnDefinition Width="1.6*" />
+                            <ColumnDefinition Width="0.75" />
                         </Grid.ColumnDefinitions>
                         <Border CornerRadius="50"
-                            Background="#EF3F37"
-                            BorderBrush="Black"
-                            BorderThickness="0"
-                            Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                Background="#EF3F37"
+                                BorderBrush="Black"
+                                BorderThickness="0"
+                                Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                                 Visibility="{Binding Path=IsNotHeroUnit,
                                 Converter={StaticResource BooleanToVisibilityConverter}}">
-                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" 
+                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
                                        Text="{Binding Path=Attack}" FontWeight="Bold" FontSize="52"
-                                       FontFamily="/CollectibleCardGame;component/Fonts/#PF Din Text Pro"/>
+                                       FontFamily="/CollectibleCardGame;component/Fonts/#PF Din Text Pro" />
                             <Border.Effect>
                                 <DropShadowEffect Opacity="1" ShadowDepth="0" BlurRadius="100"
-                                                  Color="{Binding AttackShadowColor}"/>
+                                                  Color="{Binding AttackShadowColor}" />
                             </Border.Effect>
                         </Border>
                         <Border CornerRadius="50"
-                            Background="#66BE61"
-                            BorderBrush="Black"
-                            BorderThickness="0"
-                            Grid.Column="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                Background="#66BE61"
+                                BorderBrush="Black"
+                                BorderThickness="0"
+                                Grid.Column="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
-                                   Text="{Binding Path=Health}" FontWeight="Bold" FontSize="52"
-                                       FontFamily="/CollectibleCardGame;component/Fonts/#PF Din Text Pro"/>
+                                       Text="{Binding Path=Health}" FontWeight="Bold" FontSize="52"
+                                       FontFamily="/CollectibleCardGame;component/Fonts/#PF Din Text Pro" />
                             <Border.Effect>
                                 <DropShadowEffect Opacity="1" ShadowDepth="0" BlurRadius="100"
-                                                  Color="{Binding HealthShadowColor}"/>
+                                                  Color="{Binding HealthShadowColor}" />
                             </Border.Effect>
                         </Border>
                     </Grid>
@@ -124,4 +127,3 @@
         </Border>
     </Grid>
 </UserControl>
-

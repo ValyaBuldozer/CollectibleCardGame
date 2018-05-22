@@ -3,22 +3,21 @@ using System.Net;
 using System.Net.Sockets;
 using BaseNetworkArchitecture.Common;
 using CollectibleCardGame.Network.Controllers;
-using CollectibleCardGame.Unity;
 using CollectibleCardGame.ViewModels.Frames;
 using CollectibleCardGame.ViewModels.Windows;
-using Unity.Attributes;
 
 namespace CollectibleCardGame.Logic.Controllers
 {
     /// <summary>
-    /// Класс - контроллер, отвечает за старт, закрытие, запрос на соединение с сервером, обработка разрыва соединения с сервером.
+    ///     Класс - контроллер, отвечает за старт, закрытие, запрос на соединение с сервером, обработка разрыва соединения с
+    ///     сервером.
     /// </summary>
     public class GlobalAppStateController : IGlobalController
     {
         private readonly INetworkController _connectionController;
-        private readonly MainWindowViewModel _mainWindowViewModel;
         private readonly LogInFramePageShellViewModel _framePageShellViewModel;
         private readonly ILogger _logger;
+        private readonly MainWindowViewModel _mainWindowViewModel;
 
         public GlobalAppStateController(INetworkController networkController,
             MainWindowViewModel mainWindowViewModel, LogInFramePageShellViewModel framePageShellViewModel,
@@ -54,7 +53,7 @@ namespace CollectibleCardGame.Logic.Controllers
             throw new NotImplementedException();
         }
 
-        public bool TryConnect(IPAddress address,int port)
+        public bool TryConnect(IPAddress address, int port)
         {
             try
             {
@@ -66,7 +65,7 @@ namespace CollectibleCardGame.Logic.Controllers
             }
             catch (SocketException)
             {
-               _logger.LogAndPrint("Ошибка при попытке подключения");
+                _logger.LogAndPrint("Ошибка при попытке подключения");
                 _mainWindowViewModel.StopBusyIndicator();
                 return false;
             }

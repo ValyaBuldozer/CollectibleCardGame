@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using GameData.Controllers.Data;
 using GameData.Controllers.Global;
 using GameData.Controllers.Table;
@@ -21,21 +18,21 @@ namespace GameData.Tests.Controllers.UnitTests.Logic
         [TestMethod]
         public void StartTest()
         {
-            TestCards testCards = new TestCards();
-            TableCondition tableCondition = new TableCondition();
+            var testCards = new TestCards();
+            var tableCondition = new TableCondition();
 
             var firstPLayerDeck = new Stack<Card>();
-            firstPLayerDeck.Push(new UnitCard()
+            firstPLayerDeck.Push(new UnitCard
             {
                 Name = "testCard1",
                 Description = "Test"
             });
-            firstPLayerDeck.Push(new SpellCard()
+            firstPLayerDeck.Push(new SpellCard
             {
                 Name = "spellCard1",
                 Description = "Test"
             });
-            var secondPlayerDeck = new System.Collections.Generic.Stack<Card>(firstPLayerDeck);
+            var secondPlayerDeck = new Stack<Card>(firstPLayerDeck);
 
             var deckControllerMock = new Mock<IDeckController>();
             deckControllerMock.Setup(mock => mock.AddDeck("ping", null));
@@ -53,24 +50,25 @@ namespace GameData.Tests.Controllers.UnitTests.Logic
                 It.IsAny<PropertyChangedEventArgs>()));
 
             var gameStateController =
-                new GameStateController(tableCondition,playerTurnDispatcherMock.Object,
-                    deckControllerMock.Object,null,cardDrawMock.Object,unitDispatcherMock.Object);
+                new GameStateController(tableCondition, playerTurnDispatcherMock.Object,
+                    deckControllerMock.Object, null, cardDrawMock.Object, unitDispatcherMock.Object);
 
-            gameStateController.Start(firstPLayerDeck,"firstPlayer",testCards.FirstCard
-                ,secondPlayerDeck,"secondPlayer",testCards.SecondCard);
+            gameStateController.Start(firstPLayerDeck, "firstPlayer", testCards.FirstCard
+                , secondPlayerDeck, "secondPlayer", testCards.SecondCard);
 
             var firstPlayer = tableCondition.Players.FirstOrDefault(
                 p => p.Username == "firstPlayer");
             var secondPlayer = tableCondition.Players.FirstOrDefault(
                 p => p.Username == "secondPlayer");
 
-            playerTurnDispatcherMock.Verify(mock=>mock.Start(),Times.Once);
-            deckControllerMock.Verify(foo=>foo.AddDeck(It.IsAny<string>(),It.IsAny<Stack<Card>>()),Times.AtLeastOnce);
-            
-            cardDrawMock.Verify(mock=>mock.DealCardsToPlayer(It.IsAny<Player>(),4));
+            playerTurnDispatcherMock.Verify(mock => mock.Start(), Times.Once);
+            deckControllerMock.Verify(foo => foo.AddDeck(It.IsAny<string>(), It.IsAny<Stack<Card>>()),
+                Times.AtLeastOnce);
 
-            Assert.AreEqual(2,tableCondition.Players.Count);
-            Assert.IsNotNull(firstPlayer,"Первый игрок не найден");
+            cardDrawMock.Verify(mock => mock.DealCardsToPlayer(It.IsAny<Player>(), 4));
+
+            Assert.AreEqual(2, tableCondition.Players.Count);
+            Assert.IsNotNull(firstPlayer, "Первый игрок не найден");
             Assert.IsNotNull(secondPlayer, "Второй игрок не найден");
         }
     }

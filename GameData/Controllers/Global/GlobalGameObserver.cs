@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GameData.Controllers.Data;
+﻿using GameData.Controllers.Data;
 using GameData.Controllers.PlayerTurn;
 using GameData.Controllers.Table;
 using GameData.Models;
@@ -61,12 +56,12 @@ namespace GameData.Controllers.Global
 
         private void ObserverEventHandler(object sender, GameEndEventArgs e)
         {
-            _repositoryController.Add(new GameEndObserverAction(e.WinnerUsername,e.Reason));
+            _repositoryController.Add(new GameEndObserverAction(e.WinnerUsername, e.Reason));
         }
 
         private void ObserverEventHandler(object sender, ErrorEventArgs e)
         {
-            _repositoryController.Add(new ErrorObserverAction(e.Message,e.Player));
+            _repositoryController.Add(new ErrorObserverAction(e.Message, e.Player));
         }
 
         private void ObserverEventHandler(object sender, ObserverAction e)

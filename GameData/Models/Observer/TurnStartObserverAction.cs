@@ -2,10 +2,8 @@
 
 namespace GameData.Models.Observer
 {
-    public class TurnStartObserverAction : Observer.ObserverAction
+    public class TurnStartObserverAction : ObserverAction
     {
-        public string CurrentPlayerUsername { set; get; }
-
         public TurnStartObserverAction(string playerUsername)
         {
             CurrentPlayerUsername = playerUsername;
@@ -16,5 +14,7 @@ namespace GameData.Models.Observer
         {
             Type = ObserverActionType.TurnStart;
         }
+
+        public string CurrentPlayerUsername { set; get; }
     }
 }

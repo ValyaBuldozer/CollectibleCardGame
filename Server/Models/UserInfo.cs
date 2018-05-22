@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using GameData.Enums;
 
 namespace Server.Models
@@ -35,9 +31,10 @@ namespace Server.Models
 
         protected bool Equals(UserInfo other)
         {
-            return string.Equals(NorthDeck,other.NorthDeck) && string.Equals(SouthDeck, other.SouthDeck)
-                && string.Equals(DarkDeck, other.DarkDeck)  && int.Equals(GameWinCount, other.GameWinCount)
-                && int.Equals(GameLoseCount, other.GameLoseCount);
+            return string.Equals(NorthDeck, other.NorthDeck) && string.Equals(SouthDeck, other.SouthDeck)
+                                                             && string.Equals(DarkDeck, other.DarkDeck) &&
+                                                             Equals(GameWinCount, other.GameWinCount)
+                                                             && Equals(GameLoseCount, other.GameLoseCount);
         }
 
         public override bool Equals(object obj)
@@ -45,7 +42,7 @@ namespace Server.Models
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
             if (obj.GetType() != GetType()) return false;
-            return Equals((UserInfo)obj);
+            return Equals((UserInfo) obj);
         }
 
         public override int GetHashCode()

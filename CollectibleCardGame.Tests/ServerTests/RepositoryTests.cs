@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Server.Controllers;
 using Server.Controllers.Repository;
 using Server.Models;
 using Server.Repositories;
@@ -26,24 +20,22 @@ namespace CollectibleCardGame.Tests.ServerTests
             //if(UnityKernel.Get<UserRepository>().Collection.ToList().FirstOrDefault(u=>u.Equals(user))!=null)
             //    UnityKernel.Get<UserReposController>().Remove(user);
 
-            controller.Add(new User(){Username = "repostest",Password = "test"});
+            controller.Add(new User {Username = "repostest", Password = "test"});
             var deletingUser = controller.GetEnumerable.FirstOrDefault(u => u.Username == "repostest");
             controller.Remove(deletingUser);
 
-            Assert.IsTrue(UnityKernel.Get<UserRepository>().DatabaseCollection.FirstOrDefault(u=>u.Username == "repostest") ==null);
+            Assert.IsTrue(UnityKernel.Get<UserRepository>().DatabaseCollection
+                              .FirstOrDefault(u => u.Username == "repostest") == null);
         }
 
         //[TestMethod]
         public void ForechRepostTest()
         {
             UnityKernel.InitializeKernel();
-            int i=0;
-            foreach (var iUser in UnityKernel.Get<UserRepository>().DatabaseCollection)
-            {
-                i++;
-            }
-            
-            Assert.IsTrue(i>0);
+            var i = 0;
+            foreach (var iUser in UnityKernel.Get<UserRepository>().DatabaseCollection) i++;
+
+            Assert.IsTrue(i > 0);
         }
     }
 }

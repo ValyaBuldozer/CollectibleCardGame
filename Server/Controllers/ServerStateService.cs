@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading;
 using GameData.Controllers.Data;
 using GameData.Enums;
 using GameData.Models;
@@ -12,16 +11,15 @@ using Newtonsoft.Json;
 using Server.Controllers.Repository;
 using Server.Models;
 using Server.Network.Models;
-using ArgumentOutOfRangeException = System.ArgumentOutOfRangeException;
 
 namespace Server.Controllers
 {
     public class ServerStateService
     {
-        private readonly GameSettings _gameSettings;
-        private readonly AwaitingClientsQueueController _clientsQueueController;
         private readonly CardRepository _cardRepository;
         private readonly IDataRepositoryController<Card> _cardRepositoryController;
+        private readonly AwaitingClientsQueueController _clientsQueueController;
+        private readonly GameSettings _gameSettings;
 
         public ServerStateService(AwaitingClientsQueueController clientsQueueController,
             CardRepository cardRepository, GameSettings gameSettings,
@@ -34,18 +32,18 @@ namespace Server.Controllers
         }
 
         /// <summary>
-        /// Поиск или добавление в очередь
+        ///     Поиск или добавление в очередь
         /// </summary>
         /// <param name="client"></param>
         /// <returns>true - лобби создано, false - игрок добавлен в очередь</returns>
-        public bool FindLobby(Client client,Fraction fraction)
+        public bool FindLobby(Client client, Fraction fraction)
         {
             var deck = GetDeck(client, fraction);
             var heroUnit = GetHeroCard(client, fraction);
 
             if (_clientsQueueController.GetClientsQueue().Count == 0)
             {
-                client.CurrentLobby = new GameLobby()
+                client.CurrentLobby = new GameLobby
                 {
                     FirstClient = client,
                     FirstPlayerDeck = deck,
@@ -68,7 +66,7 @@ namespace Server.Controllers
 
                 //todo :изменение настроек
                 var msg = new MessageBase(MessageBaseType.GameRequestMessage
-                    , new GameRequestMessage()
+                    , new GameRequestMessage
                     {
                         Fraction = fraction,
                         AnswerData = true
@@ -76,7 +74,7 @@ namespace Server.Controllers
                 firstPlayerClient.ClientController.SendMessage(msg);
                 client.ClientController.SendMessage(msg);
 
-                client.CurrentLobby.InitializeGame(_gameSettings,_cardRepository);
+                client.CurrentLobby.InitializeGame(_gameSettings, _cardRepository);
                 client.CurrentLobby.OnClose += OnLobbyClose;
                 client.CurrentLobby.StartGame();
 
@@ -91,12 +89,12 @@ namespace Server.Controllers
 
         public GameLobby CreateLobby(Client firstClient, Client secondClient)
         {
-            if(firstClient == null || secondClient == null)
+            if (firstClient == null || secondClient == null)
                 throw new NullReferenceException();
 
             var gameLobby = new GameLobby(firstClient, secondClient);
 
-            var message = new MessageBase(MessageBaseType.GameStartMessage, new GameStartMessage()
+            var message = new MessageBase(MessageBaseType.GameStartMessage, new GameStartMessage
             {
                 //TableCondition = gameLobby.TableCondition,
                 EnemyUsername = secondClient.User.Username
@@ -114,12 +112,11 @@ namespace Server.Controllers
 
         public void OnClietnReconnect(Client client)
         {
-
         }
 
         private void OnLobbyClose(object sender, GameLobbyCloseEventArgs e)
         {
-            if(!(sender is GameLobby lobby)) return;
+            if (!(sender is GameLobby lobby)) return;
 
             lobby.FirstClient.CurrentLobby = null;
             lobby.SecondClient.CurrentLobby = null;

@@ -1,22 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace CollectibleCardGame.Views.UserControls
 {
     /// <summary>
-    /// Логика взаимодействия для UnitCardUserControl.xaml
+    ///     Логика взаимодействия для UnitCardUserControl.xaml
     /// </summary>
     public partial class UnitCardUserControl : UserControl
     {
@@ -27,12 +15,10 @@ namespace CollectibleCardGame.Views.UserControls
             //this.MouseLeftButtonDown += new MouseButtonEventHandler(Control_MouseLeftButtonDown);
             //this.MouseLeftButtonUp += new MouseButtonEventHandler(Control_MouseLeftButtonUp);
             //this.MouseMove += new MouseEventHandler(Control_MouseMove);
-          
         }
 
         private void UserControl_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-
             //double a = Convert.ToDouble(UserControl.ActualHeightProperty) / 25.625;
             //double b = Convert.ToDouble(UserControl.ActualHeightProperty)/ 34.17;
             //double с = Convert.ToDouble(UserControl.ActualHeightProperty) / 9.76;
@@ -79,9 +65,5 @@ namespace CollectibleCardGame.Views.UserControls
         //        transform.Y = currentPosition.Y - clickPosition.Y;
         //    }
         //}
-
-
     }
-
-
 }

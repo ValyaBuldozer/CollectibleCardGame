@@ -1,18 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CollectibleCardGame.ViewModels.UserControls
+﻿namespace CollectibleCardGame.ViewModels.UserControls
 {
-    class SpellCardUserControlViewModel : BaseViewModel
+    internal class SpellCardUserControlViewModel : BaseViewModel
     {
-        private string _name;
+        private int _cost;
         private string _description;
         private string _imagePath;
-        private int _cost;
-       
+        private string _name;
 
 
         public string Name
@@ -35,9 +28,6 @@ namespace CollectibleCardGame.ViewModels.UserControls
             }
         }
 
-        
-
-        
 
         public string ImagePath
         {
@@ -58,10 +48,5 @@ namespace CollectibleCardGame.ViewModels.UserControls
                 NotifyPropertyChanged(nameof(Cost));
             }
         }
-
-       
-
-       
     }
 }
-

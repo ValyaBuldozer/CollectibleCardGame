@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using GameData.Exceptions;
 using GameData.Models.Cards;
 using GameData.Models.Repository;
@@ -32,7 +29,7 @@ namespace GameData.Controllers.Data
 
         public void Add(Card item)
         {
-            if(_repository.Collection.Exists(c=>c.ID == item.ID))
+            if (_repository.Collection.Exists(c => c.ID == item.ID))
                 throw new RepositoryItemAlreadyExistsExcepction("Item with this id already declared");
 
             _repository.Collection.Add(item);

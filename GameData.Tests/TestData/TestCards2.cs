@@ -1,24 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using GameData.Enums;
 using GameData.Models.Action;
 using GameData.Models.Cards;
 
 namespace GameData.Tests.TestData
 {
-    class TestCards2
+    internal class TestCards2
     {
-        public UnitCard FirstCard { set; get; }
-
-        public UnitCard SecondCard { set; get; }
-
-
         public TestCards2()
         {
-            FirstCard = new UnitCard()
+            FirstCard = new UnitCard
             {
                 ID = 1,
                 Name = "test1",
@@ -28,7 +19,7 @@ namespace GameData.Tests.TestData
                 Cost = 0,
                 Description = "Test"
             };
-            SecondCard = new UnitCard()
+            SecondCard = new UnitCard
             {
                 ID = 2,
                 Name = "test2",
@@ -40,9 +31,13 @@ namespace GameData.Tests.TestData
             };
         }
 
-        public Stack<Card> FirstRandomDeck => new Stack<Card>(new List<Card>()
+        public UnitCard FirstCard { set; get; }
+
+        public UnitCard SecondCard { set; get; }
+
+        public Stack<Card> FirstRandomDeck => new Stack<Card>(new List<Card>
         {
-            new UnitCard()
+            new UnitCard
             {
                 ID = 5,
                 Name = "Требушет",
@@ -52,7 +47,7 @@ namespace GameData.Tests.TestData
                 Cost = 0,
                 Description = "Test"
             },
-            new UnitCard()
+            new UnitCard
             {
                 ID = 11,
                 Name = "Лидер",
@@ -61,9 +56,14 @@ namespace GameData.Tests.TestData
                 BaseAttack = 5,
                 Cost = 0,
                 Description = "Test",
-                BattleCryActionInfo = new CardActionInfo() {ActionId = 30,ParameterType = ActionParameterType.Buff,ParameterValue = 0}
+                BattleCryActionInfo = new CardActionInfo
+                {
+                    ActionId = 30,
+                    ParameterType = ActionParameterType.Buff,
+                    ParameterValue = 0
+                }
             },
-            new UnitCard()
+            new UnitCard
             {
                 ID = 12,
                 Name = "Ученый",
@@ -72,9 +72,14 @@ namespace GameData.Tests.TestData
                 BaseAttack = 5,
                 Cost = 0,
                 Description = "Test",
-                BattleCryActionInfo = new CardActionInfo() {ActionId = 24,ParameterType = ActionParameterType.Empty,ParameterValue = 1}
+                BattleCryActionInfo = new CardActionInfo
+                {
+                    ActionId = 24,
+                    ParameterType = ActionParameterType.Empty,
+                    ParameterValue = 1
+                }
             },
-            new UnitCard()
+            new UnitCard
             {
                 ID = 4,
                 Name = "Лучник",
@@ -84,7 +89,7 @@ namespace GameData.Tests.TestData
                 Cost = 0,
                 Description = "Test"
             },
-            new UnitCard()
+            new UnitCard
             {
                 ID = 7,
                 Name = "Павший рыцарь",
@@ -93,9 +98,14 @@ namespace GameData.Tests.TestData
                 BaseAttack = 10,
                 Cost = 0,
                 Description = "Test",
-                BattleCryActionInfo = new CardActionInfo() {ActionId = 1,ParameterType = ActionParameterType.Damage,ParameterValue = 1}
+                BattleCryActionInfo = new CardActionInfo
+                {
+                    ActionId = 1,
+                    ParameterType = ActionParameterType.Damage,
+                    ParameterValue = 1
+                }
             },
-            new UnitCard()
+            new UnitCard
             {
                 ID = 8,
                 Name = "Лекарь",
@@ -104,9 +114,14 @@ namespace GameData.Tests.TestData
                 BaseAttack = 4,
                 Cost = 0,
                 Description = "Test",
-                DeathRattleActionInfo = new CardActionInfo() {ActionId = 4, ParameterType = ActionParameterType.Heal, ParameterValue = 3}
+                DeathRattleActionInfo = new CardActionInfo
+                {
+                    ActionId = 4,
+                    ParameterType = ActionParameterType.Heal,
+                    ParameterValue = 3
+                }
             },
-            new UnitCard()
+            new UnitCard
             {
                 ID = 9,
                 Name = "Лагерта",
@@ -115,9 +130,10 @@ namespace GameData.Tests.TestData
                 BaseAttack = 8,
                 Cost = 0,
                 Description = "Test",
-                AttackActionInfo = new CardActionInfo(){ActionId = 10,ParameterType = ActionParameterType.Buff,ParameterValue = 2}
+                AttackActionInfo =
+                    new CardActionInfo {ActionId = 10, ParameterType = ActionParameterType.Buff, ParameterValue = 2}
             },
-            new UnitCard()
+            new UnitCard
             {
                 ID = 10,
                 Name = "Дитрих Черный",
@@ -126,19 +142,26 @@ namespace GameData.Tests.TestData
                 BaseAttack = 6,
                 Cost = 0,
                 Description = "Test",
-                DamageRecievedActionInfo = new CardActionInfo(){ActionId = 10,ParameterType = ActionParameterType.Buff,ParameterValue = 2}
+                DamageRecievedActionInfo = new CardActionInfo
+                {
+                    ActionId = 10,
+                    ParameterType = ActionParameterType.Buff,
+                    ParameterValue = 2
+                }
             },
-            new SpellCard()
+            new SpellCard
             {
                 ID = 6,
                 Name = "Огненный шар",
                 Description = "Бахает всех врагов на 2",
-                ActionInfo = new CardActionInfo()
+                ActionInfo = new CardActionInfo
                 {
-                    ActionId = 3, ParameterType = ActionParameterType.Damage,ParameterValue = 2
+                    ActionId = 3,
+                    ParameterType = ActionParameterType.Damage,
+                    ParameterValue = 2
                 }
             },
-            new UnitCard()
+            new UnitCard
             {
                 ID = 3,
                 Name = "Мечник",
@@ -147,8 +170,7 @@ namespace GameData.Tests.TestData
                 BaseAttack = 5,
                 Cost = 0,
                 Description = "Test"
-            },
-
+            }
         });
     }
 }

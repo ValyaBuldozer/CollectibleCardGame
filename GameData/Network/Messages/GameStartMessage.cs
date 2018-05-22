@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GameData.Models;
-
-namespace GameData.Network.Messages
+﻿namespace GameData.Network.Messages
 {
     public class GameStartMessage : IContent
     {

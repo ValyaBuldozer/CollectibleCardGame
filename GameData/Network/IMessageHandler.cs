@@ -4,6 +4,6 @@ namespace GameData.Network
 {
     public interface IMessageHandler
     {
-        IContent Execute(IContent content,object sender=null);
+        IContent Execute(IContent content, object sender = null);
     }
 }

@@ -1,15 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BaseNetworkArchitecture.Common;
 using GameData.Controllers.Table;
 using GameData.Models;
 using GameData.Models.Action;
 using GameData.Models.Observer;
 using GameData.Models.Units;
-using Exception = System.Exception;
 
 namespace GameData.Controllers.Data
 {
@@ -27,7 +21,7 @@ namespace GameData.Controllers.Data
         private readonly IActionTableControlller _tableController;
 
         public GameActionController(IDataRepositoryController<GameAction> repositoryController,
-             IActionTableControlller tableController)
+            IActionTableControlller tableController)
         {
             _repositoryController = repositoryController;
             _tableController = tableController;
@@ -47,7 +41,7 @@ namespace GameData.Controllers.Data
             //if(action.ParameterType != cardInfo.ParameterType)
             //    throw new InvalidOperationException();
 
-            return new GameActionInfo()
+            return new GameActionInfo
             {
                 Action = action,
                 ParameterType = action.ParameterType,
@@ -57,7 +51,7 @@ namespace GameData.Controllers.Data
 
         public void ExecuteAction(GameActionInfo actionInfo, Entity sender, Unit target)
         {
-            if(actionInfo == null)
+            if (actionInfo == null)
                 return;
 
             try
@@ -77,14 +71,14 @@ namespace GameData.Controllers.Data
         {
             var action = GetGameActionInfo(actionInfo);
 
-            if(action == null) return;
+            if (action == null) return;
 
             try
             {
                 GetGameActionInfo(actionInfo).Action.Action.Invoke(
                     _tableController, sender, target, actionInfo.ParameterValue);
-                ActionTrigerred?.Invoke(this,new GameActionTriggerObserverAction(action.Action.ID,
-                    sender.EntityId,target?.EntityId));
+                ActionTrigerred?.Invoke(this, new GameActionTriggerObserverAction(action.Action.ID,
+                    sender.EntityId, target?.EntityId));
             }
             catch (NotImplementedException e)
             {

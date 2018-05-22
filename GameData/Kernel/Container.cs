@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using GameData.Controllers.Data;
 using GameData.Controllers.Global;
 using GameData.Controllers.PlayerTurn;
@@ -10,7 +6,6 @@ using GameData.Controllers.Table;
 using GameData.Models;
 using GameData.Models.Action;
 using GameData.Models.Cards;
-using GameData.Models.Observer;
 using GameData.Models.PlayerTurn;
 using GameData.Models.Repository;
 using Unity;
@@ -28,11 +23,16 @@ namespace GameData.Kernel
             _container = new UnityContainer();
         }
 
+        public CardRepository CardRepository { set; get; }
+
+        public IEnumerable<IContainerRegistration> GetRegistrations => _container.Registrations;
+
         public void Initialize(GameSettings settings)
         {
             _container.RegisterInstance(settings, new ContainerControlledLifetimeManager());
 
-            _container.RegisterInstance(CardRepository ?? new CardRepository(), new ContainerControlledLifetimeManager());
+            _container.RegisterInstance(CardRepository ?? new CardRepository(),
+                new ContainerControlledLifetimeManager());
 
             RegisterBindings();
 
@@ -89,13 +89,9 @@ namespace GameData.Kernel
                 EndPlayerTurnHandler>();
         }
 
-        public CardRepository CardRepository { set; get; }
-
         public T Get<T>()
         {
             return _container.Resolve<T>();
         }
-
-        public IEnumerable<IContainerRegistration> GetRegistrations => _container.Registrations;
     }
 }

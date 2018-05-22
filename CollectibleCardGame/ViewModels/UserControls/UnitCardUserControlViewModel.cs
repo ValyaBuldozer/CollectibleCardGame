@@ -1,23 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using  System.Windows.Media;
-
-namespace CollectibleCardGame.ViewModels.UserControls
+﻿namespace CollectibleCardGame.ViewModels.UserControls
 {
-    class UnitCardUserControlViewModel: BaseViewModel
+    internal class UnitCardUserControlViewModel : BaseViewModel
     {
-        private string _name;
-        private string _description;
-        private string _imagePath;
-        private string _tapeBrush;
-        private string _tapeBorderBrush;
-        private int _cost;
         private int _attack;
+        private int _cost;
+        private string _description;
         private int _health;
+        private string _imagePath;
+        private string _name;
+        private string _tapeBorderBrush;
+        private string _tapeBrush;
 
 
         public string Name
@@ -59,6 +51,7 @@ namespace CollectibleCardGame.ViewModels.UserControls
                 NotifyPropertyChanged(nameof(TapeBorderBrush));
             }
         }
+
         public string ImagePath
         {
             get => _imagePath;
@@ -78,6 +71,7 @@ namespace CollectibleCardGame.ViewModels.UserControls
                 NotifyPropertyChanged(nameof(Cost));
             }
         }
+
         public int Attack
         {
             get => _attack;
@@ -87,6 +81,7 @@ namespace CollectibleCardGame.ViewModels.UserControls
                 NotifyPropertyChanged(nameof(Attack));
             }
         }
+
         public int Health
         {
             get => _health;
@@ -96,6 +91,7 @@ namespace CollectibleCardGame.ViewModels.UserControls
                 NotifyPropertyChanged(nameof(Health));
             }
         }
+
         //+ свойство для добавления элементов в ИтемКонтрол "AbilityStack"
     }
 }

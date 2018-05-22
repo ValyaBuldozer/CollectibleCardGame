@@ -3,10 +3,8 @@ using GameData.Models.Units;
 
 namespace GameData.Models.Observer
 {
-    public class UnitDeathObserverAction : Observer.ObserverAction
+    public class UnitDeathObserverAction : ObserverAction
     {
-        public Unit Unit { set; get; }
-
         public UnitDeathObserverAction(Unit unit)
         {
             Unit = unit;
@@ -17,5 +15,7 @@ namespace GameData.Models.Observer
         {
             Type = ObserverActionType.UnitDeath;
         }
+
+        public Unit Unit { set; get; }
     }
 }

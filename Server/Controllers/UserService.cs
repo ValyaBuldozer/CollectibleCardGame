@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlTypes;
 using System.Linq;
 using BaseNetworkArchitecture.Server;
 using Server.Controllers.Repository;
@@ -11,10 +10,10 @@ namespace Server.Controllers
 {
     public class UserService
     {
-        private readonly UserReposController _userReposController;
         private readonly ICollection<IClientConnection> _clients;
+        private readonly UserReposController _userReposController;
 
-        public UserService(UserReposController userReposController,IServer server,
+        public UserService(UserReposController userReposController, IServer server,
             ConnectedClientsRepositoryController clientsRepositoryController)
         {
             _userReposController = userReposController;
@@ -23,14 +22,14 @@ namespace Server.Controllers
 
         public string RegisterUser(string username, string password)
         {
-            if(string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
                 throw new UserServiceException("Username or password was empty");
 
-            if(_userReposController.GetEnumerable.FirstOrDefault(u=>u.Username == username)
-                !=null)
+            if (_userReposController.GetEnumerable.FirstOrDefault(u => u.Username == username)
+                != null)
                 throw new UserServiceException("User is already exists");
 
-            var user = new User() { Username = username, Password = password, UserInfo = new UserInfo()};
+            var user = new User {Username = username, Password = password, UserInfo = new UserInfo()};
             _userReposController.Add(user);
 
             return user.Username;
@@ -41,17 +40,17 @@ namespace Server.Controllers
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
                 throw new NullReferenceException();
 
-            if(_clients.FirstOrDefault(c=>c.IdentificatorTocken == username)
-                 !=null)
+            if (_clients.FirstOrDefault(c => c.IdentificatorTocken == username)
+                != null)
                 throw new UserServiceException("User is already in system");
 
             var user = _userReposController.GetEnumerable.FirstOrDefault(
                 u => u.Username == username);
 
-            if(user == null)
+            if (user == null)
                 throw new UserServiceException("No such user is exists");
 
-            if(user.Password != password)
+            if (user.Password != password)
                 throw new UserServiceException("Incorrect password");
 
             return user;
@@ -66,7 +65,7 @@ namespace Server.Controllers
         {
             var user = _userReposController.GetEnumerable.FirstOrDefault(u => u.Username == username);
 
-            if(user == null)
+            if (user == null)
                 throw new Exception("No user found");
 
             user.UserInfo = userInfo;

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using GameData.Models.Cards;
 
 namespace GameData.Models.Units
@@ -11,6 +7,14 @@ namespace GameData.Models.Units
     {
         //private HealthPoint _healthPoint;
         private UnitState _state;
+
+        public HeroUnit(Player player, UnitCard hero) : base(hero)
+        {
+            Player = player;
+
+            if (State != null)
+                State.ZeroHpEvent += HealthPoint_ZeroHpEvent;
+        }
 
         //public override HealthPoint HealthPoint
         //{
@@ -38,19 +42,11 @@ namespace GameData.Models.Units
             }
         }
 
-        public event EventHandler<HeroUnitDiedEventArgs> DiedEvent; 
-
-        public HeroUnit(Player player, UnitCard hero) : base(hero)
-        {
-            Player = player;
-
-            if(State!=null)
-                 State.ZeroHpEvent += HealthPoint_ZeroHpEvent;
-        }
+        public event EventHandler<HeroUnitDiedEventArgs> DiedEvent;
 
         private void HealthPoint_ZeroHpEvent(object sender, ZeroHpEventArgs e)
         {
-            DiedEvent?.Invoke(this,new HeroUnitDiedEventArgs(Player));
+            DiedEvent?.Invoke(this, new HeroUnitDiedEventArgs(Player));
         }
     }
 }

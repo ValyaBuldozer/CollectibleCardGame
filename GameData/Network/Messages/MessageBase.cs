@@ -5,28 +5,28 @@ namespace GameData.Network.Messages
 {
     public class MessageBase
     {
-        public MessageBaseType Type { get; }
-
-        /// <summary>
-        /// Object из-за десериализации
-        /// </summary>
-        public object Content { get; }
-
-        [JsonIgnore]
-        public IMessageHandler MessageHandler { set; get; }
-
-        public MessageBase(MessageBaseType type,object content,IMessageHandler messageHandler=null)
+        public MessageBase(MessageBaseType type, object content, IMessageHandler messageHandler = null)
         {
             Type = type;
             Content = content;
             MessageHandler = messageHandler;
         }
 
+        public MessageBaseType Type { get; }
+
+        /// <summary>
+        ///     Object из-за десериализации
+        /// </summary>
+        public object Content { get; }
+
+        [JsonIgnore]
+        public IMessageHandler MessageHandler { set; get; }
+
         public IContent HandleMessage(object sender)
         {
             //todo : тут вылетает NullReference рандомно
-            IContent content = Content as IContent;
-            return MessageHandler.Execute(content,sender);
+            var content = Content as IContent;
+            return MessageHandler.Execute(content, sender);
         }
     }
 }

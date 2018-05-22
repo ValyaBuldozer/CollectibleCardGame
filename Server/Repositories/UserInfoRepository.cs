@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data.Entity;
 using Server.Database;
 using Server.Models;
 
@@ -13,15 +8,15 @@ namespace Server.Repositories
     {
         private readonly IContext _context;
 
-        public DbSet<UserInfo> Collection { set; get; }
-
         public UserInfoRepository(IContext context)
         {
             _context = context;
 
-            if(_context.IsDatabaseExists())
+            if (_context.IsDatabaseExists())
                 Collection = context.UsersInfo;
         }
+
+        public DbSet<UserInfo> Collection { set; get; }
 
         public void Update()
         {

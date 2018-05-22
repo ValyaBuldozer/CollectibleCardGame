@@ -1,34 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
+﻿using System.Net;
 using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using BaseNetworkArchitecture;
 using BaseNetworkArchitecture.Common;
 using BaseNetworkArchitecture.Common.Messages;
 using BaseNetworkArchitecture.Server;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace CollectibleCardGame.Tests.NetworkTests
 {
     [TestClass]
     public class TcpCommunicatorTest
     {
-       // [TestMethod]
+        // [TestMethod]
         public void ConnectionTest()
         {
-            TcpServer server = new TcpServer();
+            var server = new TcpServer();
             server.ClientConnected += OnClientConnected;
             server.Start(IPAddress.Parse("127.0.0.1"), 8800);
 
-            TcpClient client = new TcpClient();
+            var client = new TcpClient();
             client.Connect(IPAddress.Parse("127.0.0.1"), 8800);
 
-            TcpCommunicator clientCommunicator = new TcpCommunicator(client);
+            var clientCommunicator = new TcpCommunicator(client);
 
-            clientCommunicator.SendMessage(new NetworkMessage() { Content = "test" });
+            clientCommunicator.SendMessage(new NetworkMessage {Content = "test"});
             var answer = clientCommunicator.ReadMessage();
 
             Assert.IsTrue(answer != null);

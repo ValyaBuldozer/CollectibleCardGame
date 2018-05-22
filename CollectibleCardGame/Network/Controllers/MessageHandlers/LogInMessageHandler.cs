@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CollectibleCardGame.Models;
+﻿using CollectibleCardGame.Models;
 using CollectibleCardGame.ViewModels.Frames;
 using CollectibleCardGame.ViewModels.Windows;
 using GameData.Network;
@@ -13,11 +8,11 @@ namespace CollectibleCardGame.Network.Controllers.MessageHandlers
 {
     public class LogInMessageHandler : MessageHandlerBase<LogInMessage>
     {
+        private readonly DeckSettingsViewModel _deckSettingsViewModel;
         private readonly MainWindowViewModel _mainWindowViewModel;
         private readonly CurrentUserService _userService;
-        private readonly DeckSettingsViewModel _deckSettingsViewModel;
 
-        public LogInMessageHandler(MainWindowViewModel mainWindowViewModel,CurrentUserService userService,
+        public LogInMessageHandler(MainWindowViewModel mainWindowViewModel, CurrentUserService userService,
             DeckSettingsViewModel deckSettingsViewModel)
         {
             _mainWindowViewModel = mainWindowViewModel;

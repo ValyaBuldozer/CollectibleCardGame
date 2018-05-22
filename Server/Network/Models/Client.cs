@@ -10,6 +10,18 @@ namespace Server.Network.Models
 {
     public class Client
     {
+        public Client(IClientConnection clientConnection)
+        {
+            ClientConnection = clientConnection;
+            ClientConnection.Communicator.MessageRecievedEvent += OnMessageRecieved;
+            ClientConnection.Communicator.BreakConnectionEvent += OnBreakConnection;
+            ClientController = UnityKernel.Get<ClientController>();
+            ClientController.Client = this;
+
+            MessageRecived += ClientController.OnMessageRecieved;
+            BreakConnection += ClientController.OnBreakConnection;
+        }
+
         public IClientConnection ClientConnection { set; get; }
 
         public User User { set; get; }
@@ -22,28 +34,16 @@ namespace Server.Network.Models
 
         public event EventHandler<MessageEventArgs> MessageRecived;
 
-        public event EventHandler<BreakConnectionEventArgs> BreakConnection; 
+        public event EventHandler<BreakConnectionEventArgs> BreakConnection;
 
         public void OnMessageRecieved(object sender, MessageEventArgs e)
         {
-            MessageRecived?.Invoke(this,e);
+            MessageRecived?.Invoke(this, e);
         }
 
         private void OnBreakConnection(object sender, BreakConnectionEventArgs e)
         {
             BreakConnection?.Invoke(this, e);
-        }
-
-        public Client(IClientConnection clientConnection)
-        {
-            ClientConnection = clientConnection;
-            ClientConnection.Communicator.MessageRecievedEvent += OnMessageRecieved;
-            ClientConnection.Communicator.BreakConnectionEvent += OnBreakConnection;
-            ClientController = UnityKernel.Get<ClientController>();
-            ClientController.Client = this;
-
-            MessageRecived += ClientController.OnMessageRecieved;
-            BreakConnection += ClientController.OnBreakConnection;
         }
     }
 }

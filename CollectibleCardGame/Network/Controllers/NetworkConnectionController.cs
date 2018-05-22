@@ -1,5 +1,4 @@
-﻿using System;
-using System.Net;
+﻿using System.Net;
 using System.Net.Sockets;
 using BaseNetworkArchitecture.Common;
 using BaseNetworkArchitecture.Common.Messages;
@@ -13,7 +12,20 @@ namespace CollectibleCardGame.Network.Controllers
 {
     public class NetworkConnectionController : INetworkController
     {
+        private readonly IMessageConverter _converter;
+        private readonly ILogger _logger;
+        private readonly LogInFramePageShellViewModel _logInViewModel;
+        private readonly MainWindowViewModel _mainViewModel;
         private INetworkCommunicator _serverCommunicator;
+
+        public NetworkConnectionController(IMessageConverter converter, MainWindowViewModel mainViewModel,
+            ILogger logger, LogInFramePageShellViewModel loginViewModel)
+        {
+            _mainViewModel = mainViewModel;
+            _converter = converter;
+            _logger = logger;
+            _logInViewModel = loginViewModel;
+        }
 
         [Dependency]
         public INetworkCommunicator ServerCommunicator
@@ -34,23 +46,9 @@ namespace CollectibleCardGame.Network.Controllers
             get => _serverCommunicator;
         }
 
-        private readonly IMessageConverter _converter;
-        private readonly MainWindowViewModel _mainViewModel;
-        private readonly ILogger _logger;
-        private readonly LogInFramePageShellViewModel _logInViewModel;
-
-        public NetworkConnectionController(IMessageConverter converter,MainWindowViewModel mainViewModel,
-            ILogger logger,LogInFramePageShellViewModel loginViewModel)
-        {
-            _mainViewModel = mainViewModel;
-            _converter = converter;
-            _logger = logger;
-            _logInViewModel = loginViewModel;
-        }
-
         public void Connect(IPAddress ipAddress, int port)
         {
-            if(!ServerCommunicator.Connect(ipAddress, port))
+            if (!ServerCommunicator.Connect(ipAddress, port))
                 throw new SocketException();
 
             ServerCommunicator.StartReadMessages();
@@ -58,7 +56,7 @@ namespace CollectibleCardGame.Network.Controllers
 
         public void Disconnect()
         {
-            if(!ServerCommunicator.Disconnect())
+            if (!ServerCommunicator.Disconnect())
                 throw new SocketException();
         }
 

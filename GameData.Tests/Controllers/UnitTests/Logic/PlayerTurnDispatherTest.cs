@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using GameData.Controllers.Data;
+﻿using System.Threading;
 using GameData.Controllers.Global;
 using GameData.Controllers.Table;
 using GameData.Models;
@@ -23,14 +17,14 @@ namespace GameData.Tests.Controllers.UnitTests.Logic
             var tableCondition = new TestTableCondition().GetFirstCondition;
             var dealCardsDispather = new Mock<ICardDrawController>();
             dealCardsDispather.Setup(mock => mock.DealCardsToPlayer(It.IsAny<Player>(), It.IsAny<int>()));
-            GameSettings settings = new GameSettings()
+            var settings = new GameSettings
             {
                 IsPlayerTurnTimerEnabled = true,
                 PlayerTurnInterval = 5
             };
-            PlayerTurnDispatcher playerTurnDispatcher = new PlayerTurnDispatcher
-                (tableCondition,dealCardsDispather.Object, settings );
-            bool eventWasDispatchered = false;
+            var playerTurnDispatcher = new PlayerTurnDispatcher
+                (tableCondition, dealCardsDispather.Object, settings);
+            var eventWasDispatchered = false;
             playerTurnDispatcher.TurnStart += (sender, args) => eventWasDispatchered = true;
 
             playerTurnDispatcher.Start();
@@ -45,19 +39,19 @@ namespace GameData.Tests.Controllers.UnitTests.Logic
             var tableCondition = new TestTableCondition().GetFirstCondition;
             var dealCardsDispather = new Mock<ICardDrawController>();
             dealCardsDispather.Setup(mock => mock.DealCardsToPlayer(It.IsAny<Player>(), It.IsAny<int>()));
-            PlayerTurnDispatcher playerTurnDispatcher = new PlayerTurnDispatcher(
-                tableCondition,dealCardsDispather.Object, TestGameSettings.Get);
+            var playerTurnDispatcher = new PlayerTurnDispatcher(
+                tableCondition, dealCardsDispather.Object, TestGameSettings.Get);
 
             var currentPlayer = playerTurnDispatcher.CurrentPlayer;
-            bool eventWasDispatchered = false;
+            var eventWasDispatchered = false;
             playerTurnDispatcher.TurnStart += (sender, args) => eventWasDispatchered = true;
 
             playerTurnDispatcher.NextPlayer();
 
-            dealCardsDispather.Verify(mock=>mock.DealCardsToPlayer(It.IsAny<Player>(),1),Times.AtLeastOnce);
+            dealCardsDispather.Verify(mock => mock.DealCardsToPlayer(It.IsAny<Player>(), 1), Times.AtLeastOnce);
 
             Assert.IsTrue(eventWasDispatchered);
-            Assert.AreNotEqual(currentPlayer,playerTurnDispatcher.CurrentPlayer);
+            Assert.AreNotEqual(currentPlayer, playerTurnDispatcher.CurrentPlayer);
         }
     }
 }

@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Threading;
 using CollectibleCardGame.Models;
 using CollectibleCardGame.Services;
@@ -22,32 +19,51 @@ namespace CollectibleCardGame.ViewModels.Frames
     {
         private readonly CurrentUserService _userService;
 
-        private Player _player;
-        private Player _enemyPlayer;
-        private string _currentPlayerUsername;
-        private PlayerState _playerState;
-        private HeroUnit _playerHeroUnit;
-        private HeroUnit _enemyHeroUnit;
-
-        private ObservableCollection<CardViewModel> _playerCards;
-        private ObservableCollection<CardViewModel> _enemyCards;
-        private ObservableCollection<UnitViewModel> _playerUnits;
-        private ObservableCollection<UnitViewModel> _enemyUnits;
-
         private RelayCommand _cardDeployCommand;
-        private RelayCommand _transferTurnCommand;
-        private RelayCommand _unitTargetCommand;
-        private RelayCommand _playerTargetCommand;
-        private RelayCommand _plyaerUnitCommand;
+        private string _currentPlayerUsername;
+        private ObservableCollection<CardViewModel> _enemyCards;
+        private HeroUnit _enemyHeroUnit;
+        private Player _enemyPlayer;
         private RelayCommand _enemyUnitCommand;
+        private ObservableCollection<UnitViewModel> _enemyUnits;
+        private PlayerUserControlViewModel _enemyViewModel;
+        private bool _isAttackTargeting;
 
         private bool _isSpellTargeting;
-        private CardViewModel _spellTargetingViewModel;
-        private bool _isAttackTargeting;
-        private UnitViewModel _unitTargetingViewModel;
+
+        private Player _player;
+
+        private ObservableCollection<CardViewModel> _playerCards;
+        private HeroUnit _playerHeroUnit;
+        private PlayerState _playerState;
+        private RelayCommand _playerTargetCommand;
+        private ObservableCollection<UnitViewModel> _playerUnits;
 
         private PlayerUserControlViewModel _playerViewModel;
-        private PlayerUserControlViewModel _enemyViewModel;
+        private RelayCommand _plyaerUnitCommand;
+        private CardViewModel _spellTargetingViewModel;
+        private RelayCommand _transferTurnCommand;
+        private RelayCommand _unitTargetCommand;
+        private UnitViewModel _unitTargetingViewModel;
+
+        public GameEngineViewModel(CurrentUserService userService)
+        {
+            CurrentDispatcher = Dispatcher.CurrentDispatcher;
+
+            _playerCards = new ObservableCollection<CardViewModel>();
+            _playerCards.CollectionChanged +=
+                (sender, args) => PlayerViewModel.CardsInHand = _playerCards.Count;
+            _enemyCards = new ObservableCollection<CardViewModel>();
+            _enemyCards.CollectionChanged +=
+                (sender, args) => EnemyViewModel.CardsInHand = _enemyCards.Count;
+
+            _playerUnits = new ObservableCollection<UnitViewModel>();
+            _enemyUnits = new ObservableCollection<UnitViewModel>();
+
+            _playerViewModel = new PlayerUserControlViewModel();
+            _enemyViewModel = new PlayerUserControlViewModel();
+            _userService = userService;
+        }
 
         public Dispatcher CurrentDispatcher { get; }
 
@@ -61,13 +77,13 @@ namespace CollectibleCardGame.ViewModels.Frames
                 NotifyPropertyChanged(nameof(Player));
                 PlayerViewModel.Player = value;
 
-                if(value == null) return;
+                if (value == null) return;
 
                 PlayerCards.Clear();
-                _player.HandCards.ForEach(c=>PlayerCards.Add(new CardViewModel(c)));
+                _player.HandCards.ForEach(c => PlayerCards.Add(new CardViewModel(c)));
 
                 PlayerUnits.Clear();
-                _player.TableUnits.ForEach(u=>PlayerUnits.Add(new UnitViewModel(u)));
+                _player.TableUnits.ForEach(u => PlayerUnits.Add(new UnitViewModel(u)));
             }
         }
 
@@ -81,7 +97,7 @@ namespace CollectibleCardGame.ViewModels.Frames
                 NotifyPropertyChanged(nameof(EnemyPlayer));
                 EnemyViewModel.Player = value;
 
-                if(value == null) return;
+                if (value == null) return;
 
                 EnemyCards.Clear();
                 _enemyPlayer.HandCards.ForEach(c => EnemyCards.Add(new CardViewModel(c)));
@@ -121,16 +137,12 @@ namespace CollectibleCardGame.ViewModels.Frames
                 NotifyPropertyChanged(nameof(TransferTurnCommand));
 
                 if (_currentPlayerUsername == _userService.Username)
-                {
-                    _playerUnits.ForEach(u=>u.IsCanAttack = true);
-                }
+                    _playerUnits.ForEach(u => u.IsCanAttack = true);
                 else
-                {
-                    _playerUnits.ForEach(u=>u.IsCanAttack = false);
-                }
+                    _playerUnits.ForEach(u => u.IsCanAttack = false);
 
-                PlayerUnits.ToList().ForEach(u=>u.ResetTargeting());
-                EnemyUnits.ToList().ForEach(u=>u.ResetTargeting());
+                PlayerUnits.ToList().ForEach(u => u.ResetTargeting());
+                EnemyUnits.ToList().ForEach(u => u.ResetTargeting());
             }
         }
 
@@ -204,202 +216,198 @@ namespace CollectibleCardGame.ViewModels.Frames
             }
         }
 
-        public GameEngineViewModel(CurrentUserService userService)
-        {
-            CurrentDispatcher = Dispatcher.CurrentDispatcher;
-
-            _playerCards = new ObservableCollection<CardViewModel>();
-            _playerCards.CollectionChanged +=
-                (sender, args) => PlayerViewModel.CardsInHand = _playerCards.Count;
-            _enemyCards = new ObservableCollection<CardViewModel>();
-            _enemyCards.CollectionChanged += 
-                (sender, args) => EnemyViewModel.CardsInHand = _enemyCards.Count;
-
-            _playerUnits = new ObservableCollection<UnitViewModel>();
-            _enemyUnits  = new ObservableCollection<UnitViewModel>();
-
-            _playerViewModel = new PlayerUserControlViewModel();
-            _enemyViewModel = new PlayerUserControlViewModel();
-            _userService = userService;
-        }
-
-        public event EventHandler<PlayerTurnRequestEventArgs> PlayerTurnEvent;
-
         public RelayCommand PlayerUnitCommand => _plyaerUnitCommand ??
-               (_plyaerUnitCommand = new RelayCommand(o =>
-               {
-                   if(!IsPlayerTurn) return;
+                                                 (_plyaerUnitCommand = new RelayCommand(o =>
+                                                 {
+                                                     if (!IsPlayerTurn) return;
 
-                   UnitViewModel unitViewModel;
-                   if (o is UnitViewModel model)
-                       unitViewModel = model;
-                   else
-                       unitViewModel = ((PlayerUserControlViewModel)o).HeroUnitViewModel;
+                                                     UnitViewModel unitViewModel;
+                                                     if (o is UnitViewModel model)
+                                                         unitViewModel = model;
+                                                     else
+                                                         unitViewModel = ((PlayerUserControlViewModel) o)
+                                                             .HeroUnitViewModel;
 
-                   if (_isSpellTargeting)
-                   {
-                        //todo : проверка героя
-                       PlayerUnits.ForEach(u => u.ResetTargeting());
-                       EnemyUnits.ForEach(u => u.ResetTargeting());
-                       PlayerViewModel.HeroUnitViewModel.ResetTargeting();
-                       EnemyViewModel.HeroUnitViewModel.ResetTargeting();
-                       PlayerTurnEvent?.Invoke(this, new PlayerTurnRequestEventArgs(
-                           new CardDeployPlayerTurn(
-                               _player, _spellTargetingViewModel.Card, unitViewModel.BaseUnit)));
-                       _unitTargetingViewModel = null;
-                       _isSpellTargeting = false;
-                       return;
-                   }
+                                                     if (_isSpellTargeting)
+                                                     {
+                                                         //todo : проверка героя
+                                                         PlayerUnits.ForEach(u => u.ResetTargeting());
+                                                         EnemyUnits.ForEach(u => u.ResetTargeting());
+                                                         PlayerViewModel.HeroUnitViewModel.ResetTargeting();
+                                                         EnemyViewModel.HeroUnitViewModel.ResetTargeting();
+                                                         PlayerTurnEvent?.Invoke(this, new PlayerTurnRequestEventArgs(
+                                                             new CardDeployPlayerTurn(
+                                                                 _player, _spellTargetingViewModel.Card,
+                                                                 unitViewModel.BaseUnit)));
+                                                         _unitTargetingViewModel = null;
+                                                         _isSpellTargeting = false;
+                                                         return;
+                                                     }
 
-                   if(!unitViewModel.IsCanAttack)
-                       return;
+                                                     if (!unitViewModel.IsCanAttack)
+                                                         return;
 
-                   if(o is PlayerUserControlViewModel) return;
+                                                     if (o is PlayerUserControlViewModel) return;
 
-                   _unitTargetingViewModel = unitViewModel;
-                   _isAttackTargeting = true;
+                                                     _unitTargetingViewModel = unitViewModel;
+                                                     _isAttackTargeting = true;
 
-                   //выделяем юнитов которых можно атаковать
-                   if(EnemyUnits.ToList().Exists(u=>u.BaseUnit.State.AttackPriority == 2))
-                       EnemyUnits.Where(u=>u.BaseUnit.State.AttackPriority == 2).
-                           ForEach(u=>u.SetTargeting());
-                   else
-                   {
-                       EnemyUnits.Where(u=>u.BaseUnit.State.AttackPriority != 0).
-                           ForEach(u=>u.SetTargeting());
-                       EnemyViewModel.HeroUnitViewModel.SetTargeting();
-                   }
-
-               }));
+                                                     //выделяем юнитов которых можно атаковать
+                                                     if (EnemyUnits.ToList().Exists(u =>
+                                                         u.BaseUnit.State.AttackPriority == 2))
+                                                     {
+                                                         EnemyUnits.Where(u => u.BaseUnit.State.AttackPriority == 2)
+                                                             .ForEach(u => u.SetTargeting());
+                                                     }
+                                                     else
+                                                     {
+                                                         EnemyUnits.Where(u => u.BaseUnit.State.AttackPriority != 0)
+                                                             .ForEach(u => u.SetTargeting());
+                                                         EnemyViewModel.HeroUnitViewModel.SetTargeting();
+                                                     }
+                                                 }));
 
         public RelayCommand EnemyUnitCommand => _enemyUnitCommand ??
-               (_enemyUnitCommand = new RelayCommand(o =>
-               {
-                   UnitViewModel unitViewModel;
-                   if (o is UnitViewModel model)
-                       unitViewModel = model;
-                   else
-                       unitViewModel = ((PlayerUserControlViewModel) o).HeroUnitViewModel;
+                                                (_enemyUnitCommand = new RelayCommand(o =>
+                                                {
+                                                    UnitViewModel unitViewModel;
+                                                    if (o is UnitViewModel model)
+                                                        unitViewModel = model;
+                                                    else
+                                                        unitViewModel = ((PlayerUserControlViewModel) o)
+                                                            .HeroUnitViewModel;
 
-                   if (_isSpellTargeting)
-                   {
-                       PlayerUnits.ForEach(u => u.ResetTargeting());
-                       EnemyUnits.ForEach(u => u.ResetTargeting());
-                       PlayerViewModel.HeroUnitViewModel.ResetTargeting();
-                       EnemyViewModel.HeroUnitViewModel.ResetTargeting();
-                       PlayerTurnEvent?.Invoke(this, new PlayerTurnRequestEventArgs(
-                           new CardDeployPlayerTurn(
-                               _player, _spellTargetingViewModel.Card, unitViewModel.BaseUnit)));
-                       _unitTargetingViewModel = null;
-                       _isSpellTargeting = false;
-                       return;
-                   }
+                                                    if (_isSpellTargeting)
+                                                    {
+                                                        PlayerUnits.ForEach(u => u.ResetTargeting());
+                                                        EnemyUnits.ForEach(u => u.ResetTargeting());
+                                                        PlayerViewModel.HeroUnitViewModel.ResetTargeting();
+                                                        EnemyViewModel.HeroUnitViewModel.ResetTargeting();
+                                                        PlayerTurnEvent?.Invoke(this, new PlayerTurnRequestEventArgs(
+                                                            new CardDeployPlayerTurn(
+                                                                _player, _spellTargetingViewModel.Card,
+                                                                unitViewModel.BaseUnit)));
+                                                        _unitTargetingViewModel = null;
+                                                        _isSpellTargeting = false;
+                                                        return;
+                                                    }
 
-                   if (!_isAttackTargeting) return;
+                                                    if (!_isAttackTargeting) return;
 
-                   //провкрка провокатора
-                   if (unitViewModel.BaseUnit.State.AttackPriority != 2 &&
-                       EnemyUnits.ToList().Exists(u => u.BaseUnit.State.AttackPriority == 2))
-                       return;
+                                                    //провкрка провокатора
+                                                    if (unitViewModel.BaseUnit.State.AttackPriority != 2 &&
+                                                        EnemyUnits.ToList().Exists(u =>
+                                                            u.BaseUnit.State.AttackPriority == 2))
+                                                        return;
 
-                   //проверка маскировки
-                   if(unitViewModel.BaseUnit.State.AttackPriority == 0)
-                       return;
+                                                    //проверка маскировки
+                                                    if (unitViewModel.BaseUnit.State.AttackPriority == 0)
+                                                        return;
 
-                   PlayerTurnEvent?.Invoke(this, new PlayerTurnRequestEventArgs(
-                       new UnitAttackPlayerTurn(_player,
-                           _unitTargetingViewModel.BaseUnit, unitViewModel.BaseUnit)));
-                   _unitTargetingViewModel.IsCanAttack = false;
-                   _unitTargetingViewModel = null;
-                   _isAttackTargeting = false;
-                   EnemyUnits.ForEach(u => u.ResetTargeting());
-                   EnemyViewModel.HeroUnitViewModel.ResetTargeting();
-                   return;
-
-               }));
+                                                    PlayerTurnEvent?.Invoke(this, new PlayerTurnRequestEventArgs(
+                                                        new UnitAttackPlayerTurn(_player,
+                                                            _unitTargetingViewModel.BaseUnit, unitViewModel.BaseUnit)));
+                                                    _unitTargetingViewModel.IsCanAttack = false;
+                                                    _unitTargetingViewModel = null;
+                                                    _isAttackTargeting = false;
+                                                    EnemyUnits.ForEach(u => u.ResetTargeting());
+                                                    EnemyViewModel.HeroUnitViewModel.ResetTargeting();
+                                                }));
 
         public RelayCommand CardDeployCommand => _cardDeployCommand ??
-               (_cardDeployCommand = new RelayCommand(o =>
-               {
-                   if(!(o is CardViewModel cardViewModel))
-                       return;
+                                                 (_cardDeployCommand = new RelayCommand(o =>
+                                                 {
+                                                     if (!(o is CardViewModel cardViewModel))
+                                                         return;
 
-                   if(!IsPlayerTurn && !cardViewModel.Card.CanBePlayedOnEnemyTurn)
-                       return;
+                                                     if (!IsPlayerTurn && !cardViewModel.Card.CanBePlayedOnEnemyTurn)
+                                                         return;
 
-                   switch (cardViewModel.Card)
-                   {
-                       case SpellCard spellCard when spellCard.ActionInfo.IsTargeted:
-                           if (spellCard.ActionInfo.ParameterType == ActionParameterType.Damage ||
-                               spellCard.ActionInfo.ParameterType == ActionParameterType.Heal)
-                           {
-                               PlayerViewModel.HeroUnitViewModel.SetTargeting();
-                               EnemyViewModel.HeroUnitViewModel.SetTargeting();
-                           }
+                                                     switch (cardViewModel.Card)
+                                                     {
+                                                         case SpellCard spellCard when spellCard.ActionInfo.IsTargeted:
+                                                             if (spellCard.ActionInfo.ParameterType ==
+                                                                 ActionParameterType.Damage ||
+                                                                 spellCard.ActionInfo.ParameterType ==
+                                                                 ActionParameterType.Heal)
+                                                             {
+                                                                 PlayerViewModel.HeroUnitViewModel.SetTargeting();
+                                                                 EnemyViewModel.HeroUnitViewModel.SetTargeting();
+                                                             }
 
-                           PlayerUnits.ForEach(u => u.SetTargeting());
-                           EnemyUnits.ForEach(u => u.SetTargeting());
-                           _isSpellTargeting = true;
-                           _spellTargetingViewModel = cardViewModel;
-                           return;
-                       case UnitCard unitCard when unitCard.BattleCryActionInfo?.IsTargeted == true:
-                           if (unitCard.BattleCryActionInfo.ParameterType == ActionParameterType.Damage ||
-                               unitCard.BattleCryActionInfo.ParameterType == ActionParameterType.Heal)
-                           {
-                               PlayerViewModel.HeroUnitViewModel.SetTargeting();
-                               EnemyViewModel.HeroUnitViewModel.SetTargeting();
-                           }
+                                                             PlayerUnits.ForEach(u => u.SetTargeting());
+                                                             EnemyUnits.ForEach(u => u.SetTargeting());
+                                                             _isSpellTargeting = true;
+                                                             _spellTargetingViewModel = cardViewModel;
+                                                             return;
+                                                         case UnitCard unitCard
+                                                             when unitCard.BattleCryActionInfo?.IsTargeted == true:
+                                                             if (unitCard.BattleCryActionInfo.ParameterType ==
+                                                                 ActionParameterType.Damage ||
+                                                                 unitCard.BattleCryActionInfo.ParameterType ==
+                                                                 ActionParameterType.Heal)
+                                                             {
+                                                                 PlayerViewModel.HeroUnitViewModel.SetTargeting();
+                                                                 EnemyViewModel.HeroUnitViewModel.SetTargeting();
+                                                             }
 
-                           PlayerUnits.ForEach(u => u.SetTargeting());
-                           EnemyUnits.ForEach(u => u.SetTargeting());
-                           PlayerViewModel.HeroUnitViewModel.SetTargeting();
-                           EnemyViewModel.HeroUnitViewModel.SetTargeting();
-                           _isSpellTargeting = true;
-                           _spellTargetingViewModel = cardViewModel;
-                           return;
-                   }
+                                                             PlayerUnits.ForEach(u => u.SetTargeting());
+                                                             EnemyUnits.ForEach(u => u.SetTargeting());
+                                                             PlayerViewModel.HeroUnitViewModel.SetTargeting();
+                                                             EnemyViewModel.HeroUnitViewModel.SetTargeting();
+                                                             _isSpellTargeting = true;
+                                                             _spellTargetingViewModel = cardViewModel;
+                                                             return;
+                                                     }
 
-                   PlayerTurnEvent?.Invoke(this,new PlayerTurnRequestEventArgs(new CardDeployPlayerTurn(
-                       _player,cardViewModel.Card)));
-               }));
+                                                     PlayerTurnEvent?.Invoke(this, new PlayerTurnRequestEventArgs(
+                                                         new CardDeployPlayerTurn(
+                                                             _player, cardViewModel.Card)));
+                                                 }));
 
 
         public RelayCommand PlayerTargetCommand => _playerTargetCommand ?? (_playerTargetCommand =
-                            new RelayCommand(o =>
-                            {
-                                if(!(o is PlayerUserControlViewModel viewModel))
-                                    return;
+                                                       new RelayCommand(o =>
+                                                       {
+                                                           if (!(o is PlayerUserControlViewModel viewModel))
+                                                               return;
 
-                                if (_isAttackTargeting)
-                                {
-                                    PlayerTurnEvent?.Invoke(this, new PlayerTurnRequestEventArgs(
-                                        new UnitAttackPlayerTurn(_player,
-                                            _unitTargetingViewModel.BaseUnit, viewModel.HeroUnit)));
-                                    _unitTargetingViewModel.IsCanAttack = false;
-                                    _unitTargetingViewModel = null;
-                                    _isAttackTargeting = false;
-                                    return;
-                                }
+                                                           if (_isAttackTargeting)
+                                                           {
+                                                               PlayerTurnEvent?.Invoke(this,
+                                                                   new PlayerTurnRequestEventArgs(
+                                                                       new UnitAttackPlayerTurn(_player,
+                                                                           _unitTargetingViewModel.BaseUnit,
+                                                                           viewModel.HeroUnit)));
+                                                               _unitTargetingViewModel.IsCanAttack = false;
+                                                               _unitTargetingViewModel = null;
+                                                               _isAttackTargeting = false;
+                                                               return;
+                                                           }
 
-                                if (_isSpellTargeting)
-                                {
-                                    PlayerTurnEvent?.Invoke(this, new PlayerTurnRequestEventArgs(
-                                        new CardDeployPlayerTurn(
-                                            _player, _spellTargetingViewModel.Card, viewModel.HeroUnit)));
-                                    _unitTargetingViewModel = null;
-                                    _isSpellTargeting = false;
-                                    return;
-                                }
-                            }));
+                                                           if (_isSpellTargeting)
+                                                           {
+                                                               PlayerTurnEvent?.Invoke(this,
+                                                                   new PlayerTurnRequestEventArgs(
+                                                                       new CardDeployPlayerTurn(
+                                                                           _player, _spellTargetingViewModel.Card,
+                                                                           viewModel.HeroUnit)));
+                                                               _unitTargetingViewModel = null;
+                                                               _isSpellTargeting = false;
+                                                           }
+                                                       }));
 
         public RelayCommand TransferTurnCommand => _transferTurnCommand ??
-                           (_transferTurnCommand = new RelayCommand(o =>
-                           {
-                                var playerTurn = new EndPlayerTurn(null);
-                               PlayerTurnEvent?.Invoke(this,new PlayerTurnRequestEventArgs(playerTurn));
-                           }));
+                                                   (_transferTurnCommand = new RelayCommand(o =>
+                                                   {
+                                                       var playerTurn = new EndPlayerTurn(null);
+                                                       PlayerTurnEvent?.Invoke(this,
+                                                           new PlayerTurnRequestEventArgs(playerTurn));
+                                                   }));
 
         public bool IsPlayerTurn => _userService.Username == CurrentPlayerUsername;
+
+        public event EventHandler<PlayerTurnRequestEventArgs> PlayerTurnEvent;
 
         public void Clear()
         {

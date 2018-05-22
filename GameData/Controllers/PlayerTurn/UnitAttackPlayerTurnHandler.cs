@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GameData.Controllers.Table;
+﻿using GameData.Controllers.Table;
 using GameData.Models.PlayerTurn;
 
 namespace GameData.Controllers.PlayerTurn
-{ 
+{
     public class UnitAttackPlayerTurnHandler : IPlayerTurnHandler<UnitAttackPlayerTurn>
     {
         private readonly IUnitDispatcher _unitDispatcher;
@@ -24,8 +19,8 @@ namespace GameData.Controllers.PlayerTurn
         {
             var validatedTurn = _validator.Validate(playerTurn);
 
-            if(validatedTurn != null && validatedTurn is UnitAttackPlayerTurn unitTurn)
-                _unitDispatcher.HandleAttack(unitTurn.Unit,unitTurn.TargetUnit);
+            if (validatedTurn != null && validatedTurn is UnitAttackPlayerTurn unitTurn)
+                _unitDispatcher.HandleAttack(unitTurn.Unit, unitTurn.TargetUnit);
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿
-namespace GameData.Enums
+﻿namespace GameData.Enums
 {
     public enum MessageBaseType
     {
@@ -71,8 +70,7 @@ namespace GameData.Enums
     {
         CardDeploy,
         UnitAttack,
-        TurnEnd,
-
+        TurnEnd
     }
 
     public enum ObserverActionType

@@ -1,14 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Net;
 using System.Net.Sockets;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using BaseNetworkArchitecture.Common;
-using BaseNetworkArchitecture.Server;
 using CollectibleCardGame.Logic.Controllers;
 using CollectibleCardGame.Models;
 using CollectibleCardGame.Network.Controllers;
@@ -30,122 +24,113 @@ using Unity.Lifetime;
 namespace CollectibleCardGame.Unity
 {
     /// <summary>
-    /// Client
+    ///     Client
     /// </summary>
     public static class UnityKernel
     {
-        private static UnityContainer _container;
-
-        public static UnityContainer Container
-        {
-            set => _container = value;
-            get => _container;
-        }
+        public static UnityContainer Container { set; get; }
 
         public static T Get<T>()
         {
-            if (_container == null)
+            if (Container == null)
                 InitializeKernel();
 
-            return _container.Resolve<T>();
+            return Container.Resolve<T>();
         }
 
         public static void InitializeKernel()
         {
-            _container = new UnityContainer();
+            Container = new UnityContainer();
 
-            _container.RegisterType<ILogger, MessageBoxLogger>();
+            Container.RegisterType<ILogger, MessageBoxLogger>();
 
             //view and viewmodels bindings
-            _container.RegisterType<LogInFramePageViewModel>(new ContainerControlledLifetimeManager());
-            _container.RegisterType<LogInFramePage>(new ContainerControlledLifetimeManager());
+            Container.RegisterType<LogInFramePageViewModel>(new ContainerControlledLifetimeManager());
+            Container.RegisterType<LogInFramePage>(new ContainerControlledLifetimeManager());
 
-            _container.RegisterType<RegistrationFramePageViewModel>(new ContainerControlledLifetimeManager());
-            _container.RegisterType<ToRegisterFramePage>(new ContainerControlledLifetimeManager());
+            Container.RegisterType<RegistrationFramePageViewModel>(new ContainerControlledLifetimeManager());
+            Container.RegisterType<ToRegisterFramePage>(new ContainerControlledLifetimeManager());
 
-            _container.RegisterType<ErrorFramePageViewModel>(new ContainerControlledLifetimeManager());
-            _container.RegisterType<ConnectionErrorFramePage>(new ContainerControlledLifetimeManager());
+            Container.RegisterType<ErrorFramePageViewModel>(new ContainerControlledLifetimeManager());
+            Container.RegisterType<ConnectionErrorFramePage>(new ContainerControlledLifetimeManager());
 
-            _container.RegisterType<ServerConnectionViewModel>(new ContainerControlledLifetimeManager());
-            _container.RegisterType<ServerConnectionPage>(new ContainerControlledLifetimeManager());
+            Container.RegisterType<ServerConnectionViewModel>(new ContainerControlledLifetimeManager());
+            Container.RegisterType<ServerConnectionPage>(new ContainerControlledLifetimeManager());
 
-            _container.RegisterType<LogInFramePageShellViewModel>(new ContainerControlledLifetimeManager());
-            _container.RegisterType<LogInFramePageShell>(new ContainerControlledLifetimeManager());
+            Container.RegisterType<LogInFramePageShellViewModel>(new ContainerControlledLifetimeManager());
+            Container.RegisterType<LogInFramePageShell>(new ContainerControlledLifetimeManager());
 
-            _container.RegisterType<GoGameFramePageViewModel>(new ContainerControlledLifetimeManager());
-            _container.RegisterType<GoGameFramePage>(new ContainerControlledLifetimeManager());
+            Container.RegisterType<GoGameFramePageViewModel>(new ContainerControlledLifetimeManager());
+            Container.RegisterType<GoGameFramePage>(new ContainerControlledLifetimeManager());
 
-            _container.RegisterType<DeckSettingsViewModel>(new ContainerControlledLifetimeManager());
-            _container.RegisterType<DecksSettingsFramePage>(new ContainerControlledLifetimeManager());
+            Container.RegisterType<DeckSettingsViewModel>(new ContainerControlledLifetimeManager());
+            Container.RegisterType<DecksSettingsFramePage>(new ContainerControlledLifetimeManager());
 
-            _container.RegisterType<MenuFramePageViewModel>(new ContainerControlledLifetimeManager());
-            _container.RegisterType<MainMenuFramePage>(new ContainerControlledLifetimeManager());
+            Container.RegisterType<MenuFramePageViewModel>(new ContainerControlledLifetimeManager());
+            Container.RegisterType<MainMenuFramePage>(new ContainerControlledLifetimeManager());
 
-            _container.RegisterType<GameEngineViewModel>(new ContainerControlledLifetimeManager());
-            _container.RegisterType<GameEngineFramePage>(new ContainerControlledLifetimeManager());
+            Container.RegisterType<GameEngineViewModel>(new ContainerControlledLifetimeManager());
+            Container.RegisterType<GameEngineFramePage>(new ContainerControlledLifetimeManager());
 
-            _container.RegisterType<MainWindowViewModel>(new ContainerControlledLifetimeManager());
-            _container.RegisterType<MainWindow>(new ContainerControlledLifetimeManager());
+            Container.RegisterType<MainWindowViewModel>(new ContainerControlledLifetimeManager());
+            Container.RegisterType<MainWindow>(new ContainerControlledLifetimeManager());
 
             //repository binding
-            _container.RegisterType<EntityRepository>(new ContainerControlledLifetimeManager());
-            _container.RegisterType<CardRepository>(new ContainerControlledLifetimeManager(),
+            Container.RegisterType<EntityRepository>(new ContainerControlledLifetimeManager());
+            Container.RegisterType<CardRepository>(new ContainerControlledLifetimeManager(),
                 new InjectionConstructor(LoadCardsFile()));
 
 
             //controller binding
             //repository
-            _container.RegisterType<IDataRepositoryController<Entity>, EntityRepositoryController>(
+            Container.RegisterType<IDataRepositoryController<Entity>, EntityRepositoryController>(
                 new ContainerControlledLifetimeManager());
-            _container.RegisterType<IDataRepositoryController<Card>, CardRepositroryController>(
+            Container.RegisterType<IDataRepositoryController<Card>, CardRepositroryController>(
                 new ContainerControlledLifetimeManager());
-            _container.RegisterType<CurrentUserService>(new ContainerControlledLifetimeManager());
+            Container.RegisterType<CurrentUserService>(new ContainerControlledLifetimeManager());
 
             //network
-            _container.RegisterType<IMessageConverter,MessageConverter>(
+            Container.RegisterType<IMessageConverter, MessageConverter>(
                 new ContainerControlledLifetimeManager());
-            _container.RegisterType<INetworkCommunicator, TcpCommunicator>(new ContainerControlledLifetimeManager(),
-                new InjectionConstructor(new object[]
-                {
-                    new TcpClient() //localhost injection, can be changed
-                }));
-            _container.RegisterType<INetworkController,NetworkConnectionController>(
+            Container.RegisterType<INetworkCommunicator, TcpCommunicator>(new ContainerControlledLifetimeManager(),
+                new InjectionConstructor(new TcpClient()));
+            Container.RegisterType<INetworkController, NetworkConnectionController>(
                 new ContainerControlledLifetimeManager());
 
             //logic
-            _container.RegisterType<UserController>(new ContainerControlledLifetimeManager());
-            _container.RegisterType<IGlobalController, GlobalAppStateController>(
+            Container.RegisterType<UserController>(new ContainerControlledLifetimeManager());
+            Container.RegisterType<IGlobalController, GlobalAppStateController>(
                 new ContainerControlledLifetimeManager());
-            _container.RegisterType<GameController>(new ContainerControlledLifetimeManager());
+            Container.RegisterType<GameController>(new ContainerControlledLifetimeManager());
 
             //messagehandlers
-            _container.RegisterType<MessageHandlerBase<LogInMessage>, LogInMessageHandler>(
+            Container.RegisterType<MessageHandlerBase<LogInMessage>, LogInMessageHandler>(
                 new ContainerControlledLifetimeManager());
-            _container.RegisterType<MessageHandlerBase<RegistrationMessage>, RegistrationMessageHandler>(
+            Container.RegisterType<MessageHandlerBase<RegistrationMessage>, RegistrationMessageHandler>(
                 new ContainerControlledLifetimeManager());
-            _container.RegisterType<MessageHandlerBase<GameRequestMessage>, GameRequestMessageHandler>(
+            Container.RegisterType<MessageHandlerBase<GameRequestMessage>, GameRequestMessageHandler>(
                 new ContainerControlledLifetimeManager());
-            _container.RegisterType<MessageHandlerBase<ObserverActionMessage>, ObserverActionMessageHandler>(
+            Container.RegisterType<MessageHandlerBase<ObserverActionMessage>, ObserverActionMessageHandler>(
                 new ContainerControlledLifetimeManager());
-            _container.RegisterType<MessageHandlerBase<ErrorMessage>, ErrorMessageHandler>(
+            Container.RegisterType<MessageHandlerBase<ErrorMessage>, ErrorMessageHandler>(
                 new ContainerControlledLifetimeManager());
-            _container.RegisterType<MessageHandlerBase<SetDeckMessage>, SetDeckMessageHandler>(
+            Container.RegisterType<MessageHandlerBase<SetDeckMessage>, SetDeckMessageHandler>(
                 new ContainerControlledLifetimeManager());
 
-            _container.Resolve<CardRepository>();
-            _container.Resolve<MainWindow>();
+            Container.Resolve<CardRepository>();
+            Container.Resolve<MainWindow>();
             //initializating observer controllers
-            _container.Resolve<UserController>();
-            _container.Resolve<IGlobalController>();
-            _container.Resolve<GameController>();
+            Container.Resolve<UserController>();
+            Container.Resolve<IGlobalController>();
+            Container.Resolve<GameController>();
         }
 
         public static object Get(Type t)
         {
-            if (_container == null)
+            if (Container == null)
                 InitializeKernel();
 
-            return _container.Resolve(t);
+            return Container.Resolve(t);
         }
 
         private static string LoadCardsFile()
@@ -153,9 +138,9 @@ namespace CollectibleCardGame.Unity
             var assembly = Assembly.GetExecutingAssembly();
             var resourceName = "CollectibleCardGame.Resources.CardsRepository.json";
 
-            using (Stream stream = assembly.GetManifestResourceStream(resourceName))
+            using (var stream = assembly.GetManifestResourceStream(resourceName))
             {
-                StreamReader streamReader = new StreamReader(stream);
+                var streamReader = new StreamReader(stream);
                 var readedString = streamReader.ReadToEnd();
                 streamReader.Close();
                 return readedString;

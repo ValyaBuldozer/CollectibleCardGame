@@ -2,11 +2,18 @@
 
 namespace GameData.Models.Units
 {
-    [Obsolete("Obsolte class. Use UnitState",false)]
+    [Obsolete("Obsolte class. Use UnitState", false)]
     public class HealthPoint
     {
+        public HealthPoint(Unit unit)
+        {
+            Unit = unit;
+            RecievedDamage = 0;
+            if (unit != null)
+                BaseHealth = Unit.BaseCard.BaseHP;
+        }
 
-        public Unit Unit { private set; get; }
+        public Unit Unit { get; }
 
         public int BaseHealth { set; get; }
 
@@ -16,15 +23,7 @@ namespace GameData.Models.Units
 
         public event EventHandler<ZeroHpEventArgs> ZeroHpEvent;
 
-        public event EventHandler<UnitRecievedDamageEventArgs> DamageRecieved; 
-
-        public HealthPoint(Unit unit)
-        {
-            Unit = unit;
-            RecievedDamage = 0;
-            if(unit!=null)
-                BaseHealth = Unit.BaseCard.BaseHP;
-        }
+        public event EventHandler<UnitRecievedDamageEventArgs> DamageRecieved;
 
         protected bool Equals(HealthPoint other)
         {
@@ -35,7 +34,7 @@ namespace GameData.Models.Units
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
+            if (obj.GetType() != GetType()) return false;
             return Equals((HealthPoint) obj);
         }
 
@@ -43,7 +42,7 @@ namespace GameData.Models.Units
         {
             unchecked
             {
-                var hashCode = (Unit != null ? Unit.GetHashCode() : 0);
+                var hashCode = Unit != null ? Unit.GetHashCode() : 0;
                 hashCode = (hashCode * 397) ^ BaseHealth;
                 hashCode = (hashCode * 397) ^ RecievedDamage;
                 return hashCode;
@@ -52,20 +51,20 @@ namespace GameData.Models.Units
 
         private void RunZeroHpEvent()
         {
-            ZeroHpEvent?.Invoke(Unit,new ZeroHpEventArgs(Unit));
+            ZeroHpEvent?.Invoke(Unit, new ZeroHpEventArgs(Unit));
         }
 
         private void RunDamageRecievedEvent(int damage)
         {
-            DamageRecieved?.Invoke(Unit,new UnitRecievedDamageEventArgs(Unit,damage));
+            DamageRecieved?.Invoke(Unit, new UnitRecievedDamageEventArgs(Unit, damage));
         }
 
         public void RecieveDamage(int value)
         {
-            if(value == 0)
+            if (value == 0)
                 return;
             RecievedDamage += value;
-            if(GetResultHealth <= 0)
+            if (GetResultHealth <= 0)
                 RunZeroHpEvent();
 
             RunDamageRecievedEvent(value);

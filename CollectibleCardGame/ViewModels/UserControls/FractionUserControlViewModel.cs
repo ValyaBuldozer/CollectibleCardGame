@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CollectibleCardGame.ViewModels.UserControls
+﻿namespace CollectibleCardGame.ViewModels.UserControls
 {
     public class FractionUserControlViewModel : BaseViewModel
     {
-        private string _name;
         private string _description;
         private string _imagePath;
+        private string _name;
 
         public string Name
         {

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using BaseNetworkArchitecture.Common;
 using BaseNetworkArchitecture.Common.Messages;
 using GameData.Enums;
@@ -14,12 +10,51 @@ namespace GameData.Network
 {
     public class MessageConverter : IMessageConverter
     {
+        [Dependency]
+        public MessageHandlerBase<LogInMessage> LogInMessageHandlerBase { set; get; }
+
+        [Dependency]
+        public MessageHandlerBase<RegistrationMessage> RegistrationMessageHandlerBase { set; get; }
+
+        [Dependency]
+        public MessageHandlerBase<GameRequestMessage> GameRequestMessageHandlerBase { set; get; }
+
+        //[Dependency]
+        public MessageHandlerBase<DisconnectMessage> DisconnectMessageHandlerBase { set; get; }
+
+        [Dependency]
+        public MessageHandlerBase<ErrorMessage> ErrorMessageHandlerBase { set; get; }
+
+        //[Dependency]
+        public MessageHandlerBase<GameResultMessage> GameResultMessageHandlerBase { set; get; }
+
+        //[Dependency]
+        public MessageHandlerBase<GameStartMessage> GameStartMessageHandlerBase { set; get; }
+
+        [Dependency]
+        public MessageHandlerBase<PlayerTurnMessage> PlayerTurnMessageHandlerBase { set; get; }
+
+        //[Dependency]
+        public MessageHandlerBase<PlayerTurnStartMessage> PlayerTurnStartMessageHandlerBase { set; get; }
+
+        [Dependency]
+        public MessageHandlerBase<SetDeckMessage> SetDeckMessageHandlerBase { set; get; }
+
+        //[Dependency]
+        public MessageHandlerBase<UserInfoRequestMessage> UserInfoRequestMessageHandlerBase { set; get; }
+
+        [Dependency]
+        public MessageHandlerBase<ObserverActionMessage> ObserverActionMessageHandlerBase { set; get; }
+
+        [Dependency]
+        public ILogger Logger { set; get; }
+
         public MessageBase DeserializeMessage(NetworkMessage networkMessage)
         {
             if (string.IsNullOrEmpty(networkMessage?.Content))
                 throw new NullReferenceException();
 
-            var settings = new JsonSerializerSettings()
+            var settings = new JsonSerializerSettings
             {
                 TypeNameHandling = TypeNameHandling.Objects,
                 ReferenceLoopHandling = ReferenceLoopHandling.Ignore
@@ -76,7 +111,6 @@ namespace GameData.Network
             }
             catch (JsonSerializationException e)
             {
-
             }
             catch (JsonReaderException e)
             {
@@ -90,7 +124,6 @@ namespace GameData.Network
             }
             catch (NullReferenceException e)
             {
-
             }
 
             return null;
@@ -98,16 +131,16 @@ namespace GameData.Network
 
         public NetworkMessage SerializeMessage(MessageBase messageBase)
         {
-            if(messageBase?.Content == null)
+            if (messageBase?.Content == null)
                 throw new NullReferenceException();
 
-            var settings = new JsonSerializerSettings()
+            var settings = new JsonSerializerSettings
             {
                 TypeNameHandling = TypeNameHandling.Objects,
                 ReferenceLoopHandling = ReferenceLoopHandling.Ignore
             };
 
-            return new NetworkMessage(JsonConvert.SerializeObject(messageBase,settings));
+            return new NetworkMessage(JsonConvert.SerializeObject(messageBase, settings));
         }
 
         public NetworkMessage SerializeMessage(IContent content)
@@ -154,7 +187,7 @@ namespace GameData.Network
                     break;
             }
 
-            var settings = new JsonSerializerSettings()
+            var settings = new JsonSerializerSettings
             {
                 ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
                 TypeNameHandling = TypeNameHandling.Objects
@@ -162,47 +195,5 @@ namespace GameData.Network
 
             return new NetworkMessage(JsonConvert.SerializeObject(messageBase, settings));
         }
-
-
-
-
-        [Dependency]
-        public MessageHandlerBase<LogInMessage> LogInMessageHandlerBase { set; get; }
-
-        [Dependency]
-        public MessageHandlerBase<RegistrationMessage> RegistrationMessageHandlerBase { set; get; }
-
-        [Dependency]
-        public MessageHandlerBase<GameRequestMessage> GameRequestMessageHandlerBase { set; get; }
-
-        //[Dependency]
-        public MessageHandlerBase<DisconnectMessage> DisconnectMessageHandlerBase { set; get; }
-
-        [Dependency]
-        public MessageHandlerBase<ErrorMessage> ErrorMessageHandlerBase { set; get; }
-
-        //[Dependency]
-        public MessageHandlerBase<GameResultMessage> GameResultMessageHandlerBase { set; get; }
-
-        //[Dependency]
-        public MessageHandlerBase<GameStartMessage> GameStartMessageHandlerBase { set; get; }
-
-        [Dependency]
-        public MessageHandlerBase<PlayerTurnMessage> PlayerTurnMessageHandlerBase { set; get; }
-
-        //[Dependency]
-        public MessageHandlerBase<PlayerTurnStartMessage> PlayerTurnStartMessageHandlerBase { set; get; }
-
-        [Dependency]
-        public MessageHandlerBase<SetDeckMessage> SetDeckMessageHandlerBase { set; get; }
-
-        //[Dependency]
-        public MessageHandlerBase<UserInfoRequestMessage> UserInfoRequestMessageHandlerBase { set; get; }
-
-        [Dependency]
-        public MessageHandlerBase<ObserverActionMessage> ObserverActionMessageHandlerBase { set; get; }
-
-        [Dependency]
-        public ILogger Logger { set; get; }
     }
 }

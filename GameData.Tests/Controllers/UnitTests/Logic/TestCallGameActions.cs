@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using GameData.Controllers.Data;
 using GameData.Controllers.Table;
 using GameData.Enums;
@@ -22,31 +18,28 @@ namespace GameData.Tests.Controllers.UnitTests.Logic
         public void CallDamageAllFriendlyUnitsTest() //тест екшена с id=1
         {
             //arrange
-            TestCards cards = new TestCards();
+            var cards = new TestCards();
 
             //cardDraw
 
 
-            Unit u2 = new Unit(cards.AttackCard);
-            Unit u3 = new Unit(cards.DefendCard);
+            var u2 = new Unit(cards.AttackCard);
+            var u3 = new Unit(cards.DefendCard);
 
-            TableCondition tc = new TableCondition()
+            var tc = new TableCondition
             {
-                Players = new List<Player>()
+                Players = new List<Player>
                 {
                     new Player(cards.FirstCard)
                     {
                         Username = "Player1"
-
                     },
                     new Player(cards.SecondCard)
                     {
                         Username = "Player2"
-                    },
+                    }
                 }
-
             };
-
 
 
             var actiionMock = new Mock<IActionTableControlller>();
@@ -56,7 +49,7 @@ namespace GameData.Tests.Controllers.UnitTests.Logic
                 new GameActionRepositoryController(new TestGameActionRepository()),
                 actiionMock.Object);
 
-            var result = gaC.GetGameActionInfo(new CardActionInfo()
+            var result = gaC.GetGameActionInfo(new CardActionInfo
             {
                 ActionId = 1,
                 ParameterValue = 1,
@@ -68,39 +61,32 @@ namespace GameData.Tests.Controllers.UnitTests.Logic
             Assert.AreEqual(result.Action.ID, 1);
             Assert.AreEqual(result.Action.Description, "test");
             Assert.AreEqual(result.Action.ParameterType, ActionParameterType.Damage);
-
-
         }
 
         [TestMethod]
         public void CallBuffDamageSpellCardsTest() //тест екшена с id=2
         {
             //arrange
-            TestCards cards = new TestCards();
+            var cards = new TestCards();
 
 
+            var u2 = new Unit(cards.AttackCard);
+            var u3 = new Unit(cards.DefendCard);
 
-
-            Unit u2 = new Unit(cards.AttackCard);
-            Unit u3 = new Unit(cards.DefendCard);
-
-            TableCondition tc = new TableCondition()
+            var tc = new TableCondition
             {
-                Players = new List<Player>()
+                Players = new List<Player>
                 {
                     new Player(cards.FirstCard)
                     {
                         Username = "Player1"
-
                     },
                     new Player(cards.SecondCard)
                     {
                         Username = "Player2"
-                    },
+                    }
                 }
-
             };
-
 
 
             var actiionMock = new Mock<IActionTableControlller>();
@@ -110,7 +96,7 @@ namespace GameData.Tests.Controllers.UnitTests.Logic
                 new GameActionRepositoryController(new TestGameActionRepository()),
                 actiionMock.Object);
 
-            var result = gaC.GetGameActionInfo(new CardActionInfo()
+            var result = gaC.GetGameActionInfo(new CardActionInfo
             {
                 ActionId = 2,
                 ParameterValue = 1,
@@ -127,31 +113,26 @@ namespace GameData.Tests.Controllers.UnitTests.Logic
         public void CallDamageAllEnemyUnitsTest() //тест екшена с id=3
         {
             //arrange
-            TestCards cards = new TestCards();
+            var cards = new TestCards();
 
 
+            var u2 = new Unit(cards.AttackCard);
+            var u3 = new Unit(cards.DefendCard);
 
-
-            Unit u2 = new Unit(cards.AttackCard);
-            Unit u3 = new Unit(cards.DefendCard);
-
-            TableCondition tc = new TableCondition()
+            var tc = new TableCondition
             {
-                Players = new List<Player>()
+                Players = new List<Player>
                 {
                     new Player(cards.FirstCard)
                     {
                         Username = "Player1"
-
                     },
                     new Player(cards.SecondCard)
                     {
                         Username = "Player2"
-                    },
+                    }
                 }
-
             };
-
 
 
             var actiionMock = new Mock<IActionTableControlller>();
@@ -161,7 +142,7 @@ namespace GameData.Tests.Controllers.UnitTests.Logic
                 new GameActionRepositoryController(new TestGameActionRepository()),
                 actiionMock.Object);
 
-            var result = gaC.GetGameActionInfo(new CardActionInfo()
+            var result = gaC.GetGameActionInfo(new CardActionInfo
             {
                 ActionId = 3,
                 ParameterValue = 1,
@@ -178,31 +159,26 @@ namespace GameData.Tests.Controllers.UnitTests.Logic
         public void CallHealAllFriendlyUnitsTest() //тест екшена с id=4
         {
             //arrange
-            TestCards cards = new TestCards();
+            var cards = new TestCards();
 
 
+            var u2 = new Unit(cards.AttackCard);
+            var u3 = new Unit(cards.DefendCard);
 
-
-            Unit u2 = new Unit(cards.AttackCard);
-            Unit u3 = new Unit(cards.DefendCard);
-
-            TableCondition tc = new TableCondition()
+            var tc = new TableCondition
             {
-                Players = new List<Player>()
+                Players = new List<Player>
                 {
                     new Player(cards.FirstCard)
                     {
                         Username = "Player1"
-
                     },
                     new Player(cards.SecondCard)
                     {
                         Username = "Player2"
-                    },
+                    }
                 }
-
             };
-
 
 
             var actiionMock = new Mock<IActionTableControlller>();
@@ -212,7 +188,7 @@ namespace GameData.Tests.Controllers.UnitTests.Logic
                 new GameActionRepositoryController(new TestGameActionRepository()),
                 actiionMock.Object);
 
-            var result = gaC.GetGameActionInfo(new CardActionInfo()
+            var result = gaC.GetGameActionInfo(new CardActionInfo
             {
                 ActionId = 4,
                 ParameterValue = 1,
@@ -229,31 +205,26 @@ namespace GameData.Tests.Controllers.UnitTests.Logic
         public void CallDamageAllUnitsTest() //тест екшена с id=5
         {
             //arrange
-            TestCards cards = new TestCards();
+            var cards = new TestCards();
 
 
+            var u2 = new Unit(cards.AttackCard);
+            var u3 = new Unit(cards.DefendCard);
 
-
-            Unit u2 = new Unit(cards.AttackCard);
-            Unit u3 = new Unit(cards.DefendCard);
-
-            TableCondition tc = new TableCondition()
+            var tc = new TableCondition
             {
-                Players = new List<Player>()
+                Players = new List<Player>
                 {
                     new Player(cards.FirstCard)
                     {
                         Username = "Player1"
-
                     },
                     new Player(cards.SecondCard)
                     {
                         Username = "Player2"
-                    },
+                    }
                 }
-
             };
-
 
 
             var actiionMock = new Mock<IActionTableControlller>();
@@ -263,7 +234,7 @@ namespace GameData.Tests.Controllers.UnitTests.Logic
                 new GameActionRepositoryController(new TestGameActionRepository()),
                 actiionMock.Object);
 
-            var result = gaC.GetGameActionInfo(new CardActionInfo()
+            var result = gaC.GetGameActionInfo(new CardActionInfo
             {
                 ActionId = 5,
                 ParameterValue = 1,
@@ -280,31 +251,26 @@ namespace GameData.Tests.Controllers.UnitTests.Logic
         public void CallBuffAttackFriendlyUnitsTest() //тест екшена с id=6
         {
             //arrange
-            TestCards cards = new TestCards();
+            var cards = new TestCards();
 
 
+            var u2 = new Unit(cards.AttackCard);
+            var u3 = new Unit(cards.DefendCard);
 
-
-            Unit u2 = new Unit(cards.AttackCard);
-            Unit u3 = new Unit(cards.DefendCard);
-
-            TableCondition tc = new TableCondition()
+            var tc = new TableCondition
             {
-                Players = new List<Player>()
+                Players = new List<Player>
                 {
                     new Player(cards.FirstCard)
                     {
                         Username = "Player1"
-
                     },
                     new Player(cards.SecondCard)
                     {
                         Username = "Player2"
-                    },
+                    }
                 }
-
             };
-
 
 
             var actiionMock = new Mock<IActionTableControlller>();
@@ -314,7 +280,7 @@ namespace GameData.Tests.Controllers.UnitTests.Logic
                 new GameActionRepositoryController(new TestGameActionRepository()),
                 actiionMock.Object);
 
-            var result = gaC.GetGameActionInfo(new CardActionInfo()
+            var result = gaC.GetGameActionInfo(new CardActionInfo
             {
                 ActionId = 6,
                 ParameterValue = 1,
@@ -331,31 +297,26 @@ namespace GameData.Tests.Controllers.UnitTests.Logic
         public void CallFullBuffFriendlyUnitsTest() //тест екшена с id=7
         {
             //arrange
-            TestCards cards = new TestCards();
+            var cards = new TestCards();
 
 
+            var u2 = new Unit(cards.AttackCard);
+            var u3 = new Unit(cards.DefendCard);
 
-
-            Unit u2 = new Unit(cards.AttackCard);
-            Unit u3 = new Unit(cards.DefendCard);
-
-            TableCondition tc = new TableCondition()
+            var tc = new TableCondition
             {
-                Players = new List<Player>()
+                Players = new List<Player>
                 {
                     new Player(cards.FirstCard)
                     {
                         Username = "Player1"
-
                     },
                     new Player(cards.SecondCard)
                     {
                         Username = "Player2"
-                    },
+                    }
                 }
-
             };
-
 
 
             var actiionMock = new Mock<IActionTableControlller>();
@@ -365,7 +326,7 @@ namespace GameData.Tests.Controllers.UnitTests.Logic
                 new GameActionRepositoryController(new TestGameActionRepository()),
                 actiionMock.Object);
 
-            var result = gaC.GetGameActionInfo(new CardActionInfo()
+            var result = gaC.GetGameActionInfo(new CardActionInfo
             {
                 ActionId = 7,
                 ParameterValue = 1,
@@ -382,31 +343,26 @@ namespace GameData.Tests.Controllers.UnitTests.Logic
         public void CallDamageRandomEnemyUnitTest() //тест екшена с id=8
         {
             //arrange
-            TestCards cards = new TestCards();
+            var cards = new TestCards();
 
 
+            var u2 = new Unit(cards.AttackCard);
+            var u3 = new Unit(cards.DefendCard);
 
-
-            Unit u2 = new Unit(cards.AttackCard);
-            Unit u3 = new Unit(cards.DefendCard);
-
-            TableCondition tc = new TableCondition()
+            var tc = new TableCondition
             {
-                Players = new List<Player>()
+                Players = new List<Player>
                 {
                     new Player(cards.FirstCard)
                     {
                         Username = "Player1"
-
                     },
                     new Player(cards.SecondCard)
                     {
                         Username = "Player2"
-                    },
+                    }
                 }
-
             };
-
 
 
             var actiionMock = new Mock<IActionTableControlller>();
@@ -416,7 +372,7 @@ namespace GameData.Tests.Controllers.UnitTests.Logic
                 new GameActionRepositoryController(new TestGameActionRepository()),
                 actiionMock.Object);
 
-            var result = gaC.GetGameActionInfo(new CardActionInfo()
+            var result = gaC.GetGameActionInfo(new CardActionInfo
             {
                 ActionId = 8,
                 ParameterValue = 1,

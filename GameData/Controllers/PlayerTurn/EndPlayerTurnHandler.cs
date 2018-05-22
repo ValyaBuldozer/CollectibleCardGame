@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GameData.Controllers.Data;
-using GameData.Controllers.Global;
-using GameData.Models;
+﻿using GameData.Controllers.Global;
 using GameData.Models.PlayerTurn;
 
 namespace GameData.Controllers.PlayerTurn
@@ -24,7 +17,7 @@ namespace GameData.Controllers.PlayerTurn
 
         public void Execute(Models.PlayerTurn.PlayerTurn playerTurn)
         {
-            if(_validator.Validate(playerTurn) != null)
+            if (_validator.Validate(playerTurn) != null)
                 _playerTurnDispatcher.NextPlayer();
         }
     }

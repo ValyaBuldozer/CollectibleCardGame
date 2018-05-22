@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using GameData.Controllers.Global;
 using GameData.Controllers.PlayerTurn;
 using GameData.Enums;
@@ -26,7 +22,7 @@ namespace GameData.Tests.Gameplay.Global
             var firstDeck = testDeck.GetFirstDeck;
             var secondDeck = testDeck.GetFirstDeck;
 
-            Container container = new Container();
+            var container = new Container();
             container.Initialize(TestGameSettings.Get);
             var observerRepository = container.Get<ObserverActionRepository>();
             var turnDispatcher = container.Get<IPlayerTurnDispatcher>();
@@ -43,7 +39,7 @@ namespace GameData.Tests.Gameplay.Global
             var unit3_3card = firstPlayer.HandCards.FirstOrDefault(c => c.Name == "Unit3_3");
 
             var unit11CardDeploy = new CardDeployPlayerTurn(firstPlayer, unit1_1card);
-            var unit33CardDeploy= new CardDeployPlayerTurn(firstPlayer,unit3_3card);
+            var unit33CardDeploy = new CardDeployPlayerTurn(firstPlayer, unit3_3card);
 
             firstPlayer.State.Base = 7;
             firstPlayer.State.Restore();
@@ -51,9 +47,9 @@ namespace GameData.Tests.Gameplay.Global
             cardDeployHandler.Execute(unit11CardDeploy);
             cardDeployHandler.Execute(unit33CardDeploy);
 
-            Assert.AreEqual(2,firstPlayer.TableUnits.Count);
-            Assert.AreEqual(3,firstPlayer.State.Current);
-            Assert.AreEqual(2,observerRepository.Collection.Count(
+            Assert.AreEqual(2, firstPlayer.TableUnits.Count);
+            Assert.AreEqual(3, firstPlayer.State.Current);
+            Assert.AreEqual(2, observerRepository.Collection.Count(
                 o => o.Type == ObserverActionType.CardDeploy));
 
             //смена хода
@@ -61,9 +57,9 @@ namespace GameData.Tests.Gameplay.Global
             turnEndHandler.Execute(turnSkip);
             var secondPlayer = turnDispatcher.CurrentPlayer;
 
-            Assert.AreNotEqual(turnDispatcher.CurrentPlayer,firstPlayer);
-            Assert.AreEqual(2,observerRepository.Collection.Count(
-                o=>o.Type == ObserverActionType.TurnStart));
+            Assert.AreNotEqual(turnDispatcher.CurrentPlayer, firstPlayer);
+            Assert.AreEqual(2, observerRepository.Collection.Count(
+                o => o.Type == ObserverActionType.TurnStart));
 
             unit1_1card = secondPlayer.HandCards.FirstOrDefault(c => c.Name == "Unit1_1");
             unit3_3card = secondPlayer.HandCards.FirstOrDefault(c => c.Name == "Unit3_3");
@@ -77,8 +73,8 @@ namespace GameData.Tests.Gameplay.Global
             cardDeployHandler.Execute(unit11CardDeploy);
             cardDeployHandler.Execute(unit33CardDeploy);
 
-            Assert.AreEqual(2,secondPlayer.TableUnits.Count);
-            Assert.AreEqual(3,secondPlayer.State.Current);
+            Assert.AreEqual(2, secondPlayer.TableUnits.Count);
+            Assert.AreEqual(3, secondPlayer.State.Current);
             Assert.AreEqual(4, observerRepository.Collection.Count(
                 o => o.Type == ObserverActionType.CardDeploy));
 
@@ -95,14 +91,14 @@ namespace GameData.Tests.Gameplay.Global
             var senderAttackUnit = firstPlayer.TableUnits.Find(u => u.State.GetResultHealth == 3);
             var targetAttackUnit = enemyPlayer.TableUnits.Find(u => u.State.GetResultHealth == 1);
 
-            UnitAttackPlayerTurn attackPlayerTurn = new UnitAttackPlayerTurn(
-                firstPlayer,senderAttackUnit,targetAttackUnit);
+            var attackPlayerTurn = new UnitAttackPlayerTurn(
+                firstPlayer, senderAttackUnit, targetAttackUnit);
             attackHandler.Execute(attackPlayerTurn);
 
-            Assert.AreEqual(1,observerRepository.Collection.Count(
-                o=>o.Type == ObserverActionType.UnitDeath));
-            Assert.AreEqual(1,enemyPlayer.TableUnits.Count);
-            Assert.AreEqual(2,senderAttackUnit.State.GetResultHealth);
+            Assert.AreEqual(1, observerRepository.Collection.Count(
+                o => o.Type == ObserverActionType.UnitDeath));
+            Assert.AreEqual(1, enemyPlayer.TableUnits.Count);
+            Assert.AreEqual(2, senderAttackUnit.State.GetResultHealth);
         }
     }
 }

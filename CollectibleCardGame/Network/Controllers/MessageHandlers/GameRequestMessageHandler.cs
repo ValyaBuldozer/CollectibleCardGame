@@ -1,21 +1,18 @@
-﻿using System;
-using CollectibleCardGame.Logic.Controllers;
-using CollectibleCardGame.ViewModels.Frames;
+﻿using CollectibleCardGame.ViewModels.Frames;
 using CollectibleCardGame.ViewModels.Windows;
 using GameData.Network;
 using GameData.Network.Messages;
-using Unity.Attributes;
 
 namespace CollectibleCardGame.Network.Controllers.MessageHandlers
 {
     public class GameRequestMessageHandler : MessageHandlerBase<GameRequestMessage>
     {
         private readonly GoGameFramePageViewModel _goGameViewModel;
-        private readonly MainWindowViewModel _mainWindowViewModel;
         private readonly MessageHandlerBase<LogInMessage> _logInMessageHandler;
+        private readonly MainWindowViewModel _mainWindowViewModel;
 
         public GameRequestMessageHandler(GoGameFramePageViewModel goGameFramePage,
-           MainWindowViewModel mainWindowViewModel,
+            MainWindowViewModel mainWindowViewModel,
             MessageHandlerBase<LogInMessage> logInMessageHandler)
         {
             _goGameViewModel = goGameFramePage;
@@ -35,13 +32,15 @@ namespace CollectibleCardGame.Network.Controllers.MessageHandlers
                     return null;
                 }
 
-                if((bool)message.AnswerData)
+                if ((bool) message.AnswerData)
                 {
                     _goGameViewModel.StopBusyIndicator();
                     _mainWindowViewModel.SetGameEngineFrame();
                 }
                 else
+                {
                     _goGameViewModel.StartBusyIndicator("Поиск игры");
+                }
             }
 
             return null;

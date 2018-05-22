@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Unity.Attributes;
 
 namespace GameData.Models.Repository
 {
     public class EntityRepository
     {
-        public List<Entity> Collection { set; get; }
-
         [InjectionConstructor]
         public EntityRepository()
         {
@@ -21,6 +15,8 @@ namespace GameData.Models.Repository
         {
             Collection = new List<Entity>(source);
         }
+
+        public List<Entity> Collection { set; get; }
 
         public void Reset()
         {

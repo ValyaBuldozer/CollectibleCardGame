@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Server.Models;
 using Server.Repositories;
@@ -10,13 +9,14 @@ namespace Server.Controllers.Repository
     {
         private readonly UserRepository _repository;
 
-        public IEnumerable<User> GetEnumerable => _repository.IsDatabaseConnected ?
-            _repository.DatabaseCollection.ToList() : _repository.Collection.ToList();
-
         public UserReposController(UserRepository repository)
         {
             _repository = repository;
         }
+
+        public IEnumerable<User> GetEnumerable => _repository.IsDatabaseConnected
+            ? _repository.DatabaseCollection.ToList()
+            : _repository.Collection.ToList();
 
         public void Add(User value)
         {
@@ -26,11 +26,13 @@ namespace Server.Controllers.Repository
                 _repository.Update();
             }
             else
+            {
                 _repository.Collection.Add(value);
+            }
         }
 
         /// <summary>
-        /// Removing object by ID
+        ///     Removing object by ID
         /// </summary>
         /// <param name="value"></param>
         public void Remove(User value)
@@ -42,7 +44,9 @@ namespace Server.Controllers.Repository
                 _repository.Update();
             }
             else
+            {
                 _repository.Collection.Remove(value);
+            }
         }
 
         public void Edit(User value)
@@ -64,7 +68,7 @@ namespace Server.Controllers.Repository
             {
                 var newValue = _repository.Collection.FirstOrDefault(v => v.Id == value.Id);
 
-                if(newValue == null)
+                if (newValue == null)
                     return;
 
                 newValue.Username = value.Username;
@@ -72,6 +76,5 @@ namespace Server.Controllers.Repository
                 newValue.UserInfo = value.UserInfo;
             }
         }
-
     }
 }

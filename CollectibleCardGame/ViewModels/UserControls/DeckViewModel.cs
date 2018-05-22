@@ -13,13 +13,38 @@ namespace CollectibleCardGame.ViewModels.UserControls
 {
     public class DeckViewModel : BaseViewModel
     {
+        private RelayCommand _dropToDeckCommand;
         private Fraction _fraction;
+        private RelayCommand _heroSelectionCommand;
         private UnitViewModel _heroUnit;
         private bool _heroUnitVisibility;
-
-        private RelayCommand _dropToDeckCommand;
-        private RelayCommand _heroSelectionCommand;
         private RelayCommand _removeCardCommand;
+
+        public DeckViewModel(IEnumerable<Card> cards, Fraction fraction, IEnumerable<Card> deckCards,
+            UnitCard heroCard)
+        {
+            _fraction = fraction;
+
+            cards = cards.OrderBy(c => c.Cost);
+
+            HeroUnit = heroCard != null ? new UnitViewModel(new HeroUnit(null, heroCard)) : null;
+
+            Cards = new ObservableCollection<CardViewModel>();
+            HeroCards = new ObservableCollection<CardViewModel>();
+            cards.ForEach(c =>
+            {
+                //герои
+                if (c.ID >= 3000)
+                    HeroCards.Add(new CardViewModel(c));
+                else if (c.ID < 1000) //cлужебные карты
+                    Cards.Add(new CardViewModel(c));
+            });
+
+            DeckCards = new ObservableCollection<CardViewModel>();
+            deckCards?.ForEach(c => DeckCards.Add(new CardViewModel(c)));
+
+            DeckCards.CollectionChanged += (sender, args) => NotifyPropertyChanged(nameof(DeckCount));
+        }
 
         public Fraction Fraction
         {
@@ -63,35 +88,37 @@ namespace CollectibleCardGame.ViewModels.UserControls
 
         public int DeckCount => DeckCards.Count;
 
-        public RelayCommand DropToDeckCommand => _dropToDeckCommand ?? 
-               (_dropToDeckCommand = new RelayCommand(o =>
-               {
-                   if (!(o is CardViewModel viewModel)) return;
+        public RelayCommand DropToDeckCommand => _dropToDeckCommand ??
+                                                 (_dropToDeckCommand = new RelayCommand(o =>
+                                                 {
+                                                     if (!(o is CardViewModel viewModel)) return;
 
-                   if (DeckCards.Count(c => c.Card.ID == viewModel.Card.ID) >= 2)
-                   {
-                       MessageBox.Show("Нельзя добавить больше двух одинковых карт в колоду");
-                       return;
-                   }
+                                                     if (DeckCards.Count(c => c.Card.ID == viewModel.Card.ID) >= 2)
+                                                     {
+                                                         MessageBox.Show(
+                                                             "Нельзя добавить больше двух одинковых карт в колоду");
+                                                         return;
+                                                     }
 
-                   DeckCards.Add(viewModel);
-               }));
+                                                     DeckCards.Add(viewModel);
+                                                 }));
 
         public RelayCommand HeroSelectionCommand => _heroSelectionCommand ??
-               (_heroSelectionCommand = new RelayCommand(o =>
-               {
-                   if(!(o is CardViewModel viewModel)) return;
+                                                    (_heroSelectionCommand = new RelayCommand(o =>
+                                                    {
+                                                        if (!(o is CardViewModel viewModel)) return;
 
-                   HeroUnit = new UnitViewModel(new HeroUnit(null,viewModel.Card as UnitCard));
-               }));
+                                                        HeroUnit = new UnitViewModel(new HeroUnit(null,
+                                                            viewModel.Card as UnitCard));
+                                                    }));
 
         public RelayCommand RemoveCardCommand => _removeCardCommand ??
-               (_removeCardCommand = new RelayCommand(o =>
-               {
-                   if (!(o is CardViewModel viewModel)) return;
+                                                 (_removeCardCommand = new RelayCommand(o =>
+                                                 {
+                                                     if (!(o is CardViewModel viewModel)) return;
 
-                   DeckCards.Remove(viewModel);
-               }));
+                                                     DeckCards.Remove(viewModel);
+                                                 }));
 
         public List<Card> GetDeck()
         {
@@ -99,32 +126,5 @@ namespace CollectibleCardGame.ViewModels.UserControls
             DeckCards.ForEach(vm => retList.Add(vm.Card));
             return retList;
         }
-
-        public DeckViewModel(IEnumerable<Card> cards,Fraction fraction,IEnumerable<Card> deckCards,
-            UnitCard heroCard)
-        {
-            _fraction = fraction;
-
-            cards = cards.OrderBy(c => c.Cost);
-
-            HeroUnit = heroCard != null ? new UnitViewModel(new HeroUnit(null,heroCard)) : null;
-
-            Cards = new ObservableCollection<CardViewModel>();
-            HeroCards = new ObservableCollection<CardViewModel>();
-            cards.ForEach(c=>
-            {
-                //герои
-                if(c.ID >= 3000)
-                    HeroCards.Add(new CardViewModel(c));
-                else if(c.ID < 1000)  //cлужебные карты
-                    Cards.Add(new CardViewModel(c));
-            });
-
-            DeckCards = new ObservableCollection<CardViewModel>();
-            deckCards?.ForEach(c=>DeckCards.Add(new CardViewModel(c)));
-
-            DeckCards.CollectionChanged += (sender, args) => NotifyPropertyChanged(nameof(DeckCount));
-        }
-
     }
 }

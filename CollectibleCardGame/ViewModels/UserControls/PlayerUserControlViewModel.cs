@@ -1,27 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CollectibleCardGame.ViewModels.Elements;
+﻿using CollectibleCardGame.ViewModels.Elements;
 using GameData.Models;
 using GameData.Models.Units;
 
 namespace CollectibleCardGame.ViewModels.UserControls
 {
-    public class PlayerUserControlViewModel:BaseViewModel
+    public class PlayerUserControlViewModel : BaseViewModel
     {
-        private string _playerName;
-        private string _heroName;
-        private int _manaСurrent;
-        private int _manaMax;
-        private int _cardsInHand;
         private int _cardsInDeck;
+        private int _cardsInHand;
+        private string _heroName;
 
         private HeroUnit _heroUnit;
+        private int _manaMax;
+        private int _manaСurrent;
         private Player _player;
+        private string _playerName;
         private PlayerState _playerState;
         private UnitViewModel _unitViewModel;
+
+        public PlayerUserControlViewModel()
+        {
+            _heroUnit = new HeroUnit(null, null);
+            _playerState = new PlayerState();
+            _player = new Player(null);
+            _unitViewModel = new UnitViewModel();
+        }
+
+        public PlayerUserControlViewModel(Player player)
+        {
+            _unitViewModel = new UnitViewModel(player?.HeroUnit);
+            _player = player;
+            _heroUnit = player.HeroUnit;
+            _playerState = player.State;
+        }
 
         public HeroUnit HeroUnit
         {
@@ -31,7 +42,7 @@ namespace CollectibleCardGame.ViewModels.UserControls
                 _heroUnit = value;
                 NotifyPropertyChanged(nameof(HeroUnit));
 
-                if(value == null) return;
+                if (value == null) return;
 
                 HeroName = value.BaseCard?.Name;
                 HeroUnitViewModel.BaseUnit = value;
@@ -56,7 +67,7 @@ namespace CollectibleCardGame.ViewModels.UserControls
             get => _player;
             set
             {
-                if(value == null) return;
+                if (value == null) return;
 
                 _player = value;
                 NotifyPropertyChanged(nameof(Player));
@@ -73,7 +84,7 @@ namespace CollectibleCardGame.ViewModels.UserControls
             get => _playerState;
             set
             {
-                if(value == null) return;
+                if (value == null) return;
 
                 _playerState = value;
                 NotifyPropertyChanged(nameof(PlayerState));
@@ -88,7 +99,7 @@ namespace CollectibleCardGame.ViewModels.UserControls
             get => _player?.Username;
             set
             {
-                if(value == null) return;
+                if (value == null) return;
 
                 _player.Username = value;
                 NotifyPropertyChanged(nameof(PlayerName));
@@ -100,7 +111,7 @@ namespace CollectibleCardGame.ViewModels.UserControls
             get => _heroUnit?.BaseCard?.Name;
             set
             {
-                if(value == null) return;
+                if (value == null) return;
 
                 _heroUnit.BaseCard.Name = value;
                 NotifyPropertyChanged(nameof(HeroName));
@@ -136,6 +147,7 @@ namespace CollectibleCardGame.ViewModels.UserControls
                 NotifyPropertyChanged(nameof(CardsInHand));
             }
         }
+
         public int CardsInDeck
         {
             get => _cardsInDeck;
@@ -144,22 +156,6 @@ namespace CollectibleCardGame.ViewModels.UserControls
                 _cardsInDeck = value;
                 NotifyPropertyChanged(nameof(CardsInDeck));
             }
-        }
-
-        public PlayerUserControlViewModel()
-        {
-            _heroUnit = new HeroUnit(null,null);
-            _playerState = new PlayerState();
-            _player = new Player(null);
-            _unitViewModel = new UnitViewModel();
-        }
-
-        public PlayerUserControlViewModel(Player player)
-        {
-            _unitViewModel = new UnitViewModel(player?.HeroUnit);
-            _player = player;
-            _heroUnit = player.HeroUnit;
-            _playerState = player.State;
         }
     }
 }

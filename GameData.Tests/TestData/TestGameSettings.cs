@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GameData.Models;
+﻿using GameData.Models;
 
 namespace GameData.Tests.TestData
 {
     public class TestGameSettings
     {
-        public static GameSettings Get => new GameSettings()
+        public static GameSettings Get => new GameSettings
         {
             IsPlayerTurnTimerEnabled = false,
             MaxDeckCardsCount = 50,

@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using GameData.Models.Action;
+﻿using GameData.Models.Action;
 
 namespace GameData.Models.Cards
 {
@@ -23,12 +22,12 @@ namespace GameData.Models.Cards
 
         public override Card ShallowCopy()
         {
-            return (Card)this.MemberwiseClone();
+            return (Card) MemberwiseClone();
         }
 
         public override Card DeepCopy()
         {
-            var other = (UnitCard) this.MemberwiseClone();
+            var other = (UnitCard) MemberwiseClone();
 
             other.AttackActionInfo = AttackActionInfo?.ShallowCopy();
             other.DamageRecievedActionInfo = DamageRecievedActionInfo?.ShallowCopy();

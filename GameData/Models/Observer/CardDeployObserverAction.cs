@@ -6,10 +6,6 @@ namespace GameData.Models.Observer
 {
     public class CardDeployObserverAction : ObserverAction
     {
-        public Card Card { set; get; }
-
-        public Unit GameActionTarget { set; get; }
-
         public CardDeployObserverAction(Card card, Unit gameActionTarget)
         {
             Type = ObserverActionType.CardDeploy;
@@ -21,5 +17,9 @@ namespace GameData.Models.Observer
         {
             Type = ObserverActionType.CardDeploy;
         }
+
+        public Card Card { set; get; }
+
+        public Unit GameActionTarget { set; get; }
     }
 }

@@ -1,27 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CollectibleCardGame.Network.Controllers;
+﻿using CollectibleCardGame.Network.Controllers;
+using CollectibleCardGame.Services;
 using CollectibleCardGame.ViewModels.Frames;
 using CollectibleCardGame.ViewModels.Windows;
 using GameData.Controllers.Data;
 using GameData.Enums;
 using GameData.Models.Cards;
 using GameData.Network.Messages;
-using Unity.Interception.Utilities;
 
 namespace CollectibleCardGame.Logic.Controllers
 {
     public class GameController
     {
-        private readonly INetworkController _networkController;
         private readonly IDataRepositoryController<Card> _cardRepositoryController;
         private readonly MainWindowViewModel _mainViewModel;
+        private readonly INetworkController _networkController;
 
         public GameController(INetworkController networkController,
-            GoGameFramePageViewModel goGameFramePageViewModel,GameEngineViewModel gameEngineViewModel,
+            GoGameFramePageViewModel goGameFramePageViewModel, GameEngineViewModel gameEngineViewModel,
             IDataRepositoryController<Card> cardRepositoryController,
             MainWindowViewModel mainViewModel)
         {
@@ -32,20 +27,20 @@ namespace CollectibleCardGame.Logic.Controllers
             _mainViewModel = mainViewModel;
         }
 
-        private void ViewModelPlayerTurnEventHandler(object sender, Services.PlayerTurnRequestEventArgs e)
+        private void ViewModelPlayerTurnEventHandler(object sender, PlayerTurnRequestEventArgs e)
         {
-            if(e.PlayerTurn == null)
+            if (e.PlayerTurn == null)
                 return;
 
-            MessageBase message = new MessageBase(MessageBaseType.PlayerTurnMessage,
-                new PlayerTurnMessage(){PlayerTurn = e.PlayerTurn});
+            var message = new MessageBase(MessageBaseType.PlayerTurnMessage,
+                new PlayerTurnMessage {PlayerTurn = e.PlayerTurn});
             _networkController.SendMessage(message);
         }
 
-        private void GameRequestEventHandler(object sender, Services.GameRequestEventArgs e)
+        private void GameRequestEventHandler(object sender, GameRequestEventArgs e)
         {
-            MessageBase message = new MessageBase(MessageBaseType.GameRequestMessage,
-                new GameRequestMessage()
+            var message = new MessageBase(MessageBaseType.GameRequestMessage,
+                new GameRequestMessage
                 {
                     Fraction = e.Fraction
                 });
@@ -54,7 +49,6 @@ namespace CollectibleCardGame.Logic.Controllers
 
         public void PrepareToGame()
         {
-
         }
 
         public void EndGame()

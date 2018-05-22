@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using GameData.Controllers.Data;
 using GameData.Models;
 using GameData.Models.Cards;
@@ -20,13 +16,13 @@ namespace GameData.Controllers.Table
 
     public class CardDrawController : ICardDrawController
     {
-        private readonly TableCondition _tableCondition;
         private readonly IDeckController _deckController;
-        private readonly GameSettings _settings;
         private readonly IDataRepositoryController<Entity> _entityController;
+        private readonly GameSettings _settings;
+        private readonly TableCondition _tableCondition;
 
         public CardDrawController(TableCondition tableCondition, IDeckController deckController,
-            GameSettings settings,IDataRepositoryController<Entity> entityController)
+            GameSettings settings, IDataRepositoryController<Entity> entityController)
         {
             _tableCondition = tableCondition;
             _deckController = deckController;
@@ -34,21 +30,18 @@ namespace GameData.Controllers.Table
             _entityController = entityController;
         }
 
-        public event EventHandler<CardDrawObserverAction> OnCardDraw; 
+        public event EventHandler<CardDrawObserverAction> OnCardDraw;
 
-        public void DealCardsToPlayer(string username,int count)
+        public void DealCardsToPlayer(string username, int count)
         {
-            DealCardsToPlayer(_tableCondition.GetPlayerByUsername(username),count);
+            DealCardsToPlayer(_tableCondition.GetPlayerByUsername(username), count);
         }
 
-        public void DealCardsToPlayer(Player player,int count)
+        public void DealCardsToPlayer(Player player, int count)
         {
             var cards = _deckController.PopCards(player.Username, count);
 
-            foreach (var iCard in cards)
-            {
-                DealCard(player,iCard);
-            }
+            foreach (var iCard in cards) DealCard(player, iCard);
         }
 
         public void DealCard(Player player, Card card)
@@ -62,8 +55,9 @@ namespace GameData.Controllers.Table
             }
             else
                 //todo : card burn event
+            {
                 player.State.DeckCardsCount--;
-            return;
+            }
         }
     }
 }

@@ -4,18 +4,19 @@ namespace GameData.Models
 {
     public class Entity
     {
-
-        public int EntityId { set; get; }
-
-        public EntityType EntityType { set; get; }
-
         public Entity(int entityId, EntityType entityType)
         {
             EntityId = entityId;
             EntityType = entityType;
         }
 
-        public Entity() { }
+        public Entity()
+        {
+        }
+
+        public int EntityId { set; get; }
+
+        public EntityType EntityType { set; get; }
 
         protected bool Equals(Entity other)
         {
@@ -26,7 +27,7 @@ namespace GameData.Models
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
+            if (obj.GetType() != GetType()) return false;
             return Equals((Entity) obj);
         }
     }

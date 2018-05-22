@@ -10,12 +10,12 @@ namespace Server.Controllers.Repository
     {
         private readonly UserInfoRepository _repository;
 
-        public IEnumerable<UserInfo> GetEnumerable => _repository.Collection;
-
         public UserInfoReposController(UserInfoRepository repository)
         {
             _repository = repository;
         }
+
+        public IEnumerable<UserInfo> GetEnumerable => _repository.Collection;
 
         public void Add(UserInfo value)
         {
@@ -41,6 +41,5 @@ namespace Server.Controllers.Repository
 
             _repository.Update();
         }
-
     }
 }

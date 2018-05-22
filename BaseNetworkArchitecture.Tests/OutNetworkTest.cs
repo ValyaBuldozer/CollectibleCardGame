@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net;
+﻿using System.Net;
 using System.Net.Sockets;
-using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace BaseNetworkArchitecture.Tests
@@ -13,7 +10,7 @@ namespace BaseNetworkArchitecture.Tests
         [TestMethod]
         public void CreateListener()
         {
-            TcpListener listener = new TcpListener(IPAddress.Parse("127.0.0.1"),8800);
+            var listener = new TcpListener(IPAddress.Parse("127.0.0.1"), 8800);
             listener.Start();
 
             var client = listener.AcceptTcpClient();
@@ -24,8 +21,8 @@ namespace BaseNetworkArchitecture.Tests
         [TestMethod]
         public void ConnectTest()
         {
-            TcpListener listener = new TcpListener(IPAddress.Parse("192.168.0.105"), 8800);
-            TcpClient client  =new TcpClient();
+            var listener = new TcpListener(IPAddress.Parse("192.168.0.105"), 8800);
+            var client = new TcpClient();
             listener.Start();
 
             var result = listener.AcceptTcpClientAsync();

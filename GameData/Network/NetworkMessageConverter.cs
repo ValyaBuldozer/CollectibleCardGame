@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using BaseNetworkArchitecture.Common;
 using BaseNetworkArchitecture.Common.Messages;
 using GameData.Enums;
@@ -22,7 +18,7 @@ namespace GameData.Network
         NetworkMessage SerializeMessage(IContent content);
     }
 
-    [Obsolete("Obsolete class. User MessageConverter",false)]
+    [Obsolete("Obsolete class. User MessageConverter", false)]
     public class NetworkMessageConverter : IMessageConverter
     {
         [Dependency]
@@ -76,49 +72,49 @@ namespace GameData.Network
                 switch (deserializedObj.Type)
                 {
                     case MessageBaseType.LogInMessage:
-                        return new MessageBase(type: MessageBaseType.LogInMessage,
-                            content: (((JObject)deserializedObj.Content).ToObject<LogInMessage>()),
-                            messageHandler: LogInMessageHandlerBase);
+                        return new MessageBase(MessageBaseType.LogInMessage,
+                            ((JObject) deserializedObj.Content).ToObject<LogInMessage>(),
+                            LogInMessageHandlerBase);
 
                     case MessageBaseType.RegistrationMessage:
-                        return new MessageBase(type: MessageBaseType.RegistrationMessage,
-                            content: (((JObject)deserializedObj.Content).ToObject<RegistrationMessage>()),
-                            messageHandler: RegistrationMessageHandlerBase);
+                        return new MessageBase(MessageBaseType.RegistrationMessage,
+                            ((JObject) deserializedObj.Content).ToObject<RegistrationMessage>(),
+                            RegistrationMessageHandlerBase);
 
                     case MessageBaseType.UserInfoRequestMessage:
                         break;
                     case MessageBaseType.SetDeckMesage:
                         break;
                     case MessageBaseType.GameRequestMessage:
-                        return new MessageBase(type: MessageBaseType.GameRequestMessage,
-                            content: (((JObject)deserializedObj.Content).ToObject<GameRequestMessage>()),
-                            messageHandler: GameRequestMessageHandlerBase);
+                        return new MessageBase(MessageBaseType.GameRequestMessage,
+                            ((JObject) deserializedObj.Content).ToObject<GameRequestMessage>(),
+                            GameRequestMessageHandlerBase);
 
                     case MessageBaseType.GameStartMessage:
                         break;
                     case MessageBaseType.PlayerTurnMessage:
                     {
-                        var message = ((JObject)deserializedObj.Content).ToObject<dynamic>();
+                        var message = ((JObject) deserializedObj.Content).ToObject<dynamic>();
                         PlayerTurn playerTurn;
                         PlayerTurnType type = message.PlayerTurn.Type;
                         switch (type)
                         {
                             case PlayerTurnType.CardDeploy:
-                                playerTurn = ((JObject)message.PlayerTurn).ToObject<CardDeployPlayerTurn>();
+                                playerTurn = ((JObject) message.PlayerTurn).ToObject<CardDeployPlayerTurn>();
                                 break;
                             case PlayerTurnType.UnitAttack:
-                                playerTurn = ((JObject)message.PlayerTurn).ToObject<UnitAttackPlayerTurn>();
+                                playerTurn = ((JObject) message.PlayerTurn).ToObject<UnitAttackPlayerTurn>();
                                 break;
                             case PlayerTurnType.TurnEnd:
-                                playerTurn = ((JObject)message.PlayerTurn).ToObject<EndPlayerTurn>();
+                                playerTurn = ((JObject) message.PlayerTurn).ToObject<EndPlayerTurn>();
                                 break;
                             default:
                                 throw new ArgumentOutOfRangeException();
                         }
 
-                        return new MessageBase(type: MessageBaseType.PlayerTurnMessage,
-                            content: new PlayerTurnMessage() {PlayerTurn = playerTurn},
-                            messageHandler: PlayerTurnMessageHandlerBase);
+                        return new MessageBase(MessageBaseType.PlayerTurnMessage,
+                            new PlayerTurnMessage {PlayerTurn = playerTurn},
+                            PlayerTurnMessageHandlerBase);
                     }
                     case MessageBaseType.PlayerTurnStartMessage:
                         break;
@@ -127,9 +123,9 @@ namespace GameData.Network
                     case MessageBaseType.DisconnectMessage:
                         break;
                     case MessageBaseType.ErrorMessage:
-                        return new MessageBase(type: MessageBaseType.ErrorMessage,
-                            content: (((JObject)deserializedObj.Content).ToObject<ErrorMessage>()),
-                            messageHandler: ErrorMessageHandlerBase);
+                        return new MessageBase(MessageBaseType.ErrorMessage,
+                            ((JObject) deserializedObj.Content).ToObject<ErrorMessage>(),
+                            ErrorMessageHandlerBase);
                     case MessageBaseType.ObserverActionMessage:
                     {
                         var message = ((JObject) deserializedObj.Content).ToObject<dynamic>();
@@ -142,41 +138,47 @@ namespace GameData.Network
                                 observerAction = ((JObject) message.ObserverAction).ToObject<GameStartObserverAction>();
                                 break;
                             case ObserverActionType.CardDeploy:
-                                observerAction = ((JObject)message.ObserverAction).ToObject<CardDeployObserverAction>();
-                                    break;
+                                observerAction =
+                                    ((JObject) message.ObserverAction).ToObject<CardDeployObserverAction>();
+                                break;
                             case ObserverActionType.CardDraw:
-                                observerAction = ((JObject)message.ObserverAction).ToObject<CardDrawObserverAction>();
-                                    break;
+                                observerAction = ((JObject) message.ObserverAction).ToObject<CardDrawObserverAction>();
+                                break;
                             case ObserverActionType.UnitSpawn:
-                                observerAction = ((JObject)message.ObserverAction).ToObject<UnitSpawnObserverAction>();
-                                    break;
+                                observerAction = ((JObject) message.ObserverAction).ToObject<UnitSpawnObserverAction>();
+                                break;
                             case ObserverActionType.UnitDeath:
-                                observerAction = ((JObject)message.ObserverAction).ToObject<UnitDeathObserverAction>();
-                                    break;
+                                observerAction = ((JObject) message.ObserverAction).ToObject<UnitDeathObserverAction>();
+                                break;
                             case ObserverActionType.UnitStateChange:
-                                observerAction = ((JObject)message.ObserverAction).ToObject<UnitStateChangeObserverAction>();
-                                    break;
+                                observerAction = ((JObject) message.ObserverAction)
+                                    .ToObject<UnitStateChangeObserverAction>();
+                                break;
                             case ObserverActionType.GameAction:
-                                observerAction = ((JObject)message.ObserverAction).ToObject<GameActionTriggerObserverAction>();
-                                    break;
+                                observerAction = ((JObject) message.ObserverAction)
+                                    .ToObject<GameActionTriggerObserverAction>();
+                                break;
                             case ObserverActionType.TurnStart:
-                                observerAction = ((JObject)message.ObserverAction).ToObject<TurnStartObserverAction>();
-                                    break;
+                                observerAction = ((JObject) message.ObserverAction).ToObject<TurnStartObserverAction>();
+                                break;
                             case ObserverActionType.PlayerStateChange:
-                                observerAction = ((JObject)message.ObserverAction).ToObject<PlayerStateChangesObserverAction>();
-                                    break;
+                                observerAction = ((JObject) message.ObserverAction)
+                                    .ToObject<PlayerStateChangesObserverAction>();
+                                break;
                             case ObserverActionType.TurnEnd:
                                 observerAction = null;
-                                    break;
+                                break;
                             case ObserverActionType.Error:
-                                observerAction = ((JObject)message.ObserverAction).ToObject<ErrorObserverAction>();
-                                    break;
+                                observerAction = ((JObject) message.ObserverAction).ToObject<ErrorObserverAction>();
+                                break;
                             default:
                                 throw new ArgumentOutOfRangeException();
                         }
-                        return new MessageBase(type: MessageBaseType.ObserverActionMessage,
-                            content: new ObserverActionMessage() { ObserverAction = observerAction},
-                            messageHandler: ObserverActionMessageHandlerBase); ;
+
+                        return new MessageBase(MessageBaseType.ObserverActionMessage,
+                            new ObserverActionMessage {ObserverAction = observerAction},
+                            ObserverActionMessageHandlerBase);
+                        ;
                     }
                     default:
                         throw new ArgumentOutOfRangeException();
@@ -186,22 +188,27 @@ namespace GameData.Network
             {
                 Logger?.Log(e);
             }
-            catch(JsonReaderException e) { }
-            catch (NullReferenceException e) { }
+            catch (JsonReaderException e)
+            {
+            }
+            catch (NullReferenceException e)
+            {
+            }
+
             //todo : вставить обработку Exceprion - так точно не вылетит
             return null;
         }
 
         public NetworkMessage SerializeMessage(MessageBase messageBase)
         {
-            var settings = new JsonSerializerSettings()
+            var settings = new JsonSerializerSettings
             {
                 ReferenceLoopHandling = ReferenceLoopHandling.Ignore
             };
             if (messageBase?.Content == null)
                 throw new NullReferenceException();
 
-            return new NetworkMessage(JsonConvert.SerializeObject(messageBase,settings));
+            return new NetworkMessage(JsonConvert.SerializeObject(messageBase, settings));
         }
 
         public NetworkMessage SerializeMessage(IContent content)
@@ -248,12 +255,12 @@ namespace GameData.Network
                     break;
             }
 
-            var settings = new JsonSerializerSettings()
+            var settings = new JsonSerializerSettings
             {
                 ReferenceLoopHandling = ReferenceLoopHandling.Ignore
             };
 
-            return new NetworkMessage(JsonConvert.SerializeObject(messageBase,settings));
+            return new NetworkMessage(JsonConvert.SerializeObject(messageBase, settings));
         }
     }
 }

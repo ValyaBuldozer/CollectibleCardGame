@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 using System.Windows.Controls;
 using CollectibleCardGame.Views.ForComponents;
 using CollectibleCardGame.Views.Frames;
@@ -15,17 +10,7 @@ namespace CollectibleCardGame.ViewModels.Frames
         private Page _currentPage;
         private MainMenuPart _selectedMenuItem;
 
-        public Page CurrentPage
-        {
-            private set
-            {
-                _currentPage = value;
-                NotifyPropertyChanged(nameof(CurrentPage));
-            }
-            get => _currentPage;
-        }
-
-        public MenuFramePageViewModel(GoGameFramePage goGameFramePage,DecksSettingsFramePage decksFramePage)
+        public MenuFramePageViewModel(GoGameFramePage goGameFramePage, DecksSettingsFramePage decksFramePage)
         {
             Menus = new ObservableCollection<MainMenuPart>
             {
@@ -53,17 +38,22 @@ namespace CollectibleCardGame.ViewModels.Frames
                     Title = "Настройки",
                     FramePage = new SettingsFramePage()
                 }
-
             };
 
             CurrentPage = goGameFramePage;
         }
 
-        public ObservableCollection<MainMenuPart> Menus
+        public Page CurrentPage
         {
-            set;
-            get;
+            private set
+            {
+                _currentPage = value;
+                NotifyPropertyChanged(nameof(CurrentPage));
+            }
+            get => _currentPage;
         }
+
+        public ObservableCollection<MainMenuPart> Menus { set; get; }
 
         public MainMenuPart SelectedMenuItem
         {
@@ -76,8 +66,5 @@ namespace CollectibleCardGame.ViewModels.Frames
                 NotifyPropertyChanged(nameof(SelectedMenuItem));
             }
         }
-       
-
-
     }
 }

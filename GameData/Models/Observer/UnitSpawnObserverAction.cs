@@ -3,13 +3,9 @@ using GameData.Models.Units;
 
 namespace GameData.Models.Observer
 {
-    public class UnitSpawnObserverAction : Observer.ObserverAction
+    public class UnitSpawnObserverAction : ObserverAction
     {
-        public string PlayerUsername { set; get; }
-
-        public Unit Unit { set; get; }
-
-        public UnitSpawnObserverAction(Unit unit,string playerUsername)
+        public UnitSpawnObserverAction(Unit unit, string playerUsername)
         {
             PlayerUsername = playerUsername;
             Unit = unit;
@@ -20,5 +16,9 @@ namespace GameData.Models.Observer
         {
             Type = ObserverActionType.UnitSpawn;
         }
+
+        public string PlayerUsername { set; get; }
+
+        public Unit Unit { set; get; }
     }
 }

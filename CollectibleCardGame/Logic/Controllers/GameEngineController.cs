@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using BaseNetworkArchitecture.Common;
 using CollectibleCardGame.Models;
 using CollectibleCardGame.ViewModels.Elements;
 using CollectibleCardGame.ViewModels.Frames;
-using CollectibleCardGame.ViewModels.UserControls;
 using CollectibleCardGame.ViewModels.Windows;
 using GameData.Controllers.Data;
 using GameData.Models;
@@ -15,19 +11,18 @@ using GameData.Models.Cards;
 using GameData.Models.Observer;
 using GameData.Models.Units;
 using Unity.Attributes;
-using Xceed.Wpf.Toolkit;
 
 namespace CollectibleCardGame.Logic.Controllers
 {
     public class GameEngineController
     {
+        private readonly IDataRepositoryController<Card> _cardRepositoryController;
+        private readonly IDataRepositoryController<Entity> _entityRepositoryController;
+        private readonly Lazy<GameController> _gameControllerLazy;
         private readonly GameEngineViewModel _gameViewModel;
+        private readonly ILogger _logger;
         private readonly MainWindowViewModel _mainWindowViewModel;
         private readonly CurrentUserService _userService;
-        private readonly IDataRepositoryController<Entity> _entityRepositoryController;
-        private readonly IDataRepositoryController<Card> _cardRepositoryController;
-        private readonly Lazy<GameController> _gameControllerLazy;
-        private readonly ILogger _logger;
 
         [InjectionConstructor]
         public GameEngineController(GameEngineViewModel gameViewModel, MainWindowViewModel mainViewModel,
@@ -52,7 +47,7 @@ namespace CollectibleCardGame.Logic.Controllers
             _entityRepositoryController.Add(action.FirstPlayer.HeroUnit);
             _entityRepositoryController.Add(action.SecondPlayer.HeroUnit);
 
-            action.FirstPlayer.TableUnits.ForEach(u=>_entityRepositoryController.Add(u));
+            action.FirstPlayer.TableUnits.ForEach(u => _entityRepositoryController.Add(u));
             action.SecondPlayer.TableUnits.ForEach(u => _entityRepositoryController.Add(u));
             action.FirstPlayer.HandCards.ForEach(c => _entityRepositoryController.Add(c));
             action.SecondPlayer.HandCards.ForEach(c => _entityRepositoryController.Add(c));
@@ -79,14 +74,14 @@ namespace CollectibleCardGame.Logic.Controllers
 
         public void HandleObserverAction(ErrorObserverAction action)
         {
-            if(!action.IsSystemError)
+            if (!action.IsSystemError)
                 _logger?.LogAndPrint(action.ErrorMessage);
         }
 
         public void HandleObserverAction(CardDrawObserverAction action)
         {
             var card = _cardRepositoryController.GetById(action.Card.ID);
-            if(card == null)
+            if (card == null)
                 return;
             card.EntityId = action.Card.EntityId;
             _entityRepositoryController.Add(card);
@@ -120,7 +115,6 @@ namespace CollectibleCardGame.Logic.Controllers
                 if (card != null)
                     _gameViewModel.EnemyCards.Remove(card);
             });
-
         }
 
         public void HandleObserverAction(UnitSpawnObserverAction action)
@@ -137,7 +131,7 @@ namespace CollectibleCardGame.Logic.Controllers
                 else
                 {
                     action.Unit.Player = _gameViewModel.EnemyPlayer;
-                    _gameViewModel.EnemyUnits.Add(new UnitViewModel(action.Unit){IsCanAttack = false});
+                    _gameViewModel.EnemyUnits.Add(new UnitViewModel(action.Unit) {IsCanAttack = false});
                 }
             });
         }
@@ -152,13 +146,13 @@ namespace CollectibleCardGame.Logic.Controllers
 
         public void HandleObserverAction(PlayerStateChangesObserverAction action)
         {
-                _gameViewModel.CurrentDispatcher.Invoke(() =>
-                {
-                    if (action.PlayerUsername == _userService.Username)
-                        _gameViewModel.PlayerViewModel.PlayerState = action.PlayerState;
-                    else
-                        _gameViewModel.EnemyViewModel.PlayerState = action.PlayerState;
-                });
+            _gameViewModel.CurrentDispatcher.Invoke(() =>
+            {
+                if (action.PlayerUsername == _userService.Username)
+                    _gameViewModel.PlayerViewModel.PlayerState = action.PlayerState;
+                else
+                    _gameViewModel.EnemyViewModel.PlayerState = action.PlayerState;
+            });
         }
 
         public void HandleObserverAction(EntityStateChangeObserverAction action)
@@ -168,17 +162,14 @@ namespace CollectibleCardGame.Logic.Controllers
             if (!(action.EntityState is Unit unit)) return;
             if (!(entity is Unit oldUnitState)) return;
 
-            _gameViewModel.CurrentDispatcher.Invoke(()=>
-            {
-                oldUnitState.State.SetState = unit.State;
-            });
+            _gameViewModel.CurrentDispatcher.Invoke(() => { oldUnitState.State.SetState = unit.State; });
         }
 
         public void HandleObserverAction(UnitDeathObserverAction action)
         {
             var entity = _entityRepositoryController.GetById(action.Unit.EntityId);
 
-            if(!(entity is Unit unit)) return;
+            if (!(entity is Unit unit)) return;
 
             _gameViewModel.CurrentDispatcher.Invoke(() =>
             {
@@ -203,8 +194,10 @@ namespace CollectibleCardGame.Logic.Controllers
         {
             _gameViewModel.CurrentDispatcher.Invoke(() =>
             {
-                _logger.LogAndPrint(action.WinnerUsername == 
-                                _userService.Username ? "ВЫ ПОБЕДИЛИ!!!" : "ВЫ ПРОИГРАЛИ!!!");
+                _logger.LogAndPrint(action.WinnerUsername ==
+                                    _userService.Username
+                    ? "ВЫ ПОБЕДИЛИ!!!"
+                    : "ВЫ ПРОИГРАЛИ!!!");
 
                 _gameViewModel.Clear();
                 _entityRepositoryController.ClearRepository();

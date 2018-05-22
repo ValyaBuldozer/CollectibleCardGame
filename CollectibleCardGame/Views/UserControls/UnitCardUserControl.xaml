@@ -1,97 +1,102 @@
 ﻿<UserControl
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:CollectibleCardGame.Views.UserControls"
-             xmlns:System="clr-namespace:System;assembly=mscorlib" x:Class="CollectibleCardGame.Views.UserControls.UnitCardUserControl"
-             mc:Ignorable="d" 
-             AllowDrop="True"
-             d:DesignHeight="410" d:DesignWidth="220" SizeChanged="UserControl_SizeChanged">
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:CollectibleCardGame.Views.UserControls"
+    xmlns:System="clr-namespace:System;assembly=mscorlib"
+    x:Class="CollectibleCardGame.Views.UserControls.UnitCardUserControl"
+    mc:Ignorable="d"
+    AllowDrop="True"
+    d:DesignHeight="410" d:DesignWidth="220" SizeChanged="UserControl_SizeChanged">
 
     <!--410x220-->
     <Border BorderThickness="2" BorderBrush="Black" CornerRadius="5">
         <Border.Effect>
-            <DropShadowEffect BlurRadius="10" Direction="315" Opacity="0.8"/>
+            <DropShadowEffect BlurRadius="10" Direction="315" Opacity="0.8" />
         </Border.Effect>
 
         <Grid>
             <Grid.Background>
-                <ImageBrush ImageSource="/Images/backgroundCard.jpg" Stretch="UniformToFill"/>
+                <ImageBrush ImageSource="/Images/backgroundCard.jpg" Stretch="UniformToFill" />
             </Grid.Background>
 
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="8*"/>
-                    <RowDefinition Height="0.8*"/>
-                    <RowDefinition Height="2*"/>
-                    <RowDefinition Height="1.85*"/>
+                    <RowDefinition Height="8*" />
+                    <RowDefinition Height="0.8*" />
+                    <RowDefinition Height="2*" />
+                    <RowDefinition Height="1.85*" />
                 </Grid.RowDefinitions>
 
 
                 <!--картинка юнита 210x250-->
-                <Image x:Name="UnitImage" Source="{Binding Path=ImagePath}"  Margin="0,0,0,0">
+                <Image x:Name="UnitImage" Source="{Binding Path=ImagePath}" Margin="0,0,0,0">
                     <Image.Effect>
-                        <DropShadowEffect   RenderingBias="Quality" Direction="270"  BlurRadius="20" ShadowDepth="10" Opacity="0.9"/>
+                        <DropShadowEffect RenderingBias="Quality" Direction="270" BlurRadius="20" ShadowDepth="10"
+                                          Opacity="0.9" />
                     </Image.Effect>
                 </Image>
 
-                
+
                 <Grid Grid.Row="1" Background="Transparent">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="3.5*"/>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="3.5*" />
                     </Grid.ColumnDefinitions>
                     <!--<Grid.Effect>
                         <DropShadowEffect Color="Gray" BlurRadius="90" Direction="90" RenderingBias="Quality" ShadowDepth="4"/>
                     </Grid.Effect>-->
 
-                    <TextBlock x:Name="UnitName" Grid.Column="1" Text="{Binding Path=Name}" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"
-                               FontFamily="/CollectibleCardGame;component/Fonts/#Mason Chronicles" FontSize="16" Margin="0,15,0,0" />
+                    <TextBlock x:Name="UnitName" Grid.Column="1" Text="{Binding Path=Name}"
+                               HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"
+                               FontFamily="/CollectibleCardGame;component/Fonts/#Mason Chronicles" FontSize="16"
+                               Margin="0,15,0,0" />
                 </Grid>
 
 
                 <Grid Grid.Row="0" Grid.RowSpan="2">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="0.26*"/>
-                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="0.26*" />
+                        <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.2*"/>
-                        <ColumnDefinition Width="5*"/>
-                        <ColumnDefinition Width="10*"/>
-                        <ColumnDefinition Width="4*"/>
+                        <ColumnDefinition Width="0.2*" />
+                        <ColumnDefinition Width="5*" />
+                        <ColumnDefinition Width="10*" />
+                        <ColumnDefinition Width="4*" />
                     </Grid.ColumnDefinitions>
 
                     <Grid Grid.Column="1" Grid.RowSpan="2">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="3.5*"/>
-                            <ColumnDefinition  Width="*"/>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="3.5*" />
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
 
 
-                        <Border Grid.Column="1" BorderBrush="{Binding TapeBorderBrush}" BorderThickness="5" Margin="0,40,0,0">
-                            <Rectangle  Fill="{Binding TapeBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"   Opacity="0.9"  />
+                        <Border Grid.Column="1" BorderBrush="{Binding TapeBorderBrush}" BorderThickness="5"
+                                Margin="0,40,0,0">
+                            <Rectangle Fill="{Binding TapeBrush}" HorizontalAlignment="Stretch"
+                                       VerticalAlignment="Stretch" Opacity="0.9" />
                             <Border.Effect>
-                                <DropShadowEffect BlurRadius="10" Direction="270" Opacity="0.8"/>
+                                <DropShadowEffect BlurRadius="10" Direction="270" Opacity="0.8" />
                             </Border.Effect>
                         </Border>
 
-                       
 
-                        
                     </Grid>
                     <Grid Grid.Column="1" Grid.Row="1">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="30" />
+                            <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
-                        <ItemsControl x:Name="AbilityStack" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center" Grid.ColumnSpan="3" >
+                        <ItemsControl x:Name="AbilityStack" Grid.Row="1" VerticalAlignment="Top"
+                                      HorizontalAlignment="Center" Grid.ColumnSpan="3">
                             <!--ItemsSource="{Binding  ViewModel.Parameters, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">-->
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
-                                    <WrapPanel   Orientation="Vertical" />
+                                    <WrapPanel Orientation="Vertical" />
                                 </ItemsPanelTemplate>
                             </ItemsControl.ItemsPanel>
 
@@ -100,12 +105,14 @@
                             <Image Source="../../Icons/settingsChange.png" Margin="2"/>-->
 
 
-                            <Rectangle Grid.Row="0" Stroke="Gold" RadiusX="5" RadiusY="5" StrokeThickness="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Width="55" Height="55">
+                            <Rectangle Grid.Row="0" Stroke="Gold" RadiusX="5" RadiusY="5" StrokeThickness="1"
+                                       HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="55" Height="55">
                                 <Rectangle.Fill>
-                                    <ImageBrush ImageSource="../../Images/IconsUnit/sword.png"/>
+                                    <ImageBrush ImageSource="../../Images/IconsUnit/sword.png" />
                                 </Rectangle.Fill>
                                 <Rectangle.Effect>
-                                    <DropShadowEffect   RenderingBias="Quality" Direction="315"  BlurRadius="10" ShadowDepth="8"/>
+                                    <DropShadowEffect RenderingBias="Quality" Direction="315" BlurRadius="10"
+                                                      ShadowDepth="8" />
                                 </Rectangle.Effect>
                             </Rectangle>
 
@@ -139,27 +146,29 @@
                             BorderBrush="Black"
                             BorderThickness="3"
                             Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <TextBlock  x:Name="UnitCost" HorizontalAlignment="Center" VerticalAlignment="Center" Margin=" 0,0,1,5"
+                        <TextBlock x:Name="UnitCost" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                   Margin=" 0,0,1,5"
                                    Text="{Binding Cost}" FontWeight="Bold" FontSize="42" />
                     </Border>
 
-                    
 
                 </Grid>
 
                 <Grid Grid.Row="2" Background="Transparent">
-                    <TextBlock x:Name="UnitStory" Grid.Row="2" Text="{Binding Description}" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center"
-                               FontFamily="/CollectibleCardGame;component/Fonts/#Mason Chronicles" FontSize="12" Margin="5,0,5,0"/>
+                    <TextBlock x:Name="UnitStory" Grid.Row="2" Text="{Binding Description}" TextWrapping="Wrap"
+                               HorizontalAlignment="Center" VerticalAlignment="Center"
+                               FontFamily="/CollectibleCardGame;component/Fonts/#Mason Chronicles" FontSize="12"
+                               Margin="5,0,5,0" />
                 </Grid>
 
 
                 <Grid Grid.Row="3" Background="Transparent">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.25*"/>
-                        <ColumnDefinition Width="6*"/>
-                        <ColumnDefinition Width="10*"/>
-                        <ColumnDefinition Width="6*"/>
-                        <ColumnDefinition Width="0.25*"/>
+                        <ColumnDefinition Width="0.25*" />
+                        <ColumnDefinition Width="6*" />
+                        <ColumnDefinition Width="10*" />
+                        <ColumnDefinition Width="6*" />
+                        <ColumnDefinition Width="0.25*" />
                     </Grid.ColumnDefinitions>
                     <Border CornerRadius="50"
                             Width="55"
@@ -168,7 +177,8 @@
                             BorderBrush="Black"
                             BorderThickness="3"
                             Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <TextBlock  x:Name="UnitAttck" HorizontalAlignment="Center" VerticalAlignment="Center" Margin=" 0,0,1,5"
+                        <TextBlock x:Name="UnitAttck" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                   Margin=" 0,0,1,5"
                                    Text="{Binding Path=Attack}" FontWeight="Bold" FontSize="42" />
                     </Border>
                     <Border CornerRadius="50"
@@ -178,7 +188,8 @@
                             BorderBrush="Black"
                             BorderThickness="3"
                             Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <TextBlock  x:Name="UnitHealth" HorizontalAlignment="Center" VerticalAlignment="Center" Margin=" 0,0,1,5"
+                        <TextBlock x:Name="UnitHealth" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                   Margin=" 0,0,1,5"
                                    Text="{Binding Path=Health}" FontWeight="Bold" FontSize="42" />
                     </Border>
                     <!--<Ellipse Grid.Column="1" Stroke="Black" StrokeThickness="3" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="#EF3F37" Width="55" Height="55" Margin="0,0,0,0" />

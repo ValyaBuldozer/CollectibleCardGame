@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Threading;
+﻿using System.Windows.Threading;
 using GameData.Network;
 using GameData.Network.Messages;
 using Xceed.Wpf.Toolkit;
@@ -17,14 +12,13 @@ namespace CollectibleCardGame.Network.Controllers.MessageHandlers
         public RegistrationMessageHandler()
         {
             _currentDispatcher = Dispatcher.CurrentDispatcher;
-            
         }
 
         public override IContent Execute(IContent content, object sender)
         {
             if (!(content is RegistrationMessage message)) return null;
 
-            _currentDispatcher.Invoke(()=>MessageBox.Show("Пользователь зарегистрирован"));
+            _currentDispatcher.Invoke(() => MessageBox.Show("Пользователь зарегистрирован"));
             return null;
         }
     }

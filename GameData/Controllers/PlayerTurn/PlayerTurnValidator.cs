@@ -17,13 +17,11 @@ namespace GameData.Controllers.PlayerTurn
 
     public class PlayerTurnValidator : IPlayerTurnValidator
     {
-        private readonly TableCondition _tableCondition;
-        private readonly IPlayerTurnDispatcher _playerTurnDispatcher;
         private readonly IDataRepositoryController<Entity> _entityRepositoryController;
+        private readonly IPlayerTurnDispatcher _playerTurnDispatcher;
+        private readonly TableCondition _tableCondition;
 
-        public event EventHandler<ErrorEventArgs> ValidateError; 
-
-        public PlayerTurnValidator(TableCondition tableCondition,IPlayerTurnDispatcher playerTurnDispatcher,
+        public PlayerTurnValidator(TableCondition tableCondition, IPlayerTurnDispatcher playerTurnDispatcher,
             IDataRepositoryController<Entity> entityRepositoryController)
         {
             _tableCondition = tableCondition;
@@ -31,16 +29,18 @@ namespace GameData.Controllers.PlayerTurn
             _entityRepositoryController = entityRepositoryController;
         }
 
+        public event EventHandler<ErrorEventArgs> ValidateError;
+
         public Models.PlayerTurn.PlayerTurn Validate(Models.PlayerTurn.PlayerTurn playerTurn)
         {
             switch (playerTurn.GetType().Name)
             {
                 case nameof(CardDeployPlayerTurn):
-                    return Validate((CardDeployPlayerTurn)playerTurn);
+                    return Validate((CardDeployPlayerTurn) playerTurn);
                 case nameof(UnitAttackPlayerTurn):
-                    return Validate((UnitAttackPlayerTurn)playerTurn);
+                    return Validate((UnitAttackPlayerTurn) playerTurn);
                 case nameof(EndPlayerTurn):
-                    return Validate((EndPlayerTurn)playerTurn);
+                    return Validate((EndPlayerTurn) playerTurn);
                 default:
                     throw new InvalidOperationException("No such player turn was found");
             }
@@ -62,25 +62,25 @@ namespace GameData.Controllers.PlayerTurn
 
             if (!playerTurn.Sender.HandCards.Exists(c => c.Equals(card)))
             {
-                RunValidateError(new ErrorEventArgs("No such card in hand",true,playerTurn.Sender));
+                RunValidateError(new ErrorEventArgs("No such card in hand", true, playerTurn.Sender));
                 return null;
             }
 
-            if (_playerTurnDispatcher.CurrentPlayer.Username != sender.Username && 
+            if (_playerTurnDispatcher.CurrentPlayer.Username != sender.Username &&
                 !card.CanBePlayedOnEnemyTurn)
             {
                 RunValidateError(new ErrorEventArgs("Нельзя разыграть эту карту во время хода протиника",
-                    false,playerTurn.Sender));
+                    false, playerTurn.Sender));
                 return null;
             }
 
             if (sender.State.Current < card.Cost)
             {
-                RunValidateError(new ErrorEventArgs("Недостаточно маны", true,playerTurn.Sender));
+                RunValidateError(new ErrorEventArgs("Недостаточно маны", true, playerTurn.Sender));
                 return null;
             }
 
-            return new CardDeployPlayerTurn(sender,card,target);
+            return new CardDeployPlayerTurn(sender, card, target);
         }
 
         public UnitAttackPlayerTurn Validate(UnitAttackPlayerTurn playerTurn)
@@ -95,14 +95,14 @@ namespace GameData.Controllers.PlayerTurn
 
             if (!sender.TableUnits.Exists(u => u.Equals(senderUnit)))
             {
-                RunValidateError(new ErrorEventArgs("No such unit found", true,playerTurn.Sender));
+                RunValidateError(new ErrorEventArgs("No such unit found", true, playerTurn.Sender));
                 return null;
             }
-            
-            if(_playerTurnDispatcher.CurrentPlayer.Username!=sender.Username)
+
+            if (_playerTurnDispatcher.CurrentPlayer.Username != sender.Username)
             {
                 RunValidateError(new ErrorEventArgs("Нельзя атаковать во время хода протиника",
-                    false,playerTurn.Sender));
+                    false, playerTurn.Sender));
                 return null;
             }
 
@@ -114,7 +114,7 @@ namespace GameData.Controllers.PlayerTurn
             }
 
             if (target.State.AttackPriority == 0)
-            //атака маскировки
+                //атака маскировки
             {
                 RunValidateError(new ErrorEventArgs("Нельзя атаковать существо с маскировкой",
                     false, playerTurn.Sender));
@@ -138,7 +138,7 @@ namespace GameData.Controllers.PlayerTurn
 
             //todo : проверка провокаторов и тд
 
-            return new UnitAttackPlayerTurn(sender,senderUnit,target);
+            return new UnitAttackPlayerTurn(sender, senderUnit, target);
         }
 
         public EndPlayerTurn Validate(EndPlayerTurn playerTurn)
@@ -151,7 +151,7 @@ namespace GameData.Controllers.PlayerTurn
 
             if (_playerTurnDispatcher.CurrentPlayer.Username != sender.Username)
             {
-                RunValidateError(new ErrorEventArgs("Not your turn",true,playerTurn.Sender));
+                RunValidateError(new ErrorEventArgs("Not your turn", true, playerTurn.Sender));
                 return null;
             }
 
@@ -160,7 +160,7 @@ namespace GameData.Controllers.PlayerTurn
 
         private void RunValidateError(ErrorEventArgs e)
         {
-            ValidateError?.Invoke(this,e);
+            ValidateError?.Invoke(this, e);
         }
     }
 }

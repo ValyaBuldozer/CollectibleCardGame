@@ -1,10 +1,14 @@
 ﻿using GameData.Enums;
-using Newtonsoft.Json;
 
 namespace GameData.Models.Cards
 {
     public class Card : Entity
     {
+        protected Card()
+        {
+            EntityType = EntityType.Card;
+        }
+
         public int ID { set; get; }
 
         public string Name { set; get; }
@@ -19,14 +23,9 @@ namespace GameData.Models.Cards
 
         public Fraction Fraction { set; get; }
 
-        protected Card()
-        {
-            EntityType = EntityType.Card;
-        }
-
         protected bool Equals(Card other)
         {
-            return ID == other.ID && string.Equals(Name, other.Name) && 
+            return ID == other.ID && string.Equals(Name, other.Name) &&
                    string.Equals(Description, other.Description);
         }
 
@@ -34,7 +33,7 @@ namespace GameData.Models.Cards
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
+            if (obj.GetType() != GetType()) return false;
             return Equals((Card) obj);
         }
 
@@ -56,12 +55,12 @@ namespace GameData.Models.Cards
 
         public virtual Card ShallowCopy()
         {
-            return (Card) this.MemberwiseClone();
+            return (Card) MemberwiseClone();
         }
 
         public virtual Card DeepCopy()
         {
-            return (Card)this.MemberwiseClone();
+            return (Card) MemberwiseClone();
         }
     }
 }
