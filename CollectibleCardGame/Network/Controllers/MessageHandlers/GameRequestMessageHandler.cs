@@ -12,18 +12,29 @@ namespace CollectibleCardGame.Network.Controllers.MessageHandlers
     {
         private readonly GoGameFramePageViewModel _goGameViewModel;
         private readonly MainWindowViewModel _mainWindowViewModel;
+        private readonly MessageHandlerBase<LogInMessage> _logInMessageHandler;
 
         public GameRequestMessageHandler(GoGameFramePageViewModel goGameFramePage,
-           MainWindowViewModel mainWindowViewModel)
+           MainWindowViewModel mainWindowViewModel,
+            MessageHandlerBase<LogInMessage> logInMessageHandler)
         {
             _goGameViewModel = goGameFramePage;
             _mainWindowViewModel = mainWindowViewModel;
+            _logInMessageHandler = logInMessageHandler;
         }
 
         public override IContent Execute(IContent content, object sender)
         {
             if (content is GameRequestMessage message)
             {
+                if (message.AnswerData is LogInMessage logInMessage)
+                {
+                    _logInMessageHandler.Execute(logInMessage, null);
+                    _goGameViewModel.StopBusyIndicator();
+                    _mainWindowViewModel.SetGameEngineFrame();
+                    return null;
+                }
+
                 if((bool)message.AnswerData)
                 {
                     _goGameViewModel.StopBusyIndicator();

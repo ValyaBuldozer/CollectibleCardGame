@@ -88,7 +88,6 @@ namespace CollectibleCardGame.Unity
             _container.RegisterType<MainWindow>(new ContainerControlledLifetimeManager());
 
             //repository binding
-            _container.RegisterType<CurrentUser>(new ContainerControlledLifetimeManager());
             _container.RegisterType<EntityRepository>(new ContainerControlledLifetimeManager());
             _container.RegisterType<CardRepository>(new ContainerControlledLifetimeManager(),
                 new InjectionConstructor(LoadCardsFile()));
@@ -100,6 +99,7 @@ namespace CollectibleCardGame.Unity
                 new ContainerControlledLifetimeManager());
             _container.RegisterType<IDataRepositoryController<Card>, CardRepositroryController>(
                 new ContainerControlledLifetimeManager());
+            _container.RegisterType<CurrentUserService>(new ContainerControlledLifetimeManager());
 
             //network
             _container.RegisterType<IMessageConverter,MessageConverter>(

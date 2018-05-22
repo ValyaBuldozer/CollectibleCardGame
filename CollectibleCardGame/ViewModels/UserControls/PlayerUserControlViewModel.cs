@@ -20,7 +20,7 @@ namespace CollectibleCardGame.ViewModels.UserControls
 
         private HeroUnit _heroUnit;
         private Player _player;
-        private PlayerMana _playerMana;
+        private PlayerState _playerState;
         private UnitViewModel _unitViewModel;
 
         public HeroUnit HeroUnit
@@ -64,21 +64,22 @@ namespace CollectibleCardGame.ViewModels.UserControls
                 HeroUnit = _player.HeroUnit;
                 HeroName = _player.HeroUnit?.BaseCard?.Name;
                 PlayerName = _player.Username;
-                PlayerMana = _player.Mana;
+                PlayerState = _player.State;
             }
         }
 
-        public PlayerMana PlayerMana
+        public PlayerState PlayerState
         {
-            get => _playerMana;
+            get => _playerState;
             set
             {
                 if(value == null) return;
 
-                _playerMana = value;
-                NotifyPropertyChanged(nameof(PlayerMana));
+                _playerState = value;
+                NotifyPropertyChanged(nameof(PlayerState));
                 NotifyPropertyChanged(nameof(ManaMax));
                 NotifyPropertyChanged(nameof(ManaСurrent));
+                CardsInDeck = value.DeckCardsCount;
             }
         }
 
@@ -108,20 +109,20 @@ namespace CollectibleCardGame.ViewModels.UserControls
 
         public int ManaСurrent
         {
-            get => _playerMana.Current;
+            get => _playerState.Current;
             set
             {
-                _playerMana.Current = value;
+                _playerState.Current = value;
                 NotifyPropertyChanged(nameof(ManaСurrent));
             }
         }
 
         public int ManaMax
         {
-            get => _playerMana.Base;
+            get => _playerState.Base;
             set
             {
-                _playerMana.Base = value;
+                _playerState.Base = value;
                 NotifyPropertyChanged(nameof(ManaMax));
             }
         }
@@ -148,7 +149,7 @@ namespace CollectibleCardGame.ViewModels.UserControls
         public PlayerUserControlViewModel()
         {
             _heroUnit = new HeroUnit(null,null);
-            _playerMana = new PlayerMana();
+            _playerState = new PlayerState();
             _player = new Player(null);
             _unitViewModel = new UnitViewModel();
         }
@@ -158,7 +159,7 @@ namespace CollectibleCardGame.ViewModels.UserControls
             _unitViewModel = new UnitViewModel(player?.HeroUnit);
             _player = player;
             _heroUnit = player.HeroUnit;
-            _playerMana = player.Mana;
+            _playerState = player.State;
         }
     }
 }

@@ -165,7 +165,11 @@ namespace BaseNetworkArchitecture.Common
         {
             try
             {
+                if (!IsConnected) return false;
+
+                Client.GetStream().Close();
                 Client.Close();
+                RunBreakConnection(new BreakConnectionEventArgs());
                 return true;
             }
             catch (Exception e)
@@ -243,8 +247,8 @@ namespace BaseNetworkArchitecture.Common
 
                     while (buffCount != messageLength)
                     {
-                        int bytesRead = 
-                            Client.GetStream().Read(messageBuffer, buffCount,bufferReadChange);
+                        int bytesRead =
+                            Client.GetStream().Read(messageBuffer, buffCount, bufferReadChange);
                         buffCount += bytesRead;
                         bufferReadChange -= bytesRead;
                     }
@@ -270,7 +274,7 @@ namespace BaseNetworkArchitecture.Common
                 }
                 else
                 {
-                    clientState.TcpClient.Close();
+                    Disconnect();
                 }
             }
             catch (SocketException e)
@@ -289,9 +293,13 @@ namespace BaseNetworkArchitecture.Common
             }
             catch (IOException e)
             {
-                Logger?.LogAndPrint("Соединение разорвано");
                 Logger?.Log(e.Message);
-                BreakConnectionEvent?.Invoke(this,new BreakConnectionEventArgs());
+                BreakConnectionEvent?.Invoke(this, new BreakConnectionEventArgs());
+            }
+            catch (InvalidOperationException)
+            {
+                //Client.GetStream().EndRead(asyncResult);
+                Disconnect();
             }
         }
 

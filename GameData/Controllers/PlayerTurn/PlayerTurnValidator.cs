@@ -74,7 +74,7 @@ namespace GameData.Controllers.PlayerTurn
                 return null;
             }
 
-            if (sender.Mana.Current < card.Cost)
+            if (sender.State.Current < card.Cost)
             {
                 RunValidateError(new ErrorEventArgs("Недостаточно маны", true,playerTurn.Sender));
                 return null;

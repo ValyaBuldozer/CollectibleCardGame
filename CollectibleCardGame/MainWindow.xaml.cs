@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,6 +33,18 @@ namespace CollectibleCardGame
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void MainWindow_OnClosing(object sender, CancelEventArgs e)
+        {
+            if (MessageBox.Show("Вы уверены что хотите выйти?", "Выход", MessageBoxButton.OKCancel,
+                    MessageBoxImage.Question) == MessageBoxResult.OK)
+            {
+                App.Current.Shutdown();
+                e.Cancel = false;
+            }
+            else
+                e.Cancel = true;
         }
     }
 }

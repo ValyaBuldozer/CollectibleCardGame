@@ -21,6 +21,7 @@ namespace GameData.Controllers.Global
         event EventHandler<GameEndEventArgs> GameEnd;
         event EventHandler<GameStartObserverAction> GameStart;
         event EventHandler<PlayerStateChangesObserverAction> PlayerStateChanged;
+        void SendTableConditionRequest(string username);
     }
 
     public class GameStateController : IGameStateController
@@ -56,7 +57,7 @@ namespace GameData.Controllers.Global
             if(string.IsNullOrEmpty(firstUsername) && string.IsNullOrEmpty(secondUsername))
                 throw new NullReferenceException("Username is null");
 
-            var firstPLayer = new Player(firstHero)
+            var firstPlayer = new Player(firstHero)
             {
                 Username = firstUsername
             };
@@ -65,28 +66,31 @@ namespace GameData.Controllers.Global
                 Username = secondUsername
             };
 
-            _tableCondition.Players.Add(firstPLayer);
+            _tableCondition.Players.Add(firstPlayer);
             _tableCondition.Players.Add(secondPlayer);
 
-            _entitytRepositoryController.AddNewItem(firstPLayer);
+            _entitytRepositoryController.AddNewItem(firstPlayer);
             _entitytRepositoryController.AddNewItem(secondPlayer);
 
-            _entitytRepositoryController.AddNewItem(firstPLayer.HeroUnit);
+            _entitytRepositoryController.AddNewItem(firstPlayer.HeroUnit);
             _entitytRepositoryController.AddNewItem(secondPlayer.HeroUnit);
 
-            firstPLayer.HeroUnit.State.PropertyChanged += _unitDispatcher.OnUnitStateChanges;
+            firstPlayer.State.DeckCardsCount = firstDeck.Count;
+            secondPlayer.State.DeckCardsCount = secondDeck.Count;
+
+            firstPlayer.HeroUnit.State.PropertyChanged += _unitDispatcher.OnUnitStateChanges;
             secondPlayer.HeroUnit.State.PropertyChanged += _unitDispatcher.OnUnitStateChanges;
 
-            firstPLayer.HeroUnit.DiedEvent += OnUnitDies;
+            firstPlayer.HeroUnit.DiedEvent += OnUnitDies;
             secondPlayer.HeroUnit.DiedEvent += OnUnitDies;
 
             _deckController.AddDeck(firstUsername,firstDeck);
             _deckController.AddDeck(secondUsername,secondDeck);
 
-            firstPLayer.Mana.Changed += Mana_Changed;
-            secondPlayer.Mana.Changed += Mana_Changed;
+            firstPlayer.State.Changed += Mana_Changed;
+            secondPlayer.State.Changed += Mana_Changed;
 
-            GameStart?.Invoke(this,new GameStartObserverAction(firstPLayer,secondPlayer));
+            GameStart?.Invoke(this,new GameStartObserverAction(firstPlayer,secondPlayer));
 
             //выдача стартовой руки
             foreach (var iplayer in _tableCondition.Players)
@@ -100,7 +104,7 @@ namespace GameData.Controllers.Global
         private void Mana_Changed(object sender, PlayerManaChangeEventArgs e)
         {
             PlayerStateChanged?.Invoke(this,new PlayerStateChangesObserverAction(
-                (sender as Player)?.Username,e.PlayerMana));
+                (sender as Player)?.Username,e.PlayerState));
         }
 
         private void OnUnitDies(object sender, HeroUnitDiedEventArgs e)
@@ -109,6 +113,22 @@ namespace GameData.Controllers.Global
 
             GameEnd?.Invoke(this,new GameEndEventArgs(GameEndReason.HeroUnitKill,
                 winner?.Username));
+        }
+
+        public void SendTableConditionRequest(string username)
+        {
+            if(!_tableCondition.Players.Exists(p=>p.Username == username))
+                return;
+
+            var firstPlayer = _tableCondition.Players.FirstOrDefault(p => p.Username == username);
+            var secondPlayer = _tableCondition.Players.FirstOrDefault(p => p.Username != username);
+            var observerAction = new GameStartObserverAction(firstPlayer,secondPlayer)
+            {
+                TargetPlayer = firstPlayer,
+                CurrentPlayerUsername = _playerTurnDispatcher.CurrentPlayer.Username
+            };
+
+            GameStart?.Invoke(this,observerAction);
         }
     }
 }

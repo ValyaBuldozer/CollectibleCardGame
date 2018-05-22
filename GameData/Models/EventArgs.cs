@@ -116,11 +116,11 @@ namespace GameData.Models
 
     public class PlayerManaChangeEventArgs : EventArgs
     {
-        public PlayerMana PlayerMana { get; }
+        public PlayerState PlayerState { get; }
 
-        public PlayerManaChangeEventArgs(PlayerMana mana)
+        public PlayerManaChangeEventArgs(PlayerState state)
         {
-            PlayerMana = mana;
+            PlayerState = state;
         }
     }
 }

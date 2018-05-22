@@ -45,14 +45,14 @@ namespace GameData.Tests.Gameplay.Global
             var unit11CardDeploy = new CardDeployPlayerTurn(firstPlayer, unit1_1card);
             var unit33CardDeploy= new CardDeployPlayerTurn(firstPlayer,unit3_3card);
 
-            firstPlayer.Mana.Base = 7;
-            firstPlayer.Mana.Restore();
+            firstPlayer.State.Base = 7;
+            firstPlayer.State.Restore();
 
             cardDeployHandler.Execute(unit11CardDeploy);
             cardDeployHandler.Execute(unit33CardDeploy);
 
             Assert.AreEqual(2,firstPlayer.TableUnits.Count);
-            Assert.AreEqual(3,firstPlayer.Mana.Current);
+            Assert.AreEqual(3,firstPlayer.State.Current);
             Assert.AreEqual(2,observerRepository.Collection.Count(
                 o => o.Type == ObserverActionType.CardDeploy));
 
@@ -71,14 +71,14 @@ namespace GameData.Tests.Gameplay.Global
             unit11CardDeploy = new CardDeployPlayerTurn(secondPlayer, unit1_1card);
             unit33CardDeploy = new CardDeployPlayerTurn(secondPlayer, unit3_3card);
 
-            secondPlayer.Mana.Base = 7;
-            secondPlayer.Mana.Restore();
+            secondPlayer.State.Base = 7;
+            secondPlayer.State.Restore();
 
             cardDeployHandler.Execute(unit11CardDeploy);
             cardDeployHandler.Execute(unit33CardDeploy);
 
             Assert.AreEqual(2,secondPlayer.TableUnits.Count);
-            Assert.AreEqual(3,secondPlayer.Mana.Current);
+            Assert.AreEqual(3,secondPlayer.State.Current);
             Assert.AreEqual(4, observerRepository.Collection.Count(
                 o => o.Type == ObserverActionType.CardDeploy));
 

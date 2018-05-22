@@ -73,10 +73,10 @@ namespace GameData.Controllers.Global
         {
             CurrentPlayer = _playersCyclicQueue.Dequeue();
 
-            if(CurrentPlayer.Mana.Base < _settings.MaxPlayerMana)
-                CurrentPlayer.Mana.Base++;
+            if(CurrentPlayer.State.Base < _settings.MaxPlayerMana)
+                CurrentPlayer.State.Base++;
 
-            CurrentPlayer.Mana.Restore();
+            CurrentPlayer.State.Restore();
             CurrentPlayer.TableUnits.ForEach(u=>u.State.CanAttack = true);
 
             _cardsDispatcher.DealCardsToPlayer(CurrentPlayer,1);

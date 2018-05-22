@@ -72,7 +72,7 @@ namespace Server.Network.Controllers.MessageHandlers
             }
             _userReposController.Edit(user);
 
-            return null;
+            return message;
         }
 
     }

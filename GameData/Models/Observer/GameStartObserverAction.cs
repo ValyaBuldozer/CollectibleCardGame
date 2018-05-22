@@ -14,6 +14,8 @@ namespace GameData.Models.Observer
 
         public Player SecondPlayer { set; get; }
 
+        public string CurrentPlayerUsername { set; get; }
+
         public GameStartObserverAction(Player firstPlayer,Player secondPlayer)
         {
             FirstPlayer = firstPlayer;
