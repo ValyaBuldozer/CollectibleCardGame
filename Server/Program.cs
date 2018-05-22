@@ -22,7 +22,12 @@ namespace Server
             UnityKernel.InitializeKernel();
 
             //пробуем подключится к бд
-            UnityKernel.Get<UserRepository>();
+            var databaseRepos = UnityKernel.Get<UserRepository>();
+
+            int count;
+            if (databaseRepos.IsDatabaseConnected)
+                //подгружаем для скороости работы
+                count = databaseRepos.DatabaseCollection.Count();
 
             bool conFlag = true;
             while (conFlag)

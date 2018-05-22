@@ -253,7 +253,10 @@ namespace CollectibleCardGame.ViewModels.Elements
             _baseCardViewModel = new CardViewModel();
             BaseUnit = unit;
             _borderBrush = null;
-            IsCanAttack = unit.State.CanAttack;
+
+            if(unit?.State != null)
+                IsCanAttack = unit.State.CanAttack;
+
             _healthShdowColor = Color.FromArgb(0,0, 0, 0);
 
         }

@@ -17,6 +17,6 @@ namespace GameData.Models.Observer
         /// Игрок, которому необходимо сообщить об изменении (null если всем)
         /// </summary>
         [JsonIgnore]
-        public Player TargetPlayer { protected set; get; }
+        public Player TargetPlayer { set; get; }
     }
 }

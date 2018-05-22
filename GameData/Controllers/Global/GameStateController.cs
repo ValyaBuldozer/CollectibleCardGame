@@ -21,6 +21,7 @@ namespace GameData.Controllers.Global
         event EventHandler<GameEndEventArgs> GameEnd;
         event EventHandler<GameStartObserverAction> GameStart;
         event EventHandler<PlayerStateChangesObserverAction> PlayerStateChanged;
+        void SendTableConditionRequest(string username);
     }
 
     public class GameStateController : IGameStateController
@@ -109,6 +110,22 @@ namespace GameData.Controllers.Global
 
             GameEnd?.Invoke(this,new GameEndEventArgs(GameEndReason.HeroUnitKill,
                 winner?.Username));
+        }
+
+        public void SendTableConditionRequest(string username)
+        {
+            if(!_tableCondition.Players.Exists(p=>p.Username == username))
+                return;
+
+            var firstPlayer = _tableCondition.Players.FirstOrDefault(p => p.Username == username);
+            var secondPlayer = _tableCondition.Players.FirstOrDefault(p => p.Username != username);
+            var observerAction = new GameStartObserverAction(firstPlayer,secondPlayer)
+            {
+                TargetPlayer = firstPlayer,
+                CurrentPlayerUsername = _playerTurnDispatcher.CurrentPlayer.Username
+            };
+
+            GameStart?.Invoke(this,observerAction);
         }
     }
 }

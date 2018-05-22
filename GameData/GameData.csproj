@@ -149,6 +149,7 @@
     <Compile Include="Models\Units\Unit.cs" />
     <Compile Include="Models\Cards\UnitCard.cs" />
     <Compile Include="Models\Units\UnitState.cs" />
+    <Compile Include="Network\DeckInfo.cs" />
     <Compile Include="Network\IMessageHandler.cs" />
     <Compile Include="Network\MessageConverter.cs" />
     <Compile Include="Network\MessageHandlerBase.cs" />
@@ -167,6 +168,7 @@
     <Compile Include="Network\Messages\SetDeckMessage.cs" />
     <Compile Include="Network\Messages\UserInfoRequestMessage.cs" />
     <Compile Include="Network\NetworkMessageConverter.cs" />
+    <Compile Include="Network\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\TableCondition.cs" />
   </ItemGroup>

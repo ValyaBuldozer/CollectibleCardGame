@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.Sockets;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
@@ -37,6 +38,20 @@ namespace CollectibleCardGame
             UnityKernel.Get<IGlobalController>().OnStartup();
 
 
+        }
+
+        private void App_OnExit(object sender, ExitEventArgs e)
+        {
+            var networkControlller = UnityKernel.Get<INetworkController>();
+
+            try
+            {
+                if (networkControlller.ServerCommunicator.IsConnected)
+                    networkControlller.Disconnect();
+            }
+            catch(SocketException) { }
+
+            
         }
     }
 }

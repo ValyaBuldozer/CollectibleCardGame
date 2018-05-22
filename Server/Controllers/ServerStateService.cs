@@ -6,6 +6,7 @@ using GameData.Enums;
 using GameData.Models;
 using GameData.Models.Cards;
 using GameData.Models.Repository;
+using GameData.Network;
 using GameData.Network.Messages;
 using Newtonsoft.Json;
 using Server.Controllers.Repository;
@@ -60,8 +61,6 @@ namespace Server.Controllers
 
             try
             {
-                //todo : говнокод что делать то
-
                 client.CurrentLobby = firstPlayerClient.CurrentLobby;
                 firstPlayerClient.CurrentLobby.SecondClient = client;
                 firstPlayerClient.CurrentLobby.SecondPlayerDeck = deck;
@@ -111,6 +110,11 @@ namespace Server.Controllers
             secondClient.CurrentLobby = gameLobby;
 
             return gameLobby;
+        }
+
+        public void OnClietnReconnect(Client client)
+        {
+
         }
 
         private void OnLobbyClose(object sender, GameLobbyCloseEventArgs e)

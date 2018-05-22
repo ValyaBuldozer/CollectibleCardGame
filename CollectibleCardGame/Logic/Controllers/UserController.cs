@@ -16,7 +16,7 @@ namespace CollectibleCardGame.Logic.Controllers
     public class UserController
     {
         [Dependency]
-        public CurrentUser CurrentUser { set; get; }
+        public CurrentUserService CurrentUserService { set; get; }
 
         private readonly INetworkController _networkController;
         private readonly ILogger _logger;
@@ -76,15 +76,15 @@ namespace CollectibleCardGame.Logic.Controllers
         public void ResetUser()
         {
             //todo : доделать
-            CurrentUser = null;
+            CurrentUserService = null;
         }
 
         public void SetUser(string username)
         {
-            if(CurrentUser != null)
+            if(CurrentUserService != null)
                 ResetUser();
 
-            CurrentUser = new CurrentUser() {Username = username};
+            CurrentUserService.Username = username;
         }
     }
 }
