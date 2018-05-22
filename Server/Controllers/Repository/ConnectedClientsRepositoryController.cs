@@ -19,7 +19,8 @@ namespace Server.Controllers.Repository
 
         public void Remove(Client client)
         {
-            _repository.Collection.Remove(client);
+            if(_repository.Collection.Contains(client))
+                _repository.Collection.Remove(client);
         }
     }
 }
