@@ -144,25 +144,21 @@ namespace CollectibleCardGame.Properties {
         ///   Ищет локализованную строку, похожую на [
         ///	{
         ///		&quot;$type&quot;: &quot;GameData.Models.Cards.UnitCard, GameData&quot;,
-        ///		&quot;ID&quot;: 1,
-        ///		&quot;Name&quot;: &quot;jsontest&quot;,
-        ///		&quot;Description&quot;: &quot;jsonTest&quot;,
-        ///		&quot;Cost&quot;: 1,
+        ///		&quot;ID&quot;: 20,
+        ///		&quot;Name&quot;: &quot;Легкая кавалерия&quot;,
+        ///		&quot;Description&quot;: &quot;[Рывок] Эх, что не день, то очередной прорыв&quot;,
+        ///		&quot;Cost&quot;: 3,
         ///		&quot;CanBePlayedOnEnemyTurn&quot;: false,
-        ///		&quot;ImagePath&quot;: null,
-        ///		&quot;Fraction&quot;: 0,
-        ///		&quot;BaseHP&quot;: 1,
-        ///		&quot;BaseAttack&quot;: 1,
+        ///		&quot;ImagePath&quot;: &quot;../../Images/ImagesUnit/North/Легкая кавалерия.jpg&quot;,
+        ///		&quot;Fraction&quot;: 1,
+        ///		&quot;BaseHP&quot;: 2,
+        ///		&quot;BaseAttack&quot;: 4,
         ///		&quot;AttackPriority&quot;: 1,
-        ///		&quot;AttackActionInfo&quot;: {
-        ///			&quot;$type&quot;: &quot;GameData.Models.Action.CardActionInfo, GameData&quot;,
-        ///			&quot;ActionId&quot;: 1,
-        ///			&quot;ParameterValue&quot;: 1,
-        ///			&quot;ParameterType&quot;: 4
-        ///		},
+        ///		&quot;CanAttack&quot;: true,
+        ///		&quot;AttackActionInfo&quot;: null,
         ///		&quot;DamageRecievedActionInfo&quot;: null,
         ///		&quot;BattleCryActionInfo&quot;: null,
-        ///		&quot; [остаток строки не уместился]&quot;;.
+        ///		&quot;DeathRattleActionI [остаток строки не уместился]&quot;;.
         /// </summary>
         internal static string CardsRepository {
             get {
@@ -1546,6 +1542,16 @@ namespace CollectibleCardGame.Properties {
         internal static System.Drawing.Bitmap Требушет_ля_Шореля {
             get {
                 object obj = ResourceManager.GetObject("Требушет_ля_Шореля", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Фемистокл {
+            get {
+                object obj = ResourceManager.GetObject("Фемистокл", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
