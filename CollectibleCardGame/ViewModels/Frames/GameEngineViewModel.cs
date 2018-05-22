@@ -25,7 +25,7 @@ namespace CollectibleCardGame.ViewModels.Frames
         private Player _player;
         private Player _enemyPlayer;
         private string _currentPlayerUsername;
-        private PlayerMana _playerMana;
+        private PlayerState _playerState;
         private HeroUnit _playerHeroUnit;
         private HeroUnit _enemyHeroUnit;
 
@@ -134,13 +134,13 @@ namespace CollectibleCardGame.ViewModels.Frames
             }
         }
 
-        public PlayerMana PlayerMana
+        public PlayerState PlayerState
         {
-            get => _playerMana;
+            get => _playerState;
             set
             {
-                _playerMana = value;
-                NotifyPropertyChanged(nameof(PlayerMana));
+                _playerState = value;
+                NotifyPropertyChanged(nameof(PlayerState));
             }
         }
 

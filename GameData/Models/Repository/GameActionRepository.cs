@@ -311,8 +311,8 @@ namespace GameData.Models.Repository
                     {
                       
                         if(!(sender is Player player)) return;
-                        if(player.Mana.Current<10)
-                        player.Mana.Current = player.Mana.Current+1;
+                        if(player.State.Current<10)
+                        player.State.Current = player.State.Current+1;
 
 
                     })),
@@ -674,8 +674,8 @@ namespace GameData.Models.Repository
                     {
 
                         if(!(sender is Player player)) return;
-                        if(player.Mana.Base<10)
-                            player.Mana.Base = player.Mana.Base+1;
+                        if(player.State.Base<10)
+                            player.State.Base = player.State.Base+1;
                         else
                         {
                             controller.DrawCard(player,1);

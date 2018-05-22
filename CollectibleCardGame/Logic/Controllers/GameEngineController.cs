@@ -154,9 +154,9 @@ namespace CollectibleCardGame.Logic.Controllers
                 _gameViewModel.CurrentDispatcher.Invoke(() =>
                 {
                     if (action.PlayerUsername == _userService.Username)
-                        _gameViewModel.PlayerViewModel.PlayerMana = action.PlayerMana;
+                        _gameViewModel.PlayerViewModel.PlayerState = action.PlayerState;
                     else
-                        _gameViewModel.EnemyViewModel.PlayerMana = action.PlayerMana;
+                        _gameViewModel.EnemyViewModel.PlayerState = action.PlayerState;
                 });
         }
 

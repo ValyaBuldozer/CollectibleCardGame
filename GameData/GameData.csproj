@@ -131,7 +131,7 @@
     <Compile Include="Models\Observer\UnitDeathObserverAction.cs" />
     <Compile Include="Models\Observer\UnitSpawnObserverAction.cs" />
     <Compile Include="Models\Observer\UnitStateChangeObserverAction.cs" />
-    <Compile Include="Models\PlayerMana.cs" />
+    <Compile Include="Models\PlayerState.cs" />
     <Compile Include="Models\Repository\CardRepository.cs" />
     <Compile Include="Models\Repository\CyclicQueue.cs" />
     <Compile Include="Models\Repository\EntityRepository.cs" />
