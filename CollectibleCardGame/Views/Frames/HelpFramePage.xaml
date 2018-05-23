@@ -69,13 +69,13 @@
                     <Paragraph Margin="5,20,0,0" FontWeight="Bold" FontSize="16" FontFamily="/CollectibleCardGame;component/Fonts/#PF Din Text Pro">
                         <Span FontSize="20" >Мастер осады:
                         <Span FontSize="16" FontWeight="Light" >
-                            наносит 5 урона по крепости противника при розыгрыше.</Span>
+                            наносит 5 урона по герою противника при розыгрыше.</Span>
                     </Span>
                 </Paragraph>
                     <Paragraph Margin="5,20,0,0" FontWeight="Bold" FontSize="16" FontFamily="/CollectibleCardGame;component/Fonts/#PF Din Text Pro">
                         <Span FontSize="20" >Лекарь:
                         <Span FontSize="16" FontWeight="Light" >
-                            восстанавливает защиту выбранного юнита до максимума при розыгрыше.</Span>
+                            восстанавливает здоровье выбранного юнита до максимума при розыгрыше.</Span>
                     </Span>
                 </Paragraph>
                     <Paragraph Margin="5,20,0,0" FontWeight="Bold" FontSize="16" FontFamily="/CollectibleCardGame;component/Fonts/#PF Din Text Pro">
@@ -136,7 +136,7 @@
 
 
 
-                    <Paragraph FontWeight="Bold" FontSize="22" FontFamily="/CollectibleCardGame;component/Fonts/#PF Din Text Pro">
+                    <Paragraph Margin="5,20,0,0" FontWeight="Bold" FontSize="22" FontFamily="/CollectibleCardGame;component/Fonts/#PF Din Text Pro">
                         GL HF
                     </Paragraph>
                 </FlowDocument>

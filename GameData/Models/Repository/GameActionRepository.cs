@@ -460,7 +460,7 @@ namespace GameData.Models.Repository
                         var unit = target;
                         controller.DrawCard(unit.Player,unit.BaseCard);
                         controller.Remove(unit);
-                        var deployCard = controller.GetCard(1007);
+                        var deployCard = controller.GetCard(1000);
                         controller.SpawnUnit(unit.Player,(UnitCard)deployCard);
 
 
@@ -647,7 +647,7 @@ namespace GameData.Models.Repository
                         if(!(sender is Unit unit)) return;
 
 
-                        var deployCard = controller.GetCard(1008);
+                        var deployCard = controller.GetCard(1001);
                         controller.SpawnUnit(unit.Player,(UnitCard)deployCard);
 
 

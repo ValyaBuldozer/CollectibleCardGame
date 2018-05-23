@@ -41,15 +41,15 @@
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Viewbox Stretch="Fill" Width="110" VerticalAlignment="Stretch" Margin="0,0,-40,0">
-                                <uc:CardBackUserControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                            <Viewbox Stretch="Fill" Width="110" Height="210" VerticalAlignment="Stretch" Margin="0,0,-40,0">
+                                <uc:CardBackUserControl HorizontalAlignment="Stretch"
                                                         Width="220" Height="420"/>
                             </Viewbox>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
                 <!--Enemy player-->
-                <Viewbox Grid.Column="1" Height="205" Width="250" VerticalAlignment="Stretch">
+                <Viewbox Grid.Column="1" Height="205" Width="250" >
                     <Button Command="{Binding EnemyUnitCommand}" CommandParameter="{Binding EnemyViewModel}">
                         <uc:PlayerUserControl Height="330" Width="400" 
                                               DataContext="{Binding Path=EnemyViewModel,

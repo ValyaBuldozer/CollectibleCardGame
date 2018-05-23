@@ -47,17 +47,16 @@ namespace CollectibleCardGame.ViewModels.Frames
                     Title = "Помощь",
                     FramePage = new HelpFramePage()
                 },
-                new MainMenuPart
-                {
-                    ImagePath = "/Images/Icons/settingsChange.png",
-                    Title = "Настройки",
-                    FramePage = new SettingsFramePage()
-                }
+                //new MainMenuPart
+                //{
+                //    ImagePath = "/Images/Icons/settingsChange.png",
+                //    Title = "Настройки",
+                //    FramePage = new SettingsFramePage()
+                //}
 
             };
-            //BusyMessage = "Подождите...";
-            //IsBusy = false;
-           
+            CurrentPage = goGameFramePage;
+
         }
 
         public ObservableCollection<MainMenuPart> Menus
