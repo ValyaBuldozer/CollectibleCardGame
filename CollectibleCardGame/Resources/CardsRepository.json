@@ -1770,7 +1770,7 @@
 		"$type": "GameData.Models.Cards.SpellCard, GameData",
 		"ID": 116,
 		"Name": "Затерянная казна",
-		"Description": "Игрок получает 1 золотой на тукущий ход.",
+		"Description": "Игрок получает 1 золотой на текущий ход.",
 		"Cost": 0,
 		"CanBePlayedOnEnemyTurn": false,
 		"ImagePath": "../../Images/ImagesSpell/Затерянная казна.jpg",
