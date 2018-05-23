@@ -480,7 +480,7 @@ namespace GameData.Tests.Gameplay
             container.Get<IPlayerTurnDispatcher>().NextPlayer();
 
             //формируем третий ход - спавн юнита первого игрока
-            var countDeck = firstPlayer.DeckCardsCount;
+            var countDeck = firstPlayer.State.DeckCardsCount;
             var thirdPlayerUnitCard = firstPlayer.HandCards.FirstOrDefault(c => c.Name == "Ученый");
             CardDeployPlayerTurn playerTurn3 = new CardDeployPlayerTurn(firstPlayer, thirdPlayerUnitCard);
             container.Get<IPlayerTurnHandler<CardDeployPlayerTurn>>().Execute(playerTurn3);
@@ -488,7 +488,7 @@ namespace GameData.Tests.Gameplay
 
 
 
-            Assert.AreEqual(countDeck, firstPlayer.DeckCardsCount);
+            Assert.AreEqual(countDeck, firstPlayer.State.DeckCardsCount);
             
 
 
