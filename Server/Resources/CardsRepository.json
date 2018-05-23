@@ -1540,7 +1540,7 @@
 		"$type": "GameData.Models.Cards.UnitCard, GameData",
 		"ID": 104,
 		"Name": "Полевой медик",
-		"Description": "Он должен был бороться со злом, а не примкнуть к нему.",
+		"Description": "[Лекарь] Пока я жив, здесь никто не умрет.",
 		"Cost": 5,
 		"CanBePlayedOnEnemyTurn": false,
 		"ImagePath": "../../Images/ImagesUnit/Neutral/Полевой медик.jpg",
