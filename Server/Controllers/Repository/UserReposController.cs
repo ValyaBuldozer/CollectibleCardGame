@@ -26,9 +26,11 @@ namespace Server.Controllers.Repository
                 _repository.Update();
             }
             else
-            value.Id = _repository.Collection.Count != 0 ? _repository.Collection.Max(u => u.Id) + 1 :
-                    0;
-            _repository.Collection.Add(value);
+            {
+                value.Id = _repository.Collection.Count != 0 ?
+                    _repository.Collection.Max(u => u.Id) + 1 : 0;
+                _repository.Collection.Add(value);
+            }
         }
 
         /// <summary>
