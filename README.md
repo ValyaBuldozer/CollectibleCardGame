@@ -5,7 +5,7 @@ Simple server-client application
 
  <li>SQL Server 2017
  
- <li>.NET Framework 4.5.2
+ <li>.NET Framework 4.6.1
 
  <li>Visual Studio 2017
 
