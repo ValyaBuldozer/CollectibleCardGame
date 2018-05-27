@@ -27,14 +27,16 @@ namespace CollectibleCardGame.ViewModels.Frames
 
         public MenuFramePageViewModel(GoGameFramePage goGameFramePage,DecksSettingsFramePage decksFramePage)
         {
+            var mainPart = new MainMenuPart
+            {
+                ImagePath = "/Images/Icons/search.png",
+                Title = "Играть",
+                FramePage = goGameFramePage
+            };
+
             Menus = new ObservableCollection<MainMenuPart>
             {
-                new MainMenuPart
-                {
-                    ImagePath = "/Images/Icons/search.png",
-                    Title = "Играть",
-                    FramePage = goGameFramePage
-                },
+                mainPart,
                 new MainMenuPart
                 {
                     ImagePath = "/Images/Icons/cards.png",
@@ -46,17 +48,9 @@ namespace CollectibleCardGame.ViewModels.Frames
                     ImagePath = "/Images/Icons/question.png",
                     Title = "Помощь",
                     FramePage = new HelpFramePage()
-                },
-                //new MainMenuPart
-                //{
-                //    ImagePath = "/Images/Icons/settingsChange.png",
-                //    Title = "Настройки",
-                //    FramePage = new SettingsFramePage()
-                //}
-
+                }
             };
-            CurrentPage = goGameFramePage;
-
+            SelectedMenuItem = mainPart;
         }
 
         public ObservableCollection<MainMenuPart> Menus

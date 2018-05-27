@@ -29,7 +29,10 @@ namespace Server
             int count;
             if (databaseRepos.IsDatabaseConnected)
                 //подгружаем для скороости работы
+            {
                 count = databaseRepos.DatabaseCollection.Count();
+                Console.WriteLine("Database connected");
+            }
 
             ConsoleMenu menu = new ConsoleMenu();
             menu.Start();
