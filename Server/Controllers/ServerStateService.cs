@@ -55,6 +55,7 @@ namespace Server.Controllers
                 return false;
             }
 
+            //получение клиента из очереди в игру
             var firstPlayerClient = _clientsQueueController.Dequeue();
 
             //todo: запалить многопоточность - слабое место
@@ -66,7 +67,6 @@ namespace Server.Controllers
                 firstPlayerClient.CurrentLobby.SecondPlayerDeck = deck;
                 firstPlayerClient.CurrentLobby.SecondPlayerHeroUnit = heroUnit;
 
-                //todo :изменение настроек
                 var msg = new MessageBase(MessageBaseType.GameRequestMessage
                     , new GameRequestMessage()
                     {
@@ -76,7 +76,8 @@ namespace Server.Controllers
                 firstPlayerClient.ClientController.SendMessage(msg);
                 client.ClientController.SendMessage(msg);
 
-                client.CurrentLobby.InitializeGame(_gameSettings,_cardRepository);
+                //старт игры в лобби
+                client.CurrentLobby.InitializeGame(_gameSettings.ShadowCopy(),_cardRepository);
                 client.CurrentLobby.OnClose += OnLobbyClose;
                 client.CurrentLobby.StartGame();
 

@@ -115,6 +115,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\ConsoleMenu.cs" />
     <Compile Include="Controllers\Repository\AwaitingClientsQueueController.cs" />
     <Compile Include="Controllers\Repository\ConnectedClientsRepositoryController.cs" />
     <Compile Include="Controllers\ConsoleLogger.cs" />

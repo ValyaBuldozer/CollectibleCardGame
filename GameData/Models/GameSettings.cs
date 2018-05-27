@@ -21,5 +21,12 @@ namespace GameData.Models
         public int MaxDeckCardsCount { set; get; }
 
         public int MaxPlayerMana { set; get; }
+
+        public int StartHandCardsCount { set; get; }
+
+        public GameSettings ShadowCopy()
+        {
+            return (GameSettings) this.MemberwiseClone();
+        }
     }
 }

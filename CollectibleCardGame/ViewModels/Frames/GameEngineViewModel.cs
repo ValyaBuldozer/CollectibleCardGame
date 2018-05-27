@@ -64,7 +64,8 @@ namespace CollectibleCardGame.ViewModels.Frames
                 if(value == null) return;
 
                 PlayerCards.Clear();
-                _player.HandCards.ForEach(c=>PlayerCards.Add(new CardViewModel(c)));
+                _player.HandCards.ForEach(c=>PlayerCards.Add(new CardViewModel(c,
+                    PlayerHeroUnit.BaseCard.Fraction)));
 
                 PlayerUnits.Clear();
                 _player.TableUnits.ForEach(u=>PlayerUnits.Add(new UnitViewModel(u)));
@@ -84,7 +85,8 @@ namespace CollectibleCardGame.ViewModels.Frames
                 if(value == null) return;
 
                 EnemyCards.Clear();
-                _enemyPlayer.HandCards.ForEach(c => EnemyCards.Add(new CardViewModel(c)));
+                _enemyPlayer.HandCards.ForEach(c => EnemyCards.Add(new CardViewModel(c,
+                    EnemyHeroUnit.BaseCard.Fraction)));
 
                 EnemyUnits.Clear();
                 _enemyPlayer.TableUnits.ForEach(u => EnemyUnits.Add(new UnitViewModel(u)));

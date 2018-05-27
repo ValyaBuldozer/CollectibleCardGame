@@ -27,6 +27,7 @@ namespace GameData.Controllers.Global
     public class GameStateController : IGameStateController
     {
         private readonly TableCondition _tableCondition;
+        private readonly GameSettings _gameSettings;
         private readonly IPlayerTurnDispatcher _playerTurnDispatcher;
         private readonly IDeckController _deckController;
         private readonly IDataRepositoryController<Entity> _entitytRepositoryController;
@@ -41,7 +42,7 @@ namespace GameData.Controllers.Global
 
         public GameStateController(TableCondition tableCondition,IPlayerTurnDispatcher playerTurnDispatcher,
             IDeckController deckController,IDataRepositoryController<Entity> entitytRepositoryController,
-            ICardDrawController cardDrawController,IUnitDispatcher unitDispatcher)
+            ICardDrawController cardDrawController,IUnitDispatcher unitDispatcher,GameSettings gameSettings)
         {
             _tableCondition = tableCondition;
             _playerTurnDispatcher = playerTurnDispatcher;
@@ -49,6 +50,7 @@ namespace GameData.Controllers.Global
             _entitytRepositoryController = entitytRepositoryController;
             _cardDrawController = cardDrawController;
             _unitDispatcher = unitDispatcher;
+            _gameSettings = gameSettings;
         }
 
         public void Start(Stack<Card> firstDeck, string firstUsername, UnitCard firstHero,
@@ -94,7 +96,7 @@ namespace GameData.Controllers.Global
 
             //выдача стартовой руки
             foreach (var iplayer in _tableCondition.Players)
-                _cardDrawController.DealCardsToPlayer(iplayer,4);
+                _cardDrawController.DealCardsToPlayer(iplayer,_gameSettings.StartHandCardsCount);
 
             //начинаем отсчет ходов (период хода в мс)
             _playerTurnDispatcher.Start();

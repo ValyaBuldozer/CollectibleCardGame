@@ -61,7 +61,8 @@ namespace Server.Unity
                 PlayerHandCardsMaxCount = 10,
                 PlayersCount = 2,
                 PlayerTableUnitsMaxCount = 10,
-                MaxPlayerMana = 10
+                MaxPlayerMana = 10,
+                StartHandCardsCount = 4
             };
 
             _container.RegisterInstance(defaultSettings, new ContainerControlledLifetimeManager());

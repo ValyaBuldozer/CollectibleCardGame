@@ -52,9 +52,11 @@ namespace GameData.Tests.Controllers.UnitTests.Logic
             unitDispatcherMock.Setup(mock => mock.OnUnitStateChanges(It.IsAny<object>(),
                 It.IsAny<PropertyChangedEventArgs>()));
 
+            var settings = new GameSettings() {StartHandCardsCount = 4};
+
             var gameStateController =
                 new GameStateController(tableCondition,playerTurnDispatcherMock.Object,
-                    deckControllerMock.Object,null,cardDrawMock.Object,unitDispatcherMock.Object);
+                    deckControllerMock.Object,null,cardDrawMock.Object,unitDispatcherMock.Object,settings);
 
             gameStateController.Start(firstPLayerDeck,"firstPlayer",testCards.FirstCard
                 ,secondPlayerDeck,"secondPlayer",testCards.SecondCard);
